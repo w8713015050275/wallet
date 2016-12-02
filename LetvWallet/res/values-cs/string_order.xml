@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="label_cfm_product_name">"Název položky:"</string>
+	<string name="label_done">"Dokončeno"</string>
+	<string name="label_order_cost_info">"Platební informace"</string>
+	<string name="label_order_create_time">"Čas vytvoření"</string>
+	<string name="label_order_desc">"Zobrazit údaje o objednávce"</string>
+	<string name="label_order_desc_coupon_price">"Kupón"</string>
+	<string name="label_order_desc_discount_price">"Ukládání"</string>
+	<string name="label_order_desc_null_discount">"Nic"</string>
+	<string name="label_order_desc_total_price">"Celkem"</string>
+	<string name="label_order_pay_info">"Informace o platbě"</string>
+	<string name="label_order_payment">"Zaplacená částka"</string>
+	<string name="label_order_product_info">"Informace o položce"</string>
+	<string name="label_order_serialnumber">"Číslo objednávky"</string>
+	<string name="label_order_status">"Stav objednávky"</string>
+	<string name="label_pay_paid">"Placené"</string>
+	<string name="label_phonenumber">"Číslo dobití:"</string>
+	<string name="label_product_name">"Název položky"</string>
+	<string name="order_desc_label_sn">"Číslo:"</string>
+	<string name="order_desc_label_status">"Stav:"</string>
+	<string name="order_list_loadmore">"Načítání..."</string>
+	<string name="total_order_detail_fail_prom">"Žádné údaje o objednávce"</string>
+	<string name="total_order_empty_no_record">"Žádné objednávky"</string>
+	<string name="total_order_list_hearder_other_month">"MMM.yyyy"</string>
+	<string name="total_order_list_hearder_this_month">"Aktuální měsíc"</string>
+	<string name="total_order_list_label">"Historie objednávek"</string>
+	<string name="total_order_no_sn">"Číslo: %1$s"</string>
+	<string name="total_order_status_canceled">"Zrušeno"</string>
+	<string name="total_order_status_completed">"Dokončeno"</string>
+	<string name="total_order_status_delivered">"Dodáno"</string>
+	<string name="total_order_status_paid">"Zaplaceno"</string>
+	<string name="total_order_status_unknown">"Neznámé"</string>
+	<string name="total_order_status_unpay">"Čekající"</string>
+</resources>

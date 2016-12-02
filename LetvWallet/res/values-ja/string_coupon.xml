@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">"件の期限切れのメッセージ"</item>
+        <item quantity="other">"件の期限切れのメッセージ"</item>
+    </plurals>
+	<string name="coupon_card">"カード"</string>
+	<string name="coupon_card_list_expired_no_data">"現在カードはありません"</string>
+	<string name="coupon_card_no">"注文番号："</string>
+	<string name="coupon_copy_code_cancel">"キャンセル"</string>
+	<string name="coupon_date">"時刻："</string>
+	<string name="coupon_lis_no_data">"現在カードまたはクーポンはありません"</string>
+	<string name="coupon_list_expired_activity_title">"期限切れ"</string>
+	<string name="coupon_list_expired_list_item_expired_tag">"期限切れ"</string>
+	<string name="coupon_list_expired_list_item_show_tag">"放送済み"</string>
+	<string name="coupon_list_expired_list_item_unconsumed_tag">"要求済み"</string>
+	<string name="coupon_list_expired_list_item_used_tag">"使用済み"</string>
+	<string name="coupon_list_expired_no_data">"現在クーポンはありません"</string>
+	<string name="coupon_list_more_item">"その他のカード"</string>
+	<string name="coupon_list_title_activity">"財布"</string>
+	<string name="coupon_validite_period">"有効期限："</string>
+	<string name="coupon_validite_period_to">" 送信先 "</string>
+	<string name="empty_no_coupon">"クーポンはありません"</string>
+	<string name="label_coupon">"クーポン"</string>
+	<string name="label_coupon_info">"クーポン情報"</string>
+	<string name="label_coupon_usecondition">"使用条件"</string>
+	<string name="label_coupon_usecoupon_btn">"今すぐ使用"</string>
+	<string name="label_coupon_usedetail">"手順"</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- order list -->
+    <string name="order_list_loadmore">Loading...</string>
+    <string name="order_list_reload_title">Reload</string>
+    <string name="total_order_list_label">Order history</string>
+    <string name="total_order_status_unknown">Unknown</string>
+    <string name="total_order_status_unpay">Pending</string>
+    <string name="total_order_status_paid">Paid</string>
+    <string name="total_order_status_delivered">Shipped</string>
+    <string name="total_order_status_completed">Completed</string>
+    <string name="total_order_status_canceled">Canceled</string>
+    <string name="total_order_detail_fail_prom">No order details</string>
+    <string name="total_order_empty_no_record">No orders</string>
+    <string name="total_order_no_sn">Number: %1$s</string>
+    <string name="total_order_list_time_week" translatable="false">E</string>
+    <string name="total_order_list_hearder_this_year_month" translatable="false">MMM</string>
+    <string name="total_order_list_hearder_id_month" translatable="false">yyyyMM</string>
+    <string name="total_order_list_hearder_other_month">MMM yyyy</string>
+    <string name="total_order_list_hearder_this_month">Current month</string>
+    <string name="order_desc_label_status">Status:</string>
+    <string name="order_desc_label_sn">Number:</string>
+
+    <string name="label_order_cost_info">Checkout information</string>
+    <string name="label_order_product_info">Item information</string>
+    <string name="label_order_pay_info">Payment information</string>
+    <string name="label_pay_paid">Paid</string>
+    <string name="label_pay_unpaid">Pending</string>
+    <string name="label_order_payment">Amount paid</string>
+    <string name="label_product_name">Item name</string>
+    <string name="label_order_serialnumber">Order number</string>
+    <string name="label_done">Complete</string>
+    <string name="label_order_desc">View order details</string>
+    <string name="label_order_status">Order status</string>
+    <string name="label_order_create_time">Time of creation</string>
+    <string name="label_order_desc_total_price">Total</string>
+    <string name="label_order_desc_coupon_price">Coupon</string>
+    <string name="label_order_desc_discount_price">Saving</string>
+    <string name="label_order_desc_null_discount">Nothing</string>
+    <string name="label_easy_go">Yidao Yongche</string>
+    <string name="label_cfm_product_name">Item name:</string>
+    <string name="label_phonenumber">Recharge number:</string>
+</resources>

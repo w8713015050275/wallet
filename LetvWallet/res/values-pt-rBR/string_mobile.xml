@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="label_matter_attention">Notas</string>
+    <string name="label_mobile_deposite">Quantidade de adição</string>
+    <string name="label_mobile_flow_deposite">Limite de adição</string>
+    <string name="label_mobile_number">Número móvel (%s)</string>
+    <string name="label_mobile_number_def_desc"> China Unicom\\China Telecom\\China Mobile</string>
+    <string name="label_mobile_product_price">Preço:</string>
+    <string name="label_mobile_product_unit_fee">RMB</string>
+    <string name="label_mobile_product_unit_flow">MB</string>
+    <string name="label_mobile_product_unit_g_flow">G</string>
+    <string name="label_price_unit">RMB</string>
+    <string name="menu_record">Gravar</string>
+    <string name="mobile_clear_history">Limpar log</string>
+    <string name="mobile_clear_history_failed">Falha ao limpar</string>
+    <string name="mobile_divider_phone_number_show">Seu número</string>
+    <string name="mobile_order_desc_coupon_price">-%.2f</string>
+    <string name="mobile_order_desc_label_phonenumber">Número de adição</string>
+    <string name="mobile_order_list_label">Histórico de adição</string>
+    <string name="mobile_order_status_cancelled">Cancelado</string>
+    <string name="mobile_order_status_charged">Recarregado</string>
+    <string name="mobile_order_status_created">Pendente</string>
+    <string name="mobile_order_status_depositing">Recarregando</string>
+    <string name="mobile_order_status_paid">Pago</string>
+    <string name="mobile_order_view_label">Detalhes do pedido</string>
+    <string name="mobile_order_view_surelabel">Confirmar pedido</string>
+    <string name="mobile_phone_number_no_name">Desconhecido</string>
+    <string name="mobile_prompt_input_right_number">Insira um número de telefone válido</string>
+    <string name="mobile_prompt_net_connection_fail">Falha na conexão de rede</string>
+    <string name="mobile_prompt_user_select_cancel">Cancelar</string>
+    <string name="mobile_prompt_user_select_load_title">Erro de rede. Recarregue.</string>
+    <string name="mobile_prompt_user_select_reload">Recarregar</string>
+    <string name="mobile_request_order_fail_prom">Falha ao obter o pedido. Tente novamente.</string>
+</resources>

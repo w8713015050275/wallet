@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ids_desc_v"
+    style="@style/SectionBase.OrderListItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ids_desc_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_order_prodcut"
+            android:layout_marginBottom="6dp"
+            style="@style/TextAppearance.Wallet.OrderDesc.Highlight"
+            />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_number"
+                android:layout_marginBottom="6dp"
+                style="@style/TextAppearance.Wallet.OrderDesc.OrderList"/>
+
+            <LinearLayout
+                android:id="@+id/v_status"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tv_number"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_desc_label_status"
+                    style="@style/TextAppearance.Wallet.OrderDesc.OrderList" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_order_status"
+                    style="@style/TextAppearance.Wallet.OrderDesc.OrderList" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_time"
+                android:layout_below="@+id/tv_number"
+                android:layout_alignStart="@id/tv_number"
+                style="@style/TextAppearance.Wallet.OrderDesc.OrderList"/>
+
+            <LinearLayout
+                android:id="@+id/v_sn"
+                android:layout_below="@+id/v_status"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/v_status">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_desc_label_sn"
+                    style="@style/TextAppearance.Wallet.OrderDesc.OrderList" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_order_sn"
+                    style="@style/TextAppearance.Wallet.OrderDesc.OrderList" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ids_action_bar"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="right|center_vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_price"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_price_unit"
+                android:id="@+id/tv_price"
+                style="@style/TextAppearance.Wallet.OrderDesc.Highlight"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_price_unit"
+                style="@style/TextAppearance.Wallet.OrderDesc.Secondary"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginTop="9dp"
+            android:minWidth="70dp"
+            android:gravity="center"
+            android:text="@string/pay_now"
+            style="@style/PayButton"
+            android:id="@+id/ibtn_order_action"
+            android:textStyle="normal"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

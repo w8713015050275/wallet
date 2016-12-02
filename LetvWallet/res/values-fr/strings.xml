@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="label_entity_flow">Réapprovisionnement du forfait de données</string>
+    <string name="label_entity_mobile">Réapprovisionnement mobile</string>
+    <string name="label_entity_movie">Billet de cinéma</string>
+    <string name="label_more">Plus</string>
+    <string name="menu_bills">Historique des commandes</string>
+    <string name="pay_by_option_ali">Alipay</string>
+    <string name="pay_by_option_wechat">WeChat</string>
+    <string name="pay_info_response_error">Informations de paiement erronées</string>
+    <string name="pay_network_error">Erreur réseau</string>
+    <string name="pay_now">Payer maintenant</string>
+    <string name="pay_remaining_time">Temps restant pour effectuer le paiement :</string>
+    <string name="pay_selected_option_dont_work">La méthode de paiement sélectionnée n\'est pas disponible</string>
+    <string name="pay_status_unpaid">À payer</string>
+    <string name="pay_unable_to_pay_prompt">Paiement impossible. Fermez les autres commandes en attente, puis réessayez.</string>
+    <string name="pay_wx_notavailable_prompt">"L'application WeChat n'est pas installée."</string>
+    <string name="pay_wx_pay_notavailable_prompt">"L'application WeChat que vous avez installée ne prend pas en charge les paiements."</string>
+    <string name="wallet_prompt_create_order">Création de la commande</string>
+    <string name="wallet_prompt_create_payinfo">Récupération des informations de paiement</string>
+    <string name="wallet_prompt_login_cancel">Annuler</string>
+    <string name="wallet_prompt_login_title">Pour plus de détails, connectez-vous à votre compte LeEco</string>
+    <string name="wallet_prompt_login_toLogin">Se connecter maintenant</string>
+    <string name="wallet_prompt_title">Invite</string>
+    <string name="app_name">Portefeuille</string>
+</resources>

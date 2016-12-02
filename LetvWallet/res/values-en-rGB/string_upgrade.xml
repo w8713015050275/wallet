@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="continue_upgrade">"Upgrade now"</string>
+    <string name="defautl_update_content">"resolve some bugs."</string>
+    <string name="downloaded">"Downloaded"</string>
+    <string name="download_fail">"Download failed"</string>
+    <string name="download_sucess">"Download success"</string>
+    <string name="download_under_wifi">"Update under WI-FI"</string>
+    <string name="in_downloading">"Downloading"</string>
+    <string name="no_wifi_update_notify">"You are currently using the mobile data and this may incur data costs."</string>
+    <string name="undownloaded">"Not downloaded"</string>
+    <string name="update_content">"Introduction: %s"</string>
+    <string name="update_version">"Version: v%s"</string>
+    <string name="upgrade_fail_note">"Upgrade fail"</string>
+    <string name="upgrade_success_note">"Upgrade success"</string>
+    <string name="wallet_exit_application">"Exit Application"</string>
+    <string name="wallet_upgrade_notify_later">"Notify Later"</string>
+    <string name="wallet_upgrade_now">"Upgrade Now"</string>
+    <string name="wallet_upgrade_title">"Upgrade note"</string>
+    <string name="wifi_fail_continue_next">"Resume when Wi-Fi is available"</string>
+</resources>

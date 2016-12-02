@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- coupon -->
+    <string name="coupon_request_data_fail_prom">获取优惠券失败</string>
+    <string name="coupon_request_data">%d张可用</string>
+    <string name="empty_no_coupon">无优惠券</string>
+    <!--coupon list -->
+    <string name="coupon_card_no">订单号：</string>
+    <string name="coupon_code">兑换码：</string>
+    <string name="coupon_date">时间：</string>
+    <string name="coupon_list_title_activity">卡券包</string>
+    <string name="coupon_card">卡片</string>
+    <string name="coupon_list_expired_activity_title">已失效</string>
+    <string name="coupon_list_expired_list_item_expired_tag">已过期</string>
+    <string name="coupon_list_expired_list_item_show_tag">已放映</string>
+    <string name="coupon_list_expired_list_item_used_tag">已使用</string>
+    <string name="coupon_list_expired_list_item_unconsumed_tag">已领取</string>
+    <string name="coupon_list_more_item">更多卡片</string>
+    <string name="coupon_list_expired_no_data">暂无优惠券</string>
+    <string name="coupon_lis_no_data">暂无卡券</string>
+    <string name="coupon_card_list_expired_no_data">暂无卡片</string>
+    <string name="coupon_validite_period">有效期：</string>
+    <string name="coupon_validite_period_to"> 至 </string>
+    <string name="coupon_copy_code">复制兑换码</string>
+    <string name="coupon_copy_code_cancel">取消</string>
+    <string name="coupon_copy_code_notify">已复制兑换码</string>
+
+    <string name="label_coupon">优惠券</string>
+    <string name="label_coupon_info">优惠券信息</string>
+    <string name="label_coupon_usedetail">使用说明</string>
+    <string name="label_coupon_usecondition">使用条件</string>
+    <string name="label_coupon_usecoupon_btn">立即使用</string>
+    <!--plurals -->
+    <!--plurals -->
+    <plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">%1d条失效消息</item>
+        <item quantity="other">%1d条失效消息</item>
+    </plurals>
+</resources>

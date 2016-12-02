@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="coupon_expired_tab_array" >
+        <item>卡片</item>
+        <item>優惠券</item>
+    </string-array>
+    <string-array name="movie_list_tab_array" >
+        <item>正在上映</item>
+        <item>即將上映</item>
+    </string-array>
+</resources>

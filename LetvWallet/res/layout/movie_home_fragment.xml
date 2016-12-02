@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/base_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/content_item_bg_color"
+    android:orientation="vertical">
+
+    <View style="@style/Divider_HorizontalLine_Style" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:textSize="14sp"
+        android:background="?android:attr/statusBarColor"
+        app:tabPaddingStart="10dip"
+        app:tabPaddingEnd="10dip"
+        app:tabIndicatorColor="?attr/walletPrimaryColor"
+        app:tabIndicatorHeight="@dimen/tab_indicator_height"
+        app:tabSelectedTextColor="#685bee"
+        app:tabTextColor="@color/movie_tab_tv_color" />
+
+    <View style="@style/Divider_HorizontalLine_Style" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never" />
+
+</LinearLayout>
+
+

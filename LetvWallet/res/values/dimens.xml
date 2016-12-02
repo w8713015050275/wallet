@@ -1,0 +1,158 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="margin_default">16dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="title_font_size">18sp</dimen>
+    <dimen name="comments_font_size">10sp</dimen>
+    <dimen name="label_font_size">10sp</dimen>
+    <dimen name="label_font_default_size">14sp</dimen>
+    <dimen name="matter_attention_font_size">15sp</dimen>
+    <dimen name="pay_button_tv_font_size">18sp</dimen>
+    <dimen name="buy_movieticket_button_tv_font_size">18sp</dimen>
+    <dimen name="divider_width">0.25dp</dimen>
+
+
+    <!--pay result-->
+    <dimen name="pay_status_v_padding">25dp</dimen>
+    <dimen name="pay_status_h_interval">20dp</dimen>
+
+    <dimen name="vertical_big_padding">20dp</dimen>
+    <dimen name="vertical_small_padding">10dp</dimen>
+    <dimen name="vertical_cost_padding">12dp</dimen>
+
+    <dimen name="pay_desc_vbig_padding">@dimen/vertical_big_padding</dimen>
+    <dimen name="pay_desc_vsmall_padding">@dimen/vertical_small_padding</dimen>
+
+    <dimen name="pay_desc_vdefault_padding">12dp</dimen>
+    <dimen name="pay_desc_vmid_padding">18dp</dimen>
+
+    <dimen name="bottom_vertical_padding">14dp</dimen>
+
+    <!-- order list -->
+    <dimen name="orderlist_footerv_pg_tv_margin">6dp</dimen>
+
+    <!-- movie -->
+    <dimen name="movie_list_padding_left">16dp</dimen>
+    <dimen name="movie_list_alphabet_width">55dp</dimen>
+    <dimen name="movie_hot_list_item_padding_left">94dp</dimen>
+    <dimen name="movie_hot_list_item_padding_top">20dp</dimen>
+    <dimen name="movie_seat_top_tv_padding_top">12dp</dimen>
+    <dimen name="movie_seat_top_tv_padding_left">8dp</dimen>
+    <dimen name="movie_seat_top_time_tv_font_size">12sp</dimen>
+    <dimen name="movie_seat_bottom_tv_font_size">12dp</dimen>
+    <dimen name="movie_seat_checkedinfo_font_size">14dp</dimen>
+    <dimen name="movie_seat_bottom_tv_im_margin">10dp</dimen>
+    <dimen name="movie_seat_bottom_bt_margin_left">20dp</dimen>
+    <dimen name="movie_seat_thumb_w">152dp</dimen>
+    <dimen name="movie_seat_thumb_margin_left">40dp</dimen>
+    <dimen name="movie_seat_thumb_margin_top">3dp</dimen>
+    <dimen name="movie_seat_thumb_padding">6dp</dimen>
+    <dimen name="movie_seat_v_rownum_axis_font_size">8dp</dimen>
+    <dimen name="movie_seat_v_rownum_axis_v_width">20dp</dimen>
+    <dimen name="movie_seat_v_rownum_axis_margin_offset">16dp</dimen>
+    <dimen name="movie_seat_v_init_width">25dp</dimen>
+    <dimen name="movie_seat_v_init_height">20dp</dimen>
+    <dimen name="movie_seat_v_screen_center_v_height">25dp</dimen>
+    <dimen name="movie_seat_v_screen_center_v_width">40dp</dimen>
+    <dimen name="movie_seat_v_margin_top">50dp</dimen>
+    <dimen name="movie_seat_v_margin_bottom">30dp</dimen>
+    <dimen name="movie_seat_v_margin_left_offset">50dp</dimen>
+    <dimen name="movie_seat_v_margin_left">42dp</dimen>
+    <dimen name="movie_seat_screen_center_tv_font_size">10dp</dimen>
+    <dimen name="movie_seat_screen_center_tv_width">50dp</dimen>
+    <dimen name="movie_seat_screen_center_tv_height">20dp</dimen>
+    <dimen name="movie_seat_screen_center_tv_padding_horizontal">10dp</dimen>
+    <dimen name="movie_seat_screen_center_tv_padding_vertical">5dp</dimen>
+    <dimen name="movie_seat_screen_info_tv_height">20dp</dimen>
+    <dimen name="movie_seat_screen_info_tv_width">250dp</dimen>
+    <dimen name="movie_seat_screen_info_tv_padding">8dp</dimen>
+    <dimen name="movie_cinema_filter_height">320dip</dimen>
+    <dimen name="movie_cinema_filter_category_width">150dip</dimen>
+    <dimen name="movie_cinema_filter_category_height">55dip</dimen>
+    <dimen name="movie_cinema_list_item_padding_bottom_extra">40.25dip</dimen>
+    <dimen name="movie_cinema_list_item_special_padding_horizon">5dip</dimen>
+    <dimen name="movie_movie_list_fiters_padding_horizon">10dip</dimen>
+
+    <dimen name="movie_detail_description_padding_bottom">8dip</dimen>
+    <dimen name="movie_schedule_item_summary_textsize">10sp</dimen>
+    <dimen name="movie_schedule_item_discount_textsize">9sp</dimen>
+
+    <!-- total order list -->
+    <dimen name="total_orderlist_vertical_padding">12dp</dimen>
+    <dimen name="total_orderlist_tv_small_margin">4dp</dimen>
+    <dimen name="total_orderlist_tv_week_size">13sp</dimen>
+    <dimen name="total_orderlist_tv_time_size">10sp</dimen>
+    <dimen name="total_orderlist_tv_product_name_size">14sp</dimen>
+    <dimen name="total_orderlist_tv_order_no_size">11sp</dimen>
+    <dimen name="total_orderlist_tv_order_status_size">11sp</dimen>
+    <dimen name="total_orderlist_tv_price_size">16sp</dimen>
+    <dimen name="total_orderlist_tv_yuan_size">10sp</dimen>
+    <dimen name="total_orderlist_icon_wh">30dp</dimen>
+    <dimen name="total_orderlist_icon_margin_left">15dp</dimen>
+
+    <!-- -->
+    <dimen name="view_card_padding_left">10dp</dimen>
+    <dimen name="view_card_padding_top">12dp</dimen>
+    <dimen name="view_card_padding_bottom">10dp</dimen>
+    <dimen name="view_card_icon_margin_top">10dp</dimen>
+    <dimen name="view_card_icon_margin_right">18dp</dimen>
+    <dimen name="tv_card_name_textsize">18sp</dimen>
+    <dimen name="tv_card_type_textsize">10sp</dimen>
+    <dimen name="tv_card_type_margin_top">5dp</dimen>
+    <dimen name="tv_card_date_margin_top">36dp</dimen>
+    <dimen name="view_coupon_code_margin_left">20dp</dimen>
+    <dimen name="view_coupon_icon_height">80dp</dimen>
+    <dimen name="view_card_icon_size">40dp</dimen>
+
+    <!-- coupon list -->
+    <dimen name="coupon_expired_view_height">30dp</dimen>
+    <dimen name="coupon_expired_msg_textsize">11sp</dimen>
+    <dimen name="coupon_expired_arrow_margin_left">2dp</dimen>
+    <dimen name="tv_catalog_margin_left">15dp</dimen>
+    <dimen name="tv_catalog_margin_top">10dp</dimen>
+    <dimen name="tv_catalog_textsize">12sp</dimen>
+    <dimen name="view_card_select_icon_width">25dp</dimen>
+    <dimen name="view_coupon_padding_left">15dp</dimen>
+    <dimen name="view_coupon_padding_top">12dp</dimen>
+    <dimen name="view_coupon_padding_bottom">10dp</dimen>
+    <dimen name="view_coupon_icon_width">40dp</dimen>
+    <dimen name="view_coupon_icon_margin_top">10dp</dimen>
+    <dimen name="view_coupon_icon_margin_right">18dp</dimen>
+    <dimen name="view_coupon_icon_margin_bottom">50dp</dimen>
+    <dimen name="view_coupon_item_height">100dp</dimen>
+    <dimen name="tv_coupon_name_textsize">18sp</dimen>
+    <dimen name="tv_coupon_type_textsize">12sp</dimen>
+    <dimen name="tv_coupon_date_textsize">14sp</dimen>
+    <dimen name="tv_coupon_date_sec_textsize">14sp</dimen>
+    <dimen name="tv_coupon_type_margin_top">5dp</dimen>
+    <dimen name="tv_coupon_date_margin_top">32dp</dimen>
+    <dimen name="view_card_no_margin_top">34dp</dimen>
+    <dimen name="view_card_code_margin_left">16dp</dimen>
+    <dimen name="view_card_icon_width">56dp</dimen>
+    <dimen name="view_card_icon_height">80dp</dimen>
+    <dimen name="view_coupon_icon_margin">10dp</dimen>
+    <dimen name="tv_more_card_item_padding_vertical">20dp</dimen>
+
+    <!-- activiy coupon list  expired-->
+    <dimen name="tab_textsize">14sp</dimen>
+    <dimen name="tab_height">48dp</dimen>
+    <dimen name="tab_indicator_height">3dp</dimen>
+    <dimen name="tab_padding_vertical">17dp</dimen>
+    <dimen name="tab_margin_horizontal">40dp</dimen>
+
+    <!-- mobile -->
+    <dimen name="mobile_matterpage_margin_bottom">25dp</dimen>
+    <dimen name="mobile_matterpage_body_margin_left">30dp</dimen>
+    <dimen name="mobile_matterpage_body_margin_top">20dp</dimen>
+    <dimen name="mobile_historynumber_margin">18dp</dimen>
+    <dimen name="mobile_desc_tv_yuan_size">14sp</dimen>
+    <dimen name="mobile_desc_tv_price_size">18sp</dimen>
+
+    <!-- update-->
+    <dimen name="notify_img_dimens">40dp</dimen>
+    <dimen name="notify_paddingleft">24dp</dimen>
+    <dimen name="notify_paddingright">24dp</dimen>
+
+</resources>

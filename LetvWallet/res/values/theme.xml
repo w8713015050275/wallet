@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main -->
+    <style name="MainTheme" parent="AppTheme.NoArrow" />
+
+    <!-- Moblie -->
+    <style name="MobileTheme" parent="AppTheme.Arrow">
+        <item name="walletPrimaryColor">@color/colorMobilePrimary</item>
+    </style>
+
+    <!-- Movie -->
+    <style name="MovieTheme" parent="AppTheme.Arrow">
+        <item name="walletPrimaryColor">@color/movie_primary_color</item>
+    </style>
+
+    <style name="MovieTheme.MovieDetail">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@color/movieColorPrimary</item>
+        <item name="colorPrimaryDark">@color/movieColorPrimary</item>
+    </style>
+
+    <style name="MovieTheme.MoviePhotoGallery" parent="MovieTheme.MovieDetail">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="walletPrimaryColor">@android:color/white</item>
+    </style>
+
+    <!-- Coupon -->
+    <style name="CouponTheme" parent="AppTheme.Arrow" />
+
+    <!-- TotalOrder -->
+    <style name="TotalOrder" parent="AppTheme.Arrow">
+        <item name="walletPrimaryColor">@color/colorMobilePrimary</item>
+    </style>
+
+    <style name="MovieTheme.MovieListSmallYellow">
+        <item name="walletPrimaryColor">@color/movie_schedule_price</item>
+    </style>
+
+    <style name="MovieTheme.MovieListSmallRed">
+        <item name="walletPrimaryColor">@color/movie_btn_order_status_unpay</item>
+    </style>
+
+    <style name="MovieTheme.MovieListSmallGrey">
+        <item name="walletPrimaryColor">@color/movie_btn_order_status_shown</item>
+    </style>
+
+</resources>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="movie_attention_count_formatter">
+        <item quantity="one">"%s urmăritor"</item>
+        <item quantity="other">"%s urmăritori"</item>
+    </plurals>
+	<plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">"%1$d cinematograf"</item>
+        <item quantity="other">"%1$d cinematografe"</item>
+    </plurals>
+	<plurals name="movie_ticket_amount">
+        <item quantity="one">"bilet"</item>
+        <item quantity="other">"bilete"</item>
+    </plurals>
+	<string name="label_entity_city">"Selectare oraș"</string>
+	<string name="label_menu_search">"Căutare"</string>
+	<string name="movie_btn_presell_ticket">"Prevânzare"</string>
+	<string name="movie_btn_purchase_ticket">"Vânzare bilete"</string>
+	<string name="movie_cinema_cancel_filter">"Elimină filtrele"</string>
+	<string name="movie_cinema_contact_infomation">"Informații de contact"</string>
+	<string name="movie_cinema_filter_category_all">"Toate"</string>
+	<string name="movie_cinema_filter_category_area">"După regiune"</string>
+	<string name="movie_cinema_filter_category_brand">"După marcă"</string>
+	<string name="movie_cinema_filter_category_special">"După funcții"</string>
+	<string name="movie_cinema_filter_text_formatter">"Cinematografe în „%s” filtrate"</string>
+	<string name="movie_cinema_list_by_movie_normal">"E, dd.MM"</string>
+	<string name="movie_cinema_list_by_movie_today">"„Astăzi” dd.MM"</string>
+	<string name="movie_cinema_list_by_movie_tomorrow">"„Mâine” dd.MM"</string>
+	<string name="movie_cinema_menu_filter">"Filtru"</string>
+	<string name="movie_cinema_menu_search">"Căutare"</string>
+	<string name="movie_city_locating">"Se poziționează"</string>
+	<string name="movie_city_location_failure">"Nu s-a reușit poziționarea"</string>
+	<string name="movie_create_order_failed">"Nu s-a reușit crearea comenzii"</string>
+	<string name="movie_detail_buy">"Cumpărați acum"</string>
+	<string name="movie_detail_date_formatter">"Lansat în premieră pe dd.MM.yyyy"</string>
+	<string name="movie_detail_introduction">"Sinopsis"</string>
+	<string name="movie_detail_photo">"Postere"</string>
+	<string name="movie_detail_prevue">"Trailer"</string>
+	<string name="movie_detail_star">"Regizor și vedete"</string>
+	<string name="movie_detail_subscribe">"Urmărire"</string>
+	<string name="movie_detail_subscribed">"Urmărit"</string>
+	<string name="movie_detail_subscribe_failed">"Urmărire eșuată"</string>
+	<string name="movie_detail_subscribing">"Se urmărește..."</string>
+	<string name="movie_detail_tab_comment">"Recenzii"</string>
+	<string name="movie_detail_tab_information">"Date"</string>
+	<string name="movie_detail_tab_recommend">"Recomandări"</string>
+	<string name="movie_detail_unsubscribe_failed">"Anulare urmărire eșuată"</string>
+	<string name="movie_detail_unsubscribing">"Se anulează urmărirea..."</string>
+	<string name="movie_dialog_query_pay_result">"Se verifică rezultatul plății..."</string>
+	<string name="movie_dialog_user_select_result_failed">"Neplătit"</string>
+	<string name="movie_dialog_user_select_result_success">"Plătit"</string>
+	<string name="movie_dialog_user_select_result_title">"S-a achitat comanda?"</string>
+	<string name="movie_empty_no_seat_data">"Lipsă date"</string>
+	<string name="movie_error_cinema_no_movie">"Nu s-au difuzat filme în acest cinematograf"</string>
+	<string name="movie_error_no_cinema">"Nu există cinematografe în acest oraș"</string>
+	<string name="movie_error_no_movie">"Nu se difuzează filme în acest cinematograf"</string>
+	<string name="movie_error_no_movie_will">"Nu există filme viitoare pentru orașul curent"</string>
+	<string name="movie_hot_cities">"Top orașe"</string>
+	<string name="movie_location_city">"Autopoziționarea"</string>
+	<string name="movie_min_price">"RMB (preț de pornire)"</string>
+	<string name="movie_more">"Mai mult"</string>
+	<string name="movie_order_list_pay_remain_time">"m „min” s „sec rămase”"</string>
+	<string name="movie_order_view_label">"Detaliile comenzii"</string>
+	<string name="movie_pay_change_sessions_unavailable">"Netransferabil"</string>
+	<string name="movie_pay_order">"Confirmare comandă"</string>
+	<string name="movie_pay_overtime">"Plata comenzii a expirat. Selectați scaunele din nou."</string>
+	<string name="movie_pay_refund_unavailable">"Nerambursabil"</string>
+	<string name="movie_phone_number_empty">"Numărul de mobil este necompletat"</string>
+	<string name="movie_phone_number_empty_toast">"Numărul de mobil nu poate rămâne necompletat!"</string>
+	<string name="movie_phone_number_error_toast">"Introduceți numărul de mobil corect"</string>
+	<string name="movie_photo_gallery_failed">"Nu s-a reușit încărcarea. Reîncercați."</string>
+	<string name="movie_remain_time">"Timp rămas pentru plată"</string>
+	<string name="movie_schedule_add_favorites_fail">"Nu s-a reușit adăugarea la favorite"</string>
+	<string name="movie_schedule_cancle_favorites_fail">"Nu s-a reușit eliminarea din favorite"</string>
+	<string name="movie_schedule_stop_time_tip">"Notă: vânzarea biletelor se va încheia cu %1$d minute înainte de începerea filmului."</string>
+	<string name="movie_score">"-scor"</string>
+	<string name="movie_seat_buy_btr">"Cumpărați acum"</string>
+	<string name="movie_seat_checked_exceed_max_count">"Se pot selecta până la 4 scaune. Dacă aveți nevoie de mai multe scaune, cumpărați separat"</string>
+	<string name="movie_seat_data_by_alert_normal">"E, dd MMM"</string>
+	<string name="movie_seat_data_by_alert_today">"„Astăzi” dd MMM"</string>
+	<string name="movie_seat_data_by_alert_tomorrow">"„Mâine” dd MMM"</string>
+	<string name="movie_seat_data_normal">"E, dd.MM"</string>
+	<string name="movie_seat_data_today">"„Astăzi” dd.MM"</string>
+	<string name="movie_seat_data_tomorrow">"„Mâine” dd.MM"</string>
+	<string name="movie_seat_date_alert_ok">"OK"</string>
+	<string name="movie_seat_date_alert_text">"Ați selectat o sesiune în %1$s. Confirmați ora exactă."</string>
+	<string name="movie_seat_info_column">"Scaun"</string>
+	<string name="movie_seat_info_formatter">"%1$s - %2$s"</string>
+	<string name="movie_seat_info_row">"Rând"</string>
+	<string name="movie_seat_room_info_tv">"Ecran"</string>
+	<string name="movie_seat_screen_center_tv">"Mijlocul ecranului"</string>
+	<string name="movie_seat_separated_seat_checked_attention">"Nu cumpărați bilete pentru scaune nealăturate"</string>
+	<string name="movie_seat_state_checked">"Selectate"</string>
+	<string name="movie_seat_state_lover">"Canapele"</string>
+	<string name="movie_seat_state_normal">"Disponibile"</string>
+	<string name="movie_seat_state_sold">"Vândute"</string>
+	<string name="movie_select_seat_order">"Vânzare bilete"</string>
+	<string name="movie_show_finished">" Încheiere"</string>
+	<string name="movie_soon_filter_hot">"Nou"</string>
+	<string name="movie_soon_filter_time">"Oră"</string>
+	<string name="movie_soon_filter_time_all">"Toate"</string>
+	<string name="movie_soon_list_filter_other">"MM.yyyy"</string>
+	<string name="movie_soon_list_filter_this_year">"MM"</string>
+	<string name="movie_soon_list_section">"E, dd.MM.yyyy"</string>
+	<string name="movie_stop_sale">"Închis"</string>
+	<string name="movie_tab_cinema">"Cinema"</string>
+	<string name="movie_tab_movie">"Film"</string>
+	<string name="movie_tab_order">"Comenzi"</string>
+	<string name="movie_ticket_back_unlock_back">"Înapoi"</string>
+	<string name="movie_ticket_back_unlock_cancel">"Anulare"</string>
+	<string name="movie_ticket_back_unlock_title">"Dacă selectați Înapoi, scaunul sau scaunele blocate vor fi deblocate"</string>
+	<string name="movie_ticket_change_city_btn_cancel">"Anulare"</string>
+	<string name="movie_ticket_change_city_btn_confirm">"Comutare"</string>
+	<string name="movie_ticket_change_city_title">"Vă aflați în %1$s. Schimbați orașul?"</string>
+	<string name="movie_ticket_code_desc">"Verificarea valorificării"</string>
+	<string name="movie_ticket_order_date">"Creat la"</string>
+	<string name="movie_ticket_order_num">"Numărul comenzii"</string>
+	<string name="movie_ticket_order_price">"Sumă plătită"</string>
+	<string name="movie_ticket_price_unit">"RMB"</string>
+	<string name="movie_ticket_redeem_code">"Cod valorificare"</string>
+	<string name="movie_ticket_serial_number">"Serie"</string>
+	<string name="movie_ticket_status_generate_ticket_failed">"Nu s-a reușit emiterea biletelor"</string>
+	<string name="movie_ticket_status_generating_ticket">"Se emit bilete"</string>
+	<string name="movie_ticket_status_overtime">"Expirat"</string>
+	<string name="movie_ticket_status_refunded">"Rambursat"</string>
+	<string name="movie_ticket_status_refunding">"Se restituie"</string>
+	<string name="movie_ticket_status_shown">"Difuzat"</string>
+	<string name="movie_ticket_status_unconsumed">"Necheltuit"</string>
+	<string name="movie_ticket_status_unknown">"Nu se cunoaște"</string>
+	<string name="movie_ticket_status_unpay">"Se va plăti"</string>
+	<string name="movie_toast_order_overtime">"Comandă expirată"</string>
+	<string name="movie_want">"urmărește"</string>
+	<string name="movie_weipiao_tele">"Serviciu clienți Wepiao"</string>
+	<string name="movie_weipiao_tele_num">"4001100100"</string>
+	<string name="movie_schedule_add_favorite">"favorit"</string>
+</resources>

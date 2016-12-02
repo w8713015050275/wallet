@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <plurals name="movie_ticket_amount">
+        <item quantity="one">टिकट</item>
+        <item quantity="other">टिकटें</item>
+    </plurals>
+    <string name="label_entity_city">शहर चुनें</string>
+    <string name="label_menu_search">खोजें</string>
+    <string name="movie_btn_presell_ticket">पूर्व-विक्रय</string>
+    <string name="movie_btn_purchase_ticket">टिकटिंग</string>
+    <string name="movie_cinema_cancel_filter">फ़िल्टर निकालें</string>
+    <string name="movie_cinema_contact_infomation">संपर्क जानकारी</string>
+    <string name="movie_cinema_filter_category_all">सभी</string>
+    <string name="movie_cinema_filter_category_area">क्षेत्र के अनुसार</string>
+    <string name="movie_cinema_filter_category_brand">ब्रांड के अनुसार</string>
+    <string name="movie_cinema_filter_category_special">सुविधा के अनुसार</string>
+    <string name="movie_cinema_filter_text_formatter">\"%s\" में क्रिसमस फ़िल्टर किया गया</string>
+    <string name="movie_cinema_list_by_movie_normal">dd-MM E</string>
+    <string name="movie_cinema_list_by_movie_today">\'आज\' dd-MM</string>
+    <string name="movie_cinema_list_by_movie_tomorrow">\'कल\' dd-MM</string>
+    <string name="movie_cinema_menu_filter">फ़िल्टर करें</string>
+    <string name="movie_cinema_menu_search">खोजें</string>
+    <string name="movie_city_locating">स्थिति</string>
+    <string name="movie_city_location_failure">स्थापित करने में विफल</string>
+    <string name="movie_create_order_failed">आदेश जनरेट करने में विफल</string>
+    <string name="movie_detail_buy">अभी खरीदें</string>
+    <string name="movie_detail_date_formatter">dd/MM/yyyy को पहली बार प्रदर्शित</string>
+    <string name="movie_detail_introduction">संक्षेप</string>
+    <string name="movie_detail_photo">पोस्टर</string>
+    <string name="movie_detail_prevue">ट्रेलर</string>
+    <string name="movie_detail_star">निर्देशक और सितारे</string>
+    <string name="movie_detail_subscribe">फ़ॉलो करें</string>
+    <string name="movie_detail_subscribed">फ़ॉलो किया गया</string>
+    <string name="movie_detail_subscribe_failed">फ़ॉलो करने में विफल</string>
+    <string name="movie_detail_subscribing">फ़ॉलो किया जा रहा है...</string>
+    <string name="movie_detail_tab_comment">समीक्षाएँ</string>
+    <string name="movie_detail_tab_information">डेटा</string>
+    <string name="movie_detail_tab_recommend">अनुशंसाएँ</string>
+    <string name="movie_detail_unsubscribe_failed">अनफ़ॉलो करने में विफल</string>
+    <string name="movie_detail_unsubscribing">अनफ़ॉलो किया जा रहा है...</string>
+    <string name="movie_dialog_query_pay_result">भुगतान परिणाम की जाँच की जा रही है...</string>
+    <string name="movie_dialog_user_select_result_failed">भुगतान नहीं किया गया</string>
+    <string name="movie_dialog_user_select_result_success">भुगतान हो गया</string>
+    <string name="movie_dialog_user_select_result_title">क्या आदेश का भुगतान किया जा चुका है?</string>
+    <string name="movie_empty_no_seat_data">कोई डेटा नहीं</string>
+    <string name="movie_error_cinema_no_movie">इस सिनेमा में कोई मूवी प्रसारित नहीं हुई</string>
+    <string name="movie_error_no_cinema">इस शहर में कोई सिनेमा नहीं</string>
+    <string name="movie_error_no_movie">इस शहर में कोई मूवी प्रसारित नहीं हुई</string>
+    <string name="movie_error_no_movie_will">वर्तमान शहर के लिए कोई आगामी फ़िल्म नहीं</string>
+    <string name="movie_hint_input_phonenumber">कृपया एक मोबाइल नंबर दर्ज करें</string>
+    <string name="movie_hot_cities">शीर्ष शहर</string>
+    <string name="movie_location_city">स्वतः स्थान</string>
+    <string name="movie_min_price">RMB (प्रारंभिक मूल्य)</string>
+    <string name="movie_more">अधिक</string>
+    <string name="movie_order_list_pay_remain_time">मि \'मिनट\' से \'सेकंड शेष\'</string>
+    <string name="movie_order_view_label">ऑर्डर विवरण</string>
+    <string name="movie_pay_change_sessions_unavailable">स्थानांतरण योग्य नहीं</string>
+    <string name="movie_pay_order">ऑर्डर की पुष्टि करें</string>
+    <string name="movie_pay_overtime">आदेश भुगतान की समय सीमा समाप्त। कृपया फिर से सीटें चुनें।</string>
+    <string name="movie_pay_refund_unavailable">धनवापसी योग्य नहीं</string>
+    <string name="movie_phone_num">फ़ोन नंबर</string>
+    <string name="movie_phone_number_empty">मोबाइल नंबर रिक्त है</string>
+    <string name="movie_phone_number_empty_toast">मोबाइल नंबर रिक्त नहीं हो सकता!</string>
+    <string name="movie_phone_number_error_toast">कृपया सही मोबाइल नंबर दर्ज करें</string>
+    <string name="movie_photo_gallery_failed">लोड करने में विफल। कृपया पुनः प्रयास करें।</string>
+    <string name="movie_remain_time">भुगतान के लिए शेष समय</string>
+    <string name="movie_schedule_add_favorites_fail">पसंदीदा करने में असमर्थ</string>
+    <string name="movie_schedule_cancle_favorites_fail">पसंदीदा रद्द करने में असमर्थ</string>
+    <string name="movie_schedule_stop_time_tip">नोट: टिकट देने की प्रक्रिया फ़िल्म शुरू होने से %1$d मिनट पहले समाप्त हो जाएगी।</string>
+    <string name="movie_score">-स्कोर</string>
+    <string name="movie_seat_buy_btr">अभी खरीदें</string>
+    <string name="movie_seat_checked_exceed_max_count">अधिकतम 4 सीटें चुनी जा सकती है। अगर आपको अधिक सीटें चाहिए, तो कृपया उन्हें अलग से खरीदें</string>
+    <string name="movie_seat_data_by_alert_normal">dd MMM E</string>
+    <string name="movie_seat_data_by_alert_today">\'आज\' dd MMM</string>
+    <string name="movie_seat_data_by_alert_tomorrow">\'कल\' dd MMM</string>
+    <string name="movie_seat_data_normal">dd/MM E</string>
+    <string name="movie_seat_data_today">dd/MM \'आज\'</string>
+    <string name="movie_seat_data_tomorrow">dd/MM \'कल\'</string>
+    <string name="movie_seat_date_alert_ok">ठीक</string>
+    <string name="movie_seat_date_alert_text">आपने %1$s पर एक सत्र चुना है। कृपया सटीक समय की पुष्टि करें।</string>
+    <string name="movie_seat_info_column">सीट</string>
+    <string name="movie_seat_info_formatter">पंक्ति %1$s सीट %2$s</string>
+    <string name="movie_seat_info_row">पंक्ति</string>
+    <string name="movie_seat_room_info_tv">स्क्रीन</string>
+    <string name="movie_seat_screen_center_tv">स्क्रीन के बीच में</string>
+    <string name="movie_seat_separated_seat_checked_attention">अलग होने वाली सीटों के लिए टिकटें न खरीदें</string>
+    <string name="movie_seat_state_checked">चयनित</string>
+    <string name="movie_seat_state_lover">लवसीटें</string>
+    <string name="movie_seat_state_normal">उपलब्ध</string>
+    <string name="movie_seat_state_sold">बिक चुकी</string>
+    <string name="movie_select_seat_order">सीट(सीटें) चुनें और टिकट(टिकटें) खरीदें</string>
+    <string name="movie_show_finished">समाप्ति समय</string>
+    <string name="movie_soon_filter_hot">प्रचलित</string>
+    <string name="movie_soon_filter_time">समय</string>
+    <string name="movie_soon_filter_time_all">सभी</string>
+    <string name="movie_soon_list_filter_other">MM-yyyy</string>
+    <string name="movie_soon_list_filter_this_year">MM</string>
+    <string name="movie_soon_list_section">E dd/MM/yyyy</string>
+    <string name="movie_stop_sale">टिकट विक्रय समाप्त</string>
+    <string name="movie_tab_cinema">सिनेमा</string>
+    <string name="movie_tab_movie">मूवी</string>
+    <string name="movie_tab_order">आदेश</string>
+    <string name="movie_ticket_back_unlock_back">पीछे</string>
+    <string name="movie_ticket_back_unlock_cancel">रद्द करें</string>
+    <string name="movie_ticket_back_unlock_title">अगर आप पीछे जाते हैं, तो लॉक सीट(सीटों) को अनलॉक कर दिया जाएगा</string>
+    <string name="movie_ticket_change_city_btn_cancel">रद्द करें</string>
+    <string name="movie_ticket_change_city_btn_confirm">स्विच करें</string>
+    <string name="movie_ticket_change_city_title">आप %1$s में स्थित हैं। इस शहर को स्विच करें?</string>
+    <string name="movie_ticket_code_desc">रीडिम्पशन सत्यापन</string>
+    <string name="movie_ticket_order_date">इस पर बनाया गया</string>
+    <string name="movie_ticket_order_num">आदेश संख्या</string>
+    <string name="movie_ticket_order_price">भुगतान की गई राशि</string>
+    <string name="movie_ticket_price_unit">RMB</string>
+    <string name="movie_ticket_redeem_code">रीडिम्पशन कोड</string>
+    <string name="movie_ticket_serial_number">क्रम संख्या</string>
+    <string name="movie_ticket_status_generate_ticket_failed">टिकटें जारी करने में विफल</string>
+    <string name="movie_ticket_status_generating_ticket">टिकटें जारी की जा रही हैं</string>
+    <string name="movie_ticket_status_overtime">समय सीमा समाप्त</string>
+    <string name="movie_ticket_status_refunded">धन वापसी की गई</string>
+    <string name="movie_ticket_status_refunding">धन वापसी की जा रही है</string>
+    <string name="movie_ticket_status_shown">प्रसारित</string>
+    <string name="movie_ticket_status_unconsumed">खर्च नहीं किया गया</string>
+    <string name="movie_ticket_status_unknown">अज्ञात</string>
+    <string name="movie_ticket_status_unpay">भुगतान किया जाना है</string>
+    <string name="movie_toast_order_overtime">आदेश की समय सीमा समाप्त</string>
+    <string name="movie_want">फ़ॉलो</string>
+    <string name="movie_weipiao_tele">Wepiao ग्राहक सेवा</string>
+    <plurals name="movie_attention_count_formatter">
+        <item quantity="one">%s अनुसरणकर्ता</item>
+        <item quantity="other">%s अनुसरणकर्ता</item>
+    </plurals>
+    <plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">%1$d सिनेमा</item>
+        <item quantity="other">%1$d सिनेमा</item>
+    </plurals>
+    <string name="movie_schedule_add_favorite">पसंदीदा</string>
+</resources>

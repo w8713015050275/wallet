@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>Tiada</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Jenama</item>
+        <!--WALLPAPER-->
+        
+        <item>Kertas dinding</item>
+        <!--MUSIC-->
+        
+        <item>Muzik label</item>
+        <!--ALBUM-->
+        
+        <item>Tiada</item>
+        <!--ARTISTS-->
+        
+        <item>Tiada</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet berkaitan</item>
+        <!--SITES-->
+        
+        <item>Laman web berkaitan</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>Filem dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Hiburan</item>
+        <!--WALLPAPER-->
+        
+        <item>Kertas dinding</item>
+        <!--MUSIC-->
+        
+        <item>Lagu tema</item>
+        <!--ALBUM-->
+        
+        <item>Tiada</item>
+        <!--ARTISTS-->
+        
+        <item>Artis berkaitan</item>
+        <!--WEI_BO-->
+        
+        <item>Tiada</item>
+        <!--SITES-->
+        
+        <item>Tiada</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>Filem dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Sukan</item>
+        <!--WALLPAPER-->
+        
+        <item>Kertas dinding</item>
+        <!--MUSIC-->
+        
+        <item>Tiada</item>
+        <!--ALBUM-->
+        
+        <item>Album muzik</item>
+        <!--ARTISTS-->
+        
+        <item>Tiada</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet berkaitan</item>
+        <!--SITES-->
+        
+        <item>Laman web berkaitan</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>Tiada</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Video berkaitan</item>
+        <!--WALLPAPER-->
+        
+        <item>Kertas dinding</item>
+        <!--MUSIC-->
+        
+        <item>Tiada</item>
+        <!--ALBUM-->
+        
+        <item>Tiada</item>
+        <!--ARTISTS-->
+        
+        <item>Tiada</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet berkaitan</item>
+        <!--SITES-->
+        
+        <item>Tiada</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>Filem dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Hiburan</item>
+        <!--WALLPAPER-->
+        
+        <item>Kertas dinding</item>
+        <!--MUSIC-->
+        
+        <item>Single popular</item>
+        <!--ALBUM-->
+        
+        <item>Album muzik</item>
+        <!--ARTISTS-->
+        
+        <item>Artis berkaitan</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet berkaitan</item>
+        <!--SITES-->
+        
+        <item>Laman web berkaitan</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>Filem dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita berkaitan</item>
+        <!--WALLPAPER-->
+        
+        <item>Kertas dinding</item>
+        <!--MUSIC-->
+        
+        <item>Muzik berkaitan</item>
+        <!--ALBUM-->
+        
+        <item>Tiada</item>
+        <!--ARTISTS-->
+        
+        <item>Tiada</item>
+        <!--WEI_BO-->
+        
+        <item>Tiada</item>
+        <!--SITES-->
+        
+        <item>Tiada</item>
+    </string-array>
+</resources>

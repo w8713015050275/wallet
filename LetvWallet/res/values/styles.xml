@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.Wallet" parent="@*android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorWalletTv</item>
+    </style>
+
+    <style name="TextAppearance.PayCountDown" parent="@*android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/pay_countdown_tv_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">helve-neue</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.MobileLabel">
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_default</item>
+        <item name="android:textColor">@color/mobile_tv_label_color</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="MobileHistoryMobileNumber" parent="@*android:style/TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/mobile_history_number_tv_color</item>
+        <item name="android:fontFamily">helve-neue</item>
+    </style>
+
+    <style name="MobileHistoryContactName" parent="@*android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/mobile_history_contact_name_tv_color</item>
+        <item name="android:fontFamily">helve-neue</item>
+    </style>
+    <style name="TextAppearance.Wallet.OrderDesc">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/mobile_tv_secondary_color</item>
+        <item name="android:fontFamily">helve-neue</item>
+		<item name="android:maxLines">1</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.Highlight">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorWalletTv</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.Secondary">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/wallet_tv_default_color</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.SectionLabel">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorSectionLabel</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.SectionLabel">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorSectionLabel</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.Label">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/mobile_tv_primary_color</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.Price">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">helve-neue</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.Content">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">helve-neue</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.MobileProduct">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/order_detial_desc_tv_color</item>
+    </style>
+
+    <style name="TextAppearance.Wallet.OrderDesc.OrderList">
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextAppearance.MovieSeat" parent="@*android:style/TextAppearance">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="TextAppearance.MovieSeat.BottomTv" parent="TextAppearance.MovieSeat">
+        <item name="android:layout_marginLeft">@dimen/movie_seat_bottom_tv_im_margin</item>
+        <item name="android:textSize">@dimen/movie_seat_bottom_tv_font_size</item>
+        <item name="android:textColor">@color/colorWalletTv</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+    <style name="MovieSeatBottomIv">
+        <item name="android:layout_width">15dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+    <style name="TextAppearance.MovieSeat.CheckedSeatTv" parent="TextAppearance.MovieSeat">
+        <item name="android:textColor">@color/movie_primary_color</item>
+        <item name="android:textSize">@dimen/movie_seat_checkedinfo_font_size</item>
+    </style>
+    <style name="TextAppearance.Wallet.OrderDesc.Unit">
+        <item name="android:textSize">@dimen/mobile_desc_tv_yuan_size</item>
+        <item name="android:textColor">@color/mobile_order_desc_black_color</item>
+    </style>
+    <style name="TextAppearance.TotalOrderList" parent="@*android:style/TextAppearance">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextAppearance.TotalOrderList.TitleTv" parent="TextAppearance.TotalOrderList">
+        <item name="android:textColor">@color/totalorder_item_primary_tv_color</item>
+    </style>
+
+    <style name="TextAppearance.TotalOrderList.UndertoneTv" parent="TextAppearance.TotalOrderList">
+        <item name="android:textColor">@color/totalorder_item_secondary_tv_color</item>
+    </style>
+
+    <style name="SectionBase">
+        <item name="android:paddingLeft">@dimen/padding_default</item>
+        <item name="android:paddingRight">@dimen/padding_default</item>
+    </style>
+
+    <style name="SectionBase.Label">
+        <item name="android:paddingTop">@dimen/pay_desc_vbig_padding</item>
+        <item name="android:paddingBottom">@dimen/pay_desc_vsmall_padding</item>
+    </style>
+
+    <style name="SectionBase.CostLabel">
+        <item name="android:paddingTop">@dimen/pay_desc_vbig_padding</item>
+        <item name="android:paddingBottom">@dimen/pay_desc_vsmall_padding</item>
+    </style>
+
+    <style name="SectionBase.CostContent">
+        <item name="android:paddingTop">@dimen/pay_desc_vbig_padding</item>
+        <item name="android:paddingBottom">@dimen/pay_desc_vbig_padding</item>
+    </style>
+
+    <style name="SectionBase.CostView">
+        <item name="android:paddingTop">@dimen/vertical_cost_padding</item>
+        <item name="android:paddingBottom">@dimen/vertical_cost_padding</item>
+        <item name="android:layout_marginTop">@dimen/vertical_cost_padding</item>
+        <item name="android:layout_marginBottom">@dimen/vertical_cost_padding</item>
+        <item name="android:background">@color/content_item_bg_color</item>
+    </style>
+
+    <style name="SectionBase.PayOptions">
+        <item name="android:paddingTop">@dimen/pay_desc_vmid_padding</item>
+        <item name="android:paddingBottom">@dimen/pay_desc_vmid_padding</item>
+    </style>
+
+    <style name="SectionBase.LabeledText">
+        <item name="android:paddingTop">@dimen/pay_desc_vsmall_padding</item>
+        <item name="android:paddingBottom">@dimen/pay_desc_vsmall_padding</item>
+    </style>
+
+    <style name="SectionBase.ContentBlock">
+        <item name="android:paddingTop">@dimen/pay_desc_vsmall_padding</item>
+        <item name="android:paddingBottom">@dimen/pay_desc_vsmall_padding</item>
+    </style>
+
+    <style name="PayButton" parent="@style/Widget.Eui.Button">
+        <item name="android:textColor">@color/pay_btn_tv_color</item>
+    </style>
+
+    <style name="PayButton.SectionBase">
+        <item name="android:layout_marginLeft">@dimen/padding_default</item>
+        <item name="android:layout_marginRight">@dimen/padding_default</item>
+    </style>
+
+    <style name="PayButton.SectionBase.Bottom">
+        <item name="android:layout_marginTop">@dimen/vertical_small_padding</item>
+        <item name="android:layout_marginBottom">@dimen/bottom_vertical_padding</item>
+    </style>
+
+    <style name="PaddingVBase">
+        <item name="android:paddingTop">@dimen/vertical_small_padding</item>
+        <item name="android:paddingBottom">@dimen/vertical_small_padding</item>
+    </style>
+
+    <style name="ProductPaddingVBase">
+        <item name="android:paddingTop">@dimen/vertical_cost_padding</item>
+        <item name="android:paddingBottom">@dimen/vertical_cost_padding</item>
+        <item name="android:background">@color/content_item_bg_color</item>
+    </style>
+
+    <style name="SectionBase.OrderListItem">
+        <item name="android:paddingTop">@dimen/vertical_small_padding</item>
+        <item name="android:paddingBottom">@dimen/vertical_small_padding</item>
+    </style>
+
+    <style name="SectionBase.TotalOrderListItem">
+        <item name="android:paddingTop">@dimen/total_orderlist_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/total_orderlist_vertical_padding</item>
+    </style>
+
+    <style name="CouponExpiredMsgTextStyle">
+        <item name="android:textSize">@dimen/coupon_expired_msg_textsize</item>
+        <item name="android:textColor">@color/coupon_expired_view_tvcolor</item>
+    </style>
+
+    <style name="MovieScheduleTextItemSumaryStyle">
+        <item name="android:textSize">@dimen/movie_schedule_item_summary_textsize</item>
+        <item name="android:textColor">@color/movie_schedule_item_summary</item>
+    </style>
+
+    <style name="MovieScheduleTextItemDiscountStyle">
+        <item name="android:textSize">@dimen/movie_schedule_item_discount_textsize</item>
+        <item name="android:textColor">@color/movie_cinema_special_discount_text_color</item>
+    </style>
+
+    <style name="CouponUseButton" parent="@style/Widget.Eui.Button">
+        <item name="android:theme">@style/MobileTheme</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/buy_movieticket_button_tv_font_size</item>
+        <item name="android:layout_marginLeft">@dimen/margin_default</item>
+        <item name="android:layout_marginRight">@dimen/margin_default</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

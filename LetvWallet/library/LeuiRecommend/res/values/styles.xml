@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LeTextStyle">
+        <item name="android:fontFamily">helve-neue-ultralight</item>
+        <item name="android:textSize">@dimen/item_recomend_tv_music_index_front_size</item>
+        <item name="android:layout_marginEnd">@dimen/item_recomend_margin_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="LeTextStyleThin">
+        <item name="android:fontFamily">helve-neue-thin</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:layout_marginEnd">@dimen/item_recomend_margin_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+</resources>

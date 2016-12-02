@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+
+        <item>Películas y dramas</item>
+        <!--LATEST_NEWS-->
+
+        <item>Noticias sobre entretenimiento</item>
+        <!--WALLPAPER-->
+
+        <item>Fondos de escritorio</item>
+        <!--MUSIC-->
+
+        <item>Sencillos de éxito</item>
+        <!--ALBUM-->
+
+        <item>Álbumes de música</item>
+        <!--ARTISTS-->
+
+        <item>Artistas relacionados</item>
+        <!--WEI_BO-->
+
+        <item>Tweets relacionados</item>
+        <!--SITES-->
+
+        <item>Sitios web relacionados</item>
+    </string-array>
+
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+
+        <item>Películas y dramas</item>
+        <!--LATEST_NEWS-->
+
+        <item>Noticias sobre deportes</item>
+        <!--WALLPAPER-->
+
+        <item>Fondos de escritorio</item>
+        <!--MUSIC-->
+
+        <item>Ninguno</item>
+        <!--ALBUM-->
+
+        <item>Álbumes de música</item>
+        <!--ARTISTS-->
+
+        <item>Ninguno</item>
+        <!--WEI_BO-->
+
+        <item>Tweets relacionados</item>
+        <!--SITES-->
+
+        <item>Sitios web relacionados</item>
+    </string-array>
+
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+
+        <item>Películas y dramas</item>
+        <!--LATEST_NEWS-->
+
+        <item>Noticias sobre entretenimiento</item>
+        <!--WALLPAPER-->
+
+        <item>Fondos de escritorio</item>
+        <!--MUSIC-->
+
+        <item>Bandas sonoras</item>
+        <!--ALBUM-->
+
+        <item>Ninguno</item>
+        <!--ARTISTS-->
+
+        <item>Artistas relacionados</item>
+        <!--WEI_BO-->
+
+        <item>Ninguno</item>
+        <!--SITES-->
+
+        <item>Ninguno</item>
+    </string-array>
+
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+
+        <item>Películas y dramas</item>
+        <!--LATEST_NEWS-->
+
+        <item>Noticias relevantes</item>
+        <!--WALLPAPER-->
+
+        <item>Fondos de escritorio</item>
+        <!--MUSIC-->
+
+        <item>Música relacionada</item>
+        <!--ALBUM-->
+
+        <item>Ninguno</item>
+        <!--ARTISTS-->
+
+        <item>Ninguno</item>
+        <!--WEI_BO-->
+
+        <item>Ninguno</item>
+        <!--SITES-->
+
+        <item>Ninguno</item>
+    </string-array>
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+
+        <item>Ninguno</item>
+        <!--LATEST_NEWS-->
+
+        <item>Noticias sobre la marca</item>
+        <!--WALLPAPER-->
+
+        <item>Fondos de escritorio</item>
+        <!--MUSIC-->
+
+        <item>Música independiente</item>
+        <!--ALBUM-->
+
+        <item>Ninguno</item>
+        <!--ARTISTS-->
+
+        <item>Ninguno</item>
+        <!--WEI_BO-->
+
+        <item>Tweets relacionados</item>
+        <!--SITES-->
+
+        <item>Sitios web relacionados</item>
+    </string-array>
+
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+
+        <item>Ninguno</item>
+        <!--LATEST_NEWS-->
+
+        <item>Videos relacionados</item>
+        <!--WALLPAPER-->
+
+        <item>Fondos de escritorio</item>
+        <!--MUSIC-->
+
+        <item>Ninguno</item>
+        <!--ALBUM-->
+
+        <item>Ninguno</item>
+        <!--ARTISTS-->
+
+        <item>Ninguno</item>
+        <!--WEI_BO-->
+
+        <item>Tweets relacionados</item>
+        <!--SITES-->
+
+        <item>Ninguno</item>
+    </string-array>
+
+</resources>

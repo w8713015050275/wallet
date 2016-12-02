@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:localui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/content_item_bg_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/vertical_big_padding"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingTop="@dimen/vertical_big_padding">
+
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="@dimen/view_card_icon_size"
+                android:layout_height="@dimen/view_card_icon_size"
+                android:paddingRight="@dimen/view_coupon_icon_margin"
+                android:alpha="@dimen/le_img_alpha"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_coupon_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tvCouponNameTvColor"
+                    android:textSize="@dimen/title_font_size" />
+
+                <TextView
+                    android:id="@+id/tv_coupon_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/coupon_comments_color"
+                    android:textSize="@dimen/comments_font_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <LinearLayout
+            style="@style/SectionBase.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.Wallet.SectionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_coupon_info" />
+        </LinearLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <LinearLayout
+            android:id="@+id/v_info"
+            style="@style/PaddingVBase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/content_item_bg_color"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <LinearLayout
+            style="@style/SectionBase.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.Wallet.SectionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_coupon_usecondition" />
+        </LinearLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/content_item_bg_color"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/vertical_big_padding"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingTop="@dimen/vertical_big_padding">
+
+            <TextView
+                android:id="@+id/tv_usecondition"
+                style="@style/TextAppearance.Wallet.SectionLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/coupon_comments_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <LinearLayout
+            android:id="@+id/v_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/content_item_bg_color"
+            android:orientation="vertical">
+
+            <com.letv.wallet.common.widget.LabeledTextView
+                android:id="@+id/ltv_usedetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/vertical_small_padding"
+                android:paddingTop="@dimen/vertical_small_padding"
+                localui:label_text="@string/label_coupon_usedetail" />
+
+            <View style="@style/Divider_HorizontalLine_Style" />
+        </LinearLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <RelativeLayout
+            android:id="@+id/view_use_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="10dip"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/btn_use_coupon"
+                style="@style/CouponUseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:onClick="useCoupon"
+                android:text="@string/label_coupon_usecoupon_btn" />
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="coupon_expired_tab_array" >
+        <item>Card</item>
+        <item>Coupon</item>
+    </string-array>
+    <string-array name="movie_list_tab_array" >
+        <item>Now showing</item>
+        <item>Coming soon</item>
+    </string-array>
+</resources>

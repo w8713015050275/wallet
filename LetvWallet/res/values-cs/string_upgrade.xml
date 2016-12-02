@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="continue_upgrade">"Upgradovat"</string>
+	<string name="defautl_update_content">"Řeší některé chyby."</string>
+	<string name="downloaded">"Staženo"</string>
+	<string name="download_fail">"Stahování se nezdařilo."</string>
+	<string name="download_sucess">"Stahování proběhlo úspěšně."</string>
+	<string name="download_under_wifi">"Aktualizovat přes Wi-Fi"</string>
+	<string name="in_downloading">"Stahování"</string>
+	<string name="no_wifi_update_notify">"Upozornění: Stahování přes datové připojení"</string>
+	<string name="undownloaded">"Zrušit stahování"</string>
+	<string name="update_content">"Úvod: %s"</string>
+	<string name="update_version">"Verze: v. %s"</string>
+	<string name="upgrade_fail_note">"Upgrade se nezdařil."</string>
+	<string name="upgrade_success_note">"Upgrade proběhl úspěšně."</string>
+	<string name="wallet_exit_application">"Ukončit aplikaci"</string>
+	<string name="wallet_upgrade_notify_later">"Upozornit později"</string>
+	<string name="wallet_upgrade_now">"Upgradovat"</string>
+	<string name="wallet_upgrade_title">"Poznámka k upgradu"</string>
+	<string name="wifi_fail_continue_next">"Síť Wi-Fi byla odpojena. Pokračujte ve stahování po připojení k síti Wi-Fi."</string>
+</resources>

@@ -1,0 +1,10 @@
+<vector
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:viewportWidth="120"
+android:viewportHeight="120"
+android:width="24dp"
+android:height="24dp">
+<path
+android:fillColor="?attr/walletPrimaryColor"
+android:pathData="M60,8.6c-1.2,0-2.6,0.6-3.2,2L41.9,40L9.4,45.1c-3,0.4-4.1,4.1-2,6.1l23.2,23.1l-5.1,32.8 		c-0.4,2.4,1.5,4.2,3.6,4.2c0.5,0,1.1-0.1,1.6-0.4L60,96l29.2,15c0.5,0.2,1.1,0.4,1.6,0.4c2.1,0,4-1.9,3.6-4.2l-5.1-32.6l23.2-23.2 		c2.1-2.1,1-5.8-2-6.2L78,39.8L63.2,10.6C62.6,9.2,61.2,8.6,60,8.6L60,8.6z"/>
+</vector>

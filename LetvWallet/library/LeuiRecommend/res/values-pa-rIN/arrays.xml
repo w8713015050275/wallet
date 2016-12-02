@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ਬ੍ਰਾਂਡ ਖਬਰਾਂ</item>
+        <!--WALLPAPER-->
+        
+        <item>ਵਾਲਪੇਪਰ</item>
+        <!--MUSIC-->
+        
+        <item>ਲੇਬਲ ਸੰਗੀਤ</item>
+        <!--ALBUM-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--ARTISTS-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--WEI_BO-->
+        
+        <item>ਸੰਬੰਧਿਤ ਟਵੀਟਾਂ</item>
+        <!--SITES-->
+        
+        <item>ਸੰਬੰਧਿਤ ਵੈਬਸਾਈਟਾਂ</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>ਮੂਵੀਜ਼ ਅਤੇ ਡਰਾਮੇ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ਮਨੋਰੰਜਨ ਖਬਰਾਂ</item>
+        <!--WALLPAPER-->
+        
+        <item>ਵਾਲਪੇਪਰ</item>
+        <!--MUSIC-->
+        
+        <item>ਸਾਊਂਡਟ੍ਰੈਕਾਂ</item>
+        <!--ALBUM-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--ARTISTS-->
+        
+        <item>ਸੰਬੰਧਿਤ ਕਲਾਕਾਰ</item>
+        <!--WEI_BO-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--SITES-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>ਮੂਵੀਜ਼ ਅਤੇ ਡਰਾਮੇ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ਖੇਡ ਖਬਰਾਂ</item>
+        <!--WALLPAPER-->
+        
+        <item>ਵਾਲਪੇਪਰ</item>
+        <!--MUSIC-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--ALBUM-->
+        
+        <item>ਸੰਗੀਤ ਐਲਬਮਾਂ</item>
+        <!--ARTISTS-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--WEI_BO-->
+        
+        <item>ਸੰਬੰਧਿਤ ਟਵੀਟਾਂ</item>
+        <!--SITES-->
+        
+        <item>ਸੰਬੰਧਿਤ ਵੈਬਸਾਈਟਾਂ</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ਸੰਬੰਧਿਤ ਵੀਡੀਓਜ਼</item>
+        <!--WALLPAPER-->
+        
+        <item>ਵਾਲਪੇਪਰ</item>
+        <!--MUSIC-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--ALBUM-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--ARTISTS-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--WEI_BO-->
+        
+        <item>ਸੰਬੰਧਿਤ ਟਵੀਟਾਂ</item>
+        <!--SITES-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>ਮੂਵੀਜ਼ ਅਤੇ ਡਰਾਮੇ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ਮਨੋਰੰਜਨ ਖਬਰਾਂ</item>
+        <!--WALLPAPER-->
+        
+        <item>ਵਾਲਪੇਪਰ</item>
+        <!--MUSIC-->
+        
+        <item>ਸਫ਼ਲ ਇਕਲੌਤੇ ਗੀਤ</item>
+        <!--ALBUM-->
+        
+        <item>ਸੰਗੀਤ ਐਲਬਮਾਂ</item>
+        <!--ARTISTS-->
+        
+        <item>ਸੰਬੰਧਿਤ ਕਲਾਕਾਰ</item>
+        <!--WEI_BO-->
+        
+        <item>ਸੰਬੰਧਿਤ ਟਵੀਟਾਂ</item>
+        <!--SITES-->
+        
+        <item>ਸੰਬੰਧਿਤ ਵੈਬਸਾਈਟਾਂ</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>ਮੂਵੀਜ਼ ਅਤੇ ਡਰਾਮੇ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ਢੁਕਵੀਆਂ ਖਬਰਾਂ</item>
+        <!--WALLPAPER-->
+        
+        <item>ਵਾਲਪੇਪਰ</item>
+        <!--MUSIC-->
+        
+        <item>ਸੰਬੰਧਿਤ ਸੰਗੀਤ</item>
+        <!--ALBUM-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--ARTISTS-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--WEI_BO-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+        <!--SITES-->
+        
+        <item>ਕੋਈ ਵੀ ਨਹੀਂ</item>
+    </string-array>
+</resources>

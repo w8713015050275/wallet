@@ -1,0 +1,117 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="item_recommend_label_box_margin">10dp</dimen>
+    <dimen name="item_recommend_label_more_margin_r">3dp</dimen>
+    <dimen name="item_recommend_label_recycle_margin_l">7dp</dimen>
+
+    <dimen name="item_recommend_hot_w">112dp</dimen>
+    <dimen name="item_recommend_hot_h">150dp</dimen>
+    <dimen name="item_recommend_items_margin">10dp</dimen>
+    <dimen name="item_recommend_hot_type_margin_b">6dp</dimen>
+    <dimen name="item_recommend_hot_type_margin_r">5dp</dimen>
+    <dimen name="item_recommend_hot_type_margin_l">5dp</dimen>
+    <dimen name="item_recommend_hot_product_name_margin_t">5dp</dimen>
+    <dimen name="item_recommend_hot_product_name_margin_b">10dp</dimen>
+
+    <!--Artists-->
+    <dimen name="item_recommend_artists">64dp</dimen>
+    <dimen name="corner_radius">32dp</dimen>
+    <dimen name="item_recommend_artists_margin_left">8dp</dimen>
+    <dimen name="item_recommend_artists_margin_top">15dp</dimen>
+
+    <!--Latest News-->
+    <dimen name="item_recommend_latest_news_w">144dp</dimen>
+    <dimen name="item_recommend_latest_news_h">108dp</dimen>
+    <dimen name="item_recommend_latest_news_play">30dp</dimen>
+
+    <!--Wallpaper-->
+    <dimen name="item_recommend_wallpaper_w">112dp</dimen>
+    <dimen name="item_recommend_wallpaper_h">168dp</dimen>
+
+    <!--Musics-->
+    <dimen name="item_recommend_musics_w">96dp</dimen>
+    <dimen name="item_recommend_musics_h">96dp</dimen>
+
+    <dimen name="item_recommend_music_w">181dp</dimen>
+    <dimen name="item_recommend_music_h">40dp</dimen>
+    <dimen name="item_recomend_margin_size">1px</dimen>
+    <dimen name="item_recommend_music_content_w">141dp</dimen>
+    <dimen name="item_recomend_front_margin_size">1dp</dimen>
+
+    <!--Album-->
+    <dimen name="item_recomment_album_icon">112dp</dimen>
+    <dimen name="item_recomment_album_content">30dp</dimen>
+
+    <!--card view-->
+    <dimen name="item_card_view_corner_radius">0dp</dimen>
+    <dimen name="item_card_view_elevation">0dp</dimen>
+
+    <!--media news-->
+    <dimen name="item_recommend_media_news_w">340dp</dimen>
+    <dimen name="item_recommend_media_news_h">143dp</dimen>
+    <dimen name="item_recommend_media_news_margin_b">6dp</dimen>
+    <dimen name="item_recommend_media_news_tv_margin_t">10dp</dimen>
+    <dimen name="item_recommend_media_news_tv_margin_l">10dp</dimen>
+    <dimen name="item_recommend_media_news_iv_h">75dp</dimen>
+    <dimen name="item_recommend_media_news_iv_w">100dp</dimen>
+    <dimen name="item_recommend_media_news_item_padding">10dp</dimen>
+    <dimen name="item_recommend_media_news_item_h">75dp</dimen>
+    <dimen name="item_recommend_media_news_item_w">100dp</dimen>
+
+    <!--calendar-->
+
+    <!--wei bo-->
+    <dimen name="item_recommend_wei_box_padding">10dp</dimen>
+    <dimen name="item_recommend_wei_head_photo_w">40dp</dimen>
+    <dimen name="item_recommend_wei_head_photo_h">40dp</dimen>
+    <dimen name="item_recommend_wei_margin_l">10dp</dimen>
+    <dimen name="item_recommend_wei_margin_l2">5dp</dimen>
+    <dimen name="item_recommend_wei_margin_t">10dp</dimen>
+    <dimen name="item_recommend_wei_margin_t2">6dp</dimen>
+    <dimen name="item_recommend_wei_photo_w">147dp</dimen>
+    <dimen name="item_recommend_wei_photo_h">94dp</dimen>
+    <!--Fonts-->
+    <dimen name="item_recommend_label_name_front_size">13dp</dimen>
+    <dimen name="item_recommend_item_more_front_size">11dp</dimen>
+    <dimen name="item_recommend_label_action_name_front_size">11dp</dimen>
+    <dimen name="item_recommend_hot_type_front_size">10dp</dimen>
+    <dimen name="item_recommend_hot_fraction_front_size">11dp</dimen>
+    <dimen name="item_recommend_hot_product_front_size">11dp</dimen>
+    <dimen name="item_recommend_hot_album_front_size">12dp</dimen>
+    <dimen name="item_recommend_media_news_title_front_size">13dp</dimen>
+    <dimen name="item_recommend_media_news_source_front_size">11dp</dimen>
+    <dimen name="item_recommend_calendar_month_front_size">11dp</dimen>
+    <dimen name="item_recommend_calendar_data_front_size">35dp</dimen>
+    <dimen name="item_recommend_calendar_content_front_size">13dp</dimen>
+    <dimen name="item_recommend_calendar_btn_front_size">13dp</dimen>
+    <dimen name="item_recommend_wei_name_front_size">13dp</dimen>
+    <dimen name="item_recommend_wei_identify_front_size">11dp</dimen>
+    <dimen name="item_recommend_wei_context_front_size">13dp</dimen>
+    <dimen name="item_recommend_wei_from_front_size">13dp</dimen>
+
+    <dimen name="item_recomend_tv_music_index_front_size">32sp</dimen>
+    <dimen name="item_recomend_tv_music_name_front_size">12dp</dimen>
+    <dimen name="item_recomend_tv_music_album_front_size">11dp</dimen>
+
+    <!-- space -->
+    <dimen name="item_marge_big">24dp</dimen>
+    <dimen name="item_marge_normal">16dp</dimen>
+    <dimen name="item_marge_small">12dp</dimen>
+    <dimen name="item_marge_tiny">8dp</dimen>
+
+    <dimen name="font_marge_big">20dp</dimen>
+    <dimen name="font_marge">6dp</dimen>
+
+    <dimen name="click_area_w">50dp</dimen>
+    <dimen name="click_area_h">38dp</dimen>
+
+    <!-- font -->
+    <dimen name="font_big">14sp</dimen>
+    <dimen name="font_normal">12sp</dimen>
+    <dimen name="font_small">10sp</dimen>
+    <dimen name="item_recommend_label_more_front_size">11sp</dimen>
+
+</resources>

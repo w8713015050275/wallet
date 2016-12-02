@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1.0"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/id_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/order_detial_remain_time_bg_color"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="11dip"
+                android:paddingTop="11dip">
+
+                <TextView
+                    android:id="@+id/remain_time_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dip"
+                    android:text="@string/movie_remain_time"
+                    android:textColor="@color/order_detial_dct_color"
+                    android:textSize="14sp" />
+
+                <com.letv.walletbiz.movie.ui.TimerTextView
+                    android:id="@+id/remain_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/order_detial_dct_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/content_item_bg_color"
+                android:orientation="vertical"
+                android:paddingLeft="16dip"
+                android:paddingRight="16dip"
+                android:paddingTop="15dip">
+
+                <TextView
+                    android:id="@+id/movie_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/movie_primary_tv_color"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dip"
+                    android:layout_marginTop="12dip">
+
+                    <TextView
+                        android:id="@+id/cinema_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dip"
+                        android:textColor="@color/order_detial_gray_tv_color"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/cinema_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/order_detial_gray_tv_color"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/movie_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dip"
+                    android:textColor="@color/order_detial_gray_tv_color"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/seat_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dip"
+                    android:textColor="@color/order_detial_gray_tv_color"
+                    android:textSize="13sp" />
+
+                <View style="@style/Divider_HorizontalLine_Style" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:paddingBottom="15dip"
+                        android:paddingTop="15dip">
+
+                        <TextView
+                            android:id="@+id/movie_phone_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/movie_primary_tv_color"
+                            android:textSize="14sp" />
+
+                        <com.letv.wallet.common.widget.PhoneEditText
+                            android:id="@+id/movie_phone_number_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:maxWidth="200dip"
+                            android:minWidth="100dip"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/btn_edit_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dip"
+                        android:src="@drawable/btn_edit"
+                        android:alpha="@dimen/le_img_alpha"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/Divider_HorizontalLine_Style" />
+
+            <include layout="@layout/order_detail_cost_section" />
+
+            <include layout="@layout/pay_selection_section" />
+
+            <LinearLayout
+                android:id="@+id/id_footnoted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pay_desc_vdefault_padding"
+                android:layout_marginTop="@dimen/pay_desc_vdefault_padding"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/movie_pay_not_refund"
+                    android:alpha="@dimen/le_img_alpha"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:singleLine="true"
+                    android:text="@string/movie_pay_refund_unavailable"
+                    android:textColor="@color/movie_primary_tv_color"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:src="@drawable/movie_pay_not_refund"
+                    android:alpha="@dimen/le_img_alpha"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:singleLine="true"
+                    android:text="@string/movie_pay_change_sessions_unavailable"
+                    android:textColor="@color/movie_primary_tv_color"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/ibtn_pay"
+        style="@style/PayButton.SectionBase.Bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="startPay"
+        android:text="@string/pay_now"
+        android:textSize="@dimen/pay_button_tv_font_size"
+        android:textStyle="normal" />
+</LinearLayout>

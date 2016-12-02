@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cube_ptr_pull_down">下拉</string>
+    <string name="cube_ptr_pull_down_to_refresh">下拉以重新整理</string>
+    <string name="cube_ptr_release_to_refresh">放開即可重新整理</string>
+    <string name="cube_ptr_refreshing">載入中…</string>
+    <string name="cube_ptr_refresh_complete">更新完成.</string>
+    <string name="cube_ptr_last_update">上次更新:&#160; </string>
+    <!--plurals -->
+    <plurals name="cube_ptr_seconds_ago">
+        <item quantity="one"> 秒之前</item>
+        <item quantity="other"> 秒之前</item>
+    </plurals>
+    <plurals name="cube_ptr_minutes_ago">
+        <item quantity="one"> 分鐘之前</item>
+        <item quantity="other"> 分鐘之前</item>
+    </plurals>
+    <plurals name="cube_ptr_hours_ago">
+        <item quantity="one"> 小時之前</item>
+        <item quantity="other"> 小時之前</item>
+    </plurals>
+</resources>

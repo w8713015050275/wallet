@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>Movies and dramas</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Entertainment News</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpapers</item>
+        <!--MUSIC-->
+        
+        <item>Hit singles</item>
+        <!--ALBUM-->
+        
+        <item>Music albums</item>
+        <!--ARTISTS-->
+        
+        <item>Related artists</item>
+        <!--WEI_BO-->
+        
+        <item>Related tweets</item>
+        <!--SITES-->
+        
+        <item>Related websites</item>
+    </string-array>
+
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>Movies and dramas</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Sports News</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpapers</item>
+        <!--MUSIC-->
+        
+        <item>None</item>
+        <!--ALBUM-->
+        
+        <item>Music albums</item>
+        <!--ARTISTS-->
+        
+        <item>None</item>
+        <!--WEI_BO-->
+        
+        <item>Related tweets</item>
+        <!--SITES-->
+        
+        <item>Related websites</item>
+    </string-array>
+
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>Movies and dramas</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Entertainment News</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpapers</item>
+        <!--MUSIC-->
+        
+        <item>Soundtracks</item>
+        <!--ALBUM-->
+        
+        <item>None</item>
+        <!--ARTISTS-->
+        
+        <item>Related artists</item>
+        <!--WEI_BO-->
+        
+        <item>None</item>
+        <!--SITES-->
+        
+        <item>None</item>
+    </string-array>
+
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>Movies and dramas</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Relevant news</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpapers</item>
+        <!--MUSIC-->
+        
+        <item>Related music</item>
+        <!--ALBUM-->
+        
+        <item>None</item>
+        <!--ARTISTS-->
+        
+        <item>None</item>
+        <!--WEI_BO-->
+        
+        <item>None</item>
+        <!--SITES-->
+        
+        <item>None</item>
+    </string-array>
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>None</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Brand News</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpapers</item>
+        <!--MUSIC-->
+        
+        <item>Label music</item>
+        <!--ALBUM-->
+        
+        <item>None</item>
+        <!--ARTISTS-->
+        
+        <item>None</item>
+        <!--WEI_BO-->
+        
+        <item>Related tweets</item>
+        <!--SITES-->
+        
+        <item>Related websites</item>
+    </string-array>
+
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>None</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Related videos</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpapers</item>
+        <!--MUSIC-->
+        
+        <item>None</item>
+        <!--ALBUM-->
+        
+        <item>None</item>
+        <!--ARTISTS-->
+        
+        <item>None</item>
+        <!--WEI_BO-->
+        
+        <item>Related tweets</item>
+        <!--SITES-->
+        
+        <item>None</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- order list -->
+    <string name="order_list_loadmore">載入中…</string>
+    <string name="order_list_reload_title">重新載入</string>
+    <string name="total_order_list_label">訂單記錄</string>
+    <string name="total_order_status_unknown">未知</string>
+    <string name="total_order_status_unpay">待支付</string>
+    <string name="total_order_status_paid">已支付</string>
+    <string name="total_order_status_delivered">已發貨</string>
+    <string name="total_order_status_completed">已完成</string>
+    <string name="total_order_status_canceled">已取消</string>
+    <string name="total_order_detail_fail_prom">"暫無訂單詳情"</string>
+    <string name="total_order_empty_no_record">暫無訂單</string>
+    <string name="total_order_no_sn">編號: %1$s</string>
+    <string name="order_desc_label_status">状态:</string>
+    <string name="order_desc_label_sn">編號:</string>
+
+    <string name="label_order_cost_info">結算資料</string>
+    <string name="label_order_product_info">商品資料</string>
+    <string name="label_order_pay_info">支付資料</string>
+    <string name="label_pay_method">支付方式</string>
+    <string name="label_pay_paid">支付成功</string>
+    <string name="label_pay_unpaid">待支付</string>
+    <string name="label_order_payment">支付金額</string>
+    <string name="label_product_name">商品名稱</string>
+    <string name="label_order_serialnumber">訂單編號</string>
+    <string name="label_done">完成</string>
+    <string name="label_order_desc">查看訂單詳細資料</string>
+    <string name="label_order_status">訂單狀態</string>
+    <string name="label_order_create_time">建立時間</string>
+    <string name="label_order_desc_total_price">總價</string>
+    <string name="label_order_desc_coupon_price">優惠券</string>
+    <string name="label_easy_go">易到用車</string>
+    <string name="label_order_desc_discount_price">優惠</string>
+    <string name="label_order_desc_null_discount">無</string>
+    <string name="total_order_list_hearder_other_month">yyyy年MM月</string>
+    <string name="total_order_list_hearder_this_month">本月</string>
+    <string name="label_cfm_product_name">商品名稱：</string>
+    <string name="label_phonenumber">充值號碼：</string>
+</resources>

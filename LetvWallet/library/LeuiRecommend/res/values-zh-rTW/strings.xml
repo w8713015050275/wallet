@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<string name="recommend_label_hot_product">熱門作品</string>-->
+    <!--<string name="recommend_label_media_news">媒體資訊</string>-->
+    <!--<string name="recommend_label_latest_news">娛樂報導</string>-->
+    <!--<string name="recommend_label_wallpaper">桌布推薦</string>-->
+    <!--<string name="recommend_label_musics">熱門音樂</string>-->
+    <!--<string name="recommend_label_calendar">近期動態</string>-->
+    <!--<string name="recommend_label_weibo">最新微博</string>-->
+    <string name="recommend_label_more">更多</string>
+    <string name="recommend_item_more">查看更多</string>
+    <string name="recommend_calendar_buy">購買</string>
+
+    <string name="le_app_not_available">%1$s不可用</string>
+    <string name="le_app_not_install">請安裝%1$s</string>
+    <string name="le_music">樂視音樂</string>
+    <string name="le_video">樂視影片</string>
+    <string name="le_wallpaper">樂視桌布</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">"%1 wiadomość utraciła ważność"</item>
+        <item quantity="other">"Wiadomości, które utraciły ważność: %1"</item>
+    </plurals>
+	<string name="coupon_card">"Karta"</string>
+	<string name="coupon_card_list_expired_no_data">"Nie masz obecnie kart"</string>
+	<string name="coupon_card_no">"Numer zamówienia:"</string>
+	<string name="coupon_code">"Kod do realizacji:"</string>
+	<string name="coupon_copy_code">"Kopiuj kod do realizacji"</string>
+	<string name="coupon_copy_code_cancel">"Anuluj"</string>
+	<string name="coupon_copy_code_notify">"Skopiowano kod do realizacji"</string>
+	<string name="coupon_date">"Czas:"</string>
+	<string name="coupon_lis_no_data">"Nie masz teraz kart ani kuponów"</string>
+	<string name="coupon_list_expired_activity_title">"Wygasło"</string>
+	<string name="coupon_list_expired_list_item_expired_tag">"Wygasło"</string>
+	<string name="coupon_list_expired_list_item_show_tag">"Wyemitowane"</string>
+	<string name="coupon_list_expired_list_item_unconsumed_tag">"Odebrano"</string>
+	<string name="coupon_list_expired_list_item_used_tag">"Użyte"</string>
+	<string name="coupon_list_expired_no_data">"Nie masz obecnie kuponów"</string>
+	<string name="coupon_list_more_item">"Więcej kart"</string>
+	<string name="coupon_list_title_activity">"Portfel"</string>
+	<string name="coupon_request_data">"Dostępny %d kupon"</string>
+	<string name="coupon_validite_period">"Data wygaśnięcia: "</string>
+	<string name="coupon_validite_period_to">" Do "</string>
+	<string name="empty_no_coupon">"Brak kuponów"</string>
+	<string name="label_coupon">"Kupon"</string>
+	<string name="label_coupon_info">"Informacje o kuponie"</string>
+	<string name="label_coupon_usecondition">"Warunki korzystania"</string>
+	<string name="label_coupon_usecoupon_btn">"Użyj teraz"</string>
+	<string name="label_coupon_usedetail">"Instrukcje"</string>
+</resources>

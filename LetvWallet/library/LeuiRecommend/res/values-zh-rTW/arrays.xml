@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        <item>影視作品</item>
+        <!--LATEST_NEWS-->
+        <item>娛樂報導</item>
+        <!--WALLPAPER-->
+        <item>桌布推薦</item>
+        <!--MUSIC-->
+        <item>熱門單曲</item>
+        <!--ALBUM-->
+        <item>音樂專輯</item>
+        <!--ARTISTS-->
+        <item>相關藝人</item>
+        <!--WEI_BO-->
+        <item>相關微博</item>
+        <!--SITES-->
+        <item>相關網站</item>
+    </string-array>
+
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        <item>影視作品</item>
+        <!--LATEST_NEWS-->
+        <item>體育報導</item>
+        <!--WALLPAPER-->
+        <item>桌布推薦</item>
+        <!--MUSIC-->
+        <item>None</item>
+        <!--ALBUM-->
+        <item>音樂專輯</item>
+        <!--ARTISTS-->
+        <item>None</item>
+        <!--WEI_BO-->
+        <item>相關微博</item>
+        <!--SITES-->
+        <item>相關網站</item>
+    </string-array>
+
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        <item>影视作品</item>
+        <!--LATEST_NEWS-->
+        <item>娛樂報導</item>
+        <!--WALLPAPER-->
+        <item>桌布推薦</item>
+        <!--MUSIC-->
+        <item>原創音樂</item>
+        <!--ALBUM-->
+        <item>None</item>
+        <!--ARTISTS-->
+        <item>相關藝人</item>
+        <!--WEI_BO-->
+        <item>None</item>
+        <!--SITES-->
+        <item>None</item>
+    </string-array>
+
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        <item>影视作品</item>
+        <!--LATEST_NEWS-->
+        <item>相關報導</item>
+        <!--WALLPAPER-->
+        <item>桌布推薦</item>
+        <!--MUSIC-->
+        <item>相關音樂</item>
+        <!--ALBUM-->
+        <item>None</item>
+        <!--ARTISTS-->
+        <item>None</item>
+        <!--WEI_BO-->
+        <item>None</item>
+        <!--SITES-->
+        <item>None</item>
+    </string-array>
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        <item>None</item>
+        <!--LATEST_NEWS-->
+        <item>品牌資訊</item>
+        <!--WALLPAPER-->
+        <item>桌布推薦</item>
+        <!--MUSIC-->
+        <item>品牌音樂</item>
+        <!--ALBUM-->
+        <item>None</item>
+        <!--ARTISTS-->
+        <item>None</item>
+        <!--WEI_BO-->
+        <item>相關微博</item>
+        <!--SITES-->
+        <item>相關網站</item>
+    </string-array>
+
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        <item>None</item>
+        <!--LATEST_NEWS-->
+        <item>相關視頻</item>
+        <!--WALLPAPER-->
+        <item>桌布推薦</item>
+        <!--MUSIC-->
+        <item>None</item>
+        <!--ALBUM-->
+        <item>None</item>
+        <!--ARTISTS-->
+        <item>None</item>
+        <!--WEI_BO-->
+        <item>相關微博</item>
+        <!--SITES-->
+        <item>None</item>
+    </string-array>
+
+</resources>

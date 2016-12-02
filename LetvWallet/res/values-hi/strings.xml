@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">मेरा वॉलेट </string>
+    <string name="label_entity_flow">डेटा प्लान टॉप-अप</string>
+    <string name="label_entity_mobile">मोबाइल टॉप-अप</string>
+    <string name="label_entity_movie">मूवी टिकट</string>
+    <string name="label_more">अधिक</string>
+    <string name="pay_by_option_ali">Alipay</string>
+    <string name="pay_by_option_wechat">WeChat</string>
+    <string name="pay_info_response_error">गलत भुगतान जानकारी</string>
+    <string name="pay_network_error">नेटवर्क त्रुटि</string>
+    <string name="pay_now">अभी भुगतान करें</string>
+    <string name="pay_remaining_time">भुगतान के लिए शेष समय:</string>
+    <string name="pay_selected_option_dont_work">चयनित भुगतान विधि उपलब्ध नहीं है</string>
+    <string name="pay_status_unpaid">भुगतान किया जाना है</string>
+    <string name="pay_unable_to_pay_prompt">भुगतान करने में असमर्थ। कृपया दूसरे लंबित आदेश बंद करें और पुनः प्रयास करें।</string>
+    <string name="pay_wx_notavailable_prompt">आपने WeChat ऐप इंस्टॉल नहीं किया है</string>
+    <string name="pay_wx_pay_notavailable_prompt">आपका इंस्टॉल किया गया WeChat ऐप भुगतान का समर्थन नहीं करता</string>
+    <string name="wallet_prompt_create_order">आदेश जनरेट कर रहा है</string>
+    <string name="wallet_prompt_create_payinfo">भुगतान जानकारी प्राप्त की जा रही है</string>
+    <string name="wallet_prompt_login_cancel">रद्द करें</string>
+    <string name="wallet_prompt_login_title">अधिक देखने के लिए LeEco खाते में लॉगिन करें</string>
+    <string name="wallet_prompt_login_toLogin">अभी लॉगिन करें</string>
+    <string name="wallet_prompt_title">संकेत</string>
+    <string name="menu_bills">आदेश इतिहास</string>
+</resources>

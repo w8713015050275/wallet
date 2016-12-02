@@ -1,0 +1,154 @@
+-keep class * extends android.app.Activity
+
+-dontwarn android.support.design.**
+-dontwarn com.letv.wallet.base.**
+-dontwarn in.srain.cube.views.ptr.**
+-dontwarn com.google.**
+
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,*Annotation*,Synthetic,EnclosingMethod,SourceFile,LineNumberTable
+
+################### region for xUtils
+-keep public class org.xutils.** {
+    public protected *;
+}
+-keep public interface org.xutils.** {
+    public protected *;
+}
+-keepclassmembers class * extends org.xutils.** {
+    public protected *;
+}
+-keepclassmembers class * extends org.xutils.http.RequestParams {*;}
+-keepclassmembers class * {
+   void *(android.view.View);
+   *** *Click(...);
+   *** *Event(...);
+}
+#################### end region
+
+
+#################### android-Ultra-Pull-To-Refresh  start
+-keep class in.srain.**
+#################### android-Ultra-Pull-To-Refresh end
+
+
+#for wallet
+
+#不混淆自定义view以及view group
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+#不混淆ResponseParser的实现类，如果混淆，导致首页优惠券解析失败，无法显示
+-keep public class * implements org.xutils.http.app.ResponseParser {
+	*;
+}
+
+
+#不混淆android　support包v4
+-dontwarn android.support.v4.**
+-keep class android.support.v4.** { *;}
+
+
+#不混淆android　support包v7
+-dontwarn android.support.v7.**
+-keep class android.support.v7.** { *; }
+
+-dontnote android.support.v7.**
+
+
+-dontnote org.xutils.image.MemCacheKey
+-dontnote org.xutils.image.ImageLoader
+
+
+-dontnote com.google.i18n.phonenumbers.RegexCache$LRUCache
+-dontnote com.google.i18n.phonenumbers.PhoneNumberUtil
+-dontnote com.google.i18n.phonenumbers.prefixmapper.PhonePrefixMapStorageStrategy
+-dontnote com.google.i18n.phonenumbers.PhoneNumberUtil$1
+
+-dontnote com.google.gson.internal.LinkedHashTreeMap$Node
+-dontnote com.google.gson.internal.LinkedTreeMap$Node
+-dontnote com.google.gson.internal.UnsafeAllocator
+
+
+-dontnote com.letv.wallet.common.view.BlankPage$1
+-dontnote com.letv.wallet.common.fragment.BaseFragment
+
+-dontnote com.letv.wallet.common.widget.LeFragmentTabHost$OnClickTabNotChangeListener
+-dontnote com.letv.wallet.common.widget.LeFragmentTabHost$OnDoubleClickTabNotChangeListener
+
+-dontnote com.android.letv.agnes.service.beans.IEvent
+-dontnote com.letv.shared.**
+-dontnote com.letv.leui.common.**
+-dontnote com.letv.leui.support.**
+-dontnote com.letv.wallet.common.widget.PhoneEditText$ActionCallback
+
+-dontnote android.net.NetworkPolicyManager
+-dontnote android.os.SystemProperties
+-dontnote com.android.layoutlib.bridge.impl.RenderAction
+-dontnote com.android.letvmanager.LetvManager
+-dontnote com.letv.leui.util.LeSystemProperties
+
+
+#the configuration refers to the unknown class
+-dontnote com.letv.leui.widget.LeGlowRelativeLayout
+-dontnote com.android.internal.widget.DialogTitle
+-dontnote com.android.internal.app.AlertController$RecycleListView
+-dontnote android.widget.AppSecurityPermissions$PermissionItemView
+-dontnote Parcelable
+
+
+#accesses a declared field '' dynamically
+-dontnote com.letv.android.lcm.notification.NoticeManager
+-dontnote com.letv.wallet.common.util.NetworkHelper
+
+#proguard for eui-support
+
+-dontwarn com.letv.shared.**
+-dontnote com.letv.shared.**
+
+-dontwarn com.letv.leui.support.**
+-dontnote com.letv.leui.support.**
+
+-dontwarn com.le.eui.support.**
+-dontnote com.le.eui.support.**
+
+-keep public class com.letv.shared.** {
+    public protected *;
+}
+
+-keep public class com.letv.shared.**$* {
+    public protected *;
+}
+
+-keepclassmembers class com.letv.shared.R$* {
+    public static <fields>;
+}
+
+-keep public interface com.letv.shared.** {
+    *;
+}
+
+-keep public class com.letv.leui.support.widget.** {
+    public protected *;
+}
+
+-keep public class com.letv.leui.support.widget.**$* {
+    public protected *;
+}
+
+-keepclassmembers class com.le.eui.support.**.R$* {
+    public static <fields>;
+}
+
+-keep public interface com.letv.support.widget.** {
+    *;
+}

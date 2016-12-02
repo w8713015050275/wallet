@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">"%1d message expiré"</item>
+        <item quantity="other">"%1d messages expirés"</item>
+    </plurals>
+    <string name="coupon_card">Carte</string>
+    <string name="coupon_card_list_expired_no_data">Pas de cartes en ce moment</string>
+    <string name="coupon_card_no">Nº de commande :</string>
+    <string name="coupon_code">Code cadeau :</string>
+    <string name="coupon_copy_code">Copier le code cadeau</string>
+    <string name="coupon_copy_code_cancel">Annuler</string>
+    <string name="coupon_copy_code_notify">Code cadeau copié</string>
+    <string name="coupon_date">Temps :</string>
+    <string name="coupon_lis_no_data">Pas de cartes ni de bons en ce moment</string>
+    <string name="coupon_list_expired_activity_title">Arrivé à expiration</string>
+    <string name="coupon_list_expired_list_item_expired_tag">Arrivé à expiration</string>
+    <string name="coupon_list_expired_list_item_show_tag">Diffusé</string>
+    <string name="coupon_list_expired_list_item_unconsumed_tag">Récupéré</string>
+    <string name="coupon_list_expired_list_item_used_tag">Utilisé</string>
+    <string name="coupon_list_expired_no_data">Pas de bons en ce moment</string>
+    <string name="coupon_list_more_item">Plus de cartes</string>
+    <string name="coupon_list_title_activity">Portefeuille</string>
+    <string name="coupon_request_no_data">Aucun bon disponible</string>
+    <string name="coupon_validite_period">Date d\'expiration :</string>
+    <string name="coupon_validite_period_to"> À </string>
+    <string name="empty_no_coupon">Aucun bon</string>
+    <string name="label_coupon">Bon</string>
+    <string name="label_coupon_info">Informations sur le bon</string>
+    <string name="label_coupon_usecondition">Conditions d\'utilisation</string>
+    <string name="label_coupon_usecoupon_btn">Utiliser maintenant</string>
+    <string name="label_coupon_usedetail">Instructions</string>
+    <string name="coupon_request_data">%d bon(s) disponible(s)</string>
+</resources>

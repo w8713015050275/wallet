@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/moive_seat_main_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorMovieSeatBg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/movie_seat_info_bg_color"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/movie_seat_top_tv_padding_top"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingTop="@dimen/movie_seat_top_tv_padding_top">
+
+            <TextView
+                android:id="@+id/movie_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/movie_primary_tv_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/movie_seat_top_tv_padding_top"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/movie_data_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/movie_seat_time_tv_color"
+                    android:textSize="@dimen/movie_seat_top_time_tv_font_size" />
+
+                <TextView
+                    android:id="@+id/movie_time_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/movie_seat_top_tv_padding_left"
+                    android:textColor="@color/movie_seat_time_tv_color"
+                    android:textSize="@dimen/movie_seat_top_time_tv_font_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/movie_screen_info_tv"
+            android:layout_width="@dimen/movie_seat_screen_info_tv_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/movie_screen_bg"
+            android:gravity="center"
+            android:minHeight="@dimen/movie_seat_screen_info_tv_height"
+            android:paddingBottom="@dimen/movie_seat_screen_info_tv_padding"
+            android:paddingTop="@dimen/movie_seat_screen_info_tv_padding"
+            android:textColor="@color/movie_seat_screen_tv_color"
+            android:textSize="14dp" />
+
+        <RelativeLayout
+            android:id="@+id/movie_seat_v_parents_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/movie_seat_v"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.letv.walletbiz.movie.ui.MovieSeatThumbV
+                android:id="@+id/movie_seat_thumb_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorMovieSeatBg"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:id="@+id/movie_seat_state_info_v"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginBottom="26dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/MovieSeatBottomIv"
+                    android:src="@drawable/movie_seat_normal"/>
+
+                <TextView
+                    style="@style/TextAppearance.MovieSeat.BottomTv"
+                    android:text="@string/movie_seat_state_normal" />
+
+                <ImageView
+                    style="@style/MovieSeatBottomIv"
+                    android:layout_marginLeft="@dimen/movie_seat_bottom_bt_margin_left"
+                    android:src="@drawable/movie_seat_checked"/>
+
+                <TextView
+                    style="@style/TextAppearance.MovieSeat.BottomTv"
+                    android:text="@string/movie_seat_state_checked" />
+
+                <ImageView
+                    style="@style/MovieSeatBottomIv"
+                    android:layout_marginLeft="@dimen/movie_seat_bottom_bt_margin_left"
+                    android:src="@drawable/movie_seat_sold" />
+
+                <TextView
+                    style="@style/TextAppearance.MovieSeat.BottomTv"
+                    android:text="@string/movie_seat_state_sold" />
+
+                <ImageView
+                    style="@style/MovieSeatBottomIv"
+                    android:layout_marginLeft="@dimen/movie_seat_bottom_bt_margin_left"
+                    android:src="@drawable/movie_seat_lover" />
+
+                <TextView
+                    style="@style/TextAppearance.MovieSeat.BottomTv"
+                    android:text="@string/movie_seat_state_lover" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/movie_seat_checked_v"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/movie_seat_checkedinfo_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal" />
+
+                <TextView
+                    android:id="@+id/btn_buy_ticket"
+                    style="@style/PayButton.SectionBase.Bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:onClick="buyTicket"
+                    android:text="@string/movie_seat_buy_btr"
+                    android:textSize="@dimen/buy_movieticket_button_tv_font_size" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

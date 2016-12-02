@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+
+        <item>ภาพยนตร์และละคร</item>
+        <!--LATEST_NEWS-->
+
+        <item>ข่าวบันเทิง</item>
+        <!--WALLPAPER-->
+
+        <item>ภาพพื้นหลัง</item>
+        <!--MUSIC-->
+
+        <item>ซิงเกิลฮิต</item>
+        <!--ALBUM-->
+
+        <item>อัลบั้มเพลง</item>
+        <!--ARTISTS-->
+
+        <item>ศิลปินที่เกี่ยวข้อง</item>
+        <!--WEI_BO-->
+
+        <item>ทวีตที่เกี่ยวข้อง</item>
+        <!--SITES-->
+
+        <item>เว็บไซต์ที่เกี่ยวข้อง</item>
+    </string-array>
+
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+
+        <item>ภาพยนตร์และละคร</item>
+        <!--LATEST_NEWS-->
+
+        <item>ข่าวกีฬา</item>
+        <!--WALLPAPER-->
+
+        <item>ภาพพื้นหลัง</item>
+        <!--MUSIC-->
+
+        <item>ไม่มี</item>
+        <!--ALBUM-->
+
+        <item>อัลบั้มเพลง</item>
+        <!--ARTISTS-->
+
+        <item>ไม่มี</item>
+        <!--WEI_BO-->
+
+        <item>ทวีตที่เกี่ยวข้อง</item>
+        <!--SITES-->
+
+        <item>เว็บไซต์ที่เกี่ยวข้อง</item>
+    </string-array>
+
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+
+        <item>ภาพยนตร์และละคร</item>
+        <!--LATEST_NEWS-->
+
+        <item>ข่าวบันเทิง</item>
+        <!--WALLPAPER-->
+
+        <item>ภาพพื้นหลัง</item>
+        <!--MUSIC-->
+
+        <item>ซาวด์แทร็ค</item>
+        <!--ALBUM-->
+
+        <item>ไม่มี</item>
+        <!--ARTISTS-->
+
+        <item>ศิลปินที่เกี่ยวข้อง</item>
+        <!--WEI_BO-->
+
+        <item>ไม่มี</item>
+        <!--SITES-->
+
+        <item>ไม่มี</item>
+    </string-array>
+
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+
+        <item>ภาพยนตร์และละคร</item>
+        <!--LATEST_NEWS-->
+
+        <item>ข่าวที่เกี่ยวข้อง</item>
+        <!--WALLPAPER-->
+
+        <item>ภาพพื้นหลัง</item>
+        <!--MUSIC-->
+
+        <item>เพลงที่เกี่ยวข้อง</item>
+        <!--ALBUM-->
+
+        <item>ไม่มี</item>
+        <!--ARTISTS-->
+
+        <item>ไม่มี</item>
+        <!--WEI_BO-->
+
+        <item>ไม่มี</item>
+        <!--SITES-->
+
+        <item>ไม่มี</item>
+    </string-array>
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+
+        <item>ไม่มี</item>
+        <!--LATEST_NEWS-->
+
+        <item>ข่าวแบรนด์</item>
+        <!--WALLPAPER-->
+
+        <item>ภาพพื้นหลัง</item>
+        <!--MUSIC-->
+
+        <item>เพลงจากค่ายเพลง</item>
+        <!--ALBUM-->
+
+        <item>ไม่มี</item>
+        <!--ARTISTS-->
+
+        <item>ไม่มี</item>
+        <!--WEI_BO-->
+
+        <item>ทวีตที่เกี่ยวข้อง</item>
+        <!--SITES-->
+
+        <item>เว็บไซต์ที่เกี่ยวข้อง</item>
+    </string-array>
+
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+
+        <item>ไม่มี</item>
+        <!--LATEST_NEWS-->
+
+        <item>วิดีโอที่เกี่ยวข้อง</item>
+        <!--WALLPAPER-->
+
+        <item>ภาพพื้นหลัง</item>
+        <!--MUSIC-->
+
+        <item>ไม่มี</item>
+        <!--ALBUM-->
+
+        <item>ไม่มี</item>
+        <!--ARTISTS-->
+
+        <item>ไม่มี</item>
+        <!--WEI_BO-->
+
+        <item>ทวีตที่เกี่ยวข้อง</item>
+        <!--SITES-->
+
+        <item>ไม่มี</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="label_order_desc_coupon_price">ئېتىبار بېلىتى</string>
+    <string name="label_order_desc_pay_price">يەنە تۆلەيدىغان ھەق</string>
+    <string name="label_order_desc_total_price">ئومۇمىي باھاسى</string>
+    <string name="total_order_detail_fail_prom">بۇيرۇتما تەپسىلاتىنى كۆرگىلى بولمىدى</string>
+    <string name="total_order_empty_no_record">ھازىرچە بۇيرۇتما يوق</string>
+    <string name="total_order_status_canceled">بىكار قىلىندى</string>
+    <string name="total_order_status_completed">تاماملاندى</string>
+    <string name="total_order_status_delivered">مال يوللاندى</string>
+    <string name="total_order_status_paid">تۆلەندى</string>
+    <string name="total_order_status_unknown">نامەلۇم</string>
+    <string name="total_order_status_unpay">ھەق تۆلەشنى كۈتۈۋاتىدۇ</string>
+    <string name="label_done">تاماملاش</string>
+    <string name="label_order_cost_info">ھېساب بوغۇش ئۇچۇرى</string>
+    <string name="label_order_create_time">قۇرۇلغان ۋاقىت</string>
+    <string name="label_order_desc">بۇيرۇتما تەپسىلاتىنى كۆرۈش</string>
+    <string name="label_order_desc_discount_price">ئېتىبار</string>
+    <string name="label_order_desc_null_discount">يوق</string>
+    <string name="label_order_pay_info">ھەق تۆلەش ئۇچۇرى</string>
+    <string name="label_order_payment">ھەق سوممىسى</string>
+    <string name="label_order_product_info">مال ئۇچۇرى</string>
+    <string name="label_order_serialnumber">بۇيرۇتما نومۇرى</string>
+    <string name="label_order_status">بۇيرۇتما ھالىتى</string>
+    <string name="label_pay_paid">تۆلەندى</string>
+    <string name="label_product_name">مال نامى</string>
+    <string name="order_desc_label_sn">نومۇرى:</string>
+    <string name="order_desc_label_status">ھالەت:</string>
+    <string name="order_list_loadmore">يۈكلەۋاتىدۇ…</string>
+    <string name="total_order_list_hearder_other_month">yyyy-يىلى MM-ئاي</string>
+    <string name="total_order_list_hearder_this_month">بۇ ئاي</string>
+    <string name="total_order_list_label">بۇيرۇتما خاتىرىسى</string>
+    <string name="total_order_no_sn">نومۇرى: %1$s</string>
+    <string name="label_cfm_product_name">مال نامى:</string>
+    <string name="label_phonenumber">قاچىلايدىغان نومۇر:</string>
+</resources>

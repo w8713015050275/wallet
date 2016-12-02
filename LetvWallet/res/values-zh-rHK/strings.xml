@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">錢包</string>
+    <string name="menu_bills">賬單</string>
+    <string name="label_more">更多</string>
+    <string name="label_entity_flow">流量充值</string>
+    <string name="label_entity_mobile">話費充值</string>
+    <string name="label_entity_movie">電影票</string>
+    <string name="label_entity_show">演出票</string>
+
+    <string name="pay_now">立即支付</string>
+    <string name="pay_selected_option_dont_work">所選支付方式不可用</string>
+    <string name="pay_info_response_error">支付信息錯誤</string>
+    <string name="pay_network_error">網絡錯誤</string>
+    <string name="pay_by_option_wechat">微信</string>
+    <string name="pay_by_option_ali">支付寶</string>
+    <string name="pay_remaining_time">支付剩餘時間：</string>
+    <string name="pay_wx_notavailable_prompt">您尚未安裝微信</string>
+    <string name="pay_wx_pay_notavailable_prompt">您安裝的微信不支援支付</string>
+    <string name="pay_unable_to_pay_prompt">無法支付，請先關閉其他支付商品</string>
+    <string name="pay_status_unpaid">等待支付</string>
+
+    <string name="wallet_prompt_title">提示</string>
+    <string name="wallet_prompt_create_order">正在產生訂單</string>
+    <string name="wallet_prompt_create_payinfo">正在獲取支付信息</string>
+    <string name="wallet_prompt_login_title">登入樂視帳戶查看更多內容</string>
+    <string name="wallet_prompt_login_toLogin">現在登入</string>
+    <string name="wallet_prompt_login_cancel">取消</string>
+
+</resources>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="movie_attention_count_formatter">
+        <item quantity="one">"%s følger"</item>
+        <item quantity="other">"%s følgere"</item>
+    </plurals>
+	<plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">"%1$d biograf"</item>
+        <item quantity="other">"%1$d biografer"</item>
+    </plurals>
+	<plurals name="movie_ticket_amount">
+        <item quantity="one">"billet"</item>
+        <item quantity="other">"billetter"</item>
+    </plurals>
+	<string name="label_entity_city">"Vælg by"</string>
+	<string name="label_menu_search">"Søg"</string>
+	<string name="movie_btn_purchase_ticket">"Billetter"</string>
+	<string name="movie_cinema_cancel_filter">"Fjern filtre"</string>
+	<string name="movie_cinema_contact_infomation">"Kontaktoplysninger"</string>
+	<string name="movie_cinema_filter_category_all">"Alle"</string>
+	<string name="movie_cinema_filter_category_area">"Efter region"</string>
+	<string name="movie_cinema_filter_category_brand">"Efter mærke"</string>
+	<string name="movie_cinema_filter_category_special">"Efter funktion"</string>
+	<string name="movie_cinema_filter_text_formatter">"Biografer i \"%s\" filtreret"</string>
+	<string name="movie_cinema_list_by_movie_normal">"E dd-MM"</string>
+	<string name="movie_cinema_list_by_movie_today">"\'I dag\' dd-MM"</string>
+	<string name="movie_cinema_list_by_movie_tomorrow">"\'I morgen\' dd-MM"</string>
+	<string name="movie_cinema_menu_filter">"Filter"</string>
+	<string name="movie_cinema_menu_search">"Søg"</string>
+	<string name="movie_city_locating">"Placering"</string>
+	<string name="movie_city_location_failure">"Kunne ikke placere"</string>
+	<string name="movie_create_order_failed">"Kunne ikke oprette ordre"</string>
+	<string name="movie_detail_buy">"Køb nu"</string>
+	<string name="movie_detail_date_formatter">"Havde præmiere dd/MM/yyyy"</string>
+	<string name="movie_detail_introduction">"Synopsis"</string>
+	<string name="movie_detail_photo">"Plakater"</string>
+	<string name="movie_detail_prevue">"Trailer"</string>
+	<string name="movie_detail_star">"Instruktør og stjerner"</string>
+	<string name="movie_detail_subscribe">"Følg"</string>
+	<string name="movie_detail_subscribed">"Følges"</string>
+	<string name="movie_detail_subscribe_failed">"Kunne ikke følge"</string>
+	<string name="movie_detail_subscribing">"Følger ..."</string>
+	<string name="movie_detail_tab_comment">"Anmeldelser"</string>
+	<string name="movie_detail_tab_information">"Data"</string>
+	<string name="movie_detail_tab_recommend">"Anbefalinger"</string>
+	<string name="movie_detail_unsubscribe_failed">"Kunne ikke stoppe med at følge"</string>
+	<string name="movie_detail_unsubscribing">"Stopper med at følge ..."</string>
+	<string name="movie_dialog_query_pay_result">"Kontrollerer betalingsresultat ..."</string>
+	<string name="movie_dialog_user_select_result_failed">"Ikke betalt"</string>
+	<string name="movie_dialog_user_select_result_success">"Betalt"</string>
+	<string name="movie_dialog_user_select_result_title">"Er ordren blevet betalt?"</string>
+	<string name="movie_empty_no_seat_data">"Ingen data"</string>
+	<string name="movie_error_cinema_no_movie">"Der blev ikke vist nogen film i denne biograf"</string>
+	<string name="movie_error_no_cinema">"Ingen biografer i denne by"</string>
+	<string name="movie_error_no_movie">"Der blev ikke vist nogen film i denne by"</string>
+	<string name="movie_hot_cities">"Top-byer"</string>
+	<string name="movie_location_city">"Placer automatisk"</string>
+	<string name="movie_min_price">"RMB (startpris)"</string>
+	<string name="movie_more">"Mere"</string>
+	<string name="movie_order_list_pay_remain_time">"m \'min.\' s \'sek. tilbage\'"</string>
+	<string name="movie_pay_overtime">"Ordrebetaling gik i timeout. Vælg pladser igen."</string>
+	<string name="movie_phone_number_empty">"Mobilnummeret er tomt"</string>
+	<string name="movie_phone_number_empty_toast">"Mobilnummeret må ikke være tomt!"</string>
+	<string name="movie_photo_gallery_failed">"Kunne ikke indlæse. Prøv igen."</string>
+	<string name="movie_remain_time">"Tid tilbage til betaling"</string>
+	<string name="movie_score">"-score"</string>
+	<string name="movie_seat_buy_btr">"Køb nu"</string>
+	<string name="movie_seat_checked_exceed_max_count">"Der kan vælges op til 4 pladser. Hvis du skal bruge flere pladser, bedes du købe dem separat"</string>
+	<string name="movie_seat_data_by_alert_normal">"E dd MMM"</string>
+	<string name="movie_seat_data_by_alert_today">"\'I dag\' dd MMM"</string>
+	<string name="movie_seat_data_by_alert_tomorrow">"\'I morgen\' dd MMM"</string>
+	<string name="movie_seat_data_normal">"E dd/MM"</string>
+	<string name="movie_seat_data_today">"dd/MM \'i dag\'"</string>
+	<string name="movie_seat_data_tomorrow">"dd/MM \'i morgen\'"</string>
+	<string name="movie_seat_date_alert_ok">"OK"</string>
+	<string name="movie_seat_info_column">"Plads"</string>
+	<string name="movie_seat_info_row">"Række"</string>
+	<string name="movie_seat_room_info_tv">"Lærred"</string>
+	<string name="movie_seat_screen_center_tv">"Midten af lærredet"</string>
+	<string name="movie_seat_separated_seat_checked_attention">"Køb ikke billetter til adskilte pladser"</string>
+	<string name="movie_seat_state_checked">"Valgt"</string>
+	<string name="movie_seat_state_lover">"Loveseats"</string>
+	<string name="movie_seat_state_normal">"Tilgængelig"</string>
+	<string name="movie_seat_state_sold">"Solgt"</string>
+	<string name="movie_select_seat_order">"Billetter"</string>
+	<string name="movie_show_finished">" Slut"</string>
+	<string name="movie_soon_filter_hot">"Populært"</string>
+	<string name="movie_soon_filter_time">"Tidspunkt"</string>
+	<string name="movie_soon_filter_time_all">"Alle"</string>
+	<string name="movie_soon_list_filter_other">"MM-yyyy"</string>
+	<string name="movie_soon_list_filter_this_year">"MM"</string>
+	<string name="movie_soon_list_section">"E dd-MM-yyyy"</string>
+	<string name="movie_stop_sale">"Lukket"</string>
+	<string name="movie_tab_cinema">"Biograf"</string>
+	<string name="movie_tab_movie">"Film"</string>
+	<string name="movie_tab_order">"Bestillinger"</string>
+	<string name="movie_ticket_back_unlock_back">"Tilbage"</string>
+	<string name="movie_ticket_back_unlock_cancel">"Annuller"</string>
+	<string name="movie_ticket_back_unlock_title">"Hvis du går tilbage, vil de låste pladser blive låst op"</string>
+	<string name="movie_ticket_change_city_btn_cancel">"Annuller"</string>
+	<string name="movie_ticket_change_city_btn_confirm">"Skift"</string>
+	<string name="movie_ticket_change_city_title">"Du befinder dig i %1$s. Vil du skifte by?"</string>
+	<string name="movie_ticket_code_desc">"Indløsningsbekræftelse"</string>
+	<string name="movie_ticket_order_num">"Ordrenummer"</string>
+	<string name="movie_ticket_price_unit">"RMB"</string>
+	<string name="movie_ticket_redeem_code">"Indløsningskode"</string>
+	<string name="movie_ticket_serial_number">"Serienummer"</string>
+	<string name="movie_ticket_status_generate_ticket_failed">"Kunne ikke udstede billetter"</string>
+	<string name="movie_ticket_status_generating_ticket">"Udsteder billetter"</string>
+	<string name="movie_ticket_status_overtime">"Gik i timeout"</string>
+	<string name="movie_ticket_status_refunded">"Refunderet"</string>
+	<string name="movie_ticket_status_refunding">"Refundering"</string>
+	<string name="movie_ticket_status_shown">"Udsendt"</string>
+	<string name="movie_ticket_status_unconsumed">"Ikke brugt"</string>
+	<string name="movie_ticket_status_unknown">"Ukendt"</string>
+	<string name="movie_ticket_status_unpay">"Skal betales"</string>
+	<string name="movie_toast_order_overtime">"Ordre gik i timeout"</string>
+	<string name="movie_want">"følgere"</string>
+	<string name="movie_weipiao_tele">"Wepiao-kundeservice"</string>
+</resources>

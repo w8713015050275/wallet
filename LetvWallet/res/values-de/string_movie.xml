@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <plurals name="movie_ticket_amount">
+        <item quantity="one">Ticket</item>
+        <item quantity="other">Tickets</item>
+    </plurals>
+    <string name="label_entity_city">Ort auswählen</string>
+    <string name="label_menu_search">Suchen</string>
+    <string name="movie_btn_presell_ticket">Vorverkauf</string>
+    <string name="movie_btn_purchase_ticket">Buchung</string>
+    <string name="movie_cinema_cancel_filter">Filter entfernen</string>
+    <string name="movie_cinema_contact_infomation">Kontaktinformationen</string>
+    <string name="movie_cinema_filter_category_all">Alle</string>
+    <string name="movie_cinema_filter_category_area">Nach Region</string>
+    <string name="movie_cinema_filter_category_brand">Nach Marke</string>
+    <string name="movie_cinema_filter_category_special">Nach Funktion</string>
+    <string name="movie_cinema_filter_text_formatter">Kinos in \"%s\" gefiltert</string>
+    <string name="movie_cinema_list_by_movie_normal">E dd.MM.</string>
+    <string name="movie_cinema_list_by_movie_today">"\'Heute' dd.MM."</string>
+    <string name="movie_cinema_list_by_movie_tomorrow">"\'Morgen' dd.MM."</string>
+    <string name="movie_city_locating">Platzierung</string>
+    <string name="movie_city_location_failure">Platzierung fehlgeschlagen</string>
+    <string name="movie_create_order_failed">Bestellvorgang fehlgeschlagen</string>
+    <string name="movie_detail_buy">Jetzt kaufen</string>
+    <string name="movie_detail_date_formatter">Premiere am dd.MM.yyyy</string>
+    <string name="movie_detail_introduction">Handlung</string>
+    <string name="movie_detail_photo">Poster</string>
+    <string name="movie_detail_prevue">Trailer</string>
+    <string name="movie_detail_star">Regisseur und Stars</string>
+    <string name="movie_detail_subscribe">Folgen</string>
+    <string name="movie_detail_subscribed">Gefolgt</string>
+    <string name="movie_detail_subscribe_failed">Folgen fehlgeschlagen</string>
+    <string name="movie_detail_subscribing">Folgen...</string>
+    <string name="movie_detail_tab_comment">Bewertungen</string>
+    <string name="movie_detail_tab_information">Daten</string>
+    <string name="movie_detail_tab_recommend">Empfehlungen</string>
+    <string name="movie_detail_unsubscribe_failed">Entfolgung fehlgeschlagen</string>
+    <string name="movie_detail_unsubscribing">Entfolgen läuft...</string>
+    <string name="movie_dialog_query_pay_result">Zahlungsergebnis wird überprüft...</string>
+    <string name="movie_dialog_user_select_result_failed">Nicht bezahlt</string>
+    <string name="movie_dialog_user_select_result_success">Bezahlt</string>
+    <string name="movie_dialog_user_select_result_title">Wurde die Bestellung bezahlt?</string>
+    <string name="movie_empty_no_seat_data">Keine Daten</string>
+    <string name="movie_error_cinema_no_movie">In diesem Kino werden keine Filme gezeigt.</string>
+    <string name="movie_error_no_cinema">Keine Kinos in dieser Stadt.</string>
+    <string name="movie_error_no_movie">In dieser Stadt werden keine Filme gezeigt.</string>
+    <string name="movie_hint_input_phonenumber">Bitte geben Sie eine Mobiltelefonnummer ein.</string>
+    <string name="movie_hot_cities">Top-Städte</string>
+    <string name="movie_location_city">Auto-Positionierung</string>
+    <string name="movie_min_price">RMB (Startpreis)</string>
+    <string name="movie_more">Mehr</string>
+    <string name="movie_order_list_pay_remain_time">"m 'min' s 'sek übrig'"</string>
+    <string name="movie_order_view_label">Bestelldetails</string>
+    <string name="movie_pay_change_sessions_unavailable">Nicht übertragbar</string>
+    <string name="movie_pay_order">Bestellung bestätigen</string>
+    <string name="movie_pay_overtime">Zeitüberschreitung beim Bezahlen der Bestellung. Bitte wählen Sie erneut Sitze aus.</string>
+    <string name="movie_pay_refund_unavailable">Nicht erstattungsfähig</string>
+    <string name="movie_phone_num">Telefonnummer</string>
+    <string name="movie_phone_number_empty">Keine Mobiltelefonnummer angegeben.</string>
+    <string name="movie_phone_number_empty_toast">Es muss eine Mobiltelefonnummer angegeben werden.</string>
+    <string name="movie_phone_number_error_toast">Bitte geben Sie die korrekte Mobiltelefonnummer ein</string>
+    <string name="movie_photo_gallery_failed">Laden fehlgeschlagen. Bitte versuchen Sie es erneut.</string>
+    <string name="movie_remain_time">Verbleibende Zeit für Bezahlung</string>
+    <string name="movie_score">-Wertung</string>
+    <string name="movie_seat_buy_btr">Jetzt kaufen</string>
+    <string name="movie_seat_checked_exceed_max_count">Es können bis zu 4 Sitze ausgewählt werden. Wenn Sie mehr Sitze benötigen, kaufen Sie bitte separate Karten.</string>
+    <string name="movie_seat_data_by_alert_normal">E dd.MMM.</string>
+    <string name="movie_seat_data_by_alert_today">"\'Heute' dd.MMM."</string>
+    <string name="movie_seat_data_by_alert_tomorrow">"\'Morgen' dd.MMM."</string>
+    <string name="movie_seat_data_normal">dd.MM. E</string>
+    <string name="movie_seat_data_today">"dd.MM. 'Heute'"</string>
+    <string name="movie_seat_data_tomorrow">"dd.MM. 'Morgen'"</string>
+    <string name="movie_seat_date_alert_ok">OK</string>
+    <string name="movie_seat_date_alert_text">Sie haben eine Vorführung am %1$s ausgewählt. Bitte bestätigen Sie die exakte Zeit.</string>
+    <string name="movie_seat_info_column">Sitz</string>
+    <string name="movie_seat_info_formatter">Reihe %1$s Sitz %2$s</string>
+    <string name="movie_seat_info_row">Reihe</string>
+    <string name="movie_seat_room_info_tv">Leinwand</string>
+    <string name="movie_seat_screen_center_tv">Mitte der Kinoleinwand</string>
+    <string name="movie_seat_separated_seat_checked_attention">Kaufen Sie keine Karten für nicht zusammenhängende Sitze.</string>
+    <string name="movie_seat_state_checked">Ausgewählt</string>
+    <string name="movie_seat_state_lover">Zweier-Sitze</string>
+    <string name="movie_seat_state_normal">Verfügbar</string>
+    <string name="movie_seat_state_sold">Verkauft</string>
+    <string name="movie_tab_cinema">Kino</string>
+    <string name="movie_tab_movie">Filme</string>
+    <string name="movie_tab_order">Bestellungen</string>
+    <string name="movie_ticket_back_unlock_back">Zurück</string>
+    <string name="movie_ticket_back_unlock_cancel">Abbrechen</string>
+    <string name="movie_ticket_back_unlock_title">Wenn Sie zurückgehen, werden der/die gesperrte(n) Sitz(e) wieder freigegeben.</string>
+    <string name="movie_ticket_change_city_btn_cancel">Abbrechen</string>
+    <string name="movie_ticket_change_city_btn_confirm">Überschreiben</string>
+    <string name="movie_ticket_change_city_title">Sie befinden sich in %1$s. Ort wechseln?</string>
+    <string name="movie_ticket_code_desc">Erstattungsüberprüfung</string>
+    <string name="movie_ticket_order_date">Erstellt am</string>
+    <string name="movie_ticket_order_num">Bestellnummer</string>
+    <string name="movie_ticket_order_price">Gezahlter Betrag</string>
+    <string name="movie_ticket_price_unit">RMB</string>
+    <string name="movie_ticket_redeem_code">Erstattungscode</string>
+    <string name="movie_ticket_serial_number">Seriennummer</string>
+    <string name="movie_ticket_status_generate_ticket_failed">Ausstellung der Karten fehlgeschlagen</string>
+    <string name="movie_ticket_status_generating_ticket">Karten werden ausgestellt</string>
+    <string name="movie_ticket_status_overtime">Zeitüberschreitung</string>
+    <string name="movie_ticket_status_refunded">Zurückerstattet</string>
+    <string name="movie_ticket_status_refunding">Wird zurückerstattet...</string>
+    <string name="movie_ticket_status_shown">Gesendet</string>
+    <string name="movie_ticket_status_unconsumed">Nicht ausgegeben</string>
+    <string name="movie_ticket_status_unknown">Unbekannt</string>
+    <string name="movie_ticket_status_unpay">Zu zahlen</string>
+    <string name="movie_toast_order_overtime">Zeitüberschreitung bei Bestellung</string>
+    <string name="movie_want">folgt</string>
+    <string name="movie_weipiao_tele">Kundenservice von Wepiao</string>
+    <plurals name="movie_attention_count_formatter">
+        <item quantity="one">%s Follower</item>
+        <item quantity="other">%s Followers</item>
+    </plurals>
+    <plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">%1$d Kino</item>
+        <item quantity="other">%1$d Kinos</item>
+    </plurals>
+    <string name="movie_cinema_menu_filter">Filter</string>
+    <string name="movie_cinema_menu_search">Suchen</string>
+    <string name="movie_error_no_movie_will">Keine anstehenden Filme für ausgewählte Stadt</string>
+    <string name="movie_schedule_add_favorites_fail">Kann nicht zu Favoriten hinzugefügt werden</string>
+    <string name="movie_schedule_cancle_favorites_fail">Kann nicht aus Favoriten gelöscht werden</string>
+    <string name="movie_schedule_stop_time_tip">Hinweis: Verkauf der Eintrittskarten endet %1$d Minuten vor Filmbeginn.</string>
+    <string name="movie_select_seat_order">Buchung</string>
+    <string name="movie_show_finished">" Ende"</string>
+    <string name="movie_soon_filter_hot">Beliebt</string>
+    <string name="movie_soon_filter_time">Zeit</string>
+    <string name="movie_soon_filter_time_all">Alle</string>
+    <string name="movie_soon_list_filter_other">MM-yyyy</string>
+    <string name="movie_soon_list_filter_this_year">MM</string>
+    <string name="movie_soon_list_section">dd.MM.yyyy E</string>
+    <string name="movie_stop_sale">Geschlossen</string>
+    <string name="movie_schedule_add_favorite">Favorit</string>
+    <string name="movie_weipiao_tele_num">"4001100100"</string>
+</resources>

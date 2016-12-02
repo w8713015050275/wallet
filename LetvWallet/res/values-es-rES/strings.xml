@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Cartera </string>
+    <string name="label_entity_flow">Plan de recarga de datos</string>
+    <string name="label_entity_mobile">Recarga del móvil</string>
+    <string name="label_entity_movie">Entrada de película</string>
+    <string name="label_more">Más</string>
+    <string name="menu_bills">Historial de pedidos</string>
+    <string name="pay_by_option_ali">Alipay</string>
+    <string name="pay_by_option_wechat">WeChat</string>
+    <string name="pay_info_response_error">Información de pago incorrecto</string>
+    <string name="pay_network_error">Error de red</string>
+    <string name="pay_now">Pagar ahora</string>
+    <string name="pay_remaining_time">Tiempo restante para realizar el pago:</string>
+    <string name="pay_selected_option_dont_work">El método de pago seleccionado no está disponible.</string>
+    <string name="pay_status_unpaid">Por pagar</string>
+    <string name="pay_unable_to_pay_prompt">No se ha podido realizar el pago. Cierre otros pedidos pendientes y vuelva a intentarlo.</string>
+    <string name="pay_wx_notavailable_prompt">No tienes instalada la aplicación WeChat.</string>
+    <string name="pay_wx_pay_notavailable_prompt">La aplicación WeChat que tienes instalada no admite el pago.</string>
+    <string name="wallet_prompt_create_order">Orden de generación</string>
+    <string name="wallet_prompt_create_payinfo">Obteniendo información de pago</string>
+    <string name="wallet_prompt_login_cancel">Cancelar</string>
+    <string name="wallet_prompt_login_title">Inicia sesión en tu cuenta LeEco para ver más detalles.</string>
+    <string name="wallet_prompt_login_toLogin">Iniciar sesión ahora</string>
+    <string name="wallet_prompt_title">Aviso</string>
+</resources>

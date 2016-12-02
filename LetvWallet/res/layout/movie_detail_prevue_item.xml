@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dip"
+    android:layout_marginRight="4dip"
+    >
+    <ImageView
+        android:id="@+id/prevue_icon"
+        android:layout_width="160dip"
+        android:layout_height="120dip"
+        android:layout_marginBottom="15dip"
+        android:background="@color/colorPlaceHolderBg"
+        android:alpha="@dimen/le_img_alpha"
+        />
+    <TextView
+        android:id="@+id/prevue_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/movie_desc_content_tv_color"
+        android:gravity="center"
+        android:ellipsize="end"
+        />
+</LinearLayout>

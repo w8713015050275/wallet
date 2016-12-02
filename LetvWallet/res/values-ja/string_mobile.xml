@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="label_matter_attention">"メモ"</string>
+	<string name="label_mobile_deposite">"リチャージ量"</string>
+	<string name="label_mobile_flow_deposite">"リチャージの上限"</string>
+	<string name="label_mobile_number">"携帯電話番号（%s）"</string>
+	<string name="label_mobile_number_def_desc">" 中国聯通\\中国電信\\中国移動"</string>
+	<string name="label_mobile_product_price">"価格："</string>
+	<string name="label_mobile_product_unit_fee">"人民元"</string>
+	<string name="label_mobile_product_unit_flow">"MB"</string>
+	<string name="label_mobile_product_unit_g_flow">"G"</string>
+	<string name="label_price_unit">"人民元"</string>
+	<string name="menu_record">"レコード"</string>
+	<string name="mobile_clear_history">"ログをクリア"</string>
+	<string name="mobile_clear_history_failed">"クリアできませんでした。"</string>
+	<string name="mobile_divider_phone_number_show">"あなたの番号"</string>
+	<string name="mobile_order_desc_coupon_price">"-%.2f"</string>
+	<string name="mobile_order_desc_label_phonenumber">"リチャージ番号"</string>
+	<string name="mobile_order_list_label">"リチャージ履歴"</string>
+	<string name="mobile_order_status_cancelled">"キャンセル済み"</string>
+	<string name="mobile_order_status_charged">"リチャージ済み"</string>
+	<string name="mobile_order_status_depositing">"リチャージしています"</string>
+	<string name="mobile_order_status_paid">"支払い済み"</string>
+	<string name="mobile_order_view_label">"注文詳細"</string>
+	<string name="mobile_order_view_surelabel">"注文を確定"</string>
+	<string name="mobile_phone_number_no_name">"不明"</string>
+	<string name="mobile_prompt_net_connection_fail">"ネットワーク接続に失敗しました"</string>
+	<string name="mobile_prompt_user_select_cancel">"キャンセル"</string>
+	<string name="mobile_prompt_user_select_load_title">"ネットワークエラーです。もう一度読み込んでください。"</string>
+	<string name="mobile_prompt_user_select_reload">"再読み込み"</string>
+	<string name="mobile_request_order_fail_prom">"注文できませんでした。もう一度お試しください"</string>
+</resources>

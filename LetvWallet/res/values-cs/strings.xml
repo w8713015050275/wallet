@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="app_name">"Peněženka"</string>
+	<string name="label_entity_flow">"Dobití datového tarifu"</string>
+	<string name="label_entity_mobile">"Dobití mobilního tarifu"</string>
+	<string name="label_entity_movie">"Lístek na film"</string>
+	<string name="label_more">"Další"</string>
+	<string name="menu_bills">"Historie objednávek"</string>
+	<string name="pay_by_option_ali">"Alipay"</string>
+	<string name="pay_by_option_wechat">"WeChat"</string>
+	<string name="pay_info_response_error">"Chybné informace o platbě"</string>
+	<string name="pay_network_error">"Chyba sítě"</string>
+	<string name="pay_now">"Zaplatit"</string>
+	<string name="pay_remaining_time">"Zbývající čas pro platbu:"</string>
+	<string name="pay_selected_option_dont_work">"Zvolená metoda platby není k dispozici."</string>
+	<string name="pay_status_unpaid">"K úhradě"</string>
+	<string name="pay_unable_to_pay_prompt">"Nelze zaplatit. Zavřete prosím další nevyřízené objednávky a zkuste to znovu."</string>
+	<string name="pay_wx_notavailable_prompt">"Nemáte nainstalovanou aplikaci WeChat."</string>
+	<string name="pay_wx_pay_notavailable_prompt">"Nainstalovaná aplikace WeChat nepodporuje platbu."</string>
+	<string name="wallet_prompt_create_order">"Generování objednávky"</string>
+	<string name="wallet_prompt_create_payinfo">"Načítání informací o platbě"</string>
+	<string name="wallet_prompt_login_cancel">"Zrušit"</string>
+	<string name="wallet_prompt_login_title">"Chcete-li zobrazit další informace, přihlaste se ke svému účtu LeEco."</string>
+	<string name="wallet_prompt_login_toLogin">"Přihlásit se"</string>
+	<string name="wallet_prompt_title">"Výzva"</string>
+</resources>

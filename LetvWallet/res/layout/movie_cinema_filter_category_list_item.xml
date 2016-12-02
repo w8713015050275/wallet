@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" 
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/movie_cinema_filter_category_height"
+    android:paddingRight="16dip"
+    android:paddingLeft="16dip"
+    android:background="@color/movie_cinema_filter_container_color"
+    >
+    <TextView
+        android:id="@+id/category_name"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:duplicateParentState="true"
+        android:textColor="@color/movie_cinema_category_list_tv_color"
+        />
+    <TextView
+        android:id="@+id/cinema_count"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="12sp"
+        android:textColor="@color/movie_cinema_count_tv_color"
+        android:gravity="center_vertical"
+        />
+</LinearLayout>

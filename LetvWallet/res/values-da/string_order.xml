@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="label_done">"Fuldført"</string>
+	<string name="label_order_cost_info">"Kasseoplysninger"</string>
+	<string name="label_order_create_time">"Oprettelsestidspunkt"</string>
+	<string name="label_order_desc">"Se ordredetaljer"</string>
+	<string name="label_order_desc_coupon_price">"Kupon"</string>
+	<string name="label_order_desc_null_discount">"Intet"</string>
+	<string name="label_order_desc_total_price">"I alt"</string>
+	<string name="label_order_pay_info">"Betalingsoplysninger"</string>
+	<string name="label_order_payment">"Betalt beløb"</string>
+	<string name="label_order_product_info">"Vareoplysninger"</string>
+	<string name="label_order_serialnumber">"Ordrenummer"</string>
+	<string name="label_order_status">"Ordrestatus"</string>
+	<string name="label_pay_paid">"Betalt"</string>
+	<string name="label_product_name">"Varenavn"</string>
+	<string name="order_desc_label_sn">"Nummer:"</string>
+	<string name="order_desc_label_status">"Status:"</string>
+	<string name="order_list_loadmore">"Indlæser ..."</string>
+	<string name="total_order_detail_fail_prom">"Kunne ikke se ordredetaljer"</string>
+	<string name="total_order_list_hearder_other_month">"MMM yyyy"</string>
+	<string name="total_order_list_label">"Ordrehistorik"</string>
+	<string name="total_order_no_sn">"Nummer: %1$s"</string>
+	<string name="total_order_status_canceled">"Annulleret"</string>
+	<string name="total_order_status_completed">"Fuldført"</string>
+	<string name="total_order_status_delivered">"Sendt"</string>
+	<string name="total_order_status_paid">"Betalt"</string>
+	<string name="total_order_status_unknown">"Ukendt"</string>
+</resources>

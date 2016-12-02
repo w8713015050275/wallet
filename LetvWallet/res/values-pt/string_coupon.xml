@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="coupon_card">Cartão</string>
+    <string name="coupon_card_list_expired_no_data">Não existem cartões</string>
+    <string name="coupon_card_no">Pedido N.º:</string>
+    <string name="coupon_copy_code">Copiar código de resgate</string>
+    <string name="coupon_copy_code_cancel">Cancelar</string>
+    <string name="coupon_copy_code_notify">Código de resgate copiado</string>
+    <string name="coupon_date">Hora:</string>
+    <string name="coupon_lis_no_data">Não existem cartões nem cupões</string>
+    <string name="coupon_list_expired_activity_title">Expirado</string>
+    <string name="coupon_list_expired_list_item_expired_tag">Expirado</string>
+    <string name="coupon_list_expired_list_item_show_tag">Exibido</string>
+    <string name="coupon_list_expired_list_item_unconsumed_tag">Reclamado</string>
+    <string name="coupon_list_expired_list_item_used_tag">Utilizado</string>
+    <string name="coupon_list_expired_no_data">Não existem cupões</string>
+    <string name="coupon_list_more_item">Mais cartões</string>
+    <string name="coupon_list_title_activity">Carteira</string>
+    <string name="coupon_request_no_data">0 cupões disponíveis</string>
+    <string name="coupon_validite_period">Prazo de validade:</string>
+    <string name="coupon_validite_period_to"> Para </string>
+    <string name="empty_no_coupon">Não existem cupões</string>
+    <string name="label_coupon">Cupão</string>
+    <string name="label_coupon_info">Informação do cupão</string>
+    <string name="label_coupon_usecondition">Condições de utilização</string>
+    <string name="label_coupon_usecoupon_btn">Utilizar agora</string>
+    <string name="label_coupon_usedetail">Instruções</string>
+    <plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">mensagem expirada</item>
+        <item quantity="other">mensagens expiradas</item>
+    </plurals>
+    <string name="coupon_code">Código de resgate:</string>
+    <string name="coupon_request_data">%d cupão disponível</string>
+</resources>

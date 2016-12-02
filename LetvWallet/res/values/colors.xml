@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#77CEE1</color>
+    <color name="colorPrimaryDark">#2B6372</color>
+    <color name="colorSecondary">#747474</color>
+    <color name="colorAccent">#2BA2FF</color>
+    <color name="colorDivider">#C6C7DB</color>
+    <color name="colorDividerLineBg">#DFDFDF</color>
+    <color name="colorWalletBg">@color/wallet_windowBackground_color</color>
+    <color name="colorTvBlack">#FF000000</color>
+    <color name="colorTvHint">#DFDFDF</color>
+    <color name="colorLabelBg">#F6F6F7</color>
+    <color name="colorBtnBlue">#2BA2FF</color>
+    <color name="colorSectionLabel">#898B94</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPlaceHolderBg">#F6F6F7</color>
+
+    <color name="colorMovieSimpleRemark">#54555C</color>
+    <color name="colorMovieActor">#747474</color>
+    <color name="colorMovieScore">#FF2D55</color>
+    <color name="colorCityListHeaderText">#747474</color>
+    <color name="colorMovieCinemaMinPrice">#FE7C43</color>
+    <color name="colorMovieCinemaAddress">#757575</color>
+    <color name="movie_list_divider">#DFDFDF</color>
+    <color name="colorMovieThumbBg">#BB000000</color>
+    <color name="colorMovieThumbRectLineBg">#BBDD2222</color>
+    <color name="colorMovieSeatRowAxisBg">#33000000</color>
+    <color name="colorMovieSeatCenterLineBg">#FF222222</color>
+    <color name="colorRowAxisText">@android:color/white</color>
+    <color name="colorMovieScreenCenterTvBg">#33000000</color>
+    <color name="colorMovieScreenCenterTv">#FFFFFFFF</color>
+    <drawable name="movie_cinema_filter_category_selected">#EEEEF0</drawable>
+    <drawable name="movie_cinema_filter_category_normal">@android:color/white</drawable>
+    <color name="movie_cinema_filter_bg">#42000000</color>
+    <color name="movie_cinema_special_discount_text_color">#FFAC1B</color>
+    <color name="movie_btn_order_status_unpay">#FF4451</color>
+    <color name="movie_btn_order_status_shown">#C8C8C8</color>
+    <color name="movie_stop_sale_text">#C8C8C8</color>
+    <color name="movie_schedule_price">#FE7C43</color>
+    <color name="movie_primary_color">#685BEE</color>
+    <color name="movieColorPrimary">@android:color/white</color>
+    <color name="coupon_comments_color">#54555C</color>
+    <color name="movieAppPrimary">#EA4F40</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF0000</color>
+    <color name="colorMovieSeatBg">#DFDFDF</color>
+    <color name="mobile_order_desc_black_color">#54555C</color>
+    <color name="mobile_order_desc_prodct_bg_color">#FFFFFF</color>
+    <color name="total_order_list_hearder_bg_color">#F9F9F9</color>
+    <color name="order_detial_remain_time_bg_color">#F8E1CC</color>
+    <color name="order_detial_dct_color">#FF9B42</color>
+    <color name="order_detial_gray_tv_color">#5C5D5E</color>
+    <color name="order_detial_lightgray_tv_color">#898B9C</color>
+    <color name="order_detial_desc_tv_color">#898B9C</color>
+    <color name="btn_round_shape_bg_color">@android:color/white</color>
+    <color name="pay_btn_tv_color">@android:color/white</color>
+    <color name="content_item_bg_color">@android:color/white</color>
+    <color name="page_bg_color">#EEEEF0</color>
+    <color name="ic_fill_color">#C6C7CB</color>
+    <color name="wallet_tv_default_color">@android:color/black</color>
+    <color name="wallet_tv_secondary_color">@android:color/white</color>
+    <color name="wallet_pay_pending_ic_color">#FF4451</color>
+    <color name="wallet_pay_sucess_ic_color">#83DF00</color>
+    <color name="place_holder_ic_color">#FFFFFF</color>
+    <color name="mobile_contact_ic_fill_color">#FF000000</color>
+    <color name="pay_countdown_tv_color">#FFFF0000</color>
+
+    <!--activity coupon list-->
+    <color name="coupon_expired_view_bgcolor">#FFCC03</color>
+    <color name="coupon_expired_view_tvcolor">@android:color/white</color>
+    <color name="tvCouponCatalogTextColor">#54555C</color>
+    <color name="tvCouponContentTvColor">#54555C</color>
+    <color name="tvCouponNameTvColor">@android:color/black</color>
+
+    <!-- main -->
+    <color name="main_service_name_color">#54555C</color>
+
+    <!-- movie -->
+    <color name="movie_tab_tv_color">#323232</color>
+    <color name="movie_tab_bg_color">@android:color/white</color>
+    <color name="movie_soon_filter_tv_color">#898b94</color>
+    <color name="movie_location_desc_tv_color">#898b94</color>
+    <color name="movie_detail_movie_info_tv_color">#898b94</color>
+    <color name="movie_detail_tab_indicator_tv_color">#323232</color>
+    <color name="movie_detail_movie_description_tv_color">#54555C</color>
+    <color name="movie_desc_content_tv_color">#54555C</color>
+    <color name="movie_detail_attention_count_tv_color">#54555C</color>
+    <color name="movie_shedule_movie_title_tv_color">@android:color/white</color>
+    <color name="movie_shedule_stoptime_bg_color">#FFD07D</color>
+    <color name="movie_shedule_stoptime_tv_color">@android:color/white</color>
+    <color name="movie_schedule_item_secondary_tv_color">#898B94</color>
+    <color name="movie_toolbar_line_color">#C6C7CB</color>
+    <color name="movie_toolbar_title_color">#898B94</color>
+    <color name="movie_cinema_list_location_ic_fill_color">#FF54555C</color>
+    <color name="movie_cinema_list_location_refresh_fill_color">#FF757575</color>
+    <color name="movie_ticket_tab_tv_color">@android:color/black</color>
+    <color name="movie_ticket_tab_tv_select_color">@color/movie_primary_color</color>
+    <color name="movie_seat_info_bg_color">@android:color/white</color>
+    <color name="movie_seat_time_tv_color">@android:color/black</color>
+    <color name="movie_seat_screen_tv_color">@android:color/white</color>
+    <color name="movie_primary_tv_color">@android:color/black</color>
+    <color name="movie_secondary_tv_color">@android:color/white</color>
+    <color name="movie_pay_not_refund_ic_fill_color">#231F20</color>
+    <color name="movie_detail_expansion_ic_fill_color">#FF000000</color>
+    <color name="movie_bottom_tab_ic_normal_color">#FFBCBCBC</color>
+    <color name="movie_bottom_tab_ic_press_color">#FF685BEE</color>
+    <color name="movie_bottom_tab_bg_color">@android:color/white</color>
+    <color name="movie_cinema_list_item_favorites_color">#FE7841</color>
+    <color name="movie_order_list_tv_secondary_color">#323232</color>
+    <color name="movie_order_list_price_color">#586BEE</color>
+    <color name="movie_order_list_tv_ordinary_color">#747474</color>
+    <color name="movie_order_list_remain_time_color">#ff4451</color>
+    <color name="movie_detail_contact_info_color">#646464</color>
+    <color name="movie_detail_title_tv_color">@color/movie_primary_tv_color</color>
+    <color name="movie_detail_more_tv_color">#54555C</color>
+    <color name="movie_cinema_filter_container_color">#EEEEF0</color>
+    <color name="movie_cinema_filter_category_bg_color">@android:color/white</color>
+    <color name="movie_cinema_filter_tv_color">#757575</color>
+    <color name="movie_cinema_one_category_tv_color">@android:color/black</color>
+    <color name="movie_cinema_two_category_tv_color">#626262</color>
+    <color name="movie_cinema_count_tv_color">#626262</color>
+
+    <!-- total order list -->
+    <color name="totalorder_item_primary_tv_color">@android:color/black</color>
+    <color name="totalorder_item_secondary_tv_color">@color/colorSecondary</color>
+
+    <!-- mobile -->
+    <color name="mobile_tv_primary_color">@android:color/black</color>
+    <color name="mobile_tv_secondary_color">#747474</color>
+    <color name="colorMobileDivider">#747474</color>
+    <color name="colorMobilePrimary">#2BA2FF</color>
+    <color name="mobile_tv_label_color">#747474</color>
+    <color name="mobile_history_clear_tv_color">#747474</color>
+    <color name="mobile_history_number_tv_color">@android:color/black</color>
+    <color name="mobile_history_contact_name_tv_color">#747474</color>
+    <color name="mobile_product_tv_color">#747474</color>
+    <color name="mobile_product_tv_press_color">@android:color/white</color>
+
+</resources>

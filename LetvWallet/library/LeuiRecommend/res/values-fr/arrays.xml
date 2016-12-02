@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>Aucun</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Actualités sur la marque</item>
+        <!--WALLPAPER-->
+        
+        <item>Fonds d\'écran</item>
+        <!--MUSIC-->
+        
+        <item>Musique avec étiquette</item>
+        <!--ALBUM-->
+        
+        <item>Aucun</item>
+        <!--ARTISTS-->
+        
+        <item>Aucun</item>
+        <!--WEI_BO-->
+        
+        <item>Tweets liés</item>
+        <!--SITES-->
+        
+        <item>Sites Web liés</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films et séries</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Actualités du divertissement</item>
+        <!--WALLPAPER-->
+        
+        <item>Fonds d\'écran</item>
+        <!--MUSIC-->
+        
+        <item>Bandes originales</item>
+        <!--ALBUM-->
+        
+        <item>Aucun</item>
+        <!--ARTISTS-->
+        
+        <item>Artistes associés</item>
+        <!--WEI_BO-->
+        
+        <item>Aucun</item>
+        <!--SITES-->
+        
+        <item>Aucun</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films et séries</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Actualités sportives</item>
+        <!--WALLPAPER-->
+        
+        <item>Fonds d\'écran</item>
+        <!--MUSIC-->
+        
+        <item>Aucun</item>
+        <!--ALBUM-->
+        
+        <item>Albums musicaux</item>
+        <!--ARTISTS-->
+        
+        <item>Aucun</item>
+        <!--WEI_BO-->
+        
+        <item>Tweets liés</item>
+        <!--SITES-->
+        
+        <item>Sites Web liés</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>Aucun</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Vidéos associés</item>
+        <!--WALLPAPER-->
+        
+        <item>Fonds d\'écran</item>
+        <!--MUSIC-->
+        
+        <item>Aucun</item>
+        <!--ALBUM-->
+        
+        <item>Aucun</item>
+        <!--ARTISTS-->
+        
+        <item>Aucun</item>
+        <!--WEI_BO-->
+        
+        <item>Tweets liés</item>
+        <!--SITES-->
+        
+        <item>Aucun</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films et séries</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Actualités du divertissement</item>
+        <!--WALLPAPER-->
+        
+        <item>Fonds d\'écran</item>
+        <!--MUSIC-->
+        
+        <item>Tubes</item>
+        <!--ALBUM-->
+        
+        <item>Albums musicaux</item>
+        <!--ARTISTS-->
+        
+        <item>Artistes associés</item>
+        <!--WEI_BO-->
+        
+        <item>Tweets liés</item>
+        <!--SITES-->
+        
+        <item>Sites Web liés</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films et séries</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Actualités pertinentes</item>
+        <!--WALLPAPER-->
+        
+        <item>Fonds d\'écran</item>
+        <!--MUSIC-->
+        
+        <item>Musique associée</item>
+        <!--ALBUM-->
+        
+        <item>Aucun</item>
+        <!--ARTISTS-->
+        
+        <item>Aucun</item>
+        <!--WEI_BO-->
+        
+        <item>Aucun</item>
+        <!--SITES-->
+        
+        <item>Aucun</item>
+    </string-array>
+</resources>

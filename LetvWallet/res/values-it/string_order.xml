@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="label_done">Completo</string>
+    <string name="label_order_cost_info">Informazioni transazione</string>
+    <string name="label_order_create_time">Data di creazione</string>
+    <string name="label_order_desc">Vedi i dettagli dell\'ordine</string>
+    <string name="label_order_desc_coupon_price">Coupon</string>
+    <string name="label_order_desc_discount_price">Salvataggio in corso</string>
+    <string name="label_order_desc_null_discount">Niente</string>
+    <string name="label_order_desc_total_price">Totale</string>
+    <string name="label_order_pay_info">Informazioni di pagamento</string>
+    <string name="label_order_payment">Importo pagato</string>
+    <string name="label_order_product_info">Informazioni articolo</string>
+    <string name="label_order_serialnumber">Numero dell\'ordine</string>
+    <string name="label_order_status">Stato dell\'ordine</string>
+    <string name="label_pay_method">Metodo di pagamento</string>
+    <string name="label_pay_paid">Pagato</string>
+    <string name="label_product_name">Nome articolo</string>
+    <string name="order_desc_label_sn">Numero:</string>
+    <string name="order_desc_label_status">Stato:</string>
+    <string name="order_list_loadmore">Caricamento in corso...</string>
+    <string name="total_order_detail_fail_prom">"Nessun dettaglio dell'ordine"</string>
+    <string name="total_order_empty_no_record">Nessun ordine</string>
+    <string name="total_order_list_label">Cronologia ordini</string>
+    <string name="total_order_list_time_week">E</string>
+    <string name="total_order_no_sn">Numero: %1$s</string>
+    <string name="total_order_status_canceled">Annullato</string>
+    <string name="total_order_status_completed">Completato</string>
+    <string name="total_order_status_delivered">Spedito</string>
+    <string name="total_order_status_paid">Pagato</string>
+    <string name="total_order_status_unknown">Sconosciuto</string>
+    <string name="total_order_status_unpay">In attesa</string>
+    <string name="total_order_list_hearder_other_month">MMM yyyy</string>
+    <string name="total_order_list_hearder_this_month">Mese corrente</string>
+    <string name="label_cfm_product_name">"Nome articolo:"</string>
+    <string name="label_phonenumber">"Numero ricarica:"</string>
+</resources>

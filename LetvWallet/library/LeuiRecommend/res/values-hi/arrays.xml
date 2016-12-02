@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+
+        <item>फ़िल्में और नाटक</item>
+        <!--LATEST_NEWS-->
+
+        <item>मनोरंजन समाचार</item>
+        <!--WALLPAPER-->
+
+        <item>वॉलपेपर</item>
+        <!--MUSIC-->
+
+        <item>हिट सिंगल</item>
+        <!--ALBUM-->
+
+        <item>संगीत ऐल्बम</item>
+        <!--ARTISTS-->
+
+        <item>संबंधित कलाकार</item>
+        <!--WEI_BO-->
+
+        <item>Related tweets</item>
+        <!--SITES-->
+
+        <item>Related websites</item>
+    </string-array>
+
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+
+        <item>Movies and dramas</item>
+        <!--LATEST_NEWS-->
+
+        <item>Sports News</item>
+        <!--WALLPAPER-->
+
+        <item>वॉलपेपर</item>
+        <!--MUSIC-->
+
+        <item>कोई नहीं</item>
+        <!--ALBUM-->
+
+        <item>संगीत ऐल्बम</item>
+        <!--ARTISTS-->
+
+        <item>कोई नहीं</item>
+        <!--WEI_BO-->
+
+        <item>Related tweets</item>
+        <!--SITES-->
+
+        <item>Related websites</item>
+    </string-array>
+
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+
+        <item>Movies and dramas</item>
+        <!--LATEST_NEWS-->
+
+        <item>मनोरंजन समाचार</item>
+        <!--WALLPAPER-->
+
+        <item>वॉलपेपर</item>
+        <!--MUSIC-->
+
+        <item>साउंडट्रैक</item>
+        <!--ALBUM-->
+
+        <item>कोई नहीं</item>
+        <!--ARTISTS-->
+
+        <item>संबंधित कलाकार</item>
+        <!--WEI_BO-->
+
+        <item>None</item>
+        <!--SITES-->
+
+        <item>None</item>
+    </string-array>
+
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+
+        <item>Movies and dramas</item>
+        <!--LATEST_NEWS-->
+
+        <item>Relevant news</item>
+        <!--WALLPAPER-->
+
+        <item>Wallpapers</item>
+        <!--MUSIC-->
+
+        <item>Related music</item>
+        <!--ALBUM-->
+
+        <item>कोई नहीं</item>
+        <!--ARTISTS-->
+
+        <item>कोई नहीं</item>
+        <!--WEI_BO-->
+
+        <item>कोई नहीं</item>
+        <!--SITES-->
+
+        <item>कोई नहीं</item>
+    </string-array>
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+
+        <item>कोई नहीं</item>
+        <!--LATEST_NEWS-->
+
+        <item>ब्रांड समाचार</item>
+        <!--WALLPAPER-->
+
+        <item>वॉलपेपर</item>
+        <!--MUSIC-->
+
+        <item>लेबल संगीत</item>
+        <!--ALBUM-->
+
+        <item>कोई नहीं</item>
+        <!--ARTISTS-->
+
+        <item>कोई नहीं</item>
+        <!--WEI_BO-->
+
+        <item>संबंधित ट्वीट</item>
+        <!--SITES-->
+
+        <item>संबंधित वेबसाइट</item>
+    </string-array>
+
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+
+        <item>कोई नहीं</item>
+        <!--LATEST_NEWS-->
+
+        <item>संबंधित वीडियो</item>
+        <!--WALLPAPER-->
+
+        <item>वॉलपेपर</item>
+        <!--MUSIC-->
+
+        <item>कोई नहीं</item>
+        <!--ALBUM-->
+
+        <item>कोई नहीं</item>
+        <!--ARTISTS-->
+
+        <item>कोई नहीं</item>
+        <!--WEI_BO-->
+
+        <item>संबंधित ट्वीट</item>
+        <!--SITES-->
+
+        <item>कोई नहीं</item>
+    </string-array>
+
+</resources>

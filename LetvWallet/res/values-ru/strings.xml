@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Мой кошелек </string>
+    <string name="day_of_week_friday">Пятница</string>
+    <string name="day_of_week_monday">Понедельник</string>
+    <string name="day_of_week_saturday">Суббота</string>
+    <string name="day_of_week_sunday">Воскресенье</string>
+    <string name="day_of_week_thursday">Четверг</string>
+    <string name="day_of_week_tuesday">Вторник</string>
+    <string name="day_of_week_wednesday">Среда</string>
+    <string name="label_entity_flow">Пополнение тарифного плана</string>
+    <string name="label_entity_mobile">Пополнение счета мобильного телефона</string>
+    <string name="label_entity_movie">Билет в кино</string>
+    <string name="label_more">Больше</string>
+    <string name="menu_bills">Счет</string>
+    <string name="pay_by_option_ali">Alipay</string>
+    <string name="pay_by_option_wechat">WeChat</string>
+    <string name="pay_info_response_error">Неверные платежные данные</string>
+    <string name="pay_network_error">Ошибка сети</string>
+    <string name="pay_now">Оплатить сейчас</string>
+    <string name="pay_remaining_time">Время до завершения оплаты:</string>
+    <string name="pay_selected_option_dont_work">Выбранный способ оплаты недоступен</string>
+    <string name="pay_status_unpaid">К оплате</string>
+    <string name="pay_unable_to_pay_prompt">Невозможно оплатить Закройте другие заказы и повторите попытку.</string>
+    <string name="pay_wx_notavailable_prompt">Приложение WeChat не установлено</string>
+    <string name="pay_wx_pay_notavailable_prompt">Установленное приложение WeChat не поддерживает платежи</string>
+    <string name="wallet_prompt_create_order">Формирование заказа</string>
+    <string name="wallet_prompt_create_payinfo">Получение платежных данных</string>
+    <string name="wallet_prompt_login_cancel">Отмена</string>
+    <string name="wallet_prompt_login_title">Войдите в учетную запись LeEco, чтобы увидеть больше</string>
+    <string name="wallet_prompt_login_toLogin">Войти сейчас</string>
+    <string name="wallet_prompt_title">Подсказка</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/category_name"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/movie_cinema_filter_category_height"
+    android:textSize="16sp"
+    android:textColor="@color/movie_cinema_one_category_tv_color"
+    android:paddingLeft="32dip"
+    android:gravity="center_vertical"
+    android:background="@drawable/movie_cinema_filter_category_bg"
+    />

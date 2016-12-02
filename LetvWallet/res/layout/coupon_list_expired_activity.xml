@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/base_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_height"
+            android:textSize="@dimen/tab_textsize"
+            android:background="@color/content_item_bg_color"
+            app:tabIndicatorColor="@color/coupon_expired_view_bgcolor"
+            app:tabIndicatorHeight="@dimen/tab_indicator_height"
+            app:tabSelectedTextColor="@color/tvCouponCatalogTextColor"
+            app:tabTextColor="@color/tvCouponCatalogTextColor" />
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never" />
+
+    </LinearLayout>
+
+

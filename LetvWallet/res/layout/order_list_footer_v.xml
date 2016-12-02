@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/orderlist_footerv_pg_tv_margin"
+    android:paddingTop="@dimen/orderlist_footerv_pg_tv_margin">
+
+    <!--<ProgressBar-->
+    <!--android:id="@+id/order_load_more_pb"-->
+    <!--style="@android:style/Widget.ProgressBar.Small"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginRight="@dimen/mobile_orderlist_footerv_pg_tv_margin" />-->
+
+    <RelativeLayout
+        android:id="@+id/order_load_more_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/orderlist_footerv_pg_tv_margin" />
+
+    <TextView
+        android:id="@+id/order_load_more_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/order_load_more_pb"
+        android:textColor="@color/colorWalletTv"
+        android:text="@string/order_list_loadmore" />
+
+
+</LinearLayout>

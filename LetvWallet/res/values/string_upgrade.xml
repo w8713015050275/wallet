@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wallet_upgrade_title">Update notification</string>
+    <string name="wallet_upgrade_now">Update now</string>
+    <string name="wallet_upgrade_notify_later">Remind me later</string>
+    <string name="wallet_exit_application">Exit</string>
+    <string name="download_fail">Download failed</string>
+    <string name="in_downloading">Downloading</string>
+    <string name="download_sucess">File downloaded</string>
+
+    <string name="update_content">Details: %s</string>
+    <string name="defautl_update_content">Made some optimizations and fixed a few known issues</string>
+    <string name="update_version">Version: v%s</string>
+    <string name="downloaded">Downloaded</string>
+    <string name="undownloaded">Not downloaded</string>
+    <string name="upgrade_fail">Failed to update</string>
+    <string name="no_wifi_update_notify">You are downloading the package using the mobile network.</string>
+    <string name="continue_upgrade">Update now</string>
+    <string name="download_under_wifi">Update on Wi-Fi only</string>
+    <string name="upgrade_success_note">Updated successfully</string>
+    <string name="upgrade_fail_note">Failed to update</string>
+    <string name="wifi_fail_continue_next">Resume when Wi-Fi is available</string>
+</resources>
+

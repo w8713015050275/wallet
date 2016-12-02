@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/wallet_windowBackground_color</item>
+        <item name="android:actionMenuTextColor">@color/wallet_actionMenuTextColor_color</item>
+        <item name="android:statusBarColor">@color/wallet_statusbar_color</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!--<item name="*android:leStatusBarIconColor">@color/wallet_leStatusBarIconColor_color</item>-->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="actionBarSize">40dp</item>
+        <item name="walletPrimaryColor">@color/wallet_common_primary_color</item>
+
+        <!--<item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/colorStatusBar</item>-->
+        <item name="colorAccent">?attr/walletPrimaryColor</item>
+
+        <!-- Text styles -->
+        <item name="android:textAppearance">@style/Wallet.TextAppearance</item>
+        <item name="android:textAppearanceInverse">@style/Wallet.TextAppearance.Inverse</item>
+        <item name="android:textAppearanceLarge">@style/Wallet.TextAppearance.Large</item>
+        <item name="android:textAppearanceMedium">@style/Wallet.TextAppearance.Medium</item>
+        <item name="android:textAppearanceSmall">@style/Wallet.TextAppearance.Small</item>
+        <item name="android:textAppearanceLargeInverse">@style/Wallet.TextAppearance.Large.Inverse
+        </item>
+        <item name="android:textAppearanceMediumInverse">@style/Wallet.TextAppearance.Medium.Inverse</item>
+        <item name="android:textAppearanceSmallInverse">@style/Wallet.TextAppearance.Small.Inverse</item>
+        <item name="android:textAppearanceButton">@style/Wallet.TextAppearance.Widget.Button</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/Wallet.TextAppearance.Widget.PopupMenu.Large</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/Wallet.TextAppearance.Widget.PopupMenu.Small</item>
+
+        <!-- Dialog attributes -->
+        <item name="dialogTheme">@style/Theme.Leui.Dialog</item>
+
+        <!-- AlertDialog attributes -->
+        <item name="alertDialogTheme">@style/Theme.Leui.Dialog.Alert</item>
+        <item name="alertDialogStyle">@style/AlertDialog.Leui</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoArrow">
+        <item name="actionBarStyle">@style/Wallet.Actionbar</item>
+    </style>
+    <style name="AppTheme.Arrow">
+        <item name="actionBarStyle">@style/Wallet.Actionbar.Arrow</item>
+    </style>
+</resources>

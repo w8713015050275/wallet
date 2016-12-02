@@ -1,0 +1,108 @@
+-keep class * extends android.app.Activity
+-keep class * extends android.app.Fragment
+-keep class * extends android.app.Dialog
+-keep class * extends android.app.Application
+-keep class * extends android.app.Service
+-keep class * extends android.content.BroadcastReceiver
+-keep class * extends android.content.ContentProvider
+
+#官方不建议混淆
+-keep class * extends android.app.backup.BackupAgentHelper
+-keep class * extends android.preference.Preference
+-keep class * extends com.android.vending.licensing.ILicensingService
+
+-useuniqueclassmembernames
+-dontoptimize
+-optimizationpasses 5
+
+
+#保护给定的可选属性
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,*Annotation*,Synthetic,EnclosingMethod,LineNumberTable
+
+#保留调试信息
+#-renamesourcefileattribute SourceFile
+
+
+
+#不混淆支付宝支付
+-dontwarn com.alipay.**
+-keep class com.alipay.** { *;}
+-dontwarn HttpUtils.**
+-keep class HttpUtils.** { *;}
+-dontwarn com.ta.utdid2.**
+-keep class com.ta.utdid2.** { *;}
+-dontwarn com.ut.device.**
+-keep class com.ut.device.** { *;}
+
+#不混淆微信支付
+-dontwarn com.tencent.mm.**
+-keep class com.tencent.mm.** { *;}
+
+
+#保持Parcelable不被混淆
+-keep class * implements Parcelable {
+ *;
+}
+
+#保持Serializable不被混淆
+-keep class * implements java.io.Serializable{
+ *;
+}
+
+#保持枚举 enum 类不被混淆
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+#不混淆native方法
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+#不混淆自定义view以及view group
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+
+
+################### region for wallet Support
+
+#引入common的配置文件
+-include ../LetvWalletCommon/proguard.flags
+
+#不混淆自定义view对MovieDetailPagerViewBehavior不起作用，单独配置
+-keep public class com.letv.walletbiz.movie.ui.MovieDetailPagerViewBehavior{
+ *;
+}
+-keep  public interface com.letv.walletbiz.movie.ui.MovieDetailPagerViewBehavior$StarPageHeaderViewScrollListener{
+}
+
+-keep public class * implements com.letv.wallet.common.http.beans.LetvBaseBean{
+   *;
+}
+
+-keep public class com.letv.walletbiz.push.utils.PushMessageParser{
+   *;
+}
+#################### end region
+
+-dontnote com.letv.walletbiz.base.fragment.BaseOrderListFragment
+-dontnote com.letv.walletbiz.order.fragment.TotalOrderListFragment
+-dontnote com.letv.walletbiz.movie.activity.MovieSeatActivity$OnSeatClickListener
+-dontnote com.letv.walletbiz.movie.fragment.MovieOrderListFragment
+-dontnote com.letv.walletbiz.mobile.ui.HistoryRecordNumberAdapter$EnventCallback
+-dontnote com.letv.walletbiz.mobile.activity.MobileOrderConfirmationActivity$GetOrderSNAsyncTask
+-dontnote com.letv.walletbiz.base.view.OrderListViewAdapter
+-dontnote com.letv.walletbiz.base.util.OrderDetailTask
+
+#the configuration refers to the unknown class
+-dontnote android.app.ApplicationPackageManager
+
+
+#accesses a declared field '' dynamically
+-dontnote com.letv.android.lcm.notification.NoticeManager

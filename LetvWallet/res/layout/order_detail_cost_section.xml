@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/pay_desc_vdefault_padding"
+    android:background="@color/content_item_bg_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/container_price"
+        style="@style/SectionBase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/pay_desc_vdefault_padding">
+
+        <TextView
+            android:id="@+id/tv_label_price"
+            style="@style/TextAppearance.Wallet.OrderDesc.Label"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/label_order_desc_total_price" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            style="@style/TextAppearance.Wallet.OrderDesc.Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/order_detial_lightgray_tv_color" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_discount"
+        style="@style/SectionBase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/pay_desc_vdefault_padding"
+        android:paddingTop="@dimen/pay_desc_vdefault_padding">
+
+        <TextView
+            android:id="@+id/tv_label_discount"
+            style="@style/TextAppearance.Wallet.OrderDesc.Label"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_weight="1.0"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/label_order_desc_discount_price"
+            android:textColor="@color/order_detial_dct_color" />
+
+        <TextView
+            android:id="@+id/tv_discount"
+            style="@style/TextAppearance.Wallet.OrderDesc.Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/order_detial_lightgray_tv_color" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/Divider_HorizontalLine_Style"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_marginRight="@dimen/padding_default" />
+
+    <LinearLayout
+        style="@style/SectionBase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/pay_desc_vdefault_padding"
+        android:paddingTop="@dimen/pay_desc_vdefault_padding">
+
+        <TextView
+            android:id="@+id/tv_label_cost"
+            style="@style/TextAppearance.Wallet.OrderDesc.Label"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_weight="1.0"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/movie_ticket_order_price" />
+
+        <TextView
+            android:id="@+id/tv_cost"
+            style="@style/TextAppearance.Wallet.OrderDesc.Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/movie_primary_tv_color" />
+
+    </LinearLayout>
+
+</LinearLayout>

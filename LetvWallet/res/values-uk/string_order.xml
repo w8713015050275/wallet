@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="label_cfm_product_name">"Ім'я елемента:"</string>
+	<string name="label_done">"Завершити"</string>
+	<string name="label_order_cost_info">"Відомості про сплату"</string>
+	<string name="label_order_create_time">"Час створення"</string>
+	<string name="label_order_desc">"Переглянути відомості про замовлення"</string>
+	<string name="label_order_desc_coupon_price">"Купон"</string>
+	<string name="label_order_desc_discount_price">"Збереження"</string>
+	<string name="label_order_desc_null_discount">"Нічого"</string>
+	<string name="label_order_desc_total_price">"Усього"</string>
+	<string name="label_order_pay_info">"Відомості про оплату"</string>
+	<string name="label_order_payment">"Сплачена сума"</string>
+	<string name="label_order_product_info">"Відомості про елемент"</string>
+	<string name="label_order_serialnumber">"Номер замовлення"</string>
+	<string name="label_order_status">"Стан замовлення"</string>
+	<string name="label_pay_paid">"Оплачено"</string>
+	<string name="label_phonenumber">"Номер поповнення:"</string>
+	<string name="label_product_name">"Ім'я елемента"</string>
+	<string name="order_desc_label_sn">"Номер:"</string>
+	<string name="order_desc_label_status">"Стан:"</string>
+	<string name="order_list_loadmore">"Завантаження..."</string>
+	<string name="total_order_detail_fail_prom">"Немає відомостей про замовлення"</string>
+	<string name="total_order_empty_no_record">"Немає замовлень"</string>
+	<string name="total_order_list_hearder_other_month">"MMM yyyy"</string>
+	<string name="total_order_list_hearder_this_month">"Поточний місяць"</string>
+	<string name="total_order_list_label">"Історія замовлень"</string>
+	<string name="total_order_no_sn">"Номер: %1$s"</string>
+	<string name="total_order_status_canceled">"Скасовано"</string>
+	<string name="total_order_status_completed">"Завершено"</string>
+	<string name="total_order_status_delivered">"Відвантажено"</string>
+	<string name="total_order_status_paid">"Оплачено"</string>
+	<string name="total_order_status_unknown">"Невідомо"</string>
+	<string name="total_order_status_unpay">"Очікування"</string>
+</resources>

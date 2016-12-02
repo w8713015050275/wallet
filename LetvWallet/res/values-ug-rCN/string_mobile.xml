@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="mobile_matter_attention_body1">ئاينىڭ بېشى ۋە ئاي ئاخىرىدا يۈرۈتكۈچىنىڭ سىستېمىسى ئالدىراش، ھېساباتقا كىرىشىگە ئۇزۇنراق ۋاقىت كېتىشى مۇمكىن.</string>
+    <string name="mobile_matter_attention_body2">بۇ پۇل قاچىلاش يۈرۈتكۈچىنىڭ پائالىيىتىگە قاتناشتۇرۇلمايدۇ، ئىشلەتكەندىن كېيىن يۈرۈتكۈچىنىڭ تىجارەت زالىدىن تالون ئېلىڭ.</string>
+    <string name="mobile_matter_attention_body3">يۈرۈتكۈچىنىڭ سىستېمىسىدا توسالغۇ بولۇش ياكى باشقا سەۋەبتىن پۇل قاچىلانمىسا، سىستېما 24 سائەت ئىچىدە تولۇق سومما بويىچە پۇل قايتۇرىدۇ</string>
+    <string name="mobile_matter_attention_titile1">سۆزلىشىش ھەققىم نېمىشقا ھېساباتقا كىرمىدى</string>
+    <string name="mobile_matter_attention_titile2">يانفوندا ۋە تىجارەت زالىدا پۇل قاچىلاشنىڭ قانداق پەرقى بار</string>
+    <string name="mobile_matter_attention_titile3">پۇل قاچىلانمىسا قاچان قايتۇرۇلىدۇ</string>
+    <string name="mobile_matter_attention_titile4">پۇل قاچىلاش مۇلازىمەت لىنىيەسى</string>
+    <string name="mobile_permission_contacts_refused_toast">ئەپنىڭ ئالاقىداشلارنى ئوقۇشىغا ئىجازەت بېرىشىڭىز كېرەك!</string>
+    <string name="mobile_prompt_user_select_cancel">بىكار قىلىش</string>
+    <string name="mobile_prompt_user_select_load_title">توردا خاتالىق كۆرۈلدى، قايتا يۈكلەڭ</string>
+    <string name="mobile_prompt_user_select_reload">قايتا يۈكلەش</string>
+    <string name="label_matter_attention">دىققەت قىلىدىغان ئىشلار</string>
+    <string name="label_mobile_deposite">قاچىلاش سوممىسى</string>
+    <string name="label_mobile_flow_deposite">قاچىلايدىغان سومما</string>
+    <string name="label_mobile_number">يانفون نومۇرى (%s)</string>
+    <string name="label_mobile_number_def_desc"> بىرلەشمە \\ تېلېگراف \\ كۆچمە</string>
+    <string name="label_mobile_product_price">باھاسى:</string>
+    <string name="label_mobile_product_unit_fee">يۈەن</string>
+    <string name="label_mobile_product_unit_flow">MB</string>
+    <string name="label_mobile_product_unit_g_flow">G</string>
+    <string name="label_price_unit">يۈەن</string>
+    <string name="menu_record">خاتىرە</string>
+    <string name="mobile_clear_history">خاتىرىنى تازىلاش</string>
+    <string name="mobile_clear_history_failed">تازىلانمىدى</string>
+    <string name="mobile_divider_phone_number_show">بۇ تېلېفوننىڭ نومۇرى</string>
+    <string name="mobile_order_desc_coupon_price">-%.2f</string>
+    <string name="mobile_order_desc_label_phonenumber">ھەق تۆلەيدىغان نومۇر</string>
+    <string name="mobile_order_list_label">ھەق تۆلەش خاتىرىسى</string>
+    <string name="mobile_order_status_cancelled">بىكار قىلىندى</string>
+    <string name="mobile_order_status_charged">ھەق تۆلەندى</string>
+    <string name="mobile_order_status_created">ھەق تۆلەشنى كۈتۈۋاتىدۇ</string>
+    <string name="mobile_order_status_depositing">ھەق تۆلىنىۋاتىدۇ</string>
+    <string name="mobile_order_status_paid">تۆلەندى</string>
+    <string name="mobile_order_view_label">بۇيرۇتما تەپسىلاتى</string>
+    <string name="mobile_order_view_surelabel">بۇيرۇتمىنى جەزملەشتۈرۈش</string>
+    <string name="mobile_phone_number_no_name">نامەلۇم</string>
+    <string name="mobile_prompt_net_connection_fail">تور ئۇلانمىدى</string>
+    <string name="mobile_request_order_fail_prom">بۇيرۇتما ئوقۇلمىدى، قايتا سىناڭ</string>
+</resources>

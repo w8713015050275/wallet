@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<string name="recommend_label_hot_product">热门作品</string>-->
+    <!--<string name="recommend_label_media_news">媒体资讯</string>-->
+    <!--<string name="recommend_label_latest_news">娱乐报道</string>-->
+    <!--<string name="recommend_label_wallpaper">壁纸推荐</string>-->
+    <!--<string name="recommend_label_musics">热门音乐</string>-->
+    <!--<string name="recommend_label_calendar">近期动态</string>-->
+    <!--<string name="recommend_label_weibo">最新微博</string>-->
+    <string name="recommend_label_more">更多</string>
+    <string name="recommend_item_more">查看更多</string>
+    <string name="recommend_calendar_buy">购买</string>
+
+    <string name="le_app_not_available">%1$s 不可用</string>
+    <string name="le_app_not_install">请安装 %1$s</string>
+    <string name="le_music">乐视音乐</string>
+    <string name="le_video">乐视视频</string>
+    <string name="le_wallpaper">乐视壁纸</string>
+</resources>

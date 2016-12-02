@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dip"
+    android:gravity="center"
+    >
+    <ImageView
+        android:id="@+id/service_icon"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:scaleType="fitCenter"
+        android:alpha="@dimen/le_img_alpha"
+        android:layout_marginBottom="10dip"
+        />
+    <TextView
+        android:id="@+id/service_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main_service_name_color"
+        android:textSize="12sp"
+        />
+</LinearLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <include
+        android:id="@+id/geocity_header"
+        layout="@layout/movie_city_list_section"
+        />
+    <TextView
+        android:id="@+id/geocity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="16dp"
+        android:textColor="@color/movie_primary_tv_color"
+        android:gravity="left|center_vertical"
+        />
+    <include android:id="@+id/hotcity_header"
+        layout="@layout/movie_city_list_section"
+        />
+    <LinearLayout
+        android:id="@+id/hot_cities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
+
+</merge>

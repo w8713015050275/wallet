@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="30dp"
+    android:paddingBottom="26dp"
+    android:background="@drawable/mobile_product_bg"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ids_product_bar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_product_name"
+            android:textSize="30sp"
+            android:layout_marginRight="3dp"
+            android:textColor="@drawable/mobile_product_textcolor"
+            android:fontFamily="helve-neue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_product_unit"
+            android:textSize="10sp"
+            android:textColor="@drawable/mobile_product_textcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ids_price_bar"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_mobile_product_price"
+            android:id="@+id/ids_tv_price_a"
+            android:textSize="10sp"
+            android:textColor="@drawable/mobile_product_textcolor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_price_label"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:textColor="@drawable/mobile_product_textcolor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_price_unit"
+            android:id="@+id/tv_price_unit"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:textColor="@drawable/mobile_product_textcolor" />
+    </LinearLayout>
+
+</LinearLayout>

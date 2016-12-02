@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        <item>يوق</item>
+        <!--LATEST_NEWS-->
+        <item>ماركا ئۇچۇرلىرى</item>
+        <!--WALLPAPER-->
+        <item>تەۋسىيەلىك تام قەغەزلەر</item>
+        <!--MUSIC-->
+        <item>داڭلىق مۇزىكىلار</item>
+        <!--ALBUM-->
+        <item>يوق</item>
+        <!--ARTISTS-->
+        <item>يوق</item>
+        <!--WEI_BO-->
+        <item>ئالاقىدار مىكروبىلوگلار</item>
+        <!--SITES-->
+        <item>ئالاقىدار توربېكەتلەر</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        <item>كىنو-تېلېۋىزىيە ئەسەرلىرى</item>
+        <!--LATEST_NEWS-->
+        <item>كۆڭۈل ئېچىش خەۋەرلىرى</item>
+        <!--WALLPAPER-->
+        <item>تەۋسىيەلىك تام قەغەزلەر</item>
+        <!--MUSIC-->
+        <item>ئەسلى ئاۋازلىق مۇزىكا</item>
+        <!--ALBUM-->
+        <item>يوق</item>
+        <!--ARTISTS-->
+        <item>مۇناسىۋەتلىك سەنئەتكار</item>
+        <!--WEI_BO-->
+        <item>يوق</item>
+        <!--SITES-->
+        <item>يوق</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        <item>كىنو-تېلېۋىزىيە ئەسەرلىرى</item>
+        <!--LATEST_NEWS-->
+        <item>تەنتەربىيە خەۋەرلىرى</item>
+        <!--WALLPAPER-->
+        <item>تەۋسىيەلىك تام قەغەزلەر</item>
+        <!--MUSIC-->
+        <item>يوق</item>
+        <!--ALBUM-->
+        <item>مۇزىكا پىلاستىنكىسى</item>
+        <!--ARTISTS-->
+        <item>يوق</item>
+        <!--WEI_BO-->
+        <item>ئالاقىدار مىكروبىلوگلار</item>
+        <!--SITES-->
+        <item>ئالاقىدار توربېكەتلەر</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        <item>يوق</item>
+        <!--LATEST_NEWS-->
+        <item>مۇناسىۋەتلىك سىنلار</item>
+        <!--WALLPAPER-->
+        <item>تەۋسىيەلىك تام قەغەزلەر</item>
+        <!--MUSIC-->
+        <item>يوق</item>
+        <!--ALBUM-->
+        <item>يوق</item>
+        <!--ARTISTS-->
+        <item>يوق</item>
+        <!--WEI_BO-->
+        <item>ئالاقىدار مىكروبىلوگلار</item>
+        <!--SITES-->
+        <item>يوق</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        <item>كىنو-تېلېۋىزىيە ئەسەرلىرى</item>
+        <!--LATEST_NEWS-->
+        <item>كۆڭۈل ئېچىش خەۋەرلىرى</item>
+        <!--WALLPAPER-->
+        <item>تەۋسىيەلىك تام قەغەزلەر</item>
+        <!--MUSIC-->
+        <item>ئاۋات يەككە ناخشىلار</item>
+        <!--ALBUM-->
+        <item>مۇزىكا پىلاستىنكىسى</item>
+        <!--ARTISTS-->
+        <item>مۇناسىۋەتلىك سەنئەتكار</item>
+        <!--WEI_BO-->
+        <item>ئالاقىدار مىكروبىلوگلار</item>
+        <!--SITES-->
+        <item>ئالاقىدار توربېكەتلەر</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        <item>كىنو-تېلېۋىزىيە ئەسەرلىرى</item>
+        <!--LATEST_NEWS-->
+        <item>ئالاقىدار خەۋەرلەر</item>
+        <!--WALLPAPER-->
+        <item>تەۋسىيەلىك تام قەغەزلەر</item>
+        <!--MUSIC-->
+        <item>مۇناسىۋەتلىك مۇزىكا</item>
+        <!--ALBUM-->
+        <item>يوق</item>
+        <!--ARTISTS-->
+        <item>يوق</item>
+        <!--WEI_BO-->
+        <item>يوق</item>
+        <!--SITES-->
+        <item>يوق</item>
+    </string-array>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- empty page -->
+    <string name="empty_no_network">無網路，請連線後重試</string>
+    <string name="empty_no_login">尚未登入</string>
+    <string name="empty_no_login_prompt">立刻登入</string>
+    <string name="empty_no_record">无记录</string>
+    <string name="empty_network_error">網路錯誤，請稍後重試</string>
+    <string name="empty_no_network_retry">重新載入</string>
+    <string name="empty_no_network_setting">設定網路</string>
+
+    <!-- phone number edittext -->
+    <string name="phonenumber_prompt_input_right_number">請輸入正確的手機號碼</string>
+</resources>

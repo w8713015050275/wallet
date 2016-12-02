@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="label_cfm_product_name">"Nume articol:"</string>
+	<string name="label_done">"Finalizare"</string>
+	<string name="label_order_cost_info">"Informații despre validare"</string>
+	<string name="label_order_create_time">"Ora creării"</string>
+	<string name="label_order_desc">"Vizualizare detalii despre comenzi"</string>
+	<string name="label_order_desc_coupon_price">"Cupon"</string>
+	<string name="label_order_desc_discount_price">"Se salvează"</string>
+	<string name="label_order_desc_null_discount">"Nimic"</string>
+	<string name="label_order_desc_total_price">"Total"</string>
+	<string name="label_order_pay_info">"Informații despre plată"</string>
+	<string name="label_order_payment">"Sumă plătită"</string>
+	<string name="label_order_product_info">"Informații despre element"</string>
+	<string name="label_order_serialnumber">"Numărul comenzii"</string>
+	<string name="label_order_status">"Stare comandă"</string>
+	<string name="label_pay_paid">"Plătit"</string>
+	<string name="label_phonenumber">"Număr reîncărcare:"</string>
+	<string name="label_product_name">"Denumire element"</string>
+	<string name="order_desc_label_sn">"Număr:"</string>
+	<string name="order_desc_label_status">"Stare:"</string>
+	<string name="order_list_loadmore">"Se încarcă..."</string>
+	<string name="total_order_detail_fail_prom">"Nu există detalii privind comanda"</string>
+	<string name="total_order_empty_no_record">"Lipsă comenzi"</string>
+	<string name="total_order_list_hearder_other_month">"MMM yyyy"</string>
+	<string name="total_order_list_hearder_this_month">"Luna curentă"</string>
+	<string name="total_order_list_label">"Istoric comenzi"</string>
+	<string name="total_order_no_sn">"Număr: %1$s"</string>
+	<string name="total_order_status_canceled">"Anulat"</string>
+	<string name="total_order_status_completed">"Finalizate"</string>
+	<string name="total_order_status_delivered">"Expediat"</string>
+	<string name="total_order_status_paid">"Plătit"</string>
+	<string name="total_order_status_unknown">"Nu se cunoaște"</string>
+	<string name="total_order_status_unpay">"În așteptare"</string>
+</resources>

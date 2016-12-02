@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movie_detail_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.letv.wallet.common.view.BlankPage
+        android:id="@+id/blank_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.letv.shared.widget.LeLoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/content_item_bg_color"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/movie_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    android:background="@color/colorPlaceHolderBg"
+                    android:alpha="@dimen/le_img_alpha"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="75dip"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dip"
+                    android:paddingRight="16dip">
+
+                    <TextView
+                        android:id="@+id/movie_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textColor="@color/movie_primary_tv_color"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dip"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/movie_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textColor="@color/movie_detail_movie_info_tv_color"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/movie_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dip"
+                            android:layout_marginRight="6dip"
+                            android:singleLine="true"
+                            android:textColor="@color/movie_detail_movie_info_tv_color"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/movie_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textColor="@color/movie_detail_movie_info_tv_color"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:textSize="14sp"
+            app:tabIndicatorColor="?attr/walletPrimaryColor"
+            app:tabIndicatorHeight="3dip"
+            app:tabPaddingEnd="18dip"
+            app:tabPaddingStart="18dip"
+            app:tabSelectedTextColor="?attr/walletPrimaryColor"
+            app:tabTextColor="@color/movie_detail_tab_indicator_tv_color" />
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:background="@color/content_item_bg_color"
+        app:layout_behavior="com.letv.walletbiz.movie.ui.MovieDetailPagerViewBehavior" />
+
+    <LinearLayout
+        android:id="@+id/buy_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@color/content_item_bg_color">
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <TextView
+            android:id="@+id/button_buy"
+            style="@style/PayButton.SectionBase.Bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/movie_detail_buy"
+            android:textSize="16sp" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

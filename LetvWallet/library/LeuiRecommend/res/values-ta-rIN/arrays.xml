@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--LATEST_NEWS-->
+        
+        <item>பிராண்ட் செய்திகள்</item>
+        <!--WALLPAPER-->
+        
+        <item>வால்பேப்பர்கள்</item>
+        <!--MUSIC-->
+        
+        <item>இசையை லேபிள் செய்யவும்</item>
+        <!--ALBUM-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--ARTISTS-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--WEI_BO-->
+        
+        <item>தொடர்புடைய ட்வீட்கள்</item>
+        <!--SITES-->
+        
+        <item>தொடர்புடைய வலைத்தளங்கள்</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>திரைப்படங்கள் மற்றும் நாடகங்கள்</item>
+        <!--LATEST_NEWS-->
+        
+        <item>பொழுதுபோக்கு செய்திகள்</item>
+        <!--WALLPAPER-->
+        
+        <item>வால்பேப்பர்கள்</item>
+        <!--MUSIC-->
+        
+        <item>சவுண்ட்டிராக்குகள்</item>
+        <!--ALBUM-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--ARTISTS-->
+        
+        <item>தொடர்புடைய ஆர்ட்டிஸ்ட்கள்</item>
+        <!--WEI_BO-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--SITES-->
+        
+        <item>எதுவுமில்லை</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>திரைப்படங்கள் மற்றும் நாடகங்கள்</item>
+        <!--LATEST_NEWS-->
+        
+        <item>விளையாட்டு செய்திகள்</item>
+        <!--WALLPAPER-->
+        
+        <item>வால்பேப்பர்கள்</item>
+        <!--MUSIC-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--ALBUM-->
+        
+        <item>இசை ஆல்பங்கள்</item>
+        <!--ARTISTS-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--WEI_BO-->
+        
+        <item>தொடர்புடைய ட்வீட்கள்</item>
+        <!--SITES-->
+        
+        <item>தொடர்புடைய வலைத்தளங்கள்</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--LATEST_NEWS-->
+        
+        <item>தொடர்புடைய வீடியோகள்</item>
+        <!--WALLPAPER-->
+        
+        <item>வால்பேப்பர்கள்</item>
+        <!--MUSIC-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--ALBUM-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--ARTISTS-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--WEI_BO-->
+        
+        <item>தொடர்புடைய ட்வீட்கள்</item>
+        <!--SITES-->
+        
+        <item>எதுவுமில்லை</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>திரைப்படங்கள் மற்றும் நாடகங்கள்</item>
+        <!--LATEST_NEWS-->
+        
+        <item>பொழுதுபோக்கு செய்திகள்</item>
+        <!--WALLPAPER-->
+        
+        <item>வால்பேப்பர்கள்</item>
+        <!--MUSIC-->
+        
+        <item>ஹிட் தனிப்பாடல்கள்</item>
+        <!--ALBUM-->
+        
+        <item>இசை ஆல்பங்கள்</item>
+        <!--ARTISTS-->
+        
+        <item>தொடர்புடைய ஆர்ட்டிஸ்ட்கள்</item>
+        <!--WEI_BO-->
+        
+        <item>தொடர்புடைய ட்வீட்கள்</item>
+        <!--SITES-->
+        
+        <item>தொடர்புடைய வலைத்தளங்கள்</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>திரைப்படங்கள் மற்றும் நாடகங்கள்</item>
+        <!--LATEST_NEWS-->
+        
+        <item>தொடர்புடைய செய்திகள்</item>
+        <!--WALLPAPER-->
+        
+        <item>வால்பேப்பர்கள்</item>
+        <!--MUSIC-->
+        
+        <item>தொடர்புடைய இசை</item>
+        <!--ALBUM-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--ARTISTS-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--WEI_BO-->
+        
+        <item>எதுவுமில்லை</item>
+        <!--SITES-->
+        
+        <item>எதுவுமில்லை</item>
+    </string-array>
+</resources>

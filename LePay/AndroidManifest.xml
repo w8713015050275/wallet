@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.letv.wallet"
+    android:versionCode="2"
+    android:versionName="1.1.0"
+    android:sharedUserId="com.letv.uid.walletpay">
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="24" />
+
+    <uses-permission android:name="android.permission.MANAGE_NETWORK_POLICY" />
+
+    <application
+        android:name=".PayApplication"
+        android:screenOrientation="portrait"
+        android:theme="@android:style/Theme.Translucent">
+
+        <activity
+            android:name=".LePayEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent">
+            <intent-filter>
+                <action android:name="android.intent.action.LE_PAYENTRYACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent"/>
+    </application>
+
+</manifest>

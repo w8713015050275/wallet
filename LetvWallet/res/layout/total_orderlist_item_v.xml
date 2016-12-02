@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SectionBase.TotalOrderListItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/tv_week"
+                style="@style/TextAppearance.TotalOrderList.UndertoneTv"
+                android:layout_alignParentTop="true"
+                android:gravity="top"
+                android:singleLine="true"
+                android:textSize="@dimen/total_orderlist_tv_week_size" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/TextAppearance.TotalOrderList.UndertoneTv"
+                android:layout_alignLeft="@+id/tv_week"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/tv_week"
+                android:gravity="bottom"
+                android:singleLine="true"
+                android:textSize="@dimen/total_orderlist_tv_time_size" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/total_orderlist_icon_margin_left"
+            android:layout_marginRight="@dimen/total_orderlist_icon_margin_left"
+            android:alpha="@dimen/le_img_alpha"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:minHeight="40dp">
+
+            <TextView
+                android:id="@+id/tv_product_name"
+                style="@style/TextAppearance.TotalOrderList.UndertoneTv"
+                android:layout_alignParentTop="true"
+                android:ellipsize="end"
+                android:gravity="top"
+                android:singleLine="true"
+                android:textSize="@dimen/total_orderlist_tv_product_name_size" />
+
+            <TextView
+                android:id="@+id/tv_order_no"
+                style="@style/TextAppearance.TotalOrderList.TitleTv"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/tv_product_name"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:singleLine="true"
+                android:text="@string/pay_wx_pay_notavailable_prompt"
+                android:textSize="@dimen/total_orderlist_tv_order_no_size" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="top">
+
+            <TextView
+                android:id="@+id/tv_price"
+                style="@style/TextAppearance.TotalOrderList.UndertoneTv"
+                android:singleLine="true"
+                android:textSize="@dimen/total_orderlist_tv_price_size" />
+
+            <TextView
+                style="@style/TextAppearance.TotalOrderList.UndertoneTv"
+                android:layout_alignBottom="@+id/tv_price"
+                android:layout_toRightOf="@+id/tv_price"
+                android:text="@string/label_price_unit"
+                android:textSize="@dimen/total_orderlist_tv_yuan_size" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_order_status"
+            style="@style/TextAppearance.TotalOrderList.TitleTv"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/rl_price"
+            android:layout_below="@+id/rl_price"
+            android:gravity="bottom"
+            android:singleLine="true"
+            android:textSize="@dimen/total_orderlist_tv_order_status_size"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

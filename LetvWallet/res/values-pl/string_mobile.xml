@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="label_matter_attention">"Uwagi"</string>
+	<string name="label_mobile_deposite">"Kwota doładowania"</string>
+	<string name="label_mobile_flow_deposite">"Limit doładowania"</string>
+	<string name="label_mobile_number">"Numer telefonu komórkowego (%s)"</string>
+	<string name="label_mobile_number_def_desc">"China Unicom\\China Telecom\\China Mobile"</string>
+	<string name="label_mobile_product_price">"Cena:"</string>
+	<string name="label_mobile_product_unit_fee">"RMB"</string>
+	<string name="label_mobile_product_unit_flow">"MB"</string>
+	<string name="label_mobile_product_unit_g_flow">"G"</string>
+	<string name="label_price_unit">"RMB"</string>
+	<string name="menu_record">"Nagrywaj"</string>
+	<string name="mobile_clear_history">"Wyczyść rejestr"</string>
+	<string name="mobile_clear_history_failed">"Nie udało się wyczyścić"</string>
+	<string name="mobile_divider_phone_number_show">"Twój numer"</string>
+	<string name="mobile_order_desc_coupon_price">"–%.2f"</string>
+	<string name="mobile_order_desc_label_phonenumber">"Numer do doładowania"</string>
+	<string name="mobile_order_list_label">"Historia doładowań"</string>
+	<string name="mobile_order_status_cancelled">"Anulowano"</string>
+	<string name="mobile_order_status_charged">"Doładowano"</string>
+	<string name="mobile_order_status_created">"Oczekujące"</string>
+	<string name="mobile_order_status_depositing">"Doładowywanie"</string>
+	<string name="mobile_order_status_paid">"Zapłacono"</string>
+	<string name="mobile_order_view_label">"Szczegóły zamówienia"</string>
+	<string name="mobile_order_view_surelabel">"Potwierdź zamówienie"</string>
+	<string name="mobile_phone_number_no_name">"Nieznane"</string>
+	<string name="mobile_prompt_net_connection_fail">"Nawiązanie połączenia sieciowego nie powiodło się"</string>
+	<string name="mobile_prompt_user_select_cancel">"Anuluj"</string>
+	<string name="mobile_prompt_user_select_load_title">"Błąd sieci. Załaduj ponownie."</string>
+	<string name="mobile_prompt_user_select_reload">"Ładuj ponownie"</string>
+	<string name="mobile_request_order_fail_prom">"Nie udało się uzyskać zamówienia. Spróbuj ponownie"</string>
+</resources>

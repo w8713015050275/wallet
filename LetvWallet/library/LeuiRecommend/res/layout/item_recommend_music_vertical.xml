@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/item_marge_normal"
+        android:layout_marginEnd="@dimen/item_marge_normal"
+        android:layout_marginBottom="@dimen/item_marge_tiny"
+        >
+
+    <TextView
+            android:id="@+id/tv_music_index"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            style="@style/LeTextStyleThin"
+            />
+
+    <RelativeLayout
+            android:id="@+id/rl_music_box"
+            android:layout_marginStart="@dimen/item_recomend_margin_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@color/transparent"
+            >
+
+        <TextView
+                android:id="@+id/tv_music_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_normal"
+                android:textColor="@color/shallow_black"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:drawableEnd="@drawable/recommend_music_arrow"
+                android:paddingStart="5dp"
+                android:layout_marginTop="6dp"
+                />
+
+        <TextView
+                android:id="@+id/tv_music_album"
+                android:layout_below="@id/tv_music_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_small"
+                android:textColor="@color/grey"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:paddingStart="5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                />
+    </RelativeLayout>
+
+</LinearLayout>

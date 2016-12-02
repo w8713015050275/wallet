@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="label_done">Завершено</string>
+    <string name="label_easy_go">Yidao Yongche</string>
+    <string name="label_order_cost_info">Сведения о заказе</string>
+    <string name="label_order_create_time">Время создания</string>
+    <string name="label_order_desc">Просмотр сведений о заказе</string>
+    <string name="label_order_desc_coupon_price">Купон</string>
+    <string name="label_order_desc_pay_price">Сумма к оплате</string>
+    <string name="label_order_desc_total_price">Всего</string>
+    <string name="label_order_pay_info">Платежные данные</string>
+    <string name="label_order_payment">Сумма платежа</string>
+    <string name="label_order_product_info">Сведения об элементе</string>
+    <string name="label_order_serialnumber">Номер заказа</string>
+    <string name="label_order_status">Состояние заказа</string>
+    <string name="label_pay_method">Способ оплаты</string>
+    <string name="label_pay_paid">Оплачено</string>
+    <string name="label_product_name">Имя элемента</string>
+    <string name="order_desc_label_sn">Номер:</string>
+    <string name="order_desc_label_status">Состояние:</string>
+    <string name="order_list_loadmore">Загрузка...</string>
+    <string name="total_order_detail_fail_prom">Не удалось отобразить сведения о заказе</string>
+    <string name="total_order_empty_no_record">Нет заказов</string>
+    <string name="total_order_list_label">История заказов</string>
+    <string name="total_order_no_sn">Номер: %1$s</string>
+    <string name="total_order_status_canceled">Отменено</string>
+    <string name="total_order_status_completed">Завершено</string>
+    <string name="total_order_status_delivered">Отправлено</string>
+    <string name="total_order_status_paid">Оплачено</string>
+    <string name="total_order_status_unknown">Неизвестно</string>
+    <string name="total_order_status_unpay">Ожидание</string>
+    <string name="label_order_desc_discount_price">Сохранение</string>
+    <string name="label_order_desc_null_discount">Ничего</string>
+    <string name="total_order_list_hearder_other_month">MMM yyyy г.</string>
+    <string name="total_order_list_hearder_this_month">Текущий месяц</string>
+    <string name="label_cfm_product_name">Имя элемента:</string>
+    <string name="label_phonenumber">Номер пополнения:</string>
+</resources>

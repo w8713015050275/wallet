@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="app_name">"Pung "</string>
+	<string name="label_entity_flow">"Dataplan-top-up"</string>
+	<string name="label_entity_mobile">"Mobil-top-up"</string>
+	<string name="label_entity_movie">"Biografbillet"</string>
+	<string name="label_more">"Mere"</string>
+	<string name="menu_bills">"Ordrehistorik"</string>
+	<string name="pay_by_option_ali">"Alipay"</string>
+	<string name="pay_by_option_wechat">"WeChat"</string>
+	<string name="pay_info_response_error">"Forkerte betalingsoplysninger"</string>
+	<string name="pay_network_error">"Netværksfejl"</string>
+	<string name="pay_now">"Betal nu"</string>
+	<string name="pay_remaining_time">"Tid tilbage til betaling:"</string>
+	<string name="pay_selected_option_dont_work">"Den valgte betalingsmetode er ikke tilgængelig"</string>
+	<string name="pay_status_unpaid">"Skal betales"</string>
+	<string name="pay_wx_notavailable_prompt">"Du har ikke installeret WeChat-appen"</string>
+	<string name="pay_wx_pay_notavailable_prompt">"Din installerede WeChat-app understøtter ikke betaling"</string>
+	<string name="wallet_prompt_create_order">"Genererer orden"</string>
+	<string name="wallet_prompt_create_payinfo">"Indhenter betalingsoplysninger"</string>
+	<string name="wallet_prompt_login_cancel">"Annuller"</string>
+	<string name="wallet_prompt_login_title">"Log ind på din LeEco-konto for at se mere"</string>
+	<string name="wallet_prompt_login_toLogin">"Log ind nu"</string>
+	<string name="wallet_prompt_title">"Prompt"</string>
+</resources>

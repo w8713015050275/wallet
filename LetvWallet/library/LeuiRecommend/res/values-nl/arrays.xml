@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>Geen</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Merknieuws</item>
+        <!--WALLPAPER-->
+        
+        <item>Achtergronden</item>
+        <!--MUSIC-->
+        
+        <item>Label muziek</item>
+        <!--ALBUM-->
+        
+        <item>Geen</item>
+        <!--ARTISTS-->
+        
+        <item>Geen</item>
+        <!--WEI_BO-->
+        
+        <item>Gerelateerde tweets</item>
+        <!--SITES-->
+        
+        <item>Gerelateerde websites</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films en toneel</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Shownieuws</item>
+        <!--WALLPAPER-->
+        
+        <item>Achtergronden</item>
+        <!--MUSIC-->
+        
+        <item>Soundtracks</item>
+        <!--ALBUM-->
+        
+        <item>Geen</item>
+        <!--ARTISTS-->
+        
+        <item>Gerelateerde artiesten</item>
+        <!--WEI_BO-->
+        
+        <item>Geen</item>
+        <!--SITES-->
+        
+        <item>Geen</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films en toneel</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Sportnieuws</item>
+        <!--WALLPAPER-->
+        
+        <item>Achtergronden</item>
+        <!--MUSIC-->
+        
+        <item>Geen</item>
+        <!--ALBUM-->
+        
+        <item>Muziekalbums</item>
+        <!--ARTISTS-->
+        
+        <item>Geen</item>
+        <!--WEI_BO-->
+        
+        <item>Gerelateerde tweets</item>
+        <!--SITES-->
+        
+        <item>Gerelateerde websites</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>Geen</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Gerelateerde video\'s</item>
+        <!--WALLPAPER-->
+        
+        <item>Achtergronden</item>
+        <!--MUSIC-->
+        
+        <item>Geen</item>
+        <!--ALBUM-->
+        
+        <item>Geen</item>
+        <!--ARTISTS-->
+        
+        <item>Geen</item>
+        <!--WEI_BO-->
+        
+        <item>Gerelateerde tweets</item>
+        <!--SITES-->
+        
+        <item>Geen</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films en toneel</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Shownieuws</item>
+        <!--WALLPAPER-->
+        
+        <item>Achtergronden</item>
+        <!--MUSIC-->
+        
+        <item>Hitsingles</item>
+        <!--ALBUM-->
+        
+        <item>Muziekalbums</item>
+        <!--ARTISTS-->
+        
+        <item>Gerelateerde artiesten</item>
+        <!--WEI_BO-->
+        
+        <item>Gerelateerde tweets</item>
+        <!--SITES-->
+        
+        <item>Gerelateerde websites</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>Films en toneel</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Relevant nieuws</item>
+        <!--WALLPAPER-->
+        
+        <item>Achtergronden</item>
+        <!--MUSIC-->
+        
+        <item>Gerelateerde muziek</item>
+        <!--ALBUM-->
+        
+        <item>Geen</item>
+        <!--ARTISTS-->
+        
+        <item>Geen</item>
+        <!--WEI_BO-->
+        
+        <item>Geen</item>
+        <!--SITES-->
+        
+        <item>Geen</item>
+    </string-array>
+</resources>

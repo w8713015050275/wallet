@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dip"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:minHeight="@dimen/view_coupon_item_height"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:layout_marginTop="@dimen/view_coupon_padding_top"
+        android:layout_marginLeft="@dimen/view_coupon_padding_left"
+        android:layout_marginBottom="@dimen/view_coupon_padding_bottom">
+
+        <TextView
+            android:id="@+id/tv_card_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/tvCouponCatalogTextColor"
+            android:textSize="@dimen/tv_coupon_name_textsize" />
+        <TextView
+            android:id="@+id/tv_card_expired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_card_name"
+            android:layout_alignLeft="@id/tv_card_name"
+            android:textColor="@color/tvCouponContentTvColor"
+            android:textSize="@dimen/tv_coupon_type_textsize"
+            android:visibility="gone"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/tv_card_name"
+            android:layout_marginTop="@dimen/view_card_no_margin_top">
+
+            <LinearLayout
+                android:id="@+id/viewNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coupon_card_no"
+                    android:textColor="@color/tvCouponContentTvColor"
+                    android:textSize="@dimen/tv_coupon_type_textsize" />
+
+                <TextView
+                    android:id="@+id/tv_card_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginTop="@dimen/tv_coupon_type_margin_top"
+                    android:textColor="@color/tvCouponContentTvColor"
+                    android:textSize="@dimen/tv_coupon_date_textsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coupon_code"
+                    android:textColor="@color/tvCouponContentTvColor"
+                    android:textSize="@dimen/tv_coupon_type_textsize" />
+
+                <TextView
+                    android:id="@+id/tv_card_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginTop="@dimen/tv_coupon_type_margin_top"
+                    android:textColor="@color/tvCouponContentTvColor"
+                    android:textSize="@dimen/tv_coupon_date_textsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:minHeight="37dp"
+                android:layout_marginLeft="@dimen/view_card_code_margin_left">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coupon_date"
+                    android:textColor="@color/tvCouponContentTvColor"
+                    android:textSize="@dimen/tv_coupon_type_textsize" />
+
+                <TextView
+                    android:id="@+id/tv_card_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginTop="@dimen/tv_coupon_type_margin_top"
+                    android:textColor="@color/tvCouponContentTvColor"
+                    android:textSize="@dimen/tv_coupon_date_textsize" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img_card_icon"
+        android:layout_width="@dimen/view_card_icon_width"
+        android:layout_height="@dimen/view_card_icon_height"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/view_coupon_icon_margin_right"
+        android:layout_marginLeft="@dimen/view_coupon_icon_margin"
+        android:layout_marginTop="@dimen/view_coupon_icon_margin_top"
+        android:layout_marginBottom="@dimen/view_coupon_icon_margin_top"
+        android:background="@color/colorPlaceHolderBg"
+        android:alpha="@dimen/le_img_alpha"
+        />
+
+</LinearLayout>

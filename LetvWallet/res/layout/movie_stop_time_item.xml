@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvStopTime"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:paddingBottom="10dip"
+    android:paddingLeft="16dip"
+    android:paddingRight="16dip"
+    android:singleLine="true"
+    android:gravity="center_vertical|left"
+    android:textSize="12sp"
+    android:textColor="@color/movie_shedule_stoptime_tv_color"
+    android:background="@color/movie_shedule_stoptime_bg_color"
+    android:duplicateParentState="true"
+    />

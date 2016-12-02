@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="continue_upgrade">Обновить сейчас</string>
+    <string name="defautl_update_content">устранить неполадки.</string>
+    <string name="downloaded">Загружено</string>
+    <string name="download_fail">Не удалось выполнить загрузку.</string>
+    <string name="download_sucess">Загрузка выполнена успешно.</string>
+    <string name="download_under_wifi">Обновить через сеть Wi-Fi</string>
+    <string name="in_downloading">Загрузка</string>
+    <string name="no_wifi_update_notify">уведомить: загрузка посредством сетевых данных</string>
+    <string name="undownloaded">Отменить загрузку</string>
+    <string name="update_content">Введение: %s</string>
+    <string name="update_version">Версия: v%s</string>
+    <string name="upgrade_fail_note">Сбой обновления</string>
+    <string name="upgrade_success_note">Обновление прошло успешно</string>
+    <string name="wallet_exit_application">Выйти из приложения</string>
+    <string name="wallet_upgrade_notify_later">Напомнить позже</string>
+    <string name="wallet_upgrade_now">Обновить сейчас</string>
+    <string name="wallet_upgrade_title">Примечание об обновлении</string>
+    <string name="wifi_fail_continue_next">Отключение сети Wi-Fi, продолжить загрузку после восстановления подключения к Wi-Fi-сети.</string>
+</resources>

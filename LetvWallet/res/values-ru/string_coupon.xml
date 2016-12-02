@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">сообщение об истечении срока действия</item>
+        <item quantity="other">сообщения об истечении срока действия</item>
+    </plurals>
+    <string name="coupon_card">Карта</string>
+    <string name="coupon_card_list_expired_no_data">Карт нет</string>
+    <string name="coupon_card_no">Номер заказа:</string>
+    <string name="coupon_copy_code">Скопировать промокод</string>
+    <string name="coupon_copy_code_cancel">Отмена</string>
+    <string name="coupon_copy_code_notify">Промокод скопирован</string>
+    <string name="coupon_date">Время:</string>
+    <string name="coupon_lis_no_data">Карт или купонов нет</string>
+    <string name="coupon_list_expired_activity_title">Истек срок действия</string>
+    <string name="coupon_list_expired_list_item_expired_tag">Истек срок действия</string>
+    <string name="coupon_list_expired_list_item_show_tag">В прокате</string>
+    <string name="coupon_list_expired_list_item_unconsumed_tag">Заявка подана</string>
+    <string name="coupon_list_expired_list_item_used_tag">Использован</string>
+    <string name="coupon_list_expired_no_data">Купонов нет</string>
+    <string name="coupon_list_more_item">Больше карт</string>
+    <string name="coupon_list_title_activity">Кошелек</string>
+    <string name="coupon_request_no_data">Доступно купонов: 0</string>
+    <string name="coupon_validite_period">Окончание срока действия:</string>
+    <string name="coupon_validite_period_to"> До </string>
+    <string name="empty_no_coupon">empty_no_coupon</string>
+    <string name="label_coupon">Купон</string>
+    <string name="label_coupon_info">Сведения о купоне</string>
+    <string name="label_coupon_usecondition">Условия использования</string>
+    <string name="label_coupon_usecoupon_btn">Использовать сейчас</string>
+    <string name="label_coupon_usedetail">Инструкции</string>
+    <string name="coupon_code">Промокод:</string>
+    <string name="coupon_request_data">Доступный купон: %d</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">"%1d vervallen bericht"</item>
+        <item quantity="other">"%1d vervallen berichten"</item>
+    </plurals>
+	<string name="coupon_card">"Kaart"</string>
+	<string name="coupon_card_list_expired_no_data">"Er zijn nu geen kaarten"</string>
+	<string name="coupon_card_no">"Bestelnummer:"</string>
+	<string name="coupon_code">"Inwisselcode:"</string>
+	<string name="coupon_copy_code">"Inwisselcode kopiëren"</string>
+	<string name="coupon_copy_code_cancel">"Annuleren"</string>
+	<string name="coupon_copy_code_notify">"Inwisselcode gekopieerd"</string>
+	<string name="coupon_date">"Tijd:"</string>
+	<string name="coupon_lis_no_data">"Er zijn nu geen kaarten of coupons"</string>
+	<string name="coupon_list_expired_activity_title">"Verlopen"</string>
+	<string name="coupon_list_expired_list_item_expired_tag">"Verlopen"</string>
+	<string name="coupon_list_expired_list_item_show_tag">"Uitgezonden"</string>
+	<string name="coupon_list_expired_list_item_unconsumed_tag">"Geclaimd"</string>
+	<string name="coupon_list_expired_list_item_used_tag">"Gebruikt"</string>
+	<string name="coupon_list_expired_no_data">"Er zijn nu geen coupons"</string>
+	<string name="coupon_list_more_item">"Meer kaarten"</string>
+	<string name="coupon_list_title_activity">"Pasfoto"</string>
+	<string name="coupon_request_data">"%d coupon beschikbaar"</string>
+	<string name="coupon_validite_period">"Vervaldatum:"</string>
+	<string name="coupon_validite_period_to">" Aan "</string>
+	<string name="empty_no_coupon">"Geen coupons"</string>
+	<string name="label_coupon">"Coupon"</string>
+	<string name="label_coupon_info">"Couponinformatie"</string>
+	<string name="label_coupon_usecondition">"Verbruiksomstandigheden"</string>
+	<string name="label_coupon_usecoupon_btn">"Nu gebruiken"</string>
+	<string name="label_coupon_usedetail">"Instructies"</string>
+</resources>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ବ୍ରାଣ୍ଡ ସମାଚାର</item>
+        <!--WALLPAPER-->
+        
+        <item>ୱାଲପେପରଗୁଡିକ</item>
+        <!--MUSIC-->
+        
+        <item>ସଙ୍ଗୀତ ଲେବଲ୍</item>
+        <!--ALBUM-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--ARTISTS-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--WEI_BO-->
+        
+        <item>ଟୁଇଟ୍‌ ସମ୍ବନ୍ଧୀୟ</item>
+        <!--SITES-->
+        
+        <item>ୱେବସାଇଟଗୁଡିକ ସମ୍ବନ୍ଧୀୟ</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>ଚଳଚିତ୍ର ଏବଂ ଡ୍ରାମାଗୁଡିକ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ମନୋରଞ୍ଜନ ସମ୍ବାଦଗୁଡିକ</item>
+        <!--WALLPAPER-->
+        
+        <item>ୱାଲପେପରଗୁଡିକ</item>
+        <!--MUSIC-->
+        
+        <item>ସାଉଣ୍ଡଟ୍ରାକଗୁଡିକ</item>
+        <!--ALBUM-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--ARTISTS-->
+        
+        <item>କଳାକାରଗଣ ସମ୍ବନ୍ଧୀୟ</item>
+        <!--WEI_BO-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--SITES-->
+        
+        <item>କିଛି ନାହିଁ</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>ଚଳଚିତ୍ର ଏବଂ ଡ୍ରାମାଗୁଡିକ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ଖେଳ ସମ୍ବାଦଗୁଡିକ</item>
+        <!--WALLPAPER-->
+        
+        <item>ୱାଲପେପରଗୁଡିକ</item>
+        <!--MUSIC-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--ALBUM-->
+        
+        <item>ସଙ୍ଗୀତ ଆଲବମଗୁଡିକ</item>
+        <!--ARTISTS-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--WEI_BO-->
+        
+        <item>ଟୁଇଟ୍‌ ସମ୍ବନ୍ଧୀୟ</item>
+        <!--SITES-->
+        
+        <item>ୱେବସାଇଟଗୁଡିକ ସମ୍ବନ୍ଧୀୟ</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ସମ୍ବନ୍ଧୀୟ ଭିଡିଓଗୁଡିକ</item>
+        <!--WALLPAPER-->
+        
+        <item>ୱାଲପେପରଗୁଡିକ</item>
+        <!--MUSIC-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--ALBUM-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--ARTISTS-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--WEI_BO-->
+        
+        <item>ଟୁଇଟ୍‌ ସମ୍ବନ୍ଧୀୟ</item>
+        <!--SITES-->
+        
+        <item>କିଛି ନାହିଁ</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>ଚଳଚିତ୍ର ଏବଂ ଡ୍ରାମାଗୁଡିକ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ମନୋରଞ୍ଜନ ସମ୍ବାଦଗୁଡିକ</item>
+        <!--WALLPAPER-->
+        
+        <item>ୱାଲପେପରଗୁଡିକ</item>
+        <!--MUSIC-->
+        
+        <item>ହିଟ୍‌ ଏକକ</item>
+        <!--ALBUM-->
+        
+        <item>ସଙ୍ଗୀତ ଆଲବମଗୁଡିକ</item>
+        <!--ARTISTS-->
+        
+        <item>କଳାକାରଗଣ ସମ୍ବନ୍ଧୀୟ</item>
+        <!--WEI_BO-->
+        
+        <item>ଟୁଇଟ୍‌ ସମ୍ବନ୍ଧୀୟ</item>
+        <!--SITES-->
+        
+        <item>ୱେବସାଇଟଗୁଡିକ ସମ୍ବନ୍ଧୀୟ</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>ଚଳଚିତ୍ର ଏବଂ ଡ୍ରାମାଗୁଡିକ</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ସମାଚାର ସମ୍ବନ୍ଧୀୟ</item>
+        <!--WALLPAPER-->
+        
+        <item>ୱାଲପେପରଗୁଡିକ</item>
+        <!--MUSIC-->
+        
+        <item>ସଙ୍ଗୀତ ସମ୍ବନ୍ଧୀୟ</item>
+        <!--ALBUM-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--ARTISTS-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--WEI_BO-->
+        
+        <item>କିଛି ନାହିଁ</item>
+        <!--SITES-->
+        
+        <item>କିଛି ନାହିଁ</item>
+    </string-array>
+</resources>

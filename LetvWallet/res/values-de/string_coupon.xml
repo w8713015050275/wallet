@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="coupon_card">Karte</string>
+    <string name="coupon_card_list_expired_no_data">Derzeit keine Karten</string>
+    <string name="coupon_card_no">Bestell-Nr.:</string>
+    <string name="coupon_copy_code">Einlösungscode kopieren</string>
+    <string name="coupon_copy_code_cancel">Abbrechen</string>
+    <string name="coupon_copy_code_notify">Einlösungscode kopiert</string>
+    <string name="coupon_date">Zeit:</string>
+    <string name="coupon_lis_no_data">Derzeit keine Karten oder Gutscheine</string>
+    <string name="coupon_list_expired_activity_title">Abgelaufen</string>
+    <string name="coupon_list_expired_list_item_expired_tag">Abgelaufen</string>
+    <string name="coupon_list_expired_list_item_show_tag">Gesendet</string>
+    <string name="coupon_list_expired_list_item_unconsumed_tag">Beansprucht</string>
+    <string name="coupon_list_expired_list_item_used_tag">Belegt</string>
+    <string name="coupon_list_expired_no_data">Jetzt</string>
+    <string name="coupon_list_more_item">Weitere Karten</string>
+    <string name="coupon_list_title_activity">Guthaben</string>
+    <string name="coupon_request_no_data">0 Gutschein verfügbar</string>
+    <string name="coupon_validite_period">Ablaufdatum:</string>
+    <string name="coupon_validite_period_to"> Bis </string>
+    <string name="empty_no_coupon">Keine Gutscheine</string>
+    <string name="label_coupon">Gutschein</string>
+    <string name="label_coupon_info">Gutscheininformationen</string>
+    <string name="label_coupon_usecondition">Nutzungsbedingungen</string>
+    <string name="label_coupon_usecoupon_btn">Jetzt verwenden</string>
+    <string name="label_coupon_usedetail">Anweisungen</string>
+    <plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">"%1d abgelaufene Nachricht"</item>
+        <item quantity="other">"%1d abgelaufene Nachrichten"</item>
+    </plurals>
+    <string name="coupon_code">Einlösungscode:</string>
+    <string name="coupon_request_data">%d Gutschein verfügbar</string>
+</resources>

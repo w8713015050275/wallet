@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="app_name">"財布 "</string>
+	<string name="label_entity_flow">"データプランのリチャージ"</string>
+	<string name="label_entity_mobile">"モバイルのリチャージ"</string>
+	<string name="label_entity_movie">"映画のチケット"</string>
+	<string name="label_more">"詳細"</string>
+	<string name="menu_bills">"注文履歴"</string>
+	<string name="pay_by_option_ali">"Alipay"</string>
+	<string name="pay_by_option_wechat">"WeChat"</string>
+	<string name="pay_info_response_error">"支払情報が間違っています"</string>
+	<string name="pay_network_error">"ネットワークエラー"</string>
+	<string name="pay_now">"今すぐ支払う"</string>
+	<string name="pay_remaining_time">"支払いの残り時間："</string>
+	<string name="pay_selected_option_dont_work">"選択したお支払い方法は利用できません"</string>
+	<string name="pay_status_unpaid">"支払予定"</string>
+	<string name="pay_wx_notavailable_prompt">"WeChatアプリがインストールされていません"</string>
+	<string name="pay_wx_pay_notavailable_prompt">"インストールされているWeChatアプリは、支払いをサポートしていません"</string>
+	<string name="wallet_prompt_create_order">"生成順"</string>
+	<string name="wallet_prompt_create_payinfo">"支払情報を取得しています"</string>
+	<string name="wallet_prompt_login_cancel">"キャンセル"</string>
+	<string name="wallet_prompt_login_title">"LeEcoアカウントにログインして詳細を表示"</string>
+	<string name="wallet_prompt_login_toLogin">"今すぐログイン"</string>
+	<string name="wallet_prompt_title">"プロンプト"</string>
+</resources>

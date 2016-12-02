@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="label_menu_search">ئىزدەش</string>
+    <string name="movie_cinema_cancel_filter">سۈزۈشنى بىكار قىلىش</string>
+    <string name="movie_cinema_contact_infomation">ئالاقە ئۇسۇلى</string>
+    <string name="movie_cinema_filter_category_all">بارلىق</string>
+    <string name="movie_cinema_filter_category_area">رايون بويىچە</string>
+    <string name="movie_cinema_filter_category_brand">ماركا بويىچە</string>
+    <string name="movie_cinema_filter_category_special">ئالاھىدىلىكى بويىچە</string>
+    <string name="movie_cinema_filter_text_formatter">\"%s\" كىنوخانىسى تاللاندى</string>
+    <string name="movie_detail_buy">دەرھال سېتىۋېلىش</string>
+    <string name="movie_detail_date_formatter">dd.MM.yyyy قويۇلىدۇ</string>
+    <string name="movie_detail_introduction">فىلىم چۈشەندۈرۈشى</string>
+    <string name="movie_detail_photo">كىنو رەسىملىرى</string>
+    <string name="movie_detail_prevue">ئېلانى</string>
+    <string name="movie_detail_star">رېژىسسور ۋە چولپانلار</string>
+    <string name="movie_detail_subscribe">ئەگىشىش</string>
+    <string name="movie_detail_subscribed">ئەگەشتىڭىز</string>
+    <string name="movie_detail_subscribe_failed">ئەگىشىلمىدى</string>
+    <string name="movie_detail_subscribing">ئەگىشىۋاتىسىز…</string>
+    <string name="movie_detail_tab_comment">ئىنكاس</string>
+    <string name="movie_detail_tab_information">ئارخىپ</string>
+    <string name="movie_detail_tab_recommend">تەۋسىيە</string>
+    <string name="movie_detail_unsubscribe_failed">ئەگىشىش بىكار قىلىنمىدى</string>
+    <string name="movie_detail_unsubscribing">بىكار قىلىۋاتىدۇ…</string>
+    <string name="movie_dialog_query_pay_result">ھەق تۆلەش نەتىجىسىنى تەكشۈرۈۋاتىدۇ…</string>
+    <string name="movie_dialog_user_select_result_failed">تۆلەنمىدى</string>
+    <string name="movie_dialog_user_select_result_success">تۆلەندى</string>
+    <string name="movie_dialog_user_select_result_title">بۇيرۇتما ھەققى تۆلەندىمۇ؟</string>
+    <string name="movie_error_cinema_no_movie">نۆۋەتتىكى كىنوخانىدا ھازىرچە كىنو قويۇلمىدى</string>
+    <string name="movie_error_no_cinema">نۆۋەتتىكى شەھەردە ھازىرچە كىنوخانا يوق</string>
+    <string name="movie_error_no_movie">نۆۋەتتىكى شەھەردە ھازىرچە قويۇلىدىغان كىنو يوق</string>
+    <string name="movie_more">باشقىلار</string>
+    <string name="movie_order_list_pay_remain_time">m مىنۇت s سېكۇنت قالدى</string>
+    <string name="movie_pay_overtime">بۇيرۇتما ھەققىنى تۆلەش ۋاقتى ئېشىپ كەتتى، قايتا ئورۇن تاللاڭ</string>
+    <string name="movie_permission_call_refused_toast">ئەپنىڭ تېلېفون قىلىشىغا ئىجازەت بېرىشىڭىز كېرەك!</string>
+    <string name="movie_permission_location_refused_toast">ئەپنىڭ ئورۇن بەلگىلىشىگە ئىجازەت بېرىشىڭىز كېرەك!</string>
+    <string name="movie_phone_number_empty">تېلېفون نومۇرى بوش</string>
+    <string name="movie_phone_number_empty_toast">يانفون نومۇرى بوش قالسا بولمايدۇ!</string>
+    <string name="movie_photo_gallery_failed">يۈكلەنمىدى، كېيىنرەك قايتا سىناڭ</string>
+    <string name="movie_seat_info_column">ئورۇن</string>
+    <string name="movie_seat_info_formatter">%1$s-رەت %2$s-ئورۇن</string>
+    <string name="movie_seat_info_row">رەت</string>
+    <string name="movie_ticket_back_unlock_back">قايتىش</string>
+    <string name="movie_ticket_back_unlock_cancel">بىكار قىلىش</string>
+    <string name="movie_ticket_back_unlock_title">قايتسىڭىز، بۇرۇن مۇقىملىغان ئورۇننى بوشىتىدۇ</string>
+    <string name="movie_ticket_code_desc">نەقلەشتۈرۈشنى دەلىللەش</string>
+    <string name="movie_ticket_order">بۇيرۇتما</string>
+    <string name="movie_ticket_order_num">بۇيرۇتما نومۇرى</string>
+    <string name="movie_ticket_price_unit">يۈەن</string>
+    <string name="movie_ticket_redeem_code">نەقلەشتۈرۈش كودى</string>
+    <string name="movie_ticket_serial_number">تەرتىپ نومۇرى</string>
+    <string name="movie_ticket_status_generate_ticket_failed">بېلەت چىقمىدى</string>
+    <string name="movie_ticket_status_generating_ticket">بېلەت چىقىرىۋاتىدۇ</string>
+    <string name="movie_ticket_status_overtime">ۋاقتى ئېشىپ كەتتى</string>
+    <string name="movie_ticket_status_refunded">پۇل قايتۇرۇلدى</string>
+    <string name="movie_ticket_status_refunding">پۇل قايتۇرۇۋاتىدۇ</string>
+    <string name="movie_ticket_status_shown">قويۇلۇپ بولغانلىرى</string>
+    <string name="movie_ticket_status_unconsumed">ئىستېمال قىلىنمىدى</string>
+    <string name="movie_ticket_status_unknown">نامەلۇم</string>
+    <string name="movie_ticket_status_unpay">ھەق تۆلەشنى كۈتۈۋاتقان</string>
+    <string name="movie_ticket_verification_code">دەلىللەش كودى</string>
+    <string name="movie_toast_order_overtime">بۇيرۇتمىنىڭ ۋاقتى ئېشىپ كەتتى</string>
+    <string name="movie_weipiao_tele">wepiao.com خېرىدارلار مۇلازىمەت مەركىزى</string>
+    <plurals name="movie_attention_count_formatter">
+        <item quantity="one">%s كىشى ئەگەشتى</item>
+        <item quantity="other">%s كىشى ئەگەشتى</item>
+    </plurals>
+    <plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">%1$d</item>
+        <item quantity="other">%1$d</item>
+    </plurals>
+    <plurals name="movie_ticket_amount">
+        <item quantity="one">پارچە</item>
+        <item quantity="other">پارچە</item>
+    </plurals>
+    <string name="label_entity_city">شەھەر تاللاش</string>
+    <string name="movie_btn_presell_ticket">ئالدىن سېتىش</string>
+    <string name="movie_btn_purchase_ticket">بېلەت سېتىۋېلىش</string>
+    <string name="movie_cinema_list_by_movie_normal">dd-MM E</string>
+    <string name="movie_cinema_list_by_movie_today">بۈگۈن dd-MM</string>
+    <string name="movie_cinema_list_by_movie_tomorrow">ئەتە dd-MM</string>
+    <string name="movie_cinema_menu_filter">سۈزۈش</string>
+    <string name="movie_cinema_menu_search">ئىزدەش</string>
+    <string name="movie_city_locating">ئورۇن بەلگىلەۋاتىدۇ</string>
+    <string name="movie_city_location_failure">ئورۇن بەلگىلەنمىدى</string>
+    <string name="movie_create_order_failed">بۇيرۇتما قۇرۇلمىدى</string>
+    <string name="movie_empty_no_seat_data">ھازىرچە مەلۇمات يوق</string>
+    <string name="movie_error_no_movie_will">نۆۋەتتىكى شەھەردە ھازىرچە قويۇلىدىغان كىنو يوق</string>
+    <string name="movie_hot_cities">ئاۋات شەھەرلەر</string>
+    <string name="movie_location_city">شەھەر بەلگىلەش</string>
+    <string name="movie_min_price">يۈەندىن</string>
+    <string name="movie_pay_change_sessions_unavailable">مەيدان ئالماشتۇرغىلى بولمايدۇ</string>
+    <string name="movie_pay_refund_unavailable">بېلەت قايتۇرۇلمايدۇ</string>
+    <string name="movie_phone_num">يانفون نومۇرى</string>
+    <string name="movie_phone_number_error_toast">يانفون نومۇرىنى توغرا كىرگۈزۈڭ!</string>
+    <string name="movie_remain_time">ھەق تۆلەش ئۈچۈن قالغان ۋاقىت</string>
+    <string name="movie_schedule_add_favorites_fail">يىغقۇچقا قوشۇلمىدى</string>
+    <string name="movie_schedule_cancle_favorites_fail">يىغىپ ساقلاش بىكار قىلىنمىدى</string>
+    <string name="movie_schedule_stop_time_tip">سەمىمىي ئەسكەرتىش: كىنو باشلىنىشتىن %1$d مىنۇت بۇرۇن بېلەت سېتىش توختايدۇ</string>
+    <string name="movie_score">مىنۇت</string>
+    <string name="movie_seat_buy_btr">دەرھال بېلەت سېتىۋېلىش</string>
+    <string name="movie_seat_checked_exceed_max_count">كۆپىدە 4 ئورۇن تاللاشقا بولىدۇ، 4 تىن كۆپ ئالماقچى بولسىڭىز، بۆلۈپ سېتىۋېلىڭ</string>
+    <string name="movie_seat_data_by_alert_normal">E MM-ئاينىڭ dd-كۈنى</string>
+    <string name="movie_seat_data_by_alert_today">بۈگۈن MM-ئاينىڭ dd-كۈنى</string>
+    <string name="movie_seat_data_by_alert_tomorrow">ئەتە MM-ئاينىڭ dd-كۈنى</string>
+    <string name="movie_seat_data_normal">MM-ئاينىڭ dd-كۈنى E</string>
+    <string name="movie_seat_data_today">MM-ئاينىڭ dd-كۈنى بۈگۈن</string>
+    <string name="movie_seat_data_tomorrow">MM-ئاينىڭ dd-كۈنى ئەتە</string>
+    <string name="movie_seat_date_alert_ok">جەزملەشتۈرۈش</string>
+    <string name="movie_seat_date_alert_text">%1$s نىڭ مەيدانى تاللاندى، ۋاقىتقا تەپسىلىي قاراڭ</string>
+    <string name="movie_seat_room_info_tv">كۈمۈش پەردە</string>
+    <string name="movie_seat_screen_center_tv">مەركىزىي كۈمۈش پەردە</string>
+    <string name="movie_seat_separated_seat_checked_attention">ئورۇن ئاتلاپ بېلەت ئالماڭ</string>
+    <string name="movie_seat_state_checked">تاللاندى</string>
+    <string name="movie_seat_state_lover">ئاشىق-مەشۇق</string>
+    <string name="movie_seat_state_normal">ئىختىيارىي</string>
+    <string name="movie_seat_state_sold">سېتىلدى</string>
+    <string name="movie_select_seat_order">بېلەت سېتىۋېلىش</string>
+    <string name="movie_show_finished">تارقاش</string>
+    <string name="movie_soon_filter_hot">ئاۋاتلىقى</string>
+    <string name="movie_soon_filter_time">ۋاقتى</string>
+    <string name="movie_soon_filter_time_all">بارلىق</string>
+    <string name="movie_soon_list_filter_other">yyyy-يىلى MM-ئاي</string>
+    <string name="movie_soon_list_filter_this_year">MM-ئاي</string>
+    <string name="movie_soon_list_section">dd-MM-yyyy E</string>
+    <string name="movie_stop_sale">بېلەت سېتىش توختىدى</string>
+    <string name="movie_tab_cinema">كىنوخانا</string>
+    <string name="movie_tab_movie">كىنو</string>
+    <string name="movie_tab_order">بۇيرۇتما</string>
+    <string name="movie_ticket_change_city_btn_cancel">بىكار قىلىش</string>
+    <string name="movie_ticket_change_city_btn_confirm">ئالماشتۇرۇش</string>
+    <string name="movie_ticket_change_city_title">سىز نۆۋەتتە تۇرۇۋاتقان شەھەر %1$sگە ئورۇن بەلگىلىدى، ئالماشتۇرامسىز؟</string>
+    <string name="movie_ticket_order_date">قۇرۇلغان ۋاقىت</string>
+    <string name="movie_ticket_order_price">ئەمەلىي سومما</string>
+    <string name="movie_want">كۆرەي</string>
+    <string name="movie_order_view_label">بۇيرۇتما تەپسىلاتى</string>
+    <string name="movie_pay_order">بۇيرۇتمىنى جەزملەشتۈرۈش</string>
+    <string name="movie_schedule_add_favorite">يىغقۇچ</string>
+</resources>

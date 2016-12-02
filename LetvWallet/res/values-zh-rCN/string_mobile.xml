@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_record">记录</string>
+    <string name="label_price_unit">元</string>
+    <string name="label_mobile_number">手机号码（ %s ）</string>
+    <string name="label_mobile_number_def_desc"> 联通\\电信\\移动</string>
+    <string name="label_mobile_deposite">充值金额</string>
+    <string name="label_mobile_flow_deposite">充值额度</string>
+    <string name="label_mobile_product_price">售价:</string>
+    <string name="label_mobile_product_unit_fee">元</string>
+    <string name="label_mobile_product_unit_flow">MB</string>
+    <string name="label_mobile_product_unit_g_flow">G</string>
+    <!-- mobile order -->
+    <string name="mobile_order_list_label">充值记录</string>
+    <string name="mobile_order_desc_label_prodcut">充值：</string>
+    <string name="mobile_order_desc_coupon_price">-%.2f</string>
+    <string name="mobile_order_desc_label_phonenumber">充值号码</string>
+    <string name="mobile_order_view_label">订单详情</string>
+    <string name="mobile_order_view_surelabel">确认订单</string>
+    <string name="mobile_order_status_created">待支付</string>
+    <string name="mobile_order_status_paying">支付中</string>
+    <string name="mobile_order_status_paid">已支付</string>
+    <string name="mobile_order_status_depositing">充值中</string>
+    <string name="mobile_order_status_charged">已充值</string>
+    <string name="mobile_order_status_cancelled">已取消</string>
+    <string name="mobile_order_reorder">重新下单</string>
+    <string name="mobile_order_close">关闭</string>
+    <string name="mobile_order_list_prompt_tv">正在加载...</string>
+    <string name="mobile_request_order_fail_prom">获取订单失败，请重试</string>
+    <!-- mobile contact -->
+    <string name="mobile_clear_history">清除记录</string>
+    <string name="mobile_clear_history_failed">清除失败</string>
+    <string name="mobile_divider_phone_number_show">本机号码</string>
+    <string name="mobile_phone_number_no_name">未知</string>
+    <string name="mobile_phone_number_unknown">陌生号码</string>
+    <string name="mobile_prompt_net_connection_fail">网络连接失败</string>
+    <string name="mobile_prompt_user_select_load_title">网络出错,请重新加载</string>
+    <string name="mobile_prompt_user_select_reload">重新加载</string>
+    <string name="mobile_prompt_user_select_cancel">取消</string>
+    <string name="mobile_permission_contacts_refused_toast">您需要允许应用读联系人权限!</string>
+    <!-- matter attention content -->
+    <string name="label_matter_attention">注意事项</string>
+</resources>

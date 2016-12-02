@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="movie_attention_count_formatter">
+        <item quantity="one">"%s人のフォロワー"</item>
+        <item quantity="other">"%s人のフォロワー"</item>
+    </plurals>
+	<plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">"%1$d軒の映画館"</item>
+        <item quantity="other">"%1$d軒の映画館"</item>
+    </plurals>
+	<plurals name="movie_ticket_amount">
+        <item quantity="one">"枚のチケット"</item>
+        <item quantity="other">"枚のチケット"</item>
+    </plurals>
+	<string name="label_entity_city">"都市を選択"</string>
+	<string name="label_menu_search">"検索"</string>
+	<string name="movie_btn_purchase_ticket">"発券"</string>
+	<string name="movie_cinema_cancel_filter">"フィルターを削除"</string>
+	<string name="movie_cinema_contact_infomation">"連絡先情報"</string>
+	<string name="movie_cinema_filter_category_all">"すべて"</string>
+	<string name="movie_cinema_filter_category_area">"地域別"</string>
+	<string name="movie_cinema_filter_category_brand">"ブランド別"</string>
+	<string name="movie_cinema_filter_category_special">"機能別"</string>
+	<string name="movie_cinema_filter_text_formatter">"フィルターされた「%s」の映画館"</string>
+	<string name="movie_cinema_list_by_movie_normal">"MM/dd (E)"</string>
+	<string name="movie_cinema_list_by_movie_today">"「今日」、 MM/dd"</string>
+	<string name="movie_cinema_list_by_movie_tomorrow">"「明日」、MM/dd"</string>
+	<string name="movie_cinema_menu_filter">"フィルター"</string>
+	<string name="movie_cinema_menu_search">"検索"</string>
+	<string name="movie_city_locating">"測位"</string>
+	<string name="movie_city_location_failure">"測位に失敗しました"</string>
+	<string name="movie_create_order_failed">"注文の作成に失敗しました"</string>
+	<string name="movie_detail_buy">"今すぐ購入"</string>
+	<string name="movie_detail_date_formatter">"yyyy/MM/dd、初演"</string>
+	<string name="movie_detail_introduction">"あらすじ"</string>
+	<string name="movie_detail_photo">"ポスター"</string>
+	<string name="movie_detail_prevue">"予告編"</string>
+	<string name="movie_detail_star">"監督と出演者"</string>
+	<string name="movie_detail_subscribe">"フォロー"</string>
+	<string name="movie_detail_subscribed">"フォロー中"</string>
+	<string name="movie_detail_subscribe_failed">"フォローに失敗しました"</string>
+	<string name="movie_detail_subscribing">"フォローしています..."</string>
+	<string name="movie_detail_tab_comment">"レビュー"</string>
+	<string name="movie_detail_tab_information">"データ"</string>
+	<string name="movie_detail_tab_recommend">"おすすめ"</string>
+	<string name="movie_detail_unsubscribe_failed">"フォロー解除に失敗しました"</string>
+	<string name="movie_detail_unsubscribing">"フォローを解除しています..."</string>
+	<string name="movie_dialog_query_pay_result">"支払い結果を確認しています..."</string>
+	<string name="movie_dialog_user_select_result_failed">"未払い"</string>
+	<string name="movie_dialog_user_select_result_success">"支払い済み"</string>
+	<string name="movie_dialog_user_select_result_title">"注文への支払いは済んでいますか？"</string>
+	<string name="movie_empty_no_seat_data">"データがありません"</string>
+	<string name="movie_error_cinema_no_movie">"この映画館で上映された映画はありません"</string>
+	<string name="movie_error_no_cinema">"この都市には映画館がありません"</string>
+	<string name="movie_error_no_movie">"この都市で上映された映画はありません"</string>
+	<string name="movie_hot_cities">"人気の都市"</string>
+	<string name="movie_location_city">"自動測位"</string>
+	<string name="movie_min_price">"人民元（開始時の価格）"</string>
+	<string name="movie_more">"詳細"</string>
+	<string name="movie_order_list_pay_remain_time">"「残り」m「分」 s「秒」"</string>
+	<string name="movie_pay_overtime">"注文の支払いがタイムアウトしました。もう一度シートを選択してください。"</string>
+	<string name="movie_phone_number_empty">"携帯電話番号が空白です"</string>
+	<string name="movie_phone_number_empty_toast">"携帯電話番号を空白にすることはできません。"</string>
+	<string name="movie_photo_gallery_failed">"読み込みに失敗しました。再試行してください。"</string>
+	<string name="movie_remain_time">"支払いの残り時間"</string>
+	<string name="movie_score">"スコア"</string>
+	<string name="movie_seat_buy_btr">"今すぐ購入"</string>
+	<string name="movie_seat_checked_exceed_max_count">"最大4つのシートを選択できます。これ以上のシートが必要な場合は、別途お買い求めください"</string>
+	<string name="movie_seat_data_by_alert_normal">"MMM/dd (E)"</string>
+	<string name="movie_seat_data_by_alert_today">"「今日」、MMM/dd"</string>
+	<string name="movie_seat_data_by_alert_tomorrow">"「明日」、MMM/dd"</string>
+	<string name="movie_seat_data_normal">"MM/dd (E)"</string>
+	<string name="movie_seat_data_today">"「今日」、MM/dd"</string>
+	<string name="movie_seat_data_tomorrow">"「明日」、MM/dd "</string>
+	<string name="movie_seat_date_alert_ok">"OK"</string>
+	<string name="movie_seat_info_column">"シート"</string>
+	<string name="movie_seat_info_row">"列"</string>
+	<string name="movie_seat_room_info_tv">"画面"</string>
+	<string name="movie_seat_screen_center_tv">"画面の中央"</string>
+	<string name="movie_seat_separated_seat_checked_attention">"バラバラのシートのチケットを購入しないでください"</string>
+	<string name="movie_seat_state_checked">"選択済み"</string>
+	<string name="movie_seat_state_lover">"2人掛けシート"</string>
+	<string name="movie_seat_state_normal">"利用可能"</string>
+	<string name="movie_seat_state_sold">"販売済み"</string>
+	<string name="movie_select_seat_order">"発券"</string>
+	<string name="movie_show_finished">" 終了"</string>
+	<string name="movie_soon_filter_hot">"人気"</string>
+	<string name="movie_soon_filter_time">"時刻"</string>
+	<string name="movie_soon_filter_time_all">"すべて"</string>
+	<string name="movie_soon_list_filter_other">"yyyy/MM"</string>
+	<string name="movie_soon_list_filter_this_year">"MM"</string>
+	<string name="movie_soon_list_section">"yyyy/MM/dd (E)"</string>
+	<string name="movie_stop_sale">"終了"</string>
+	<string name="movie_tab_cinema">"映画館"</string>
+	<string name="movie_tab_movie">"映画"</string>
+	<string name="movie_tab_order">"注文"</string>
+	<string name="movie_ticket_back_unlock_back">"戻る"</string>
+	<string name="movie_ticket_back_unlock_cancel">"キャンセル"</string>
+	<string name="movie_ticket_back_unlock_title">"前に戻ると、ロックされたシートがロック解除されます"</string>
+	<string name="movie_ticket_change_city_btn_cancel">"キャンセル"</string>
+	<string name="movie_ticket_change_city_btn_confirm">"切り替え"</string>
+	<string name="movie_ticket_change_city_title">"現在地は%1$sです。都市を切り替えますか？"</string>
+	<string name="movie_ticket_code_desc">"引き換え確認"</string>
+	<string name="movie_ticket_order_num">"注文番号"</string>
+	<string name="movie_ticket_price_unit">"人民元"</string>
+	<string name="movie_ticket_redeem_code">"引き換えコード"</string>
+	<string name="movie_ticket_serial_number">"シリアル番号"</string>
+	<string name="movie_ticket_status_generate_ticket_failed">"発券に失敗しました"</string>
+	<string name="movie_ticket_status_generating_ticket">"発券しています"</string>
+	<string name="movie_ticket_status_overtime">"タイムアウトしました"</string>
+	<string name="movie_ticket_status_refunded">"払戻済み"</string>
+	<string name="movie_ticket_status_refunding">"払い戻しています"</string>
+	<string name="movie_ticket_status_shown">"放送済み"</string>
+	<string name="movie_ticket_status_unconsumed">"使用されていません"</string>
+	<string name="movie_ticket_status_unknown">"不明"</string>
+	<string name="movie_ticket_status_unpay">"支払予定"</string>
+	<string name="movie_toast_order_overtime">"注文がタイムアウトしました"</string>
+	<string name="movie_want">"フォロー"</string>
+	<string name="movie_weipiao_tele">"Wepiaoカスタマーサービス"</string>
+</resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.letv.walletbiz.mobile.ui.BannerV
+        android:id="@+id/mobile_banner_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/content_item_bg_color"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_label_number"
+            style="@style/TextAppearance.Wallet.MobileLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_mobile_number" />
+    </RelativeLayout>
+
+    <include layout="@layout/mobile_number_selector" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/content_item_bg_color">
+
+        <LinearLayout
+            android:id="@+id/product_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/page_bg_color">
+
+                <TextView
+                    android:id="@+id/label_deposite"
+                    style="@style/TextAppearance.Wallet.MobileLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <com.letv.walletbiz.mobile.ui.ProductsPanel
+                android:id="@+id/rv_product_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:overScrollMode="never" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:onClick="onClick_matterAttention"
+            android:paddingBottom="@dimen/mobile_matterpage_margin_bottom"
+            android:text="@string/label_matter_attention"
+            android:textColor="?attr/walletPrimaryColor"
+            android:textSize="@dimen/matter_attention_font_size" />
+
+
+        <com.letv.walletbiz.mobile.ui.HistoryRecordNumberV
+            android:id="@+id/record_history_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</LinearLayout>

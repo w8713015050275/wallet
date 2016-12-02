@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="cube_ptr_hours_ago">
+        <item quantity="one">"Před hodinou"</item>
+        <item quantity="other">"Před hodinami"</item>
+    </plurals>
+	<plurals name="cube_ptr_minutes_ago">
+        <item quantity="one">"Před minutou"</item>
+        <item quantity="other">"Před minutami"</item>
+    </plurals>
+	<plurals name="cube_ptr_seconds_ago">
+        <item quantity="one">"Před sekundou"</item>
+        <item quantity="other">"Před sekundami"</item>
+    </plurals>
+	<string name="cube_ptr_last_update">"Poslední aktualizace: "</string>
+	<string name="cube_ptr_pull_down">"Táhnout dolů"</string>
+	<string name="cube_ptr_pull_down_to_refresh">"Obnovte tažením dolů"</string>
+	<string name="cube_ptr_refresh_complete">"Aktualizováno"</string>
+	<string name="cube_ptr_refreshing">"Načítání..."</string>
+	<string name="cube_ptr_release_to_refresh">"Obnovte uvolněním"</string>
+</resources>

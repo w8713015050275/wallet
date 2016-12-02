@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="movie_attention_count_formatter">
+        <item quantity="one">"%s volger"</item>
+        <item quantity="other">"%s volgers"</item>
+    </plurals>
+	<plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">"%1$d bioscoop"</item>
+        <item quantity="other">"%1$d bioscopen"</item>
+    </plurals>
+	<plurals name="movie_ticket_amount">
+        <item quantity="one">"ticket"</item>
+        <item quantity="other">"tickets"</item>
+    </plurals>
+	<string name="label_entity_city">"Selecteer plaats"</string>
+	<string name="label_menu_search">"Zoeken"</string>
+	<string name="movie_btn_presell_ticket">"Pre-sale"</string>
+	<string name="movie_btn_purchase_ticket">"Ticketuitgifte"</string>
+	<string name="movie_cinema_cancel_filter">"Verwijder filters"</string>
+	<string name="movie_cinema_contact_infomation">"Contactgegevens"</string>
+	<string name="movie_cinema_filter_category_all">"Alle"</string>
+	<string name="movie_cinema_filter_category_area">"Per regio"</string>
+	<string name="movie_cinema_filter_category_brand">"Per merk"</string>
+	<string name="movie_cinema_filter_category_special">"Per functie"</string>
+	<string name="movie_cinema_filter_text_formatter">"Bioscopen in \"%s\" gefilterd"</string>
+	<string name="movie_cinema_list_by_movie_normal">"E MM-dd"</string>
+	<string name="movie_cinema_list_by_movie_today">"\'Vandaag' MM-dd"</string>
+	<string name="movie_cinema_list_by_movie_tomorrow">"\'Morgen' MM-dd"</string>
+	<string name="movie_cinema_menu_filter">"Filter"</string>
+	<string name="movie_cinema_menu_search">"Zoeken"</string>
+	<string name="movie_city_locating">"Plaatsen"</string>
+	<string name="movie_city_location_failure">"Kan niet plaatsen"</string>
+	<string name="movie_create_order_failed">"Kan bestelling niet creëren"</string>
+	<string name="movie_detail_buy">"Nu kopen"</string>
+	<string name="movie_detail_date_formatter">"Premiered on MM/dd/yyyy"</string>
+	<string name="movie_detail_introduction">"Samenvatting"</string>
+	<string name="movie_detail_photo">"Posters"</string>
+	<string name="movie_detail_prevue">"Trailer"</string>
+	<string name="movie_detail_star">"Director en sterren"</string>
+	<string name="movie_detail_subscribe">"Volgen"</string>
+	<string name="movie_detail_subscribed">"Gevolgd"</string>
+	<string name="movie_detail_subscribe_failed">"Kan niet volgen"</string>
+	<string name="movie_detail_subscribing">"Volgen..."</string>
+	<string name="movie_detail_tab_comment">"Recensies"</string>
+	<string name="movie_detail_tab_information">"Gegevens"</string>
+	<string name="movie_detail_tab_recommend">"Aanbevelingen"</string>
+	<string name="movie_detail_unsubscribe_failed">"Kan niet ontvolgen"</string>
+	<string name="movie_detail_unsubscribing">"Ontvolgen..."</string>
+	<string name="movie_dialog_query_pay_result">"Betalingsresultaat controleren..."</string>
+	<string name="movie_dialog_user_select_result_failed">"Niet betaald"</string>
+	<string name="movie_dialog_user_select_result_success">"Betaald"</string>
+	<string name="movie_dialog_user_select_result_title">"Is de bestelling betaald?"</string>
+	<string name="movie_empty_no_seat_data">"Geen gegevens"</string>
+	<string name="movie_error_cinema_no_movie">"Geen films uitgezonden in deze bioscoop"</string>
+	<string name="movie_error_no_cinema">"Geen bioscopen in deze stad"</string>
+	<string name="movie_error_no_movie">"Geen films uitgezonden in deze stad"</string>
+	<string name="movie_error_no_movie_will">"Geen nieuwe films voor huidige plaats"</string>
+	<string name="movie_hot_cities">"Populairste plaatsen"</string>
+	<string name="movie_location_city">"Automatisch plaatsen"</string>
+	<string name="movie_min_price">"RMB (basisprijs)"</string>
+	<string name="movie_more">"Meer"</string>
+	<string name="movie_order_list_pay_remain_time">"m 'min' s 'sec resterend'"</string>
+	<string name="movie_order_view_label">"Orderdetails"</string>
+	<string name="movie_pay_change_sessions_unavailable">"Niet-overdraagbaar"</string>
+	<string name="movie_pay_order">"Bestelling bevestigen"</string>
+	<string name="movie_pay_overtime">"Betaling van bestelling is verlopen. Selecteer stoelen opnieuw."</string>
+	<string name="movie_pay_refund_unavailable">"Niet-restitueerbaar"</string>
+	<string name="movie_phone_number_empty">"Mobiele nummer is leeg"</string>
+	<string name="movie_phone_number_empty_toast">"Mobiele nummer mag niet leeg zijn!"</string>
+	<string name="movie_phone_number_error_toast">"Voer het juiste mobiele nummer in"</string>
+	<string name="movie_photo_gallery_failed">"Laden mislukt. Probeer het opnieuw."</string>
+	<string name="movie_remain_time">"Resterende tijd voor betaling"</string>
+	<string name="movie_schedule_add_favorites_fail">"Kan niet toevoegen aan favorieten"</string>
+	<string name="movie_schedule_cancle_favorites_fail">"Kan niet verwijderen uit favorieten"</string>
+	<string name="movie_schedule_stop_time_tip">"Opmerking: kaartverkoop stopt %1$d minuten voordat de film begint."</string>
+	<string name="movie_score">"-score"</string>
+	<string name="movie_seat_buy_btr">"Nu kopen"</string>
+	<string name="movie_seat_checked_exceed_max_count">"Er kunnen maximaal 4 stoelen worden geselecteerd. Als u meer stoelen nodig hebt, moet u die apart aanschaffen"</string>
+	<string name="movie_seat_data_by_alert_normal">"E MMM dd"</string>
+	<string name="movie_seat_data_by_alert_today">"\'Vandaag' MMM dd"</string>
+	<string name="movie_seat_data_by_alert_tomorrow">"\'Morgen' MMM dd"</string>
+	<string name="movie_seat_data_normal">"MM/dd E"</string>
+	<string name="movie_seat_data_today">"MM/dd 'vandaag'"</string>
+	<string name="movie_seat_data_tomorrow">"MM/dd 'morgen'"</string>
+	<string name="movie_seat_date_alert_ok">"OK"</string>
+	<string name="movie_seat_date_alert_text">"U hebt een sessie geselecteerd op %1$s. Bevestig de precieze tijd."</string>
+	<string name="movie_seat_info_column">"Stoel"</string>
+	<string name="movie_seat_info_formatter">"%1$s - %2$s"</string>
+	<string name="movie_seat_info_row">"Rij"</string>
+	<string name="movie_seat_room_info_tv">"Scherm"</string>
+	<string name="movie_seat_screen_center_tv">"Midden van het scherm"</string>
+	<string name="movie_seat_separated_seat_checked_attention">"Koop geen tickets voor niet-aansluitende stoelen"</string>
+	<string name="movie_seat_state_checked">"Geselecteerd"</string>
+	<string name="movie_seat_state_lover">"Loveseats"</string>
+	<string name="movie_seat_state_normal">"Beschikbaar"</string>
+	<string name="movie_seat_state_sold">"Verkocht"</string>
+	<string name="movie_select_seat_order">"Ticketuitgifte"</string>
+	<string name="movie_show_finished">" Beëindigen"</string>
+	<string name="movie_soon_filter_hot">"Populair"</string>
+	<string name="movie_soon_filter_time">"Tijd"</string>
+	<string name="movie_soon_filter_time_all">"Alle"</string>
+	<string name="movie_soon_list_filter_other">"yyyy-MM"</string>
+	<string name="movie_soon_list_filter_this_year">"MM"</string>
+	<string name="movie_soon_list_section">"yyyy-MM-dd  E"</string>
+	<string name="movie_stop_sale">"Gesloten"</string>
+	<string name="movie_tab_cinema">"Bioscoop"</string>
+	<string name="movie_tab_movie">"Film"</string>
+	<string name="movie_tab_order">"Orders"</string>
+	<string name="movie_ticket_back_unlock_back">"Terug"</string>
+	<string name="movie_ticket_back_unlock_cancel">"Annuleren"</string>
+	<string name="movie_ticket_back_unlock_title">"Als u terugkeert, worden de vergrendelde stoel(en) ontgrendeld"</string>
+	<string name="movie_ticket_change_city_btn_cancel">"Annuleren"</string>
+	<string name="movie_ticket_change_city_btn_confirm">"Overschakelen"</string>
+	<string name="movie_ticket_change_city_title">"U bevindt zich in %1$s. De stad wisselen?"</string>
+	<string name="movie_ticket_code_desc">"Controle waardebon"</string>
+	<string name="movie_ticket_order_date">"Gemaakt op"</string>
+	<string name="movie_ticket_order_num">"Bestelnummer"</string>
+	<string name="movie_ticket_order_price">"Betaald bedrag"</string>
+	<string name="movie_ticket_price_unit">"RMB"</string>
+	<string name="movie_ticket_redeem_code">"Waardeboncode"</string>
+	<string name="movie_ticket_serial_number">"Serienummer"</string>
+	<string name="movie_ticket_status_generate_ticket_failed">"Kon geen tickets uitgeven"</string>
+	<string name="movie_ticket_status_generating_ticket">"Tickets uitgeven"</string>
+	<string name="movie_ticket_status_overtime">"Time-out"</string>
+	<string name="movie_ticket_status_refunded">"Terugbetaald"</string>
+	<string name="movie_ticket_status_refunding">"Terugbetalen"</string>
+	<string name="movie_ticket_status_shown">"Uitgezonden"</string>
+	<string name="movie_ticket_status_unconsumed">"Niet besteed"</string>
+	<string name="movie_ticket_status_unknown">"Onbekend"</string>
+	<string name="movie_ticket_status_unpay">"Te betalen"</string>
+	<string name="movie_toast_order_overtime">"Time-out bestelling"</string>
+	<string name="movie_want">"volgt"</string>
+	<string name="movie_weipiao_tele">"Wepiao-klantenservice"</string>
+	<string name="movie_weipiao_tele_num">"4001100100"</string>
+	<string name="movie_schedule_add_favorite">"favoriet"</string>
+</resources>

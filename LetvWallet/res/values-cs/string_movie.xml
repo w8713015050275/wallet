@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="movie_attention_count_formatter">
+        <item quantity="one">"%s sledující"</item>
+        <item quantity="other">"Sledující: %s"</item>
+    </plurals>
+	<plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">"%1$d kino"</item>
+        <item quantity="other">"Kina: %1$d"</item>
+    </plurals>
+	<plurals name="movie_ticket_amount">
+        <item quantity="one">" lístek"</item>
+        <item quantity="other">"lístky"</item>
+    </plurals>
+	<string name="label_entity_city">"Vybrat město"</string>
+	<string name="label_menu_search">"Hledat"</string>
+	<string name="movie_btn_presell_ticket">"Předprodej"</string>
+	<string name="movie_btn_purchase_ticket">"Předprodej lístků"</string>
+	<string name="movie_cinema_cancel_filter">"Odebrat filtry"</string>
+	<string name="movie_cinema_contact_infomation">"Kontaktní údaje"</string>
+	<string name="movie_cinema_filter_category_all">"Vše"</string>
+	<string name="movie_cinema_filter_category_area">"Podle oblasti"</string>
+	<string name="movie_cinema_filter_category_brand">"Podle značky"</string>
+	<string name="movie_cinema_filter_category_special">"Podle funkce"</string>
+	<string name="movie_cinema_filter_text_formatter">"Byla vyfiltrována kina v „%s“."</string>
+	<string name="movie_cinema_list_by_movie_normal">"E dd.MM"</string>
+	<string name="movie_cinema_list_by_movie_today">"Dnes dd.MM"</string>
+	<string name="movie_cinema_list_by_movie_tomorrow">"Zítra dd.MM"</string>
+	<string name="movie_cinema_menu_filter">"Filtrovat"</string>
+	<string name="movie_cinema_menu_search">"Hledat"</string>
+	<string name="movie_city_locating">"Určování polohy"</string>
+	<string name="movie_city_location_failure">"Určení polohy se nezdařilo."</string>
+	<string name="movie_create_order_failed">"Vytvoření objednávky se nezdařilo."</string>
+	<string name="movie_detail_buy">"Koupit"</string>
+	<string name="movie_detail_date_formatter">"Premiéra dne dd.MM.yyyy"</string>
+	<string name="movie_detail_introduction">"Přehled"</string>
+	<string name="movie_detail_photo">"Plakáty"</string>
+	<string name="movie_detail_prevue">"Filmová ukázka"</string>
+	<string name="movie_detail_star">"Režisér a obsazení"</string>
+	<string name="movie_detail_subscribe">"Sledovat"</string>
+	<string name="movie_detail_subscribed">"Sledováno"</string>
+	<string name="movie_detail_subscribe_failed">"Sledování se nezdařilo."</string>
+	<string name="movie_detail_subscribing">"Sledování..."</string>
+	<string name="movie_detail_tab_comment">"Recenze"</string>
+	<string name="movie_detail_tab_information">"Data"</string>
+	<string name="movie_detail_tab_recommend">"Doporučení"</string>
+	<string name="movie_detail_unsubscribe_failed">"Zrušení sledování se nezdařilo."</string>
+	<string name="movie_detail_unsubscribing">"Rušení sledování..."</string>
+	<string name="movie_dialog_query_pay_result">"Kontrola výsledku platby..."</string>
+	<string name="movie_dialog_user_select_result_failed">"Nezaplaceno"</string>
+	<string name="movie_dialog_user_select_result_success">"Zaplaceno"</string>
+	<string name="movie_dialog_user_select_result_title">"Byla objednávka zaplacena?"</string>
+	<string name="movie_empty_no_seat_data">"Žádná data"</string>
+	<string name="movie_error_cinema_no_movie">"V tomto kině nepromítají žádné filmy."</string>
+	<string name="movie_error_no_cinema">"V tomto městě nejsou žádná kina."</string>
+	<string name="movie_error_no_movie">"V tomto městě nepromítají žádné filmy."</string>
+	<string name="movie_error_no_movie_will">"Pro aktuální město nebyly nalezeny žádné připravované filmy."</string>
+	<string name="movie_hot_cities">"Nejlepší města"</string>
+	<string name="movie_location_city">"Automatické určení polohy"</string>
+	<string name="movie_min_price">"RMB (počáteční cena)"</string>
+	<string name="movie_more">"Další"</string>
+	<string name="movie_order_list_pay_remain_time">"m „min“ s „sec “ zbývá"</string>
+	<string name="movie_order_view_label">"Údaje objednávky"</string>
+	<string name="movie_pay_change_sessions_unavailable">"Nepřenosné"</string>
+	<string name="movie_pay_order">"Potvrdit objednávku"</string>
+	<string name="movie_pay_overtime">"Platební příkaz vypršel. Vyberte prosím sedadla znovu."</string>
+	<string name="movie_pay_refund_unavailable">"Nevratné"</string>
+	<string name="movie_phone_number_empty">"Není zadáno telefonní číslo."</string>
+	<string name="movie_phone_number_empty_toast">"Telefonní číslo je nutné zadat."</string>
+	<string name="movie_phone_number_error_toast">"Zadejte správné telefonní číslo."</string>
+	<string name="movie_photo_gallery_failed">"Načtení se nezdařilo. Zkuste to prosím znovu."</string>
+	<string name="movie_remain_time">"Zbývající čas pro platbu"</string>
+	<string name="movie_schedule_add_favorites_fail">"Nelze přidat do oblíbených"</string>
+	<string name="movie_schedule_cancle_favorites_fail">"Nelze odebrat z oblíbených"</string>
+	<string name="movie_schedule_stop_time_tip">"Poznámka: Předprodej lístků skončí %1$d minut před začátkem filmu."</string>
+	<string name="movie_score">"-score"</string>
+	<string name="movie_seat_buy_btr">"Koupit"</string>
+	<string name="movie_seat_checked_exceed_max_count">"Lze vybrat maximálně 4 sedadla. Potřebujete-li více sedadel, kupte je jednotlivě."</string>
+	<string name="movie_seat_data_by_alert_normal">"E dd.MMM"</string>
+	<string name="movie_seat_data_by_alert_today">"Dnes dd.MMM"</string>
+	<string name="movie_seat_data_by_alert_tomorrow">"Zítra dd.MMM"</string>
+	<string name="movie_seat_data_normal">"E dd.MM"</string>
+	<string name="movie_seat_data_today">"dnes dd.MM"</string>
+	<string name="movie_seat_data_tomorrow">"zítra dd.MM"</string>
+	<string name="movie_seat_date_alert_ok">"OK"</string>
+	<string name="movie_seat_date_alert_text">"Vybrali jste si relaci v %1$s. Potvrďte prosím přesný čas."</string>
+	<string name="movie_seat_info_column">"Sedadlo"</string>
+	<string name="movie_seat_info_formatter">"%1$s – %2$s"</string>
+	<string name="movie_seat_info_row">"Řada"</string>
+	<string name="movie_seat_room_info_tv">"Plátno"</string>
+	<string name="movie_seat_screen_center_tv">"Uprostřed plátna"</string>
+	<string name="movie_seat_separated_seat_checked_attention">"Kupovat lístky pouze pro sousedící sedadla"</string>
+	<string name="movie_seat_state_checked">"Vybráno"</string>
+	<string name="movie_seat_state_lover">"Dvojsedadlo"</string>
+	<string name="movie_seat_state_normal">"K dispozici"</string>
+	<string name="movie_seat_state_sold">"Prodáno"</string>
+	<string name="movie_select_seat_order">"Předprodej lístků"</string>
+	<string name="movie_show_finished">" Ukončit"</string>
+	<string name="movie_soon_filter_hot">"Populární"</string>
+	<string name="movie_soon_filter_time">"Čas"</string>
+	<string name="movie_soon_filter_time_all">"Vše"</string>
+	<string name="movie_soon_list_filter_other">"MM.yyyy"</string>
+	<string name="movie_soon_list_filter_this_year">"MM"</string>
+	<string name="movie_soon_list_section">"E dd.MM.yyyy"</string>
+	<string name="movie_stop_sale">"Zavřeno"</string>
+	<string name="movie_tab_cinema">"Kino"</string>
+	<string name="movie_tab_movie">"Film"</string>
+	<string name="movie_tab_order">"Objednávky"</string>
+	<string name="movie_ticket_back_unlock_back">"Zpět"</string>
+	<string name="movie_ticket_back_unlock_cancel">"Zrušit"</string>
+	<string name="movie_ticket_back_unlock_title">"Vrátíte-li se zpět, budou zamknutá sedadla odemknuta."</string>
+	<string name="movie_ticket_change_city_btn_cancel">"Zrušit"</string>
+	<string name="movie_ticket_change_city_btn_confirm">"Přepnout"</string>
+	<string name="movie_ticket_change_city_title">"Nacházíte se v %1$s. Přepnout město?"</string>
+	<string name="movie_ticket_code_desc">"Ověření poukázky"</string>
+	<string name="movie_ticket_order_date">"Vytvořeno"</string>
+	<string name="movie_ticket_order_num">"Číslo objednávky"</string>
+	<string name="movie_ticket_order_price">"Zaplacená částka"</string>
+	<string name="movie_ticket_price_unit">"RMB"</string>
+	<string name="movie_ticket_redeem_code">"Kód poukázky"</string>
+	<string name="movie_ticket_serial_number">"Sériové číslo"</string>
+	<string name="movie_ticket_status_generate_ticket_failed">"Vydání lístků se nezdařilo."</string>
+	<string name="movie_ticket_status_generating_ticket">"Vydávání lístků"</string>
+	<string name="movie_ticket_status_overtime">"Platnost vypršela"</string>
+	<string name="movie_ticket_status_refunded">"Vráceno"</string>
+	<string name="movie_ticket_status_refunding">"Vrácení"</string>
+	<string name="movie_ticket_status_shown">"Vysíláno"</string>
+	<string name="movie_ticket_status_unconsumed">"Neupotřebeno"</string>
+	<string name="movie_ticket_status_unknown">"Neznámé"</string>
+	<string name="movie_ticket_status_unpay">"K úhradě"</string>
+	<string name="movie_toast_order_overtime">"Objednávka vypršela."</string>
+	<string name="movie_want">"sledovat"</string>
+	<string name="movie_weipiao_tele">"Oddělení služeb zákazníkům Wepiao"</string>
+	<string name="movie_weipiao_tele_num">"4001100100"</string>
+	<string name="movie_schedule_add_favorite">"oblíbené"</string>
+</resources>

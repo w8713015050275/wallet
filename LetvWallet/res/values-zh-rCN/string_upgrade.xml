@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wallet_upgrade_title">升级提醒</string>
+    <string name="wallet_upgrade_now">立即升级</string>
+    <string name="wallet_upgrade_notify_later">稍后提醒</string>
+    <string name="wallet_exit_application">退出应用</string>
+
+    <string name="download_fail">下载失败</string>
+    <string name="in_downloading">正在下载</string>
+    <string name="download_sucess">下载成功</string>
+
+    <string name="update_content">说明: %s</string>
+    <string name="defautl_update_content">优化部分流程及修复已知问题</string>
+    <string name="update_version">版本: v%s</string>
+    <string name="downloaded">已下载</string>
+    <string name="undownloaded">未下载</string>
+    <string name="upgrade_fail">升级失败</string>
+    <string name="no_wifi_update_notify">注意：当前使用移动数据流量下载升级包</string>
+    <string name="continue_upgrade">立即升级</string>
+    <string name="download_under_wifi">Wlan下自动更新</string>
+    <string name="upgrade_success_note">升级成功</string>
+    <string name="upgrade_fail_note">升级失败</string>
+    <string name="wifi_fail_continue_next">待Wlan网络时继续下载</string>
+</resources>
+

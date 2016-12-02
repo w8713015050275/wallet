@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="110dip"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    >
+    <com.letv.shared.widget.BorderedCircleImageView
+        android:id="@+id/star_icon"
+        android:layout_width="74dip"
+        android:layout_height="74dip"
+        app:circle_radius="37dp"
+        android:alpha="@dimen/le_img_alpha"
+        android:background="@drawable/place_holder_star"
+        />
+    <TextView
+        android:id="@+id/star_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/movie_desc_content_tv_color"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:layout_marginTop="10dip"
+        />
+</LinearLayout>

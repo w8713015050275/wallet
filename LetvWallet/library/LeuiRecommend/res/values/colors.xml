@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="text">#212121</color>
+    <color name="list_background_normal">#FCFCFC</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="item_recommend_hot_type_front_color">#a7a39a</color>
+    <color name="item_recommend_hot_fraction_front_color">#ff7243</color>
+    <color name="item_recommend_hot_product_front_color">#565253</color>
+    <color name="item_recommend_label_name_front_color">#565253</color>
+    <color name="item_recommend_label_more_front_color">#a7a39a</color>
+    <color name="item_recommend_item_more_front_color">#999999</color>
+    <color name="item_recommend_item_media_news_source_front_color">#999999</color>
+    <color name="item_recommend_photo_bg">#E6EAF0</color>
+    <color name="item_recommend_calendar_month_front_color">#999999</color>
+    <color name="item_recommend_calendar_data_front_color">#000000</color>
+    <color name="item_recommend_calendar_content_front_color">#000000</color>
+    <color name="item_recommend_calendar_btn_front_color">#999999</color>
+    <color name="item_recommend_card_background_color">#f5f5f7</color>
+
+    <!--view style white-->
+    <color name="item_recommend_view_style_front_color1">#ffffff</color>
+    <color name="item_recommend_view_style_front_color2">#999999</color>
+    <color name="item_recommend_card_background_color_white">#1f1f1f</color>
+
+    <!--music-->
+    <color name="item_recommend_music_front_color1">#565253</color>
+    <color name="item_recommend_music_front_color2">#a7a39a</color>
+
+    <!-- font -->
+    <color name="black">#000000</color>
+    <color name="shallow_black">#54555c</color>
+    <color name="grey">#898b94</color>
+</resources>

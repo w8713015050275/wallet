@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <plurals name="cube_ptr_hours_ago">
+        <item quantity="one"> heure auparavant</item>
+        <item quantity="other"> heures auparavant</item>
+    </plurals>
+    <plurals name="cube_ptr_minutes_ago">
+        <item quantity="one"> minute auparavant</item>
+        <item quantity="other"> minutes auparavant</item>
+    </plurals>
+    <plurals name="cube_ptr_seconds_ago">
+        <item quantity="one"> seconde auparavant</item>
+        <item quantity="other"> secondes auparavant</item>
+    </plurals>
+    <string name="cube_ptr_last_update">"Dernière mise à jour : "</string>
+    <string name="cube_ptr_pull_down">Tirer vers le bas</string>
+    <string name="cube_ptr_pull_down_to_refresh">Tirer vers le bas pour actualiser</string>
+    <string name="cube_ptr_refresh_complete">Mis à jour</string>
+    <string name="cube_ptr_refreshing">Chargement...</string>
+    <string name="cube_ptr_release_to_refresh">Relâcher pour actualiser</string>
+</resources>

@@ -1,0 +1,110 @@
+-keep class * extends android.app.Activity
+-keep class * extends android.app.Fragment
+-keep class * extends android.app.Dialog
+-keep class * extends android.app.Application
+-keep class * extends android.app.Service
+-keep class * extends android.content.BroadcastReceiver
+-keep class * extends android.content.ContentProvider
+
+#官方不建议混淆
+-keep class * extends android.app.backup.BackupAgentHelper
+-keep class * extends android.preference.Preference
+-keep class * extends com.android.vending.licensing.ILicensingService
+#不混淆所有的R文件
+-keep class **.R$* {
+    public static <fields>;
+}
+
+
+-useuniqueclassmembernames
+-dontoptimize
+-optimizationpasses 5
+
+
+#保护给定的可选属性
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,*Annotation*,Synthetic,EnclosingMethod,LineNumberTable
+
+#保留调试信息
+-renamesourcefileattribute SourceFile
+
+#不混淆支付宝支付
+-dontwarn com.alipay.**
+-keep class com.alipay.** { *;}
+-dontwarn HttpUtils.**
+-keep class HttpUtils.** { *;}
+-dontwarn com.ta.utdid2.**
+-keep class com.ta.utdid2.** { *;}
+-dontwarn com.ut.device.**
+-keep class com.ut.device.** { *;}
+
+#不混淆微信支付
+-dontwarn com.tencent.**
+-keep class com.tencent.** { *;}
+
+
+#保持Parcelable不被混淆
+-keep class * implements Parcelable {
+ *;
+}
+
+#保持Serializable不被混淆
+-keep class * implements java.io.Serializable{
+ *;
+}
+
+#保持枚举 enum 类不被混淆
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+#不混淆native方法
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+
+#不混淆自定义view以及view group
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+
+#引入common的配置文件
+-include ../LetvWalletCommon/proguard.flags
+
+-dontnote org.xutils.image.MemCacheKey
+-dontnote org.xutils.image.ImageLoader
+
+-dontnote android.os.Parcelable
+-dontwarn com.android.**
+-dontnote com.android.letv.**
+-dontnote com.letv.tracker.**
+-dontnote com.unionpay.**
+
+-dontnote com.android.volley.**
+
+
+-dontnote pl.droidsonroids.gif.GifAnimationMetaData
+
+
+-dontnote com.letv.lepaysdk.network.CommonHttpClient
+
+-dontnote com.paytm.pgsdk.PaytmPGActivity
+-dontnote com.alipay.sdk.pay.demo.H5PayDemoActivity
+-dontnote com.intsig.ccrengine.ISCardScanActivity
+-dontnote com.android.vending.licensing.ILicensingService
+-dontnote com.android.layoutlib.bridge.impl.RenderAction
+-dontnote Parcelable
+
+-dontwarn org.apache.**
+-dontwarn com.paytm.**
+-dontwarn com.unionpay.**
+-dontwarn com.letv.lepaysdk.**
+
+-dontnote com.letv.lepaysdk.view.SwitchView$OnStateChangedListener
+-dontnote pl.droidsonroids.gif.InputSource
+-dontnote com.letv.lepaysdk.view.ClearEditText$OnTextChangedListener

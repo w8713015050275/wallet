@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.letv.walletbiz"
+    android:versionCode="3"
+    android:versionName="1.2.0"
+    android:sharedUserId="com.letv.uid.walletpay"
+    android:sharedUserLabel="@string/app_name">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.letv.android.account.permission.ACCOUNT_RELEVANT" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="com.letv.android.accountinfo.accessAccountInfo" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS_PRIVILEGED" />
+
+    <permission
+        android:name="com.letv.walletbiz.permission.PUSH_RECEIVER"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.letv.walletbiz.permission.PUSH_RECEIVER" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="24" />
+    <application
+        android:name=".WalletApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="letvwallet" android:host="mainactivity.update"></data>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".main.WalletMainWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
+
+        <provider
+            android:name=".main.provider.WalletMainProvider"
+            android:authorities="com.letv.wallet.main"
+            android:exported="false"></provider>
+        <provider
+            android:name=".main.provider.WalletServiceByActionProvider"
+            android:authorities="com.letv.wallet.main.service"
+            android:exported="true"></provider>
+
+        <!-- Mobile -->
+        <activity
+            android:name=".mobile.activity.MobileActivity"
+            android:exported="true"
+            android:label="@string/label_entity_mobile"
+            android:screenOrientation="portrait"
+            android:theme="@style/MobileTheme"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.letv.wallet.mobile.fee" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.letv.wallet.mobile.flow" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="fee"></data>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="flow"></data>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".mobile.activity.MobileOrderListActivity"
+            android:label="@string/mobile_order_list_label"
+            android:screenOrientation="portrait"
+            android:theme="@style/MobileTheme" />
+        <activity
+            android:name=".mobile.activity.MobileOrderConfirmationActivity"
+            android:label="@string/mobile_order_view_surelabel"
+            android:screenOrientation="portrait"
+            android:theme="@style/MobileTheme">
+        </activity>
+        <activity
+            android:name=".mobile.activity.MobileOrderDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MobileTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="mobileOrderDetail"></data>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".mobile.activity.MobileCouponListActivity"
+            android:label="@string/label_order_desc_coupon_price"
+            android:screenOrientation="portrait"
+            android:theme="@style/MobileTheme">
+        </activity>
+        <activity
+            android:name=".mobile.activity.MobileWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MobileTheme" />
+
+      <!-- movie ticket -->
+        <activity
+            android:name=".movie.activity.MoviePayActivity"
+            android:label="@string/pay_now"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/MovieTheme" />
+
+        <activity
+            android:name=".movie.activity.MovieTicketActivity"
+            android:label="@string/label_entity_movie"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme">
+            <intent-filter>
+                <action android:name="com.letv.wallet.movie.ticket" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="movieTicket" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".movie.activity.CityListActivity"
+            android:label="@string/label_entity_city"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".movie.activity.CinemaListByMovieActivity"
+            android:label="@string/label_entity_movie"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="com.letv.wallet.movie.CINEMA_LIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="cinemaList" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".movie.activity.MovieScheduleActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="com.letv.wallet.movie.SCHEDULE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="cinemaSchedule" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".movie.activity.MovieSeatActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme" />
+        <activity
+            android:name=".movie.activity.MovieOrderDetailActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/movie_order_view_label"
+            android:theme="@style/MovieTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="movieOrderDetail"></data>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".movie.activity.MovieDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme.MovieDetail" >
+            <intent-filter>
+                <action android:name="com.letv.wallet.movie.MOVIE_DETAIL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="movieDetail"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".movie.activity.MoviePhotoGalleryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme.MoviePhotoGallery" />
+        <activity
+            android:name=".movie.activity.MovieStillListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MovieTheme" />
+
+        <provider
+            android:name=".movie.provider.MovieTicketProvider"
+            android:authorities="com.letv.movie.ticket"
+            android:exported="false" />
+        <provider
+            android:name=".mobile.provider.MobileContactProvider"
+            android:authorities="com.letv.mobile.record"
+            android:exported="false" />
+
+        <!-- wallet common start -->
+        <receiver android:name="com.letv.wallet.common.receiver.AccountChangedReceiver">
+            <intent-filter>
+                <action android:name="com.letv.android.account.ACTION_LOGIN" />
+                <action android:name="com.letv.android.account.ACTION_LOGOUT" />
+                <action android:name="com.letv.android.account.ACTION_LOGOUT_SAVE" />
+                <action android:name="com.letv.android.account.ACTION_TOKEN_UPDATE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.letv.wallet.common.receiver.ConnectivityStateChangedReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <!-- wallet common end -->
+
+        <!-- Total Orders -->
+        <activity
+            android:name=".order.activity.TotalOrderListActivity"
+            android:label="@string/total_order_list_label"
+            android:screenOrientation="portrait"
+            android:theme="@style/TotalOrder">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="totalOrderList" />
+            </intent-filter>
+        </activity>
+
+        <!-- Pay -->
+        <activity
+            android:name=".base.activity.PayActivity"
+            android:label="@string/pay_now"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
+
+        <activity
+            android:name=".base.activity.PayWebViewActivity"
+            android:label="@string/pay_now"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
+        <activity
+            android:name=".base.activity.PayResultActivity"
+            android:label="@string/pay_now"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
+
+        <!-- Coupon -->
+        <activity
+            android:name=".coupon.activity.CouponDetailActivity"
+            android:label="@string/label_coupon"
+            android:screenOrientation="portrait"
+            android:theme="@style/CouponTheme" />
+        <activity
+            android:name=".coupon.activity.CouponListActivity"
+            android:label="@string/coupon_list_title_activity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/CouponTheme">
+            <intent-filter>
+                <action android:name="com.letv.wallet.coupon.CARD_COUPON" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="letvwallet" android:host="cardCoupon" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".coupon.activity.CouponExpiredListActivity"
+            android:label="@string/coupon_list_expired_activity_title"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/CouponTheme">
+        </activity>
+        <activity
+            android:name=".coupon.activity.CouponUseDetailActivity"
+            android:label="@string/label_coupon_usedetail"
+            android:screenOrientation="portrait"
+            android:theme="@style/CouponTheme"/>
+
+        <!--letv Push -->
+        <service android:name=".push.LetvPushIntentService" />
+
+        <!--upgrade-->
+        <service android:name=".update.service.UpgradeService"
+            android:enabled="true"/>
+
+        <!-- 接收推送消息的receiver -->
+        <receiver
+            android:name=".push.LePushMessageReceiver"
+            android:permission="com.stv.stvpush.permission.SEND_PUSH">
+            <intent-filter>
+                <action android:name="com.stv.stvpush.ACTION_RECEIVE_PUSH_MESSAGE" />
+                <category android:name="com.letv.walletbiz" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".update.receiver.UpgradeApkInstallReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED_FAILED" />
+            </intent-filter>
+        </receiver>
+
+        <!--推送注册服务-->
+        <service android:name=".push.PushRegisterService" />
+        <!-- 失败后的, 启动定时任务 -->
+        <service android:name=".push.schedule.ScheduleService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service android:name=".push.notice.NoticeActionService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <activity
+            android:name=".push.PushWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
+    </application>
+</manifest>

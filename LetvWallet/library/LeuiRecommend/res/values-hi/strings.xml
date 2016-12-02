@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!--<string name="recommend_label_hot_product">热门作品</string>-->
+
+
+    <!--<string name="recommend_label_media_news">媒体资讯</string>-->
+
+
+    <!--<string name="recommend_label_latest_news">娱乐报道</string>-->
+
+
+    <!--<string name="recommend_label_wallpaper">壁纸推荐</string>-->
+
+
+    <!--<string name="recommend_label_musics">热门音乐</string>-->
+
+
+    <!--<string name="recommend_label_calendar">近期动态</string>-->
+
+
+    <!--<string name="recommend_label_weibo">最新微博</string>-->
+
+    <string name="recommend_label_more">और अधिक</string>
+    <string name="recommend_item_more">और देखें</string>
+    <string name="recommend_calendar_buy">खरीदें</string>
+
+    <string name="le_app_not_available">%1$s अनुपलब्ध</string>
+    <string name="le_app_not_install">कृपया %1$s इंस्टॉल करें</string>
+    <string name="le_music">Le Music</string>
+    <string name="le_video">Le</string>
+    <string name="le_wallpaper">वॉलपेपर</string>
+</resources>

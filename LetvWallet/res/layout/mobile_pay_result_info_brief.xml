@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:localui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/view_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        style ="@style/SectionBase">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_product_name"
+            style="@style/TextAppearance.Wallet.OrderDesc.Label"/>
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right"
+            style ="@style/TextAppearance.Wallet.OrderDesc.MobileProduct"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/view_sn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/vertical_cost_padding"
+        style ="@style/SectionBase">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_order_serialnumber"
+            style="@style/TextAppearance.Wallet.OrderDesc.Label"/>
+        <TextView
+            android:id="@+id/tv_sn"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right"
+            style ="@style/TextAppearance.Wallet.OrderDesc.MobileProduct"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/view_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/vertical_cost_padding"
+        style ="@style/SectionBase">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mobile_order_desc_label_phonenumber"
+            style="@style/TextAppearance.Wallet.OrderDesc.Label"/>
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right"
+            style ="@style/TextAppearance.Wallet.OrderDesc.MobileProduct"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--LATEST_NEWS-->
+        
+        <item>బ్రాండ్ వార్తలు</item>
+        <!--WALLPAPER-->
+        
+        <item>వాల్‌పేపర్‌లు</item>
+        <!--MUSIC-->
+        
+        <item>లేబుల్ సంగీతం</item>
+        <!--ALBUM-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--ARTISTS-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--WEI_BO-->
+        
+        <item>సంబంధిత ట్వీట్‌లు</item>
+        <!--SITES-->
+        
+        <item>సంబంధిత వెబ్‌సైట్‌లు</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>మూవీలు మరియు డ్రామాలు</item>
+        <!--LATEST_NEWS-->
+        
+        <item>వినోద వార్తలు</item>
+        <!--WALLPAPER-->
+        
+        <item>వాల్‌పేపర్‌లు</item>
+        <!--MUSIC-->
+        
+        <item>సౌండ్‌ట్రాక్‌లు</item>
+        <!--ALBUM-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--ARTISTS-->
+        
+        <item>సంబంధిత కళాకారులు</item>
+        <!--WEI_BO-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--SITES-->
+        
+        <item>ఏదీ వద్దు</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>మూవీలు మరియు డ్రామాలు</item>
+        <!--LATEST_NEWS-->
+        
+        <item>క్రీడా వార్తలు</item>
+        <!--WALLPAPER-->
+        
+        <item>వాల్‌పేపర్‌లు</item>
+        <!--MUSIC-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--ALBUM-->
+        
+        <item>సంగీత ఆల్బమ్‌లు</item>
+        <!--ARTISTS-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--WEI_BO-->
+        
+        <item>సంబంధిత ట్వీట్‌లు</item>
+        <!--SITES-->
+        
+        <item>సంబంధిత వెబ్‌సైట్‌లు</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--LATEST_NEWS-->
+        
+        <item>సంబంధిత వీడియోలు</item>
+        <!--WALLPAPER-->
+        
+        <item>వాల్‌పేపర్‌లు</item>
+        <!--MUSIC-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--ALBUM-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--ARTISTS-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--WEI_BO-->
+        
+        <item>సంబంధిత ట్వీట్‌లు</item>
+        <!--SITES-->
+        
+        <item>ఏదీ వద్దు</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>మూవీలు మరియు డ్రామాలు</item>
+        <!--LATEST_NEWS-->
+        
+        <item>వినోద వార్తలు</item>
+        <!--WALLPAPER-->
+        
+        <item>వాల్‌పేపర్‌లు</item>
+        <!--MUSIC-->
+        
+        <item>హిట్ సింగిల్‌లు</item>
+        <!--ALBUM-->
+        
+        <item>సంగీత ఆల్బమ్‌లు</item>
+        <!--ARTISTS-->
+        
+        <item>సంబంధిత కళాకారులు</item>
+        <!--WEI_BO-->
+        
+        <item>సంబంధిత ట్వీట్‌లు</item>
+        <!--SITES-->
+        
+        <item>సంబంధిత వెబ్‌సైట్‌లు</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>మూవీలు మరియు డ్రామాలు</item>
+        <!--LATEST_NEWS-->
+        
+        <item>సంబంధిత వార్తలు</item>
+        <!--WALLPAPER-->
+        
+        <item>వాల్‌పేపర్‌లు</item>
+        <!--MUSIC-->
+        
+        <item>సంబంధిత సంగీతం</item>
+        <!--ALBUM-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--ARTISTS-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--WEI_BO-->
+        
+        <item>ఏదీ వద్దు</item>
+        <!--SITES-->
+        
+        <item>ఏదీ వద్దు</item>
+    </string-array>
+</resources>

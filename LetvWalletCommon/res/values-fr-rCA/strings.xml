@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- empty page -->
+    <string name="empty_no_network">Déconnecté. Veuillez vous connecter à un réseau</string>
+    <string name="empty_network_error">Erreur d\'accées au réseau, veuillez réessayer plus tard.</string>
+    <string name="empty_no_login">Non connecté</string>
+    <string name="empty_no_login_prompt">Se connecter maintenant</string>
+    <string name="empty_no_network_retry">Recharger</string>
+    <string name="empty_no_network_setting">Configurer le réseau</string>
+
+    <!-- phone number edittext -->
+    <string name="phonenumber_prompt_input_right_number">Veuillez entrer un numéro de téléphone cellulaire valide</string>
+
+</resources>

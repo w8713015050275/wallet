@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ബ്രാൻഡ് വാർത്ത</item>
+        <!--WALLPAPER-->
+        
+        <item>വാൾപേപ്പറുകൾ</item>
+        <!--MUSIC-->
+        
+        <item>സംഗീതം ലേബൽ ചെയ്യുക</item>
+        <!--ALBUM-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--ARTISTS-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--WEI_BO-->
+        
+        <item>അനുബന്ധ ട്വീറ്റുകൾ</item>
+        <!--SITES-->
+        
+        <item>അനുബന്ധ വെബ്‌സൈറ്റുകൾ</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>സിനിമകളും നാടകങ്ങളും</item>
+        <!--LATEST_NEWS-->
+        
+        <item>വിനോദ വാർത്ത</item>
+        <!--WALLPAPER-->
+        
+        <item>വാൾപേപ്പറുകൾ</item>
+        <!--MUSIC-->
+        
+        <item>ശബ്‌ദട്രാക്കുകൾ</item>
+        <!--ALBUM-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--ARTISTS-->
+        
+        <item>ബന്ധപ്പെട്ട ആർട്ടിസ്റ്റുകൾ</item>
+        <!--WEI_BO-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--SITES-->
+        
+        <item>ഒന്നുമില്ല</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>സിനിമകളും നാടകങ്ങളും</item>
+        <!--LATEST_NEWS-->
+        
+        <item>കായിക വാർത്തകൾ</item>
+        <!--WALLPAPER-->
+        
+        <item>വാൾപേപ്പറുകൾ</item>
+        <!--MUSIC-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--ALBUM-->
+        
+        <item>സംഗീത ആൽബങ്ങൾ</item>
+        <!--ARTISTS-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--WEI_BO-->
+        
+        <item>അനുബന്ധ ട്വീറ്റുകൾ</item>
+        <!--SITES-->
+        
+        <item>അനുബന്ധ വെബ്‌സൈറ്റുകൾ</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--LATEST_NEWS-->
+        
+        <item>ബന്ധപ്പെട്ട വീഡിയോകൾ</item>
+        <!--WALLPAPER-->
+        
+        <item>വാൾപേപ്പറുകൾ</item>
+        <!--MUSIC-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--ALBUM-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--ARTISTS-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--WEI_BO-->
+        
+        <item>അനുബന്ധ ട്വീറ്റുകൾ</item>
+        <!--SITES-->
+        
+        <item>ഒന്നുമില്ല</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>സിനിമകളും നാടകങ്ങളും</item>
+        <!--LATEST_NEWS-->
+        
+        <item>വിനോദ വാർത്ത</item>
+        <!--WALLPAPER-->
+        
+        <item>വാൾപേപ്പറുകൾ</item>
+        <!--MUSIC-->
+        
+        <item>ഹിറ്റ് സിംഗിളുകൾ</item>
+        <!--ALBUM-->
+        
+        <item>സംഗീത ആൽബങ്ങൾ</item>
+        <!--ARTISTS-->
+        
+        <item>ബന്ധപ്പെട്ട ആർട്ടിസ്റ്റുകൾ</item>
+        <!--WEI_BO-->
+        
+        <item>അനുബന്ധ ട്വീറ്റുകൾ</item>
+        <!--SITES-->
+        
+        <item>അനുബന്ധ വെബ്‌സൈറ്റുകൾ</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>സിനിമകളും നാടകങ്ങളും</item>
+        <!--LATEST_NEWS-->
+        
+        <item>പ്രസക്തമായ വാർത്തകൾ</item>
+        <!--WALLPAPER-->
+        
+        <item>വാൾപേപ്പറുകൾ</item>
+        <!--MUSIC-->
+        
+        <item>ബന്ധപ്പെട്ട സംഗീതം</item>
+        <!--ALBUM-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--ARTISTS-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--WEI_BO-->
+        
+        <item>ഒന്നുമില്ല</item>
+        <!--SITES-->
+        
+        <item>ഒന്നുമില്ല</item>
+    </string-array>
+</resources>

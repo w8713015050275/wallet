@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:text="@string/wallet_upgrade_title"
+        android:id="@+id/update_tip"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/update_tip"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:id="@+id/update_content"
+    />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/update_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@id/update_content"
+        android:text="@string/update_version"
+        android:textSize="15sp"
+        android:id="@+id/update_version"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/update_version"
+        android:layout_marginTop="10dp"
+        android:text="@string/downloaded"
+        android:textSize="15sp"
+        android:id="@+id/download_status"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/download_status"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/le_bottomsheet_gapline_color"
+        android:id="@+id/le_bottomsheet_btn_checkbox_gap1" />
+
+    <Button android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/le_bottomsheet_btn_checkbox_gap1"
+        android:id="@+id/le_bottomsheet_btn_confirm5"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:textColor="@color/colorBtnBlue"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAllCaps="false"
+        android:stateListAnimator="@null"
+        android:fontFamily="helve-neue-regular"
+        android:background="@color/colorWhite"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/le_bottomsheet_btn_confirm5"
+        android:background="@drawable/le_bottomsheet_gapline_color"
+        android:id="@+id/le_bottomsheet_btn_checkbox_gap2" />
+
+    <Button
+        android:id="@+id/le_bottomsheet_btn_cancel5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="17dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/le_bottomsheet_btn_checkbox_gap2"
+        android:textColor="@color/black"
+        android:background="@color/colorWhite"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAllCaps="false"
+        android:fontFamily="helve-neue-regular"
+        android:stateListAnimator="@null"
+    />
+
+</RelativeLayout>

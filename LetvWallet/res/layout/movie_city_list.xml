@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/content_item_bg_color">
+
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/refresh_header_view"
+        xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        cube_ptr:ptr_duration_to_close="200"
+        cube_ptr:ptr_duration_to_close_header="1000"
+        cube_ptr:ptr_keep_header_when_refresh="true"
+        cube_ptr:ptr_pull_to_fresh="false"
+        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+        cube_ptr:ptr_resistance="1.7"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:scrollbars="none"
+            />
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+    <com.letv.shared.widget.AlphabetWavesView
+        android:id="@+id/list_alphabet_index"
+        android:layout_width="@dimen/movie_list_alphabet_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|right"
+        android:paddingLeft="5dp"
+        android:paddingRight="7dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
+        />
+
+</FrameLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/action_coupon"
+        android:icon="@drawable/ic_menu_coupon"
+        android:title="@string/coupon_list_title_activity"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_bills"
+        android:icon="@drawable/ic_menu_orderlist"
+        android:title="@string/menu_bills"
+        app:showAsAction="always"/>
+</menu>

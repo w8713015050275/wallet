@@ -1,0 +1,10 @@
+<vector
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:width="60dp"
+android:height="60dp"
+android:viewportWidth="240"
+android:viewportHeight="240">
+<path
+android:fillColor="@color/wallet_pay_pending_ic_color"
+android:pathData="M120,20C64.771,20,20,64.771,20,120c0,55.228,44.771,100,100,100c55.228,0,100-44.772,100-100 		C220,64.771,175.228,20,120,20z M120,212c-50.729,0-92-41.271-92-92s41.271-92,92-92s92,41.271,92,92S170.729,212,120,212z 		 M120,155.833c2.209,0,4-1.791,4-4v-81c0-2.209-1.791-4-4-4s-4,1.791-4,4v81C116,154.042,117.791,155.833,120,155.833z 		 M120,165.167c-2.761,0-5,2.239-5,5c0,2.761,2.239,5,5,5s5-2.239,5-5C125,167.405,122.761,165.167,120,165.167z"/>
+</vector>

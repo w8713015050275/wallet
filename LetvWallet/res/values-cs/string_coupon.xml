@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">"Zpráva vypršela před: %1 d"</item>
+        <item quantity="other">"Zprávy vypršely před: %1 d"</item>
+    </plurals>
+	<string name="coupon_card">"Karta"</string>
+	<string name="coupon_card_list_expired_no_data">"Žádná karta"</string>
+	<string name="coupon_card_no">"Číslo objednávky:"</string>
+	<string name="coupon_code">"Dárkový poukaz:"</string>
+	<string name="coupon_copy_code">"Kopírovat dárkový poukaz"</string>
+	<string name="coupon_copy_code_cancel">"Zrušit"</string>
+	<string name="coupon_copy_code_notify">"Dárkový poukaz zkopírován"</string>
+	<string name="coupon_date">"Čas:"</string>
+	<string name="coupon_lis_no_data">"Žádné karty ani kupóny"</string>
+	<string name="coupon_list_expired_activity_title">"Platnost vypršela."</string>
+	<string name="coupon_list_expired_list_item_expired_tag">"Platnost vypršela."</string>
+	<string name="coupon_list_expired_list_item_show_tag">"Vysíláno"</string>
+	<string name="coupon_list_expired_list_item_unconsumed_tag">"Vyžádáno"</string>
+	<string name="coupon_list_expired_list_item_used_tag">"Využito"</string>
+	<string name="coupon_list_expired_no_data">"Žádné kupóny"</string>
+	<string name="coupon_list_more_item">"Více karet"</string>
+	<string name="coupon_list_title_activity">"Peněženka"</string>
+	<string name="coupon_request_data">"%d kupón k dispozici"</string>
+	<string name="coupon_validite_period">"Datum konce platnosti: "</string>
+	<string name="coupon_validite_period_to">" Komu "</string>
+	<string name="empty_no_coupon">"Žádné kupóny"</string>
+	<string name="label_coupon">"Kupón"</string>
+	<string name="label_coupon_info">"Informace o kupónu"</string>
+	<string name="label_coupon_usecondition">"Podmínky použití"</string>
+	<string name="label_coupon_usecoupon_btn">"Použít"</string>
+	<string name="label_coupon_usedetail">"Pokyny"</string>
+</resources>

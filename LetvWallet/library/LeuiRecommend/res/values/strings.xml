@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LeRecommendViewDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--<string name="recommend_label_hot_product">Hot products</string>-->
+    <!--<string name="recommend_label_media_news">Media</string>-->
+    <!--<string name="recommend_label_latest_news">Latest news</string>-->
+    <!--<string name="recommend_label_wallpaper">Wallpapers</string>-->
+    <!--<string name="recommend_label_musics">Hot music</string>-->
+    <!--<string name="recommend_label_calendar">Calendar</string>-->
+    <!--<string name="recommend_label_weibo">Latest on Weibo</string>-->
+    <string name="recommend_label_more">More</string>
+    <string name="recommend_item_more">View more</string>
+    <string name="recommend_calendar_buy">Buy</string>
+
+    <string name="le_video">Le</string>
+    <string name="le_wallpaper">Wallpaper</string>
+    <string name="le_music">Le Music</string>
+
+    <string name="le_app_not_install">Please install %1$s</string>
+    <string name="le_app_not_available">%1$s unavailable</string>
+
+    <!--test-->
+    <string name="recommend_wei_test1">weibo_name</string>
+    <string name="recommend_wei_test2">weibo_identify</string>
+    <string name="recommend_wei_test4">weibo_from</string>
+
+</resources>

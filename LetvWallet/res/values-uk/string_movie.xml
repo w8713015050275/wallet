@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="movie_attention_count_formatter">
+        <item quantity="one">"%s читач"</item>
+        <item quantity="other">"Читачів: %s"</item>
+    </plurals>
+	<plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">"%1$d кінотеатр"</item>
+        <item quantity="other">"Кінотеатрів: %1$d"</item>
+    </plurals>
+	<plurals name="movie_ticket_amount">
+        <item quantity="one">"квиток"</item>
+        <item quantity="other">"квитки"</item>
+    </plurals>
+	<string name="label_entity_city">"Вибрати місто"</string>
+	<string name="label_menu_search">"Пошук"</string>
+	<string name="movie_btn_presell_ticket">"Передпродаж"</string>
+	<string name="movie_btn_purchase_ticket">"Продаж квитків"</string>
+	<string name="movie_cinema_cancel_filter">"Видалити фільтри"</string>
+	<string name="movie_cinema_contact_infomation">"Відомості про контакт"</string>
+	<string name="movie_cinema_filter_category_all">"Усі"</string>
+	<string name="movie_cinema_filter_category_area">"За регіоном"</string>
+	<string name="movie_cinema_filter_category_brand">"За брендом"</string>
+	<string name="movie_cinema_filter_category_special">"За функцією"</string>
+	<string name="movie_cinema_filter_text_formatter">"Відфільтровано кінотеатри в «%s»"</string>
+	<string name="movie_cinema_list_by_movie_normal">"E, dd.MM"</string>
+	<string name="movie_cinema_list_by_movie_today">"\'Сьогодні' dd.MM"</string>
+	<string name="movie_cinema_list_by_movie_tomorrow">"\'Завтра' dd.MM"</string>
+	<string name="movie_cinema_menu_filter">"Фільтрувати"</string>
+	<string name="movie_cinema_menu_search">"Пошук"</string>
+	<string name="movie_city_locating">"Позиціонування"</string>
+	<string name="movie_city_location_failure">"Помилка позиціонування"</string>
+	<string name="movie_create_order_failed">"Не вдалося створити замовлення"</string>
+	<string name="movie_detail_buy">"Придбати зараз"</string>
+	<string name="movie_detail_date_formatter">"Випущено dd.MM.yyyy"</string>
+	<string name="movie_detail_introduction">"Стислий огляд"</string>
+	<string name="movie_detail_photo">"Плакати"</string>
+	<string name="movie_detail_prevue">"Трейлер"</string>
+	<string name="movie_detail_star">"Режисер і зірки"</string>
+	<string name="movie_detail_subscribe">"Стежити"</string>
+	<string name="movie_detail_subscribed">"Я стежу"</string>
+	<string name="movie_detail_subscribe_failed">"Не вдалося почати стеження"</string>
+	<string name="movie_detail_subscribing">"Стеження..."</string>
+	<string name="movie_detail_tab_comment">"Рецензії"</string>
+	<string name="movie_detail_tab_information">"Дані"</string>
+	<string name="movie_detail_tab_recommend">"Рекомендації"</string>
+	<string name="movie_detail_unsubscribe_failed">"Не вдалося припинити стеження"</string>
+	<string name="movie_detail_unsubscribing">"Припинення стеження..."</string>
+	<string name="movie_dialog_query_pay_result">"Перевірка результату сплати..."</string>
+	<string name="movie_dialog_user_select_result_failed">"Не оплачено"</string>
+	<string name="movie_dialog_user_select_result_success">"Оплачено"</string>
+	<string name="movie_dialog_user_select_result_title">"Чи оплачено замовлення?"</string>
+	<string name="movie_empty_no_seat_data">"Немає даних"</string>
+	<string name="movie_error_cinema_no_movie">"У цьому кінотеатрі немає сеансів"</string>
+	<string name="movie_error_no_cinema">"У цьому місті немає кінотеатрів"</string>
+	<string name="movie_error_no_movie">"У цьому місті немає сеансів"</string>
+	<string name="movie_error_no_movie_will">"У цьому місті немає найближчих фільмів"</string>
+	<string name="movie_hot_cities">"Популярні міста"</string>
+	<string name="movie_location_city">"Автопозиціонування"</string>
+	<string name="movie_min_price">"RMB (початкова ціна)"</string>
+	<string name="movie_more">"Більше"</string>
+	<string name="movie_order_list_pay_remain_time">"хв 'хв.' с 'сек. лишилося'"</string>
+	<string name="movie_order_view_label">"Відомості про замовлення"</string>
+	<string name="movie_pay_change_sessions_unavailable">"Не підлягає перенесенню"</string>
+	<string name="movie_pay_order">"Підтвердити замовлення"</string>
+	<string name="movie_pay_overtime">"Термін сплати замовлення минув. Виберіть місця знову."</string>
+	<string name="movie_pay_refund_unavailable">"Не підлягає поверненню"</string>
+	<string name="movie_phone_number_empty">"Поле номера телефону пусте"</string>
+	<string name="movie_phone_number_empty_toast">"Поле номера телефону не може бути пусте!"</string>
+	<string name="movie_phone_number_error_toast">"Введіть правильний номер мобільного телефону"</string>
+	<string name="movie_photo_gallery_failed">"Не вдалося завантажити. Спробуйте знову."</string>
+	<string name="movie_remain_time">"Залишилося часу для оплати"</string>
+	<string name="movie_schedule_add_favorites_fail">"Не вдалося додати до вподобань"</string>
+	<string name="movie_schedule_cancle_favorites_fail">"Не вдалося вилучити з уподобань"</string>
+	<string name="movie_schedule_stop_time_tip">"Примітка. Продаж квитків завершиться за %1$d хв. до початку фільму."</string>
+	<string name="movie_score">"-рахунок"</string>
+	<string name="movie_seat_buy_btr">"Придбати зараз"</string>
+	<string name="movie_seat_checked_exceed_max_count">"Можна вибрати до 4 місць. Якщо потрібно більше місць, придбайте їх окремо"</string>
+	<string name="movie_seat_data_by_alert_normal">"E, dd MMM"</string>
+	<string name="movie_seat_data_by_alert_today">"\'Сьогодні' dd MMM"</string>
+	<string name="movie_seat_data_by_alert_tomorrow">"\'Завтра' dd MMМ"</string>
+	<string name="movie_seat_data_normal">"E, dd.MM"</string>
+	<string name="movie_seat_data_today">"\'Сьогодні' dd.MM"</string>
+	<string name="movie_seat_data_tomorrow">"\'Завтра' dd.MM"</string>
+	<string name="movie_seat_date_alert_ok">"OK"</string>
+	<string name="movie_seat_date_alert_text">"Ви вибрали сеанс о %1$s. Підтвердьте точний час."</string>
+	<string name="movie_seat_info_column">"Місце"</string>
+	<string name="movie_seat_info_formatter">"%1$s–%2$s"</string>
+	<string name="movie_seat_info_row">"Ряд"</string>
+	<string name="movie_seat_room_info_tv">"Екран"</string>
+	<string name="movie_seat_screen_center_tv">"Середина екрана"</string>
+	<string name="movie_seat_separated_seat_checked_attention">"Не купуйте квитки на місця, що знаходяться окремо"</string>
+	<string name="movie_seat_state_checked">"Вибрані"</string>
+	<string name="movie_seat_state_lover">"Місця для закоханих"</string>
+	<string name="movie_seat_state_normal">"Доступні"</string>
+	<string name="movie_seat_state_sold">"Продані"</string>
+	<string name="movie_select_seat_order">"Продаж квитків"</string>
+	<string name="movie_show_finished">" Завершити"</string>
+	<string name="movie_soon_filter_hot">"Найпопулярніші"</string>
+	<string name="movie_soon_filter_time">"Час"</string>
+	<string name="movie_soon_filter_time_all">"Усі"</string>
+	<string name="movie_soon_list_filter_other">"MM.yyyy"</string>
+	<string name="movie_soon_list_filter_this_year">"ММ"</string>
+	<string name="movie_soon_list_section">"E, dd.MM.yyyy"</string>
+	<string name="movie_stop_sale">"Зачинено"</string>
+	<string name="movie_tab_cinema">"Кінотеатр"</string>
+	<string name="movie_tab_movie">"Фільм"</string>
+	<string name="movie_tab_order">"Замовлення"</string>
+	<string name="movie_ticket_back_unlock_back">"Назад"</string>
+	<string name="movie_ticket_back_unlock_cancel">"Скасувати"</string>
+	<string name="movie_ticket_back_unlock_title">"Якщо повернутися назад, заблоковані крісла буде розблоковано"</string>
+	<string name="movie_ticket_change_city_btn_cancel">"Скасувати"</string>
+	<string name="movie_ticket_change_city_btn_confirm">"Перемкнути"</string>
+	<string name="movie_ticket_change_city_title">"Ви перебуваєте у %1$s. Змінити місто?"</string>
+	<string name="movie_ticket_code_desc">"Перевірка активації"</string>
+	<string name="movie_ticket_order_date">"Створено"</string>
+	<string name="movie_ticket_order_num">"Номер замовлення"</string>
+	<string name="movie_ticket_order_price">"Сплачена сума"</string>
+	<string name="movie_ticket_price_unit">"RMB"</string>
+	<string name="movie_ticket_redeem_code">"Код активації"</string>
+	<string name="movie_ticket_serial_number">"Серійний номер"</string>
+	<string name="movie_ticket_status_generate_ticket_failed">"Не вдалося замовити квитки"</string>
+	<string name="movie_ticket_status_generating_ticket">"Замовлення квитків"</string>
+	<string name="movie_ticket_status_overtime">"Час очікування вичерпано"</string>
+	<string name="movie_ticket_status_refunded">"Відшкодовано"</string>
+	<string name="movie_ticket_status_refunding">"Відшкодування"</string>
+	<string name="movie_ticket_status_shown">"В ефірі"</string>
+	<string name="movie_ticket_status_unconsumed">"Не витрачено"</string>
+	<string name="movie_ticket_status_unknown">"Невідомо"</string>
+	<string name="movie_ticket_status_unpay">"До сплати"</string>
+	<string name="movie_toast_order_overtime">"Термін замовлення минув"</string>
+	<string name="movie_want">"стеження"</string>
+	<string name="movie_weipiao_tele">"Служба підтримки Wepiao"</string>
+	<string name="movie_weipiao_tele_num">"4001100100"</string>
+	<string name="movie_schedule_add_favorite">"уподобання"</string>
+</resources>

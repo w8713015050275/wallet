@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_coupon_list_more"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/tv_more_card_item_padding_vertical"
+    android:paddingBottom="@dimen/tv_more_card_item_padding_vertical"
+    android:singleLine="true"
+    android:textColor="@color/tvCouponCatalogTextColor"
+    android:textSize="@dimen/tv_catalog_textsize"
+    android:gravity="center"
+    />

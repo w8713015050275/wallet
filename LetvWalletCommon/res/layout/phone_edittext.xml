@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:background="@null"
+    android:digits=" 0123456789"
+    android:fontFamily="helve-neue"
+    android:gravity="center_vertical"
+    android:inputType="phone"
+    android:singleLine="true"
+    android:textColor="@color/colorWalletTv"
+    android:imeOptions="actionDone" >
+
+</EditText>

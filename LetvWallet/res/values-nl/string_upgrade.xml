@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="continue_upgrade">"Nu upgraden"</string>
+	<string name="defautl_update_content">"een aantal bugs verhelpen."</string>
+	<string name="downloaded">"Gedownload"</string>
+	<string name="download_fail">"Download mislukt"</string>
+	<string name="download_sucess">"Download geslaagd"</string>
+	<string name="download_under_wifi">"Bijwerken via wifi"</string>
+	<string name="in_downloading">"Downloaden..."</string>
+	<string name="no_wifi_update_notify">"Melden：downloaden via netwerkgegevens"</string>
+	<string name="undownloaded">"Downloaden ongedaan maken"</string>
+	<string name="update_content">"Inleiding: %s"</string>
+	<string name="update_version">"Versie: v%s"</string>
+	<string name="upgrade_fail_note">"Upgrade mislukt"</string>
+	<string name="upgrade_success_note">"Upgrade geslaagd"</string>
+	<string name="wallet_exit_application">"Applicatie afsluiten"</string>
+	<string name="wallet_upgrade_notify_later">"Later waarschuwen"</string>
+	<string name="wallet_upgrade_now">"Nu upgraden"</string>
+	<string name="wallet_upgrade_title">"Opmerking bij upgrade"</string>
+	<string name="wifi_fail_continue_next">"Verbinding met wifi verbroken. Download wordt voortgezet zodra er weer verbinding is."</string>
+</resources>

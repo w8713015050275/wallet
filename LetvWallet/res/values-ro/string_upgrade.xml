@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="continue_upgrade">"Faceți acum upgrade"</string>
+	<string name="defautl_update_content">"rezolvă anumite erori."</string>
+	<string name="downloaded">"Descărcare efectuată"</string>
+	<string name="download_fail">"Descărcare eșuată"</string>
+	<string name="download_sucess">"Descărcare reușită"</string>
+	<string name="download_under_wifi">"Actualizare prin WI-FI"</string>
+	<string name="in_downloading">"Se descarcă"</string>
+	<string name="no_wifi_update_notify">"notificare：Descărcare prin date de rețea"</string>
+	<string name="undownloaded">"Nedescărcat"</string>
+	<string name="update_content">"Introducere: %s"</string>
+	<string name="update_version">"Versiune: v%s"</string>
+	<string name="upgrade_fail_note">"Upgrade eșuat"</string>
+	<string name="upgrade_success_note">"Upgrade reușit"</string>
+	<string name="wallet_exit_application">"Părăsire aplicație"</string>
+	<string name="wallet_upgrade_notify_later">"Notifică mai târziu"</string>
+	<string name="wallet_upgrade_now">"Faceți acum upgrade"</string>
+	<string name="wallet_upgrade_title">"Actualizați nota"</string>
+	<string name="wifi_fail_continue_next">"Wi-Fi deconectat, continuați descărcarea după reconectarea Wi-Fi."</string>
+</resources>

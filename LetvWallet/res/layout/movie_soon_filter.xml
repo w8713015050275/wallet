@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/statusBarColor"
+    android:orientation="vertical"
+    android:id="@+id/ll_sort"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="36.0dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dip"
+        android:paddingRight="16dip">
+
+        <com.letv.walletbiz.movie.ui.MovieSoonHorizontalScrollView
+            android:layout_width="0.0dip"
+            android:layout_height="35.0dip"
+            android:layout_weight="1.0"
+            android:scrollbars="none">
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
+        </com.letv.walletbiz.movie.ui.MovieSoonHorizontalScrollView>
+
+            <RadioGroup
+                android:id="@+id/rg_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="15.0dip"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:button="@null"
+                    android:checked="true"
+                    android:text="@string/movie_soon_filter_time"
+                    android:textColor="@color/movie_soon_filter_text_color"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="1.0dip"
+                    android:layout_height="15.0dip"
+                    android:background="@color/colorDividerLineBg" />
+
+                <RadioButton
+                    android:id="@+id/hot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:button="@null"
+                    android:text="@string/movie_soon_filter_hot"
+                    android:textColor="@color/movie_soon_filter_text_color"
+                    android:textSize="12sp" />
+            </RadioGroup>
+    </LinearLayout>
+
+    <View style="@style/Divider_HorizontalLine_Style" />
+</LinearLayout>

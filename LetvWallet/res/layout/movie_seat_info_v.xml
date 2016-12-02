@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    >
+    <TextView
+        android:id="@+id/seat_info"
+        style="@style/TextAppearance.MovieSeat.CheckedSeatTv" />
+
+    <ImageView
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@null"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_seat_clear_bg"
+        android:alpha="@dimen/le_img_alpha"/>
+</merge>

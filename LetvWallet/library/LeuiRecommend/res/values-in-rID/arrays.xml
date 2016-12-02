@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="brand">
+        <!--HOT_PRODUCT-->
+        
+        <item>Tidak ada</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Merek</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpaper</item>
+        <!--MUSIC-->
+        
+        <item>Musik label</item>
+        <!--ALBUM-->
+        
+        <item>Tidak ada</item>
+        <!--ARTISTS-->
+        
+        <item>Tidak ada</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet terkait</item>
+        <!--SITES-->
+        
+        <item>Situs web terkait</item>
+    </string-array>
+    <string-array name="movie">
+        <!--HOT_PRODUCT-->
+        
+        <item>Film dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Dunia Hiburan</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpaper</item>
+        <!--MUSIC-->
+        
+        <item>Soundtrack</item>
+        <!--ALBUM-->
+        
+        <item>Tidak ada</item>
+        <!--ARTISTS-->
+        
+        <item>Artis terkait</item>
+        <!--WEI_BO-->
+        
+        <item>Tidak ada</item>
+        <!--SITES-->
+        
+        <item>Tidak ada</item>
+    </string-array>
+    <string-array name="player">
+        <!--HOT_PRODUCT-->
+        
+        <item>Film dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Olahraga</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpaper</item>
+        <!--MUSIC-->
+        
+        <item>Tidak ada</item>
+        <!--ALBUM-->
+        
+        <item>Album musik</item>
+        <!--ARTISTS-->
+        
+        <item>Tidak ada</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet terkait</item>
+        <!--SITES-->
+        
+        <item>Situs web terkait</item>
+    </string-array>
+    <string-array name="region">
+        <!--HOT_PRODUCT-->
+        
+        <item>Tidak ada</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Video terkait</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpaper</item>
+        <!--MUSIC-->
+        
+        <item>Tidak ada</item>
+        <!--ALBUM-->
+        
+        <item>Tidak ada</item>
+        <!--ARTISTS-->
+        
+        <item>Tidak ada</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet terkait</item>
+        <!--SITES-->
+        
+        <item>Tidak ada</item>
+    </string-array>
+    <string-array name="star">
+        <!--HOT_PRODUCT-->
+        
+        <item>Film dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita Dunia Hiburan</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpaper</item>
+        <!--MUSIC-->
+        
+        <item>Lagu terlaris</item>
+        <!--ALBUM-->
+        
+        <item>Album musik</item>
+        <!--ARTISTS-->
+        
+        <item>Artis terkait</item>
+        <!--WEI_BO-->
+        
+        <item>Tweet terkait</item>
+        <!--SITES-->
+        
+        <item>Situs web terkait</item>
+    </string-array>
+    <string-array name="team">
+        <!--HOT_PRODUCT-->
+        
+        <item>Film dan drama</item>
+        <!--LATEST_NEWS-->
+        
+        <item>Berita relevan</item>
+        <!--WALLPAPER-->
+        
+        <item>Wallpaper</item>
+        <!--MUSIC-->
+        
+        <item>Musik terkait</item>
+        <!--ALBUM-->
+        
+        <item>Tidak ada</item>
+        <!--ARTISTS-->
+        
+        <item>Tidak ada</item>
+        <!--WEI_BO-->
+        
+        <item>Tidak ada</item>
+        <!--SITES-->
+        
+        <item>Tidak ada</item>
+    </string-array>
+</resources>
