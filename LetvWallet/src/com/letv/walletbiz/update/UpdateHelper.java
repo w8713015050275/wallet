@@ -1,5 +1,6 @@
 package com.letv.walletbiz.update;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -159,8 +160,15 @@ public class UpdateHelper {
                         final boolean needForceUpgrade = msgFromServer.arg2 == 1;
                         if(!(mBaseActivity instanceof MainActivity)) {
                             if(needForceUpgrade) {
-                                exitCurrentApplication();
-                                return;
+                                ActivityManager am = (ActivityManager) mBaseActivity
+                                        .getSystemService(Context.ACTIVITY_SERVICE);
+                                ActivityManager.RunningTaskInfo task = am.getRunningTasks(Integer.MAX_VALUE).get(0);
+                                String baseClass = task.baseActivity.getClassName();
+                                String thisPackageName = mBaseActivity.getPackageName();
+                                if(task.numActivities > 1 && baseClass.indexOf(thisPackageName) >= 0) {
+                                    exitCurrentApplication();
+                                    return;
+                                }
                             }
                         }
 
