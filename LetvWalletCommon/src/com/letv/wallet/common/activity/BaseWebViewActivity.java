@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.CookieManager;
@@ -54,9 +53,31 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
         }
     };
 
+    private View.OnClickListener mCloseButtonClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        if (intent == null) {
+            finish();
+            return;
+        }
+        mUrl = getUrl(intent);
+        if (TextUtils.isEmpty(mUrl)) {
+            finish();
+            return;
+        }
+        mTitle = getWebViewTitle(intent);
+        if (!TextUtils.isEmpty(mTitle)) {
+            setTitle(mTitle);
+        }
         registerNetWorkReceiver();
         mContainer = new FrameLayout(this);
         mContainer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -64,33 +85,7 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
         mContainer.addView(mWebView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
         setContentView(mContainer);
 
-        Toolbar toolbar = getToolbar();
-        ImageButton refreshView = new ImageButton(this, null, android.support.v7.appcompat.R.attr.toolbarNavigationButtonStyle);
-        Toolbar.LayoutParams layoutParams = new Toolbar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        refreshView.setLayoutParams(layoutParams);
-        layoutParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
-        layoutParams.rightMargin = (int) DensityUtils.dip2px(10);
-        refreshView.setImageResource(R.drawable.ic_wallet_action_refresh);
-        refreshView.setOnClickListener(mRefreshClickListener);
-        toolbar.addView(refreshView, layoutParams);
-
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_wallet_action_close);
-
-        Intent intent = getIntent();
-        if (intent == null) {
-            finish();
-            return;
-        } else {
-            mUrl = intent.getStringExtra(CommonConstants.EXTRA_URL);
-            if (TextUtils.isEmpty(mUrl)) {
-                finish();
-                return;
-            }
-            mTitle = intent.getStringExtra(CommonConstants.EXTRA_TITLE_NAME);
-            if (!TextUtils.isEmpty(mTitle)) {
-                setTitle(mTitle);
-            }
-        }
+        initView();
 
         initWebView();
         if (!isNetworkAvailable()) {
@@ -101,6 +96,58 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
         showLoadingView();
         mWebView.loadUrl(mUrl, getAdditionalHttpHeaders());
 
+    }
+
+    protected String getUrl(Intent intent) {
+        if (intent != null) {
+            return intent.getStringExtra(CommonConstants.EXTRA_URL);
+        }
+        return null;
+    }
+
+    protected String getWebViewTitle(Intent intent) {
+        if (intent != null) {
+            return intent.getStringExtra(CommonConstants.EXTRA_TITLE_NAME);
+        }
+        return null;
+    }
+
+    protected void initView() {
+        Toolbar toolbar = getToolbar();
+        if (showRefreshButton()) {
+            ImageButton refreshView = new ImageButton(this, null, android.support.v7.appcompat.R.attr.toolbarNavigationButtonStyle);
+            Toolbar.LayoutParams layoutParams = new Toolbar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            refreshView.setLayoutParams(layoutParams);
+            layoutParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+            layoutParams.rightMargin = (int) DensityUtils.dip2px(10);
+            refreshView.setImageResource(R.drawable.ic_wallet_action_refresh);
+            refreshView.setOnClickListener(getRefreshClickListener());
+            toolbar.addView(refreshView, layoutParams);
+        }
+        updateHomeAsUpButton(toolbar);
+    }
+
+    protected void updateHomeAsUpButton(Toolbar toolbar) {
+        if (toolbar == null) {
+            return;
+        }
+        View.OnClickListener closeListener = getCloseButtonClickListener();
+        if (closeListener != null) {
+            toolbar.setNavigationOnClickListener(closeListener);
+        }
+        toolbar.setNavigationIcon(R.drawable.ic_wallet_action_close);
+    }
+
+    protected View.OnClickListener getCloseButtonClickListener() {
+        return mCloseButtonClickListener;
+    }
+
+    protected boolean showRefreshButton() {
+        return true;
+    }
+
+    protected View.OnClickListener getRefreshClickListener() {
+        return mRefreshClickListener;
     }
 
     @Override
@@ -232,16 +279,12 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK) {
-            if(mWebView.canGoBack()) {
-                mWebView.goBack();//返回上一页面
-                return true;
-            } else {
-                finish();//退出程序
-            }
+    public void onBackPressed() {
+        if(mWebView.canGoBack()) {
+            mWebView.goBack();//返回上一页面
+        } else {
+            super.onBackPressed();
         }
-        return super.onKeyDown(keyCode, event);
     }
 
     public class BaseWebViewClient extends WebViewClient {
