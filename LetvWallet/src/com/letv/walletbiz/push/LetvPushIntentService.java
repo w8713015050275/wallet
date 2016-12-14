@@ -25,7 +25,7 @@ public class LetvPushIntentService extends LetvPushBaseIntentService {
     }
 
     protected void onMessage(Context context, String message) {
-        LogHelper.d("[%s] push message == " + message, TAG);
+        LogHelper.d("push message == " + message);
         if (TextUtils.isEmpty(message)) {
             return;
         }

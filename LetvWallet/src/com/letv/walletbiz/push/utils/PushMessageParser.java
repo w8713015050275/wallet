@@ -31,10 +31,10 @@ public class PushMessageParser {
             if(parser != null){
                 parser.icon_uri = TextUtils.isEmpty(parser.icon_uri) ? PushMessage.DEFAULT_ICON_URI : parser.icon_uri;
                 PushMessage pushMessage = new PushMessage(parser.msgid, parser.action, parser.web_uri, parser.intent_val, parser.custom_val, parser.title, parser.content, parser.icon_uri, parser.intent_uri);
-                LogHelper.d("[%S] push message = " + pushMessage.toString(), TAG);
+                LogHelper.d("push message = " + pushMessage.toString());
                 return pushMessage;
             }else{
-                LogHelper.e("[%S] parser push message is null, result = " + result, TAG);
+                LogHelper.e("parser push message is null, result = " + result);
             }
         }
         return null;
