@@ -51,7 +51,7 @@ public abstract class OrderDetailActivity extends BaseWalletFragmentActivity {
                         setData(mContentView, mOrderBean);
                     } else if (erroCode == CommonCallback.ERROR_NETWORK) {
                         showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL).getIconView().setOnClickListener(blankClickLis);
-                        mOrderBean = null;
+                        clearData();
                     }
                     break;
             }
@@ -99,6 +99,10 @@ public abstract class OrderDetailActivity extends BaseWalletFragmentActivity {
         }
     }
 
+    protected void clearData() {
+        mOrderBean = null;
+    }
+
     @Override
     protected void onNetWorkChanged(boolean isNetworkAvailable) {
         if (isNetworkAvailable && mOrderBean == null) {
@@ -106,7 +110,7 @@ public abstract class OrderDetailActivity extends BaseWalletFragmentActivity {
         }
     }
 
-    View.OnClickListener blankClickLis = new View.OnClickListener() {
+   protected View.OnClickListener blankClickLis = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (isNetworkAvailable() && mOrderBean == null) {

@@ -35,7 +35,7 @@ public class MobileProduct extends Product {
     public MobileProduct(int title, OrderDetailBean orderDetailBean) {
         this(title, orderDetailBean.order_sn, orderDetailBean.getSnapshot().getGoods_title(), orderDetailBean.number,
                 orderDetailBean.getPrice(), orderDetailBean.getOrderCTime(), orderDetailBean.getStatusValue());
-        mProductId = orderDetailBean.snapshot.getGoods_id();
+        mProductId = orderDetailBean.getSnapshot().getGoods_id();
     }
 
     public MobileProduct(int title, int productId, String skuSN, String name, String number, String price) {

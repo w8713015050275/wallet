@@ -26,7 +26,7 @@ public class OrderDetailBean implements OrderBaseBean {
                 "\norder_ctime: " + order_ctime +
                 "\nprice: " + price +
                 "\nnumber: " + number +
-                "\nsnapshot: " + snapshot.toString();
+                "\nsnapshot: " + (snapshot == null ? "null" : snapshot.toString());
     }
 
     public OrderSnapshot getSnapshot() {

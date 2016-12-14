@@ -19,6 +19,7 @@ import com.letv.wallet.common.util.DateUtils;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.PriorityExecutorHelper;
+import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.widget.LabeledTextView;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.WalletApplication;
@@ -30,6 +31,7 @@ import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.mobile.beans.HistoryRecordNumberBean;
 import com.letv.walletbiz.mobile.beans.OrderDetailBean;
+import com.letv.walletbiz.mobile.beans.OrderSnapshot;
 import com.letv.walletbiz.mobile.dbhelper.HistoryRecordHelper;
 import com.letv.walletbiz.mobile.pay.MobileProduct;
 import com.letv.walletbiz.mobile.util.PayInfoCommonCallback;
@@ -144,11 +146,17 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
                 break;
         }
         setTitle(mTitleId);
-
+        OrderSnapshot mSnapshot = mOrderDetailBean.getSnapshot();
+        if (mSnapshot == null) {
+            LogHelper.e("[%S] orderinfo : %s", TAG, mOrderDetailBean.toString());
+            showBlankPage(BlankPage.STATE_DATA_EXCEPTION).getPrimaryBtn().setOnClickListener(blankClickLis);
+            clearData();
+            return;
+        }
         MobileProductCostBrief costBrief = null;
 
         MobileProductBrief vProduct = (MobileProductBrief) v.findViewById(R.id.v_prodcut);
-        vProduct.setAllLines(mOrderDetailBean.getSnapshot().getGoods_title(), mOrderDetailBean.getOrderId(), mOrderDetailBean.number);
+        vProduct.setAllLines(mSnapshot.getGoods_title(), mOrderDetailBean.getOrderId(), mOrderDetailBean.number);
 
         LinearLayout llPriceTop = (LinearLayout) v.findViewById(R.id.ll_price_top);
         LinearLayout llPriceBottom = (LinearLayout) v.findViewById(R.id.ll_price_bottom);
