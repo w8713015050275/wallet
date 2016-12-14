@@ -35,6 +35,8 @@ public class MainPanelHelper {
     public static final int ERROR_NETWORK = 1;
     public static final int ERROR_NO_NETWORK = 2;
 
+    public static final String ROAMING_PACKAGE = "com.letv.roaming";
+
     public interface Callback<T> {
         void onLoadFromLocalFinished(T result, int errorCode);
         void onLoadFromNetworkFinished(T result, int errorCode, boolean needUpdate);

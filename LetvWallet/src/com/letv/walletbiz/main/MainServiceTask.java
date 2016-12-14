@@ -6,8 +6,10 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.letv.wallet.common.http.beans.BaseResponse;
+import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.walletbiz.main.bean.WalletServiceListBean;
+import com.letv.walletbiz.main.bean.WalletServiceListBean.WalletServiceBean;
 
 import java.util.Arrays;
 
@@ -51,6 +53,7 @@ public class MainServiceTask implements Runnable {
     public void run() {
         WalletServiceListBean listBean = MainPanelHelper.getServiceListFromDb(mContext);
         if (listBean != null) {
+            checkRoamingService(mContext, listBean);
             sendMessage(MSG_LOAD_FROM_LOCAL_FINISHED, listBean, mErroCode, true);
         }
         WalletServiceListBean newList = getServiceListFromNetwork(mContext);
@@ -61,6 +64,9 @@ public class MainServiceTask implements Runnable {
             if (newList != null) {
                 MainPanelHelper.syncServiceListToDb(mContext, newList);
             }
+        }
+        if (needUpdate) {
+            checkRoamingService(mContext, newList);
         }
         sendMessage(MSG_LOAD_FROM_NETWORK_FINISHED, newList, mErroCode, needUpdate);
     }
@@ -89,5 +95,31 @@ public class MainServiceTask implements Runnable {
         msg.arg1 = erroCode;
         msg.arg2 = needUpdate ? 1 : 0;
         mHandler.sendMessage(msg);
+    }
+
+    private void checkRoamingService(Context context, WalletServiceListBean listBean) {
+        if (context == null || listBean == null || listBean.list == null) {
+            return;
+        }
+        boolean isRoamingInstalled = AppUtils.isAppInstalled(context, MainPanelHelper.ROAMING_PACKAGE);
+        if (isRoamingInstalled) {
+            return;
+        }
+        int index = -1;
+        WalletServiceBean bean;
+        for (int i=0; i<listBean.list.length; i++) {
+            bean = listBean.list[i];
+            if (bean != null && bean.jump_type == WalletServiceBean.JUMP_TYPE_APP
+                    && MainPanelHelper.ROAMING_PACKAGE.equals(bean.package_name)) {
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            WalletServiceBean[] result = new WalletServiceBean[listBean.list.length - 1];
+            System.arraycopy(listBean.list, 0, result, 0, index);
+            System.arraycopy(listBean.list, index + 1, result, index, listBean.list.length - index - 1);
+            listBean.list = result;
+        }
     }
 }
