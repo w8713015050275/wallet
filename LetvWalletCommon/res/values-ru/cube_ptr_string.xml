@@ -27,7 +27,7 @@
         <item quantity="one"> секунду назад</item>
         <item quantity="other"> секунды (секунд) назад</item>
     </plurals>
-    <string name="cube_ptr_last_update">Последнее обновление: </string>
+    <string name="cube_ptr_last_update">"Последнее обновление: "</string>
     <string name="cube_ptr_pull_down">Потяните вниз</string>
     <string name="cube_ptr_pull_down_to_refresh">Потяните вниз, чтобы обновить</string>
     <string name="cube_ptr_refresh_complete">Обновлено</string>
