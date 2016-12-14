@@ -13,6 +13,7 @@ public class OrderDetailBean implements OrderBaseBean {
 
     public String order_sn;
     public int order_status;
+    public int refund_progress;
     public long order_ctime;
     public float price;
     public float discount_price;
@@ -35,6 +36,38 @@ public class OrderDetailBean implements OrderBaseBean {
 
     public String getOrderStatus(Context context) {
         return UiUtils.getOrderStatusStringbyValue(context, order_status);
+    }
+
+    public boolean showRefundProgress() {
+        boolean showRefundProgess = false;
+        switch (refund_progress) {
+            case MobileConstant.REFUND_PROGRESS.REFUNDING:
+            case MobileConstant.REFUND_PROGRESS.REFUND_SUCCESS:
+            case MobileConstant.REFUND_PROGRESS.REFUND_FAIL:
+            case MobileConstant.REFUND_PROGRESS.AUDIT_FAIL:
+                showRefundProgess = true;
+                break;
+        }
+        return showRefundProgess;
+    }
+
+    public String getRefundProgressStr(Context context) {
+        int index = MobileConstant.REFUND_PROGRESS_ID.REFUNDING;
+        switch (refund_progress) {
+            case MobileConstant.REFUND_PROGRESS.REFUNDING:
+                index = MobileConstant.REFUND_PROGRESS_ID.REFUNDING;
+                break;
+            case MobileConstant.REFUND_PROGRESS.REFUND_SUCCESS:
+                index = MobileConstant.REFUND_PROGRESS_ID.REFUND_SUCCESS;
+                break;
+            case MobileConstant.REFUND_PROGRESS.REFUND_FAIL:
+                index = MobileConstant.REFUND_PROGRESS_ID.REFUND_FAIL;
+                break;
+            case MobileConstant.REFUND_PROGRESS.AUDIT_FAIL:
+                index = MobileConstant.REFUND_PROGRESS_ID.AUDIT_FAIL;
+                break;
+        }
+        return UiUtils.getRefundProgressStringbyValue(context, index);
     }
 
     public int getOrderTodo() {

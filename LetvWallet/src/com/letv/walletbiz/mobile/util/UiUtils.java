@@ -27,6 +27,21 @@ public class UiUtils {
             R.string.mobile_order_status_cancelled
     };
 
+    //1:退款中 2:退款成功 3:退款失败 4:审核失败
+    private static final int MobileOrderRefundProgressDisplayID[] = {
+            R.string.mobile_order_refunding,
+            R.string.mobile_order_refund_success,
+            R.string.mobile_order_refund_fail,
+            R.string.mobile_order_audit_fail
+    };
+
+    public static String getRefundProgressStringbyValue(Context context, int index) {
+        if (index > 0 && index <= MobileOrderRefundProgressDisplayID.length) {
+            return context.getString(MobileOrderRefundProgressDisplayID[index - 1]);
+        }
+        return null;
+    }
+
     public static String getOrderStatusStringbyValue(Context context, int status) {
 
         if (status > 0 && status <= MobileOrderStatusDisplayID.length) {
@@ -92,4 +107,5 @@ public class UiUtils {
         cursor.close();
         return "";
     }
+
 }

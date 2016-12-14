@@ -194,7 +194,11 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
                 costBrief = (MobileProductCostBrief) v.findViewById(R.id.v_top_price_brief);
 
                 statusStr = UiUtils.getOrderStatusStringbyValue(getBaseContext(), mOrderDetailBean.getStatusValue());
-                ltvStatus.setTextSummery(statusStr);
+                if (mOrderDetailBean.showRefundProgress()) {
+                    ltvStatus.setTextSummery(statusStr, mOrderDetailBean.getRefundProgressStr(getBaseContext()));
+                } else {
+                    ltvStatus.setTextSummery(statusStr);
+                }
                 ltvTime.setTextSummery(DateUtils.getTimeStr(mOrderDetailBean.getOrderCTime()));
 
                 llPriceTop.setVisibility(View.VISIBLE);
@@ -206,7 +210,11 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
                 costBrief = (MobileProductCostBrief) v.findViewById(R.id.v_top_price_brief);
 
                 statusStr = UiUtils.getOrderStatusStringbyValue(getBaseContext(), mOrderDetailBean.getStatusValue());
-                ltvStatus.setTextSummery(statusStr);
+                if (mOrderDetailBean.showRefundProgress()) {
+                    ltvStatus.setTextSummery(statusStr, mOrderDetailBean.getRefundProgressStr(getBaseContext()));
+                } else {
+                    ltvStatus.setTextSummery(statusStr);
+                }
 
                 llPriceTop.setVisibility(View.VISIBLE);
                 llPriceBottom.setVisibility(View.GONE);

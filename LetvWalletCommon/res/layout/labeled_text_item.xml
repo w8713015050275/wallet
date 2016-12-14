@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <View
         android:id="@+id/top_line"
         style="@style/Divider_HorizontalLine_Style"
-        android:visibility="gone" >
-    </View>
+        android:visibility="gone"></View>
 
 
     <LinearLayout
@@ -34,15 +33,35 @@
             android:layout_weight="1"
             android:gravity="right">
 
-            <TextView
-                android:id="@+id/tv_content"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/colorContentTv"
-                android:textSize="14sp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_additional_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorContentSecondaryTv"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/colorContentPrimaryTv"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_jump"
@@ -50,9 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="2dp"
+                android:alpha="@dimen/le_img_alpha"
                 android:clickable="true"
-                android:src="@drawable/ic_default_arrow"
-                android:alpha="@dimen/le_img_alpha"/>
+                android:src="@drawable/ic_default_arrow" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -60,8 +79,6 @@
     <View
         android:id="@+id/bottom_line"
         style="@style/Divider_HorizontalLine_Style"
-        android:visibility="gone"
-        >
-    </View>
+        android:visibility="gone"></View>
 
 </LinearLayout>

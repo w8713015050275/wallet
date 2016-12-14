@@ -23,6 +23,10 @@
     <string name="mobile_order_status_depositing">Topping up</string>
     <string name="mobile_order_status_charged">Topped up</string>
     <string name="mobile_order_status_cancelled">Canceled</string>
+    <string name="mobile_order_refunding">Refunding</string>
+    <string name="mobile_order_refund_success">Refund success</string>
+    <string name="mobile_order_refund_fail">Refund failed</string>
+    <string name="mobile_order_audit_fail">Audit failure</string>
     <string name="mobile_order_reorder">Place order again</string>
     <string name="mobile_order_close">Turn off</string>
     <string name="mobile_order_list_prompt_tv">Loading...</string>

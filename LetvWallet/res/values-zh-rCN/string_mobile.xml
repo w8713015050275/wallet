@@ -23,6 +23,10 @@
     <string name="mobile_order_status_depositing">充值中</string>
     <string name="mobile_order_status_charged">已充值</string>
     <string name="mobile_order_status_cancelled">已取消</string>
+    <string name="mobile_order_refunding">退款中</string>
+    <string name="mobile_order_refund_success">退款成功</string>
+    <string name="mobile_order_refund_fail">退款失败</string>
+    <string name="mobile_order_audit_fail">审核失败</string>
     <string name="mobile_order_reorder">重新下单</string>
     <string name="mobile_order_close">关闭</string>
     <string name="mobile_order_list_prompt_tv">正在加载...</string>

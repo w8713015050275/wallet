@@ -18,11 +18,13 @@ public class LabeledTextView extends RelativeLayout {
     private ImageView iv_jump;
     private TextView tv_label;
     private TextView tv_content;
+    private TextView tv_additional_content;
     private View top_line;
     private View bottom_line;
 
     private String big_string;
     private String little_string;
+    private String additional_string;
 
     public LabeledTextView(Context context) {
         super(context);
@@ -46,6 +48,7 @@ public class LabeledTextView extends RelativeLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CommonLabeledTextView);
         big_string = typedArray.getString(R.styleable.CommonLabeledTextView_label_text);
         little_string = typedArray.getString(R.styleable.CommonLabeledTextView_content_text);
+        additional_string = typedArray.getString(R.styleable.CommonLabeledTextView_additional_content_text);
         typedArray.recycle();
 
         View view = inflate(context);
@@ -57,17 +60,20 @@ public class LabeledTextView extends RelativeLayout {
         tv_label.setText(big_string);
         tv_content = (TextView) view.findViewById(R.id.tv_content);
         tv_content.setText(little_string);
+        tv_additional_content = (TextView) view.findViewById(R.id.tv_additional_content);
+        tv_additional_content.setText(additional_string);
         top_line = (View) view.findViewById(R.id.top_line);
-        bottom_line= (View) view.findViewById(R.id.bottom_line);
+        bottom_line = (View) view.findViewById(R.id.bottom_line);
         if (TextUtils.isEmpty(little_string)) {
             if (iv_jump != null)
                 iv_jump.setVisibility(View.VISIBLE);
         }
     }
 
-    protected View inflate(Context context){
+    protected View inflate(Context context) {
         return View.inflate(context, R.layout.labeled_text_item, this);
     }
+
     public void setTextTitle(String s) {
         tv_label.setText(s);
     }
@@ -75,7 +81,28 @@ public class LabeledTextView extends RelativeLayout {
     public void setTextSummery(String s) {
         if (iv_jump != null)
             iv_jump.setVisibility(View.GONE);
+        if (tv_additional_content != null)
+            tv_additional_content.setVisibility(View.GONE);
         tv_content.setText(s);
+    }
+
+    public void setTextSummery(String contentStr, String additionalStr) {
+        if (iv_jump != null)
+            iv_jump.setVisibility(View.GONE);
+        if (tv_content != null) {
+            tv_content.setText(contentStr);
+        }
+        if (tv_additional_content != null) {
+            tv_additional_content.setVisibility(View.VISIBLE);
+            tv_additional_content.setText(additionalStr);
+        }
+    }
+
+    public void setTextAdditional(String additionalStr) {
+        if (tv_additional_content != null) {
+            tv_additional_content.setVisibility(View.VISIBLE);
+            tv_additional_content.setText(additionalStr);
+        }
     }
 
     public void setIconShow() {
@@ -86,11 +113,12 @@ public class LabeledTextView extends RelativeLayout {
     public void setTopLineShow(boolean b) {
         top_line.setVisibility(b ? View.VISIBLE : View.GONE);
     }
+
     public void setBottomLineShow(boolean b) {
         bottom_line.setVisibility(b ? View.VISIBLE : View.GONE);
     }
 
-    public TextView getSummeryView(){
+    public TextView getSummeryView() {
         return tv_content;
     }
 

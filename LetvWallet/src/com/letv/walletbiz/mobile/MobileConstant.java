@@ -74,6 +74,26 @@ public class MobileConstant {
         public static final int MOBILE_FLOW = 4;
     }
 
+    //退款状态, 0:无退款 2:已建立记录 5:审核成功 6:退款中 10:退款成功 40:退款失败 50:审核失败
+    public static final class REFUND_PROGRESS {
+        public static final int NONE = 0;
+        public static final int ESTABLISH_RECORD = 2;
+        public static final int AUDIT_SUCCESS = 5;
+        public static final int REFUNDING = 6;
+        public static final int REFUND_SUCCESS = 10;
+        public static final int REFUND_FAIL = 40;
+        public static final int AUDIT_FAIL = 50;
+
+    }
+
+    //退款状态, 1:退款中 2:退款成功 3:退款失败 4:审核失败
+    public static final class REFUND_PROGRESS_ID {
+        public static final int REFUNDING = 1;
+        public static final int REFUND_SUCCESS = 2;
+        public static final int REFUND_FAIL = 3;
+        public static final int AUDIT_FAIL = 4;
+    }
+
     //订单状态, 1:订单已创建, 2:支付中, 3:支付完成, 4:充值中, 5:充值完成, 6:订单取消
     public static final class ORDER_STATUS {
 

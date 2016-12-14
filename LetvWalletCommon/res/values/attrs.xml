@@ -9,5 +9,6 @@
     <declare-styleable name="CommonLabeledTextView">
         <attr name="label_text" format="string" />
         <attr name="content_text" format="string" />
+        <attr name="additional_content_text" format="string" />
     </declare-styleable>
 </resources>

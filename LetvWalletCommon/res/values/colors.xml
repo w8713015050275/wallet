@@ -13,6 +13,8 @@
 
     <color name="colorLabelTv">@android:color/black</color>
     <color name="colorContentTv">#54555C</color>
+    <color name="colorContentPrimaryTv">#808080</color>
+    <color name="colorContentSecondaryTv">#404040</color>
     <color name="colorWalletTv">@android:color/black</color>
 
 </resources>
