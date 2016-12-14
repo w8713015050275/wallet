@@ -160,7 +160,7 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
         if (isNetworkAvailable && mContainer.getVisibility() != View.VISIBLE) {
             hideBlankPage();
             showLoadingView();
-            mWebView.loadUrl(mUrl);
+            mWebView.loadUrl(mUrl, getAdditionalHttpHeaders());
         }
     }
 
