@@ -22,6 +22,7 @@ public class BlankPage extends com.letv.leui.support.widget.LeEmptyView{
     public static final int STATE_NO_NETWORK = 2;
     public static final int STATE_NETWORK_ABNORMAL = 3; // 网络异常
     public static final int STATE_NO_LOGIN = 4;
+    public static final int STATE_DATA_EXCEPTION = 5;
 
     private int mCurrentState = STATE_INIT;
     private Drawable icon;
@@ -59,6 +60,9 @@ public class BlankPage extends com.letv.leui.support.widget.LeEmptyView{
                 break;
             case STATE_NETWORK_ABNORMAL:
                 setEmptyViewStyle(com.le.eui.support.widget.R.style.LeEmptyView_NetworkAbnormal);
+                break;
+            case STATE_DATA_EXCEPTION:
+                setEmptyViewStyle(com.le.eui.support.widget.R.style.LeEmptyView_NoData);
                 break;
             case STATE_NO_LOGIN:
                 setEmptyViewStyle(R.style.Blankpage_NoLogin);
