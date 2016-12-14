@@ -253,7 +253,7 @@ public class MoviePayActivity extends BaseWalletFragmentActivity implements Phon
         mPayBtn = (TextView) findViewById(R.id.ibtn_pay);
         //By default, set first radiobutton as selected
         mPayOptionGroup = (RadioGroup) findViewById(R.id.pay_by_radiogroup);
-        ((LeRadioButton) mPayOptionGroup.getChildAt(0)).setChecked(true);
+        ((LeRadioButton) mPayOptionGroup.getChildAt(1)).setChecked(true);
     }
 
     private void updateRemainTimeView(BaseMovieOrder order) {
