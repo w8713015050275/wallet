@@ -31,6 +31,7 @@ public class ProductsPanel extends RecyclerView {
 
     public ProductsPanel(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.setFocusable(false);
         mContext = context;
         GridLayoutManager layoutManager = new GridLayoutManager(context, LAYOUT_COLUMES);
         setLayoutManager(layoutManager);
