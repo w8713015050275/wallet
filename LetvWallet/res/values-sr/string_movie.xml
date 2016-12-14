@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="movie_attention_count_formatter">
+        <item quantity="one">"Pratilaca: %s"</item>
+        <item quantity="other">"Pratilaca: %s"</item>
+    </plurals>
+	<plurals name="movie_cinema_filter_cinema_count">
+        <item quantity="one">"Bioskopa: %1$d"</item>
+        <item quantity="other">"Bioskopa: %1$d"</item>
+    </plurals>
+	<plurals name="movie_ticket_amount">
+        <item quantity="one">"karta"</item>
+        <item quantity="other">"karte/ata"</item>
+    </plurals>
+	<string name="label_entity_city">"Izaberite grad"</string>
+	<string name="label_menu_search">"Pretraži"</string>
+	<string name="movie_btn_presell_ticket">"Pretprodaja"</string>
+	<string name="movie_btn_purchase_ticket">"Prodaja karata"</string>
+	<string name="movie_cinema_cancel_filter">"Ukloni filtere"</string>
+	<string name="movie_cinema_contact_infomation">"Informacije za kontakt"</string>
+	<string name="movie_cinema_filter_category_all">"Sve"</string>
+	<string name="movie_cinema_filter_category_area">"Po regionu"</string>
+	<string name="movie_cinema_filter_category_brand">"Po brendu"</string>
+	<string name="movie_cinema_filter_category_special">"Po karakteristici"</string>
+	<string name="movie_cinema_filter_text_formatter">"Bioskopi u „%s“, filtrirani"</string>
+	<string name="movie_cinema_list_by_movie_normal">"E dd.MM."</string>
+	<string name="movie_cinema_list_by_movie_today">"danas, dd.MM."</string>
+	<string name="movie_cinema_list_by_movie_tomorrow">"sutra, dd.MM."</string>
+	<string name="movie_cinema_menu_filter">"Filtriraj"</string>
+	<string name="movie_cinema_menu_search">"Pretraži"</string>
+	<string name="movie_city_locating">"Pozicioniranje"</string>
+	<string name="movie_city_location_failure">"Pozicioniranje nije uspelo"</string>
+	<string name="movie_create_order_failed">"Kreiranje narudžbine nije uspelo"</string>
+	<string name="movie_detail_buy">"Kupi odmah"</string>
+	<string name="movie_detail_date_formatter">"Premijera: dd.MM.yyyy."</string>
+	<string name="movie_detail_introduction">"Sinopsis"</string>
+	<string name="movie_detail_photo">"Posteri"</string>
+	<string name="movie_detail_prevue">"Trejler"</string>
+	<string name="movie_detail_star">"Režiser i zvezde"</string>
+	<string name="movie_detail_subscribe">"Prati"</string>
+	<string name="movie_detail_subscribed">"Praćeno"</string>
+	<string name="movie_detail_subscribe_failed">"Praćenje nije uspelo"</string>
+	<string name="movie_detail_subscribing">"Praćenje..."</string>
+	<string name="movie_detail_tab_comment">"Recenzije"</string>
+	<string name="movie_detail_tab_information">"Podaci"</string>
+	<string name="movie_detail_tab_recommend">"Preporuke"</string>
+	<string name="movie_detail_unsubscribe_failed">"Prekid praćenja nije uspeo"</string>
+	<string name="movie_detail_unsubscribing">"Praćenje se prekida..."</string>
+	<string name="movie_dialog_query_pay_result">"Rezultati plaćanja se proveravaju..."</string>
+	<string name="movie_dialog_user_select_result_failed">"Nije plaćeno"</string>
+	<string name="movie_dialog_user_select_result_success">"Plaćeno"</string>
+	<string name="movie_dialog_user_select_result_title">"Da li ste platili za ovu narudžbinu?"</string>
+	<string name="movie_empty_no_seat_data">"Nema podataka"</string>
+	<string name="movie_error_cinema_no_movie">"U ovom bioskopu nema projekcija"</string>
+	<string name="movie_error_no_cinema">"U ovom gradu nema bioskopa"</string>
+	<string name="movie_error_no_movie">"U ovom gradu nema projekcija"</string>
+	<string name="movie_error_no_movie_will">"U trenutnom gradu nema najavljenih filmova"</string>
+	<string name="movie_hot_cities">"Najpopularniji gradovi"</string>
+	<string name="movie_location_city">"Automatsko pozicioniranje"</string>
+	<string name="movie_min_price">"CNY (početna cena)"</string>
+	<string name="movie_more">"Više"</string>
+	<string name="movie_order_list_pay_remain_time">"m „min.“ s „preostalo sek.“"</string>
+	<string name="movie_order_view_label">"Detalji o narudžbini"</string>
+	<string name="movie_pay_change_sessions_unavailable">"Neprenosivo"</string>
+	<string name="movie_pay_order">"Potvrdi narudžbinu"</string>
+	<string name="movie_pay_overtime">"Isteklo je vreme plaćanja narudžbine. Ponovo izaberite sedišta."</string>
+	<string name="movie_pay_refund_unavailable">"Ne može se refundirati"</string>
+	<string name="movie_phone_number_empty">"Polje za broj mobilnog telefona je prazno"</string>
+	<string name="movie_phone_number_empty_toast">"Polje za broj mobilnog telefona ne sme da bude prazno!"</string>
+	<string name="movie_phone_number_error_toast">"Unesite tačan broj telefona"</string>
+	<string name="movie_photo_gallery_failed">"Učitavanje nije uspelo. Pokušajte ponovo."</string>
+	<string name="movie_remain_time">"Preostalo vreme za plaćanje"</string>
+	<string name="movie_schedule_add_favorites_fail">"Dodavanje u omiljene stavke nije moguće"</string>
+	<string name="movie_schedule_cancle_favorites_fail">"Uklanjanje iz omiljenih stavki nije moguće"</string>
+	<string name="movie_schedule_stop_time_tip">"Napomena: Prodaja karata se završava %1$d min. pre početka filma."</string>
+	<string name="movie_score">"-rezultat"</string>
+	<string name="movie_seat_buy_btr">"Kupi odmah"</string>
+	<string name="movie_seat_checked_exceed_max_count">"Možete da izaberete najviše 4 sedišta. Ako vam je potrebno još sedišta, kupite ih posebno"</string>
+	<string name="movie_seat_data_by_alert_normal">"E dd. MMM"</string>
+	<string name="movie_seat_data_by_alert_today">"danas, dd. MMM"</string>
+	<string name="movie_seat_data_by_alert_tomorrow">"sutra, dd. MMM"</string>
+	<string name="movie_seat_data_normal">"E dd.MM."</string>
+	<string name="movie_seat_data_today">"danas, dd.MM. "</string>
+	<string name="movie_seat_data_tomorrow">"sutra, dd.MM."</string>
+	<string name="movie_seat_date_alert_ok">"OK"</string>
+	<string name="movie_seat_date_alert_text">"Izabrali ste sesiju dana %1$s. Potvrdite tačno vreme."</string>
+	<string name="movie_seat_info_column">"Sedište"</string>
+	<string name="movie_seat_info_formatter">"%1$s–%2$s"</string>
+	<string name="movie_seat_info_row">"Red"</string>
+	<string name="movie_seat_room_info_tv">"Platno"</string>
+	<string name="movie_seat_screen_center_tv">"Sredina platna"</string>
+	<string name="movie_seat_separated_seat_checked_attention">"Ne kupuj karte za razdvojena sedišta"</string>
+	<string name="movie_seat_state_checked">"Izabrano"</string>
+	<string name="movie_seat_state_lover">"Sedišta za zaljubljene"</string>
+	<string name="movie_seat_state_normal">"Dostupno"</string>
+	<string name="movie_seat_state_sold">"Prodato"</string>
+	<string name="movie_select_seat_order">"Prodaja karata"</string>
+	<string name="movie_show_finished">" Kraj"</string>
+	<string name="movie_soon_filter_hot">"Popularno"</string>
+	<string name="movie_soon_filter_time">"Vreme"</string>
+	<string name="movie_soon_filter_time_all">"Sve"</string>
+	<string name="movie_soon_list_filter_other">"MM.yyyy."</string>
+	<string name="movie_soon_list_filter_this_year">"MM."</string>
+	<string name="movie_soon_list_section">"E, dd.MM.yyyy."</string>
+	<string name="movie_stop_sale">"Zatvoreno"</string>
+	<string name="movie_tab_cinema">"Bioskop"</string>
+	<string name="movie_tab_movie">"Film"</string>
+	<string name="movie_tab_order">"Porudžbine"</string>
+	<string name="movie_ticket_back_unlock_back">"Nazad"</string>
+	<string name="movie_ticket_back_unlock_cancel">"Otkaži"</string>
+	<string name="movie_ticket_back_unlock_title">"Ako se vratite, zaključana sedišta će se otključati"</string>
+	<string name="movie_ticket_change_city_btn_cancel">"Otkaži"</string>
+	<string name="movie_ticket_change_city_btn_confirm">"Promeni"</string>
+	<string name="movie_ticket_change_city_title">"Nalazite se u gradu %1$s. Promeniti grad?"</string>
+	<string name="movie_ticket_code_desc">"Potvrda o preuzimanju"</string>
+	<string name="movie_ticket_order_date">"Kreirano"</string>
+	<string name="movie_ticket_order_num">"Broj narudžbine"</string>
+	<string name="movie_ticket_order_price">"Plaćeni iznos"</string>
+	<string name="movie_ticket_price_unit">"CNY"</string>
+	<string name="movie_ticket_redeem_code">"Kôd za preuzimanje"</string>
+	<string name="movie_ticket_serial_number">"Serijski broj"</string>
+	<string name="movie_ticket_status_generate_ticket_failed">"Izdavanje karata nije uspelo"</string>
+	<string name="movie_ticket_status_generating_ticket">"Izdavanje karata"</string>
+	<string name="movie_ticket_status_overtime">"Vreme je isteklo"</string>
+	<string name="movie_ticket_status_refunded">"Refundirano"</string>
+	<string name="movie_ticket_status_refunding">"Refundiranje"</string>
+	<string name="movie_ticket_status_shown">"Emitovano"</string>
+	<string name="movie_ticket_status_unconsumed">"Nije potrošeno"</string>
+	<string name="movie_ticket_status_unknown">"Nepoznato"</string>
+	<string name="movie_ticket_status_unpay">"Za isplatu"</string>
+	<string name="movie_toast_order_overtime">"Vreme narudžbine je isteklo"</string>
+	<string name="movie_want">"prati"</string>
+	<string name="movie_weipiao_tele">"Wepiao korisnička služba"</string>
+	<string name="movie_weipiao_tele_num">"4001100100"</string>
+	<string name="movie_schedule_add_favorite">"omiljena stavka"</string>
+</resources>

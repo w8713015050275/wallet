@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="label_matter_attention">"Beleške"</string>
+	<string name="label_mobile_deposite">"Iznos dopune"</string>
+	<string name="label_mobile_flow_deposite">"Ograničenje dopune"</string>
+	<string name="label_mobile_number">"Broj mobilnog telefona (%s)"</string>
+	<string name="label_mobile_number_def_desc">"China Unicom\\China Telecom\\China Mobile"</string>
+	<string name="label_mobile_product_price">"Cena:"</string>
+	<string name="label_mobile_product_unit_fee">"CNY"</string>
+	<string name="label_mobile_product_unit_flow">"MB"</string>
+	<string name="label_mobile_product_unit_g_flow">"G"</string>
+	<string name="label_price_unit">"CNY"</string>
+	<string name="menu_record">"Zapis"</string>
+	<string name="mobile_clear_history">"Obriši evidenciju"</string>
+	<string name="mobile_clear_history_failed">"Brisanje nije uspelo"</string>
+	<string name="mobile_divider_phone_number_show">"Vaš broj"</string>
+	<string name="mobile_order_desc_coupon_price">"-%.2f"</string>
+	<string name="mobile_order_desc_label_phonenumber">"Broj za dopunu"</string>
+	<string name="mobile_order_list_label">"Istorija dopuna"</string>
+	<string name="mobile_order_status_cancelled">"Otkazano"</string>
+	<string name="mobile_order_status_charged">"Dopunjeno"</string>
+	<string name="mobile_order_status_created">"Na čekanju"</string>
+	<string name="mobile_order_status_depositing">"Dopunjavanje"</string>
+	<string name="mobile_order_status_paid">"Plaćeno"</string>
+	<string name="mobile_order_view_label">"Detalji o narudžbini"</string>
+	<string name="mobile_order_view_surelabel">"Potvrdi narudžbinu"</string>
+	<string name="mobile_phone_number_no_name">"Nepoznato"</string>
+	<string name="mobile_prompt_net_connection_fail">"Mrežno povezivanje nije uspelo"</string>
+	<string name="mobile_prompt_user_select_cancel">"Otkaži"</string>
+	<string name="mobile_prompt_user_select_load_title">"Mrežna greška. Ponovo učitajte stranicu."</string>
+	<string name="mobile_prompt_user_select_reload">"Učitaj ponovo"</string>
+	<string name="mobile_request_order_fail_prom">"Preuzimanje narudžbine nije uspelo, pokušajte ponovo"</string>
+</resources>

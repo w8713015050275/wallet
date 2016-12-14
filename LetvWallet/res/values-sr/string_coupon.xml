@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+--> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<plurals name="coupon_list_expired_msg_count">
+        <item quantity="one">"Isteklih poruka: %1d"</item>
+        <item quantity="other">"Isteklih poruka: %1d"</item>
+    </plurals>
+	<string name="coupon_card">"Kartica"</string>
+	<string name="coupon_card_list_expired_no_data">"Trenutno nema kartica"</string>
+	<string name="coupon_card_no">"Br. narudžbine:"</string>
+	<string name="coupon_code">"Kôd za preuzimanje:"</string>
+	<string name="coupon_copy_code">"Kopiraj kôd za preuzimanje"</string>
+	<string name="coupon_copy_code_cancel">"Otkaži"</string>
+	<string name="coupon_copy_code_notify">"Kôd za preuzimanje je kopiran"</string>
+	<string name="coupon_date">"Vreme:"</string>
+	<string name="coupon_lis_no_data">"Trenutno nema karata ili kupona"</string>
+	<string name="coupon_list_expired_activity_title">"Isteklo"</string>
+	<string name="coupon_list_expired_list_item_expired_tag">"Isteklo"</string>
+	<string name="coupon_list_expired_list_item_show_tag">"Emitovano"</string>
+	<string name="coupon_list_expired_list_item_unconsumed_tag">"Preuzeto"</string>
+	<string name="coupon_list_expired_list_item_used_tag">"Iskorišćeno"</string>
+	<string name="coupon_list_expired_no_data">"Trenutno nema kupona"</string>
+	<string name="coupon_list_more_item">"Više kartica"</string>
+	<string name="coupon_list_title_activity">"Novčanik"</string>
+	<string name="coupon_request_data">"%d kupon je dostupan"</string>
+	<string name="coupon_validite_period">"Datum isteka: "</string>
+	<string name="coupon_validite_period_to">" Do "</string>
+	<string name="empty_no_coupon">"Nema kupona"</string>
+	<string name="label_coupon">"Kupon"</string>
+	<string name="label_coupon_info">"Informacije o kuponu"</string>
+	<string name="label_coupon_usecondition">"Uslovi korišćenja"</string>
+	<string name="label_coupon_usecoupon_btn">"Upotrebi odmah"</string>
+	<string name="label_coupon_usedetail">"Uputstva"</string>
+</resources>
