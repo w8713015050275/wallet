@@ -48,6 +48,6 @@
     <string name="label_order_desc_null_discount">Ничего</string>
     <string name="total_order_list_hearder_other_month">MMM yyyy г.</string>
     <string name="total_order_list_hearder_this_month">Текущий месяц</string>
-    <string name="label_cfm_product_name">Имя элемента:</string>
-    <string name="label_phonenumber">Номер пополнения:</string>
+    <string name="label_cfm_product_name">"Имя элемента:"</string>
+    <string name="label_phonenumber">"Номер пополнения:"</string>
 </resources>

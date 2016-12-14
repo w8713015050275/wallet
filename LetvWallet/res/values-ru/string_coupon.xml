@@ -16,8 +16,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <plurals name="coupon_list_expired_msg_count">
-        <item quantity="one">сообщение об истечении срока действия</item>
-        <item quantity="other">сообщения об истечении срока действия</item>
+        <item quantity="one">"Сообщение об истечении срока действия (%1 дн.)"</item>
+        <item quantity="other">"Сообщения об истечении срока действия (%1 дн.)"</item>
     </plurals>
     <string name="coupon_card">Карта</string>
     <string name="coupon_card_list_expired_no_data">Карт нет</string>

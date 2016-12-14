@@ -35,8 +35,8 @@
     <string name="movie_cinema_filter_category_special">По функциям</string>
     <string name="movie_cinema_filter_text_formatter">Выбраны кинотеатры в \"%s\"</string>
     <string name="movie_cinema_list_by_movie_normal">dd.MM, E</string>
-    <string name="movie_cinema_list_by_movie_today">dd.MM, "Сегодня"</string>
-    <string name="movie_cinema_list_by_movie_tomorrow">dd.MM, "Завтра"</string>
+    <string name="movie_cinema_list_by_movie_today">"dd.MM, сегодня"</string>
+    <string name="movie_cinema_list_by_movie_tomorrow">"dd.MM, завтра"</string>
     <string name="movie_city_locating">Определение местонахождения</string>
     <string name="movie_city_location_failure">Не удалось определить местонахождение</string>
     <string name="movie_create_order_failed">Не удалось создать заказ</string>
@@ -68,7 +68,7 @@
     <string name="movie_location_city">Автоматическое определение местонахождения</string>
     <string name="movie_min_price">RMB (начальная цена)</string>
     <string name="movie_more">Больше</string>
-    <string name="movie_order_list_pay_remain_time">м "мин" с "сек до окончания срока оплаты"</string>
+    <string name="movie_order_list_pay_remain_time">"осталось m мин. s с."</string>
     <string name="movie_order_view_label">Сведения о заказе</string>
     <string name="movie_pay_change_sessions_unavailable">Не транспортабельный</string>
     <string name="movie_pay_order">Подтвердить заказ</string>
@@ -86,11 +86,11 @@
     <string name="movie_seat_buy_btr">Купить сейчас</string>
     <string name="movie_seat_checked_exceed_max_count">Можно выбрать до четырех мест. Если вам нужно больше мест, купите их отдельно.</string>
     <string name="movie_seat_data_by_alert_normal">dd.MMM, E</string>
-    <string name="movie_seat_data_by_alert_today">dd.MMM, "Сегодня"</string>
-    <string name="movie_seat_data_by_alert_tomorrow">dd.MMM, "Завтра"</string>
+    <string name="movie_seat_data_by_alert_today">"dd.MMM, сегодня"</string>
+    <string name="movie_seat_data_by_alert_tomorrow">"dd.MMM, завтра"</string>
     <string name="movie_seat_data_normal">dd.MM, E</string>
-    <string name="movie_seat_data_today">dd.MM, "Сегодня"</string>
-    <string name="movie_seat_data_tomorrow">dd.MM, "Завтра"</string>
+    <string name="movie_seat_data_today">"dd.MM, сегодня"</string>
+    <string name="movie_seat_data_tomorrow">"dd.MM, завтра"</string>
     <string name="movie_seat_date_alert_ok">OK</string>
     <string name="movie_seat_date_alert_text">Вы выбрали сеанс на %1$s. Подтвердите время.</string>
     <string name="movie_seat_info_column">Место</string>
@@ -104,7 +104,7 @@
     <string name="movie_seat_state_normal">Доступно</string>
     <string name="movie_seat_state_sold">Продано</string>
     <string name="movie_select_seat_order">Выберите места и купите билеты</string>
-    <string name="movie_show_finished">Время окончания</string>
+    <string name="movie_show_finished">" Завершить"</string>
     <string name="movie_stop_sale">Продажа билетов закончилась</string>
     <string name="movie_tab_cinema">Кинотеатр</string>
     <string name="movie_tab_movie">Фильм</string>
@@ -151,4 +151,5 @@
         <item quantity="other">Фильмы: %1$d</item>
     </plurals>
     <string name="movie_schedule_add_favorite">избранное</string>
+    <string name="movie_weipiao_tele_num">"4001100100"</string>
 </resources>

@@ -15,22 +15,22 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="continue_upgrade">Обновить сейчас</string>
-    <string name="defautl_update_content">устранить неполадки.</string>
-    <string name="downloaded">Загружено</string>
-    <string name="download_fail">Не удалось выполнить загрузку.</string>
-    <string name="download_sucess">Загрузка выполнена успешно.</string>
+    <string name="continue_upgrade">"Обновить сейчас"</string>
+    <string name="defautl_update_content">"устранить неполадки."</string>
+    <string name="downloaded">"Загружено"</string>
+    <string name="download_fail">"Не удалось выполнить загрузку"</string>
+    <string name="download_sucess">"Загрузка выполнена успешно."</string>
     <string name="download_under_wifi">Обновить через сеть Wi-Fi</string>
-    <string name="in_downloading">Загрузка</string>
-    <string name="no_wifi_update_notify">уведомить: загрузка посредством сетевых данных</string>
-    <string name="undownloaded">Отменить загрузку</string>
-    <string name="update_content">Введение: %s</string>
-    <string name="update_version">Версия: v%s</string>
-    <string name="upgrade_fail_note">Сбой обновления</string>
-    <string name="upgrade_success_note">Обновление прошло успешно</string>
-    <string name="wallet_exit_application">Выйти из приложения</string>
-    <string name="wallet_upgrade_notify_later">Напомнить позже</string>
-    <string name="wallet_upgrade_now">Обновить сейчас</string>
-    <string name="wallet_upgrade_title">Примечание об обновлении</string>
+    <string name="in_downloading">"Загрузка"</string>
+    <string name="no_wifi_update_notify">"уведомить: загрузка посредством сетевых данных"</string>
+    <string name="undownloaded">"Отменить загрузку"</string>
+    <string name="update_content">"Введение: %s"</string>
+    <string name="update_version">"Версия: %s"</string>
+    <string name="upgrade_fail_note">"Сбой обновления"</string>
+    <string name="upgrade_success_note">"Обновление прошло успешно"</string>
+    <string name="wallet_exit_application">"Выйти из приложения"</string>
+    <string name="wallet_upgrade_notify_later">"Напомнить позже"</string>
+    <string name="wallet_upgrade_now">"Обновить сейчас"</string>
+    <string name="wallet_upgrade_title">"Примечание об обновлении"</string>
     <string name="wifi_fail_continue_next">Отключение сети Wi-Fi, продолжить загрузку после восстановления подключения к Wi-Fi-сети.</string>
 </resources>
