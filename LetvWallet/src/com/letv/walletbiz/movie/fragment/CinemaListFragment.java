@@ -116,19 +116,18 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
     private LocationHelper.LocationCallback mLocationCallback = new LocationHelper.LocationCallback() {
 
         @Override
-        public void onLocationUpdateFinished(Address address) {
+        public void onLocationUpdateFinished(Address address, int responseCode) {
             if (address != null) {
                 mAddress = address;
-                mHandler.sendEmptyMessage(MSG_LOCATION_SUCCESS);
+                updateLocationDescView(true);
+                updateDiatanceAndSortAsyn();
             } else {
-                mHandler.sendEmptyMessage(MSG_LOCATION_FAILURE);
+                updateLocationDescView(false);
             }
         }
     };
 
     private static final int MSG_LOAD_FINISHED = 1;
-    private static final int MSG_LOCATION_FAILURE = 2;
-    private static final int MSG_LOCATION_SUCCESS = 3;
     private static final int MSG_STOP_REFRESH = 4;
     public static final int REQUEST_UPDATE_DATA = 10;
 
@@ -164,17 +163,6 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
                         showBlankPage(BlankPage.STATE_NO_NETWORK);
                     }
                     updateMenuIcon(mFilterBean == null ? R.drawable.ic_menu_filter_disabled : R.drawable.ic_menu_filter);
-                    break;
-                case MSG_LOCATION_SUCCESS:
-                    removeMessages(MSG_LOCATION_FAILURE);
-                    removeMessages(MSG_LOCATION_SUCCESS);
-                    updateLocationDescView(true);
-                    updateDiatanceAndSortAsyn();
-                    break;
-                case MSG_LOCATION_FAILURE:
-                    removeMessages(MSG_LOCATION_FAILURE);
-                    removeMessages(MSG_LOCATION_SUCCESS);
-                    updateLocationDescView(false);
                     break;
                 case MSG_STOP_REFRESH:
                     if (mPtrFrameLayout != null && mPtrFrameLayout.isRefreshing()) {
@@ -278,7 +266,7 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
                     location(false);
                 } else {
                     mPermissionState = PermissionCheckHelper.PERMISSION_REFUSED;
-                    mHandler.obtainMessage(MSG_LOCATION_FAILURE).sendToTarget();
+                    updateLocationDescView(false);
                 }
                 break;
             case PERMISSIONS_REQUEST_CODE_FORCE:
@@ -286,7 +274,7 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
                     location(true);
                 } else {
                     mPermissionState = PermissionCheckHelper.PERMISSION_REFUSED;
-                    mHandler.obtainMessage(MSG_LOCATION_FAILURE).sendToTarget();
+                    updateLocationDescView(false);
                 }
                 break;
         }
@@ -305,14 +293,13 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
         if (result == PermissionCheckHelper.PERMISSION_ALLOWED) {
             if (isNetworkAvailable()) {
                 mLocationDesc.setText(R.string.movie_city_locating);
-                mHandler.sendEmptyMessageDelayed(MSG_LOCATION_FAILURE, 15000);
                 mLocationHelper.getAddress(force);
             } else {
                 mLocationDesc.setText(R.string.movie_city_location_failure);
             }
             return true;
         } else if (result == PermissionCheckHelper.PERMISSION_REFUSED) {
-            mHandler.obtainMessage(MSG_LOCATION_FAILURE).sendToTarget();
+            updateLocationDescView(false);
         }
         return false;
     }

@@ -55,7 +55,6 @@ public class MovieHomeFragment extends BaseFragment {
      * 定位相关
      */
     //private static final int MSG_CURRENT_CITY_CHANGED = 2;
-    private static final int MSG_LOCATION_UPDATE = 3;
     private static final int MSG_OBTAIN_LOCATION_CITY_ID = 4;
     private static final int PERMISSIONS_REQUEST_CODE = 1;
     public static final int REQUEST_CODE_SET_CURRENT_CITY = 10;
@@ -76,16 +75,6 @@ public class MovieHomeFragment extends BaseFragment {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case MSG_LOCATION_UPDATE:
-                    removeMessages(MSG_LOCATION_UPDATE);
-                    if (msg.obj != null) {
-                        mLocationCityname = (String) msg.obj;
-                        if (mLocationTask == null) {
-                            getLocationCityId(mLocationCityname);
-                        }
-                    }
-                    break;
-
                 case MSG_OBTAIN_LOCATION_CITY_ID:
                     CityList.City city = (CityList.City) msg.obj;
                     if (city != null) {
@@ -311,9 +300,17 @@ public class MovieHomeFragment extends BaseFragment {
         isLocationPermissionRequest = true;
         if (result == PermissionCheckHelper.PERMISSION_ALLOWED) {
             mLocationHelper.getAddress(false);
-            mHandler.sendEmptyMessageDelayed(MSG_LOCATION_UPDATE, 15000);
         } else if (result == PermissionCheckHelper.PERMISSION_REFUSED) {
-            mHandler.obtainMessage(MSG_LOCATION_UPDATE).sendToTarget();
+            updateLoacation(null);
+        }
+    }
+
+    private void updateLoacation(String cityName){
+        if (!TextUtils.isEmpty(cityName)) {
+            mLocationCityname = cityName;
+            if (mLocationTask == null) {
+                getLocationCityId(mLocationCityname);
+            }
         }
     }
 
@@ -323,8 +320,6 @@ public class MovieHomeFragment extends BaseFragment {
             case PERMISSIONS_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     location();
-                } else {
-                    mHandler.obtainMessage(MSG_LOCATION_UPDATE).sendToTarget();
                 }
                 break;
         }
@@ -367,13 +362,11 @@ public class MovieHomeFragment extends BaseFragment {
     private LocationHelper.LocationCallback mLocationCallback = new LocationHelper.LocationCallback() {
 
         @Override
-        public void onLocationUpdateFinished(Address address) {
+        public void onLocationUpdateFinished(Address address, int responseCode) {
             if (getActivity() == null || getActivity().isFinishing()) {
                 return;
             }
-            Message msg = mHandler.obtainMessage(MSG_LOCATION_UPDATE);
-            msg.obj = address == null ? null : address.getLocality();
-            mHandler.sendMessage(msg);
+            updateLoacation(address == null ? null : address.getLocality());
         }
     };
 

@@ -157,13 +157,11 @@ public class CityListActivity extends BaseWalletFragmentActivity {
     private LocationHelper.LocationCallback mLocationCallback = new LocationHelper.LocationCallback() {
 
         @Override
-        public void onLocationUpdateFinished(Address address) {
+        public void onLocationUpdateFinished(Address address, int responseCode) {
             if (isFinishing()) {
                 return;
             }
-            Message msg = mHandler.obtainMessage(MSG_LOCATION_UPDATE);
-            msg.obj = address == null ? null : address.getLocality();
-            mHandler.sendMessage(msg);
+            updateLocation(address == null ? null : address.getLocality());
         }
     };
 
@@ -176,18 +174,6 @@ public class CityListActivity extends BaseWalletFragmentActivity {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case MSG_LOCATION_UPDATE:
-                    removeMessages(MSG_LOCATION_UPDATE);
-                    String cityName = (String) msg.obj;
-                    if (cityName == null) {
-                        mHeaderView.setGeoCity(R.string.movie_city_location_failure);
-                    } else {
-                        mLocationCityname = cityName;
-                        if (mLoadTask == null) {
-                            getLocationCityId(cityName);
-                        }
-                    }
-                    break;
                 case MSG_OBTAIN_LOCATION_CITY_ID:
                     CityList.City city = (CityList.City) msg.obj;
                     if (city == null) {
@@ -333,14 +319,24 @@ public class CityListActivity extends BaseWalletFragmentActivity {
         }
     }
 
+    private void updateLocation(String cityName){
+        if (cityName == null) {
+            mHeaderView.setGeoCity(R.string.movie_city_location_failure);
+        } else {
+            mLocationCityname = cityName;
+            if (mLoadTask == null) {
+                getLocationCityId(cityName);
+            }
+        }
+    }
+
     private void location() {
         int result = PermissionCheckHelper.checkLocationPermission(this, isLocationPermissionRequest ? -1 : PERMISSIONS_REQUEST_CODE);
         isLocationPermissionRequest = true;
         if (result == PermissionCheckHelper.PERMISSION_ALLOWED) {
             mLocationHelper.getAddress(false);
-            mHandler.sendEmptyMessageDelayed(MSG_LOCATION_UPDATE, 15000);
         } else if (result == PermissionCheckHelper.PERMISSION_REFUSED) {
-            mHandler.obtainMessage(MSG_LOCATION_UPDATE).sendToTarget();
+            updateLocation(null);
         }
     }
 
@@ -351,7 +347,7 @@ public class CityListActivity extends BaseWalletFragmentActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     location();
                 } else {
-                    mHandler.obtainMessage(MSG_LOCATION_UPDATE).sendToTarget();
+                    updateLocation(null);
                 }
                 break;
         }
