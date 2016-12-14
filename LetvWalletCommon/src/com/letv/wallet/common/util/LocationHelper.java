@@ -2,13 +2,15 @@ package com.letv.wallet.common.util;
 
 import android.content.Context;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 
 import com.letv.wallet.common.BaseApplication;
@@ -32,6 +34,18 @@ public class LocationHelper {
     private Address mAddress;
 
     private boolean isUpdating = false;
+    private boolean gpsProviderEnabled = false, networkProviderEnabled = false;
+    private static final int LOCATION_MIN_TIME_MS = 10, LOCATION_MIN_DISTENCE_M = 1;
+    private static final int LOCATION_TIME_OUT_MIN = 15 * 1000;
+    private static final int LOCATION_TIME_OUT_MAX = 60 * 1000;
+    private static final int MSG_LOCATION_GPS_TIME_OUT= 1001;
+    private static final int MSG_LOCATION_NETWORK_TIME_OUT= 1002;
+    private static final int MSG_LOCATION_FINISH= 1003;
+
+    public static final int LOCATE_TIME_OUT = 3;
+    public static final int LOCATE_DISABLE = 4;
+    public static final int LOCATE_EXCEPTION = 5;
+    public static final int LOCATE_SUCCESS = 6;
 
     private static LocationHelper sInstance = null;
     public static synchronized LocationHelper getInstance() {
@@ -41,8 +55,46 @@ public class LocationHelper {
         return sInstance;
     }
 
+    private Handler mMainHandler = new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_LOCATION_NETWORK_TIME_OUT:
+                    isUpdating = false;
+                    requestLoaction(LocationManager.GPS_PROVIDER);
+                    break;
+                case MSG_LOCATION_GPS_TIME_OUT:
+                    isUpdating = false;
+                    if(mLocationManager != null){
+                        Location lastLocation = null ;
+                        if(mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+                            lastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        }
+                        if(lastLocation == null){
+                            lastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        }
+                        if(lastLocation != null){
+                            updateLocationAddress(lastLocation);
+                        }else {
+                            callback(null, LOCATE_TIME_OUT);
+                        }
+                    }
+                    break;
+                case MSG_LOCATION_FINISH:
+                    locationUpdate((Address) msg.obj, msg.arg1);
+                    break;
+            }
+        }
+    };
+
+    private void removeUpdates(){
+        if (mLocationManager != null && mLocationListener != null) {
+            mLocationManager.removeUpdates(mLocationListener);
+        }
+    }
+
     public interface LocationCallback {
-        void onLocationUpdateFinished(Address address);
+        void onLocationUpdateFinished(Address address, int responseCode);
     }
 
     private LocationHelper(Context context) {
@@ -64,47 +116,80 @@ public class LocationHelper {
 
     public void getAddress(boolean forceUpdate) {
         if (!forceUpdate && mAddress != null) {
-            callback(mAddress);
+            callback(mAddress, LOCATE_SUCCESS);
             return;
         }
         if (isUpdating) {
             return;
         }
-        isUpdating = true;
-        Location lastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (lastLocation != null) {
-            updateLocationAddress(lastLocation);
+
+        List<String> enabledProviders = mLocationManager.getProviders(true);
+        if(enabledProviders == null || enabledProviders.size() == 0){
+            callback(null, LOCATE_DISABLE);
+            return;
+        }
+
+        gpsProviderEnabled = enabledProviders.contains(LocationManager.GPS_PROVIDER);
+        networkProviderEnabled = enabledProviders.contains(LocationManager.NETWORK_PROVIDER);
+
+        if (!gpsProviderEnabled && !networkProviderEnabled) {
+            callback(null, LOCATE_DISABLE);
+            return;
+        }
+        requestLoaction(networkProviderEnabled ? LocationManager.NETWORK_PROVIDER : LocationManager.GPS_PROVIDER);
+    }
+
+    private void requestLoaction(String provider){
+        if(isUpdating || mLocationManager == null || TextUtils.isEmpty(provider)){
+            return;
+        }
+
+        if (mLocationListener == null) {
+            mLocationListener = new MyLocationListener(mLocationManager);
         }
 
         try {
-            Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_FINE);
-            criteria.setAltitudeRequired(false);
-            criteria.setBearingRequired(false);
-            criteria.setCostAllowed(false);
-            criteria.setPowerRequirement(Criteria.POWER_LOW);
-
-            String provider = mLocationManager.getBestProvider(criteria, true);
-            if (mLocationListener == null) {
-                mLocationListener = new MyLocationListener(mLocationManager);
+            if (mLocationManager.isProviderEnabled(provider)){
+                LogHelper.d("startLocation >>> " + provider);
+                isUpdating = true;
+                mLocationManager.requestLocationUpdates(provider, LOCATION_MIN_TIME_MS, LOCATION_MIN_DISTENCE_M, mLocationListener);
+                int mLocationTimeOut = LOCATION_TIME_OUT_MIN;
+                int msgWhat = MSG_LOCATION_NETWORK_TIME_OUT;
+                if(LocationManager.GPS_PROVIDER.equalsIgnoreCase(provider)){
+                    mLocationTimeOut = LOCATION_TIME_OUT_MAX;
+                    msgWhat = MSG_LOCATION_GPS_TIME_OUT;
+                }
+                mMainHandler.sendEmptyMessageDelayed(msgWhat, mLocationTimeOut);
             }
-            if (!TextUtils.isEmpty(provider)) {
-                mLocationManager.requestLocationUpdates(provider, 10, 1, mLocationListener);
-            }
-
         } catch (Exception e) {
-            isUpdating = false;
             LogHelper.e(e.toString());
+            callback(null , LOCATE_EXCEPTION);
         }
     }
 
-    private void callback(Address address) {
+    private void callback(final Address address, final int responseCode) {
+        LogHelper.d("location finished >>> responseCode  = " + responseCode);
+        isUpdating = false;
         if (address != null) {
             mAddress = address;
         }
-        for (LocationCallback callback : mCallbackList) {
-            callback.onLocationUpdateFinished(mAddress);
+        if (isOnUIThread()) {
+            locationUpdate(address, responseCode);
+        } else {
+            Message.obtain(mMainHandler, MSG_LOCATION_FINISH, responseCode, 0, address).sendToTarget();
         }
+    }
+
+    private void locationUpdate(Address address,  int responseCode){
+        LogHelper.d("location update >>> responseCode  = " + responseCode);
+        removeUpdates();
+        for (LocationCallback callback : mCallbackList) {
+            callback.onLocationUpdateFinished(address, responseCode);
+        }
+    }
+
+    private boolean isOnUIThread(){
+        return Looper.myLooper() == Looper.getMainLooper();
     }
 
     private void updateLocationAddress(Location location) {
@@ -139,12 +224,6 @@ public class LocationHelper {
         @Override
         public void onLocationChanged(Location location) {
             updateLocationAddress(location);
-            if (mLocationManager != null) {
-                if (LocationManager.NETWORK_PROVIDER.equals(location.getProvider())
-                        || LocationManager.GPS_PROVIDER.equals(location.getProvider())) {
-                    mLocationManager.removeUpdates(this);
-                }
-            }
         }
 
         @Override
@@ -186,8 +265,11 @@ public class LocationHelper {
 
         @Override
         protected void onPostExecute(Address address) {
-            isUpdating = false;
-            callback(address);
+            if (mMainHandler != null) {
+                mMainHandler.removeMessages(MSG_LOCATION_GPS_TIME_OUT);
+                mMainHandler.removeMessages(MSG_LOCATION_NETWORK_TIME_OUT);
+            }
+            callback(address, LOCATE_SUCCESS);
         }
     }
 
