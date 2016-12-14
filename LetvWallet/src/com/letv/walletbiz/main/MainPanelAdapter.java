@@ -1,5 +1,10 @@
 package com.letv.walletbiz.main;
 
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.walletbiz.R;
@@ -19,6 +25,8 @@ import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.main.bean.WalletServiceListBean.WalletServiceBean;
 
 import org.xutils.xmain;
+
+import java.io.IOException;
 
 /**
  * Created by liuliang on 16-4-8.
@@ -82,7 +90,7 @@ public class MainPanelAdapter extends RecyclerView.Adapter<MainPanelAdapter.View
         if (isMoreItem(position)) {
             updatehasMore(false);
         } else {
-            WalletServiceBean bean = getItem(position);
+            final WalletServiceBean bean = getItem(position);
             if (bean != null) {
                 Action.uploadExposeTab(Action.WALLET_HOME_LIST + bean.service_id);
                 if (bean.jump_type == WalletServiceBean.JUMP_TYPE_APP) {
@@ -95,14 +103,41 @@ public class MainPanelAdapter extends RecyclerView.Adapter<MainPanelAdapter.View
                     }
                     AppUtils.LaunchAppWithBundle(mContext, bean.package_name, bean.jump_param, bundle);
                 } else if (bean.jump_type == WalletServiceBean.JUMP_TYPE_WEB) {
-                    Intent intent = new Intent(mContext, WalletMainWebActivity.class);
-                    intent.putExtra(CommonConstants.EXTRA_URL, bean.jump_link);
-                    intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, bean.service_name);
-                    intent.putExtra(WalletConstant.EXTRA_WEB_WITH_ACCOUNT, bean.need_token == 1);
-                    mContext.startActivity(intent);
+                    if (AccountHelper.getInstance().isLogin(mContext)) {
+                        jumpWeb(bean);
+                    } else {
+                        AccountHelper.getInstance().loginLetvAccountIfNot((Activity) mContext,  new AccountManagerCallback() {
+
+                            @Override
+                            public void run(AccountManagerFuture future) {
+                                try {
+                                    if (mContext != null && future.getResult() != null && AccountHelper.getInstance().isLogin(mContext)) {
+                                        jumpWeb(bean);
+                                    }
+                                } catch (OperationCanceledException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (AuthenticatorException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
                 }
             }
         }
+    }
+
+    private void jumpWeb(WalletServiceBean bean){
+        if (bean == null) {
+            return ;
+        }
+        Intent intent = new Intent(mContext, WalletMainWebActivity.class);
+        intent.putExtra(CommonConstants.EXTRA_URL, bean.jump_link);
+        intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, bean.service_name);
+        intent.putExtra(WalletConstant.EXTRA_WEB_WITH_ACCOUNT, bean.need_token == 1);
+        mContext.startActivity(intent);
     }
 
     @Override
