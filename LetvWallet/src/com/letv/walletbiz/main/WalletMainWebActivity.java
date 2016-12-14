@@ -2,15 +2,20 @@ package com.letv.walletbiz.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.webkit.JavascriptInterface;
 
-import com.google.gson.JsonObject;
 import com.letv.wallet.common.activity.BaseWebViewActivity;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.DeviceUtils;
+import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.base.util.WalletConstant;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,19 +24,11 @@ import java.util.Map;
  */
 public class WalletMainWebActivity extends BaseWebViewActivity {
 
-    private static final String JS_GETSSOTK_INTERFACE_NAME = "LeWalletJSBridge";
-    private static final String JSON_ERRNO = "errno";
-    private static final String JSON_ERRMSG = "errmsg";
-    private static final String JSON_DATA = "data";
-    private static final String JSON_SUCCESS_MSG = "success";
-    private static final String JSON_NOTOKEN_MSG = "Get token failed";
-    private static final String JSON_NOLOGIN_MSG = "Redirecting login...";
-
-    private static final int SUCCESS = 10000;
-    private static final int NOTOKEN = 10001;
-    private static final int NOLOGIN = 10002;
+    private static final String JS_Bridge_INTERFACE_NAME = "LeWalletJSBridge";
 
     private boolean withAccount = false;
+    private static final String DOMAIN_LE = "le.com";
+    private static final String DOMAIN_LETV = "letv.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,11 @@ public class WalletMainWebActivity extends BaseWebViewActivity {
             withAccount = intent.getBooleanExtra(WalletConstant.EXTRA_WEB_WITH_ACCOUNT, false);
         }
         super.onCreate(savedInstanceState);
-        mWebView.addJavascriptInterface(new JsBridgeInterface(this), JS_GETSSOTK_INTERFACE_NAME);
+        Uri uri = Uri.parse(mUrl);
+        String host = uri.getHost();
+        if (!TextUtils.isEmpty(host) && (host.endsWith(DOMAIN_LE) || host.endsWith(DOMAIN_LETV))) {
+            mWebView.addJavascriptInterface(new JsBridgeInterface(this), JS_Bridge_INTERFACE_NAME);
+        }
     }
 
     @Override
@@ -66,25 +67,31 @@ public class WalletMainWebActivity extends BaseWebViewActivity {
         }
 
         @JavascriptInterface
-        public String GetSsoTk() {
-            if (!AccountHelper.getInstance().isLogin(this.mContext)) {
-                AccountHelper.getInstance().loginLetvAccountIfNot(this.mContext, null);
-                return getJson(NOLOGIN, JSON_NOLOGIN_MSG, "");
+        public String getImei() {
+            return DeviceUtils.getDeviceImei(WalletApplication.getApplication());
+        }
+
+        @JavascriptInterface
+        public String getPhoneNumbers() {
+            ArrayList<String> numberList = new ArrayList<String>();
+            String phoneNumber0 = DeviceUtils.getPhoneNumber0(WalletMainWebActivity.this);
+            String phoneNumber1 = DeviceUtils.getPhoneNumber1(WalletMainWebActivity.this);
+            if (!TextUtils.isEmpty(phoneNumber0)) {
+                numberList.add(phoneNumber0);
+            }
+            if (!TextUtils.isEmpty(phoneNumber1)) {
+                numberList.add(phoneNumber1);
+            }
+            if (numberList.size() == 0) {
+                return null;
             } else {
-                String uToken = AccountHelper.getInstance().getToken(this.mContext);
-                if (TextUtils.isEmpty(uToken))
-                    return getJson(NOTOKEN, JSON_NOTOKEN_MSG, "");
-                return getJson(SUCCESS, JSON_SUCCESS_MSG, uToken);
+                JSONArray array = new JSONArray();
+                for (String phoneNumber : numberList) {
+                    array.put(phoneNumber);
+                }
+                return array.toString();
             }
         }
 
-    }
-
-    public String getJson(int errno, String errmsg, String data) {
-        JsonObject obj = new JsonObject();
-        obj.addProperty(JSON_ERRNO, errno);
-        obj.addProperty(JSON_ERRMSG, errmsg);
-        obj.addProperty(JSON_DATA, data);
-        return obj.toString();
     }
 }
