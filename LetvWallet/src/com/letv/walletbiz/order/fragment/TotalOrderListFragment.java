@@ -3,6 +3,7 @@ package com.letv.walletbiz.order.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,7 +101,9 @@ public class TotalOrderListFragment extends BaseOrderListFragment {
 
             @Override
             public void onItemClick(View view, int position) {
-                if (view.isEnabled()) {
+                if (position == RecyclerView.NO_POSITION)
+                    return;
+                if (view != null && view.isEnabled()) {
                     if (!NetworkHelper.isNetworkAvailable()) {
                         mToast.show();
                         return;

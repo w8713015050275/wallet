@@ -3,6 +3,7 @@ package com.letv.walletbiz.movie.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -113,6 +114,8 @@ public class MovieOrderListFragment extends BaseOrderListFragment {
         RecyclerItemClickListener itemClickListener = new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                if (position == RecyclerView.NO_POSITION)
+                    return;
                 OrderListViewAdapter adapater = getOrderListAdapter();
                 if (adapater != null) {
                     MovieOrder order = (MovieOrder) adapater.getOrderItem(position);

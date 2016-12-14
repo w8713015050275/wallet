@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -252,6 +253,8 @@ public class MobileOrderListFragment extends BaseOrderListFragment implements Pa
 
             @Override
             public void onItemClick(View view, int position) {
+                if (position == RecyclerView.NO_POSITION)
+                    return;
                 if (!NetworkHelper.isNetworkAvailable()) {
                     mToast.show();
                     return;
