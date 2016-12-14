@@ -28,9 +28,7 @@
     <style name="CouponTheme" parent="AppTheme.Arrow" />
 
     <!-- TotalOrder -->
-    <style name="TotalOrder" parent="AppTheme.Arrow">
-        <item name="walletPrimaryColor">@color/colorMobilePrimary</item>
-    </style>
+    <style name="TotalOrder" parent="AppTheme.Arrow" />
 
     <style name="MovieTheme.MovieListSmallYellow">
         <item name="walletPrimaryColor">@color/movie_schedule_price</item>
