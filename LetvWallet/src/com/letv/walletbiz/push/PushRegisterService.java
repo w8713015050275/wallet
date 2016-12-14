@@ -127,7 +127,6 @@ public class PushRegisterService extends Service {
         LogHelper.d("[%s] push app register state = " + str +" isRegister = " + isRegister, TAG);
         final boolean isRegister = isRegister();
         if (isRegister) {
-            cleanup();
             stopSelf();
             return;
         }
@@ -183,7 +182,6 @@ public class PushRegisterService extends Service {
         LogHelper.d("[%s] push mRegId = " + mRegId, TAG);
         if (result) {
             onRegisterPushSuccess(); // 取消push服务状态广播监听
-            stopSelf();
         } else {
             registerPushStateReceiver();  // 如果失败了, 注册push服务
             setRetryJob(LePushConstant.PHASE_PUSH_REGISTER); // 进行重试
@@ -254,6 +252,9 @@ public class PushRegisterService extends Service {
      * 清除相关状态
      */
     public void cleanup() {
+        if(Looper.myLooper() != Looper.getMainLooper()){
+            return;
+        }
         if (mWorkLooper != null) {
             mWorkLooper.quit();
             mWorkLooper = null;
@@ -272,7 +273,7 @@ public class PushRegisterService extends Service {
     private void onRegisterPushSuccess() {
         unRegisterPushStateReceiver();
         cancelRetryJob();
-        cleanup();
+        stopSelf();
     }
 
     /**
