@@ -235,7 +235,6 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==KeyEvent.KEYCODE_BACK) {
             if(mWebView.canGoBack()) {
-                mWebViewClient.setBackPressed(true);
                 mWebView.goBack();//返回上一页面
                 return true;
             } else {
@@ -247,22 +246,11 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
 
     public class BaseWebViewClient extends WebViewClient {
 
-        private boolean isBackPressed = false;
-
-        public void setBackPressed(boolean isBackPressed) {
-            this.isBackPressed = isBackPressed;
-        }
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            //返回值是true的人为控制打开逻辑，为false时webview自己处理
             LogHelper.d("[" + TAG + "]shouldOverrideUrlLoading url is: " + url);
-            if (isBackPressed) {
-                return true;
-            }
-            if (url.startsWith("http")) {
-                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                view.loadUrl(url);
-            } else {
+            if (!url.startsWith("http")) {
                 LogHelper.d("["+TAG+"]shouldOverrideUrlLoading go browser");
                 Intent intent = null;
                 if (url.startsWith("intent:")) {
@@ -288,13 +276,13 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
                 } catch (Exception e) {
                     LogHelper.d(e.toString());
                 }
+                return true;
             }
-            return true;
+            return false;
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            isBackPressed = false;
             super.onPageFinished(view, url);
         }
     }
