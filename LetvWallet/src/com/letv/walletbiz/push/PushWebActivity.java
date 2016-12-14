@@ -4,8 +4,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.KeyEvent;
+import android.view.View;
 
 import com.letv.wallet.common.activity.BaseWebViewActivity;
 import com.letv.wallet.common.util.LogHelper;
@@ -19,6 +18,16 @@ import java.util.List;
  */
 public class PushWebActivity  extends BaseWebViewActivity {
     private static final String TAG = PushWebActivity.class.getSimpleName();
+
+    private View.OnClickListener mClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!isExsitMainActivity()) {
+                startActivity(new Intent(PushWebActivity.this, MainActivity.class));
+                LogHelper.d("%S Main is not in stack, start MainActivity", TAG);
+            }
+        }
+    };
 
     @Override
     protected boolean needUpdateTitle() {
@@ -44,26 +53,19 @@ public class PushWebActivity  extends BaseWebViewActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        LogHelper.d("%S onBackPressed", TAG);
-        if (!isExsitMainActivity()) {
-            startActivity(new Intent(this, MainActivity.class));
-            LogHelper.d("%S Main is not in stack, start MainActivity", TAG);
-        }
-        super.onBackPressed();
+    protected View.OnClickListener getCloseButtonClickListener() {
+        return mClickListener;
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode== KeyEvent.KEYCODE_BACK) {
-            LogHelper.d("%S onKeyDown BACK", TAG);
-            if(!mWebView.canGoBack()) {
-                if (!isExsitMainActivity()) {
-                    startActivity(new Intent(this, MainActivity.class));
-                    LogHelper.d("%S Main is not in stack, start MainActivity", TAG);
-                }
+    public void onBackPressed() {
+        LogHelper.d("%S onBackPressed", TAG);
+        if(!mWebView.canGoBack()) {
+            if (!isExsitMainActivity()) {
+                startActivity(new Intent(this, MainActivity.class));
+                LogHelper.d("%S Main is not in stack, start MainActivity", TAG);
             }
         }
-        return super.onKeyDown(keyCode, event);
+        super.onBackPressed();
     }
 }
