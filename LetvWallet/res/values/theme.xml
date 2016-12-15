@@ -8,6 +8,11 @@
         <item name="walletPrimaryColor">@color/colorMobilePrimary</item>
     </style>
 
+    <!-- Member -->
+    <style name="MemberTheme" parent="AppTheme.Arrow">
+        <item name="walletPrimaryColor">@color/colorMemberPrimary</item>
+    </style>
+
     <!-- Movie -->
     <style name="MovieTheme" parent="AppTheme.Arrow">
         <item name="walletPrimaryColor">@color/movie_primary_color</item>

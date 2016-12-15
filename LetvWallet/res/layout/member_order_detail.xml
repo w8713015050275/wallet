@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:localui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_price_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/SectionBase.CostLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.Wallet.OrderDesc.SectionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_order_cost_info" />
+            </LinearLayout>
+
+            <View style="@style/Divider_HorizontalLine_Style" />
+
+            <com.letv.walletbiz.mobile.widget.MobileProductCostBrief
+                android:id="@+id/v_top_price_brief"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/SectionBase.CostLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.Wallet.OrderDesc.SectionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_order_product_info" />  <!--商品信息head-->
+        </LinearLayout>
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <com.letv.walletbiz.member.widget.MemberProductBrief
+            android:id="@+id/v_prodcut"
+            style="@style/PaddingVBase"
+            android:background="@color/content_item_bg_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" /> <!--商品信息主体-->
+
+        <View style="@style/Divider_HorizontalLine_Style" />
+
+        <LinearLayout
+            android:id="@+id/ll_price_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/SectionBase.CostLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.Wallet.OrderDesc.SectionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_order_cost_info" />
+            </LinearLayout>
+
+            <View style="@style/Divider_HorizontalLine_Style" />
+
+            <com.letv.walletbiz.mobile.widget.MobileProductCostBrief
+                android:id="@+id/v_bottom_price_brief"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" /> <!--结算信息-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_order_pay_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/SectionBase.CostLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.Wallet.OrderDesc.SectionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_order_pay_info" />
+            </LinearLayout>
+
+            <View style="@style/Divider_HorizontalLine_Style" />
+
+
+            <LinearLayout
+                style="@style/PaddingVBase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/content_item_bg_color"
+                android:orientation="vertical">
+
+                <com.letv.wallet.common.widget.LabeledTextView
+                    android:id="@+id/ltv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    localui:label_text="@string/label_order_status" />
+
+                <com.letv.wallet.common.widget.LabeledTextView
+                    android:id="@+id/ltv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    localui:label_text="@string/label_order_create_time" />
+
+            </LinearLayout>
+
+            <View style="@style/Divider_HorizontalLine_Style" />
+        </LinearLayout> <!--支付信息-->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/ibtn_action"
+                style="@style/PayButton.SectionBase.Bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/pay_button_tv_font_size"
+                android:textStyle="normal"
+                android:visibility="gone" />
+        </RelativeLayout> <!--支付按钮-->
+    </LinearLayout>
+</ScrollView>

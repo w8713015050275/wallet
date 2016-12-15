@@ -251,6 +251,11 @@
             android:authorities="com.letv.mobile.record"
             android:exported="false" />
 
+        <provider
+            android:name=".member.provider.MemberProvider"
+            android:authorities="com.letv.wallet.member"
+            android:exported="false" />
+
         <!-- wallet common start -->
         <receiver android:name="com.letv.wallet.common.receiver.AccountChangedReceiver">
             <intent-filter>
@@ -335,6 +340,51 @@
             android:label="@string/label_coupon_usedetail"
             android:screenOrientation="portrait"
             android:theme="@style/CouponTheme"/>
+
+        <!--member purchase -->
+        <activity
+            android:name=".member.activity.MemberActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MemberTheme">
+            <intent-filter>
+                <action android:name="com.letv.wallet.member" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".member.activity.MemberOrderConfirmActivity"
+            android:label="@string/mobile_order_view_surelabel"
+            android:screenOrientation="portrait"
+            android:theme="@style/MemberTheme">
+        </activity>
+        <activity
+            android:name=".member.activity.MemberOrderDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MemberTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="letvwallet" android:host="memberOrderDetail" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".member.activity.MemberCouponListActivity"
+            android:label="@string/label_order_desc_coupon_price"
+            android:screenOrientation="portrait"
+            android:theme="@style/MemberTheme">
+        </activity>
+
+        <activity
+            android:name=".member.activity.MemberOrderListActivity"
+            android:label="@string/member_order_list_label"
+            android:screenOrientation="portrait"
+            android:theme="@style/MemberTheme" />
+
+        <activity
+            android:name=".member.activity.MemberAgreementActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MemberTheme" />
 
         <!--letv Push -->
         <service android:name=".push.LetvPushIntentService" />

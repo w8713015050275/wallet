@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ids_desc_v"
+    style="@style/SectionBase"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ids_desc_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_order_prodcut"
+            android:singleLine="true"
+            android:layout_marginBottom="2dp"
+            android:textSize="16sp"
+            android:textColor="@color/member_color_text"
+            android:fontFamily="SourceHanSansSC-Regular"
+            /> <!--产品名称-->
+
+        <LinearLayout
+            android:id="@+id/v_sn"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/member_order_desc_label_sn"
+                android:textSize="14sp"
+                android:textColor="@color/member_color_sub_text"
+                android:fontFamily="SourceHanSansSC-Regular" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_order_sn"
+                android:textSize="14sp"
+                android:textColor="@color/member_color_sub_text"
+                android:fontFamily="SourceHanSansSC-Regular" />
+        </LinearLayout> <!--订单编号-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_time"
+            android:textSize="14sp"
+            android:textColor="@color/member_color_sub_text"
+            android:fontFamily="SourceHanSansSC-Regular"/> <!--创建时间-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ids_action_bar"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/ll_price"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_price"
+                android:textSize="20sp"
+                android:textColor="@color/member_color_text"
+                android:fontFamily="Rotobo-Regular"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_price_unit"
+                android:textSize="20sp"
+                android:textColor="@color/member_color_text"
+                android:fontFamily="Roboto-Regular"/>
+        </LinearLayout> <!--付款-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:id="@+id/tv_order_status"
+            android:textSize="14sp"
+            android:fontFamily="SourceHanSansSC-Regular"
+            /> <!--产品状态-->
+    </LinearLayout>
+
+</LinearLayout>

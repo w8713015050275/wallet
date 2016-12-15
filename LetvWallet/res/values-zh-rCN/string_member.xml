@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="member_tool_bar">乐视会员</string>
+    <string name="total_price">%1$s元</string>
+    <string name="month_price">%1$s元/月</string>
+    <string name="purchase">购买</string>
+    <string name="agreement">会员协议</string>
+    <string name="available_scope">适用范围</string>
+
+    <string name="label_member_duration">会员时长</string>
+    <string name="label_member_description">会员描述</string>
+    <string name="label_member_detail">详情说明</string>
+    <string name="label_agreement"> 协议</string>
+
+    <string name="member_order_desc_label_name">商品名称: </string>
+    <string name="member_order_desc_label_duration">会员时长: </string>
+    <string name="member_order_desc_label_description">会员描述: </string>
+    <string name="agreement_detail">详细说明</string>
+
+    <string name="member_month_count">个月</string>
+    <string name="member_agree_agreement">同意 《%1$s 协议》</string>
+    <string name="member_prompt_net_connection_fail">网络连接失败</string>
+    <string name="member_prompt_user_select_load_title">网络出错,请重新加载</string>
+
+    <string name="member_product_continuous">连续\n包月</string>
+    <string name="member_product_month">包月</string>
+    <string name="member_product_season">包季</string>
+    <string name="member_product_year">包年</string>
+
+    <string name="member_order_desc_label_sn">订单编号：</string>
+    <string name="member_order_list_label">订单记录</string>
+</resources>

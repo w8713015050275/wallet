@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/agreement"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="18dp"
+    android:paddingBottom="18dp"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/membership_agreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/member_color_text"
+        android:singleLine="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="16dip"
+        android:paddingRight="16dip"
+        android:text="@string/agreement"
+        android:fontFamily="SourceHanSansSC-Regular"/>
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/agreement_detail"
+        android:textSize="14sp"
+        android:textColor="@color/member_color_sub_text"
+        android:maxLines="1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@id/membership_agreement"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:fontFamily="SourceHanSansSC-Regular"/>
+</RelativeLayout>

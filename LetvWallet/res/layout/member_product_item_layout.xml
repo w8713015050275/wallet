@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:paddingBottom="10dip"
+    android:paddingLeft="16dip"
+    android:paddingRight="16dip">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"/>
+
+    <Button
+        android:id="@+id/purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:text="@string/purchase"
+        android:textSize="14sp"
+        android:layout_centerVertical="true"
+        style="@style/Widget.Eui.Button.Twostate" />
+
+
+    <LinearLayout
+        android:id="@+id/member_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/icon"
+        android:layout_toStartOf="@id/purchase"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/product_price_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/icon">
+            <TextView
+                android:id="@+id/price_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/member_color_text"
+                android:text="@string/total_price"
+                android:fontFamily="Roboto-Medium"/>
+            <TextView
+                android:id="@+id/price_per_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textSize="14sp"
+                android:textColor="@color/member_color_sub_text"
+                android:text="@string/month_price"
+                android:fontFamily="Roboto-Medium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/operational_copy_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            android:layout_alignBottom="@id/icon">
+            <TextView
+                android:id="@+id/tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="16dp"
+                android:minWidth="32dp"
+                android:gravity="center_vertical"
+                android:textSize="10sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="SourceHanSansSC-Regular"
+                android:background="@drawable/member_tag_bg"/>
+            <TextView
+                android:id="@+id/copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/member_color_sub_text"
+                android:fontFamily="SourceHanSansSC-Regular" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

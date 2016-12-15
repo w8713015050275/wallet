@@ -34,6 +34,7 @@ public class AutoSlideViewpager extends ViewPager {
             }
         }
     };
+    private Boolean mEnableAutoSlide = true;
 
     public AutoSlideViewpager(Context context) {
         this(context, null);
@@ -44,14 +45,27 @@ public class AutoSlideViewpager extends ViewPager {
         init();
     }
 
+    public void enableAutoSlide() {
+        mEnableAutoSlide = true;
+        mHandler.removeCallbacks(mUpdateRunnable);
+        mHandler.postDelayed(mUpdateRunnable, 3000);
+    }
+
+    public void disableAutoSlide() {
+        mEnableAutoSlide = false;
+        mHandler.removeCallbacks(mUpdateRunnable);
+    }
+
     public void dataSetChanged() {
         PagerAdapter pagerAdapter = getAdapter();
         if (pagerAdapter != null && pagerAdapter.getCount() > 1) {
             isChanging = true;
             mCurrentPosition = 0;
             setCurrentItem(mCurrentPosition);
-            mHandler.removeCallbacks(mUpdateRunnable);
-            mHandler.postDelayed(mUpdateRunnable, 3000);
+            if (mEnableAutoSlide) {
+                mHandler.removeCallbacks(mUpdateRunnable);
+                mHandler.postDelayed(mUpdateRunnable, 3000);
+            }
         } else {
             isChanging = false;
         }
@@ -66,7 +80,9 @@ public class AutoSlideViewpager extends ViewPager {
         super.onWindowVisibilityChanged(visibility);
         if (isChanging) {
             if (View.VISIBLE == visibility) {
-                mHandler.postDelayed(mUpdateRunnable, 3000);
+                if (mEnableAutoSlide) {
+                    mHandler.postDelayed(mUpdateRunnable, 3000);
+                }
             } else {
                 mHandler.removeCallbacks(mUpdateRunnable);
             }
@@ -88,8 +104,10 @@ public class AutoSlideViewpager extends ViewPager {
                 }
                 mCurrentPosition = position;
                 if (getAdapter() != null && getAdapter().getCount() > 1) {
-                    mHandler.removeCallbacks(mUpdateRunnable);
-                    mHandler.postDelayed(mUpdateRunnable, 3000);
+                    if (mEnableAutoSlide) {
+                        mHandler.removeCallbacks(mUpdateRunnable);
+                        mHandler.postDelayed(mUpdateRunnable, 3000);
+                    }
                 }
             }
 

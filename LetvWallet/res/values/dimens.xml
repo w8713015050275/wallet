@@ -155,4 +155,7 @@
     <dimen name="notify_paddingleft">24dp</dimen>
     <dimen name="notify_paddingright">24dp</dimen>
 
+    <!--member-->
+    <dimen name="member_tab_indicator_height">10px</dimen>
+
 </resources>

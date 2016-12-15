@@ -12,6 +12,11 @@
         <item name="android:fontFamily">helve-neue</item>
     </style>
 
+    <style name="MemberTabLayoutTextAppearance" parent="@*android:style/TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">SourceHanSansSC-Regular</item>
+    </style>
+
     <style name="TextAppearance.Wallet.MobileLabel">
         <item name="android:layout_marginTop">24dp</item>
         <item name="android:layout_marginBottom">12dp</item>

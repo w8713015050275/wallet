@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/available_scope_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/available_scope_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:singleLine="true"
+        android:paddingTop="12dp"
+        android:paddingLeft="16dip"
+        android:paddingRight="16dip"
+        android:paddingBottom="12dip"
+        android:text="@string/available_scope"
+        />
+
+    <ImageView
+        android:id="@+id/available_scope_iv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+</LinearLayout>

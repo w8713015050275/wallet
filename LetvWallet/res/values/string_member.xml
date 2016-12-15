@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="member_tool_bar">Le Member</string>
+    <string name="total_price">%1$s Yuan</string>
+    <string name="month_price">%1$s Yuan/Month</string>
+    <string name="purchase">Purchase</string>
+    <string name="agreement">Member agreement</string>
+    <string name="available_scope">Available scope</string>
+
+    <string name="label_member_duration">Member duration</string>
+    <string name="label_member_description">Member description</string>
+    <string name="label_member_detail">Member detail</string>
+    <string name="label_agreement"> agreement</string>
+
+    <string name="member_order_desc_label_duration">Member duration: </string>
+    <string name="member_order_desc_label_description">Member description: </string>
+    <string name="agreement_detail">Agreement Detail</string>
+
+    <string name="member_month_count"> Months</string>
+    <string name="member_agree_agreement">Agree &lt;%1$s agreement&gt;</string>
+    <string name="member_prompt_net_connection_fail">Network connection failed</string>
+    <string name="member_prompt_user_select_load_title">Network error. Please reload.</string>
+
+    <string name="member_product_continuous">continue</string>
+    <string name="member_product_month">month</string>
+    <string name="member_product_season">season</string>
+    <string name="member_product_year">year</string>
+
+    <string name="member_order_desc_label_sn">Order Number:</string>
+    <string name="member_order_list_label">Order history</string>
+
+</resources>
