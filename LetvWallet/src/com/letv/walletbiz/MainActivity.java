@@ -360,6 +360,10 @@ public class MainActivity extends BaseWalletFragmentActivity {
             mLeLicenceDialog.dismiss();
         }
 
+        if (mLoginSheet != null && mLoginSheet.isShowing()) {
+            mLoginSheet.dismiss();
+        }
+
         super.onDestroy();
     }
 
