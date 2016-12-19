@@ -13,10 +13,16 @@ public class MobileConstant {
         public final static String SDKPAY = _BASE + "sdkpay";
         public final static String ORDER_DETAIL_QUERY = _BASE + "orderdetail";
         public final static String COUPON = "coupon/api/v1/available";
+        public final static String DOC = "charge/api/v1/doc/one";
+        public final static String DOCS = "charge/api/v1/doc/all";
 
         public final static String MOBILE_MATTER_ATTENTION_BASE = "http://static.scloud.letv.com/htmlpage/";
         public final static String MOBILE_MATTER_ATTENTION_FEE = MOBILE_MATTER_ATTENTION_BASE + "1467017924-5770eac4cf88d.html";
         public final static String MOBILE_MATTER_ATTENTION_FLOW = MOBILE_MATTER_ATTENTION_BASE + "1467017962-5770eaeacbff0.html";
+    }
+
+    public static final class ACTIVITY_ACTION {
+        public final static String MOBILE_FLOW = "com.letv.wallet.mobile.flow";
     }
 
     public static final class JPRODUCT {
@@ -43,11 +49,16 @@ public class MobileConstant {
         public final static String CHARGE_PLATFORM = "platform";
         public final static String SKU = "sku";
         public final static String NUM = "num";
+        public final static String DOC_KEY = "doc_key";
 
         public final static String COUPONLIST_KEY = "couponlist_key";
         public final static String COUPON_DATA_KEY = "coupon_data_key";
         public final static String COUPON_LIST_COUNT_KEY = "coupon_list_count_key";
         public final static String COUPON_ID_KEY = "coupon_id";
+    }
+
+    public static final class DOCKEY {
+        public final static String DOC_FLOW_KEY = "DOC_FLOW_NOTICE";
     }
 
     public static final class JPREPAY {

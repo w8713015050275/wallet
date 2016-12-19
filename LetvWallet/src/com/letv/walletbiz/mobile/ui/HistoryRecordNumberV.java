@@ -38,13 +38,14 @@ public class HistoryRecordNumberV extends RecyclerView {
     }
 
     public void initV() {
-        setBackgroundColor(getContext().getResources().getColor(R.color.colorWalletBg));
+        setBackgroundColor(getContext().getResources().getColor(R.color.content_item_bg_color));
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setLayoutParams(params);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         setLayoutManager(layoutManager);
         DividerItemDecoration dividerLine = new DividerItemDecoration(getContext(), getResources().getColor(R.color.colorDividerLineBg),
                 DividerItemDecoration.VERTICAL_LIST, getResources().getDimensionPixelSize(R.dimen.divider_width));
+        dividerLine.setTopAndBottomLine(true, getResources().getDimensionPixelSize(R.dimen.divider_width));
         addItemDecoration(dividerLine);
         setAdapter(mAdapter = new HistoryRecordNumberAdapter());
     }

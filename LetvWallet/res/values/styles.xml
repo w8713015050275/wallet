@@ -18,11 +18,11 @@
     </style>
 
     <style name="TextAppearance.Wallet.MobileLabel">
-        <item name="android:layout_marginTop">24dp</item>
-        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
         <item name="android:layout_marginLeft">@dimen/margin_default</item>
-        <item name="android:textColor">@color/mobile_tv_label_color</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/mobilePrimaryTvColor</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="MobileHistoryMobileNumber" parent="@*android:style/TextAppearance">

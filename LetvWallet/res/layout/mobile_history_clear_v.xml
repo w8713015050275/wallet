@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mobile_history_clear_tv"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/mobile_historynumber_margin"
+    android:paddingTop="@dimen/mobile_historynumber_margin">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="14sp"
         android:fontFamily="helve-neue"
+        android:text="@string/mobile_clear_history"
         android:textColor="@color/mobile_history_clear_tv_color"
-        android:text="@string/mobile_clear_history" />
+        android:textSize="14sp" />
 </RelativeLayout>

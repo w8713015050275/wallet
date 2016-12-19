@@ -1,67 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="53dp"
+    android:layout_height="wrap_content"
     android:background="@color/content_item_bg_color"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/mobile_default_big_margin"
+    android:paddingTop="@dimen/mobile_default_big_margin">
 
 
     <ImageButton
+        android:id="@+id/ibtn_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ibtn_contact"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
-        android:src="@drawable/ic_wallet_mobile_contact"
-        android:layout_centerVertical="true"
-        android:tint="@color/colorMobilePrimary"
         android:background="@null"
-        android:onClick="onClick_Contact" />
+        android:onClick="onClick_Contact"
+        android:src="@drawable/ic_wallet_mobile_contact"
+        android:tint="@color/colorMobilePrimary" />
 
     <View
-        android:layout_width="@dimen/divider_width"
-        android:layout_height="fill_parent"
         android:id="@+id/slash"
-        android:layout_toLeftOf="@id/ibtn_contact"
-        android:background="@color/colorDividerLineBg"
+        android:layout_width="@dimen/mobile_phone_number_vertical_divider_width"
+        android:layout_height="60dp"
         android:layout_centerVertical="true"
-        android:layout_alignTop="@+id/ibtn_clear"
-        android:layout_alignBottom="@+id/ibtn_clear"
+        android:layout_toLeftOf="@id/ibtn_contact"
+        android:background="@color/colorDividerLine"
         android:clickable="true" />
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
         android:id="@+id/ibtn_clear"
-        android:layout_toLeftOf="@id/slash"
-        android:paddingLeft="8dp"
-        android:paddingRight="10dp"
-        android:src="@drawable/ic_wallet_clearall"
-        android:background="@null"
-        android:onClick="onClick_ClearAll"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_contact_name"
-        style="@style/TextAppearance.Wallet"
-        android:singleLine="true"
-        android:maxEms="7"
-        android:ellipsize="end"
-        android:layout_toStartOf="@+id/ibtn_clear"
-        android:layout_centerVertical="true" />
-
-    <com.letv.wallet.common.widget.PhoneEditText
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minWidth="80dp"
-        android:layout_alignParentStart="true"
-        android:gravity="center_vertical"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/tv_contact_name"
-        android:id="@+id/etv_mobile_number"
-        android:layout_marginLeft="@dimen/margin_default" />
+        android:layout_toLeftOf="@id/slash"
+        android:background="@null"
+        android:onClick="onClick_ClearAll"
+        android:paddingLeft="@dimen/margin_default"
+        android:paddingRight="@dimen/margin_default"
+        android:src="@drawable/ic_wallet_clearall" />
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_toLeftOf="@+id/ibtn_clear"
+        android:orientation="vertical">
+
+        <com.letv.wallet.common.widget.PhoneEditText
+            android:id="@+id/etv_mobile_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="center_vertical" />
+
+        <LinearLayout
+            android:id="@+id/mobile_number_info_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/tv_contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/mobilePrimaryTvColor"
+                android:textSize="@dimen/mobile_phone_desc_tv_size" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="@dimen/mobile_phone_number_vertical_divider_width"
+                android:layout_height="@dimen/mobile_divider_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:layout_marginRight="@dimen/margin_default"
+                android:background="@color/colorDividerLine"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/tv_mobile_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:maxLines="1"
+                android:textColor="@color/mobilePrimaryTvColor"
+                android:textSize="@dimen/mobile_phone_desc_tv_size" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

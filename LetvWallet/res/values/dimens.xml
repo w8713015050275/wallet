@@ -143,12 +143,24 @@
     <dimen name="tab_margin_horizontal">40dp</dimen>
 
     <!-- mobile -->
-    <dimen name="mobile_matterpage_margin_bottom">25dp</dimen>
+    <dimen name="mobile_matterpage_margin_bottom">15dp</dimen>
     <dimen name="mobile_matterpage_body_margin_left">30dp</dimen>
     <dimen name="mobile_matterpage_body_margin_top">20dp</dimen>
     <dimen name="mobile_historynumber_margin">18dp</dimen>
+    <dimen name="mobile_phone_number_tv_size">24sp</dimen>
+    <dimen name="mobile_phone_desc_tv_size">14sp</dimen>
     <dimen name="mobile_desc_tv_yuan_size">14sp</dimen>
     <dimen name="mobile_desc_tv_price_size">18sp</dimen>
+    <dimen name="mobile_divider_height">14dp</dimen>
+    <dimen name="mobile_default_big_margin">14dp</dimen>
+    <dimen name="mobile_default_vertical_margin">6dp</dimen>
+    <dimen name="mobile_products_panel_space">10dp</dimen>
+    <dimen name="mobile_products_panel_vertical_padding">2dp</dimen>
+    <dimen name="mobile_products_panel_height">64dp</dimen>
+    <dimen name="mobile_products_panel_corners_radius">3dp</dimen>
+    <dimen name="mobile_products_panel_stroke_width">1dp</dimen>
+    <dimen name="mobile_products_panel_more_tv_size">16sp</dimen>
+    <dimen name="mobile_phone_number_vertical_divider_width">0.5dp</dimen>
 
     <!-- update-->
     <dimen name="notify_img_dimens">40dp</dimen>

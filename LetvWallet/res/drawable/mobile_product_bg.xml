@@ -2,23 +2,31 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_focused="true">
         <shape android:shape="rectangle">
-            <gradient android:angle="270.0" android:endColor="@color/colorMobilePrimary" android:startColor="@color/colorMobilePrimary" />
+            <corners android:radius="@dimen/mobile_products_panel_corners_radius" />
+            <solid android:color="@color/colorMobilePrimary" />
+            <stroke android:color="@color/colorMobilePrimary" android:width="@dimen/mobile_products_panel_stroke_width" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <gradient android:angle="270.0" android:endColor="@color/colorMobilePrimary" android:startColor="@color/colorMobilePrimary" />
+            <corners android:radius="@dimen/mobile_products_panel_corners_radius" />
+            <solid android:color="@color/colorMobilePrimary" />
+            <stroke android:color="@color/colorMobilePrimary" android:width="@dimen/mobile_products_panel_stroke_width" />
         </shape>
     </item>
 
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <gradient android:angle="270.0" android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
+            <corners android:radius="@dimen/mobile_products_panel_corners_radius" />
+            <solid android:color="@android:color/transparent" />
+            <stroke android:color="@color/mobile_product_tv_color" android:width="@dimen/mobile_products_panel_stroke_width" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <gradient android:angle="270.0" android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
+            <corners android:radius="@dimen/mobile_products_panel_corners_radius" />
+            <solid android:color="@android:color/transparent" />
+            <stroke android:color="@color/colorMobilePrimary" android:width="@dimen/mobile_products_panel_stroke_width" />
         </shape>
     </item>
 </selector>

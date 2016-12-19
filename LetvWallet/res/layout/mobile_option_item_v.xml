@@ -1,67 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="30dp"
-    android:paddingBottom="26dp"
     android:background="@drawable/mobile_product_bg"
-    android:gravity="center_horizontal">
+    android:paddingBottom="@dimen/mobile_products_panel_vertical_padding"
+    android:paddingTop="@dimen/mobile_products_panel_vertical_padding">
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:id="@+id/normal_ll"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ids_product_bar">
+        android:gravity="center"
+        android:minHeight="@dimen/mobile_products_panel_height"
+        android:orientation="vertical"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/ids_product_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_product_name"
-            android:textSize="30sp"
-            android:layout_marginRight="3dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="helve-neue"
+                android:textColor="@drawable/mobile_product_textcolor"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/tv_product_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/mobile_product_textcolor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ids_price_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mobile_products_panel_vertical_padding"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ids_tv_price_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_mobile_product_price"
+                android:textColor="@drawable/mobile_product_textcolor"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_price_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/mobile_product_textcolor"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_price_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_price_unit"
+                android:textColor="@drawable/mobile_product_textcolor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/more_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
+
+        <TextView
+            android:id="@+id/more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@drawable/mobile_product_textcolor"
-            android:fontFamily="helve-neue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_product_unit"
-            android:textSize="10sp"
-            android:textColor="@drawable/mobile_product_textcolor" />
+            android:textSize="@dimen/mobile_products_panel_more_tv_size" />
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ids_price_bar"
-        android:layout_marginTop="12dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_mobile_product_price"
-            android:id="@+id/ids_tv_price_a"
-            android:textSize="10sp"
-            android:textColor="@drawable/mobile_product_textcolor" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_price_label"
-            android:textStyle="bold"
-            android:textSize="10sp"
-            android:textColor="@drawable/mobile_product_textcolor" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_price_unit"
-            android:id="@+id/tv_price_unit"
-            android:textStyle="bold"
-            android:textSize="10sp"
-            android:textColor="@drawable/mobile_product_textcolor" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

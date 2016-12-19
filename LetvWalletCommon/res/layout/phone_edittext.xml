@@ -8,7 +8,8 @@
     android:fontFamily="helve-neue"
     android:gravity="center_vertical"
     android:inputType="phone"
-    android:singleLine="true"
+    android:maxLines="1"
+    android:ellipsize="end"
     android:textColor="@color/colorWalletTv"
     android:imeOptions="actionDone" >
 

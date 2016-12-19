@@ -6,6 +6,7 @@
     <color name="colorAccent">#2BA2FF</color>
     <color name="colorDivider">#C6C7DB</color>
     <color name="colorDividerLineBg">#DFDFDF</color>
+    <color name="colorDividerLine">#D8D8D8</color>
     <color name="colorWalletBg">@color/wallet_windowBackground_color</color>
     <color name="colorTvBlack">#FF000000</color>
     <color name="colorTvHint">#DFDFDF</color>
@@ -132,11 +133,14 @@
     <color name="colorMobilePrimary">#2BA2FF</color>
     <color name="colorMemberPrimary">#447DE9</color>
     <color name="mobile_tv_label_color">#747474</color>
-    <color name="mobile_history_clear_tv_color">#747474</color>
-    <color name="mobile_history_number_tv_color">@android:color/black</color>
-    <color name="mobile_history_contact_name_tv_color">#747474</color>
+    <color name="mobile_history_clear_tv_color">@color/mobileSecondaryTvColor</color>
+    <color name="mobile_history_number_tv_color">@color/mobileSecondaryTvColor</color>
+    <color name="mobile_history_contact_name_tv_color">@color/mobilePrimaryTvColor</color>
     <color name="mobile_product_tv_color">#747474</color>
     <color name="mobile_product_tv_press_color">@android:color/white</color>
+    <color name="mobilePrimaryTvColor">#808080</color>
+    <color name="mobileSecondaryTvColor">#404040</color>
+    <color name="mobile_dialog_out_bg_color">#4C000000</color>
 
     <!--member-->
     <color name="member_color_primary">#447DE9</color>

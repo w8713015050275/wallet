@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import com.letv.shared.widget.LeBottomSheet;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
+import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.DeviceUtils;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.ParseHelper;
@@ -46,6 +50,7 @@ import com.letv.walletbiz.main.MainPanelHelper;
 import com.letv.walletbiz.main.bean.WalletBannerListBean;
 import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.mobile.MobileConstant.PRODUCT_TYPE;
+import com.letv.walletbiz.mobile.beans.DocPromptBean;
 import com.letv.walletbiz.mobile.beans.HistoryRecordNumberBean;
 import com.letv.walletbiz.mobile.beans.ProductBean;
 import com.letv.walletbiz.mobile.pay.MobileProduct;
@@ -78,6 +83,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private static final int GET_UTOKEN_RET = 102;
     private static final int CLEAR_HISTORY_RET = 103;
     private static final int UPDATE_CONTACTNAME = 104;
+    private static final int UPDATE_DOC_PROMPT = 105;
 
     private static final int CHECK_STATUS = 107;
 
@@ -93,21 +99,25 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private String mDividerPhoneNumberStr;
     private String mPromptInputRightNumber;
     private String mPromptNetConnectionFail;
-    private String mPhoneNumFormatStr;
-    private String mPhoneNumDefDesc;
+    private String mPhoneNumDefDescFormatStr;
 
     private String mDividerNumber;
     private String mSimCard0;
     private String mSimCard1;
 
+    private LinearLayout mFlowEntrancell;
     private ProductsPanel mProductPanel;
+    private ProductsPanel mFlowEntranceProductPanel;
     private PhoneEditText mPhoneEdittext;
+    private LinearLayout mMobileNumberInfoLl;
     private TextView mViewMobileName;
     private TextView mViewMobileDesc;
+    private View mLine1;
     private TextView mViewDeposite;
     private ProductBean mStubProducts;
     private static long mCouponID;
 
+    private LinearLayout mBannerLl;
     private BannerV mBannerV;
     private int mFeeOrFlow;
     private LeBottomSheet mUserSelectDialog;
@@ -117,13 +127,14 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private boolean isChangedNumber = false;
     private boolean isRequestingPermissin = false;
 
-
+    private RelativeLayout mRecordHistoryNumberRl;
     private HistoryRecordNumberV mRecordHistoryNumberV;
 
     private WalletBannerListBean mBannerListData;
 
     private PriorityExecutor mExecutor;
     private MobileAsyncTask mMobileProductsAsyncT;
+    private DocPromptTask mDocPromptAsyncT;
     private ContactNameAsyncTask contactAsyncT;
     private BannerTask mBannerAsyncT;
 
@@ -135,6 +146,16 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             switch (msg.what) {
                 case CHECK_STATUS:
                     checkAllStatus();
+                    break;
+                case UPDATE_DOC_PROMPT:
+                    if (msg.obj != null) {
+                        DocPromptBean docPromptBean = (DocPromptBean) msg.obj;
+                        if (!TextUtils.isEmpty(docPromptBean.getDoc_content())) {
+                            mViewDeposite.setText(docPromptBean.getDoc_content());
+                            return;
+                        }
+                    }
+                    mViewDeposite.setText(getDeposite(mFeeOrFlow));
                     break;
                 case UPDATE_PRODUCT_LIST:
                     ProductBean result;
@@ -153,15 +174,15 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                     break;
                 case UPDATE_CONTACTNAME:
                     contactAsyncT = null;
+                    showMobileNumberInfoLl();
                     String name = "";
                     if (msg.obj != null) {
                         name = msg.obj.toString();
                     }
                     if (TextUtils.isEmpty(name)) {
-                        setStrangeMobileName();
-                    } else {
-                        setMobileName(name);
+                        name = getString(R.string.mobile_phone_number_unknown);
                     }
+                    setMobileName(name);
                     break;
                 case CLEAR_HISTORY_RET:
                     if (msg.arg1 == CLEAR_FAILED_STATE) {
@@ -311,23 +332,28 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         mPromptNetConnectionFail = getString(R.string.mobile_prompt_net_connection_fail);
         mPromptInputRightNumber = getString(com.letv.wallet.common.R.string.phonenumber_prompt_input_right_number);
         mDividerPhoneNumberStr = getString(R.string.mobile_divider_phone_number_show);
-        mPhoneNumFormatStr = getString(R.string.label_mobile_number);
-        mPhoneNumDefDesc = getString(R.string.label_mobile_number_def_desc);
+        mPhoneNumDefDescFormatStr = getString(R.string.label_mobile_def_desc);
 
+        mBannerLl = (LinearLayout) findViewById(R.id.banner_ll);
         mBannerV = (BannerV) findViewById(R.id.mobile_banner_id);
         mProductPanel = (ProductsPanel) findViewById(R.id.rv_product_panel);
+        mFlowEntrancell = (LinearLayout) findViewById(R.id.flow_entrance_ll);
+        mFlowEntranceProductPanel = (ProductsPanel) findViewById(R.id.flow_entrance_product_panel);
+        mRecordHistoryNumberRl = (RelativeLayout) findViewById(R.id.record_history_number_rl);
         mRecordHistoryNumberV = (HistoryRecordNumberV) findViewById(R.id.record_history_number);
         mRecordHistoryNumberV.setHistoryNumberClickListener(this);
         mPhoneEdittext = (PhoneEditText) findViewById(R.id.etv_mobile_number);
-        mPhoneEdittext.setTextHintcolor(getResources().getColor(R.color.colorTvHint));
+        mPhoneEdittext.setTextSize(DensityUtils.px2dip(24.0F));
+        mPhoneEdittext.setTextColor(getColor(R.color.mobileSecondaryTvColor));
+        mPhoneEdittext.setTextHintcolor(getColor(R.color.mobilePrimaryTvColor));
+        mPhoneEdittext.setHint(R.string.movie_hint_input_phonenumber);
         mPhoneEdittext.setVerificationLevel(PhoneEditText.PHONENUMBER_RIGOROUS_VERIFICATION);
         mPhoneEdittext.setCallback(this);
-
+        mMobileNumberInfoLl = (LinearLayout) findViewById(R.id.mobile_number_info_ll);
         mViewDeposite = (TextView) findViewById(R.id.label_deposite);
         mViewDeposite.setText(getDeposite(mFeeOrFlow));
-        mViewMobileDesc = (TextView) findViewById(R.id.tv_label_number);
-        updateNumberDesc(null);
-
+        mViewMobileDesc = (TextView) findViewById(R.id.tv_mobile_desc);
+        mLine1 = findViewById(R.id.line1);
         mViewMobileName = (TextView) findViewById(R.id.tv_contact_name);
 
 
@@ -360,6 +386,36 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             }
 
         });
+        if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FEE) {
+            mFlowEntrancell.setVisibility(View.VISIBLE);
+            ProductsPanelAdapter flowAdapter = new ProductsPanelAdapter(null, getString(R.string.mobile_flow_entrance_content));
+            mFlowEntranceProductPanel.setAdapter(flowAdapter);
+            mFlowEntranceProductPanel.setType(MOBILE_FLOW);
+            flowAdapter.setOnItemClickListener(new ProductsPanelAdapter.OnMobileProductItemClickListener() {
+                                                   @Override
+                                                   public void onItemClick(View view, int position) {
+                                                       Object tag = view.getTag();
+                                                       int type = 0;
+                                                       if (tag != null) {
+                                                           try {
+                                                               type = (int) tag;
+                                                           } catch (Exception e) {
+                                                               e.printStackTrace();
+                                                           }
+                                                       }
+                                                       if (type == ProductsPanelAdapter.VIEW_MORETYPE) {
+                                                           Intent intent = new Intent(MobileConstant.ACTIVITY_ACTION.MOBILE_FLOW);
+                                                           intent.putExtra(MOBILE_PARAM.MOBILENUMBER, getCurrentNumber());
+                                                           intent.putExtra(WalletConstant.EXTRA_FROM, getPackageName());
+                                                           startActivity(intent);
+                                                       }
+                                                   }
+                                               }
+            );
+        } else {
+            mFlowEntrancell.setVisibility(View.GONE);
+            queryFlowDocPrompt(MobileConstant.DOCKEY.DOC_FLOW_KEY);
+        }
         fillPhoneNumber(savedInstanceState, number);
     }
 
@@ -466,8 +522,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         LogHelper.d("[%S] getPhoneInfo end time = " + System.currentTimeMillis(), TAG);
     }
 
-    private boolean isShowSoftKeyboard = false;
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -560,40 +614,40 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         @Override
         public void onLoadFromLocalFinished(WalletBannerListBean result, int errorCode) {
             mBannerAsyncT = null;
-            if (mBannerV == null) {
+            if (mBannerLl == null || mBannerV == null) {
                 return;
             }
             mBannerListData = result;
             if (result != null && result.list.length > 0) {
                 mBannerV.bindBannerView(result.list);
-                if (mBannerV.getVisibility() == View.GONE) {
-                    mBannerV.setVisibility(View.VISIBLE);
+                if (mBannerLl.getVisibility() == View.GONE) {
+                    mBannerLl.setVisibility(View.VISIBLE);
                 }
                 return;
             }
-            if (mBannerV.getVisibility() == View.VISIBLE) {
-                mBannerV.setVisibility(View.GONE);
+            if (mBannerLl.getVisibility() == View.VISIBLE) {
+                mBannerLl.setVisibility(View.GONE);
             }
         }
 
         @Override
         public void onLoadFromNetworkFinished(WalletBannerListBean result, int errorCode, boolean needUpdate) {
             mBannerAsyncT = null;
-            if (!needUpdate || mBannerV == null) {
+            if (!needUpdate || mBannerLl == null || mBannerV == null) {
                 return;
             }
             mBannerListData = result;
             if (errorCode == MainPanelHelper.NO_ERROR) {
                 if (result != null && result.list.length > 0) {
                     mBannerV.bindBannerView(result.list);
-                    if (mBannerV.getVisibility() == View.GONE) {
-                        mBannerV.setVisibility(View.VISIBLE);
+                    if (mBannerLl.getVisibility() == View.GONE) {
+                        mBannerLl.setVisibility(View.VISIBLE);
                     }
                     return;
                 }
             }
-            if (mBannerV.getVisibility() == View.VISIBLE) {
-                mBannerV.setVisibility(View.GONE);
+            if (mBannerLl.getVisibility() == View.VISIBLE) {
+                mBannerLl.setVisibility(View.GONE);
             }
         }
     };
@@ -676,8 +730,15 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     }
 
     public void onClick_ClearAll(View view) {
-        mPhoneEdittext.setText("");
-        mRecordHistoryNumberV.show();
+        if (mMobileNumberInfoLl != null) {
+            mMobileNumberInfoLl.setVisibility(View.INVISIBLE);
+        }
+        if (mPhoneEdittext != null) {
+            mPhoneEdittext.setText("");
+        }
+        if (mRecordHistoryNumberV != null) {
+            mRecordHistoryNumberV.show();
+        }
     }
 
 
@@ -696,6 +757,10 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         if (mMobileProductsAsyncT != null) {
             mMobileProductsAsyncT.cancel(true);
             mMobileProductsAsyncT = null;
+        }
+        if (mDocPromptAsyncT != null) {
+            mDocPromptAsyncT.cancel(true);
+            mDocPromptAsyncT = null;
         }
         if (contactAsyncT != null) {
             contactAsyncT.cancel(true);
@@ -726,15 +791,10 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                 return true;
             case 0:
                 mRecordHistoryNumberV.show();
-                setMobileName("");
-                updateProductList(null);
+                clearMobileNumberInfo();
                 return false;
             case CHECK_MOBILE_INDEX:
-                if (!mViewMobileDesc.getText().equals(String.format(mPhoneNumFormatStr, mPhoneNumDefDesc))) {
-                    setMobileName("");
-                    updateNumberDesc(null);
-                    updateProductList(null);
-                }
+                clearMobileNumberInfo();
             default:
                 /**
                  * TODO: 筛选手机号
@@ -754,18 +814,16 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         }
     }
 
-    private void setStrangeMobileName() {
-        if (mViewMobileName != null) {
-            String name = getResources().getString(R.string.mobile_phone_number_unknown);
-            mViewMobileName.setText(name);
-            mViewMobileName.setTextColor(getColor(R.color.red));
+    private String getCurrentNumber() {
+        if (mPhoneEdittext != null) {
+            return mPhoneEdittext.getMobileNumber();
         }
+        return "";
     }
 
     private void setMobileName(String name) {
         if (mViewMobileName != null) {
             mViewMobileName.setText(name);
-            mViewMobileName.setTextColor(getColor(R.color.black));
         }
     }
 
@@ -830,11 +888,17 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         if (mRecordHistoryNumberV.getVisibility() == View.GONE) {
             mRecordHistoryNumberV.setVisibility(View.VISIBLE);
         }
+        if (mRecordHistoryNumberRl.getVisibility() == View.GONE) {
+            mRecordHistoryNumberRl.setVisibility(View.VISIBLE);
+        }
     }
 
     private void hideHistoryNumberV() {
         if (mRecordHistoryNumberV.getVisibility() == View.VISIBLE) {
             mRecordHistoryNumberV.setVisibility(View.GONE);
+        }
+        if (mRecordHistoryNumberRl.getVisibility() == View.VISIBLE) {
+            mRecordHistoryNumberRl.setVisibility(View.GONE);
         }
     }
 
@@ -902,12 +966,42 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         handler.sendMessage(msg);
     }
 
-    private void updateNumberDesc(String desc) {
-        if (desc == null) {
-            desc = mPhoneNumDefDesc;
+    protected void updateDocPrompt(DocPromptBean data) {
+        handler.removeMessages(UPDATE_DOC_PROMPT);
+        Message msg = Message.obtain();
+        msg.obj = data;
+        msg.what = UPDATE_DOC_PROMPT;
+        handler.sendMessage(msg);
+    }
+
+    private void showMobileNumberInfoLl() {
+        if (mMobileNumberInfoLl != null) {
+            mMobileNumberInfoLl.setVisibility(View.VISIBLE);
         }
-        String label = String.format(mPhoneNumFormatStr, desc);
+    }
+
+    private void clearMobileNumberInfo() {
+        updateProductList(null);
+        setMobileName("");
+        if (mMobileNumberInfoLl == null) return;
+        mMobileNumberInfoLl.setVisibility(View.INVISIBLE);
+    }
+
+    private void updateNumberDesc(String desc) {
+        if (mViewMobileDesc == null) return;
+        if (TextUtils.isEmpty(desc)) {
+            mViewMobileDesc.setText("");
+            if (mLine1.getVisibility() == View.VISIBLE) {
+                mLine1.setVisibility(View.INVISIBLE);
+            }
+            return;
+        }
+        String label = String.format(mPhoneNumDefDescFormatStr, desc);
         mViewMobileDesc.setText(label);
+        showMobileNumberInfoLl();
+        if (mLine1.getVisibility() == View.INVISIBLE) {
+            mLine1.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getContactNameAsyncTask(String number) {
@@ -1052,4 +1146,63 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         }
     }
 
+    private void queryFlowDocPrompt(String docKey) {
+        if (!isNetworkAvailable()) {
+            showNetFailToast();
+            return;
+        }
+        LogHelper.d("[%S] queryFlowDocPrompt execute", TAG);
+        if (TextUtils.isEmpty(docKey)) return;
+        if (mDocPromptAsyncT == null) {
+            mDocPromptAsyncT = new DocPromptTask();
+        }
+        Object[] objParams = new Object[]{docKey};
+        mDocPromptAsyncT.execute(objParams);
+    }
+
+    private class DocPromptTask extends AsyncTask<Object, Integer, BaseResponse<DocPromptBean>> {
+
+        public DocPromptTask() {
+        }
+
+        @Override
+        protected void onPostExecute(BaseResponse<DocPromptBean> result) {
+            if (MobileActivity.this.isFinishing() || isCancelled()) return;
+            LogHelper.i("[%S] Response data", TAG);
+            DocPromptBean docPromptBean = null;
+            if (result != null) {
+                docPromptBean = result.data;
+            }
+            updateDocPrompt(docPromptBean);
+            mDocPromptAsyncT = null;
+        }
+
+        @Override
+        protected BaseResponse<DocPromptBean> doInBackground(Object... params) {
+            BaseResponse<DocPromptBean> response = null;
+            try {
+                String PATH = MobileConstant.PATH.DOC;
+                LogHelper.i("[%S] request DocPrompt data", TAG);
+                String docKey = params[0].toString();
+                BaseRequestParams reqParams = new BaseRequestParams(PATH);
+                reqParams.addQueryStringParameter(MobileConstant.PARAM.DOC_KEY, docKey);
+                TypeToken typeToken = new TypeToken<BaseResponse<DocPromptBean>>() {
+                };
+                response = xmain.http().getSync(reqParams, typeToken.getType());
+            } catch (Exception e) {
+            } catch (Throwable throwable) {
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (isCancelled()) return;
+        }
+    }
 }

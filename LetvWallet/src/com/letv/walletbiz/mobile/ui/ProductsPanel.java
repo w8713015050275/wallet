@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.letv.wallet.common.view.GridDividerItemDecoration;
+import com.letv.wallet.common.view.SpacesItemDecoration;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.mobile.beans.ProductBean;
 
@@ -35,11 +36,7 @@ public class ProductsPanel extends RecyclerView {
         mContext = context;
         GridLayoutManager layoutManager = new GridLayoutManager(context, LAYOUT_COLUMES);
         setLayoutManager(layoutManager);
-
-        GridDividerItemDecoration gDividerItemDecoration = new GridDividerItemDecoration(getContext(),
-                getResources().getColor(R.color.colorMobileDivider), getResources().getDimensionPixelSize(R.dimen.divider_width));
-        gDividerItemDecoration.setSecondColor(getResources().getColor(R.color.colorMobilePrimary));
-        addItemDecoration(gDividerItemDecoration);
+        addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelOffset(R.dimen.mobile_products_panel_space)));
     }
 
 

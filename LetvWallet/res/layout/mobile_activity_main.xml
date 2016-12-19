@@ -2,78 +2,145 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/content_item_bg_color"
     android:orientation="vertical">
 
-    <com.letv.walletbiz.mobile.ui.BannerV
-        android:id="@+id/mobile_banner_id"
+    <LinearLayout
+        android:id="@+id/banner_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/content_item_bg_color"
-        android:visibility="gone" />
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_label_number"
-            style="@style/TextAppearance.Wallet.MobileLabel"
-            android:layout_width="wrap_content"
+        <com.letv.walletbiz.mobile.ui.BannerV
+            android:id="@+id/mobile_banner_id"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_mobile_number" />
-    </RelativeLayout>
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mobile_default_vertical_margin"
+            android:background="@color/wallet_windowBackground_color" />
+    </LinearLayout>
 
     <include layout="@layout/mobile_number_selector" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/content_item_bg_color">
+        android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/product_ll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/product_content_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/product_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/mobile_default_vertical_margin"
+                        android:background="@color/wallet_windowBackground_color" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/label_deposite"
+                            style="@style/TextAppearance.Wallet.MobileLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+
+                    <com.letv.walletbiz.mobile.ui.ProductsPanel
+                        android:id="@+id/rv_product_panel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:overScrollMode="never"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/flow_entrance_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/mobile_default_vertical_margin"
+                        android:background="@color/wallet_windowBackground_color" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/TextAppearance.Wallet.MobileLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_mobile_flow_entrance_deposite" />
+                    </RelativeLayout>
+
+                    <com.letv.walletbiz.mobile.ui.ProductsPanel
+                        android:id="@+id/flow_entrance_product_panel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:overScrollMode="never"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp" />
+                </LinearLayout>
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/page_bg_color">
+                android:background="@color/content_item_bg_color"
+                android:gravity="center_horizontal">
 
                 <TextView
-                    android:id="@+id/label_deposite"
-                    style="@style/TextAppearance.Wallet.MobileLabel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick_matterAttention"
+                    android:paddingBottom="@dimen/mobile_matterpage_margin_bottom"
+                    android:paddingTop="@dimen/mobile_matterpage_margin_bottom"
+                    android:text="@string/label_matter_attention"
+                    android:textColor="?attr/walletPrimaryColor"
+                    android:textSize="@dimen/matter_attention_font_size" />
             </RelativeLayout>
-
-            <com.letv.walletbiz.mobile.ui.ProductsPanel
-                android:id="@+id/rv_product_panel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:overScrollMode="never" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:onClick="onClick_matterAttention"
-            android:paddingBottom="@dimen/mobile_matterpage_margin_bottom"
-            android:text="@string/label_matter_attention"
-            android:textColor="?attr/walletPrimaryColor"
-            android:textSize="@dimen/matter_attention_font_size" />
-
-
-        <com.letv.walletbiz.mobile.ui.HistoryRecordNumberV
-            android:id="@+id/record_history_number"
+        <RelativeLayout
+            android:id="@+id/record_history_number_rl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_height="match_parent"
+            android:background="@color/mobile_dialog_out_bg_color"
+            android:clickable="true"
+            android:visibility="gone">
 
+            <com.letv.walletbiz.mobile.ui.HistoryRecordNumberV
+                android:id="@+id/record_history_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@color/content_item_bg_color"
+                android:paddingLeft="@dimen/margin_default"
+                android:paddingRight="@dimen/margin_default" />
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>
