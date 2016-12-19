@@ -24,7 +24,7 @@
                 android:id="@+id/img_icon"
                 android:layout_width="@dimen/view_card_icon_size"
                 android:layout_height="@dimen/view_card_icon_size"
-                android:paddingRight="@dimen/view_coupon_icon_margin"
+                android:layout_marginEnd="@dimen/view_coupon_icon_margin"
                 android:alpha="@dimen/le_img_alpha"/>
 
             <LinearLayout
