@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.walletbiz.update.UpdateConstant;
 import com.letv.walletbiz.update.beans.LocalAppInfo;
@@ -22,10 +21,9 @@ import com.letv.walletbiz.update.task.VersionCheckTask;
 import com.letv.walletbiz.update.util.UpdateUtil;
 import com.letv.walletbiz.update.beans.RemoteAppInfo;
 import com.letv.walletbiz.update.receiver.ScreenObserver;
-import com.letv.walletbiz.update.task.DownloadTask;
+
 import org.xutils.common.task.PriorityExecutor;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.letv.walletbiz.R;
@@ -435,7 +433,7 @@ public class UpgradeService extends Service {
                                 UpdateUtil.mIsAppAllDownload = isAllDownloaded;
                                 boolean needForceUpgrade = UpdateUtil.needForceUpgrade(mList2Upgrade);
                                 Message msgToClient = Message.obtain();
-                                msgToClient.what = UpdateConstant.SHOW_UPDATE_DIALOG_TO_CLIENT;
+                                msgToClient.what = UpdateConstant.SHOW_UPDATE_DIALOG_TO_CLIENT_WITH_APPS_INFO;
 
                                 RemoteAppInfo walletInfo = mList2Upgrade.get(0);
                                 for (RemoteAppInfo info : mList2Upgrade) {
@@ -447,6 +445,7 @@ public class UpgradeService extends Service {
                                 UpdateUtil.mWalletbizAppInfo = walletInfo;
                                 msgToClient.arg1 = isAllDownloaded ? 1 : 0;
                                 msgToClient.arg2 = needForceUpgrade ? 1 : 0;
+                                msgToClient.obj = mList2Upgrade;
                                 try {
                                     if(mReplyTo != null) {
                                         mReplyTo.send(msgToClient);

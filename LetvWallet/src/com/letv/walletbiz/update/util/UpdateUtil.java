@@ -201,6 +201,7 @@ public class UpdateUtil {
         boolean isAllDownloaded = true;
         for (int i = 0; i < list2Upgrade.size(); i++) {
             RemoteAppInfo info = list2Upgrade.get(i);
+            info.setIsDownloaded(false);
             String fileName = UpdateConstant.UPGRADE_DOWNLOAD_APK_SAVE_PATH + "/" + info.getPackageName().replace(".","_")+".apk";
             File file = new File(fileName);
             if (file.exists()) {

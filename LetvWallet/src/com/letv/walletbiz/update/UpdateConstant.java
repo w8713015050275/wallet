@@ -42,7 +42,7 @@ public class UpdateConstant {
 
     //service activity communicate command
     public static final int QUREY_NEW_VERSION_TO_SERVICE = 99;
-    public static final int SHOW_UPDATE_DIALOG_TO_CLIENT = 100;
+    public static final int SHOW_UPDATE_DIALOG_TO_CLIENT_WITH_APPS_INFO = 100;
     public static final int UPDATE_NOW_FROM_CLIENT = 101;
     public static final int NOTIFY_LATER_FROM_CLIENT = 102;
     public static final int QUREY_NEW_VERSION_TO_SERVICE_BY_PUSH_NOTICE = 103;

@@ -27,7 +27,10 @@ import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.walletbiz.MainActivity;
 import com.letv.walletbiz.R;
+import com.letv.walletbiz.update.beans.RemoteAppInfo;
 import com.letv.walletbiz.update.util.UpdateUtil;
+
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -55,7 +58,6 @@ public class UpdateHelper {
             hideUpgradeDialog();
         }
     };
-
 
     public UpdateHelper(BaseFragmentActivity activity) {
         mBaseActivity = activity;
@@ -99,6 +101,8 @@ public class UpdateHelper {
                 mUpgradeSheet.dismiss();
                 mUpgradeSheet = null;
             }
+            ArrayList<RemoteAppInfo> remoteAppInfos = (ArrayList<RemoteAppInfo>) mMsgFromServer.obj;
+            mMsgFromServer.arg1 = UpdateUtil.checkAppIsAllDownLoaded(mBaseActivity, remoteAppInfos) ? 1 : 0;
             showUpgradeDialog(mBaseActivity,mMsgFromServer);
             return;
         }
@@ -153,7 +157,7 @@ public class UpdateHelper {
         @Override
         public void handleMessage(Message msgFromServer) {
             switch (msgFromServer.what) {
-                case UpdateConstant.SHOW_UPDATE_DIALOG_TO_CLIENT:
+                case UpdateConstant.SHOW_UPDATE_DIALOG_TO_CLIENT_WITH_APPS_INFO:
                     if(mUpgradeSheet == null || !mUpgradeSheet.isShowing()) {
                         mMsgFromServer = Message.obtain();
                         mMsgFromServer.copyFrom(msgFromServer);
@@ -182,7 +186,6 @@ public class UpdateHelper {
                         if (!needForceUpgrade && !UpdateUtil.isUpdateTimeExpire()) {
                             return;
                         }
-
                         showUpgradeDialog(mBaseActivity,msgFromServer);
                     }
                     break;
