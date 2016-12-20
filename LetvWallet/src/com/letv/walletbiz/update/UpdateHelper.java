@@ -29,6 +29,8 @@ import com.letv.walletbiz.MainActivity;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.update.util.UpdateUtil;
 
+import java.util.List;
+
 /**
  * Created by zhangzhiwei1 on 16-9-9.
  */
@@ -158,16 +160,21 @@ public class UpdateHelper {
 
                         //kill current process,and MainActivity will be launched,and show upgrade dialog.
                         final boolean needForceUpgrade = msgFromServer.arg2 == 1;
-                        if(!(mBaseActivity instanceof MainActivity)) {
-                            if(needForceUpgrade) {
-                                ActivityManager am = (ActivityManager) mBaseActivity
-                                        .getSystemService(Context.ACTIVITY_SERVICE);
-                                ActivityManager.RunningTaskInfo task = am.getRunningTasks(Integer.MAX_VALUE).get(0);
-                                String baseClass = task.baseActivity.getClassName();
-                                String thisPackageName = mBaseActivity.getPackageName();
-                                if(task.numActivities > 1 && baseClass.indexOf(thisPackageName) >= 0) {
-                                    exitCurrentApplication();
-                                    return;
+                        if (!(mBaseActivity instanceof MainActivity)) {
+                            if (needForceUpgrade) {
+                                try {
+                                    List<ActivityManager.AppTask> appTasks = ((ActivityManager) mBaseActivity
+                                            .getSystemService(Context.ACTIVITY_SERVICE)).getAppTasks();
+                                    if (appTasks != null && appTasks.size() > 0) {
+                                        ActivityManager.RecentTaskInfo taskInfo = (ActivityManager.RecentTaskInfo)appTasks.get(0).getTaskInfo();
+                                        String thisPackageName = mBaseActivity.getPackageName();
+                                        if (taskInfo.numActivities > 1 && taskInfo.baseActivity.getClassName().indexOf(thisPackageName) >= 0) {
+                                            exitCurrentApplication();
+                                            return;
+                                        }
+                                    }
+                                } catch (SecurityException e) {
+
                                 }
                             }
                         }
