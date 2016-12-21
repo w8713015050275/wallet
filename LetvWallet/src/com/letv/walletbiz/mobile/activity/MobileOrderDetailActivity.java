@@ -195,7 +195,7 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
 
                 statusStr = UiUtils.getOrderStatusStringbyValue(getBaseContext(), mOrderDetailBean.getStatusValue());
                 if (mOrderDetailBean.showRefundProgress()) {
-                    ltvStatus.setTextSummery(statusStr, mOrderDetailBean.getRefundProgressStr(getBaseContext()));
+                    ltvStatus.setTextSummery(mOrderDetailBean.getRefundProgressStr(getBaseContext()), statusStr);
                 } else {
                     ltvStatus.setTextSummery(statusStr);
                 }
@@ -211,7 +211,7 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
 
                 statusStr = UiUtils.getOrderStatusStringbyValue(getBaseContext(), mOrderDetailBean.getStatusValue());
                 if (mOrderDetailBean.showRefundProgress()) {
-                    ltvStatus.setTextSummery(statusStr, mOrderDetailBean.getRefundProgressStr(getBaseContext()));
+                    ltvStatus.setTextSummery(mOrderDetailBean.getRefundProgressStr(getBaseContext()), statusStr);
                 } else {
                     ltvStatus.setTextSummery(statusStr);
                 }

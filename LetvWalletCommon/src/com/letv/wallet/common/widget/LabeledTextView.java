@@ -83,7 +83,8 @@ public class LabeledTextView extends RelativeLayout {
             iv_jump.setVisibility(View.GONE);
         if (tv_additional_content != null)
             tv_additional_content.setVisibility(View.GONE);
-        tv_content.setText(s);
+        if (tv_content != null)
+            tv_content.setText(s);
     }
 
     public void setTextSummery(String contentStr, String additionalStr) {
