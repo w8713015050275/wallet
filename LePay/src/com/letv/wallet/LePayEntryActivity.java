@@ -3,6 +3,7 @@ package com.letv.wallet;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
@@ -10,10 +11,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.letv.lepaysdk.Constants;
 import com.letv.lepaysdk.ELePayState;
-import com.letv.lepaysdk.LePay.ILePayCallback;
-import com.letv.lepaysdk.LePayApi;
 import com.letv.lepaysdk.LePayConfig;
+import com.letv.lepaysdk.activity.EUICashierAcitivity;
 import com.letv.shared.widget.LeBottomSheet;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
@@ -22,54 +23,53 @@ import com.letv.wallet.utils.LePayConstants;
 public class LePayEntryActivity extends FragmentActivity {
 
     private static final String TAG = LePayEntryActivity.class.getSimpleName();
-    private static String PAYKEY = "GoPay";
-    private boolean GOPAY = false;
+    private static final int PAY_REQUESTCODE = 100;
     private String mExternLePayInfo = null;
     private int mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
     private LeBottomSheet mNetworkDialog;
+    private int mDialogTitleId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LogHelper.e("[%S] %s", TAG, "onCreate");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.lepay_entry_activity);
         int uid = getUid();
         if (!NetworkHelper.isNetworkAvailable()) {
             //未开启移动网络
             if (!NetworkHelper.isDataNetworkAvailable()) {
-                showUserSelectDialog(getString(R.string.pay_no_network));
+                showUserSelectDialog(R.string.pay_no_network);
                 return;
             }
             //开启了移动网络并且被禁用
             if (!NetworkHelper.isEnableMobileNetwork(uid)) {
-                showUserSelectDialog(getString(R.string.pay_network_error));
+                showUserSelectDialog(R.string.pay_network_error);
                 return;
             }
         }
         //链接wifi并且wifi被禁用
         if (NetworkHelper.isWifiAvailable() && !NetworkHelper.isEnableWifi(uid)) {
             //未开启移动网络
-            showUserSelectDialog(getString(R.string.pay_network_error));
+            showUserSelectDialog(R.string.pay_network_error);
             return;
         }
+        mDialogTitleId = -1;
         mExternLePayInfo = getExternExtra();
         if (TextUtils.isEmpty(mExternLePayInfo)) {
             setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
             return;
         }
-        if (savedInstanceState == null || (savedInstanceState != null && !savedInstanceState.getBoolean(PAYKEY))) {
-            LogHelper.d("%S %s", TAG, "掉起支付");
-            startPay(mExternLePayInfo);
-        }
+        LogHelper.d("[%S] %s", TAG, "调起支付");
+        startPay(mExternLePayInfo);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (outState != null) {
-            outState.putBoolean(PAYKEY, GOPAY);
-        }
+    public void onConfigurationChanged(Configuration newConfig) {
+        LogHelper.e("[%S] %s", TAG, "onConfigurationChanged");
+        updateUI();
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -80,7 +80,40 @@ public class LePayEntryActivity extends FragmentActivity {
         }
     }
 
-    private void showUserSelectDialog(String title) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogHelper.d("[%S] %s", TAG, "onActivityResult");
+        if (requestCode == PAY_REQUESTCODE) {
+            mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
+            if (data != null) {
+                ELePayState eLePayState = (ELePayState) data.getSerializableExtra(Constants.LePayApiResult.LEPAY_EPAYSTATUS);
+                String content = data.getStringExtra(Constants.LePayApiResult.LEPAY_CONTENT);
+                if (ELePayState.OK.equals(eLePayState)) {
+                    mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_SUCCESSED;
+                } else if (ELePayState.FAILT.equals(eLePayState)) {
+                    mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
+                } else if (ELePayState.CANCEL.equals(eLePayState)) {
+                    mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_CANCLE;
+                } else if (ELePayState.NONETWORK.equals(eLePayState)) {
+                }
+                if (eLePayState != ELePayState.OK) {
+                    LogHelper.e("[%S] %s", TAG, "ELePayState == " + mPayReturnResult);
+                }
+            }
+            setReturnResult(mPayReturnResult);
+        }
+    }
+
+    private void updateUI() {
+        if (mDialogTitleId != -1) {
+            updateUserSelectDialog(mDialogTitleId);
+        }
+    }
+
+    private void showUserSelectDialog(int titleId) {
+        String title = getString(titleId);
+        mDialogTitleId = titleId;
         if (mNetworkDialog == null) {
             mNetworkDialog = new LeBottomSheet(this);
             mNetworkDialog.setCloseOnTouchOutside(false);
@@ -107,6 +140,31 @@ public class LePayEntryActivity extends FragmentActivity {
         mNetworkDialog.show();
     }
 
+    private void updateUserSelectDialog(int titleId) {
+        if (mNetworkDialog != null) {
+            String title = getString(titleId);
+            mNetworkDialog.setStyle(LeBottomSheet.BUTTON_DEFAULT_STYLE,
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mNetworkDialog.dismiss();
+                            finish();
+                        }
+                    },
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mNetworkDialog.dismiss();
+                            finish();
+                        }
+                    }, null,
+                    new String[]{
+                            getString(R.string.pay_network_error_sure)
+                    }, title,
+                    null, null, getResources().getColor(R.color.colorWalletTv), false);
+        }
+    }
+
     private int getUid() {
         int uid = -1;
         try {
@@ -123,7 +181,6 @@ public class LePayEntryActivity extends FragmentActivity {
         Intent intent = new Intent();
         intent.putExtra(LePayConstants.ApiReqeustKey.PAY_RETURN_RESULT, result);
         setResult(RESULT_OK, intent);
-        GOPAY = false;
         finish();
     }
 
@@ -142,28 +199,16 @@ public class LePayEntryActivity extends FragmentActivity {
     }
 
     public void startPay(String payInfo) {
-        GOPAY = true;
         LePayConfig lePayConfig = new LePayConfig();//参数配置
         lePayConfig.hasShowPaySuccess = false;//是否显示成功提示
-        LePayApi.initConfig(LePayEntryActivity.this, lePayConfig);
-        LePayApi.doHalfPay(LePayEntryActivity.this, payInfo, new ILePayCallback() {
-            @Override
-            public void payResult(ELePayState status, String message) {
-                mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
-                if (ELePayState.CANCEL == status) {    //支付取消
-                    mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_CANCLE;
-                } else if (ELePayState.FAILT == status) {        //支付失败
-                    mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
-                } else if (ELePayState.OK == status) {            //支付成功
-                    mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_SUCCESSED;
-                } else if (ELePayState.WAITTING == status) {    //支付中
-                } else if (ELePayState.NONETWORK == status) {    //网络异常
-                }
-                if (status != ELePayState.OK) {
-                    LogHelper.e(TAG, "ELePayState == " + mPayReturnResult + "  message :" + message);
-                }
-                setReturnResult(mPayReturnResult);
-            }
-        });
+        if (LePayEntryActivity.this == null) {
+            LogHelper.e("[%S] %s", TAG, "LePayEntryActivity.this == null");
+        }
+        Intent intent = new Intent(LePayEntryActivity.this, EUICashierAcitivity.class);
+        intent.putExtra(Constants.ApiIntentExtraKEY.LEPAY_INFO, payInfo);
+        intent.putExtra(Constants.ApiIntentExtraKEY.LEPAY_CONFIG, lePayConfig);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, PAY_REQUESTCODE);
     }
+
 }

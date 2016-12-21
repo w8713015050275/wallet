@@ -18,6 +18,7 @@
 
         <activity
             android:name=".LePayEntryActivity"
+            android:configChanges="locale|layoutDirection|fontScale"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent">
