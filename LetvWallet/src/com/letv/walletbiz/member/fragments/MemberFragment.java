@@ -16,7 +16,6 @@ import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
-import com.letv.wallet.common.view.DividerItemDecoration;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.member.MemberConstant;
 import com.letv.walletbiz.member.adapters.MemberAdapter;
@@ -58,6 +57,7 @@ public class MemberFragment extends BaseFragment {
     private boolean mProductErNet = false;
     private boolean mBannerNoNet = false;
     private boolean mBannerErNet = false;
+    private boolean mNeedUpdateBanner = true;
 
     private MemberTypeListBean.MemberTypeBean mMemberTypeBean;
 
@@ -77,6 +77,15 @@ public class MemberFragment extends BaseFragment {
                 if (needUpdate) {
                     mMemberAdapter.setBannerList(result);
                 }
+                if (!isNetworkAvailable() || errorCode == MemberCommonCallback.ERROR_NO_NETWORK) {
+                    mBannerNoNet = true;
+                } else if (errorCode == MemberCommonCallback.ERROR_NETWORK) {
+                    mBannerErNet = true;
+                }
+                showNetToast();
+            } else if (result == null || result.length == 0 ) {
+                mMemberAdapter.setBannerList(null);
+                mNeedUpdateBanner = false;
                 if (!isNetworkAvailable() || errorCode == MemberCommonCallback.ERROR_NO_NETWORK) {
                     mBannerNoNet = true;
                 } else if (errorCode == MemberCommonCallback.ERROR_NETWORK) {
@@ -197,9 +206,6 @@ public class MemberFragment extends BaseFragment {
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext, getResources().getColor(R.color.colorDividerLineBg),
-                DividerItemDecoration.VERTICAL_LIST, getResources().getDimensionPixelSize(R.dimen.divider_width));
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mContext, new RecyclerItemClickListener.OnItemClickListener() {
 
             @Override
@@ -271,8 +277,14 @@ public class MemberFragment extends BaseFragment {
 
     private void loadData() {
         hideBlankPage();
-        if (mMemberAdapter.getBannerList() == null || mMemberAdapter.getProductList() == null || mMemberAdapter.getBannerList().length == 0 || mMemberAdapter.getProductList().length == 0) {
-            showLoadingView();
+
+        if (mNeedUpdateBanner) {
+            if (mMemberAdapter.getBannerList() == null || mMemberAdapter.getProductList() == null) {
+                showLoadingView();
+            }
+        } else {
+            if (mMemberAdapter.getProductList() == null)
+                showLoadingView();
         }
         if (mBannerListTask == null) {
             mBannerListTask = new MemberBannerListTask(mContext, mMemberTypeBean.type, mBannerListCallback);

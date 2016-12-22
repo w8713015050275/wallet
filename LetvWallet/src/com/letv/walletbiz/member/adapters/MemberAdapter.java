@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +44,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private BannerListBean.BannerBean[] mBannerList;
     private ProductListBean.ProductBean[] mProductList;
     private BannerPtrFrameLayout mPtrFrameLayout;
+    private int mBlankMarginPX;
 
     public BannerViewHolder getmBannerVH() {
         return mBannerVH;
@@ -72,12 +74,14 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         RecyclerView.ViewHolder viewHolder = null;
         View view;
         RecyclerView.LayoutParams layoutParams;
-        int px = (int) DensityUtils.dip2px(6.0F);
+        mBlankMarginPX = (int) DensityUtils.dip2px(6.0F);
         switch (viewType) {
             case VIEW_TYPE_BANNER:
                 view = inflater.inflate(R.layout.member_banner_layout, parent, false);
                 layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
-                layoutParams.setMargins(0, px, 0, 0);
+                if (mBannerList != null) {
+                    layoutParams.setMargins(0, mBlankMarginPX, 0, 0);
+                }
                 viewHolder = new BannerViewHolder(view, mContext);
                 mBannerVH = (BannerViewHolder) viewHolder;
                 mPtrFrameLayout.setViewPager(mBannerVH.bannerPager);
@@ -86,7 +90,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 view = inflater.inflate(R.layout.member_product_list_layout, parent, false);
                 layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
 
-                layoutParams.setMargins(0, px, 0, 0);
+                layoutParams.setMargins(0, mBlankMarginPX, 0, 0);
                 viewHolder = new ProductListViewHolder(view, mContext);
                 break;
             case VIEW_TYPE_AGREEMENT:
@@ -96,7 +100,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case VIEW_TYPE_AVAILABLE_SCOPE:
                 view = inflater.inflate(R.layout.member_available_scope_layout, parent, false);
                 layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
-                layoutParams.setMargins(0, px, 0, 0);
+                layoutParams.setMargins(0, mBlankMarginPX, 0, 0);
                 viewHolder = new AvailableScopeViewHolder(view);
                 break;
         }
@@ -127,6 +131,15 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private void bindBannerView(BannerViewHolder holder, BannerListBean.BannerBean[] bannerList) {
+        View parent = (View)holder.bannerFrameLayout.getParent();
+        RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams)parent.getLayoutParams();
+        if (bannerList == null) {
+            layoutParams.setMargins(0, 0, 0, 0);
+            holder.bannerFrameLayout.setVisibility(View.GONE);
+            return;
+        }
+        layoutParams.setMargins(0, mBlankMarginPX, 0, 0);
+        holder.bannerFrameLayout.setVisibility(View.VISIBLE);
         if (holder.bannerAdapter != null && holder.bannerAdapter.getData() != bannerList) {
             holder.indicatorContainer.setTotalPageSize(bannerList.length);
             holder.indicatorContainer.setCurrentPage(0);
@@ -136,7 +149,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private void bindProductListView(ProductListViewHolder holder, ProductListBean.ProductBean[] productList) {
-        if (holder.itemListAdapter != null/* && holder.itemListAdapter.getData() != productList*/) {
+        if (holder.itemListAdapter != null) {
             holder.itemListAdapter.setData(productList);
             holder.itemListAdapter.notifyDataSetChanged();
         }
@@ -186,12 +199,15 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public static class BannerViewHolder extends RecyclerView.ViewHolder {
+
+        public FrameLayout bannerFrameLayout;
         public AutoSlideViewpager bannerPager;
         public PagerIndicator indicatorContainer;
         private BannerAdapter bannerAdapter;
 
         public BannerViewHolder(View itemView, Context context) {
             super(itemView);
+            bannerFrameLayout = (FrameLayout) itemView.findViewById(R.id.banner_frame_layout);
             bannerPager = (AutoSlideViewpager) itemView.findViewById(R.id.banner_pager);
             indicatorContainer = (PagerIndicator) itemView.findViewById(R.id.indicator_container);
             bannerPager.setPagerIndicator(indicatorContainer);

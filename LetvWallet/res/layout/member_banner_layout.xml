@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
 >
     <FrameLayout
+        android:id="@+id/banner_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="100dip">
         <com.letv.walletbiz.main.AutoSlideViewpager
@@ -22,5 +24,6 @@
     </FrameLayout>
     <View
         style="@style/Divider_HorizontalLine_Style"
+        android:visibility="invisible"
     />
 </LinearLayout>
