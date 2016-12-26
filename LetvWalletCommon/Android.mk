@@ -33,14 +33,12 @@ LOCAL_STATIC_JAVA_AAR_LIBRARIES:= \
        wallet-appcompat-v7 \
        wallet-design \
        wallet-recyclerview \
-       wallet-eui-support
 
 LOCAL_AAPT_FLAGS := \
         --auto-add-overlay \
         --extra-packages android.support.v7.appcompat \
         --extra-packages android.support.design \
         --extra-packages android.support.v7.recyclerview \
-        --extra-packages com.le.eui.support.widget
 
 LOCAL_PROGUARD_ENABLED := disabled
 #LOCAL_PROGUARD_ENABLED := obfuscation
@@ -59,7 +57,6 @@ LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
         wallet-appcompat-v7:libs/appcompat-v7-23.2.1.aar \
         wallet-design:libs/design-23.2.1.aar \
         wallet-recyclerview:libs/recyclerview-v7-23.2.1.aar \
-        wallet-eui-support:libs/eui_support_20161017.aar
 
 LOCAL_PREBUILT_LIBS := libwabp:libs/armeabi/libwebpbackport.so
 

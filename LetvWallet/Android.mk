@@ -30,7 +30,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 LOCAL_STATIC_JAVA_AAR_LIBRARIES:= \
        wallet-appcompat-v7 \
        wallet-design \
-       wallet-eui-support \
        wallet-recyclerview
 
 LOCAL_STATIC_LIBRARIES := libwabp
@@ -41,7 +40,6 @@ LOCAL_AAPT_FLAGS := \
         --extra-packages android.support.v7.appcompat \
         --extra-packages android.support.design \
         --extra-packages android.support.v7.recyclerview \
-        --extra-packages com.le.eui.support.widget
 
 LOCAL_PROGUARD_ENABLED := disabled
 #LOCAL_PROGUARD_ENABLED := full

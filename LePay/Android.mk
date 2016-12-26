@@ -29,7 +29,6 @@ LOCAL_STATIC_JAVA_AAR_LIBRARIES:= \
     wallet-design \
     wallet-recyclerview \
     lepay-lepaysdk \
-    wallet-eui-support
 
 LOCAL_JNI_SHARED_LIBRARIES := libentryexpro \
     libpl_droidsonroids_gif_sdk \
@@ -44,7 +43,6 @@ LOCAL_AAPT_FLAGS := \
         --extra-packages android.support.design \
         --extra-packages android.support.v7.recyclerview \
         --extra-packages com.letv.lepaysdk \
-        --extra-packages com.le.eui.support.widget
 
 LOCAL_PROGUARD_ENABLED := disabled
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
