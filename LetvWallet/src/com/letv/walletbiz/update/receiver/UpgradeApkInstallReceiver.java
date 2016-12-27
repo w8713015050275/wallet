@@ -32,19 +32,19 @@ public class UpgradeApkInstallReceiver extends BroadcastReceiver {
                 packageName = strs[strs.length-1];
             }
 
-            UpdateUtil.removeDownloadedFile(packageName);
             String contextPackageName = context.getPackageName();
             if (packageName != null && contextPackageName != null) {
-                Toast.makeText(context, context.getString(R.string.upgrade_success_note),Toast.LENGTH_SHORT).show();
                 if (packageName.trim().equalsIgnoreCase(contextPackageName.trim())) {
+                    UpdateUtil.removeDownloadedFile(packageName);
+                    Toast.makeText(context, context.getString(R.string.upgrade_success_note),Toast.LENGTH_SHORT).show();
                     restartWallet(context);
                 }
             }
 
         }  else if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED_FAILED")) {
             String failPackageName = intent.getStringExtra("PackageName");
-            UpdateUtil.removeDownloadedFile(failPackageName);
             if (failPackageName.equals(context.getPackageName())) {
+                UpdateUtil.removeDownloadedFile(failPackageName);
                 Toast.makeText(context, R.string.upgrade_fail_note, Toast.LENGTH_SHORT).show();
                 if(UpdateUtil.mIsForceUpdate) {
                     new Handler().postDelayed(new Runnable() {
