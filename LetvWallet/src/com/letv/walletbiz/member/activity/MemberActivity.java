@@ -77,7 +77,7 @@ public class MemberActivity extends BaseWalletFragmentActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         setTabMarginHorizontal((int) getResources().getDimension(R.dimen.tab_margin_horizontal));
         loadData();

@@ -19,6 +19,7 @@ import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.base.pay.PrepayBean;
 import com.letv.walletbiz.base.pay.Product;
+import com.letv.walletbiz.member.pay.MemberProduct;
 import com.letv.walletbiz.mobile.pay.MobileProduct;
 import com.letv.walletbiz.movie.beans.MovieProduct;
 
@@ -52,6 +53,8 @@ public class PayHelper implements Serializable {
             b.putInt(ActivityConstant.PAY_PARAM.PAY_PRODUCT_THEME, R.style.MobileTheme);
         } else if (product instanceof MovieProduct) {
             b.putInt(ActivityConstant.PAY_PARAM.PAY_PRODUCT_THEME, R.style.MovieTheme);
+        } else if (product instanceof MemberProduct) {
+            b.putInt(ActivityConstant.PAY_PARAM.PAY_PRODUCT_THEME, R.style.MemberTheme);
         }
         intent.putExtras(b);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
