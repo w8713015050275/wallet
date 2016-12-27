@@ -41,6 +41,7 @@ public abstract class Product implements Serializable {
     protected long mTime;
     protected int mStatus;
     protected String mPrice;
+    protected String mRealPrice;
     protected String mPrepayInfo;
 
     protected int mPayResult;
@@ -73,6 +74,13 @@ public abstract class Product implements Serializable {
         return mStatus;
     }
 
+    public String getRealPrice() {
+        return mRealPrice;
+    }
+
+    public void setRealPrice(String mRealPrice) {
+        this.mRealPrice = mRealPrice;
+    }
 
     public String getPrice() {
 

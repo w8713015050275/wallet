@@ -291,13 +291,14 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
             setDiscountPrice(zero_f);
             setCouponListCount(0);
             mTvCost.setText(mMobileProduct.getPrice());
+            mMobileProduct.setRealPrice(mMobileProduct.getPrice());
         } else {
             mUseUcouponId = couponBean.ucoupon_id;
             mTvPrice.setText(String.valueOf(couponBean.getTotalPrice()));
             setDiscountPrice(couponBean.getDiscountPrice());
             setCouponListCount(couponlistCount);
             mTvCost.setText(String.valueOf(couponBean.getRealPrice()));
-            mMobileProduct.setPrice(String.valueOf(couponBean.getRealPrice())); // 更新 price 为实付金额
+            mMobileProduct.setRealPrice(String.valueOf(couponBean.getRealPrice())); // 更新 price 为实付金额
         }
         mCouponV.setOnClickListener(new View.OnClickListener() {
             @Override

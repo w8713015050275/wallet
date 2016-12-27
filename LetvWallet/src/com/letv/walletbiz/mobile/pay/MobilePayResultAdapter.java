@@ -33,7 +33,7 @@ public class MobilePayResultAdapter implements PayResultActivity.PayResultAdapte
 
     @Override
     public String getCost() {
-        return mProduct.getPrice();
+        return mProduct.getRealPrice();
     }
 
     @Override

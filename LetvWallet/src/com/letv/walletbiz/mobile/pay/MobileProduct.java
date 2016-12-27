@@ -53,6 +53,7 @@ public class MobileProduct extends Product {
         mName = name;
         mNumber = number;
         mPrice = price;
+        mRealPrice = price;
         mTime = time;
         mStatus = status;
         initAdapter();
