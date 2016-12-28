@@ -190,7 +190,7 @@ public class BaseItemClickListener implements OnBaseItemClickListener {
                     LogHelper.e(TAG, "song_id---" + song_id);
                     Intent intent = new Intent("com.letv.music.view.song");
                     intent.putExtra("id", Long.parseLong(song_id)); // xiami online song id
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                     if (isIntentAvailable(mContext, intent)) {
                         mContext.startActivity(intent);
                     } else {
@@ -321,7 +321,7 @@ public class BaseItemClickListener implements OnBaseItemClickListener {
                 intent.setAction(Intent.ACTION_VIEW);
                 Uri content_url = Uri.parse(scheme);
                 intent.setData(content_url);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 if (isIntentAvailable(mContext, intent)) {
                     mContext.startActivity(intent);
                     return;
@@ -333,7 +333,7 @@ public class BaseItemClickListener implements OnBaseItemClickListener {
             intent.setAction(Intent.ACTION_VIEW);
             Uri content_url = Uri.parse(scheme);
             intent.setData(content_url);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
             mContext.startActivity(intent);
 
         }else if (LeRecommendType.ALBUM == mCurType) {
@@ -470,7 +470,7 @@ public class BaseItemClickListener implements OnBaseItemClickListener {
             String scheme = "leso://search?key_word=" + kw + "&from=" + from;
             LogHelper.i(TAG, "------->>> LESO === " + scheme);
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scheme));
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
             if (isIntentAvailable(mContext, intent)) {
                 mContext.startActivity(intent);
             } else {
@@ -507,7 +507,7 @@ public class BaseItemClickListener implements OnBaseItemClickListener {
 
             LogHelper.i(TAG, "onLabelActionClick [LeRecommendType.WALLPAPER] , more ");
             Intent intent = new Intent("com.letv.android.wallpaperonline.intent.action.SHOW_ALL_WALLPAPER");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra("tagId", iTagId);  //乐词id
             String tagName=mWallpaperList.get(0).getContent().getName();
             intent.putExtra("tagName", tagName); //乐词名称
@@ -533,7 +533,7 @@ public class BaseItemClickListener implements OnBaseItemClickListener {
 
             LogHelper.i(TAG, "onLabelActionClick [LeRecommendType.MUSIC] , more ");
             Intent intent = new Intent("com.letv.music.view.artist_song");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra("id", lTagId);//2127
             if (isIntentAvailable(mContext, intent)) {
                 mContext.startActivity(intent);
@@ -587,7 +587,7 @@ public class BaseItemClickListener implements OnBaseItemClickListener {
 
             LogHelper.i(TAG, "onLabelActionClick [LeRecommendType.Album] , more ");
             Intent intent = new Intent("com.letv.music.view.artist_song");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra("id", lTagId); //专辑id
             intent.putExtra("pageIndex", 1);
             if (isIntentAvailable(mContext, intent)) {
