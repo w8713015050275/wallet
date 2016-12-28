@@ -44,6 +44,7 @@ import com.letv.walletbiz.movie.beans.Movie;
 import com.letv.walletbiz.movie.fragment.CinemaListFragment;
 import com.letv.walletbiz.movie.fragment.ScheduleFragment;
 import com.letv.walletbiz.movie.ui.MovieGallery;
+import com.letv.walletbiz.movie.ui.MovieGalleryImageView;
 import com.letv.walletbiz.movie.ui.MovieTabFlowLayout;
 import com.letv.walletbiz.movie.utils.BlurImageHelper;
 import com.letv.walletbiz.movie.utils.CinemaListHelper;
@@ -596,7 +597,7 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
             if (convertView == null) {
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.movie_cinema_schedule_gallery_item, parent, false);
             }
-            ImageView view = (ImageView) convertView;
+            MovieGalleryImageView view = (MovieGalleryImageView) convertView;
             ScheduleMovie movie = getItem(position);
             xmain.image().bind(view, movie.poster_url);
             return view;

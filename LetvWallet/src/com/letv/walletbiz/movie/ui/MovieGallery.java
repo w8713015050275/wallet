@@ -51,9 +51,6 @@ public class MovieGallery extends Gallery {
 
     @Override
     protected boolean getChildStaticTransformation(View child, Transformation t) {
-        if (Build.VERSION.SDK_INT >= 16) {
-            child.invalidate();
-        }
 
         final int childWidth = child.getWidth();
         final int childCenter = child.getLeft() + childWidth / 2;
