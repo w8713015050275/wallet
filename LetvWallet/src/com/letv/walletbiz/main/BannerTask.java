@@ -57,7 +57,9 @@ public class BannerTask implements Runnable {
         }
         WalletBannerListBean newList = getBannerListFromNetwork(mContext, mPositionId);
         boolean needUpdate = false;
-        if (listBean == null || (newList != null && (newList.version > listBean.version))) {
+        int length = (listBean != null && listBean.list != null) ? listBean.list.length : 0;
+        int newLength = (newList != null && newList.list != null) ? newList.list.length : 0;
+        if (listBean == null || (newList != null && (newList.version > listBean.version || newLength != length))) {
             needUpdate = true;
             if (newList != null) {
                 MainPanelHelper.syncBannerListToDb(mContext, newList, mPositionId);

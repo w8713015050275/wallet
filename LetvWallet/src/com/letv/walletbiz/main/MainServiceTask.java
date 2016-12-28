@@ -59,7 +59,9 @@ public class MainServiceTask implements Runnable {
         WalletServiceListBean newList = getServiceListFromNetwork(mContext);
         boolean needUpdate = false;
 
-        if (listBean == null || (newList != null && (newList.version > listBean.version))) {
+        int length = (listBean != null && listBean.list != null) ? listBean.list.length : 0;
+        int newLength = (newList != null && newList.list != null) ? newList.list.length : 0;
+        if (listBean == null || (newList != null && (newList.version > listBean.version || newLength != length))) {
             needUpdate = true;
             if (newList != null) {
                 MainPanelHelper.syncServiceListToDb(mContext, newList);
