@@ -18,7 +18,7 @@
     <string name="agreement_detail">详细说明</string>
 
     <string name="member_month_count">个月</string>
-    <string name="member_agree_agreement">同意 《%1$s 协议》</string>
+    <string name="member_agree_agreement">同意《%1$s协议》</string>
     <string name="member_prompt_net_connection_fail">网络连接失败</string>
     <string name="member_prompt_user_select_load_title">网络出错,请重新加载</string>
 
