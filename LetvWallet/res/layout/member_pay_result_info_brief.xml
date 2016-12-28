@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/member_order_desc_label_duration"
+            android:text="@string/label_member_duration"
             style="@style/TextAppearance.Wallet.OrderDesc.Label"/>
         <TextView
             android:id="@+id/tv_duration"
@@ -75,7 +75,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/member_order_desc_label_description"
+            android:text="@string/label_member_description"
             style="@style/TextAppearance.Wallet.OrderDesc.Label"/>
         <TextView
             android:id="@+id/tv_description"
