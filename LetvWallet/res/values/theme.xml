@@ -11,6 +11,7 @@
     <!-- Member -->
     <style name="MemberTheme" parent="AppTheme.Arrow">
         <item name="walletPrimaryColor">@color/colorMemberPrimary</item>
+        <item name="android:windowBackground">@color/member_color_content_bg</item>
     </style>
 
     <!-- Movie -->
