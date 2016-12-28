@@ -9,6 +9,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +73,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
     private TextView mTvPrice;
     private TextView mTvDiscount;
     private TextView mTvCost;
+    private LinearLayout mBtnlayout;
     private TextView mAgreeTV;
     private LeCheckBox mAgreeCB;
 
@@ -241,6 +243,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
         mTvDiscount = (TextView) findViewById(R.id.tv_discount);
         mTvCost = (TextView) findViewById(R.id.tv_cost);
 
+        mBtnlayout = (LinearLayout) findViewById(R.id.btn_layout);
         mAgreeCB = (LeCheckBox) findViewById(R.id.agree_check_box);
         mAgreeTV = (TextView) findViewById(R.id.agree_agreement_link);
 
@@ -255,8 +258,16 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
         mTvPrice.setText(mMemberProduct.getPrice());
         mTvCost.setText(mMemberProduct.getPrice());
 
+        mBtnlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mAgreeCB.isChecked()) {
+                    Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.member_prompt_not_agree_agreement), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         String agreeStringFormat = getResources().getString(R.string.member_agree_agreement);
-        String agreeString = String.format(agreeStringFormat, mMemberProduct.getProductName());
+        String agreeString = String.format(agreeStringFormat, mMemberProduct.getType());
         mAgreeTV.setText(agreeString);
         mAgreeTV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,8 +283,10 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     mBtnAction.setEnabled(true);
+                    mBtnAction.setClickable(true);
                 } else {
                     mBtnAction.setEnabled(false);
+                    mBtnAction.setClickable(false);
                 }
             }
         });
