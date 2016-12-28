@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.letv.wallet.common.activity.BaseFragmentActivity;
@@ -57,6 +58,8 @@ public class MemberProductListAdapter extends RecyclerView.Adapter<RecyclerView.
             itemHolder.monthPrice.setVisibility(View.GONE);
         }
 
+        itemHolder.productLayout.setTag(itemBean);
+        itemHolder.productLayout.setOnClickListener(this);
         itemHolder.tag.setText(itemBean.tag);
         itemHolder.copy.setText(itemBean.description);
         itemHolder.purchase.setSelected(true);
@@ -113,6 +116,7 @@ public class MemberProductListAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     static class ItemHolder extends RecyclerView.ViewHolder {
+        private RelativeLayout productLayout;
         private ImageView icon;
         private TextView totalPrice;
         private TextView monthPrice;
@@ -122,6 +126,7 @@ public class MemberProductListAdapter extends RecyclerView.Adapter<RecyclerView.
 
         public ItemHolder(View itemView) {
             super(itemView);
+            productLayout = (RelativeLayout) itemView.findViewById(R.id.product_layout);
             icon = (ImageView) itemView.findViewById(R.id.icon);
             totalPrice = (TextView) itemView.findViewById(R.id.price_total);
             monthPrice = (TextView) itemView.findViewById(R.id.price_per_month);
