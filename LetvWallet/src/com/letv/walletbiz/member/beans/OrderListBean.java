@@ -51,8 +51,8 @@ public class OrderListBean implements LetvBaseBean {
             return real_price;
         }
 
-        public String getOrderStatus(Context context) {
-            return UiUtils.getOrderStatusStringbyValue(context, Integer.valueOf(order_status));
+        public String getOrderStatus() {
+            return order_status;
         }
 
         @Override

@@ -34,6 +34,7 @@ import com.letv.walletbiz.member.pay.MemberProduct;
 import com.letv.walletbiz.member.task.OrderCreateTask;
 import com.letv.walletbiz.member.task.OrderPrePayTask;
 import com.letv.walletbiz.member.util.MemberCommonCallback;
+import com.letv.walletbiz.member.util.MemberUtils;
 import com.letv.walletbiz.member.widget.MemberProductBrief;
 import com.letv.walletbiz.mobile.util.UiUtils;
 import com.letv.walletbiz.mobile.widget.MobileCostLabeledTextView;
@@ -239,7 +240,7 @@ public class MemberOrderDetailActivity extends OrderDetailActivity {
             case MemberConstant.ORDER_STATUS.COMPLISHED: //订单详情页
                 costBrief = (MobileProductCostBrief) v.findViewById(R.id.v_top_price_brief);
 
-                statusStr = mOrderInfoBean.progress;
+                statusStr = MemberUtils.getOrderStatusStringByStatus(this, Integer.valueOf(mOrderInfoBean.getOrderStatus()));
                 ltvStatus.setTextSummery(statusStr);
                 ltvTime.setTextSummery(DateUtils.getTimeStr(mOrderInfoBean.getOrderCTime() * 1000));
 
@@ -251,7 +252,7 @@ public class MemberOrderDetailActivity extends OrderDetailActivity {
             case MemberConstant.ORDER_STATUS.CANCELLED: //已关闭的订单
                 costBrief = (MobileProductCostBrief) v.findViewById(R.id.v_top_price_brief);
 
-                statusStr = mOrderInfoBean.progress;
+                statusStr = MemberUtils.getOrderStatusStringByStatus(this, Integer.valueOf(mOrderInfoBean.getOrderStatus()));
                 ltvStatus.setTextSummery(statusStr);
 
                 llPriceTop.setVisibility(View.VISIBLE);

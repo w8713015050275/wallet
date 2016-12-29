@@ -27,9 +27,7 @@ import com.letv.walletbiz.member.MemberConstant;
 import com.letv.walletbiz.member.activity.MemberOrderDetailActivity;
 import com.letv.walletbiz.member.beans.OrderInfoBean;
 import com.letv.walletbiz.member.beans.OrderListBean;
-import com.letv.walletbiz.mobile.MobileConstant;
-
-import org.xutils.common.task.PriorityExecutor;
+import com.letv.walletbiz.member.util.MemberUtils;
 
 import java.lang.reflect.Type;
 
@@ -143,8 +141,8 @@ public class MemberOrderListFragment extends BaseOrderListFragment{
             if (mOrderBean.snapshot != null) {
                 mDescLine1Tv.setText(mOrderBean.snapshot.name);
             }
-            mStatusTv.setText(mOrderBean.progress);
-            switch (Integer.parseInt(mOrderBean.order_status)) {
+            mStatusTv.setText(MemberUtils.getOrderStatusStringByStatus(getContext(), Integer.valueOf(mOrderBean.getOrderStatus())));
+            switch (Integer.parseInt(mOrderBean.getOrderStatus())) {
                 case MemberConstant.ORDER_STATUS.CREATED:
                     mStatusTv.setTextColor(getResources().getColor(R.color.member_color_to_pay));
                     break;
