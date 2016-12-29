@@ -1,7 +1,6 @@
 package in.srain.cube.views.ptr;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -13,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.letv.wallet.common.R;
+import com.letv.wallet.common.util.SharedPreferencesHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +21,6 @@ import in.srain.cube.views.ptr.indicator.PtrIndicator;
 
 public class PtrClassicDefaultHeader extends FrameLayout implements PtrUIHandler {
 
-    private final static String KEY_SharedPreferences = "cube_ptr_classic_last_update";
     private static SimpleDateFormat sDataFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private int mRotateAniTime = 150;
     private RotateAnimation mFlipAnimation;
@@ -174,10 +173,9 @@ public class PtrClassicDefaultHeader extends FrameLayout implements PtrUIHandler
         mTitleTextView.setText(getResources().getString(R.string.cube_ptr_refresh_complete));
 
         // update last update time
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(KEY_SharedPreferences, 0);
         if (!TextUtils.isEmpty(mLastUpdateTimeKey)) {
             mLastUpdateTime = new Date().getTime();
-            sharedPreferences.edit().putLong(mLastUpdateTimeKey, mLastUpdateTime).commit();
+            SharedPreferencesHelper.putLong(mLastUpdateTimeKey, mLastUpdateTime);
         }
     }
 
@@ -198,7 +196,7 @@ public class PtrClassicDefaultHeader extends FrameLayout implements PtrUIHandler
     private String getLastUpdateTime() {
 
         if (mLastUpdateTime == -1 && !TextUtils.isEmpty(mLastUpdateTimeKey)) {
-            mLastUpdateTime = getContext().getSharedPreferences(KEY_SharedPreferences, 0).getLong(mLastUpdateTimeKey, -1);
+            mLastUpdateTime = SharedPreferencesHelper.getSharePreferences().getLong(mLastUpdateTimeKey, -1);
         }
         if (mLastUpdateTime == -1) {
             return null;
