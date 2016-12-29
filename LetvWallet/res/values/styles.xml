@@ -13,7 +13,7 @@
     </style>
 
     <style name="MemberTabLayoutTextAppearance" parent="@*android:style/TextAppearance">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">SourceHanSansSC-Regular</item>
     </style>
 

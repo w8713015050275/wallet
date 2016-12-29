@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_order_sn"
+                android:singleLine="true"
                 android:textSize="14sp"
                 android:textColor="@color/member_color_sub_text"
                 android:fontFamily="SourceHanSansSC-Regular" />
