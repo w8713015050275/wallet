@@ -27,6 +27,7 @@ public class NetworkHelper {
 
     private static NetworkHelper instance;
     private Hashtable<Integer, NetworkAvailableCallBack> callBackHashtable = new Hashtable<Integer, NetworkAvailableCallBack>();
+    private final Object callBackHashLock = new Object();
 
     public NetworkHelper() {
     }
@@ -52,13 +53,15 @@ public class NetworkHelper {
     }
 
     public void excuteCallBack() {
-        Set<Integer> keySet = callBackHashtable.keySet();
         ArrayList<Integer> keyArrayList = new ArrayList<Integer>();
-        NetworkAvailableCallBack callBack;
-        for (int hashCode : keySet) {
-            callBack = callBackHashtable.get(hashCode);
-            callBack.onNetworkAvailable();
-            keyArrayList.add(hashCode);
+        synchronized (callBackHashLock){
+            Set<Integer> keySet = callBackHashtable.keySet();
+            NetworkAvailableCallBack callBack;
+            for (int hashCode : keySet) {
+                callBack = callBackHashtable.get(hashCode);
+                callBack.onNetworkAvailable();
+                keyArrayList.add(hashCode);
+            }
         }
         for (int key : keyArrayList) {
             callBackHashtable.remove(key);
@@ -67,7 +70,9 @@ public class NetworkHelper {
 
     public void addCallBack(int hashCode, NetworkAvailableCallBack availableCallBack) {
         if (availableCallBack != null) {
-            callBackHashtable.put(hashCode, availableCallBack);
+            synchronized (callBackHashLock){
+                callBackHashtable.put(hashCode, availableCallBack);
+            }
         }
     }
 
