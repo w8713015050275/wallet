@@ -64,6 +64,13 @@
 
 -dontnote android.support.v7.**
 
+#不混淆数据统计的jar包
+-keep public class com.letv.tracker.** {
+    *;
+}
+-keep public class com.android.letv.agnes.service.beans.** {
+    *;
+}
 
 -dontnote org.xutils.image.MemCacheKey
 -dontnote org.xutils.image.ImageLoader
