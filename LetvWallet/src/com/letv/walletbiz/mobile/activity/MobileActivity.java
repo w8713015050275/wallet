@@ -55,6 +55,7 @@ import com.letv.walletbiz.mobile.ui.HistoryRecordNumberV;
 import com.letv.walletbiz.mobile.ui.ProductsPanel;
 import com.letv.walletbiz.mobile.ui.ProductsPanelAdapter;
 import com.letv.walletbiz.mobile.util.UiUtils;
+import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 
 import org.xutils.common.task.PriorityExecutor;
 import org.xutils.xmain;
@@ -121,7 +122,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
 
     private WalletBannerListBean mBannerListData;
 
-    private PriorityExecutor mExecutor = new PriorityExecutor(1);
+    private PriorityExecutor mExecutor;
     private MobileAsyncTask mMobileProductsAsyncT;
     private ContactNameAsyncTask contactAsyncT;
     private BannerTask mBannerAsyncT;
@@ -203,6 +204,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerNetWorkReceiver();
+        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         String inNumber = processExtraData();
         LogHelper.d("[%S] getStringExtra ucouponid = " + Long.toString(mCouponID), TAG);
         setTitle(getTitle(mFeeOrFlow));
@@ -550,9 +552,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         if (mBannerAsyncT == null) {
             mBannerAsyncT = new BannerTask(getBaseContext(), bannerCallback
                     , getBusinessId(mFeeOrFlow));
-            if (mExecutor != null) {
-                mExecutor.execute(mBannerAsyncT);
-            }
+            mExecutor.execute(mBannerAsyncT);
         }
     }
 
@@ -690,6 +690,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     }
 
     private void destoryAsyncTask() {
+        if (mBannerAsyncT != null) {
+            mBannerAsyncT = null;
+        }
         if (mMobileProductsAsyncT != null) {
             mMobileProductsAsyncT.cancel(true);
             mMobileProductsAsyncT = null;
