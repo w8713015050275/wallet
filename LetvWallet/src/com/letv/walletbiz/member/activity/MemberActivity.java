@@ -119,8 +119,8 @@ public class MemberActivity extends BaseWalletFragmentActivity {
                     mMemberTypeTask = null;
                 }
             });
+            mExecuter.execute(mMemberTypeTask);
         }
-        mExecuter.execute(mMemberTypeTask);
     }
 
     private void initActionBar() {
@@ -149,6 +149,9 @@ public class MemberActivity extends BaseWalletFragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
+            if(position >= mFragmentList.size()) {
+                mFragmentList.add(MemberFragment.newInstance(mMemberBeanList[position]));
+            }
             return mFragmentList.get(position);
         }
 
@@ -170,11 +173,6 @@ public class MemberActivity extends BaseWalletFragmentActivity {
             }
             mTabNames = data;
             mFragmentList.clear();
-            for (int i = 0; i < mTabNames.size(); i++) {
-                if (mMemberBeanList != null && mMemberBeanList.length == mTabNames.size()) {
-                    mFragmentList.add(MemberFragment.newInstance(mMemberBeanList[i]));
-                }
-            }
             notifyDataSetChanged();
         }
 
