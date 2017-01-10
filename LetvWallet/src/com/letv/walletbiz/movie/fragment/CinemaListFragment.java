@@ -245,14 +245,13 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
             mCurrentCityId = bundle.getInt(MovieTicketConstant.EXTRA_CITY_ID, -1);
         }
         if (mCurrentCityId == -1) {
-            mCurrentCityId = SharedPreferencesHelper.getInt(MovieTicketConstant.PREFERENCES_CURRENT_CITY_ID, -1);
+            updateCurrentCity();
         }
         SharedPreferencesHelper.getSharePreferences().registerOnSharedPreferenceChangeListener(mSharedPreferenceChangeListener);
         mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         mLocationHelper = LocationHelper.getInstance();
         mLocationHelper.addLocationCallback(mLocationCallback);
         setHasOptionsMenu(true);
-        updateCurrentCity();
         showCurrentCity();
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
         registerCinemaFavoritesChangeReceiver();
