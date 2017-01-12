@@ -43,7 +43,8 @@ public class UpgradeApkInstallReceiver extends BroadcastReceiver {
 
         }  else if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED_FAILED")) {
             String failPackageName = intent.getStringExtra("PackageName");
-            if (failPackageName.equals(context.getPackageName())) {
+            List<String> packages = UpdateUtil.getLocalAppList();
+            if (packages.contains(failPackageName)) {
                 UpdateUtil.removeDownloadedFile(failPackageName);
                 Toast.makeText(context, R.string.upgrade_fail_note, Toast.LENGTH_SHORT).show();
                 if(UpdateUtil.mIsForceUpdate) {

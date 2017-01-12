@@ -17,7 +17,6 @@ import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.walletbiz.update.UpdateConstant;
 import com.letv.walletbiz.update.beans.LocalAppInfo;
 import com.letv.walletbiz.update.task.DownLoadManager;
-import com.letv.walletbiz.update.task.VersionCheckTask;
 import com.letv.walletbiz.update.util.UpdateUtil;
 import com.letv.walletbiz.update.beans.RemoteAppInfo;
 import com.letv.walletbiz.update.receiver.ScreenObserver;
@@ -63,6 +62,7 @@ public class UpgradeService extends Service {
     private final int ADD_NETWORK_STATE_CHANGED_LISTENER = 4;
     private final int STOP_SERVICE = 5;
     private final int RETRY_TO_GET_UPGRADE_INFO = 6;
+    private final int QUERY_NEW_VERSION_ASYNC = 7;
 
     private boolean mIsRestartAfterCrashed;
     private boolean mNeedTryToQueryVersion;
@@ -88,7 +88,7 @@ public class UpgradeService extends Service {
         }
         if (intent.getBooleanExtra(UpdateConstant.UPGRADE_AFTER_CRASHED,false)) {
             mIsRestartAfterCrashed = true;
-            queryNewVersion();
+            sendHandlerMessage(QUERY_NEW_VERSION_ASYNC,null);
         }
         return START_NOT_STICKY;
     }
@@ -168,28 +168,8 @@ public class UpgradeService extends Service {
                     isError = false;
                     isCancelled = false;
                     if (UpdateUtil.mIsForceUpdate == true) {
-                        //exit app
-                        final Message msgToClient = Message.obtain();
-                        msgToClient.what = UpdateConstant.EXIT_APPLICATION;
                         mDownLoadManager.cancelAllNotification();
-                        if (mReplyTo != null) {
-                            new Thread() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        Thread.sleep(3000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    try {
-                                        mReplyTo.send(msgToClient);
-                                    } catch (RemoteException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.start();
-                        }
-
+                        android.os.Process.killProcess(android.os.Process.myPid());
                     }
                 }
             }
@@ -197,7 +177,6 @@ public class UpgradeService extends Service {
     }
 
     private int mTryToGetUpgradeInfoCount = 0;
-    private Messenger mReplyTo;
 
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
@@ -279,18 +258,16 @@ public class UpgradeService extends Service {
                         return;
                     }
                     mNeedTryToQueryVersion = true;
-                    queryNewVersion();
+                    queryNewVersionSync(msg.replyTo);
                     break;
                 case UpdateConstant.QUREY_NEW_VERSION_TO_SERVICE:
-                    mReplyTo = msg.replyTo;
                     mNeedTryToQueryVersion = true;
-                    queryNewVersion();
+                    queryNewVersionSync(msg.replyTo);
                     break;
 
                 case UpdateConstant.QUREY_NEW_VERSION_TO_SERVICE_BY_PUSH_NOTICE:
-                    mReplyTo = msg.replyTo;
                     mNeedTryToQueryVersion = true;
-                    queryNewVersion();
+                    queryNewVersionSync(msg.replyTo);
                     break;
                 case UpdateConstant.UPDATE_NOW_FROM_CLIENT:
                     mUpgradeTypeByUser = UpdateConstant.UPGRADE_NOW;
@@ -314,6 +291,9 @@ public class UpgradeService extends Service {
                     if (mDownLoadManager != null) {
                         mDownLoadManager.cancelAllNotification();
                     }
+                    break;
+                case QUERY_NEW_VERSION_ASYNC:
+                    queryNewVersionSync(null);
                     break;
             }
         }
@@ -380,84 +360,80 @@ public class UpgradeService extends Service {
         }
     }
 
-    private void queryNewVersion() {
+    private void queryNewVersionSync(Messenger replyTo) {
         if (UpdateUtil.mIsStartedNewly || mNeedTryToQueryVersion) {
             UpdateUtil.mIsStartedNewly = false;
             mNeedTryToQueryVersion = false;
             if (NetworkHelper.isNetworkAvailable()) {
-                new VersionCheckTask(getApplicationContext(), new VersionCheckTask.OnGetUpgradeInfoCallback() {
-
-                    @Override
-                    public void onGetUpgradeInfoCallback(RemoteAppInfo[] remoteAppInfoList) {
-                        //handle error
-                        if(remoteAppInfoList ==  null || remoteAppInfoList.length == 0) {
-                            Log.d(TAG, "===wallet remote app list is null");
-                            mServiceHandler.sendEmptyMessage(RETRY_TO_GET_UPGRADE_INFO);
-                            return;
-                        }
-                        //to update
-                        if (remoteAppInfoList != null && remoteAppInfoList.length > 0) {
-                            if (mList2Upgrade == null) {
-                                mList2Upgrade = new ArrayList<RemoteAppInfo>();
-                            }
-                            mList2Upgrade.clear();
-                            List<LocalAppInfo> localAppInfolist = UpdateUtil.getLocalAppInfo(getApplicationContext());
-                            for (LocalAppInfo localAppInfo : localAppInfolist) {
-                                for (RemoteAppInfo remoteAppInfo : remoteAppInfoList) {
-                                    if (localAppInfo.mPackageName.equals(remoteAppInfo.getPackageName())) {
-                                        int local_version = 0;
-                                        int remote_version = 0;
-                                        try {
-                                            local_version = Integer.valueOf(localAppInfo.mApkVersion);
-                                            remote_version = Integer.valueOf(remoteAppInfo.getApkVersion());
-                                        } catch (NumberFormatException e) {
-                                            e.printStackTrace();
-                                        }
-                                        if (local_version < remote_version) {
-                                            remoteAppInfo.setApplicationName(UpdateUtil.getApplicationName(getApplicationContext(),remoteAppInfo.getPackageName()));
-                                            mList2Upgrade.add(remoteAppInfo);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if (mList2Upgrade != null && mList2Upgrade.size() > 0) {
-                            //upgrade directly after crashed
-                            if (mIsRestartAfterCrashed) {
-                                mIsRestartAfterCrashed = false;
-                                mUpgradeTypeByUser = UpdateConstant.UPGRADE_NOW;
-                                startUpgrade(mList2Upgrade);
-                            } else {
-                                //qurey activity to upgrade or not
-                                boolean isAllDownloaded = UpdateUtil.checkAppIsAllDownLoaded(UpgradeService.this,mList2Upgrade);
-                                UpdateUtil.mIsAppAllDownload = isAllDownloaded;
-                                boolean needForceUpgrade = UpdateUtil.needForceUpgrade(mList2Upgrade);
-                                Message msgToClient = Message.obtain();
-                                msgToClient.what = UpdateConstant.SHOW_UPDATE_DIALOG_TO_CLIENT_WITH_APPS_INFO;
-
-                                RemoteAppInfo walletInfo = mList2Upgrade.get(0);
-                                for (RemoteAppInfo info : mList2Upgrade) {
-                                   if(getPackageName().equals(info.getPackageName())) {
-                                        walletInfo = info;
-                                        break;
-                                   }
-                                }
-                                UpdateUtil.mWalletbizAppInfo = walletInfo;
-                                msgToClient.arg1 = isAllDownloaded ? 1 : 0;
-                                msgToClient.arg2 = needForceUpgrade ? 1 : 0;
-                                msgToClient.obj = mList2Upgrade;
+                List<LocalAppInfo> localInfoList = UpdateUtil.getLocalAppInfo(this);
+                RemoteAppInfo[] remoteAppInfoList = UpdateUtil.getUpdateInfoFromNetwork(this,localInfoList);
+                //handle error
+                if(remoteAppInfoList ==  null || remoteAppInfoList.length == 0) {
+                    Log.d(TAG, "===wallet remote app list is null");
+                    mServiceHandler.sendEmptyMessage(RETRY_TO_GET_UPGRADE_INFO);
+                    return;
+                }
+                //to update
+                if (remoteAppInfoList != null && remoteAppInfoList.length > 0) {
+                    if (mList2Upgrade == null) {
+                        mList2Upgrade = new ArrayList<RemoteAppInfo>();
+                    }
+                    mList2Upgrade.clear();
+                    List<LocalAppInfo> localAppInfolist = UpdateUtil.getLocalAppInfo(getApplicationContext());
+                    for (LocalAppInfo localAppInfo : localAppInfolist) {
+                        for (RemoteAppInfo remoteAppInfo : remoteAppInfoList) {
+                            if (localAppInfo.mPackageName.equals(remoteAppInfo.getPackageName())) {
+                                int local_version = 0;
+                                int remote_version = 0;
                                 try {
-                                    if(mReplyTo != null) {
-                                        mReplyTo.send(msgToClient);
-                                    }
-                                } catch (RemoteException e) {
+                                    local_version = Integer.valueOf(localAppInfo.mApkVersion);
+                                    remote_version = Integer.valueOf(remoteAppInfo.getApkVersion());
+                                } catch (NumberFormatException e) {
                                     e.printStackTrace();
                                 }
+                                if (local_version < remote_version) {
+                                    remoteAppInfo.setApplicationName(UpdateUtil.getApplicationName(getApplicationContext(),remoteAppInfo.getPackageName()));
+                                    mList2Upgrade.add(remoteAppInfo);
+                                }
                             }
-
                         }
                     }
-                }).execute();
+                }
+                if (mList2Upgrade != null && mList2Upgrade.size() > 0) {
+                    //upgrade directly after crashed
+                    if (mIsRestartAfterCrashed) {
+                        mIsRestartAfterCrashed = false;
+                        mUpgradeTypeByUser = UpdateConstant.UPGRADE_NOW;
+                        startUpgrade(mList2Upgrade);
+                    } else {
+                        //qurey activity to upgrade or not
+                        boolean isAllDownloaded = UpdateUtil.checkAppIsAllDownLoaded(UpgradeService.this,mList2Upgrade);
+                        UpdateUtil.mIsAppAllDownload = isAllDownloaded;
+                        boolean needForceUpgrade = UpdateUtil.needForceUpgrade(mList2Upgrade);
+                        Message msgToClient = Message.obtain();
+                        msgToClient.what = UpdateConstant.SHOW_UPDATE_DIALOG_TO_CLIENT_WITH_APPS_INFO;
+
+                        RemoteAppInfo walletInfo = mList2Upgrade.get(0);
+                        for (RemoteAppInfo info : mList2Upgrade) {
+                            if(getPackageName().equals(info.getPackageName())) {
+                                walletInfo = info;
+                                break;
+                            }
+                        }
+                        UpdateUtil.mWalletbizAppInfo = walletInfo;
+                        msgToClient.arg1 = isAllDownloaded ? 1 : 0;
+                        msgToClient.arg2 = needForceUpgrade ? 1 : 0;
+                        msgToClient.obj = mList2Upgrade;
+                        try {
+                            if(replyTo != null) {
+                                replyTo.send(msgToClient);
+                            }
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
             }
         }
     }
