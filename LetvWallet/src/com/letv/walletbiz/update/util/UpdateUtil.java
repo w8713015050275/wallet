@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 
 import com.google.gson.reflect.TypeToken;
 import com.letv.wallet.common.http.beans.BaseResponse;
@@ -189,12 +190,16 @@ public class UpdateUtil {
     }
 
     private static String getRegion(Context context) {
-        Locale locale = context.getResources().getConfiguration().locale;
-        String country = locale.getCountry();
-        if("GB".equals(country)) {
-            country = "UK";
+        String  currentRegionValue = Settings.Secure.getString(context.getContentResolver(), "leui_country_area_region_settings");
+        if (currentRegionValue == null) {
+            Locale locale = context.getResources().getConfiguration().locale;
+            currentRegionValue = locale.getCountry();
+            if("GB".equals(currentRegionValue)) {
+                currentRegionValue = "UK";
+            }
         }
-        return country;
+        return currentRegionValue;
+
     }
 
     public static boolean checkAppIsAllDownLoaded(Context context, List<RemoteAppInfo> list2Upgrade) {
