@@ -224,6 +224,12 @@ public class UpdateHelper {
         if(UpdateUtil.mWalletbizAppInfo != null) {
             description = UpdateUtil.mWalletbizAppInfo.getDescription();
             remoteVersion = UpdateUtil.mWalletbizAppInfo.getApkVersion();
+            int version = Integer.valueOf(remoteVersion);
+            StringBuilder sb = new StringBuilder();
+            int thirdVersion = version % 100;
+            int secondVersion = (version / 100) % 100;
+            int firstVersion = version / 10000;
+            remoteVersion =  sb.append(firstVersion).append(".").append(secondVersion).append(".").append(thirdVersion).toString();
         }
 
         String content = TextUtils.isEmpty(description) ? mBaseActivity.getString(R.string.defautl_update_content) : description;

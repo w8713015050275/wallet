@@ -10,7 +10,7 @@
 
     <string name="update_content">Details: %s</string>
     <string name="defautl_update_content">Made some optimizations and fixed a few known issues</string>
-    <string name="update_version">Version: v%s</string>
+    <string name="update_version">Version: %s</string>
     <string name="downloaded">Downloaded</string>
     <string name="undownloaded">Not downloaded</string>
     <string name="upgrade_fail">Failed to update</string>

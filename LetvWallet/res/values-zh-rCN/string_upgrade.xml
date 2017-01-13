@@ -11,7 +11,7 @@
 
     <string name="update_content">说明: %s</string>
     <string name="defautl_update_content">优化部分流程及修复已知问题</string>
-    <string name="update_version">版本: v%s</string>
+    <string name="update_version">版本: %s</string>
     <string name="downloaded">已下载</string>
     <string name="undownloaded">未下载</string>
     <string name="upgrade_fail">升级失败</string>
