@@ -1,6 +1,7 @@
 package com.letv.walletbiz.update.task;
 
 import android.content.Context;
+
 import com.letv.walletbiz.update.beans.RemoteAppInfo;
 import com.letv.walletbiz.update.service.UpgradeService;
 import org.xutils.common.task.PriorityExecutor;
@@ -52,7 +53,6 @@ public class DownLoadManager {
         for (int i = mDownloadTasks.size() - 1; i >= 0 ; i--) {
             DownloadTask dt = mDownloadTasks.get(i);
             dt.cancelNotification();
-            mDownloadTasks.remove(dt);
         }
         mDownloadTasks.clear();
     }

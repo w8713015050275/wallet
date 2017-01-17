@@ -205,6 +205,7 @@ public class DownloadTask implements Runnable {
     public void cancelNotification() {
         if (mNotificationManager != null) {
             mIsNotificationCanceled = true;
+            mIsFinish = true;
             mNotificationManager.cancel(mNotifyId);
         }
     }

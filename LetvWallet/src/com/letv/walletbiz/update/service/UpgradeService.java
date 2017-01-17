@@ -93,6 +93,15 @@ public class UpgradeService extends Service {
         return START_NOT_STICKY;
     }
 
+
+    @Nullable
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        if (mDownLoadManager != null) {
+            mDownLoadManager.cancelAllNotification();
+        }
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -100,6 +109,7 @@ public class UpgradeService extends Service {
             mScreenObserver.shutdownObserver();
             mScreenObserver = null;
         }
+
         mServiceLooper.quit();
     }
 
