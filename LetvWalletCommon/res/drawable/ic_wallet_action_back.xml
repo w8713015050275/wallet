@@ -1,10 +1,11 @@
-<vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="96"
-    android:viewportHeight="96">
-    <path
-        android:fillColor="?attr/walletPrimaryColor"
-        android:pathData="M77,46H6.821l34.135-34.135c0.781-0.781,0.781-2.047,0-2.828 		c-0.78-0.781-2.048-0.781-2.828,0L0.578,46.586c-0.781,0.781-0.781,2.047,0,2.828l37.549,37.55 		c0.391,0.391,0.902,0.586,1.414,0.586s1.024-0.195,1.414-0.586c0.781-0.781,0.781-2.047,0-2.828L6.821,50H77c1.104,0,2-0.896,2-2 		S78.104,46,77,46z"/>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+android:width="24dp"
+android:height="24dp"
+android:viewportWidth="96"
+android:viewportHeight="96">
+
+<path
+    android:fillColor="@color/wallet_actionBar_icon_color"
+    android:pathData="M34.6,47.9L34.6,47.9l31.2-31.3c0.8-0.8,1.2-1.8,1.2-2.8c0-1-0.4-2-1.2-2.8c-1.6-1.6-4.1-1.6-5.7,0L23.3,47.9
+l36.9,36.9c1.6,1.6,4.1,1.6,5.7,0C66.6,84.1,67,83,67,82s-0.4-2.1-1.2-2.8L34.6,47.9z" />
 </vector>

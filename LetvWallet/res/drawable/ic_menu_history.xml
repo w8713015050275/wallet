@@ -5,6 +5,6 @@ android:height="24dp"
 android:viewportWidth="96"
 android:viewportHeight="96">
 <path
-android:fillColor="?attr/walletPrimaryColor"
+android:fillColor="@color/wallet_actionBar_icon_color"
 android:pathData="M48,7C25.356,7,7,25.356,7,48s18.356,41,41,41s41-18.356,41-41S70.644,7,48,7z M48,85 		c-20.402,0-37-16.598-37-37c0-20.402,16.598-37,37-37c20.402,0,37,16.598,37,37C85,68.402,68.402,85,48,85z M67.947,61.636 		L48,49.49V25c0-0.829-0.671-1.5-1.5-1.5S45,24.171,45,25v26.176l21.387,13.022c0.244,0.148,0.513,0.219,0.779,0.219 		c0.506,0,1-0.256,1.282-0.72C68.879,62.989,68.654,62.066,67.947,61.636z"/>
 </vector>
