@@ -39,6 +39,7 @@ import com.letv.walletbiz.base.pay.PayAdapter;
 import com.letv.walletbiz.base.pay.PayBase;
 import com.letv.walletbiz.base.pay.PrepayBean;
 import com.letv.walletbiz.base.util.Action;
+import com.letv.walletbiz.base.util.StringUtils;
 import com.letv.walletbiz.movie.beans.BaseMovieOrder;
 import com.letv.walletbiz.movie.beans.LockSeatOrder;
 import com.letv.walletbiz.movie.beans.MoviePayResult;
@@ -229,22 +230,22 @@ public class MoviePayActivity extends BaseWalletFragmentActivity implements Phon
 
         TextView tCost = (TextView) findViewById(R.id.tv_cost);
         if (tCost != null) {
-            tCost.setText(mAdapter.getCost());
+            tCost.setText(StringUtils.getPriceUnit(getBaseContext(), mAdapter.getCost()));
         }
 
         TextView tPrice = (TextView) findViewById(R.id.tv_price); // 原始价格
         TextView tDiscout = (TextView) findViewById(R.id.tv_discount); // 优惠金额
         TextView tDiscoutLabel = (TextView) findViewById(R.id.tv_label_discount);
         if (order != null) {
-            tPrice.setText(order.getMovieOriginalPrice() + "");
+            tPrice.setText(StringUtils.getPriceUnit(getBaseContext(), order.getMovieOriginalPrice()));
             String discountDes;
             if (order.hasDiscount() == LockSeatOrder.ORDER_HAS_DISCOUNT && order.getMovieDiscount() != null) {
                 LockSeatOrder.Discount discountInfo = order.getMovieDiscount();
-                tDiscout.setText(discountInfo.discount_price + getString(R.string.label_mobile_product_unit_fee) + "×" + discountInfo.count + "  " +
+                tDiscout.setText(StringUtils.getPriceUnit(getBaseContext(), discountInfo.discount_price) + "×" + discountInfo.count + "  " +
                         +(0 - discountInfo.discount_price * discountInfo.count));
                 discountDes = discountInfo.name;
             } else {
-                tDiscout.setText("-0");
+                tDiscout.setText("-￥0");
                 discountDes = getString(R.string.label_order_desc_null_discount);
             }
             tDiscoutLabel.setText(getMovieDiscountDes(discountDes));

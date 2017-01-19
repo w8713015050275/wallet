@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.pay.Product;
+import com.letv.walletbiz.base.util.StringUtils;
 
 import java.io.Serializable;
 
@@ -74,7 +75,7 @@ public class PayResultActivity extends BaseWalletFragmentActivity {
             statusDesc.setText(status == 1 ? R.string.label_pay_paid : R.string.pay_status_unpaid);
 
             TextView tvPrice = (TextView) findViewById(R.id.tv_cost);
-            tvPrice.setText(mAdapter.getCost()+getString(R.string.label_price_unit));
+            tvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), mAdapter.getCost()));
             TextView tvPriceLabel = (TextView) findViewById(R.id.tv_label_cost);
             tvPriceLabel.setText(R.string.movie_ticket_order_price);
 

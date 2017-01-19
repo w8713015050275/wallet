@@ -27,6 +27,7 @@ import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.base.pay.Constants;
+import com.letv.walletbiz.base.util.StringUtils;
 import com.letv.walletbiz.base.widget.CouponBrief;
 import com.letv.walletbiz.coupon.CouponConstant;
 import com.letv.walletbiz.mobile.MobileConstant;
@@ -265,8 +266,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         setTitle(R.string.mobile_order_view_surelabel);
         mTvProductName.setText(mMobileProduct.getProductName());
         setTvNumber(mMobileProduct.getNumber());
-        mTvPrice.setText(mMobileProduct.getPrice());
-        mTvCost.setText(mMobileProduct.getPrice());
+        mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), mMobileProduct.getPrice()));
+        mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), mMobileProduct.getPrice()));
 
         mBtnAction.setText(R.string.pay_now);
         mBtnAction.setEnabled(true);
@@ -287,18 +288,22 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     public void setData(CouponBean couponBean, int couponlistCount) {
         if (couponBean == null) {
             mUseUcouponId = 0;
-            mTvPrice.setText(mMobileProduct.getPrice());
+            mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), mMobileProduct.getPrice()));
             setDiscountPrice(zero_f);
             setCouponListCount(0);
-            mTvCost.setText(mMobileProduct.getPrice());
+            mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), mMobileProduct.getPrice()));
             mMobileProduct.setRealPrice(mMobileProduct.getPrice());
         } else {
             mUseUcouponId = couponBean.ucoupon_id;
-            mTvPrice.setText(String.valueOf(couponBean.getTotalPrice()));
+            mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.getTotalPrice()));
             setDiscountPrice(couponBean.getDiscountPrice());
             setCouponListCount(couponlistCount);
-            mTvCost.setText(String.valueOf(couponBean.getRealPrice()));
-            mMobileProduct.setRealPrice(String.valueOf(couponBean.getRealPrice())); // 更新 price 为实付金额
+            mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.getRealPrice()));
+            try {
+                mMobileProduct.setRealPrice(String.valueOf(couponBean.getRealPrice())); // 更新 price 为实付金额
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         mCouponV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,7 +330,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         if (price > 0.0F) {
             mTvDiscount.setText(String.format(getString(R.string.mobile_order_desc_coupon_price), price));
         } else {
-            mTvDiscount.setText("-0");
+            mTvDiscount.setText("-￥0");
         }
     }
 

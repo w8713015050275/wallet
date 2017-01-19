@@ -18,6 +18,7 @@ import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
 import com.letv.walletbiz.base.pay.Constants;
+import com.letv.walletbiz.base.util.StringUtils;
 import com.letv.walletbiz.movie.MovieTicketConstant;
 import com.letv.walletbiz.movie.beans.MovieOrder;
 import com.letv.walletbiz.movie.beans.MovieProduct;
@@ -252,7 +253,7 @@ public class MovieOrderDetailActivity extends BaseWalletFragmentActivity impleme
         mContactInfoCinemaAddressTextView.setText(order.cinema_addr);
         mContactInfoCinemaAddressTextView.setOnClickListener(this);
         mOrderNumTextView.setText(order.third_no);
-        mOrderPriceTextView.setText(order.price + getString(R.string.movie_ticket_price_unit));
+        mOrderPriceTextView.setText(StringUtils.getPriceUnit(getBaseContext(), order.price));
         mOrderDateTextView.setText(DateUtils.formatDate(new Date(order.add_time * 1000), "yyyy-MM-dd HH:mm"));
     }
 

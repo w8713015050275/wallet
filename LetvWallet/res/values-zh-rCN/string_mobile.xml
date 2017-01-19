@@ -14,7 +14,6 @@
     <!-- mobile order -->
     <string name="mobile_order_list_label">充值记录</string>
     <string name="mobile_order_desc_label_prodcut">充值：</string>
-    <string name="mobile_order_desc_coupon_price">-%.2f</string>
     <string name="mobile_order_desc_label_phonenumber">充值号码</string>
     <string name="mobile_order_view_label">订单详情</string>
     <string name="mobile_order_view_surelabel">确认订单</string>

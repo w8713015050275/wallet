@@ -23,6 +23,7 @@ import com.letv.walletbiz.BuildConfig;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.pay.Constants;
+import com.letv.walletbiz.base.util.StringUtils;
 import com.letv.walletbiz.base.widget.CouponBrief;
 import com.letv.walletbiz.member.MemberConstant;
 import com.letv.walletbiz.member.beans.CouponBean;
@@ -255,8 +256,8 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
         mTvProductName.setText(mMemberProduct.getProductName());
         mTvDuration.setText(mMemberProduct.getDuration() + getResources().getString(R.string.member_month_count));
         mTvDescription.setText(mMemberProduct.getDescription());
-        mTvPrice.setText(mMemberProduct.getPrice());
-        mTvCost.setText(mMemberProduct.getPrice());
+        mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), mMemberProduct.getPrice()));
+        mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), mMemberProduct.getPrice()));
 
         mBtnlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -431,7 +432,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
         if (price > 0.0F) {
             mTvDiscount.setText(String.format(getString(R.string.mobile_order_desc_coupon_price), price));
         } else {
-            mTvDiscount.setText("-0");
+            mTvDiscount.setText("-￥0");
         }
     }
 
@@ -443,16 +444,16 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
     public void updateCouponAndPriceUi(CouponBean couponBean, int couponlistCount) {
         if (couponBean == null) {
             mUcouponId = 0;
-            mTvPrice.setText(mMemberProduct.getPrice());
+            mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), mMemberProduct.getPrice()));
             setDiscountPrice(zero_f);
             setCouponListCount(0);
-            mTvCost.setText(mMemberProduct.getPrice());
+            mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), mMemberProduct.getPrice()));
         } else {
             mUcouponId = couponBean.ucoupon_id;
-            mTvPrice.setText(String.valueOf(couponBean.total_price));
+            mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.total_price));
             setDiscountPrice(couponBean.discount_price);
             setCouponListCount(couponlistCount);
-            mTvCost.setText(String.valueOf(couponBean.real_price));
+            mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.real_price));
             mMemberProduct.setPrice(String.valueOf(couponBean.real_price));
         }
         mCouponV.setOnClickListener(new View.OnClickListener() {

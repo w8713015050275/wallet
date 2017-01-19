@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.letv.walletbiz.R;
+import com.letv.walletbiz.base.util.StringUtils;
 
 /**
  * Created by changjiajie on 16-4-19.
@@ -24,7 +25,6 @@ public class MobileCostLabeledTextView extends RelativeLayout {
     private LinearLayout ll_cost_action;
     private TextView tv_label_cost;
     private TextView tv_cost;
-    private TextView tv_cost_unit;
     private View top_line;
     private View bottom_line;
 
@@ -61,8 +61,6 @@ public class MobileCostLabeledTextView extends RelativeLayout {
         tv_label_cost = (TextView) view.findViewById(R.id.tv_label_cost);
         tv_label_cost.setText(label_string);
         tv_cost = (TextView) view.findViewById(R.id.tv_cost);
-        tv_cost_unit = (TextView) view.findViewById(R.id.tv_cost_unit);
-        tv_cost_unit.setVisibility(View.INVISIBLE);
         top_line = (View) view.findViewById(R.id.top_line);
         bottom_line = (View) view.findViewById(R.id.bottom_line);
     }
@@ -76,8 +74,7 @@ public class MobileCostLabeledTextView extends RelativeLayout {
     }
 
     public void setTextContent(String content) {
-        tv_cost.setText(content);
-        tv_cost_unit.setVisibility(View.GONE);
+        tv_cost.setText(StringUtils.getPriceUnit(getContext(), content));
     }
 
     public void setTextContentColor(int color) {
@@ -95,8 +92,7 @@ public class MobileCostLabeledTextView extends RelativeLayout {
     }
 
     public void setTextPrice(String s) {
-        tv_cost.setText(s);
-        tv_cost_unit.setVisibility(View.VISIBLE);
+        tv_cost.setText(StringUtils.getPriceUnit(getContext(), s));
     }
 
     public TextView getLabelCostTv() {
@@ -105,7 +101,6 @@ public class MobileCostLabeledTextView extends RelativeLayout {
 
     public void setCostInfoColor() {
         tv_cost.setTextColor(unitColor);
-        tv_cost_unit.setTextColor(unitColor);
     }
 
     public void setCostInfoColor(int colorId) {
@@ -115,10 +110,6 @@ public class MobileCostLabeledTextView extends RelativeLayout {
 
     public TextView getCostTv() {
         return tv_cost;
-    }
-
-    public TextView getCostUnitTv() {
-        return tv_cost_unit;
     }
 
     public ImageView getJumpIv() {

@@ -35,13 +35,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/tv_cost_unit"
-                style="@style/TextAppearance.Wallet.OrderDesc.Unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_price_unit" />
-
             <ImageView
                 android:id="@+id/iv_jump"
                 android:layout_width="wrap_content"
