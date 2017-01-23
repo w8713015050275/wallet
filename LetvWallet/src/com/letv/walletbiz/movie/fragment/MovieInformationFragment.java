@@ -3,6 +3,7 @@ package com.letv.walletbiz.movie.fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.letv.wallet.common.fragment.BaseFragment;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.IOUtils;
+import com.letv.wallet.common.util.LogHelper;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.coupon.utils.ImageOptionsHelper;
@@ -177,18 +179,32 @@ public class MovieInformationFragment extends BaseFragment implements View.OnCli
                 if (star == null) {
                     return;
                 }
+                Action.uploadClick(Action.MOVIE_DIRECTOR_STAR_CLICK, String.valueOf(star.tag_id));
+                Intent intent = new Intent();
                 try {
-                    Action.uploadClick(Action.MOVIE_DIRECTOR_STAR_CLICK, String.valueOf(star.tag_id));
-                    Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.letv.android.accountinfo", "com.letv.android.accountinfo.activity.StarPageActivity"));
-                    intent.putExtra("starIconUrl", star.icon);
-                    intent.putExtra("tagid", star.tag_id);
-                    intent.putExtra("starName", star.name);
-                    intent.putExtra("tagType", 2);
-                    intent.putExtra("themeId", 0);
+                    intent.setAction("com.letv.android.fannation.ACTION_STAR_PAGE"); // 跳转 action
+                    intent.putExtra("tagId", String.valueOf(star.tag_id)); // string 的tagId 必传参数
+                    intent.putExtra("tagName", star.name); // tagName 可选参数。
+                    intent.putExtra("appType", "wallet"); // appType 必传参数
+                    int primaryColor = getPrimaryColor();
+                    if (primaryColor != -1) {
+                        intent.putExtra("appPrimary", primaryColor);
+                    }
                     startActivity(intent);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LogHelper.e("can not find com.letv.android.fannation.ACTION_STAR_PAGE");
+                    try {
+                        intent = new Intent();
+                        intent.setComponent(new ComponentName("com.letv.android.accountinfo", "com.letv.android.accountinfo.activity.StarPageActivity"));
+                        intent.putExtra("starIconUrl", star.icon);
+                        intent.putExtra("tagid", star.tag_id);
+                        intent.putExtra("starName", star.name);
+                        intent.putExtra("tagType", 2);
+                        intent.putExtra("themeId", 0);
+                        startActivity(intent);
+                    } catch (Exception e1) {
+                        LogHelper.e(e1);
+                    }
                 }
             }
         }));
@@ -305,16 +321,42 @@ public class MovieInformationFragment extends BaseFragment implements View.OnCli
                 if (mMovieDetail == null || mMovieDetail.workTag == null || mMovieDetail.workTag.length <= 0) {
                     break;
                 }
-                intent = new Intent();
-                intent.setComponent(new ComponentName("com.letv.android.accountinfo", "com.letv.android.accountinfo.activity.StarPageActivity"));
-                intent.putExtra("starIconUrl", mMovieDetail.workTag[0].icon);
-                intent.putExtra("tagid", mMovieDetail.workTag[0].tag_id);
-                intent.putExtra("starName", mMovieDetail.name);
-                intent.putExtra("tagType", 2);
-                intent.putExtra("themeId", 0);
-                startActivity(intent);
+                try {
+                    intent = new Intent();
+                    intent.setAction("com.letv.android.fannation.ACTION_STAR_PAGE"); // 跳转 action
+                    intent.putExtra("tagId", String.valueOf(mMovieDetail.workTag[0].tag_id)); // string 的tagId 必传参数
+                    intent.putExtra("tagName", mMovieDetail.name); // tagName 可选参数。
+                    intent.putExtra("appType", "wallet"); // appType 必传参数
+                    int primaryColor = getPrimaryColor();
+                    if (primaryColor != -1) {
+                        intent.putExtra("appPrimary", primaryColor);
+                    }
+                    startActivity(intent);
+                } catch (Exception e) {
+                    LogHelper.e("can not find com.letv.android.fannation.ACTION_STAR_PAGE");
+                    try {
+                        intent = new Intent();
+                        intent.setComponent(new ComponentName("com.letv.android.accountinfo", "com.letv.android.accountinfo.activity.StarPageActivity"));
+                        intent.putExtra("starIconUrl", mMovieDetail.workTag[0].icon);
+                        intent.putExtra("tagid", mMovieDetail.workTag[0].tag_id);
+                        intent.putExtra("starName", mMovieDetail.name);
+                        intent.putExtra("tagType", 2);
+                        intent.putExtra("themeId", 0);
+                        startActivity(intent);
+                    } catch (Exception e1) {
+                        LogHelper.e(e1);
+                    }
+                }
                 break;
         }
+    }
+
+    private int getPrimaryColor() {
+        int[] attrsArray = {R.attr.walletPrimaryColor};
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrsArray);
+        int appPrimary = typedArray.getColor(0, -1);
+        typedArray.recycle();
+        return appPrimary;
     }
 
     private void updateDescriptionMoreView(View v) {
