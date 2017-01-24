@@ -2,14 +2,13 @@ package com.letv.walletbiz.member.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
+import com.letv.walletbiz.main.AutoSlidePagerAdapter;
 import com.letv.walletbiz.main.WalletMainWebActivity;
 import com.letv.walletbiz.member.MemberConstant;
 import com.letv.walletbiz.member.beans.BannerListBean;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/11/10.
  */
-public class BannerAdapter extends PagerAdapter implements View.OnClickListener{
+public class BannerAdapter extends AutoSlidePagerAdapter implements View.OnClickListener{
     private Context mContext;
 
     private ArrayList<ImageView> mImageViewArray = new ArrayList<ImageView>();
@@ -38,6 +37,19 @@ public class BannerAdapter extends PagerAdapter implements View.OnClickListener{
 
     public BannerListBean.BannerBean[] getData() {
         return mData;
+    }
+
+    @Override
+    public int getRealCount() {
+        return mData == null ? 0 : mData.length;
+    }
+
+    @Override
+    public int getItemIndexForPosition(int position) {
+        if (getRealCount() == 0) {
+            return position;
+        }
+        return position % getRealCount();
     }
 
     @Override
@@ -66,7 +78,7 @@ public class BannerAdapter extends PagerAdapter implements View.OnClickListener{
 
     @Override
     public int getCount() {
-        return mData == null ? 0 : (mData.length > 1 ? Integer.MAX_VALUE : mData.length);
+        return mData == null ? 0 : (mData.length > 1 ? mData.length * 2 + 1: mData.length);
     }
 
     @Override

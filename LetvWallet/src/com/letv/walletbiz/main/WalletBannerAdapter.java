@@ -2,7 +2,6 @@ package com.letv.walletbiz.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.PagerAdapter;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +22,13 @@ import java.util.ArrayList;
 /**
  * Created by liuliang on 16-4-14.
  */
-public class WalletBannerAdapter extends PagerAdapter implements View.OnClickListener {
+public class WalletBannerAdapter extends AutoSlidePagerAdapter implements View.OnClickListener {
 
     private Context mContext;
 
     private ArrayList<ImageView> mImageViewArray = new ArrayList<ImageView>();
     private WalletBannerBean[] mData;
+
 
     public WalletBannerAdapter(Context context) {
         mContext = context;
@@ -41,6 +41,19 @@ public class WalletBannerAdapter extends PagerAdapter implements View.OnClickLis
 
     public WalletBannerBean[] getData() {
         return mData;
+    }
+
+    @Override
+    public int getRealCount() {
+        return mData == null ? 0 : mData.length;
+    }
+
+    @Override
+    public int getItemIndexForPosition(int position) {
+        if (getRealCount() == 0) {
+            return position;
+        }
+        return position % getRealCount();
     }
 
     @Override
@@ -72,7 +85,7 @@ public class WalletBannerAdapter extends PagerAdapter implements View.OnClickLis
 
     @Override
     public int getCount() {
-        return mData == null ? 0 : (mData.length > 1 ? Integer.MAX_VALUE : mData.length);
+        return mData == null ? 0 : (mData.length > 1 ? mData.length * 2 + 1: mData.length);
     }
 
     @Override

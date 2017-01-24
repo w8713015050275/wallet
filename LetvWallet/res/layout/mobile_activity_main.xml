@@ -9,13 +9,13 @@
         android:id="@+id/banner_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <com.letv.walletbiz.mobile.ui.BannerV
             android:id="@+id/mobile_banner_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_height="wrap_content" />
 
         <View
             android:layout_width="match_parent"

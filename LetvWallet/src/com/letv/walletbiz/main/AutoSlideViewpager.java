@@ -3,7 +3,6 @@ package com.letv.walletbiz.main;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -24,6 +23,9 @@ public class AutoSlideViewpager extends ViewPager {
     private Runnable mUpdateRunnable = new Runnable() {
         @Override
         public void run() {
+            if (!mEnableAutoSlide) {
+                return;
+            }
             if (getAdapter() != null) {
                 int count = getAdapter().getCount();
                 mCurrentPosition ++;
@@ -57,11 +59,11 @@ public class AutoSlideViewpager extends ViewPager {
     }
 
     public void dataSetChanged() {
-        PagerAdapter pagerAdapter = getAdapter();
-        if (pagerAdapter != null && pagerAdapter.getCount() > 1) {
+        AutoSlidePagerAdapter pagerAdapter = (AutoSlidePagerAdapter) getAdapter();
+        if (pagerAdapter != null && pagerAdapter.getRealCount() > 1) {
             isChanging = true;
-            mCurrentPosition = 0;
-            setCurrentItem(mCurrentPosition);
+            mCurrentPosition = pagerAdapter.getRealCount();
+            setCurrentItem(mCurrentPosition, false);
             if (mEnableAutoSlide) {
                 mHandler.removeCallbacks(mUpdateRunnable);
                 mHandler.postDelayed(mUpdateRunnable, 3000);
@@ -103,7 +105,8 @@ public class AutoSlideViewpager extends ViewPager {
                     mPagerIndicator.setCurrentPage(position);
                 }
                 mCurrentPosition = position;
-                if (getAdapter() != null && getAdapter().getCount() > 1) {
+                AutoSlidePagerAdapter adapter = (AutoSlidePagerAdapter) getAdapter();
+                if (adapter != null && adapter.getCount() > 1) {
                     if (mEnableAutoSlide) {
                         mHandler.removeCallbacks(mUpdateRunnable);
                         mHandler.postDelayed(mUpdateRunnable, 3000);
@@ -113,7 +116,22 @@ public class AutoSlideViewpager extends ViewPager {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    AutoSlidePagerAdapter adapter = (AutoSlidePagerAdapter) getAdapter();
+                    if (adapter == null || adapter.getRealCount() <= 1) {
+                        return;
+                    }
+                    int newPos;
+                    if (mCurrentPosition < adapter.getRealCount()) {
+                        newPos = mCurrentPosition + adapter.getRealCount();
+                        setCurrentItem(newPos, false);
+                        mCurrentPosition = newPos;
+                    } else if(mCurrentPosition >= adapter.getRealCount() * 2){
+                        newPos = adapter.getItemIndexForPosition(mCurrentPosition);
+                        setCurrentItem(newPos, false);
+                        mCurrentPosition = newPos;
+                    }
+                }
             }
         });
     }
