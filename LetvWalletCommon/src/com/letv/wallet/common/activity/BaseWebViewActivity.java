@@ -270,11 +270,14 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
 
     @Override
     protected void onDestroy() {
-        mWebView.setWebChromeClient(null);
-        mWebView.setDownloadListener(null);
-        mWebView.setWebViewClient(null);
-        mWebView.destroy();
-        mContainer.removeAllViews();
+        if (mWebView != null) {
+            mWebView.stopLoading();
+            mWebView.setWebChromeClient(null);
+            mWebView.setDownloadListener(null);
+            mWebView.setWebViewClient(null);
+            mContainer.removeAllViews();
+            mWebView.destroy();
+        }
         super.onDestroy();
     }
 
