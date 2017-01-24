@@ -20,6 +20,7 @@ import com.letv.shared.widget.LeLicenceDialog;
 import com.letv.shared.widget.LeNeverPermissionRequestDialog;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.ExecutorHelper;
+import com.letv.wallet.common.util.LocationHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
 import com.letv.walletbiz.base.util.Action;
@@ -80,6 +81,9 @@ public class MainActivity extends BaseWalletFragmentActivity {
         Action.uploadStartApp();
         findView();
         parseIntent(getIntent());
+        if (hasPermission()) {
+            LocationHelper.getInstance().getAddress(true);
+        }
     }
 
     @Override

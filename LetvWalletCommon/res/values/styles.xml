@@ -61,15 +61,15 @@
     </style>
 
     <style name="Divider_HorizontalLine_Style">
-        <item name="android:background">@color/divider_secondary_horizontal_color</item>
+        <item name="android:background">@color/divider_horizontal_color</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/divider_width</item>
     </style>
 
-    <style name="Divider_Primary_HorizontalLine_Style">
-        <item name="android:background">@color/divider_horizontal_color</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/divider_width</item>
+    <style name="Divider_Vertical_Style">
+        <item name="android:background">@color/divider_vertical_color</item>
+        <item name="android:layout_width">@dimen/divider_vertical_width</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
     <style name="Label_View">

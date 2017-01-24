@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.letv.shared.widget.LeBottomSheet;
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.LogHelper;
+import com.letv.wallet.common.util.ParseHelper;
 import com.letv.wallet.common.widget.LabeledTextView;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
@@ -58,10 +61,13 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (intent != null) {
-            mCoupon = (BaseCoupon) intent.getSerializableExtra(CouponConstant.EXTRA_COUPON_BEAN);
+            Uri uri = intent.getData();
+            if (uri != null) {
+                mCoupon = parseUri(uri);
+            } else {
+                mCoupon = (BaseCoupon) intent.getSerializableExtra(CouponConstant.EXTRA_COUPON_BEAN);
+            }
             if (mCoupon == null) {
-                //Todo remove :For test only
-//                mCoupon = stub();
                 LogHelper.d("[%s] Input CouponObj is null", TAG);
                 finish();
                 return;
@@ -75,6 +81,74 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
     @Override
     public boolean hasBlankAndLoadingView() {
         return false;
+    }
+
+    /**
+     * letvwallet://coupon?source_merchant_id=0&source_merchant_name=&source=1&coupon_from=1&coupon_id=40
+     * &coupon_distribute_id=182&ucoupon_id=30000050&rank_id=30000050
+     * &ucoupon_code=Ydm2Kdd7n4YcZ5Yb4vx&type=1&title=lxt测试1&service_name=优惠券类型-测试
+     * &use_condition=优惠券使用条件&valid_date_desc=2017-02-21&use_detail_link=使用详细说明
+     * &icon=http://static.scloud.letv.com/res/3b99c8f8-3870-46a3-b917-123f1c0e98ff.png&jump_type=1&jump_param=abcdef&package_name=abcef
+     * &jump_link=&start_time=1487001600&end_time=1487606400&state=1
+     * &showItems=[{"key":"price","name":"金额","value":"0.01元","rank":5},{"key":"code","name":"券码","value":"Ydm2Kdd7n4YcZ5Yb4vx","rank":4},{"key":"validate_date","name":"有效期","value":"2017-02-21","rank":3}]
+     * &goods_category_ids[0]=2
+     * @param uri
+     * @return
+     */
+    private BaseCoupon parseUri(Uri uri) {
+        BaseCoupon coupon = new BaseCoupon();
+        try {
+            coupon.ucoupon_id = Long.parseLong(uri.getQueryParameter("ucoupon_id"));
+        } catch (Exception e) {
+        }
+        coupon.ucoupon_code = uri.getQueryParameter("ucoupon_code");
+        try {
+            coupon.rank_id = Long.parseLong(uri.getQueryParameter("rank_id"));
+        } catch (Exception e) {
+        }
+        try {
+            coupon.type = Integer.parseInt(uri.getQueryParameter("type"));
+        } catch (Exception e) {
+        }
+        coupon.title = uri.getQueryParameter("title");
+        coupon.service_name = uri.getQueryParameter("service_name");
+        coupon.use_condition = uri.getQueryParameter("use_condition");
+        coupon.use_detail_link = uri.getQueryParameter("use_detail_link");
+        coupon.icon = uri.getQueryParameter("icon");
+        try {
+            coupon.jump_type = Integer.parseInt(uri.getQueryParameter("jump_type"));
+        } catch (Exception e) {
+        }
+        coupon.jump_param = uri.getQueryParameter("jump_param");
+        coupon.package_name = uri.getQueryParameter("package_name");
+        coupon.jump_link = uri.getQueryParameter("jump_link");
+        try {
+            coupon.start_time = Long.parseLong(uri.getQueryParameter("start_time"));
+        } catch (Exception e) {
+        }
+        try {
+            coupon.end_time = Long.parseLong(uri.getQueryParameter("end_time"));
+        } catch (Exception e) {
+        }
+        coupon.valid_date_desc = uri.getQueryParameter("valid_date_desc");
+        try {
+            coupon.state = Integer.parseInt(uri.getQueryParameter("state"));
+        } catch (Exception e) {
+        }
+        String showItemJson = uri.getQueryParameter("showItems");
+        if (!TextUtils.isEmpty(showItemJson)) {
+            try {
+                TypeToken<BaseCoupon.CouponItem> typeToken = new TypeToken<BaseCoupon.CouponItem>(){};
+                List<BaseCoupon.CouponItem> itemList = ParseHelper.parseArrayByGson(showItemJson, typeToken.getType());
+                if (itemList != null) {
+                    coupon.showItems = itemList.toArray(new BaseCoupon.CouponItem[0]);
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+        return coupon;
     }
 
     private void initView() {

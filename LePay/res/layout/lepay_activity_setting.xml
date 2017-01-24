@@ -49,6 +49,6 @@
         style="@style/SettingListItemStyle"
         android:text="@string/setting_pay_pwd_label" />
 
-    <View style="@style/Divider_Primary_HorizontalLine_Style" />
+    <View style="@style/Divider_HorizontalLine_Style" />
 
 </LinearLayout>
