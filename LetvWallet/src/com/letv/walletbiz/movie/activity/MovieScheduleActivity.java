@@ -198,13 +198,7 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
                     }
                     break;
                 case R.id.view_currentMovie:
-                    Intent intent = new Intent(MovieScheduleActivity.this, MovieDetailActivity.class);
-                    intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, mMovieId);
-                    if (mCurrentScheduleMovie != null) {
-                        intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_NAME, mCurrentScheduleMovie.name);
-                    }
-                    intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_APP);
-                    startActivity(intent);
+                    gotoMovieDetail();
                     break;
             }
         }
@@ -285,6 +279,7 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
                 try {
                     mCityId = Integer.parseInt(temp);
                 } catch (NumberFormatException e) {
+                    mCityId = -1;
                 }
                 temp = uri.getQueryParameter(MovieTicketConstant.EXTRA_MOVIE_ID);
                 try {
@@ -419,17 +414,24 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
         return 0;
     }
 
+    private void gotoMovieDetail() {
+        Intent intent = new Intent(MovieScheduleActivity.this, MovieDetailActivity.class);
+        intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, mMovieId);
+        if (mCurrentScheduleMovie != null) {
+            intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_NAME, mCurrentScheduleMovie.name);
+        }
+        if (mCityId != -1) {
+            intent.putExtra(MovieTicketConstant.EXTRA_CITY_ID, mCityId);
+        }
+        intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_APP);
+        startActivity(intent);
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (mMovieGalleryAdapter != null && mMovieGalleryAdapter.getItem(position) != null) {
             if (mMovieId == mMovieGalleryAdapter.getItem(position).id) {
-                Intent intent = new Intent(MovieScheduleActivity.this, MovieDetailActivity.class);
-                intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, mMovieId);
-                if (mCurrentScheduleMovie != null) {
-                    intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_NAME, mCurrentScheduleMovie.name);
-                }
-                intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_APP);
-                startActivity(intent);
+                gotoMovieDetail();
             }
         }
 
