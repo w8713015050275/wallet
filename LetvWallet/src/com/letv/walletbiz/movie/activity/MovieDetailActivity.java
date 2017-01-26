@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.letv.shared.widget.LeLoadingView;
 import com.letv.wallet.common.util.DateUtils;
 import com.letv.wallet.common.util.DensityUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
@@ -38,7 +39,6 @@ import com.letv.walletbiz.movie.fragment.MovieRecommendFragment;
 import com.letv.walletbiz.movie.ui.MovieDetailPagerViewBehavior;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
 import com.letv.walletbiz.movie.utils.MovieDetailTask;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 
 import org.xutils.common.task.PriorityExecutor;
 import org.xutils.image.ImageOptions;
@@ -51,7 +51,6 @@ import java.util.ArrayList;
  */
 public class MovieDetailActivity extends BaseWalletFragmentActivity implements MovieDetailPagerViewBehavior.StarPageHeaderViewScrollListener {
 
-    private PriorityExecutor mExecutor;
     private MovieDetailTask mMovieDetailTask;
 
     private CoordinatorLayout mCoordinatorLayout;
@@ -155,7 +154,6 @@ public class MovieDetailActivity extends BaseWalletFragmentActivity implements M
         super.onCreate(savedInstanceState);
         registerNetWorkReceiver();
         setContentView(R.layout.movie_detail_layout);
-        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         mTabNameArray.add(getString(R.string.movie_detail_tab_information));
         mTabNameArray.add(getString(R.string.movie_detail_tab_recommend));
         initActionBar();
@@ -407,7 +405,7 @@ public class MovieDetailActivity extends BaseWalletFragmentActivity implements M
             } else {
                 showDetailLoadingView();
                 mMovieDetailTask = new MovieDetailTask(this, mMovieId, mCityId, mCallback);
-                mExecutor.execute(mMovieDetailTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mMovieDetailTask);
             }
         }
     }

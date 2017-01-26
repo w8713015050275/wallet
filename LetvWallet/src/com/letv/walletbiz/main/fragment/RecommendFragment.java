@@ -22,7 +22,6 @@ import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DateUtils;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.util.ViewUtils;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.WalletApplication;

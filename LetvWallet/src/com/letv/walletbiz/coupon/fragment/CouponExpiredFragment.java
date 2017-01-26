@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.letv.wallet.common.fragment.BaseFragment;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.coupon.CouponConstant;
@@ -28,9 +29,6 @@ import com.letv.walletbiz.coupon.utils.RecyclerScroller;
 import com.letv.walletbiz.movie.MovieTicketConstant;
 import com.letv.walletbiz.movie.activity.MovieOrderDetailActivity;
 import com.letv.walletbiz.movie.beans.MovieOrder;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +42,6 @@ import timehop.stickyheader.RecyclerItemClickListener;
 public class CouponExpiredFragment extends BaseFragment implements AccountHelper.OnAccountChangedListener {
     private RecyclerView mRecyclerView;
     private static final String TAG = CouponExpiredFragment.class.getSimpleName();
-    private PriorityExecutor mPriorityExecutor;
     private int viewType;
     private View mRootView;
     private CouponExpiredAdapter mAdapter;
@@ -71,7 +68,6 @@ public class CouponExpiredFragment extends BaseFragment implements AccountHelper
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerNetWorkReceiver();
-        mPriorityExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         if (getArguments() != null) {
             viewType = getArguments().getInt(CouponConstant.EXTRA_COUPON_EXPIRED_FRAGMENT_TYPE);
         }
@@ -157,7 +153,7 @@ public class CouponExpiredFragment extends BaseFragment implements AccountHelper
                 if (mCouponExpiredList == null || mCouponExpiredList.size() == 0) showLoadingView();
                 mCouponLoadTask = new CouponListLoadTask(getActivity(), last_id, limit);
                 mCouponLoadTask.setExpiredResponseCallback(mCouponExpiredListCallback);
-                mPriorityExecutor.execute(mCouponLoadTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mCouponLoadTask);
             }
         } else if (mCouponExpiredList != null && mCouponExpiredList.size() > 0) {
             CouponUtils.showToast(getActivity(), R.string.empty_no_network);
@@ -175,7 +171,7 @@ public class CouponExpiredFragment extends BaseFragment implements AccountHelper
                 }
                 mCardLoadTask = new CardCouponListTask(getActivity(), mCardExpiredListCallback);
                 mCardLoadTask.setParams(MovieOrder.MOVIE_TICKET_PROGRESS_SHOWN, last_id, -1, pageSize);
-                mPriorityExecutor.execute(mCardLoadTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mCardLoadTask);
             }
         } else if (mCardExpiredList != null && mCardExpiredList.size() > 0) {
             CouponUtils.showToast(getActivity(), R.string.empty_no_network);

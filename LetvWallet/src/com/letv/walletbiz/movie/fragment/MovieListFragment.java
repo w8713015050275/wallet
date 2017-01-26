@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.letv.wallet.common.fragment.BaseFragment;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.view.DividerItemDecoration;
@@ -29,9 +30,6 @@ import com.letv.walletbiz.movie.adapter.MovieSoonListAdapter;
 import com.letv.walletbiz.movie.beans.Movie;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
 import com.letv.walletbiz.movie.utils.MovieListLoadTask;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.util.List;
 
@@ -60,7 +58,6 @@ public class MovieListFragment extends BaseFragment implements MovieCommonCallba
     private int mCurrentCityID = -1;
     private MovieListLoadTask mLoadTask;
     private List<Movie> mData;
-    private PriorityExecutor mPriorityExecutor;
     private boolean isWill = false; // false:正在上映;  true:即将上映
     private RadioGroup radioGroupTimer;
     private StickyRecyclerHeadersDecoration decoration;
@@ -90,7 +87,6 @@ public class MovieListFragment extends BaseFragment implements MovieCommonCallba
             isWill = getArguments().getBoolean(MovieTicketConstant.EXTRA_MOVIE_LIST_FRAGMENT_TYPE);
             mCurrentCityID = getArguments().getInt(MovieTicketConstant.EXTRA_MOVIE_LIST_FRAGMENT_CITY_ID);
         }
-        mPriorityExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         SharedPreferencesHelper.getSharePreferences().registerOnSharedPreferenceChangeListener(onCityPreferenceChangeListener);
         registerNetWorkReceiver();
     }
@@ -222,7 +218,7 @@ public class MovieListFragment extends BaseFragment implements MovieCommonCallba
             }
             mLoadTask = new MovieListLoadTask(getActivity(), this);
             mLoadTask.setParams(mCurrentCityID, isWill, isLoadFromNet);
-            mPriorityExecutor.execute(mLoadTask);
+            ExecutorHelper.getExecutor().runnableExecutor(mLoadTask);
         }
     }
 

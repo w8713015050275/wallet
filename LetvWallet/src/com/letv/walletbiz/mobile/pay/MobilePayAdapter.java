@@ -2,12 +2,11 @@ package com.letv.walletbiz.mobile.pay;
 
 import android.content.Context;
 
-import com.letv.walletbiz.WalletApplication;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.walletbiz.base.pay.BasePayAdapter;
 import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.mobile.MobileConstant;
-import com.letv.walletbiz.mobile.beans.HistoryRecordNumberBean;
-import com.letv.walletbiz.mobile.dbhelper.HistoryRecordHelper;
+import com.letv.walletbiz.mobile.util.RecordPhoneNumberTask;
 
 import java.util.HashMap;
 
@@ -60,18 +59,9 @@ public class MobilePayAdapter implements BasePayAdapter {
                 /*
                 再 PayActivity 中运行
                  */
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        HistoryRecordNumberBean.RecordInfoBean recordInfoBean = new HistoryRecordNumberBean.RecordInfoBean();
-                        recordInfoBean.setPhoneNum(mProduct.getNumber());
-                        recordInfoBean.setTime(System.currentTimeMillis());
-                        /*
-                        TODO: Insert failure such as statistical work
-                         */
-                        boolean insertState = HistoryRecordHelper.insertContactToDBsync(WalletApplication.getApplication(), recordInfoBean);
-                    }
-                }).start();
+                if (mProduct != null) {
+                    ExecutorHelper.getExecutor().runnableExecutor(new RecordPhoneNumberTask(mProduct));
+                }
                 break;
             case Constants.RESULT_STATUS.FAIL:
             case Constants.RESULT_STATUS.PENDING:

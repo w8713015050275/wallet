@@ -53,7 +53,7 @@ public class AccountHelper {
     public void getTokenASync(Context context) {
 
     AccountThread aThread =new AccountThread(context);
-    new Thread(aThread).start();
+        ExecutorHelper.getExecutor().runnableExecutor(aThread);
     }
 
 

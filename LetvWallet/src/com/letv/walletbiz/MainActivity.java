@@ -8,6 +8,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.letv.shared.widget.LeBottomSheet;
 import com.letv.shared.widget.LeLicenceDialog;
 import com.letv.shared.widget.LeNeverPermissionRequestDialog;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
 import com.letv.walletbiz.base.util.Action;
@@ -204,6 +206,7 @@ public class MainActivity extends BaseWalletFragmentActivity {
     @Override
     protected void onDestroy() {
         Action.uploadStopApp();
+        ExecutorHelper.getExecutor().clearAllRunnable();
         if (mLeLicenceDialog != null) {
             mLeLicenceDialog.dismiss();
         }

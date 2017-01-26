@@ -17,7 +17,7 @@ import com.letv.shared.widget.LeCheckBox;
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.BuildConfig;
 import com.letv.walletbiz.R;
@@ -38,7 +38,6 @@ import com.letv.walletbiz.member.util.MemberCommonCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.common.task.PriorityExecutor;
 
 /**
  * Created by zhanghuancheng on 16-11-16.
@@ -80,7 +79,6 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
 
     private long mUcouponId;
     private ProgressDialog mDialog;
-    private PriorityExecutor mExecutor;
     private OrderPrePayTask mPrePayTask;
     private MemberProduct mMemberProduct;
     private boolean mSelectedCoupon;
@@ -214,7 +212,6 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
     }
 
     private void initView() {
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
         Bundle bundle = getIntent().getExtras();
         mMemberProduct = (MemberProduct) bundle.getSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT);
 
@@ -406,7 +403,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
                 }
             });
         }
-        mExecutor.execute(mAvailableCouponListTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mAvailableCouponListTask);
     }
 
     private void updateCouponData(CouponBean[] couponBeanList) {
@@ -508,7 +505,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
                     mPrePayTask = null;
                 }
             });
-            mExecutor.execute(mPrePayTask);
+            ExecutorHelper.getExecutor().runnableExecutor(mPrePayTask);
         }
     }
 
@@ -568,7 +565,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
                     }
                 }
             });
-            mExecutor.execute(mOrderCreateTask);
+            ExecutorHelper.getExecutor().runnableExecutor(mOrderCreateTask);
         }
     }
 }

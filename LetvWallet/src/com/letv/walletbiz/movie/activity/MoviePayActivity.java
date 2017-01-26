@@ -25,6 +25,7 @@ import com.letv.shared.widget.LeRadioButton;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.DensityUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.PhoneNumberUtils;
@@ -47,7 +48,6 @@ import com.letv.walletbiz.movie.beans.MovieProduct;
 import com.letv.walletbiz.movie.ui.TimerTextView;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
 import com.letv.walletbiz.movie.utils.MoviePayResultTask;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import org.xutils.common.task.PriorityExecutor;
@@ -70,7 +70,6 @@ public class MoviePayActivity extends BaseWalletFragmentActivity implements Phon
     private static final String MSG_STATUS = "status";
     private static String mPromptInputRightNumber;
 
-    private PriorityExecutor mExecutor;
     private MoviePayResultTask mMoviePayResultTask;
 
     protected PayAdapter mAdapter;
@@ -165,7 +164,6 @@ public class MoviePayActivity extends BaseWalletFragmentActivity implements Phon
             finish();
         }
 
-        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
 
         mAdapter = (PayAdapter) mProduct.getPayAdapter();
         setTitle(mAdapter.getTitle());
@@ -321,7 +319,7 @@ public class MoviePayActivity extends BaseWalletFragmentActivity implements Phon
             return;
         }
         mMoviePayResultTask = new MoviePayResultTask(this, mProduct.getSN(), mCallback);
-        mExecutor.execute(mMoviePayResultTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mMoviePayResultTask);
         showPayResultQueryDialog();
     }
 

@@ -2,6 +2,8 @@ package com.letv.walletbiz.base.pay;
 
 import android.content.Context;
 
+import com.letv.wallet.common.util.ExecutorHelper;
+
 /**
  * Created by linquan on 15-12-7.
  */
@@ -34,8 +36,7 @@ public abstract class PayBase {
             }
         };
         // 必须异步调用
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
+        ExecutorHelper.getExecutor().runnableExecutor(payRunnable);
     }
 
     public boolean doCheckExist() {

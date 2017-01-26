@@ -32,6 +32,7 @@ import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.DeviceUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.ParseHelper;
 import com.letv.wallet.common.util.PermissionCheckHelper;
@@ -60,7 +61,6 @@ import com.letv.walletbiz.mobile.ui.HistoryRecordNumberV;
 import com.letv.walletbiz.mobile.ui.ProductsPanel;
 import com.letv.walletbiz.mobile.ui.ProductsPanelAdapter;
 import com.letv.walletbiz.mobile.util.UiUtils;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 
 import org.xutils.common.task.PriorityExecutor;
 import org.xutils.xmain;
@@ -84,6 +84,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private static final int CLEAR_HISTORY_RET = 103;
     private static final int UPDATE_CONTACTNAME = 104;
     private static final int UPDATE_DOC_PROMPT = 105;
+    private static final int MSG_LOAD_PRODUCT_LIST_FINISH = 106;
 
     private static final int CHECK_STATUS = 107;
 
@@ -132,10 +133,10 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
 
     private WalletBannerListBean mBannerListData;
 
-    private PriorityExecutor mExecutor;
-    private MobileAsyncTask mMobileProductsAsyncT;
+
+    private ProductsTask mProductsTask;
     private DocPromptTask mDocPromptAsyncT;
-    private ContactNameAsyncTask contactAsyncT;
+    private ContactNameTask mContactTask;
     private BannerTask mBannerAsyncT;
 
     private Handler handler = new Handler() {
@@ -157,6 +158,19 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                     }
                     mViewDeposite.setText(getDeposite(mFeeOrFlow));
                     break;
+                case MSG_LOAD_PRODUCT_LIST_FINISH:
+                    BaseResponse<ProductBean> response = null;
+                    if (msg.obj != null) {
+                        response = (BaseResponse<ProductBean>) msg.obj;
+                    }
+                    if (response != null) {
+                        ProductBean product = (ProductBean) response.data;
+                        updateProductList(product);
+                    } else {
+                        showUserSelectDialog(MobileActivity.this);
+                        updateProductList(null);
+                    }
+                    break;
                 case UPDATE_PRODUCT_LIST:
                     ProductBean result;
                     String desc = null;
@@ -173,7 +187,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                     mProductPanel.update();
                     break;
                 case UPDATE_CONTACTNAME:
-                    contactAsyncT = null;
+                    mContactTask = null;
                     showMobileNumberInfoLl();
                     String name = "";
                     if (msg.obj != null) {
@@ -225,7 +239,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerNetWorkReceiver();
-        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         String inNumber = processExtraData();
         LogHelper.d("[%S] getStringExtra ucouponid = " + Long.toString(mCouponID), TAG);
         setTitle(getTitle(mFeeOrFlow));
@@ -545,7 +558,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     protected void onDestroy() {
         hideSoftkeyboard(mPhoneEdittext);
         mGotoOrderList = false;
-        destoryAsyncTask();
         super.onDestroy();
     }
 
@@ -606,7 +618,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         if (mBannerAsyncT == null) {
             mBannerAsyncT = new BannerTask(getBaseContext(), bannerCallback
                     , getBusinessId(mFeeOrFlow));
-            mExecutor.execute(mBannerAsyncT);
+            ExecutorHelper.getExecutor().runnableExecutor(mBannerAsyncT);
         }
     }
 
@@ -748,24 +760,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                 (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FEE) ? MobileConstant.PATH.MOBILE_MATTER_ATTENTION_FEE : MobileConstant.PATH.MOBILE_MATTER_ATTENTION_FLOW);
         intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, getString(R.string.label_matter_attention));
         startActivity(intent);
-    }
-
-    private void destoryAsyncTask() {
-        if (mBannerAsyncT != null) {
-            mBannerAsyncT = null;
-        }
-        if (mMobileProductsAsyncT != null) {
-            mMobileProductsAsyncT.cancel(true);
-            mMobileProductsAsyncT = null;
-        }
-        if (mDocPromptAsyncT != null) {
-            mDocPromptAsyncT.cancel(true);
-            mDocPromptAsyncT = null;
-        }
-        if (contactAsyncT != null) {
-            contactAsyncT.cancel(true);
-            contactAsyncT = null;
-        }
     }
 
     @Override
@@ -1005,53 +999,40 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     }
 
     private void getContactNameAsyncTask(String number) {
-        checkContactNameAsyncTask();
-        contactAsyncT.execute(number);
-    }
-
-    private void checkContactNameAsyncTask() {
-        if (contactAsyncT == null) {
-            contactAsyncT = new ContactNameAsyncTask();
-        } else {
-            if (contactAsyncT.getStatus() == AsyncTask.Status.RUNNING) {
-                contactAsyncT.cancel(true);
-            }
-            contactAsyncT = new ContactNameAsyncTask();
+        if (mContactTask == null) {
+            mContactTask = new ContactNameTask();
         }
+        mContactTask.setData(number);
+        ExecutorHelper.getExecutor().runnableExecutor(mContactTask);
     }
 
-    public class ContactNameAsyncTask extends AsyncTask<String, Integer, String> {
+    private class ContactNameTask implements Runnable {
+        private String mPhoneNumber;
 
-        public ContactNameAsyncTask() {
+        public void setData(String phoneNumber) {
+            mPhoneNumber = phoneNumber;
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            if (MobileActivity.this.isFinishing() || isCancelled()) return;
-            Message msg = Message.obtain();
-            msg.obj = result;
-            msg.what = UPDATE_CONTACTNAME;
-            handler.sendMessage(msg);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
+        public void run() {
             String name;
-            String phoneNumber = params[0];
             try {
-                if (TextUtils.isEmpty(phoneNumber))
-                    return null;
-                name = UiUtils.getContactNameByNumber(MobileActivity.this, params[0]);
+                if (TextUtils.isEmpty(mPhoneNumber))
+                    return;
+                name = UiUtils.getContactNameByNumber(MobileActivity.this, mPhoneNumber);
             } catch (Exception e) {
                 e.printStackTrace();
                 name = "";
             }
             if (!TextUtils.isEmpty(name)) {
-                if (name.equals(phoneNumber)) {
+                if (name.equals(mPhoneNumber)) {
                     name = getResources().getString(R.string.mobile_phone_number_no_name);
                 }
             }
-            return name;
+            Message msg = Message.obtain();
+            msg.obj = name;
+            msg.what = UPDATE_CONTACTNAME;
+            handler.sendMessage(msg);
         }
     }
 
@@ -1062,87 +1043,42 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         }
         LogHelper.d("[%S] queryMobileProducts execute", TAG);
         if (TextUtils.isEmpty(number)) return;
-        if (checkMobileProductsAsyncTask(number)) {
-            Object[] objParams = new Object[]{type, number};
-            mMobileProductsAsyncT.execute(objParams);
+        if (mProductsTask == null) {
+            mProductsTask = new ProductsTask();
         }
+        mProductsTask.setData(type, number);
+        ExecutorHelper.getExecutor().runnableExecutor(mProductsTask);
     }
 
-    private boolean checkMobileProductsAsyncTask(String number) {
-        if (mMobileProductsAsyncT == null) {
-            mMobileProductsAsyncT = new MobileAsyncTask();
-            return true;
-        } else {
-            if (number.equals(mMobileProductsAsyncT.getQueryNumber()))
-                return false;
-            if (mMobileProductsAsyncT.getStatus() == AsyncTask.Status.RUNNING) {
-                mMobileProductsAsyncT.cancel(true);
-            }
-            mMobileProductsAsyncT = new MobileAsyncTask();
-            return true;
-        }
-    }
+    private class ProductsTask implements Runnable {
+        private String queryNumber = "";
+        private int type;
 
-    private class MobileAsyncTask extends AsyncTask<Object, Integer, BaseResponse<ProductBean>> {
-        String queryNumber = "";
-
-        public MobileAsyncTask() {
-        }
-
-        public String getQueryNumber() {
-            return queryNumber;
+        public void setData(int type, String queryNumber) {
+            this.type = type;
+            this.queryNumber = queryNumber;
         }
 
         @Override
-        protected void onPostExecute(BaseResponse<ProductBean> result) {
-            if (MobileActivity.this.isFinishing() || isCancelled()) return;
-            LogHelper.i("[%S] Response data", TAG);
-            if (queryNumber.equals(mPhoneEdittext.getMobileNumber())) {
-                if (result != null) {
-                    ProductBean product = (ProductBean) result.data;
-                    updateProductList(product);
-                } else {
-                    showUserSelectDialog(MobileActivity.this);
-                    updateProductList(null);
-                }
-            } else {
-                LogHelper.i("[%S] Response data queryNumber != mPhoneEdittext.getMobileNumber()", TAG);
-            }
-            mMobileProductsAsyncT = null;
-        }
-
-        @Override
-        protected BaseResponse<ProductBean> doInBackground(Object... params) {
+        public void run() {
             BaseResponse<ProductBean> response = null;
             try {
                 String PATH = MobileConstant.PATH.PRODUCT;
-                queryNumber = params[1].toString();
                 LogHelper.i("[%S] request data", TAG);
                 BaseRequestParams reqParams = new BaseRequestParams(PATH);
                 reqParams.addQueryStringParameter(MobileConstant.PARAM.NUMBER, queryNumber);
-                reqParams.addQueryStringParameter(MobileConstant.PARAM.TYPE, params[0].toString());
+                reqParams.addQueryStringParameter(MobileConstant.PARAM.TYPE, String.valueOf(type));
                 TypeToken typeToken = new TypeToken<BaseResponse<ProductBean>>() {
                 };
                 response = xmain.http().postSync(reqParams, typeToken.getType());
+                handler.removeMessages(MSG_LOAD_PRODUCT_LIST_FINISH);
+                Message msg = Message.obtain();
+                msg.obj = response;
+                msg.what = MSG_LOAD_PRODUCT_LIST_FINISH;
+                handler.sendMessage(msg);
             } catch (Exception e) {
             } catch (Throwable throwable) {
             }
-            return response;
-        }
-
-        @Override
-        protected void onCancelled() {
-            queryNumber = "";
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            if (isCancelled()) return;
         }
     }
 

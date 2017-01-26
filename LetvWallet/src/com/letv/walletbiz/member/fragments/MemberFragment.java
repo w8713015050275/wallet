@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.letv.wallet.common.fragment.BaseFragment;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.member.MemberConstant;
@@ -27,8 +27,6 @@ import com.letv.walletbiz.member.task.MemberProductListTask;
 import com.letv.walletbiz.member.util.MemberCommonCallback;
 import com.letv.walletbiz.member.activity.MemberAgreementActivity;
 import com.letv.walletbiz.member.widget.BannerPtrFrameLayout;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -47,7 +45,6 @@ public class MemberFragment extends BaseFragment {
     private BannerPtrFrameLayout mPtrFrameLayout;
     private MemberBannerListTask mBannerListTask;
     private MemberProductListTask mProductListTask;
-    private PriorityExecutor mExecutor;
 
     private boolean mBannerLoadDone = false;
     private boolean mProductLoadDone = false;
@@ -195,7 +192,6 @@ public class MemberFragment extends BaseFragment {
         if (getArguments() != null) {
             mMemberTypeBean = (MemberTypeListBean.MemberTypeBean) getArguments().getSerializable(MemberConstant.MEMBER_TYPE);
         }
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
         registerNetWorkReceiver();
     }
 
@@ -289,11 +285,11 @@ public class MemberFragment extends BaseFragment {
         if (mBannerListTask == null) {
             mBannerListTask = new MemberBannerListTask(mContext, mMemberTypeBean.type, mBannerListCallback);
         }
-        mExecutor.execute(mBannerListTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mBannerListTask);
         if (mProductListTask == null) {
             String uToken = AccountHelper.getInstance().getToken(mContext);
             mProductListTask = new MemberProductListTask(mContext, String.valueOf(mMemberTypeBean.id), uToken, mProductListCallback);
         }
-        mExecutor.execute(mProductListTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mProductListTask);
     }
 }

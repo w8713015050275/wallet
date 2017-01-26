@@ -16,9 +16,9 @@ import com.google.gson.reflect.TypeToken;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DateUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.widget.LabeledTextView;
 import com.letv.walletbiz.BuildConfig;
 import com.letv.walletbiz.R;
@@ -39,8 +39,6 @@ import com.letv.walletbiz.member.widget.MemberProductBrief;
 import com.letv.walletbiz.mobile.util.UiUtils;
 import com.letv.walletbiz.mobile.widget.MobileCostLabeledTextView;
 import com.letv.walletbiz.mobile.widget.MobileProductCostBrief;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.util.Map;
 
@@ -65,7 +63,6 @@ public class MemberOrderDetailActivity extends OrderDetailActivity {
     public static final int PAY_USEBYOTHER = 5;//支付正在被使用，请提示用户完成上一 次支付
 
     private int mTitleId;
-    private PriorityExecutor mExecutor;
     private ProgressDialog mDialog;
     private MemberProduct mMemberProduct;
     private OrderInfoBean mOrderInfoBean;
@@ -183,7 +180,6 @@ public class MemberOrderDetailActivity extends OrderDetailActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.member_order_detail);
         setTitle("");
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
     }
 
     @Override
@@ -297,7 +293,7 @@ public class MemberOrderDetailActivity extends OrderDetailActivity {
                     mPrePayTask = null;
                 }
             });
-            mExecutor.execute(mPrePayTask);
+            ExecutorHelper.getExecutor().runnableExecutor(mPrePayTask);
         }
     }
 

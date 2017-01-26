@@ -14,15 +14,13 @@ import android.widget.FrameLayout;
 import com.google.gson.reflect.TypeToken;
 import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.util.CommonCallback;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.http.beans.order.OrderBaseBean;
 import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.base.util.OrderDetailTask;
-
-import org.xutils.common.task.PriorityExecutor;
 
 /**
  * Created by linquan on 15-11-27.
@@ -36,7 +34,6 @@ public abstract class OrderDetailActivity extends BaseWalletFragmentActivity {
     protected String mOrderNum;
     private OrderBaseBean mOrderBean;
 
-    private PriorityExecutor mExecutor;
     private OrderDetailTask mTask;
 
     Handler mHandler = new Handler(new Handler.Callback() {
@@ -92,7 +89,7 @@ public abstract class OrderDetailActivity extends BaseWalletFragmentActivity {
             if (mTask == null) {
                 showLoadingView();
                 mTask = new OrderDetailTask(this, getRequestBean(), getTypeToken(), mCallback);
-                mExecutor.execute(mTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mTask);
             }
         } else {
             showBlankPage(BlankPage.STATE_NO_NETWORK);
@@ -148,7 +145,6 @@ public abstract class OrderDetailActivity extends BaseWalletFragmentActivity {
             }
         }
         mWrapper = (ViewGroup) findViewById(R.id.id_content);
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
     }
 
     public abstract void setData(View v, OrderBaseBean bean);

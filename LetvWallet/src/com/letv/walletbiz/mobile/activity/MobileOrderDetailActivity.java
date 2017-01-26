@@ -16,32 +16,28 @@ import com.google.gson.reflect.TypeToken;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DateUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.widget.LabeledTextView;
 import com.letv.walletbiz.R;
-import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.activity.OrderDetailActivity;
 import com.letv.walletbiz.base.http.beans.order.OrderBaseBean;
 import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.mobile.MobileConstant;
-import com.letv.walletbiz.mobile.beans.HistoryRecordNumberBean;
 import com.letv.walletbiz.mobile.beans.OrderDetailBean;
 import com.letv.walletbiz.mobile.beans.OrderSnapshot;
-import com.letv.walletbiz.mobile.dbhelper.HistoryRecordHelper;
 import com.letv.walletbiz.mobile.pay.MobileProduct;
 import com.letv.walletbiz.mobile.util.PayInfoCommonCallback;
 import com.letv.walletbiz.mobile.util.PayPreInfoTask;
+import com.letv.walletbiz.mobile.util.RecordPhoneNumberTask;
 import com.letv.walletbiz.mobile.util.UiUtils;
 import com.letv.walletbiz.mobile.widget.MobileCostLabeledTextView;
 import com.letv.walletbiz.mobile.widget.MobileProductBrief;
 import com.letv.walletbiz.mobile.widget.MobileProductCostBrief;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +64,6 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
     public static final int PAY_FAILED = 4;//支付失败
     public static final int PAY_USEBYOTHER = 5;//支付正在被使用，请提示用户完成上一 次支付
 
-    private PriorityExecutor mExecutor;
     private PayPreInfoTask mPrePayTask;
 
     private MobileProduct mMobileProduct;
@@ -128,7 +123,6 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mobile_order_detail);
         setTitle("");
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
         mToast = Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.mobile_prompt_net_connection_fail), Toast.LENGTH_SHORT);
     }
 
@@ -258,15 +252,7 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
                         case SUCCESSED://支付成功
                             payResult = Constants.RESULT_STATUS.SUCCESS;
                             if (mMobileProduct != null) {
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        HistoryRecordNumberBean.RecordInfoBean recordInfoBean = new HistoryRecordNumberBean.RecordInfoBean();
-                                        recordInfoBean.setPhoneNum(mMobileProduct.getNumber());
-                                        recordInfoBean.setTime(System.currentTimeMillis());
-                                        boolean insertState = HistoryRecordHelper.insertContactToDBsync(WalletApplication.getApplication(), recordInfoBean);
-                                    }
-                                }).start();
+                                ExecutorHelper.getExecutor().runnableExecutor(new RecordPhoneNumberTask(mMobileProduct));
                             }
                             break;
                         case PAYINFO_ERROR://支付信息错误
@@ -324,7 +310,7 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
     private void getPrePayInfoTask() {
         checkPrePayAsyncTask();
         showDialog();
-        mExecutor.execute(mPrePayTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mPrePayTask);
     }
 
     private boolean checkPrePayAsyncTask() {

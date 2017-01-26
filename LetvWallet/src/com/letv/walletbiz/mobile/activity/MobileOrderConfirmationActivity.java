@@ -3,7 +3,6 @@ package com.letv.walletbiz.mobile.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,13 +16,12 @@ import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonCallback;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.PhoneNumberUtils;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
-import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.base.pay.Constants;
@@ -33,15 +31,13 @@ import com.letv.walletbiz.coupon.CouponConstant;
 import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.mobile.beans.CouponBean;
 import com.letv.walletbiz.mobile.beans.CouponListBean;
-import com.letv.walletbiz.mobile.beans.HistoryRecordNumberBean;
 import com.letv.walletbiz.mobile.beans.OrderBean;
-import com.letv.walletbiz.mobile.dbhelper.HistoryRecordHelper;
 import com.letv.walletbiz.mobile.pay.MobileProduct;
 import com.letv.walletbiz.mobile.util.CouponListTask;
 import com.letv.walletbiz.mobile.util.PayInfoCommonCallback;
 import com.letv.walletbiz.mobile.util.PayPreInfoTask;
+import com.letv.walletbiz.mobile.util.RecordPhoneNumberTask;
 
-import org.xutils.common.task.PriorityExecutor;
 import org.xutils.xmain;
 
 import java.util.HashMap;
@@ -79,9 +75,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     private ProgressDialog mDialog;
     private Toast mToast;
 
-    private PriorityExecutor mExecutor;
     private CouponListTask mCouponAsyncT;
-    private GetOrderSNAsyncTask mGetOrderSNAsyncT;
+    private GetOrderSNTask mGetOrderSNTask;
     private PayPreInfoTask mPrePayTask;
 
     private String mOrderSN;
@@ -110,9 +105,6 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case PLACE_ORDER_RET:
-                    if (mGetOrderSNAsyncT != null) {
-                        mGetOrderSNAsyncT = null;
-                    }
                     if (mMobileProduct != null) {
                         OrderBean orderBean = (OrderBean) msg.obj;
                         mMobileProduct.setSN(orderBean.order_sn);
@@ -146,9 +138,6 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     break;
                 case EXCEPTION_RET:
                     hideDialog();
-                    if (mGetOrderSNAsyncT != null) {
-                        mGetOrderSNAsyncT = null;
-                    }
                     switch (msg.arg1) {
                         case EXCEPTION_PROMPT1:
                             Toast.makeText(MobileOrderConfirmationActivity.this, R.string.mobile_request_order_fail_prom, Toast.LENGTH_SHORT).show();
@@ -200,15 +189,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                         case SUCCESSED://支付成功
                             payResult = Constants.RESULT_STATUS.SUCCESS;
                             if (mMobileProduct != null) {
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        HistoryRecordNumberBean.RecordInfoBean recordInfoBean = new HistoryRecordNumberBean.RecordInfoBean();
-                                        recordInfoBean.setPhoneNum(mMobileProduct.getNumber());
-                                        recordInfoBean.setTime(System.currentTimeMillis());
-                                        boolean insertState = HistoryRecordHelper.insertContactToDBsync(WalletApplication.getApplication(), recordInfoBean);
-                                    }
-                                }).start();
+                                ExecutorHelper.getExecutor().runnableExecutor(new RecordPhoneNumberTask(mMobileProduct));
                             }
                             break;
                         case PAYINFO_ERROR://支付信息错误
@@ -251,7 +232,6 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         }
         mUcouponId = bundle.getLong(CouponConstant.EXTRA_COUPON_BEAN_ID);
         mUseUcouponId = mUcouponId;
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
         mTvProductName = (TextView) findViewById(R.id.tv_product_name);
         mTvNumber = (TextView) findViewById(R.id.tv_number);
         mCouponV = (CouponBrief) findViewById(R.id.v_coupon);
@@ -455,7 +435,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
             mCouponAsyncT.onCancelled();
         }
         mCouponAsyncT = new CouponListTask(MobileOrderConfirmationActivity.this, this, uToken, skuSN);
-        mExecutor.execute(mCouponAsyncT);
+        ExecutorHelper.getExecutor().runnableExecutor(mCouponAsyncT);
     }
 
     @Override
@@ -474,7 +454,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         if (mDialog != null) {
             mDialog.setMessage(getString(R.string.wallet_prompt_create_payinfo));
         }
-        mExecutor.execute(mPrePayTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mPrePayTask);
     }
 
 
@@ -509,16 +489,11 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
             return;
         }
         String uToken = AccountHelper.getInstance().getToken(MobileOrderConfirmationActivity.this);
-        if (checkOrderAsyncTask(uToken, number, productId, couponIds))
-            mGetOrderSNAsyncT.execute();
-    }
-
-    private boolean checkOrderAsyncTask(String token, String number, int productId, long[] couponIds) {
-        if (mGetOrderSNAsyncT == null) {
-            mGetOrderSNAsyncT = new GetOrderSNAsyncTask(token, number, productId, couponIds);
-            return true;
+        if (mGetOrderSNTask == null) {
+            mGetOrderSNTask = new GetOrderSNTask();
         }
-        return false;
+        mGetOrderSNTask.setData(uToken, number, productId, couponIds);
+        ExecutorHelper.getExecutor().runnableExecutor(mGetOrderSNTask);
     }
 
     private void sendMessageRet(int arg1) {
@@ -555,10 +530,6 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     }
 
     private void destoryAsyncTask() {
-        if (mGetOrderSNAsyncT != null) {
-            mGetOrderSNAsyncT.cancel(true);
-            mGetOrderSNAsyncT = null;
-        }
         if (mPrePayTask != null) {
             mPrePayTask.onCancelled();
             mPrePayTask = null;
@@ -566,17 +537,13 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         mCouponAsyncT = null;
     }
 
-    private class GetOrderSNAsyncTask extends AsyncTask<Object, Integer, BaseResponse<OrderBean>> {
+    private class GetOrderSNTask implements Runnable {
         private String mUtoken;
         private String mNumber;
         private int mProductId = PRODUCT_ID;
         private long[] mCouponIds;
 
-        public int getmProductId() {
-            return mProductId;
-        }
-
-        public GetOrderSNAsyncTask(String token, String number, int productId, long[] couponIds) {
+        public void setData(String token, String number, int productId, long[] couponIds) {
             mUtoken = token;
             mNumber = number;
             mProductId = productId;
@@ -584,25 +551,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         }
 
         @Override
-        protected void onPostExecute(BaseResponse<OrderBean> result) {
-            if (isFinishing()) return;
-            if (result != null && result.data != null && result.errno == 10000) {
-                mSelectedCoupon = false;
-                OrderBean order = result.data;
-                Message msg = Message.obtain();
-                msg.obj = order;
-                msg.what = PLACE_ORDER_RET;
-                // 发送这个消息到消息队列中
-                handler.sendMessage(msg);
-            } else {
-                if (!isNetworkAvailable())
-                    sendMessageRet(EXCEPTION_PROMPT2);
-                sendMessageRet(EXCEPTION_PROMPT1);
-            }
-        }
-
-        @Override
-        protected BaseResponse<OrderBean> doInBackground(Object... params) {
+        public void run() {
             BaseResponse<OrderBean> response = null;
             try {
                 BaseRequestParams reqParams = new BaseRequestParams(MobileConstant.PATH.ORDER);
@@ -624,29 +573,22 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                 TypeToken typeToken = new TypeToken<BaseResponse<OrderBean>>() {
                 };
                 response = xmain.http().postSync(reqParams, typeToken.getType());
-                if (isCancelled()) return null;
             } catch (Exception e) {
-                return null;
             } catch (Throwable throwable) {
-                return null;
             }
-            return response;
-        }
-
-        @Override
-        protected void onCancelled() {
-            mNumber = "";
-            mProductId = PRODUCT_ID;
-            hideDialog();
-        }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            if (isCancelled()) return;
+            if (response != null && response.data != null && response.errno == 10000) {
+                mSelectedCoupon = false;
+                OrderBean order = response.data;
+                Message msg = Message.obtain();
+                msg.obj = order;
+                msg.what = PLACE_ORDER_RET;
+                // 发送这个消息到消息队列中
+                handler.sendMessage(msg);
+            } else {
+                if (!isNetworkAvailable())
+                    sendMessageRet(EXCEPTION_PROMPT2);
+                sendMessageRet(EXCEPTION_PROMPT1);
+            }
         }
     }
 }

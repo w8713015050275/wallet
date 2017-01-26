@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DateUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.PermissionCheckHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.wallet.common.view.BlankPage;
@@ -49,11 +50,9 @@ import com.letv.walletbiz.movie.ui.MovieTabFlowLayout;
 import com.letv.walletbiz.movie.utils.BlurImageHelper;
 import com.letv.walletbiz.movie.utils.CinemaListHelper;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 import com.letv.walletbiz.movie.utils.MovieScheduleFavoritesTask;
 import com.letv.walletbiz.movie.utils.ScheduleTask;
 
-import org.xutils.common.task.PriorityExecutor;
 import org.xutils.xmain;
 
 import java.util.Date;
@@ -100,7 +99,7 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
     private ScheduleMovie mCurrentScheduleMovie;
     private AccountHelper accountHelper = AccountHelper.getInstance();
     private MenuItem menuItemFavorites;
-    private PriorityExecutor mExecutor;
+    private CinemaListTask mCinemaTask;
     public MovieTabFlowLayout tagContainer;
     private TextView mStopTimeView;
 
@@ -254,7 +253,6 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
         mPagerAdapter = new ViewpagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         mBlurImageHelper = new BlurImageHelper(this);
     }
 
@@ -500,21 +498,27 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
                     }
                 });
                 mFavoritesTask.setParams(mCinemaId, addFavorite);
-                mExecutor.execute(mFavoritesTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mFavoritesTask);
             }
         } else {
             AccountHelper.getInstance().loginLetvAccountIfNot(this, null);
         }
     }
 
-    private void updateCinemaList(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                CinemaListHelper.deleteCinemaListFromLocal(MovieScheduleActivity.this, mCityId, -1, null);
-                sendBroadcast(new Intent(CinemaListFragment.ACTION_CINEMA_FAVORITES_CHANGE));
-            }
-        }).start();
+    private void updateCinemaList() {
+        if (mCinemaTask == null) {
+            mCinemaTask = new CinemaListTask();
+        }
+        ExecutorHelper.getExecutor().runnableExecutor(mCinemaTask);
+    }
+
+    protected class CinemaListTask implements Runnable {
+
+        @Override
+        public void run() {
+            CinemaListHelper.deleteCinemaListFromLocal(MovieScheduleActivity.this, mCityId, -1, null);
+            sendBroadcast(new Intent(CinemaListFragment.ACTION_CINEMA_FAVORITES_CHANGE));
+        }
     }
 
     private void showHideMenu() {

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
@@ -30,9 +31,6 @@ import com.letv.walletbiz.coupon.utils.RecyclerScroller;
 import com.letv.walletbiz.movie.MovieTicketConstant;
 import com.letv.walletbiz.movie.activity.MovieOrderDetailActivity;
 import com.letv.walletbiz.movie.beans.MovieOrder;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +50,6 @@ public class CouponListActivity extends AccountBaseActivity implements View.OnCl
     private CouponListAdapter mAdapter;
     private CouponListLoadTask mCouponLoadTask;
     private CardCouponListTask mCardLoadTask;
-    private PriorityExecutor mPriorityExecutor;
     private long last_id_card = -1;
     private long last_id_coupon = -1;
     private int mExpireNum;
@@ -85,7 +82,6 @@ public class CouponListActivity extends AccountBaseActivity implements View.OnCl
         }
 
         setContentView(R.layout.coupon_list_activity);
-        mPriorityExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         initView();
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
     }
@@ -177,7 +173,7 @@ public class CouponListActivity extends AccountBaseActivity implements View.OnCl
 
                 mCouponLoadTask = new CouponListLoadTask(this, last_id, limit);
                 mCouponLoadTask.setResponseCallback(mCouponListCallback);
-                mPriorityExecutor.execute(mCouponLoadTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mCouponLoadTask);
             }
         } else if ((mCouponList != null && mCouponList.size() > 0) || (mCardList != null && mCardList.size() > 0)) {
             CouponUtils.showToast(this, R.string.empty_no_network);
@@ -194,7 +190,7 @@ public class CouponListActivity extends AccountBaseActivity implements View.OnCl
                     showLoadingView();
                 mCardLoadTask = new CardCouponListTask(this, mCardListCallback);
                 mCardLoadTask.setParams(MovieOrder.MOVIE_TICKET_PROGRESS_UNCONSUMED, last_id, -1, limit);
-                mPriorityExecutor.execute(mCardLoadTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mCardLoadTask);
             }
         } else if ((mCardList != null && mCardList.size() > 0) || (mCouponList != null && mCouponList.size() > 0)) {
             CouponUtils.showToast(this, R.string.empty_no_network);

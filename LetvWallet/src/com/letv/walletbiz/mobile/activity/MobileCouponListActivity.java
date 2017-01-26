@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonCallback;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.view.DividerItemDecoration;
 import com.letv.walletbiz.R;
@@ -55,7 +56,7 @@ public class MobileCouponListActivity extends AccountBaseActivity implements Cou
             mCouponAsyncT.onCancelled();
         }
         mCouponAsyncT = new CouponListTask(MobileCouponListActivity.this, this, uToken, skus);
-        mCouponAsyncT.run();
+        ExecutorHelper.getExecutor().runnableExecutor(mCouponAsyncT);
     }
 
     @Override

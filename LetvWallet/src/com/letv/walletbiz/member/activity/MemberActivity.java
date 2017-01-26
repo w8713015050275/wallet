@@ -15,9 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
@@ -25,8 +25,6 @@ import com.letv.walletbiz.member.beans.MemberTypeListBean;
 import com.letv.walletbiz.member.fragments.MemberFragment;
 import com.letv.walletbiz.member.task.MemberTypeListTask;
 import com.letv.walletbiz.member.util.MemberCommonCallback;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -41,7 +39,6 @@ public class MemberActivity extends BaseWalletFragmentActivity {
 
     private String mPromptNetConnectionFail;
 
-    private PriorityExecutor mExecuter;
     private MemberTypeListTask mMemberTypeTask;
 
     private View.OnClickListener mRetryClickListener = new View.OnClickListener() {
@@ -69,7 +66,6 @@ public class MemberActivity extends BaseWalletFragmentActivity {
         setTitle(R.string.member_tool_bar);
         initActionBar();
 
-        mExecuter = PriorityExecutorHelper.getPriorityExecutor();
         mPromptNetConnectionFail = getString(R.string.mobile_prompt_net_connection_fail);
         mTabLayout = (TabLayout) findViewById(R.id.tab_indicator);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -119,7 +115,7 @@ public class MemberActivity extends BaseWalletFragmentActivity {
                     mMemberTypeTask = null;
                 }
             });
-            mExecuter.execute(mMemberTypeTask);
+            ExecutorHelper.getExecutor().runnableExecutor(mMemberTypeTask);
         }
     }
 

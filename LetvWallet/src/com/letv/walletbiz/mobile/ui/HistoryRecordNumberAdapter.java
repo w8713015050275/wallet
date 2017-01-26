@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.PhoneNumberUtils;
+import com.letv.wallet.common.util.WalletExecutorImp;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.mobile.beans.HistoryRecordNumberBean;
@@ -143,7 +145,7 @@ public class HistoryRecordNumberAdapter extends RecyclerView.Adapter<HistoryReco
             if (mCallback != null) {
                 switch (v.getId()) {
                     case R.id.mobile_history_clear_tv:
-                        new Thread(new ClearHistoryRecordNumberThread()).start();
+                        ExecutorHelper.getExecutor().runnableExecutor(new ClearHistoryRecordNumberThread());
                         break;
                     case R.id.mobile_history_record_itemv:
                         mCallback.onHistoryRecordNumberItemClick(v);

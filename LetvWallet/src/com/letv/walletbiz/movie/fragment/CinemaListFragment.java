@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.fragment.BaseFragment;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LocationHelper;
 import com.letv.wallet.common.util.PermissionCheckHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
@@ -51,11 +52,8 @@ import com.letv.walletbiz.movie.ui.MovieTabFlowLayout;
 import com.letv.walletbiz.movie.utils.CinemaListHelper;
 import com.letv.walletbiz.movie.utils.CinemaListTask;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 import com.letv.walletbiz.movie.utils.MovieSearchHelper;
 import com.letv.walletbiz.movie.utils.MovieTicketHelper;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -95,7 +93,6 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
     private String mDate = null;
 
     private CinemaListTask mTask;
-    private PriorityExecutor mExecutor;
 
     private CinemaList mCinemaList;
     private CinemaList.Cinema[] mCurrentCinemaArray;
@@ -248,7 +245,6 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
             updateCurrentCity();
         }
         SharedPreferencesHelper.getSharePreferences().registerOnSharedPreferenceChangeListener(mSharedPreferenceChangeListener);
-        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         mLocationHelper = LocationHelper.getInstance();
         mLocationHelper.addLocationCallback(mLocationCallback);
         setHasOptionsMenu(true);
@@ -491,7 +487,7 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
             } else {
                 mTask.setParam(queryType, isLoadFromNet, mCurrentCityId);
             }
-            mExecutor.execute(mTask);
+            ExecutorHelper.getExecutor().runnableExecutor(mTask);
         }
     }
 

@@ -13,6 +13,7 @@ import com.letv.shared.widget.LeLoadingDialog;
 import com.letv.wallet.common.fragment.AccountBaseFragment;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.view.DividerItemDecoration;
 import com.letv.walletbiz.R;
@@ -69,7 +70,7 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
     AccountHelper accountHelper = AccountHelper.getInstance();
 
     private Callback.Cancelable mCancelable;
-    private Thread mLoadDataThd;
+    private OrderListTask mOrderListTask;
 
     private String promptNoRecordStr;
 
@@ -410,9 +411,11 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
      */
     private void loadData(long lastId, int mode) {
         if (!mLoading) {
-            mLoadDataThd =
-                    new Thread(new queryOrderListThread(lastId, mode));
-            mLoadDataThd.start();
+            if (mOrderListTask == null) {
+                mOrderListTask = new OrderListTask();
+            }
+            mOrderListTask.setData(lastId, mode);
+            ExecutorHelper.getExecutor().runnableExecutor(mOrderListTask);
         }
     }
 
@@ -423,9 +426,11 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
      */
     private void updateData(long lastId, int limits, int updatePosition) {
         if (isClickItem && mClickPosition != -1) {
-            mLoadDataThd =
-                    new Thread(new queryOrderListThread(lastId, ActivityConstant.ORDER.LIST_CONSTANT.MOD_PART_UPDATE, limits, updatePosition));
-            mLoadDataThd.start();
+            if (mOrderListTask == null) {
+                mOrderListTask = new OrderListTask();
+            }
+            mOrderListTask.setData(lastId, ActivityConstant.ORDER.LIST_CONSTANT.MOD_PART_UPDATE, limits, updatePosition);
+            ExecutorHelper.getExecutor().runnableExecutor(mOrderListTask);
         }
     }
 
@@ -436,9 +441,11 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
      */
     private void refreshData(long firstId) {
         if (!mLoading) {
-            mLoadDataThd =
-                    new Thread(new queryOrderListThread(firstId, ActivityConstant.ORDER.LIST_CONSTANT.MOD_REFRESH));
-            mLoadDataThd.start();
+            if (mOrderListTask == null) {
+                mOrderListTask = new OrderListTask();
+            }
+            mOrderListTask.setData(firstId, ActivityConstant.ORDER.LIST_CONSTANT.MOD_REFRESH);
+            ExecutorHelper.getExecutor().runnableExecutor(mOrderListTask);
         }
     }
 
@@ -549,23 +556,26 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
         }
     }
 
-    private class queryOrderListThread implements Runnable {
+    private class OrderListTask implements Runnable {
         long localLastId;
         int localMod;
         int localLimits;
         int localposition;
 
-        public queryOrderListThread(long lastId, int mod) {
-            this(lastId, mod, mLimits);
+        public OrderListTask() {
         }
 
-        public queryOrderListThread(long lastId, int mod, int limits) {
+        public void setData(long lastId, int mod) {
+            setData(lastId, mod, mLimits);
+        }
+
+        public void setData(long lastId, int mod, int limits) {
             this.localLastId = lastId;
             this.localMod = mod;
             this.localLimits = limits;
         }
 
-        public queryOrderListThread(long lastId, int mod, int limits, int updatePosition) {
+        public void setData(long lastId, int mod, int limits, int updatePosition) {
             this.localLastId = lastId;
             this.localMod = mod;
             this.localLimits = limits;

@@ -19,12 +19,11 @@ import com.google.gson.reflect.TypeToken;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DateUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.util.ViewUtils;
 import com.letv.walletbiz.R;
-import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.fragment.BaseOrderListFragment;
 import com.letv.walletbiz.base.http.beans.order.OrderBaseBean;
@@ -34,14 +33,11 @@ import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.base.view.OrderListViewAdapter;
 import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.mobile.activity.MobileOrderDetailActivity;
-import com.letv.walletbiz.mobile.beans.HistoryRecordNumberBean;
 import com.letv.walletbiz.mobile.beans.OrderBean;
-import com.letv.walletbiz.mobile.dbhelper.HistoryRecordHelper;
 import com.letv.walletbiz.mobile.pay.MobileProduct;
 import com.letv.walletbiz.mobile.util.PayInfoCommonCallback;
 import com.letv.walletbiz.mobile.util.PayPreInfoTask;
-
-import org.xutils.common.task.PriorityExecutor;
+import com.letv.walletbiz.mobile.util.RecordPhoneNumberTask;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -69,7 +65,6 @@ public class MobileOrderListFragment extends BaseOrderListFragment implements Pa
     public static final int PAY_FAILED = 4;//支付失败
     public static final int PAY_USEBYOTHER = 5;//支付正在被使用，请提示用户完成上一 次支付
 
-    private PriorityExecutor mExecutor;
     private PayPreInfoTask mPrePayTask;
 
     private MobileProduct mMobileProduct;
@@ -130,7 +125,6 @@ public class MobileOrderListFragment extends BaseOrderListFragment implements Pa
         } else {
             mFeeOrFlow = MobileConstant.PRODUCT_TYPE.MOBILE_FLOW;
         }
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
         mToast = Toast.makeText(getContext(), getString(R.string.mobile_prompt_net_connection_fail), Toast.LENGTH_SHORT);
         super.onCreate(savedInstanceState);
     }
@@ -156,15 +150,7 @@ public class MobileOrderListFragment extends BaseOrderListFragment implements Pa
                         case SUCCESSED://支付成功
                             payResult = Constants.RESULT_STATUS.SUCCESS;
                             if (mMobileProduct != null) {
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        HistoryRecordNumberBean.RecordInfoBean recordInfoBean = new HistoryRecordNumberBean.RecordInfoBean();
-                                        recordInfoBean.setPhoneNum(mMobileProduct.getNumber());
-                                        recordInfoBean.setTime(System.currentTimeMillis());
-                                        boolean insertState = HistoryRecordHelper.insertContactToDBsync(WalletApplication.getApplication(), recordInfoBean);
-                                    }
-                                }).start();
+                                ExecutorHelper.getExecutor().runnableExecutor(new RecordPhoneNumberTask(mMobileProduct));
                             }
                             break;
                         case PAYINFO_ERROR://支付信息错误
@@ -282,7 +268,7 @@ public class MobileOrderListFragment extends BaseOrderListFragment implements Pa
     private void getPrePayInfoTask() {
         checkPrePayAsyncTask();
         showDialog();
-        mExecutor.execute(mPrePayTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mPrePayTask);
     }
 
 

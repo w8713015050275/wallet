@@ -14,7 +14,6 @@ import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DateUtils;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.util.ViewUtils;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.fragment.BaseOrderListFragment;

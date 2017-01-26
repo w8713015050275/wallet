@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
-import com.letv.wallet.common.util.PriorityExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.view.DividerItemDecoration;
 import com.letv.walletbiz.R;
@@ -19,7 +19,6 @@ import com.letv.walletbiz.member.beans.CouponBean;
 import com.letv.walletbiz.member.task.CouponAvailableTask;
 import com.letv.walletbiz.member.util.MemberCommonCallback;
 
-import org.xutils.common.task.PriorityExecutor;
 
 /**
  * Created by zhanghuancheng on 16-11-22.
@@ -31,7 +30,6 @@ public class MemberCouponListActivity extends AccountBaseActivity implements Cou
     private CouponListAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mCouponListV;
-    private PriorityExecutor mExecutor;
     private CouponAvailableTask mCouponLoadTask;
     private String mSkus;
 
@@ -53,7 +51,7 @@ public class MemberCouponListActivity extends AccountBaseActivity implements Cou
         if (mCouponLoadTask == null) {
             mCouponLoadTask = new CouponAvailableTask(uToken, mSkus, this);
         }
-        mExecutor.execute(mCouponLoadTask);
+        ExecutorHelper.getExecutor().runnableExecutor(mCouponLoadTask);
     }
 
     @Override
@@ -64,7 +62,6 @@ public class MemberCouponListActivity extends AccountBaseActivity implements Cou
     }
 
     private void initView() {
-        mExecutor = PriorityExecutorHelper.getPriorityExecutor();
         promptNoRecordStr = getResources().getString(R.string.empty_no_coupon);
         Bundle bundle = getIntent().getExtras();
         CouponBean[] mCouponBeans = (CouponBean[]) bundle.getSerializable(MemberConstant.PARAM.COUPONLIST_KEY);

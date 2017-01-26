@@ -24,7 +24,6 @@ import com.letv.walletbiz.movie.beans.MovieOrder;
 import com.letv.walletbiz.movie.beans.MovieProduct;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
 import com.letv.walletbiz.movie.utils.MovieOrderDetailTask;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 import com.letv.walletbiz.movie.utils.MovieTicketHelper;
 
 import org.xutils.common.task.PriorityExecutor;
@@ -136,7 +135,6 @@ public class MovieOrderDetailActivity extends BaseWalletFragmentActivity impleme
             }
         }
 
-        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         initView();
         loadData();
     }

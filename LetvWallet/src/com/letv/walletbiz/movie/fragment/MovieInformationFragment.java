@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.letv.wallet.common.fragment.BaseFragment;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.IOUtils;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.walletbiz.R;
@@ -32,9 +33,7 @@ import com.letv.walletbiz.movie.MovieTicketConstant;
 import com.letv.walletbiz.movie.activity.MoviePhotoGalleryActivity;
 import com.letv.walletbiz.movie.activity.MovieStillListActivity;
 import com.letv.walletbiz.movie.beans.MovieDetail;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 
-import org.xutils.common.task.PriorityExecutor;
 import org.xutils.xmain;
 
 import timehop.stickyheader.RecyclerItemClickListener;
@@ -47,7 +46,6 @@ public class MovieInformationFragment extends BaseFragment implements View.OnCli
     public static final int MOVIE_DESCRIPTION_MORE_UP = 1;
     public static final int MOVIE_DESCRIPTION_MORE_DOWN = 2;
 
-    private PriorityExecutor mPriorityExecutor;
     private SparseArray<AttentionRunnable> mAttentionRunnableArray = new SparseArray<>();
 
     private MovieDetail mMovieDetail;
@@ -151,7 +149,6 @@ public class MovieInformationFragment extends BaseFragment implements View.OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPriorityExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
     }
 
     @Override
@@ -395,7 +392,7 @@ public class MovieInformationFragment extends BaseFragment implements View.OnCli
             }
             runnable = new AttentionRunnable(getContext(), mMovieDetail.workTag[0].tag_id, mode, mAttentionCallback);
             mAttentionRunnableArray.put(key, runnable);
-            mPriorityExecutor.execute(runnable);
+            ExecutorHelper.getExecutor().runnableExecutor(runnable);
         }
     }
 

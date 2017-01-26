@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.google.gson.reflect.TypeToken;
-import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.DensityUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.ParseHelper;
 import com.letv.wallet.common.view.BlankPage;
@@ -29,9 +29,7 @@ import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.movie.MovieTicketConstant;
 import com.letv.walletbiz.movie.beans.MovieDetail;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
-import com.letv.walletbiz.movie.utils.MoviePriorityExecutorHelper;
 
-import org.xutils.common.task.PriorityExecutor;
 import org.xutils.xmain;
 
 import java.util.List;
@@ -50,7 +48,6 @@ public class MovieStillListActivity extends BaseWalletFragmentActivity {
 
     private List<MovieDetail.MovieAllSizePhoto> mPhotoList;
 
-    private PriorityExecutor mExecutor;
     private MovieStillListRunnable mStillListRunnable;
 
     private MovieCommonCallback<List<MovieDetail.MovieAllSizePhoto>> mCallback = new MovieCommonCallback<List<MovieDetail.MovieAllSizePhoto>>() {
@@ -137,7 +134,6 @@ public class MovieStillListActivity extends BaseWalletFragmentActivity {
             finish();
         }
 
-        mExecutor = MoviePriorityExecutorHelper.getPriorityExecutor();
         loadData();
     }
 
@@ -158,7 +154,7 @@ public class MovieStillListActivity extends BaseWalletFragmentActivity {
             if (mStillListRunnable == null) {
                 showLoadingView();
                 mStillListRunnable = new MovieStillListRunnable(this, mMovieId, mCallback);
-                mExecutor.execute(mStillListRunnable);
+                ExecutorHelper.getExecutor().runnableExecutor(mStillListRunnable);
             }
         } else {
             showBlankPage(BlankPage.STATE_NO_NETWORK);
