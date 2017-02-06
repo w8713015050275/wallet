@@ -15,7 +15,9 @@ import com.letv.wallet.common.util.LogHelper;
 import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.main.bean.WalletBannerListBean;
 import com.letv.walletbiz.main.bean.WalletServiceListBean;
+import com.letv.walletbiz.main.bean.WalletTopListBean;
 import com.letv.walletbiz.main.provider.WalletContract;
+import com.letv.walletbiz.mobile.MobileConstant;
 
 import org.xutils.xmain;
 
@@ -28,6 +30,8 @@ public class MainPanelHelper {
 
     public static final String MAIN_SERVICE_LIST = "wallet/api/v1/service/list";
     public static final String MAIN_BANNER_LIST = "wallet/api/v1/banner/list";
+
+    public static final String MAIN_TOP_LIST = "wallet/api/v1/topservice";
 
     public static final String PARAM_POSITION_ID = "position_id";
 
@@ -234,6 +238,92 @@ public class MainPanelHelper {
             }
         }
 
+        ContentResolver resolver = context.getContentResolver();
+        try {
+            resolver.applyBatch(WalletContract.AUTHORITY, operationList);
+        } catch (RemoteException e) {
+            LogHelper.e(e);
+        } catch (OperationApplicationException e) {
+            LogHelper.e(e);
+        }
+    }
+
+
+
+    public static WalletTopListBean getTopListFromDb(Context context) {
+        if (context == null) {
+            return null;
+        }
+        String[] projection = new String[] {
+                WalletContract.MainTopTable.TOP_NAME,
+                WalletContract.MainTopTable.TOP_HINT,
+                WalletContract.MainTopTable.TOP_ICON,
+                WalletContract.MainTopTable.TOP_RANK,
+                WalletContract.MainTopTable.TOP_VERSION,
+        };
+        Cursor cursor = null;
+        try {
+            cursor = context.getContentResolver().query(WalletContract.MainTopTable.CONTENT_URI, projection, null, null, WalletContract.MainTopTable.TOP_RANK + " ASC");
+            if (cursor != null && cursor.moveToFirst()) {
+                WalletTopListBean listBean = new WalletTopListBean();
+                WalletTopListBean.WalletTopBean[] list = new WalletTopListBean.WalletTopBean[cursor.getCount()];
+                int index = 0;
+                long version = -1;
+                do {
+                    WalletTopListBean.WalletTopBean topBean = new WalletTopListBean.WalletTopBean();
+                    topBean.name = cursor.getString(0);
+                    topBean.title = cursor.getString(1);
+                    topBean.icon = cursor.getString(2);
+                    topBean.rank = cursor.getInt(3);
+                    topBean.version=cursor.getLong(4);
+                    list[index++] = topBean;
+                    version = topBean.version;
+                } while (cursor.moveToNext());
+                if (list.length > 0) {
+                    listBean.list = list;
+                    listBean.version = version;
+                    return listBean;
+                }
+            }
+        } finally {
+            IOUtils.closeQuietly(cursor);
+        }
+        return null;
+    }
+
+    public static BaseResponse<WalletTopListBean> getTopListFromNetwork() {
+        BaseRequestParams params = new BaseRequestParams(MainPanelHelper.MAIN_TOP_LIST);
+        BaseResponse<WalletTopListBean> response = null;
+        try {
+            TypeToken typeToken = new TypeToken<BaseResponse<WalletTopListBean>>() {};
+            response = xmain.http().getSync(params, typeToken.getType());
+        } catch (Throwable throwable) {
+            response = null;
+        }
+        return response;
+    }
+
+    public static void syncTopListToDb(Context context, WalletTopListBean listBean) {
+        if (context == null || listBean == null) {
+            return;
+        }
+        ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
+        operationList.add(ContentProviderOperation.newDelete(WalletContract.MainTopTable.CONTENT_URI).build());
+
+        if (listBean.list != null) {
+            for (WalletTopListBean.WalletTopBean bean : listBean.list) {
+                ContentValues values = new ContentValues();
+                values.put(WalletContract.MainTopTable.TOP_NAME, bean.name);
+                values.put(WalletContract.MainTopTable.TOP_HINT, bean.title);
+                values.put(WalletContract.MainTopTable.TOP_ICON, bean.icon);
+                values.put(WalletContract.MainTopTable.TOP_RANK, bean.rank);
+                values.put(WalletContract.MainTopTable.TOP_VERSION, listBean.version);
+                operationList.add(ContentProviderOperation
+                        .newInsert(WalletContract.MainTopTable.CONTENT_URI)
+                        .withValues(values)
+                        .build());
+            }
+        }
         ContentResolver resolver = context.getContentResolver();
         try {
             resolver.applyBatch(WalletContract.AUTHORITY, operationList);

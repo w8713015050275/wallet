@@ -149,4 +149,46 @@ public class WalletContract {
          */
         public static final String UPDATE_TIME = "update_time";
     }
+
+
+    public static final class MainTopTable {
+
+        private MainTopTable() {}
+
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(AUTHORITY_URI, "top");
+
+        public static final String TABLE_NAME = "maintop";
+
+        /**
+         * 服务id
+         * <p>TYPE:TEXT</p>
+         */
+        public static final String TOP_NAME = "top_name";
+
+        /**
+         * 服务名称
+         * <p>TYPE:TEXT</p>
+         */
+        public static final String TOP_HINT = "top_hint";
+
+        /**
+         * icon图标
+         * <p>TYPE:TEXT</p>
+         */
+        public static final String TOP_ICON = "top_icon";
+
+
+        /**
+         * 排序值，值越小，越靠前
+         * <p>TYPE:INTEGER</p>
+         */
+        public static final String TOP_RANK = "top_rank";
+
+        /**
+         * 更新时间
+         * <p>TYPE:LONG</p>
+         */
+        public static final String TOP_VERSION = "top_version";
+
+    }
 }

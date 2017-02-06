@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.letv.walletbiz.main.provider.WalletContract.BannerTable;
 import static com.letv.walletbiz.main.provider.WalletContract.ServiceTable;
+import static com.letv.walletbiz.main.provider.WalletContract.MainTopTable;
 
 /**
  * Created by liuliang on 16-4-11.
@@ -14,7 +15,7 @@ public class WalletMainDatabaseHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "wallet_main.db";
 
-    static final int DATABASE_VERSION = 2;
+    static final int DATABASE_VERSION = 3;
 
     private Context mContext;
 
@@ -39,7 +40,7 @@ public class WalletMainDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 2) {
+        if (oldVersion < DATABASE_VERSION) {
             updateToVersion2(db);
         }
     }
@@ -67,11 +68,19 @@ public class WalletMainDatabaseHelper extends SQLiteOpenHelper {
                 BannerTable.BANNER_LINK + " TEXT," +
                 BannerTable.NEED_TOKEN + " INTEGER," +
                 BannerTable.UPDATE_TIME + " INTEGER);");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + MainTopTable.TABLE_NAME +
+                "(" + MainTopTable.TOP_NAME + " TEXT," +
+                MainTopTable.TOP_HINT + " TEXT," +
+                MainTopTable.TOP_ICON + " TEXT," +
+                MainTopTable.TOP_RANK + " INTEGER," +
+                MainTopTable.TOP_VERSION + " INTEGER);");
     }
 
     private void updateToVersion2(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + ServiceTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + BannerTable.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MainTopTable.TABLE_NAME);
         createTables(db);
     }
 }

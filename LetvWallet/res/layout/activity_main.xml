@@ -1,8 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/recyclerview"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="10dip"
-    android:overScrollMode="never"
-    />
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/main_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/main_tab_recommend_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_tab_recommend_bg"
+            android:gravity="center"
+            android:text="@string/main_tab_recommend"
+            android:textColor="@drawable/main_tab_txt_color"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/main_tab_wallet_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_tab_wallet_bg"
+            android:gravity="center"
+            android:checked="true"
+            android:text="@string/main_tab_wallet"
+            android:textColor="@drawable/main_tab_txt_color"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/main_tab_my_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_tab_my_bg"
+            android:gravity="center"
+            android:text="@string/main_tab_my"
+            android:textColor="@drawable/main_tab_txt_color"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_bottom_layout"></FrameLayout>
+</RelativeLayout>

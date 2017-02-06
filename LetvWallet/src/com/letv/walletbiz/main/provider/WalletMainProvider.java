@@ -19,6 +19,7 @@ import android.util.Log;
 
 import com.letv.walletbiz.main.provider.WalletContract.BannerTable;
 import com.letv.walletbiz.main.provider.WalletContract.ServiceTable;
+import com.letv.walletbiz.main.provider.WalletContract.MainTopTable;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,9 @@ public class WalletMainProvider extends ContentProvider {
     private static final int BANNER_LIST = 10;
     private static final int BANNER_ID = 11;
 
+    private static final int TOP_LIST = 20;
+    private static final int TOP_ID = 21;
+
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -42,6 +46,9 @@ public class WalletMainProvider extends ContentProvider {
         sUriMatcher.addURI(WalletContract.AUTHORITY, "service/#", SERVICE_ID);
         sUriMatcher.addURI(WalletContract.AUTHORITY, "banner", BANNER_LIST);
         sUriMatcher.addURI(WalletContract.AUTHORITY, "banner/#", BANNER_ID);
+
+        sUriMatcher.addURI(WalletContract.AUTHORITY, "top", TOP_LIST);
+        sUriMatcher.addURI(WalletContract.AUTHORITY, "top/#", TOP_ID);
     }
 
     private WalletMainDatabaseHelper mOpenHelper;
@@ -81,6 +88,11 @@ public class WalletMainProvider extends ContentProvider {
             case BANNER_LIST:
                 qb.setTables(BannerTable.TABLE_NAME);
                 break;
+            case TOP_ID:
+                qb.appendWhere(MainTopTable.TOP_NAME + "=" + uri.getPathSegments().get(1));
+            case TOP_LIST:
+                qb.setTables(MainTopTable.TABLE_NAME);
+                break;
             default:{
                 return null;
             }
@@ -113,6 +125,9 @@ public class WalletMainProvider extends ContentProvider {
             case BANNER_LIST:
                 rowID = db.insert(BannerTable.TABLE_NAME, null, values);
                 break;
+            case TOP_LIST:
+                rowID = db.insert(MainTopTable.TABLE_NAME, null, values);
+                break;
         }
         if (rowID >= 0) {
             result = ContentUris.withAppendedId(uri, rowID);
@@ -142,7 +157,13 @@ public class WalletMainProvider extends ContentProvider {
             case BANNER_LIST:
                 count = db.delete(BannerTable.TABLE_NAME, selection, selectionArgs);
                 break;
-
+            case TOP_ID:
+                id = ContentUris.parseId(uri);
+                count = db.delete(MainTopTable.TABLE_NAME, appendSelection(selection, MainTopTable.TOP_NAME + "=" + id), selectionArgs);
+                break;
+            case TOP_LIST:
+                count = db.delete(MainTopTable.TABLE_NAME, selection, selectionArgs);
+                break;
             default: {
                 throw new UnsupportedOperationException("Cannot delete that Uri: " + uri);
             }
@@ -171,7 +192,13 @@ public class WalletMainProvider extends ContentProvider {
             case BANNER_LIST:
                 count = db.update(BannerTable.TABLE_NAME, values, selection, selectionArgs);
                 break;
-
+            case TOP_ID:
+                id = ContentUris.parseId(uri);
+                count = db.update(MainTopTable.TABLE_NAME, values, appendSelection(selection, MainTopTable.TOP_NAME + "=" + id), selectionArgs);
+                break;
+            case TOP_LIST:
+                count = db.update(MainTopTable.TABLE_NAME, values, selection, selectionArgs);
+                break;
             default: {
                 throw new UnsupportedOperationException("Cannot update that URL: " + uri);
             }

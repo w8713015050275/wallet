@@ -1,0 +1,8 @@
+<resources>
+    <string name="main_top_finance">乐乐花</string>
+    <string name="main_top_card_coupon">卡券包</string>
+    <string name="main_top_bank_card">银行卡</string>
+    <string name="main_tab_recommend">推荐</string>
+    <string name="main_tab_wallet">钱包</string>
+    <string name="main_tab_my">我的</string>
+</resources>

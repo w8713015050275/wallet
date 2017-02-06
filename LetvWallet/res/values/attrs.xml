@@ -8,5 +8,31 @@
     <declare-styleable name="MovieTabFlowLayout">
         <attr name="singleLine" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="MainTopButton">
+        <attr name="type" format="enum" >
+            <enum name="normal" value="1"/>
+            <enum name="finance" value="2"/>
+            <enum name="bank_card" value="3"/>
+        </attr>
+        <!--默认上边的图标-->
+        <attr name="default_drawable" format="reference" />
+        <!--更改之后的图标-->
+        <attr name="next_drawable" format="reference" />
+        <!--图标与文本的距离-->
+        <attr name="distance" format="dimension" />
+        <!--文本-->
+        <attr name="text" format="reference" />
+        <!--文本大小-->
+        <attr name="textSize" format="dimension" />
+        <!--文本颜色-->
+        <attr name="textColor" format="color" />
+
+
+        <!--按钮文本大小-->
+        <attr name="button_textSize" format="dimension" />
+        <!--按钮文本颜色-->
+        <attr name="button_textColor" format="color" />
+
+    </declare-styleable>
 
 </resources>
