@@ -2,7 +2,9 @@ package com.letv.wallet.common.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.letv.wallet.common.BaseApplication;
 
@@ -18,6 +20,21 @@ public class SharedPreferencesHelper {
     public static SharedPreferences getSharePreferences() {
         return BaseApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
+
+    public static SharedPreferences getUserIdPreferences(String packName) {
+        if (!TextUtils.isEmpty(packName)) {
+            try {
+                Context context = BaseApplication.getApplication().createPackageContext(packName, Context.CONTEXT_IGNORE_SECURITY);
+                if (context != null) {
+                     return  context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 
     public static String getString(String key, @Nullable String defValue) {
         return getSharePreferences().getString(key, defValue);

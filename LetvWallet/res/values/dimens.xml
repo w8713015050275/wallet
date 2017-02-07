@@ -170,4 +170,12 @@
     <!--member-->
     <dimen name="member_tab_indicator_height">10px</dimen>
 
+    <!--me-->
+    <dimen name="me_top_info_horizontal_padding">16dp</dimen>
+    <dimen name="me_list_item_height">58dp</dimen>
+    <dimen name="me_list_item_divider_space">21px</dimen>
+    <dimen name="me_list_item_margin_horizontal">8dp</dimen>
+    <dimen name="me_list_item_padding_horizontal">16dp</dimen>
+
+
 </resources>

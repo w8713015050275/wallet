@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionInfo;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,9 +25,9 @@ import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.coupon.activity.CouponListActivity;
 import com.letv.walletbiz.main.FragManager;
-import com.letv.walletbiz.main.fragment.MyFragment;
 import com.letv.walletbiz.main.fragment.RecommendFragment;
 import com.letv.walletbiz.main.fragment.WalletFragment;
+import com.letv.walletbiz.me.fragment.MeFragment;
 import com.letv.walletbiz.order.activity.TotalOrderListActivity;
 import com.letv.walletbiz.update.util.UpdateUtil;
 
@@ -58,7 +56,7 @@ public class MainActivity extends BaseWalletFragmentActivity {
     private FragManager fragManager;
     private RecommendFragment recommendFragment;
     private WalletFragment walletFragment;
-    private MyFragment myFragment;
+    private MeFragment myFragment;
 
     private RadioButton recommendRadio;
     private RadioButton walletRadio;
@@ -77,7 +75,7 @@ public class MainActivity extends BaseWalletFragmentActivity {
         fragManager = new FragManager(this);
         recommendFragment = new RecommendFragment();
         walletFragment = new WalletFragment();
-        myFragment = new MyFragment();
+        myFragment = new MeFragment();
 
         initView();
 

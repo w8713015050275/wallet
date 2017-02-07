@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Account -->
+    <style name="AccountVerifyTheme" parent="AppTheme.Arrow">
+        <item name="walletPrimaryColor">@color/account_primary_color</item>
+    </style>
+
+
+</resources>

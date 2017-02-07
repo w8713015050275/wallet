@@ -1,9 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:background="@color/me_primary_color"
+        android:paddingLeft="@dimen/me_top_info_horizontal_padding"
+        android:paddingRight="@dimen/me_top_info_horizontal_padding">
+
+        <Button
+            android:id="@+id/btnSetting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_setting"
+            android:layout_alignParentRight="true" />
+
+        <com.letv.shared.widget.BorderedCircleImageView
+            android:id="@+id/img_usr_icon"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="12dp"
+            android:alpha="@dimen/le_img_alpha"
+            android:background="@drawable/place_holder_star"
+            app:circle_radius="33dp" />
+
+        <RelativeLayout
+            android:id="@+id/viewUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/img_usr_icon">
+
+            <TextView
+                android:id="@+id/tvNickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"/>
+
+            <com.letv.walletbiz.me.ui.ToggleTextView
+                android:id="@+id/tvVerfify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tvNickName"
+                android:layout_below="@id/tvNickName"
+                android:drawableLeft="@drawable/btn_verify_selector"
+                android:drawablePadding="2dp"
+                android:textOff="@string/me_real_name_not_authentication"
+                android:textOn="@string/me_real_name_authentication"
+                android:gravity="center_vertical"
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp"
+                android:button="@null"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/viewTips"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FFFAD1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/me_top_info_horizontal_padding"
+        android:paddingRight="@dimen/me_top_info_horizontal_padding"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/MeTipsTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/me_tips_content" />
+
+        <TextView
+            style="@style/MeTipsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/me_tips_right_arrow"
+            android:gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:text="@string/me_tips_title" />
+
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="my"/>
-</RelativeLayout>
+        android:id="@+id/tvBills"
+        style="@style/MeListItemSingleLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_list_item_height"
+        android:layout_marginTop="@dimen/me_list_item_divider_space"
+        android:text="@string/me_bills"/>
+
+    <TextView
+        android:id="@+id/tvVipLevel"
+        style="@style/MeListItemSingleLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_list_item_height"
+        android:layout_marginTop="@dimen/me_list_item_divider_space"
+        android:text="@string/me_vip_level"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/viewLeLeHuaHome"
+        style="@style/MeListItemMultipleLineTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_list_item_height"
+        android:layout_marginTop="@dimen/me_list_item_divider_space"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tagLeLeHua"
+            style="@style/MeListItemTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/me_lelehua" />
+
+        <TextView
+            android:id="@+id/tvLeLeHuaAavailableLimit"
+            style="@style/MeListItemFlagTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/viewLeLeHuaDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        style="@style/MeListDividerLine"/>
+
+    <LinearLayout
+        android:id="@+id/viewLeLeHuaBills"
+        style="@style/MeListItemMultipleLineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_list_item_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tagPayAmount"
+            style="@style/MeListItemTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/me_list_item_height"
+            android:text="@string/me_lelehua_payment_amount" />
+
+        <TextView
+            android:id="@+id/tvPayAmount"
+            style="@style/MeListItemFlagTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvUsrFeedback"
+        style="@style/MeListItemSingleLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_list_item_height"
+        android:layout_marginTop="@dimen/me_list_item_divider_space"
+        android:visibility="gone"
+        android:text="@string/me_usr_feedback" />
+
+</LinearLayout>

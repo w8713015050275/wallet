@@ -35,4 +35,10 @@
 
     </declare-styleable>
 
+    <!-- ToggleTextView -->
+    <declare-styleable name="ToggleTextView">
+        <attr name="android:textOn" />
+        <attr name="android:textOff" />
+    </declare-styleable>
+
 </resources>

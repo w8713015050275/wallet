@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <EditText
+        android:id="@+id/editRealName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/account_list_item_height"
+        android:gravity="center_vertical"
+        style="@style/AccountVerifyEditeViewStyle"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:hint="@string/account_verify_input_real_name" />
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        style="@style/AccountVerifyLine"
+        android:layout_below="@id/editRealName"/>
+
+    <EditText
+        android:id="@+id/editIdNo"
+        android:layout_below="@id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/account_list_item_height"
+        android:gravity="center_vertical"
+        android:inputType="number"
+        android:digits="0123456789xyzXYZ"
+        style="@style/AccountVerifyEditeViewStyle"
+        android:hint="@string/account_verify_input_id_no"/>
+
+    <LinearLayout
+        android:id="@+id/viewBank"
+        android:layout_below="@id/editIdNo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/account_list_item_height"
+        android:orientation="horizontal"
+        style="@style/AccountVerifyEditeViewStyle"
+        android:layout_marginTop="6dp">
+
+        <EditText
+            android:id="@+id/editBankNo"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:background="@null"
+            style="@style/AccountVerifyEditeTextStyle"
+            android:hint="@string/account_verify_input_bank_no"/>
+
+        <TextView
+            android:id="@+id/tvAvailableBankList"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            style="@style/AccountVerifyTextStyle"
+            android:layout_marginLeft="16dp"
+            android:text="@string/account_verify_available_bank_list"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editMobileNo"
+        android:layout_below="@id/viewBank"
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/account_list_item_height"
+        android:gravity="center_vertical"
+        style="@style/AccountVerifyEditeViewStyle"
+        android:hint="@string/account_verify_input_mobile_no"/>
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        style="@style/AccountVerifyLine"
+        android:layout_below="@id/editMobileNo"/>
+    <LinearLayout
+        android:id="@+id/viewSmsCode"
+        android:layout_below="@id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/account_list_item_height"
+        android:orientation="horizontal"
+        style="@style/AccountVerifyEditeViewStyle">
+
+        <EditText
+            android:id="@+id/editSmsCode"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:background="@null"
+            style="@style/AccountVerifyEditeTextStyle"
+            android:hint="@string/account_verify_input_sms_code"/>
+
+        <TextView
+            android:id="@+id/tvGetSmsCode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            style="@style/AccountVerifyTextStyle"
+            android:layout_marginLeft="16dp"
+            android:clickable="true"
+            android:text="@string/account_verify_get_sms_code"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

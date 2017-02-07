@@ -1,0 +1,5 @@
+<resources>
+    <!--account-->
+    <dimen name="account_horizontal_margin">16dp</dimen>
+    <dimen name="account_list_item_height">68dp</dimen>
+</resources>

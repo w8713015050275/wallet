@@ -15,7 +15,6 @@
         android:name=".PayApplication"
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.Translucent">
-
         <activity
             android:name=".LePayEntryActivity"
             android:configChanges="locale|layoutDirection|fontScale"
@@ -24,6 +23,7 @@
             android:theme="@android:style/Theme.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.LE_PAYENTRYACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -32,6 +32,39 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent"/>
+
+        <activity android:name=".account.activity.AccountVerifyActivity"
+            android:label="@string/account_verify_acitivtiy_title"
+            android:theme="@style/AccountVerifyTheme">
+            <intent-filter>
+                <action android:name="com.letv.wallet.accountverify" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".account.service.AccountService">
+            <intent-filter>
+                <action android:name="com.letv.wallet.ACTION_SERVICE_LEPAYACCOUNT" />
+            </intent-filter>
+        </service>
+
+        <!-- wallet common start -->
+        <receiver android:name="com.letv.wallet.common.receiver.AccountChangedReceiver">
+            <intent-filter>
+                <action android:name="com.letv.android.account.ACTION_LOGIN" />
+                <action android:name="com.letv.android.account.ACTION_LOGOUT" />
+                <action android:name="com.letv.android.account.ACTION_LOGOUT_SAVE" />
+                <action android:name="com.letv.android.account.ACTION_TOKEN_UPDATE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.letv.wallet.common.receiver.ConnectivityStateChangedReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <!-- wallet common end -->
+
     </application>
 
 </manifest>

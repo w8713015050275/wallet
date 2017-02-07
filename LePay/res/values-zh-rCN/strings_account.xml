@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_verify_acitivtiy_title">实名认证</string>
+    <string name="account_verify_input_real_name">输入真实姓名</string>
+    <string name="account_verify_input_id_no">输入身份证号</string>
+    <string name="account_verify_input_bank_no">输入储蓄卡号</string>
+    <string name="account_verify_available_bank_list">查看支持银行</string>
+    <string name="account_verify_input_mobile_no">输入银行预留手机号</string>
+    <string name="account_verify_input_sms_code">输入验证码</string>
+    <string name="account_verify_get_sms_code">获取验证码</string>
+
+    <string name="account_verify_btn_comfire_update">确认修改</string>
+
+
+</resources>

@@ -137,6 +137,12 @@ public String getTokenSync(Context context) {
         return getUserData(ACCOUNT_UID);
     }
 
+    private static final String ACCOUNT_MOBILE = "mobile";
+
+    public String getPhone() {
+        return getUserData(ACCOUNT_MOBILE);
+    }
+
     public String getUserData(String dataKey) {
         if (TextUtils.isEmpty(dataKey))
             throw new IllegalArgumentException();
@@ -158,6 +164,13 @@ public String getTokenSync(Context context) {
         }
         addAccount(activity,callback);
         return false;
+    }
+
+    public void loginOrJumpLetvAccount(Activity activity) {
+        if (loginLetvAccountIfNot(activity , null)) { //已登录进入首页
+            AccountManager am = AccountManager.get(activity);
+            am.addAccount(ACCOUNT_TYPE, AUTH_TOKEN_TYPE_LETV, null, null, activity, null, null);
+        }
     }
 
     public String getUserMobile() {
