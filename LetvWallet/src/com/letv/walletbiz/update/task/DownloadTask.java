@@ -67,7 +67,7 @@ public class DownloadTask implements Runnable {
         builder.setOngoing(false);
         builder.setAutoCancel(false);
         builder.setContent(remoteViews);
-        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setSmallIcon(R.drawable.wallet_statusbar_icon);
 
         mNotification = builder.build();
         mNotification.flags = Notification.FLAG_AUTO_CANCEL;
