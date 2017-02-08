@@ -15,7 +15,7 @@
         leui:tabMode="scrollable"
         leui:tabIndicatorColor="?attr/walletPrimaryColor"
         leui:tabSelectedTextColor="?attr/walletPrimaryColor"
-        leui:tabTextColor="@color/movie_tab_tv_color"
+        leui:tabTextColor="@color/cinema_list_by_movie_tab_tv_color"
         />
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

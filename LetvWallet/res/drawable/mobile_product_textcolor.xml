@@ -4,5 +4,5 @@
     <item android:state_selected="true" android:color="@color/mobile_product_tv_press_color" />
     <item android:state_focused="true" android:color="@color/mobile_product_tv_press_color" />
     <item android:state_pressed="true" android:color="@color/mobile_product_tv_press_color" />
-    <item android:color="@color/colorMobilePrimary" />
+    <item android:color="?attr/walletPrimaryColor" />
 </selector>

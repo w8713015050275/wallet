@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.util.DateUtils;
+import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.PermissionCheckHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
@@ -25,8 +25,6 @@ import com.letv.walletbiz.movie.beans.MovieProduct;
 import com.letv.walletbiz.movie.utils.MovieCommonCallback;
 import com.letv.walletbiz.movie.utils.MovieOrderDetailTask;
 import com.letv.walletbiz.movie.utils.MovieTicketHelper;
-
-import org.xutils.common.task.PriorityExecutor;
 
 import java.util.Date;
 
@@ -55,7 +53,6 @@ public class MovieOrderDetailActivity extends BaseWalletFragmentActivity impleme
     private TextView mOrderNumTextView , mOrderPriceTextView, mOrderDateTextView;
     private TextView mWeipiaoTeleTextView;
 
-    private PriorityExecutor mExecutor;
     private MovieOrderDetailTask mTask;
 
     private String mOrderNum;
@@ -260,7 +257,7 @@ public class MovieOrderDetailActivity extends BaseWalletFragmentActivity impleme
             if (mTask == null) {
                 showLoadingView();
                 mTask = new MovieOrderDetailTask(this, mOrderNum, mCallback);
-                mExecutor.execute(mTask);
+                ExecutorHelper.getExecutor().runnableExecutor(mTask);
             }
         } else {
             showBlankPage(BlankPage.STATE_NO_NETWORK);

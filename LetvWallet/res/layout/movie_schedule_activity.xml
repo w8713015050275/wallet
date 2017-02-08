@@ -132,7 +132,7 @@
             leui:tabPaddingStart="18dip"
             leui:tabPaddingTop="12dip"
             leui:tabSelectedTextColor="?attr/walletPrimaryColor"
-            leui:tabTextColor="@color/movie_tab_tv_color" />
+            leui:tabTextColor="@color/movie_shedule_tab_tv_color" />
 
         <View style="@style/Divider_HorizontalLine_Style" />
 

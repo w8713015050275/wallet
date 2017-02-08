@@ -5,7 +5,7 @@
 
     <!-- Moblie -->
     <style name="MobileTheme" parent="AppTheme.Arrow">
-        <item name="walletPrimaryColor">@color/colorMobilePrimary</item>
+        <!--<item name="walletPrimaryColor">@color/colorMobilePrimary</item>-->
     </style>
 
     <!-- Member -->
@@ -16,7 +16,7 @@
 
     <!-- Movie -->
     <style name="MovieTheme" parent="AppTheme.Arrow">
-        <item name="walletPrimaryColor">@color/movie_primary_color</item>
+        <!--<item name="walletPrimaryColor">@color/movie_primary_color</item>-->
     </style>
 
     <style name="MovieTheme.MovieDetail">

@@ -64,6 +64,7 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme_WebView);
         Intent intent = getIntent();
         if (intent == null) {
             finish();

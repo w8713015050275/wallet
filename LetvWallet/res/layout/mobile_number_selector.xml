@@ -19,7 +19,7 @@
         android:background="@null"
         android:onClick="onClick_Contact"
         android:src="@drawable/ic_wallet_mobile_contact"
-        android:tint="@color/colorMobilePrimary" />
+        android:tint="?attr/walletPrimaryColor" />
 
     <View
         android:id="@+id/slash"

@@ -8,19 +8,17 @@
     android:background="@color/content_item_bg_color"
     android:orientation="vertical">
 
-    <View style="@style/Divider_HorizontalLine_Style" />
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_indicator"
         android:layout_width="match_parent"
         android:layout_height="48dip"
         android:textSize="14sp"
-        android:background="?android:attr/statusBarColor"
+        android:background="@color/movie_tab_bg_color"
         app:tabPaddingStart="10dip"
         app:tabPaddingEnd="10dip"
-        app:tabIndicatorColor="?attr/walletPrimaryColor"
+        app:tabIndicatorColor="@color/movie_tab_indicator_color"
         app:tabIndicatorHeight="@dimen/tab_indicator_height"
-        app:tabSelectedTextColor="#685bee"
+        app:tabSelectedTextColor="@color/movie_tab_tv_select_color"
         app:tabTextColor="@color/movie_tab_tv_color" />
 
     <View style="@style/Divider_HorizontalLine_Style" />

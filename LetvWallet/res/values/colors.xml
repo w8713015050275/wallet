@@ -38,7 +38,7 @@
     <color name="movie_btn_order_status_shown">#C8C8C8</color>
     <color name="movie_stop_sale_text">#C8C8C8</color>
     <color name="movie_schedule_price">#FE7C43</color>
-    <color name="movie_primary_color">#685BEE</color>
+    <color name="movie_primary_color">#447DE9</color>
     <color name="movieColorPrimary">@android:color/white</color>
     <color name="coupon_comments_color">#54555C</color>
     <color name="movieAppPrimary">#EA4F40</color>
@@ -78,8 +78,11 @@
     <color name="main_service_name_color">#54555C</color>
 
     <!-- movie -->
-    <color name="movie_tab_tv_color">#323232</color>
-    <color name="movie_tab_bg_color">@android:color/white</color>
+    <color name="movie_tab_tv_color">#CCFFFFFF</color>
+    <color name="movie_tab_bg_color">#437BE5</color>
+    <color name="movie_tab_tv_select_color">@android:color/white</color>
+    <color name="movie_tab_indicator_color">#CCFFFFFF</color>
+    <color name="movie_soon_filter_bg_color">@android:color/white</color>
     <color name="movie_soon_filter_tv_color">#898b94</color>
     <color name="movie_location_desc_tv_color">#898b94</color>
     <color name="movie_detail_movie_info_tv_color">#898b94</color>
@@ -87,12 +90,13 @@
     <color name="movie_detail_movie_description_tv_color">#54555C</color>
     <color name="movie_desc_content_tv_color">#54555C</color>
     <color name="movie_detail_attention_count_tv_color">#54555C</color>
+    <color name="movie_shedule_tab_tv_color">#323232</color>
     <color name="movie_shedule_movie_title_tv_color">@android:color/white</color>
     <color name="movie_shedule_stoptime_bg_color">#FFD07D</color>
     <color name="movie_shedule_stoptime_tv_color">@android:color/white</color>
     <color name="movie_schedule_item_secondary_tv_color">#898B94</color>
-    <color name="movie_toolbar_line_color">#C6C7CB</color>
-    <color name="movie_toolbar_title_color">#898B94</color>
+    <color name="movie_toolbar_line_color">@android:color/white</color>
+    <color name="movie_toolbar_title_color">@android:color/white</color>
     <color name="movie_cinema_list_location_ic_fill_color">#FF54555C</color>
     <color name="movie_cinema_list_location_refresh_fill_color">#FF757575</color>
     <color name="movie_ticket_tab_tv_color">@android:color/black</color>
@@ -105,7 +109,7 @@
     <color name="movie_pay_not_refund_ic_fill_color">#231F20</color>
     <color name="movie_detail_expansion_ic_fill_color">#FF000000</color>
     <color name="movie_bottom_tab_ic_normal_color">#FFBCBCBC</color>
-    <color name="movie_bottom_tab_ic_press_color">#FF685BEE</color>
+    <color name="movie_bottom_tab_ic_press_color">@color/movie_primary_color</color>
     <color name="movie_bottom_tab_bg_color">@android:color/white</color>
     <color name="movie_cinema_list_item_favorites_color">#FE7841</color>
     <color name="movie_order_list_tv_secondary_color">#323232</color>
@@ -121,6 +125,7 @@
     <color name="movie_cinema_one_category_tv_color">@android:color/black</color>
     <color name="movie_cinema_two_category_tv_color">#626262</color>
     <color name="movie_cinema_count_tv_color">#626262</color>
+    <color name="cinema_list_by_movie_tab_tv_color">#323232</color>
 
     <!-- total order list -->
     <color name="totalorder_item_primary_tv_color">@android:color/black</color>
