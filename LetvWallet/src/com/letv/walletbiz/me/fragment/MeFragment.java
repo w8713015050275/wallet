@@ -177,6 +177,11 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     }
 
     @Override
+    public boolean displayActionbar() {
+        return false;
+    }
+
+    @Override
     public void onAccountLogin() {
         isAccountChanged = true;
         isPhoneAvaible = true; //重新获取手机号

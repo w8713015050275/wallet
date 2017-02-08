@@ -485,4 +485,9 @@ public class WalletFragment extends MainFragment {
             handleCardCoupnLoad();
         }
     }
+
+    @Override
+    public boolean displayActionbar() {
+        return true;
+    }
 }
