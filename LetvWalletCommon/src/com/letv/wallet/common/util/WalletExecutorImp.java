@@ -1,10 +1,5 @@
 package com.letv.wallet.common.util;
 
-import org.xutils.common.task.PriorityExecutor;
-
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -20,9 +15,6 @@ public class WalletExecutorImp implements WalletExecutor {
     private static final String TAG = WalletExecutorImp.class.getSimpleName();
     private static WalletExecutorImp instance;
     private static int KEEPALIVETIME = 20;
-    private static int COREPOOLSIZE = 20;
-    private static int ADD_POOLSIZE = 10;
-    private static int BLOCK_SIZE = 5;
 
     private static ThreadPoolExecutor mExecutors;
 
@@ -63,18 +55,6 @@ public class WalletExecutorImp implements WalletExecutor {
             return;
         }
         mExecutors.execute(task);
-        BlockingQueue<Runnable> blockingQueue = mExecutors.getQueue();
-        if (blockingQueue.size() > BLOCK_SIZE) {
-            int poolSize = mExecutors.getPoolSize() + ADD_POOLSIZE;
-            if (poolSize < mExecutors.getMaximumPoolSize()) {
-                mExecutors.setCorePoolSize(poolSize);
-                LogHelper.d("[%S] -------- setPoolSize -----------", TAG);
-            }
-        } else {
-            if (blockingQueue.size() <= 0 && mExecutors.getActiveCount() < COREPOOLSIZE) {
-                mExecutors.setCorePoolSize(COREPOOLSIZE);
-            }
-        }
     }
 
     @Override
