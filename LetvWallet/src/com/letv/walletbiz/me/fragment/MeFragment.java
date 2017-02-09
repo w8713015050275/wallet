@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -129,6 +130,10 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     public void onClick(View v) {
         Intent intent = null ;
         switch (v.getId()) {
+            case R.id.btnSetting:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("lepay://setting"));
+                startActivity(intent);
+                break;
             case R.id.img_usr_icon:
             case R.id.tvNickName:
                 AccountHelper.getInstance().loginOrJumpLetvAccount(getActivity());

@@ -3,5 +3,10 @@
     <!--account-->
     <color name="account_primary_color">#447DE9</color>
 
+    <!-- Setting -->
+    <color name="colorSettingPrimary">#447DE9</color>
+    <color name="setting_content_bg_color">#447DE9</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="divider_secondary_horizontal_color">#F2F2F2</color>
 
 </resources>

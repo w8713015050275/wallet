@@ -1,5 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--account-->
+
+	<!--account-->
     <dimen name="account_horizontal_margin">16dp</dimen>
     <dimen name="account_list_item_height">68dp</dimen>
+
+    <dimen name="margin_default">16dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="setting_divider_height">6dp</dimen>
+    <dimen name="setting_item_height">58dp</dimen>
+
 </resources>

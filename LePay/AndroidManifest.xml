@@ -28,6 +28,23 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".setting.activity.SettingActivity"
+            android:label="@string/setting_label"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="setting"
+                    android:scheme="lepay"></data>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".setting.activity.SettingWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingWebTheme" />
+        <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -41,7 +58,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
         <service
             android:name=".account.service.AccountService">
             <intent-filter>
