@@ -54,7 +54,7 @@
             android:label="@string/account_verify_acitivtiy_title"
             android:theme="@style/AccountVerifyTheme">
             <intent-filter>
-                <action android:name="com.letv.wallet.accountverify" />
+               <action android:name="com.letv.wallet.accountverify" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
@@ -81,6 +81,11 @@
         </receiver>
         <!-- wallet common end -->
 
+        <activity
+            android:name=".account.activity.AccountWebActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingWebTheme" />
     </application>
 
 </manifest>

@@ -8,6 +8,16 @@
     <string name="account_verify_input_mobile_no">输入银行预留手机号</string>
     <string name="account_verify_input_sms_code">输入验证码</string>
     <string name="account_verify_get_sms_code">获取验证码</string>
-    <string name="account_verify_btn_comfire_update">确认修改</string>
-
+    <string name="account_verify_btn_comfire_update">下一步</string>
+    <string name="account_agreement_tips">本人已阅读%1$s，且已理解上述内容，并承担相关风险。</string>
+    <string name="account_agreement">《支付通道服务协议》</string>
+    <string name="account_verify_name_invalid">姓名格式错误</string>
+    <string name="account_verify_id_num_invalid">身份证格式错误</string>
+    <string name="account_verify_card_num_invalid">卡号格式错误</string>
+    <string name="account_verify_card_bank_not_support">暂不支持该银行</string>
+    <string name="account_verify_phone_invalid">手机号格式错误</string>
+    <string name="account_verify_sms_invalid">验证码错误或已失效</string>
+    <string name="account_verify_countdoun_s">S</string>
+    <string name="account_verify_fail">实名认证失败</string>
+    <string name="account_verify_please_check_agreement">请勾选协议</string>
 </resources>

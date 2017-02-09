@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="account_horizontal_margin">16dp</dimen>
+    <dimen name="account_list_item_height">68dp</dimen>
+    <dimen name="account_padding_default">16dp</dimen>
+
+</resources>

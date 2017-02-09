@@ -7,6 +7,7 @@ import com.letv.wallet.account.aidl.v1.CardbinAvailableInfo;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.account.utils.RequestUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
+import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.utils.SslUtil;
 
 import org.xutils.xmain;
@@ -158,7 +159,7 @@ public class AccountGateway {
      */
     public static BaseResponse<CardbinAvailableInfo> availableCarbin(String bankNo) {
         AccountBaseReqParams params = buildBaseParams(AccountGateway.BANK_CARDBIN);
-        params.addBodyParameter(KEY_BANK_NO, bankNo);
+        params.addBodyParameter(KEY_BANK_NO, SslUtil.getInstance().encryptData(bankNo));
         return postSync(params, new TypeToken<BaseResponse<CardbinAvailableInfo>>() {}.getType());
     }
 
@@ -167,8 +168,7 @@ public class AccountGateway {
      */
     public static BaseResponse sendMsg(String mobile, String template) {
         AccountBaseReqParams params = buildBaseParams(AccountGateway.ACCOUNT_SENDMSG);
-        SslUtil sslUtil = SslUtil.getInstance();
-        params.addBodyParameter(KEY_MOBILE, sslUtil.encryptData(mobile));
+        params.addBodyParameter(KEY_MOBILE, SslUtil.getInstance().encryptData(mobile));
         params.addBodyParameter(KEY_TEMPLATE, template);
         return postSync(params, new TypeToken<BaseResponse<String>>() {
         }.getType());

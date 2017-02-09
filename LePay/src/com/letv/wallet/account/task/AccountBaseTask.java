@@ -1,6 +1,9 @@
 package com.letv.wallet.account.task;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
@@ -14,6 +17,45 @@ import com.letv.wallet.common.util.NetworkHelper;
  */
 
 public abstract class AccountBaseTask implements Runnable {
+
+    private Handler mMainHandler = null; //本地调用主线程返回
+
+    public static final int SUCCESS = 1;
+    public static final int ERROR = 2;
+    public static final int NONET = 3;
+
+    private int errorCode ;
+
+    private String errorMsg = null;
+
+    public Handler getHandler() {
+        if (mMainHandler == null) {
+            mMainHandler = new Handler(Looper.getMainLooper()) {
+                @Override
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case SUCCESS:
+                            if (localCallback != null) {
+                                localCallback.onSuccess(msg.obj);
+                            }
+                            break;
+                        case ERROR:
+                            if (localCallback != null) {
+                                localCallback.onError(errorCode, errorMsg);
+                            }
+                            break;
+                        case NONET:
+                            if (localCallback != null) {
+                                localCallback.onNoNet();
+                            }
+                            break;
+                    }
+                }
+            };
+        }
+        return mMainHandler;
+    }
+
     protected AccountCommonCallback localCallback;
     protected IAccountCallback remoteCallback;
 
@@ -54,7 +96,7 @@ public abstract class AccountBaseTask implements Runnable {
 
     protected void onNoNetWork() {
         if (localCallback != null) {
-            localCallback.onNoNet();
+            getHandler().obtainMessage(NONET).sendToTarget();
         }
         if (remoteCallback != null) {
             try {
@@ -67,13 +109,15 @@ public abstract class AccountBaseTask implements Runnable {
 
     protected void onSuccess(Object data) {
         if (localCallback != null) {
-            localCallback.onSuccess(data);
+            Message msg = getHandler().obtainMessage(SUCCESS);
+            msg.obj = data;
+            msg.sendToTarget();
         }
         if (remoteCallback != null) {
             try {
                 Bundle bundle = null;
                 if (data instanceof Parcelable) {
-                     bundle = new Bundle();
+                    bundle = new Bundle();
                     bundle.putParcelable(AccountConstant.KEY_LEPAY_RESPONSE, (Parcelable) data);
                 }
                 remoteCallback.onSuccess(bundle);
@@ -85,7 +129,9 @@ public abstract class AccountBaseTask implements Runnable {
 
     protected void onError(int erro, String msg) {
         if (localCallback != null) {
-            localCallback.onError(erro, msg);
+            errorCode = erro;
+            errorMsg = msg;
+            getHandler().obtainMessage(ERROR).sendToTarget();
         }
         if (remoteCallback != null) {
             try {

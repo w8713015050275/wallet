@@ -2,6 +2,7 @@
 <resources>
     <!--account-->
     <color name="account_primary_color">#447DE9</color>
+    <color name="account_verify_text_hint_color">#B3B3B3</color>
 
     <!-- Setting -->
     <color name="colorSettingPrimary">#447DE9</color>

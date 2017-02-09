@@ -111,7 +111,7 @@ public class AccountConstant {
         public static final int ERRNO_MSG_CODE_FAILED = 10104; // 短信验证码错误
 
         /** 卡bin查询 错误号 **/
-        public static final int ERRNO_BANK_CARD_NOT_EXIST = 10107; // 银行卡不存在
+        public static final int ERRNO_BANK_CARD_ERRO = 10107; // 银行卡号错误
 
         /** 自定义错误妈 **/
         public static final int ERRNO_NO_NETWORK = -1; // 无网络
