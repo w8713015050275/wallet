@@ -103,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/me_list_item_height"
         android:layout_marginTop="@dimen/me_list_item_divider_space"
-        android:text="@string/me_bills"/>
+        android:text="@string/total_order_list_label"/>
 
     <TextView
         android:id="@+id/tvVipLevel"

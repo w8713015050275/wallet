@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home_tab_me">我的</string>
-    <string name="me_real_name_authentication">实名认证</string>
-    <string name="me_real_name_not_authentication">未实名认证</string>
-    <string name="me_tips_title">去认证</string>
-    <string name="me_tips_content">进行实名认证，理财更方便</string>
-    <string name="me_bills">订单记录</string>
-    <string name="me_vip_level">会员等级</string>
-    <string name="me_lelehua">乐乐花</string>
-    <string name="me_lelehua_payment_amount">还款金额</string>
-    <string name="me_usr_feedback">用户反馈</string>
-    <string name="me_lelehua_not_open">未开通</string>
-    <string name="me_create_account_failed">开户失败！</string>
+    <string name="home_tab_me">Me</string>
+    <string name="me_real_name_authentication">Real name verification</string>
+    <string name="me_real_name_not_authentication">Not real name verified</string>
+    <string name="me_tips_title">Verify your name</string>
+    <string name="me_tips_content">More convenient with real name verification</string>
+    <string name="me_vip_level">Membership Level</string>
+    <string name="me_lelehua">Lelehua</string>
+    <string name="me_lelehua_payment_amount">Payment amount</string>
+    <string name="me_usr_feedback">User feedback</string>
+    <string name="me_lelehua_not_open">Account not open</string>
+    <string name="me_create_account_failed">Failed to open account！</string>
+    <string name="me_usr_nologin">Not logged in</string>
+
 </resources>

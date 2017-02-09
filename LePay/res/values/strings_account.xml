@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_verify_acitivtiy_title">Real name verification</string>
+    <string name="account_verify_input_real_name">Real name</string>
+    <string name="account_verify_input_id_no">ID Card</string>
+    <string name="account_verify_input_bank_no">Add bank card</string>
+    <string name="account_verify_available_bank_list">Support bank</string>
+    <string name="account_verify_input_mobile_no">Input phone registered with bank</string>
+    <string name="account_verify_input_sms_code">Enter code</string>
+    <string name="account_verify_get_sms_code">Resend SMS code</string>
+    <string name="account_verify_btn_comfire_update">Confirm Update</string>
+
+</resources>
