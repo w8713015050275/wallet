@@ -118,7 +118,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         }
 
         hideBlankPage();
-        loadData();
+
     }
 
     @Override
@@ -172,6 +172,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void startLoadData() {
+        loadData();
     }
 
     @Override
@@ -184,6 +185,11 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     @Override
     public boolean displayActionbar() {
         return false;
+    }
+
+    @Override
+    public void gotoNext(int type) {
+
     }
 
     @Override

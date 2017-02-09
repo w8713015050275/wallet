@@ -1,9 +1,15 @@
 package com.letv.walletbiz.main.fragment;
 
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +17,14 @@ import android.widget.LinearLayout;
 
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.AppUtils;
+import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
+import com.letv.walletbiz.base.util.Action;
+import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.base.widget.MainTopButton;
 import com.letv.walletbiz.coupon.CouponConstant;
 import com.letv.walletbiz.coupon.activity.CouponDetailActivity;
@@ -31,6 +40,7 @@ import com.letv.walletbiz.main.MainAdapter;
 import com.letv.walletbiz.main.MainPanelHelper;
 import com.letv.walletbiz.main.MainServiceTask;
 import com.letv.walletbiz.main.MainTopTask;
+import com.letv.walletbiz.main.WalletMainWebActivity;
 import com.letv.walletbiz.main.bean.WalletBannerListBean;
 import com.letv.walletbiz.main.bean.WalletServiceListBean;
 import com.letv.walletbiz.main.bean.WalletTopListBean;
@@ -39,6 +49,8 @@ import com.letv.walletbiz.movie.activity.MovieOrderDetailActivity;
 import com.letv.walletbiz.movie.beans.MovieOrder;
 
 import org.xutils.common.task.PriorityExecutor;
+
+import java.io.IOException;
 
 import timehop.stickyheader.RecyclerItemClickListener;
 
@@ -268,6 +280,43 @@ public class WalletFragment extends MainFragment {
         @Override
         public void onLoadFromNetworkFinished(WalletServiceListBean result, int errorCode, boolean needUpdate) {
             mServiceTask = null;
+            //System.out.println("WalletFragment mServiceCallback onLoadFromNetworkFinished gotoType==" + gotoType);
+
+            if (gotoType != -1 && result != null && result.list != null && result.list.length > 0) {
+                for (final WalletServiceListBean.WalletServiceBean bean : result.list) {
+                    if (bean.service_id == gotoType) {
+                        Action.uploadExposeTab(Action.WALLET_HOME_LIST + bean.service_id);
+                        if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_APP) {
+                            Bundle bundle = null;
+                            if (getContext() != null
+                                    && !TextUtils.isEmpty(bean.package_name)
+                                    && getContext().getPackageName().startsWith(bean.package_name)) {
+                                bundle = new Bundle();
+                                bundle.putString(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
+                            }
+                            AppUtils.LaunchAppWithBundle(getContext(), bean.package_name, bean.jump_param, bundle);
+                        } else if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_WEB) {
+                            if (AccountHelper.getInstance().isLogin(getContext())) {
+                                jumpWeb(bean);
+                            } else {
+                                AccountHelper.getInstance().loginLetvAccountIfNot((Activity) getContext(), new AccountManagerCallback() {
+
+                                    @Override
+                                    public void run(AccountManagerFuture future) {
+                                        try {
+                                            if (getContext() != null && future.getResult() != null && AccountHelper.getInstance().isLogin(getContext())) {
+                                                jumpWeb(bean);
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
             if (!needUpdate) {
                 return;
             }
@@ -285,6 +334,17 @@ public class WalletFragment extends MainFragment {
             }
         }
     };
+
+    private void jumpWeb(WalletServiceListBean.WalletServiceBean bean) {
+        if (bean == null) {
+            return;
+        }
+        Intent intent = new Intent(getContext(), WalletMainWebActivity.class);
+        intent.putExtra(CommonConstants.EXTRA_URL, bean.jump_link);
+        intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, bean.service_name);
+        intent.putExtra(WalletConstant.EXTRA_WEB_WITH_ACCOUNT, bean.need_token == 1);
+        getContext().startActivity(intent);
+    }
 
     private MainPanelHelper.Callback<WalletBannerListBean> mBannerCallback = new MainPanelHelper.Callback<WalletBannerListBean>() {
 
@@ -471,10 +531,6 @@ public class WalletFragment extends MainFragment {
         return false;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     public void onNetWorkChanged(boolean isNetworkAvailable) {
@@ -489,5 +545,13 @@ public class WalletFragment extends MainFragment {
     @Override
     public boolean displayActionbar() {
         return true;
+    }
+
+
+    private int gotoType = -1;
+
+    @Override
+    public void gotoNext(int type) {
+        gotoType = type;
     }
 }

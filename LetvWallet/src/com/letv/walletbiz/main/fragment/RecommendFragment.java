@@ -52,4 +52,9 @@ public class RecommendFragment extends MainFragment {
     public boolean displayActionbar() {
         return true;
     }
+
+    @Override
+    public void gotoNext(int type) {
+
+    }
 }

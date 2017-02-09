@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
@@ -76,15 +77,46 @@ public class MainActivity extends BaseWalletFragmentActivity {
         recommendFragment = new RecommendFragment();
         walletFragment = new WalletFragment();
         myFragment = new MeFragment();
-
-        initView();
-
         Action.uploadStartApp();
-        //Uri uri = getIntent().getData();
-        //System.out.println("onCreate uri==="+uri);
-
+        findView();
+        parseIntent(getIntent());
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        parseIntent(intent);
+    }
+
+    private void findView(){
+        recommendRadio = (RadioButton) findViewById(R.id.main_tab_recommend_radio);
+        walletRadio = (RadioButton) findViewById(R.id.main_tab_wallet_radio);
+        myRadio = (RadioButton) findViewById(R.id.main_tab_my_radio);
+    }
+
+
+    private void parseIntent(Intent intent){
+        Uri uri = intent.getData();
+        int tabId=-1;
+        int serviceId=-1;
+        if (uri != null) {
+            String main_tab = uri.getQueryParameter("main_tab");
+            try {
+                tabId = Integer.parseInt(main_tab);
+            } catch (NumberFormatException e) {
+            }
+            String service_id= uri.getQueryParameter("service_id");
+            try {
+                serviceId = Integer.parseInt(service_id);
+            } catch (NumberFormatException e) {
+            }
+        } else {
+            tabId = intent.getIntExtra("main_tab", -1);
+            serviceId = intent.getIntExtra("service_id",-1);
+        }
+        initView(tabId);
+        fragManager.getTopFragment().gotoNext(serviceId);
+    }
 
     @Override
     protected void onStart() {
@@ -220,19 +252,31 @@ public class MainActivity extends BaseWalletFragmentActivity {
     protected void onNetWorkChanged(boolean isNetworkAvailable) {
         fragManager.getTopFragment().onNetWorkChanged(isNetworkAvailable);
     }
+    private void initView(int type) {
 
-    private void initView() {
-        fragManager.showFragmentAdd(R.id.main_fragment_container, walletFragment);
+        switch(type){
+            case 1:
+                recommendRadio.setChecked(true);
+                fragManager.showFragmentAdd(R.id.main_fragment_container, recommendFragment);
+                break;
+            case 2:
+                myRadio.setChecked(true);
+                fragManager.showFragmentAdd(R.id.main_fragment_container, myFragment);
+                break;
+            default:
+                walletRadio.setChecked(true);
+                fragManager.showFragmentAdd(R.id.main_fragment_container, walletFragment);
+                break;
+        }
 
-        recommendRadio = (RadioButton) findViewById(R.id.main_tab_recommend_radio);
-        walletRadio = (RadioButton) findViewById(R.id.main_tab_wallet_radio);
-        myRadio = (RadioButton) findViewById(R.id.main_tab_my_radio);
         recommendRadio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (isChecked) {
+                    recommendFragment.setInitData(true);
                     fragManager.showFragmentAdd(R.id.main_fragment_container, recommendFragment);
                 }
 
@@ -244,7 +288,9 @@ public class MainActivity extends BaseWalletFragmentActivity {
             @Override
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (isChecked) {
+                    walletFragment.setInitData(true);
                     fragManager.showFragmentAdd(R.id.main_fragment_container, walletFragment);
                 }
 
@@ -257,6 +303,7 @@ public class MainActivity extends BaseWalletFragmentActivity {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    myFragment.setInitData(true);
                     fragManager.showFragmentAdd(R.id.main_fragment_container, myFragment);
                 }
             }
@@ -348,6 +395,8 @@ public class MainActivity extends BaseWalletFragmentActivity {
             Intent intent = new Intent(this, CouponListActivity.class);
             intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
             startActivity(intent);
+
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -378,7 +427,7 @@ public class MainActivity extends BaseWalletFragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

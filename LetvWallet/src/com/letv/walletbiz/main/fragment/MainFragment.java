@@ -1,5 +1,7 @@
 package com.letv.walletbiz.main.fragment;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 
 import com.letv.wallet.common.fragment.BaseFragment;
@@ -10,10 +12,28 @@ import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
  */
 public abstract class MainFragment extends BaseFragment {
 
+    private boolean initData = false;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        changeActionbar();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
-        changeActionbar();
+        if (initData)
+            initData();
+    }
+
+    public void setInitData(boolean init) {
+        initData = init;
+    }
+
+    public void initData() {
+        startLoadData();
+        setInitData(false);
     }
 
     public abstract void startLoadData();
@@ -22,6 +42,8 @@ public abstract class MainFragment extends BaseFragment {
 
     public abstract boolean displayActionbar();
 
+    public abstract void gotoNext(int type);
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -29,6 +51,7 @@ public abstract class MainFragment extends BaseFragment {
         //执行异步加载任务，第二次显示的时候要重新加载数据
         if (!hidden) {
             startLoadData();
+            setInitData(false);
         }
     }
 
