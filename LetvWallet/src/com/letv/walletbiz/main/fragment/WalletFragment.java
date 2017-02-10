@@ -528,7 +528,7 @@ public class WalletFragment extends MainFragment {
 
     @Override
     public boolean hasBlankAndLoadingView() {
-        return false;
+        return true;
     }
 
 
