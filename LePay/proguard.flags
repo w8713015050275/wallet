@@ -43,7 +43,7 @@
 
 
 #保持Parcelable不被混淆
--keep class * implements Parcelable {
+-keep class * implements android.os.Parcelable {
  *;
 }
 
@@ -51,6 +51,10 @@
 -keep class * implements java.io.Serializable{
  *;
 }
+
+-keep class com.letv.wallet.account.aidl.v1.IAccountCallback
+-keep class com.letv.wallet.account.aidl.v1.IAccountServiceV1
+-keep class com.letv.wallet.account.service.AccountServiceImpV1
 
 #保持枚举 enum 类不被混淆
 -keepclassmembers enum * {
