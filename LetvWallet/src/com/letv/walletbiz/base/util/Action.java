@@ -10,14 +10,17 @@ import com.letv.tracker.agnes.Widget;
 import com.letv.tracker.enums.EventType;
 import com.letv.tracker.enums.Key;
 import com.letv.tracker.enums.LeUIApp;
+import com.letv.wallet.common.util.LogHelper;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 
 public class Action {
-    private static final String TAG = "userAction";
+    private static final String TAG = "UserAction";
     private static final String WALLET = "Wallet";
 
     public static final String WALLET_HOME_TOTALORDER = "1.1";
@@ -50,15 +53,34 @@ public class Action {
     public static final String WALLET_PUSH = "4";
     public static final String WALLET_SERVICE = "5";
 
+    public static final String MOBILE_FLOW_PAY_CLICK = "5.1.1";
+    public static final String MOBILE_FLEE_PAY_CLICK = "5.1.2";
+    //type(1／2／3) from(各APP包名/icon) 1=联系人 2=非联系人 3=本机
+    public static final String MOBILE_EXPOSURE = "5.2.1";
+    public static final String MOBILE_FLEE_CONFIRM_PAY_CLICK = "5.3.1";
+    public static final String MOBILE_FLOW_CONFIRM_PAY_CLICK = "5.3.2";
+
+    //Update
+    public static final String UPGRADE_POPUP_SHOW = "7";
+    public static final String UPGRADE_POPUP_CLICK = "7.1";
+    public static final String UPGRADE_SUCCESS = "7.1.1";
+    public static final String UPGRADE_AUTOMATIC_INSTALLATION = "7.2";
+
+
+    public static final String WALLET_MAIN_EXPOSE = "1.4";
+    public static final String WALLET_MAIN_CARD_COUPONS_CARD_EXPOSE = "1.5";
+
+    public static final String TAB_RECOMMEND_PAGE_EXPOSE = "8";
+    public static final String PUSH_COUPONS_COUNT_ACCEPT = "8.2";
+    public static final String TAB_SET_PAGE_EXPOSE = "8.3";
 
     private static final String PROP_DISTANCE = "distance";
     private static final String PROP_CINEMA = "cinema";
     private static final String POSITIONID = "PositionId";
 
-    private static final String EVENTTYPE_SUBSCRIBE = "subscribe";
+    //    private static final String EVENTTYPE_SUBSCRIBE = "subscribe";
     private static final String EVENTTYPE_PURCHASE = "purchase";
     private static final String EVENTTYPE_PAY = "pay";
-    private static final String EVENTTYPE_APPLY = "apply";
 
     public static final String EVENT_PROP_TO_HOME = "home";
 
@@ -94,6 +116,7 @@ public class Action {
         return app;
     }
 
+    // ------------ App ---------------
     // App create
     public static void uploadStartApp() {
         mUploadExecutor.submit(new Runnable() {
@@ -126,510 +149,303 @@ public class Action {
         app.exit();
         Agnes.getInstance().report(app);
     }
-
-    // expose tab
-    public static void uploadExposeTab(final String tag) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadExposeTabImpl(tag);
-            }
-        });
-    }
-
-    private static void uploadExposeTabImpl(String tag) {
-        if (TextUtils.isEmpty(tag)) {
-            return;
-        }
-        App app = getApp();
-        Widget widget = app.createWidget(tag);
-        Event event = widget.createEvent(EventType.Expose);
-        Agnes.getInstance().report(event);
-    }
-
-    // expose tab
-    public static void uploadExposeTab(final String tag, final String content) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadExposeTabImpl(tag, content);
-            }
-        });
-    }
-
-    private static void uploadExposeTabImpl(String tag, String content) {
-        if (TextUtils.isEmpty(tag)) {
-            return;
-        }
-        App app = getApp();
-        Widget widget = app.createWidget(tag);
-        Event event = widget.createEvent(EventType.Expose);
-        event.addProp(Key.Content, content);
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadCouponListExpose(final String from) {
-        mUploadExecutor.submit(new Runnable() {
-
-            @Override
-            public void run() {
-                uploadFromExposeIml(COUPON_EXPOSE, from);
-            }
-        });
-    }
-
-    public static void uploadMovieDetailExpose(final String content, final String from) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadFromExposeIml(MOVIE_DETAIL, content, from);
-            }
-        });
-    }
-
-    public static void uploadCinemaDetailExpose(final String content, final String from) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadFromExposeIml(MOVIE_DETAIL_CINEMA, content, from);
-            }
-        });
-    }
-
-    public static void uploadFlowExpose(final String from) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadFromExposeIml(WALLET_SERVICE, WALLET_SERVICE_CONTENT_FLOW, from);
-            }
-        });
-    }
-
-    public static void uploadFeeExpose(final String from) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadFromExposeIml(WALLET_SERVICE, WALLET_SERVICE_CONTENT_FEE, from);
-            }
-        });
-    }
-
-    public static void uploadMovieExpose(final String from) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadFromExposeIml(WALLET_SERVICE, WALLET_SERVICE_CONTENT_MOVIE, from);
-            }
-        });
-    }
-
-    private static void uploadFromExposeIml(String widget, String from) {
-        if (TextUtils.isEmpty(widget) || TextUtils.isEmpty(from)) {
-            return;
-        }
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Expose);
-        event.addProp(Key.From, from);
-        Agnes.getInstance().report(event);
-    }
-
-    private static void uploadFromExposeIml(String widget, String content, String from) {
-        if (TextUtils.isEmpty(widget) || (TextUtils.isEmpty(content) && TextUtils.isEmpty(from))) {
-            return;
-        }
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Expose);
-        event.addProp(Key.Content, content);
-        event.addProp(Key.From, from);
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadPushExpose(final String content) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadPushExposeIml(content);
-            }
-        });
-    }
-
-    private static void uploadPushExposeIml(String content) {
-        if (TextUtils.isEmpty(content)) {
-            return;
-        }
-        App app = getApp();
-        Widget wdt = app.createWidget(WALLET_PUSH);
-        Event event = wdt.createEvent(EventType.Expose);
-        event.addProp(Key.Content, content);
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadPushExpose(final String content, final String to) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadPushExposeIml(content, to);
-            }
-        });
-    }
-
-    private static void uploadPushExposeIml(String content, String to) {
-        if (TextUtils.isEmpty(content)) {
-            return;
-        }
-        App app = getApp();
-        Widget wdt = app.createWidget(WALLET_PUSH);
-        Event event = wdt.createEvent(EventType.Expose);
-        event.addProp(Key.Content, content);
-        event.addProp(Key.To, to);
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadClick(final String widget) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadClickImpl(widget);
-            }
-        });
-    }
-
-    private static void uploadClickImpl(String widget) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Click);
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadClick(final String widget, final String content) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadClickImpl(widget, content);
-            }
-        });
-    }
-
-    private static void uploadClickImpl(String widget, String content) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Click);
-        event.addProp(Key.Content, content);
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadClick(final String widget, final String content, final String distance) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadClickImpl(widget, content, distance);
-            }
-        });
-    }
-
-    private static void uploadClickImpl(String widget, String content, String distance) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Click);
-        event.addProp(Key.Content, content);
-        if (Key.isExsited(PROP_DISTANCE)) {
-            event.addProp(Key.valueOf(PROP_DISTANCE), distance);
-        } else {
-            event.addProp(PROP_DISTANCE, distance);
-        }
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadMoviePhotoClick(final String widget, final String content, final String url) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadMoviePhotoClickImpl(widget, content, url);
-            }
-        });
-    }
-
-    private static void uploadMoviePhotoClickImpl(String widget, String content, String url) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Click);
-        event.addProp(Key.Content, content);
-        event.addProp(Key.Url, url);
-        Agnes.getInstance().report(event);
-    }
+    // ------------ App ---------------
 
     public static void uploadSet(final String widget, final String content) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadSetImpl(widget, content);
+                Map<String, Object> props = new HashMap<>();
+                props.put(Key.Content.toString(), content);
+                uploadCustomImpl(EventType.Set, widget, props);
             }
         });
     }
 
-    private static void uploadSetImpl(String widget, String content) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Set);
-        event.addProp(Key.Content, content);
-        Agnes.getInstance().report(event);
+    public static void uploadPopup(final String widget) {
+        uploadPopup(widget, null);
     }
 
-    public static void uploadSubscribeClick(final String widget, final String content) {
+    public static void uploadPopup(final String widget, final String content) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadSubscribeClickImpl(widget, content);
+                Map<String, Object> props = new HashMap<>();
+                if (!TextUtils.isEmpty(content)) {
+                    props.put(Key.Content.toString(), content);
+                }
+                uploadCustomImpl(EventType.Popup, widget, props);
             }
         });
     }
 
-    private static void uploadSubscribeClickImpl(String widget, String content) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event;
-        if (EventType.isExsited(EVENTTYPE_SUBSCRIBE)) {
-            event = wdt.createEvent(EventType.valueOf(EVENTTYPE_SUBSCRIBE));
-        } else {
-            event = wdt.createEvent(EVENTTYPE_SUBSCRIBE);
-        }
-        event.addProp(Key.Content, content);
-        Agnes.getInstance().report(event);
-    }
 
+    // ------------ buy -----------
 
-    // buy
     public static void uploadPay(final String function, final String content, final String cinema) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadPayImpl(function, content, cinema);
+                Map<String, Object> props = new HashMap<>();
+                props.put(Key.Content.toString(), content);
+                if (!TextUtils.isEmpty(cinema)) {
+                    props.put(PROP_CINEMA, cinema);
+                }
+                uploadCustomImpl(EVENTTYPE_PAY, function, props);
             }
         });
     }
 
-    private static void uploadPayImpl(String function, String content, String cinema) {
-        App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event;
-        if (EventType.isExsited(EVENTTYPE_PAY)) {
-            event = widget.createEvent(EventType.valueOf(EVENTTYPE_PAY));
-        } else {
-            event = widget.createEvent(EVENTTYPE_PAY);
-        }
-        event.addProp(Key.Content, content);
-        if (Key.isExsited(PROP_CINEMA)) {
-            event.addProp(Key.valueOf(PROP_CINEMA), cinema);
-        } else {
-            event.addProp(PROP_CINEMA, cinema);
-        }
-        Agnes.getInstance().report(event);
+    public static void uploadBuy(String function, String content) {
+        uploadBuy(function, content, null);
     }
 
-    // buy
     public static void uploadBuy(final String function, final String content, final String cinema) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadBuyImpl(function, content, cinema);
+                Map<String, Object> props = new HashMap<>();
+                props.put(Key.Content.toString(), content);
+                if (!TextUtils.isEmpty(cinema)) {
+                    props.put(PROP_CINEMA, cinema);
+                }
+                uploadCustomImpl(EVENTTYPE_PURCHASE, function, props);
             }
         });
     }
+    // ------------ buy -----------
 
-    private static void uploadBuyImpl(String function, String content, String cinema) {
-        App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event;
-        if (EventType.isExsited(EVENTTYPE_PURCHASE)) {
-            event = widget.createEvent(EventType.valueOf(EVENTTYPE_PURCHASE));
-        } else {
-            event = widget.createEvent(EVENTTYPE_PURCHASE);
-        }
-        event.addProp(Key.Content, content);
-        if (Key.isExsited(PROP_CINEMA)) {
-            event.addProp(Key.valueOf(PROP_CINEMA), cinema);
-        } else {
-            event.addProp(PROP_CINEMA, cinema);
-        }
-        Agnes.getInstance().report(event);
-    }
-
-    // buy
-    public static void uploadBuy(final String function, final String content) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadBuyImpl(function, content);
-            }
-        });
-    }
-
-    private static void uploadBuyImpl(String function, String content) {
-        App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event;
-        if (EventType.isExsited(EVENTTYPE_PURCHASE)) {
-            event = widget.createEvent(EventType.valueOf(EVENTTYPE_PURCHASE));
-        } else {
-            event = widget.createEvent(EVENTTYPE_PURCHASE);
-        }
-        event.addProp(Key.Content, content);
-        Agnes.getInstance().report(event);
-    }
 
     public static void uploadCallout(final String widget) {
+        uploadCustom(EventType.CallOut, widget);
+    }
+
+
+    // ----------- subscrible  ------------
+    public static void uploadSubscribeClick(final String widget, final String content) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadCalloutImpl(widget);
+                Map<String, Object> props = new HashMap<>();
+                props.put(Key.Content.toString(), content);
+                uploadCustomImpl(EventType.Subscrible, widget, props);
             }
         });
     }
 
-    private static void uploadCalloutImpl(String widget) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.CallOut);
-        Agnes.getInstance().report(event);
-    }
-
-    public static void uploadClickBanner(final String widget, final String content) {
+    public static void uploadSubscrible(final String widget, final int id, final int designerId) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadClickBannerImpl(widget, content);
+                Map<String, Object> props = new HashMap<>();
+                props.put(Key.Content.toString(), id);
+                props.put(Key.Class.toString(), designerId);
+                uploadCustomImpl(EventType.Subscrible, widget, props);
+            }
+        });
+    }
+    // ----------- subscrible  ------------
+
+
+    //---------- Click -------------
+    public static void uploadMoviePhotoClick(String widget, String content, String url) {
+        uploadClick(widget, content, null, url);
+    }
+
+    public static void uploadClick(String widget) {
+        uploadClick(widget, null, null, null);
+    }
+
+    public static void uploadClick(String widget, String content) {
+        uploadClick(widget, content, null, null);
+    }
+
+    public static void uploadClick(String widget, String content, String distance) {
+        uploadClick(widget, content, distance, null);
+    }
+
+    public static void uploadClick(final String widget, final String content, final String distance, final String url) {
+        mUploadExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, Object> props = new HashMap<>();
+                if (!TextUtils.isEmpty(content)) {
+                    props.put(Key.Content.toString(), content);
+                }
+                if (!TextUtils.isEmpty(distance)) {
+                    props.put(PROP_DISTANCE, distance);
+                }
+                if (!TextUtils.isEmpty(url)) {
+                    props.put(Key.Url.toString(), url);
+                }
+                uploadCustomImpl(EventType.Click, widget, props);
+            }
+        });
+    }
+    //---------- Click -------------
+
+
+    //---------- Expose ---------------
+
+    public static void uploadCouponListExpose(final String from) {
+        uploadExpose(COUPON_EXPOSE, null, from, null);
+    }
+
+    public static void uploadMovieDetailExpose(final String content, final String from) {
+        uploadExpose(MOVIE_DETAIL, content, from, null);
+    }
+
+    public static void uploadCinemaDetailExpose(final String content, final String from) {
+        uploadExpose(MOVIE_DETAIL_CINEMA, content, from, null);
+    }
+
+    public static void uploadFlowExpose(String from) {
+        uploadWalletServiceExpose(WALLET_SERVICE_CONTENT_FLOW, from);
+    }
+
+    public static void uploadFeeExpose(String from) {
+        uploadWalletServiceExpose(WALLET_SERVICE_CONTENT_FEE, from);
+    }
+
+    public static void uploadMovieExpose(String from) {
+        uploadWalletServiceExpose(WALLET_SERVICE_CONTENT_MOVIE, from);
+    }
+
+    public static void uploadWalletServiceExpose(String content, String from) {
+        uploadExpose(WALLET_SERVICE, content, from, null);
+    }
+
+    public static void uploadPushExpose(String content) {
+        uploadExpose(WALLET_PUSH, content, null, null);
+    }
+
+    public static void uploadPushExpose(String content, String to) {
+        uploadExpose(WALLET_PUSH, content, null, to);
+    }
+
+    public static void uploadExposeTab(String widget) {
+        uploadExpose(widget, null, null, null);
+    }
+
+    public static void uploadExposeTab(String widget, String content) {
+        uploadExpose(widget, content, null, null);
+    }
+
+    public static void uploadExpose(final String widget, final String content, final String from, final String to) {
+        mUploadExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, Object> props = new HashMap<>();
+                if (!TextUtils.isEmpty(content)) {
+                    props.put(Key.Content.toString(), content);
+                }
+                if (!TextUtils.isEmpty(from)) {
+                    props.put(Key.From.toString(), from);
+                }
+                if (!TextUtils.isEmpty(to)) {
+                    props.put(Key.To.toString(), to);
+                }
+                uploadCustomImpl(EventType.Expose, widget, props);
+            }
+        });
+    }
+    // ---------- Expose ----------------
+
+
+    // -------------------------------------------
+
+    public static void uploadCustom(final String eventType, final String widget) {
+        mUploadExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                uploadCustomImpl(eventType, widget);
             }
         });
     }
 
-    private static void uploadClickBannerImpl(String widget, String content) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Click);
-        event.addProp(Key.Content, content);
-        Agnes.getInstance().report(event);
-    }
-
-    // click list item
-    public static void uploadClickListItem(final String widget, final int id, final int position) {
+    public static void uploadCustom(final EventType eventType, final String widget) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadClickListItemImpl(widget, id, position);
+                uploadCustomImpl(eventType, widget);
             }
         });
     }
 
-    private static void uploadClickListItemImpl(final String widget, final int id, final int position) {
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(EventType.Click);
-        event.addProp(Key.Content, id + "");
-        // now no exsited
-        if (Key.isExsited(POSITIONID))
-            event.addProp(Key.valueOf(POSITIONID), position + "");
-        else
-            event.addProp(POSITIONID, position + "");
-        Agnes.getInstance().report(event);
-    }
-
-    // collect
-    public static void uploadCollect(final String function, final int id) {
+    public static void uploadCustom(final String eventType, final String widget, final Map<String, Object> prop) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadCollectImpl(function, id);
+                uploadCustomImpl(eventType, widget, prop);
             }
         });
     }
 
-    private static void uploadCollectImpl(final String function, final int id) {
-        App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event = widget.createEvent(EventType.Book);
-        event.addProp(Key.Content, id + "");
-        Agnes.getInstance().report(event);
-    }
-
-    // share
-    public static void uploadShare(final String function, final int id, final String to) {
+    public static void uploadCustom(final EventType eventType, final String widget, final Map<String, Object> prop) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                uploadShareImpl(function, id, to);
+                uploadCustomImpl(eventType, widget, prop);
             }
         });
     }
 
-    private static void uploadShareImpl(final String function, final int id, final String to) {
-        App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event = widget.createEvent(EventType.Share);
-        event.addProp(Key.Content, id + "");
-        event.addProp(Key.To, to);
-        Agnes.getInstance().report(event);
+    private static void uploadCustomImpl(String eventType, String widget) {
+        uploadCustomImpl(eventType, widget, null);
     }
 
-    // download
-    public static void uploadDownload(final String function, final int id) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadDownloadImpl(function, id);
-            }
-        });
+    private static void uploadCustomImpl(EventType eventType, String widget) {
+        uploadCustomImpl(eventType, widget, null);
     }
 
-    private static void uploadDownloadImpl(final String function, final int id) {
-        App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event = widget.createEvent(EventType.Download);
-        event.addProp(Key.Content, id + "");
-        Agnes.getInstance().report(event);
-    }
-
-    // apply
-    public static void uploadApply(final String function, final int id) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadApplyImpl(function, id);
-            }
-        });
-    }
-
-    private static void uploadApplyImpl(final String function, final int id) {
-        App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event;
-        if (EventType.isExsited(EVENTTYPE_APPLY)) {
-            event = widget.createEvent(EventType.valueOf(EVENTTYPE_APPLY));
-        } else {
-            event = widget.createEvent(EVENTTYPE_APPLY);
+    private static void uploadCustomImpl(String eventType, String widget, Map<String, Object> prop) {
+        if (TextUtils.isEmpty(widget)) {
+            LogHelper.i("[%S] Agen widget == null", TAG);
+            return;
         }
-        event.addProp(Key.Content, id + "");
-        Agnes.getInstance().report(event);
-    }
-
-    // subscrible
-    public static void uploadSubscrible(final String function, final int id, final int designerId) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadSubscribleImpl(function, id, designerId);
-            }
-        });
-    }
-
-    private static void uploadSubscribleImpl(final String function, final int id, final int designerId) {
         App app = getApp();
-        Widget widget = app.createWidget(function);
-        Event event = widget.createEvent(EventType.Subscrible);
-        event.addProp(Key.Content, id + "");
-        event.addProp(Key.Class, designerId + "");
+        Widget wdt = app.createWidget(widget);
+        Event event;
+        if (EventType.isExsited(eventType)) {
+            event = wdt.createEvent(EventType.valueOf(eventType));
+        } else {
+            event = wdt.createEvent(eventType);
+        }
+        if (prop != null) {
+            for (Map.Entry<String, Object> entry : prop.entrySet()) {
+                if (!TextUtils.isEmpty(entry.getKey()) && entry.getValue() != null) {
+                    if (Key.isExsited(entry.getKey())) {
+                        event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
+                    } else {
+                        event.addProp(entry.getKey(), entry.getValue().toString());
+                    }
+                    LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
+                }
+            }
+        }
         Agnes.getInstance().report(event);
     }
 
+    private static void uploadCustomImpl(EventType eventType, String widget, Map<String, Object> prop) {
+        if (TextUtils.isEmpty(widget)) {
+            LogHelper.i("[%S] Agen widget == null", TAG);
+            return;
+        }
+        App app = getApp();
+        Widget wdt = app.createWidget(widget);
+        Event event = wdt.createEvent(eventType);
+        if (prop != null) {
+            for (Map.Entry<String, Object> entry : prop.entrySet()) {
+                if (!TextUtils.isEmpty(entry.getKey()) && entry.getValue() != null) {
+                    if (Key.isExsited(entry.getKey())) {
+                        event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
+                    } else {
+                        event.addProp(entry.getKey(), entry.getValue().toString());
+                    }
+                    LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
+                }
+            }
+        }
+        Agnes.getInstance().report(event);
+    }
 }
