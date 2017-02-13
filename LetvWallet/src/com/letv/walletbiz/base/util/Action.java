@@ -74,6 +74,13 @@ public class Action {
     public static final String PUSH_COUPONS_COUNT_ACCEPT = "8.2";
     public static final String TAB_SET_PAGE_EXPOSE = "8.3";
 
+    //Member
+    public static final String MEMBER_FIRST_TAB_EXPOSE = "9";
+    public static final String MEMBER_SECOND_TAB_EXPOSE = "9.1";
+    public static final String MEMBER_PRODUCT_ORDER_EXPOSE = "9.2.1"; //购买
+    public static final String MEMBER_PAY_NOW_PURCHASE = "9.2.2"; //立刻支付
+    public static final String MEMBER_BANNER_CLICK = "9.3";
+
     private static final String PROP_DISTANCE = "distance";
     private static final String PROP_CINEMA = "cinema";
     private static final String POSITIONID = "PositionId";
@@ -205,7 +212,9 @@ public class Action {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                props.put(Key.Content.toString(), content);
+                if (!TextUtils.isEmpty(content)) {
+                    props.put(Key.Content.toString(), content);
+                }
                 if (!TextUtils.isEmpty(cinema)) {
                     props.put(PROP_CINEMA, cinema);
                 }
@@ -213,6 +222,7 @@ public class Action {
             }
         });
     }
+
     // ------------ buy -----------
 
 
@@ -249,22 +259,22 @@ public class Action {
 
     //---------- Click -------------
     public static void uploadMoviePhotoClick(String widget, String content, String url) {
-        uploadClick(widget, content, null, url);
+        uploadClick(widget, content, null, url, null);
     }
 
     public static void uploadClick(String widget) {
-        uploadClick(widget, null, null, null);
+        uploadClick(widget, null, null, null, null);
     }
 
     public static void uploadClick(String widget, String content) {
-        uploadClick(widget, content, null, null);
+        uploadClick(widget, content, null, null, null);
     }
 
     public static void uploadClick(String widget, String content, String distance) {
-        uploadClick(widget, content, distance, null);
+        uploadClick(widget, content, distance, null, null);
     }
 
-    public static void uploadClick(final String widget, final String content, final String distance, final String url) {
+    public static void uploadClick(final String widget, final String content, final String distance, final String url, final String from) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
@@ -277,6 +287,9 @@ public class Action {
                 }
                 if (!TextUtils.isEmpty(url)) {
                     props.put(Key.Url.toString(), url);
+                }
+                if (!TextUtils.isEmpty(from)) {
+                    props.put(Key.From.toString(), from);
                 }
                 uploadCustomImpl(EventType.Click, widget, props);
             }
@@ -351,6 +364,39 @@ public class Action {
     }
     // ---------- Expose ----------------
 
+    // ---------- Upgrade ----------------
+    public static void uploadUpgradeDialogPopup() {
+        mUploadExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                uploadCustomImpl(EventType.Popup, UPGRADE_POPUP_SHOW);
+            }
+        });
+    }
+
+    public static void uploadUpgradeSuccess(final String type, final String packageName) {
+        mUploadExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, Object> props = new HashMap<>();
+                props.put(Key.PackageName.toString(), packageName);
+                props.put(Key.Type.toString(), type);
+                uploadCustomImpl(EventType.Upgrade, UPGRADE_SUCCESS, props);
+            }
+        });
+    }
+
+    public static void uploadInstallSuccess(final String packageName) {
+        mUploadExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, Object> props = new HashMap<>();
+                props.put(Key.PackageName.toString(), packageName);
+                uploadCustomImpl(EventType.Install, UPGRADE_AUTOMATIC_INSTALLATION, props);
+            }
+        });
+    }
+    // ---------- Upgrade ----------------
 
     // -------------------------------------------
 

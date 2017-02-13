@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.walletbiz.MainActivity;
+import com.letv.walletbiz.base.util.Action;
+import com.letv.walletbiz.update.UpdateConstant;
 import com.letv.walletbiz.update.UpdateHelper;
 import com.letv.walletbiz.update.util.UpdateUtil;
 import com.letv.walletbiz.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,12 +31,22 @@ public class UpgradeApkInstallReceiver extends BroadcastReceiver {
         if (intent.getAction().equalsIgnoreCase("android.intent.action.PACKAGE_REPLACED")) {
             String packageStr = intent.getDataString();
             String[] strs = packageStr.split(":");
-            String packageName = intent.getStringExtra("PackageName");;
+            String packageName = intent.getStringExtra("PackageName");
             if (strs != null && strs.length > 0) {
                 packageName = strs[strs.length-1];
             }
 
             String contextPackageName = context.getPackageName();
+
+            ArrayList<String> packagesList = (ArrayList<String>) UpdateUtil.getLocalAppList();
+            if (packagesList.contains(packageName)) {
+                if (SharedPreferencesHelper.getBoolean(UpdateConstant.PREFERENCES_NOTIFY_LATER, false)) {
+                    Action.uploadInstallSuccess(packageName);
+                } else {
+                    Action.uploadUpgradeSuccess(String.valueOf(SharedPreferencesHelper.getBoolean(UpdateConstant.PREFERENCES_FORCE_UPGRADE, false)? 2 : 1), packageName);
+                }
+            }
+
             if (packageName != null && contextPackageName != null) {
                 if (packageName.trim().equalsIgnoreCase(contextPackageName.trim())) {
                     UpdateUtil.removeDownloadedFile(packageName);

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.main.AutoSlidePagerAdapter;
 import com.letv.walletbiz.main.WalletMainWebActivity;
 import com.letv.walletbiz.member.MemberConstant;
@@ -21,13 +22,15 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/11/10.
  */
 public class BannerAdapter extends AutoSlidePagerAdapter implements View.OnClickListener{
+    private String mFrom;
     private Context mContext;
 
     private ArrayList<ImageView> mImageViewArray = new ArrayList<ImageView>();
     private BannerListBean.BannerBean[] mData;
 
-    public BannerAdapter(Context context) {
+    public BannerAdapter(Context context, String from) {
         mContext = context;
+        mFrom = from;
     }
 
     public void setData(BannerListBean.BannerBean[] data) {
@@ -96,6 +99,7 @@ public class BannerAdapter extends AutoSlidePagerAdapter implements View.OnClick
         if (position < 0 || position >= mData.length) {
             return;
         }
+        Action.uploadClick(Action.MEMBER_BANNER_CLICK, String.valueOf(position), null, null, mFrom);
         if (mData[position].banner_type == MemberConstant.BANNER_TYPE_LINK) {
             Intent intent = new Intent(mContext, WalletMainWebActivity.class);
             intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, mData[position].banner_name);

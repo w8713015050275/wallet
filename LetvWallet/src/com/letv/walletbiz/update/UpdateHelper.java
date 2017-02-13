@@ -27,6 +27,7 @@ import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.walletbiz.MainActivity;
 import com.letv.walletbiz.R;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.update.beans.RemoteAppInfo;
 import com.letv.walletbiz.update.util.UpdateUtil;
 
@@ -49,6 +50,8 @@ public class UpdateHelper {
     private boolean mIsNoWifiDialogShowing;
     private boolean mIsUpgradeSheetShowing;
     private Message mMsgFromServer;
+
+    private boolean mIsFirstPopupUpgradeDialog = true;
 
     public static final String HIDE_UPGRADE_DIALOG = "walletbiz.action.hide_upgrade_dialog";
     private boolean isHideDialogReceiverRegisted;
@@ -107,6 +110,9 @@ public class UpdateHelper {
             return;
         }
         if (UpdateUtil.mIsStartedNewly || UpdateUtil.isUpdateTimeExpire()) {
+            if (UpdateUtil.isUpdateTimeExpire()) {
+                mIsFirstPopupUpgradeDialog = true;
+            }
             if(NetworkHelper.isNetworkAvailable()) {
                 UpdateUtil.startUpgradeService(mBaseActivity.getApplicationContext());
                 UpdateUtil.bindUpgradeService(mBaseActivity, mConnection);
@@ -253,11 +259,14 @@ public class UpdateHelper {
                         Toast.makeText(mBaseActivity,mBaseActivity.getString(R.string.mobile_prompt_net_connection_fail),Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    Action.uploadClick(Action.UPGRADE_POPUP_CLICK);
                     leBottomSheetConfirm.setText(R.string.in_downloading);
                     if(UpdateUtil.mApkDownloading) {
                         Toast.makeText(mBaseActivity,mBaseActivity.getString(R.string.in_downloading),Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    SharedPreferencesHelper.putBoolean(UpdateConstant.PREFERENCES_NOTIFY_LATER, false);
+                    SharedPreferencesHelper.putBoolean(UpdateConstant.PREFERENCES_FORCE_UPGRADE, true);
                     continueToUpgrade();
                 }
             });
@@ -278,7 +287,9 @@ public class UpdateHelper {
                         Toast.makeText(mBaseActivity,mBaseActivity.getString(R.string.mobile_prompt_net_connection_fail),Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    Action.uploadClick(Action.UPGRADE_POPUP_CLICK);
                     SharedPreferencesHelper.putLong(UpdateConstant.PREFERENCES_LAST_CHECK_UPDATE, System.currentTimeMillis());
+                    SharedPreferencesHelper.putBoolean(UpdateConstant.PREFERENCES_NOTIFY_LATER, false);
                     mUpgradeSheet.dismiss();
                     continueToUpgrade();
                 }
@@ -288,6 +299,8 @@ public class UpdateHelper {
                 public void onClick(View v) {
                     mUpgradeSheet.dismiss();
                     SharedPreferencesHelper.putLong(UpdateConstant.PREFERENCES_LAST_CHECK_UPDATE, System.currentTimeMillis());
+                    SharedPreferencesHelper.putBoolean(UpdateConstant.PREFERENCES_NOTIFY_LATER, true);
+                    SharedPreferencesHelper.putBoolean(UpdateConstant.PREFERENCES_FORCE_UPGRADE, false);
                     sendMsgToService(UpdateConstant.NOTIFY_LATER_FROM_CLIENT);
                 }
             });
@@ -317,7 +330,11 @@ public class UpdateHelper {
         mUpgradeSheet.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
+                if (mIsFirstPopupUpgradeDialog) {
+                    Action.uploadUpgradeDialogPopup();
+                }
                 mIsUpgradeSheetShowing = true;
+                mIsFirstPopupUpgradeDialog = false;
             }
         });
         mUpgradeSheet.show();

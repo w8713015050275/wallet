@@ -225,6 +225,7 @@ public class MemberConstant {
     public static final int BANNER_TYPE_LINK = 2;
     public static final int BANNER_TYPE_APP = 3;
     public static final String MEMBER_PRODUCT_PRICE = "product_price";
+    public static final String MEMBER_FROM_MAIN_PANEL = "from_main_panel";
 
     public class PARAM {
         public static final String COUPONLIST_KEY = "couponlist_key";

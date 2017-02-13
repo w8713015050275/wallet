@@ -38,6 +38,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static final int POSITION_AGREEMENT = 2;
 
     private static final int ITEM_COUNT = 4;
+    private String mRank;
     private MemberTypeListBean.MemberTypeBean mMemberTypeBean;
 
     private Context mContext;
@@ -65,6 +66,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public MemberAdapter(Context context, MemberTypeListBean.MemberTypeBean memberTypeBean, ViewGroup recyclerView) {
         mContext = context;
         mMemberTypeBean = memberTypeBean;
+        mRank = mMemberTypeBean.rank;
         mRefreshView = recyclerView;
     }
 
@@ -198,7 +200,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         mPtrFrameLayout = ptrFrameLayout;
     }
 
-    public static class BannerViewHolder extends RecyclerView.ViewHolder {
+    public class BannerViewHolder extends RecyclerView.ViewHolder {
 
         public FrameLayout bannerFrameLayout;
         public AutoSlideViewpager bannerPager;
@@ -211,7 +213,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             bannerPager = (AutoSlideViewpager) itemView.findViewById(R.id.banner_pager);
             indicatorContainer = (PagerIndicator) itemView.findViewById(R.id.indicator_container);
             bannerPager.setPagerIndicator(indicatorContainer);
-            bannerAdapter = new BannerAdapter(context);
+            bannerAdapter = new BannerAdapter(context, mRank);
             bannerPager.setAdapter(bannerAdapter);
         }
     }

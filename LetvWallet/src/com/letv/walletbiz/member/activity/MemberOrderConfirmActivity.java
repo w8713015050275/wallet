@@ -23,6 +23,7 @@ import com.letv.walletbiz.BuildConfig;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.pay.Constants;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.StringUtils;
 import com.letv.walletbiz.base.widget.CouponBrief;
 import com.letv.walletbiz.member.MemberConstant;
@@ -214,6 +215,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
     private void initView() {
         Bundle bundle = getIntent().getExtras();
         mMemberProduct = (MemberProduct) bundle.getSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT);
+        Action.uploadExpose(Action.MEMBER_PRODUCT_ORDER_EXPOSE, String.valueOf(mMemberProduct.getProductId()), null, null);
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -301,6 +303,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
                     Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.mobile_prompt_net_connection_fail), Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Action.uploadBuy(Action.MEMBER_PAY_NOW_PURCHASE, null);
                 showDialog();
                 runOrderSNAsyncTask(mMemberProduct.getSku_no(), new String[]{String.valueOf(mUcouponId)});
             }

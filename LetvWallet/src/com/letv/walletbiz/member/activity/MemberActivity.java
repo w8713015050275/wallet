@@ -26,7 +26,6 @@ import com.letv.walletbiz.member.fragments.MemberFragment;
 import com.letv.walletbiz.member.task.MemberTypeListTask;
 import com.letv.walletbiz.member.util.MemberCommonCallback;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -52,6 +51,7 @@ public class MemberActivity extends BaseWalletFragmentActivity {
     private MemberTypeListBean.MemberTypeBean[] mMemberBeanList;
     private ActionBar mActionBar;
     private boolean mGotoOrderList;
+    private boolean mIsFromMainPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,11 @@ public class MemberActivity extends BaseWalletFragmentActivity {
     }
 
     private void initView() {
+        String pkgName = getIntent().getStringExtra("pkgName");
+        if (pkgName != null && pkgName.contains("wallet")) {
+            mIsFromMainPanel = true;
+        }
+
         mActionBar = getSupportActionBar();
         setTitle(R.string.member_tool_bar);
         initActionBar();
@@ -146,7 +151,7 @@ public class MemberActivity extends BaseWalletFragmentActivity {
         @Override
         public Fragment getItem(int position) {
             if(position >= mFragmentList.size()) {
-                mFragmentList.add(MemberFragment.newInstance(mMemberBeanList[position]));
+                mFragmentList.add(MemberFragment.newInstance(mMemberBeanList[position], mIsFromMainPanel));
             }
             return mFragmentList.get(position);
         }

@@ -17,6 +17,7 @@ import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.member.MemberConstant;
 import com.letv.walletbiz.member.adapters.MemberAdapter;
 import com.letv.walletbiz.member.beans.BannerListBean;
@@ -57,6 +58,7 @@ public class MemberFragment extends BaseFragment {
     private boolean mNeedUpdateBanner = true;
 
     private MemberTypeListBean.MemberTypeBean mMemberTypeBean;
+    private boolean mIsFromMainPanel;
 
     private View.OnClickListener mRetryClickListener = new View.OnClickListener() {
         @Override
@@ -177,10 +179,11 @@ public class MemberFragment extends BaseFragment {
         mProductRefreshDone = false;
     }
 
-    public static MemberFragment newInstance(MemberTypeListBean.MemberTypeBean memberTypeBean) {
+    public static MemberFragment newInstance(MemberTypeListBean.MemberTypeBean memberTypeBean, boolean isFromMainPanel) {
         MemberFragment fragment = new MemberFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(MemberConstant.MEMBER_TYPE, memberTypeBean);
+        bundle.putBoolean(MemberConstant.MEMBER_FROM_MAIN_PANEL, isFromMainPanel);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -191,6 +194,7 @@ public class MemberFragment extends BaseFragment {
         mContext = getActivity();
         if (getArguments() != null) {
             mMemberTypeBean = (MemberTypeListBean.MemberTypeBean) getArguments().getSerializable(MemberConstant.MEMBER_TYPE);
+            mIsFromMainPanel = getArguments().getBoolean(MemberConstant.MEMBER_FROM_MAIN_PANEL);
         }
         registerNetWorkReceiver();
     }
@@ -253,6 +257,39 @@ public class MemberFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getUserVisibleHint()){
+            onVisibilityChangedToUser(true);
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isResumed()){
+            onVisibilityChangedToUser(isVisibleToUser);
+        }
+    }
+
+    /**
+     * 当Fragment对用户的可见性发生了改变的时候就会回调此方法
+     * @param isVisibleToUser true：用户能看见当前Fragment；false：用户看不见当前Fragment
+     *
+     */
+    public void onVisibilityChangedToUser(boolean isVisibleToUser){
+        if(isVisibleToUser){
+            if (Integer.valueOf(mMemberTypeBean.rank) == 0) {
+                Action.uploadExpose(Action.MEMBER_FIRST_TAB_EXPOSE, null, String.valueOf(mIsFromMainPanel ? 1: 2), null);
+            } else if (Integer.valueOf(mMemberTypeBean.rank) == 1) {
+                Action.uploadExpose(Action.MEMBER_SECOND_TAB_EXPOSE, null, null, null);
+            }
+        }
     }
 
     @Override

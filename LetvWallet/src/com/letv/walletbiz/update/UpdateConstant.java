@@ -50,4 +50,6 @@ public class UpdateConstant {
     public static final int CANCEL_ALL_NOTIFICATION = 105;
 
     public static final String PREFERENCES_LAST_CHECK_UPDATE = "last_check_update";
+    public static final String PREFERENCES_NOTIFY_LATER = "notify_later";
+    public static final String PREFERENCES_FORCE_UPGRADE = "force_upgrade";
 }
