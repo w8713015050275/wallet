@@ -74,7 +74,7 @@ public class SslUtil {
                 encryp = addByte(encryp, encryptByte);
             }
             // 为了方便观察吧加密后的数据用base64加密转一下，要不然看起来是乱码,所以解密是也是要用Base64先转换
-            return Base64.encodeToString(encryp, Base64.DEFAULT);
+            return Base64.encodeToString(encryp, Base64.NO_WRAP);
         } catch (Exception e) {
             return "Exception";
         }
@@ -90,7 +90,7 @@ public class SslUtil {
         try {
             String decryptStr = "";
             // 先Base64解密回来再给RSA解密
-            byte[] beforeDecrypt = Base64.decode(needDecryptContent, Base64.DEFAULT);
+            byte[] beforeDecrypt = Base64.decode(needDecryptContent, Base64.NO_WRAP);
 
             // 从文件中得到私钥
             int maxLength = rsaSize;

@@ -1,3 +1,5 @@
 <resources>
-    <string name="main_top_finance"></string>
+    <string name="main_tab_recommend">recommended</string>
+    <string name="main_tab_wallet">wallet</string>
+    <string name="main_tab_my">mine</string>
 </resources>
