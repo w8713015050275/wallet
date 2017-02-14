@@ -64,8 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:orientation="horizontal"
-            android:visibility="invisible">
+            android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/tv_contact_name"
@@ -76,7 +75,8 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/mobilePrimaryTvColor"
-                android:textSize="@dimen/mobile_phone_desc_tv_size" />
+                android:textSize="@dimen/mobile_phone_desc_tv_size"
+                android:visibility="invisible" />
 
             <View
                 android:id="@+id/line1"
@@ -86,7 +86,8 @@
                 android:layout_marginLeft="@dimen/margin_default"
                 android:layout_marginRight="@dimen/margin_default"
                 android:background="@color/colorDividerLine"
-                android:clickable="true" />
+                android:clickable="true"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/tv_mobile_desc"
@@ -95,7 +96,8 @@
                 android:layout_gravity="center_vertical"
                 android:maxLines="1"
                 android:textColor="@color/mobilePrimaryTvColor"
-                android:textSize="@dimen/mobile_phone_desc_tv_size" />
+                android:textSize="@dimen/mobile_phone_desc_tv_size"
+                android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

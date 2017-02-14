@@ -110,7 +110,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private ProductsPanel mProductPanel;
     private ProductsPanel mFlowEntranceProductPanel;
     private PhoneEditText mPhoneEdittext;
-    private LinearLayout mMobileNumberInfoLl;
     private TextView mViewMobileName;
     private TextView mViewMobileDesc;
     private View mLine1;
@@ -188,7 +187,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                     break;
                 case UPDATE_CONTACTNAME:
                     mContactTask = null;
-                    showMobileNumberInfoLl();
                     String name = "";
                     if (msg.obj != null) {
                         name = msg.obj.toString();
@@ -362,7 +360,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         mPhoneEdittext.setHint(R.string.movie_hint_input_phonenumber);
         mPhoneEdittext.setVerificationLevel(PhoneEditText.PHONENUMBER_RIGOROUS_VERIFICATION);
         mPhoneEdittext.setCallback(this);
-        mMobileNumberInfoLl = (LinearLayout) findViewById(R.id.mobile_number_info_ll);
         mViewDeposite = (TextView) findViewById(R.id.label_deposite);
         mViewDeposite.setText(getDeposite(mFeeOrFlow));
         mViewMobileDesc = (TextView) findViewById(R.id.tv_mobile_desc);
@@ -713,7 +710,11 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                                             if (name == null || name.equals("") || name.equals(phoneNumber)) {
                                                 name = getResources().getString(R.string.mobile_phone_number_no_name);
                                             }
+                                            if (mViewMobileDesc != null) {
+                                                mViewMobileDesc.setText("");
+                                            }
                                             setMobileName(name);
+                                            updateProductList(null);
                                             mPhoneEdittext.setText(phoneNumber);
                                             mPhoneEdittext.setSelection(phoneNumber.length());
                                         } else {
@@ -742,9 +743,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     }
 
     public void onClick_ClearAll(View view) {
-        if (mMobileNumberInfoLl != null) {
-            mMobileNumberInfoLl.setVisibility(View.INVISIBLE);
-        }
+        clearMobileNumberInfo();
         if (mPhoneEdittext != null) {
             mPhoneEdittext.setText("");
         }
@@ -752,7 +751,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             mRecordHistoryNumberV.show();
         }
     }
-
 
     public void onClick_matterAttention(View view) {
         Intent intent = new Intent(MobileActivity.this, MobileWebActivity.class);
@@ -818,6 +816,15 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private void setMobileName(String name) {
         if (mViewMobileName != null) {
             mViewMobileName.setText(name);
+            if (!TextUtils.isEmpty(name) && mViewMobileName.getVisibility() == View.INVISIBLE) {
+                mViewMobileName.setVisibility(View.VISIBLE);
+            }
+        }
+        if (mViewMobileDesc != null && TextUtils.isEmpty(mViewMobileDesc.getText())) {
+            mViewMobileDesc.setVisibility(View.INVISIBLE);
+            if (mLine1 != null) {
+                mLine1.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -968,23 +975,25 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         handler.sendMessage(msg);
     }
 
-    private void showMobileNumberInfoLl() {
-        if (mMobileNumberInfoLl != null) {
-            mMobileNumberInfoLl.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void clearMobileNumberInfo() {
         updateProductList(null);
-        setMobileName("");
-        if (mMobileNumberInfoLl == null) return;
-        mMobileNumberInfoLl.setVisibility(View.INVISIBLE);
+        if (mViewMobileName != null) {
+            mViewMobileName.setText("");
+            mViewMobileName.setVisibility(View.INVISIBLE);
+        }
+        if (mLine1 != null) {
+            mLine1.setVisibility(View.INVISIBLE);
+        }
+        if (mViewMobileDesc != null) {
+            mViewMobileDesc.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void updateNumberDesc(String desc) {
         if (mViewMobileDesc == null) return;
         if (TextUtils.isEmpty(desc)) {
             mViewMobileDesc.setText("");
+            mViewMobileDesc.setVisibility(View.INVISIBLE);
             if (mLine1.getVisibility() == View.VISIBLE) {
                 mLine1.setVisibility(View.INVISIBLE);
             }
@@ -992,7 +1001,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         }
         String label = String.format(mPhoneNumDefDescFormatStr, desc);
         mViewMobileDesc.setText(label);
-        showMobileNumberInfoLl();
+        mViewMobileDesc.setVisibility(View.VISIBLE);
         if (mLine1.getVisibility() == View.INVISIBLE) {
             mLine1.setVisibility(View.VISIBLE);
         }
