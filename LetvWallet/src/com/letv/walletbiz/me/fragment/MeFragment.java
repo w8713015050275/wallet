@@ -93,6 +93,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             mLeLeHuaAavailableLimit = (TextView) mRootView.findViewById(R.id.tvLeLeHuaAavailableLimit);
             mLeLeHuaPaymentAmount = (TextView) mRootView.findViewById(R.id.tvPayAmount);
 
+            mSetting.setOnClickListener(this);
             mUsrIcon.setOnClickListener(this);
             mUsrNickName.setOnClickListener(this);
             mVerifyFlag.setOnClickListener(this);
