@@ -115,6 +115,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private View mLine1;
     private TextView mViewDeposite;
     private ProductBean mStubProducts;
+    private DocPromptBean mDocPromptBean;
     private static long mCouponID;
 
     private LinearLayout mBannerLl;
@@ -149,9 +150,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                     break;
                 case UPDATE_DOC_PROMPT:
                     if (msg.obj != null) {
-                        DocPromptBean docPromptBean = (DocPromptBean) msg.obj;
-                        if (!TextUtils.isEmpty(docPromptBean.getDoc_content())) {
-                            mViewDeposite.setText(docPromptBean.getDoc_content());
+                        mDocPromptBean = (DocPromptBean) msg.obj;
+                        if (!TextUtils.isEmpty(mDocPromptBean.getDoc_content())) {
+                            mViewDeposite.setText(mDocPromptBean.getDoc_content());
                             return;
                         }
                     }
@@ -424,7 +425,6 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             );
         } else {
             mFlowEntrancell.setVisibility(View.GONE);
-            queryFlowDocPrompt(MobileConstant.DOCKEY.DOC_FLOW_KEY);
         }
         fillPhoneNumber(savedInstanceState, number);
     }
@@ -463,6 +463,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     }
 
     private void loadData() {
+        if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FLOW) {
+            queryFlowDocPrompt(MobileConstant.DOCKEY.DOC_FLOW_KEY);
+        }
         if (mPhoneEdittext != null && !mHaveProductData) {
             String content = mPhoneEdittext.getMobileNumber();
             queryMobileProducts(mFeeOrFlow, content);
@@ -715,6 +718,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                                             }
                                             setMobileName(name);
                                             updateProductList(null);
+                                            if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FLOW) {
+                                                updateDocPrompt(null);
+                                            }
                                             mPhoneEdittext.setText(phoneNumber);
                                             mPhoneEdittext.setSelection(phoneNumber.length());
                                         } else {
@@ -779,6 +785,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                     }
                 }
                 hideHistoryNumberV();
+                if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FLOW) {
+                    queryFlowDocPrompt(MobileConstant.DOCKEY.DOC_FLOW_KEY);
+                }
                 queryMobileProducts(mFeeOrFlow, content);
                 return true;
             case 0:
@@ -932,7 +941,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                                 Toast.makeText(MobileActivity.this, mPromptInputRightNumber, Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            queryMobileProducts(mFeeOrFlow, newNumber);
+                            loadData();
                         }
                     },
                     new View.OnClickListener() {
@@ -977,6 +986,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
 
     private void clearMobileNumberInfo() {
         updateProductList(null);
+        if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FLOW) {
+            updateDocPrompt(null);
+        }
         if (mViewMobileName != null) {
             mViewMobileName.setText("");
             mViewMobileName.setVisibility(View.INVISIBLE);
@@ -1092,17 +1104,18 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     }
 
     private void queryFlowDocPrompt(String docKey) {
-        if (!isNetworkAvailable()) {
-            showNetFailToast();
-            return;
+        if (!isNetworkAvailable()) return;
+        if (mDocPromptBean == null || TextUtils.isEmpty(mDocPromptBean.getDoc_content())) {
+            LogHelper.d("[%S] queryFlowDocPrompt execute", TAG);
+            if (TextUtils.isEmpty(docKey)) return;
+            if (mDocPromptAsyncT == null) {
+                mDocPromptAsyncT = new DocPromptTask();
+            }
+            Object[] objParams = new Object[]{docKey};
+            mDocPromptAsyncT.execute(objParams);
+        } else {
+            updateDocPrompt(mDocPromptBean);
         }
-        LogHelper.d("[%S] queryFlowDocPrompt execute", TAG);
-        if (TextUtils.isEmpty(docKey)) return;
-        if (mDocPromptAsyncT == null) {
-            mDocPromptAsyncT = new DocPromptTask();
-        }
-        Object[] objParams = new Object[]{docKey};
-        mDocPromptAsyncT.execute(objParams);
     }
 
     private class DocPromptTask extends AsyncTask<Object, Integer, BaseResponse<DocPromptBean>> {
