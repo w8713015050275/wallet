@@ -55,6 +55,8 @@ public class MobileConstant {
         public final static String COUPON_DATA_KEY = "coupon_data_key";
         public final static String COUPON_LIST_COUNT_KEY = "coupon_list_count_key";
         public final static String COUPON_ID_KEY = "coupon_id";
+        public final static String CONTACT_TYPE_KEY = "contact_type";
+        public final static String FEEFLOW_KEY = "fee_flow_key";
     }
 
     public static final class DOCKEY {
@@ -78,6 +80,12 @@ public class MobileConstant {
 
         public static final int MOBILE_FEE = 1;
         public static final int MOBILE_FLOW = 2;
+    }
+
+    public static final class CONTACT_TYPE {
+        public static final int CONTACTS = 1;
+        public static final int UNCONTACT = 2;
+        public static final int THIS_MACHINE = 3;
     }
 
     public static final class BUSINESS_ID {

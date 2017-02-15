@@ -19,6 +19,8 @@ import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.account.task.AccountCommonCallback;
 import com.letv.wallet.account.task.AccountQueryTask;
 import com.letv.wallet.account.task.RedirectTask;
+import com.letv.wallet.base.util.Action;
+import com.letv.wallet.base.util.WalletConstant;
 import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.ExecutorHelper;
@@ -41,6 +43,8 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
     private RedirectTask mRedirectTask;
     private RedirectURL mRedirectURL;
     private AccountInfo.BasicAccount mBasicAccount;
+    private boolean isFirstShow = true;
+    private String mFrom;
 
     private static final int ACCOUNT_QUERY_FINISH = 1;
     private static final int PWD_URL_FINISH = 2;
@@ -124,7 +128,7 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
                     if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(mBasicAccount.verifyStatus)) {
                         Toast.makeText(getBaseContext(), R.string.prompt_str_account_verified, Toast.LENGTH_SHORT).show();
                     } else {
-                        goAccountVerifyPage();
+                        goAccountVerifyPage(SettingConstant.VERIFYPAGE_REALNAME_FROM);
                     }
                 }
                 break;
@@ -136,7 +140,7 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
                 }
                 if (mBasicAccount != null) {
                     if (!AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(mBasicAccount.verifyStatus)) {
-                        goAccountVerifyPage();
+                        goAccountVerifyPage(SettingConstant.VERIFYPAGE_PWD_FROM);
                         return;
                     }
                     if (mRedirectURL != null) {
@@ -220,6 +224,10 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
             });
             return;
         }
+        if (isFirstShow) {
+            isFirstShow = false;
+            Action.uploadExpose(Action.TAB_SET_PAGE_EXPOSE, mFrom);
+        }
         mBasicAccount = accountInfo.basic;
         if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(mBasicAccount.verifyStatus)) {
             mAccountVerifyTv.setText(R.string.setting_account_verified);
@@ -246,20 +254,30 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
         }
         Intent intent = new Intent(SettingActivity.this, SettingWebActivity.class);
         intent.putExtra(CommonConstants.EXTRA_URL, urlStr);
+        intent.putExtra(SettingConstant.EXTRA_PWDSTATUS_KEY, mBasicAccount.pwdStatus);
         intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, titleStr);
         startActivity(intent);
     }
 
-    private void goAccountVerifyPage() {
+    private void goAccountVerifyPage(String from) {
         Intent intent = new Intent(SettingActivity.this, AccountVerifyActivity.class);
+        intent.putExtra(CommonConstants.EXTRA_FROM, from);
         startActivity(intent);
     }
 
     private void initV() {
+        processExtraData();
         findViewById();
         mAccountVerifyLl.setOnClickListener(this);
         mSettingPwdTv.setOnClickListener(this);
         checkAccountInfo();
+    }
+
+    private void processExtraData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            mFrom = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+        }
     }
 
     private void getPwdUrl() {

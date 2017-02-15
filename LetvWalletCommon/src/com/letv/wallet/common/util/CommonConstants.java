@@ -17,5 +17,6 @@ public class CommonConstants {
      * intent extra
      */
     public static final String EXTRA_URL = "extra_url";
+    public static final String EXTRA_FROM = "from";
     public static final String EXTRA_TITLE_NAME = "title_name";
 }

@@ -105,6 +105,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private String mDividerNumber;
     private String mSimCard0;
     private String mSimCard1;
+    private int mContactType;
 
     private LinearLayout mFlowEntrancell;
     private ProductsPanel mProductPanel;
@@ -385,13 +386,18 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                 }
                 String phoneNumber = mPhoneEdittext.getMobileNumber();
                 if (phoneNumber.length() == MOBILE_LEN) {
+                    if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FEE) {
+                        Action.uploadClick(Action.MOBILE_FEE_PRODUCT_CLICK);
+                    } else {
+                        Action.uploadClick(Action.MOBILE_FLOW_PRODUCT_CLICK);
+                    }
                     int id = position;
                     ProductBean.product productBean = mProductPanel.getProductItem(id);
                     if (AccountHelper.getInstance().loginLetvAccountIfNot(MobileActivity.this, null) == true) {
                         MobileProduct product = new MobileProduct(
                                 R.string.movie_order_view_label, productBean.getProductId(), productBean.getSkuSN(), productBean.getProductName(),
                                 mPhoneEdittext.getMobileNumber(), productBean.getProductPrice());
-                        product.showOrderSure(MobileActivity.this, mCouponID);
+                        product.showOrderSure(MobileActivity.this, mFeeOrFlow, mCouponID, mContactType);
                     }
                 }
             }
@@ -711,7 +717,10 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                                         phoneNumber = PhoneNumberUtils.checkPhoneNumber(phoneNumber, true);
                                         if (!TextUtils.isEmpty(phoneNumber)) {
                                             if (name == null || name.equals("") || name.equals(phoneNumber)) {
+                                                mContactType = MobileConstant.CONTACT_TYPE.UNCONTACT;
                                                 name = getResources().getString(R.string.mobile_phone_number_no_name);
+                                            } else {
+                                                mContactType = MobileConstant.CONTACT_TYPE.CONTACTS;
                                             }
                                             if (mViewMobileDesc != null) {
                                                 mViewMobileDesc.setText("");
@@ -773,6 +782,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                 isChangedNumber = true;
                 LogHelper.d("[%S] onNumberChanged execute", TAG);
                 if (content.equals(mSimCard0) || content.equals(mSimCard1)) {
+                    mContactType = MobileConstant.CONTACT_TYPE.THIS_MACHINE;
                     setMobileName(mDividerPhoneNumberStr);
                 } else {
                     String name = mViewMobileName.getText().toString();
@@ -1048,7 +1058,12 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             if (!TextUtils.isEmpty(name)) {
                 if (name.equals(mPhoneNumber)) {
                     name = getResources().getString(R.string.mobile_phone_number_no_name);
+                    mContactType = MobileConstant.CONTACT_TYPE.UNCONTACT;
+                } else {
+                    mContactType = MobileConstant.CONTACT_TYPE.CONTACTS;
                 }
+            } else {
+                mContactType = MobileConstant.CONTACT_TYPE.UNCONTACT;
             }
             Message msg = Message.obtain();
             msg.obj = name;

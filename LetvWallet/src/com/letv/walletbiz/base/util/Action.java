@@ -3,26 +3,17 @@ package com.letv.walletbiz.base.util;
 
 import android.text.TextUtils;
 
-import com.letv.tracker.agnes.Agnes;
-import com.letv.tracker.agnes.App;
-import com.letv.tracker.agnes.Event;
-import com.letv.tracker.agnes.Widget;
 import com.letv.tracker.enums.EventType;
 import com.letv.tracker.enums.Key;
-import com.letv.tracker.enums.LeUIApp;
-import com.letv.wallet.common.util.LogHelper;
+import com.letv.wallet.common.util.BaseAction;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 
 
-public class Action {
-    private static final String TAG = "UserAction";
-    private static final String WALLET = "Wallet";
+public class Action extends BaseAction {
 
+    //Widget
     public static final String WALLET_HOME_TOTALORDER = "1.1";
     public static final String WALLET_HOME_COUPON = "1.2";
     public static final String COUPON_EXPOSE = "1.3";
@@ -53,12 +44,11 @@ public class Action {
     public static final String WALLET_PUSH = "4";
     public static final String WALLET_SERVICE = "5";
 
+    //Mobile
     public static final String MOBILE_FLOW_PAY_CLICK = "5.1.1";
-    public static final String MOBILE_FLEE_PAY_CLICK = "5.1.2";
-    //type(1／2／3) from(各APP包名/icon) 1=联系人 2=非联系人 3=本机
-    public static final String MOBILE_EXPOSURE = "5.2.1";
-    public static final String MOBILE_FLEE_CONFIRM_PAY_CLICK = "5.3.1";
-    public static final String MOBILE_FLOW_CONFIRM_PAY_CLICK = "5.3.2";
+    public static final String MOBILE_FEE_PAY_CLICK = "5.1.2";
+    public static final String MOBILE_FLOW_PRODUCT_CLICK = "5.2.1";
+    public static final String MOBILE_FEE_PRODUCT_CLICK = "5.2.2";
 
     //Update
     public static final String UPGRADE_POPUP_SHOW = "7";
@@ -66,13 +56,16 @@ public class Action {
     public static final String UPGRADE_SUCCESS = "7.1.1";
     public static final String UPGRADE_AUTOMATIC_INSTALLATION = "7.2";
 
-
+    //Wallet
     public static final String WALLET_MAIN_EXPOSE = "1.4";
     public static final String WALLET_MAIN_CARD_COUPONS_CARD_EXPOSE = "1.5";
 
+    //Me
     public static final String TAB_RECOMMEND_PAGE_EXPOSE = "8";
     public static final String PUSH_COUPONS_COUNT_ACCEPT = "8.2";
     public static final String TAB_SET_PAGE_EXPOSE = "8.3";
+    public static final String VERIFY_PAGE_EXPOSE = "8.3.1";
+    public static final String VERIFY_SUCCESS = "8.3.2";
 
     //Member
     public static final String MEMBER_FIRST_TAB_EXPOSE = "9";
@@ -81,84 +74,34 @@ public class Action {
     public static final String MEMBER_PAY_NOW_PURCHASE = "9.2.2"; //立刻支付
     public static final String MEMBER_BANNER_CLICK = "9.3";
 
-    private static final String PROP_DISTANCE = "distance";
-    private static final String PROP_CINEMA = "cinema";
-    private static final String POSITIONID = "PositionId";
+    //Quick entry
+    public static final String QUICK_ENTRY_LELEHUA_CLICK = "11";
+    public static final String QUICK_ENTRY_BANKCARD_CLICK = "11.3";
+    public static final String QUICK_ENTRY_BANKCARD_LIST_EXPOSE = "11.3.4";
+    public static final String QUICK_ENTRY_BANKCARD_LIST_ITEM_CLICK = "11.3.5";
+    public static final String QUICK_ENTRY_ADD_BANKCARD = "11.3.6";
+    public static final String QUICK_ENTRY_BANKCARD_PAGE_EXPOSE = "11.3.7";
 
-    //    private static final String EVENTTYPE_SUBSCRIBE = "subscribe";
-    private static final String EVENTTYPE_PURCHASE = "purchase";
-    private static final String EVENTTYPE_PAY = "pay";
+    //Recommend
+    public static final String RECOMMEND_PAGE_EXPOSE = "12.1.1";
+    public static final String RECOMMEND_CARDS_EXPOSE = "12.1";
+    public static final String RECOMMEND_CARDS_CLICK = "12.2";
+    public static final String RECOMMEND_CARDS_BUTTON_CLICK = "12.2.1";
+
+    //EventType
+    public static final String EVENTTYPE_VERIFY = "verify";
+
+    public static final String POSITIONID = "PositionId";
+    public static final String PROP_DISTANCE = "distance";
+    public static final String PROP_CINEMA = "cinema";
 
     public static final String EVENT_PROP_TO_HOME = "home";
-
-    public static final String EVENT_PROP_FROM_ICON = "icon";
-    public static final String EVENT_PROP_FROM_PUSH = "push";
-    public static final String EVENT_PROP_FROM_APP = "app";
 
     public static final String WALLET_SERVICE_CONTENT_FLOW = "flow";
     public static final String WALLET_SERVICE_CONTENT_FEE = "fee";
     public static final String WALLET_SERVICE_CONTENT_MOVIE = "movie";
 
-    static class ActionThreadFactory implements ThreadFactory {
-        private static final String NAME = "USER_ACTION";
-
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread thread = new Thread(r, NAME);
-            thread.setDaemon(true);
-            thread.setPriority(Thread.MIN_PRIORITY);
-            return thread;
-        }
-    }
-
-    private static final ExecutorService mUploadExecutor = Executors.newFixedThreadPool(1, new ActionThreadFactory());
-
-    private static App getApp() {
-        App app = null;
-        if (LeUIApp.isExsited(WALLET)) {
-            app = Agnes.getInstance().getApp(LeUIApp.valueOf(WALLET));
-        } else {
-            app = Agnes.getInstance().getApp(WALLET);
-        }
-        return app;
-    }
-
-    // ------------ App ---------------
-    // App create
-    public static void uploadStartApp() {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadStartAppImpl();
-            }
-        });
-    }
-
-    private static void uploadStartAppImpl() {
-        App app = getApp();
-        app.run();
-        app.ready();
-        Agnes.getInstance().report(app);
-    }
-
-    // App stop
-    public static void uploadStopApp() {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadStopAppImpl();
-            }
-        });
-    }
-
-    private static void uploadStopAppImpl() {
-        App app = getApp();
-        app.exit();
-        Agnes.getInstance().report(app);
-    }
-    // ------------ App ---------------
-
-    public static void uploadSet(final String widget, final String content) {
+    public static void uploadSet(final String widget, final Object content) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
@@ -169,27 +112,8 @@ public class Action {
         });
     }
 
-    public static void uploadPopup(final String widget) {
-        uploadPopup(widget, null);
-    }
-
-    public static void uploadPopup(final String widget, final String content) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                Map<String, Object> props = new HashMap<>();
-                if (!TextUtils.isEmpty(content)) {
-                    props.put(Key.Content.toString(), content);
-                }
-                uploadCustomImpl(EventType.Popup, widget, props);
-            }
-        });
-    }
-
-
     // ------------ buy -----------
-
-    public static void uploadPay(final String function, final String content, final String cinema) {
+    public static void uploadPay(final String function, final Object content, final String cinema) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
@@ -203,16 +127,16 @@ public class Action {
         });
     }
 
-    public static void uploadBuy(String function, String content) {
+    public static void uploadBuy(String function, Object content) {
         uploadBuy(function, content, null);
     }
 
-    public static void uploadBuy(final String function, final String content, final String cinema) {
+    public static void uploadBuy(final String function, final Object content, final String cinema) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                if (!TextUtils.isEmpty(content)) {
+                if (content != null) {
                     props.put(Key.Content.toString(), content);
                 }
                 if (!TextUtils.isEmpty(cinema)) {
@@ -222,7 +146,6 @@ public class Action {
             }
         });
     }
-
     // ------------ buy -----------
 
 
@@ -232,13 +155,13 @@ public class Action {
 
 
     // ----------- subscrible  ------------
-    public static void uploadSubscribeClick(final String widget, final String content) {
+    public static void uploadSubscribeClick(final String widget, final Object content) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
                 props.put(Key.Content.toString(), content);
-                uploadCustomImpl(EventType.Subscrible, widget, props);
+                uploadCustomImpl(EVENTTYPE_SUBSCRIBE, widget, props);
             }
         });
     }
@@ -258,28 +181,28 @@ public class Action {
 
 
     //---------- Click -------------
-    public static void uploadMoviePhotoClick(String widget, String content, String url) {
+    public static void uploadMoviePhotoClick(String widget, Object content, String url) {
         uploadClick(widget, content, null, url, null);
     }
 
     public static void uploadClick(String widget) {
-        uploadClick(widget, null, null, null, null);
+        uploadClick(widget, null);
     }
 
-    public static void uploadClick(String widget, String content) {
-        uploadClick(widget, content, null, null, null);
+    public static void uploadClick(String widget, Object content) {
+        uploadClick(widget, content, null);
     }
 
-    public static void uploadClick(String widget, String content, String distance) {
+    public static void uploadClick(String widget, Object content, String distance) {
         uploadClick(widget, content, distance, null, null);
     }
 
-    public static void uploadClick(final String widget, final String content, final String distance, final String url, final String from) {
+    public static void uploadClick(final String widget, final Object content, final String distance, final String url, final String from) {
         mUploadExecutor.submit(new Runnable() {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                if (!TextUtils.isEmpty(content)) {
+                if (content != null) {
                     props.put(Key.Content.toString(), content);
                 }
                 if (!TextUtils.isEmpty(distance)) {
@@ -289,7 +212,7 @@ public class Action {
                     props.put(Key.Url.toString(), url);
                 }
                 if (!TextUtils.isEmpty(from)) {
-                    props.put(Key.From.toString(), from);
+                    props.put(WalletConstant.EXTRA_FROM, from);
                 }
                 uploadCustomImpl(EventType.Click, widget, props);
             }
@@ -304,11 +227,11 @@ public class Action {
         uploadExpose(COUPON_EXPOSE, null, from, null);
     }
 
-    public static void uploadMovieDetailExpose(final String content, final String from) {
+    public static void uploadMovieDetailExpose(final Object content, final String from) {
         uploadExpose(MOVIE_DETAIL, content, from, null);
     }
 
-    public static void uploadCinemaDetailExpose(final String content, final String from) {
+    public static void uploadCinemaDetailExpose(final Object content, final String from) {
         uploadExpose(MOVIE_DETAIL_CINEMA, content, from, null);
     }
 
@@ -340,28 +263,10 @@ public class Action {
         uploadExpose(widget, null, null, null);
     }
 
-    public static void uploadExposeTab(String widget, String content) {
+    public static void uploadExposeTab(String widget, Object content) {
         uploadExpose(widget, content, null, null);
     }
 
-    public static void uploadExpose(final String widget, final String content, final String from, final String to) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                Map<String, Object> props = new HashMap<>();
-                if (!TextUtils.isEmpty(content)) {
-                    props.put(Key.Content.toString(), content);
-                }
-                if (!TextUtils.isEmpty(from)) {
-                    props.put(Key.From.toString(), from);
-                }
-                if (!TextUtils.isEmpty(to)) {
-                    props.put(Key.To.toString(), to);
-                }
-                uploadCustomImpl(EventType.Expose, widget, props);
-            }
-        });
-    }
     // ---------- Expose ----------------
 
     // ---------- Upgrade ----------------
@@ -397,101 +302,4 @@ public class Action {
         });
     }
     // ---------- Upgrade ----------------
-
-    // -------------------------------------------
-
-    public static void uploadCustom(final String eventType, final String widget) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadCustomImpl(eventType, widget);
-            }
-        });
-    }
-
-    public static void uploadCustom(final EventType eventType, final String widget) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadCustomImpl(eventType, widget);
-            }
-        });
-    }
-
-    public static void uploadCustom(final String eventType, final String widget, final Map<String, Object> prop) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadCustomImpl(eventType, widget, prop);
-            }
-        });
-    }
-
-    public static void uploadCustom(final EventType eventType, final String widget, final Map<String, Object> prop) {
-        mUploadExecutor.submit(new Runnable() {
-            @Override
-            public void run() {
-                uploadCustomImpl(eventType, widget, prop);
-            }
-        });
-    }
-
-    private static void uploadCustomImpl(String eventType, String widget) {
-        uploadCustomImpl(eventType, widget, null);
-    }
-
-    private static void uploadCustomImpl(EventType eventType, String widget) {
-        uploadCustomImpl(eventType, widget, null);
-    }
-
-    private static void uploadCustomImpl(String eventType, String widget, Map<String, Object> prop) {
-        if (TextUtils.isEmpty(widget)) {
-            LogHelper.i("[%S] Agen widget == null", TAG);
-            return;
-        }
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event;
-        if (EventType.isExsited(eventType)) {
-            event = wdt.createEvent(EventType.valueOf(eventType));
-        } else {
-            event = wdt.createEvent(eventType);
-        }
-        if (prop != null) {
-            for (Map.Entry<String, Object> entry : prop.entrySet()) {
-                if (!TextUtils.isEmpty(entry.getKey()) && entry.getValue() != null) {
-                    if (Key.isExsited(entry.getKey())) {
-                        event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
-                    } else {
-                        event.addProp(entry.getKey(), entry.getValue().toString());
-                    }
-                    LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
-                }
-            }
-        }
-        Agnes.getInstance().report(event);
-    }
-
-    private static void uploadCustomImpl(EventType eventType, String widget, Map<String, Object> prop) {
-        if (TextUtils.isEmpty(widget)) {
-            LogHelper.i("[%S] Agen widget == null", TAG);
-            return;
-        }
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event = wdt.createEvent(eventType);
-        if (prop != null) {
-            for (Map.Entry<String, Object> entry : prop.entrySet()) {
-                if (!TextUtils.isEmpty(entry.getKey()) && entry.getValue() != null) {
-                    if (Key.isExsited(entry.getKey())) {
-                        event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
-                    } else {
-                        event.addProp(entry.getKey(), entry.getValue().toString());
-                    }
-                    LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
-                }
-            }
-        }
-        Agnes.getInstance().report(event);
-    }
 }

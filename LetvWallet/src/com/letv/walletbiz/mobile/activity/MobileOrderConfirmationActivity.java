@@ -25,6 +25,7 @@ import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.base.pay.Constants;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.StringUtils;
 import com.letv.walletbiz.base.widget.CouponBrief;
 import com.letv.walletbiz.coupon.CouponConstant;
@@ -95,6 +96,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
 
     private long mUcouponId;
     private long mUseUcouponId;
+    private int mContactType;
+    private int mFeeOrFlow;
     private boolean mIsGoPay = false;
     private boolean mIsShowDialog = false;
     private boolean mIsFirstLoadData = true;
@@ -231,6 +234,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
             return;
         }
         mUcouponId = bundle.getLong(CouponConstant.EXTRA_COUPON_BEAN_ID);
+        mContactType = bundle.getInt(MobileConstant.PARAM.CONTACT_TYPE_KEY);
+        mFeeOrFlow = bundle.getInt(MobileConstant.PARAM.FEEFLOW_KEY);
         mUseUcouponId = mUcouponId;
         mTvProductName = (TextView) findViewById(R.id.tv_product_name);
         mTvNumber = (TextView) findViewById(R.id.tv_number);
@@ -260,6 +265,11 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     return;
                 }
                 showDialog();
+                if (mFeeOrFlow == MobileConstant.PRODUCT_TYPE.MOBILE_FEE) {
+                    Action.uploadClick(Action.MOBILE_FEE_PAY_CLICK, mContactType);
+                } else {
+                    Action.uploadClick(Action.MOBILE_FLOW_PAY_CLICK, mContactType);
+                }
                 getOrderSNAsyncTask(mMobileProduct.getNumber(), mMobileProduct.getProductId(), new long[]{mUseUcouponId});
             }
         });

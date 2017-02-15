@@ -385,7 +385,7 @@ public class WalletFragment extends MainFragment {
         @Override
         public void onLoadFromNetworkFinished(WalletTopListBean result, int errorCode, boolean needUpdate) {
             mBannerTask = null;
-            if (result != null && null != result.list&& errorCode == MainPanelHelper.NO_ERROR) {
+            if (result != null && null != result.list && errorCode == MainPanelHelper.NO_ERROR) {
                 diaplayTopData(result.list);
             }
         }

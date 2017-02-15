@@ -2,6 +2,7 @@ package com.letv.walletbiz.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,9 +112,12 @@ public class WalletBannerAdapter extends AutoSlidePagerAdapter implements View.O
             intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, mData[position].banner_name);
             intent.putExtra(CommonConstants.EXTRA_URL, mData[position].banner_link);
             intent.putExtra(WalletConstant.EXTRA_WEB_WITH_ACCOUNT, mData[position].need_token == 1);
+            intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_BANNER);
             mContext.startActivity(intent);
         } else if (mData[position].banner_type == WalletBannerBean.BANNER_TYPE_APP) {
-            AppUtils.LaunchApp(mContext, mData[position].package_name, mData[position].jump_param);
+            Bundle bundle = new Bundle();
+            bundle.putString(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_BANNER);
+            AppUtils.LaunchAppWithBundle(mContext, mData[position].package_name, mData[position].jump_param, bundle);
         }
     }
 }

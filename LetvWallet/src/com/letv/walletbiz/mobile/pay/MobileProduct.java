@@ -12,6 +12,7 @@ import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.mobile.activity.MobileOrderConfirmationActivity;
 import com.letv.walletbiz.mobile.beans.OrderBean;
 import com.letv.walletbiz.mobile.beans.OrderDetailBean;
+import com.letv.walletbiz.mobile.provider.MobileContact;
 
 /**
  * Created by linquan on 15-12-8.
@@ -64,12 +65,13 @@ public class MobileProduct extends Product {
         mResultAdapter = (PayResultActivity.PayResultAdapter) new MobilePayResultAdapter(this);
     }
 
-    public void showOrderSure(Context context, Long couponID) {
+    public void showOrderSure(Context context, int feeOrFlow, Long couponID, int contactsType) {
         Intent intent = new Intent(context, MobileOrderConfirmationActivity.class);
         Bundle b = new Bundle();
         b.putSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT, this);
         b.putLong(CouponConstant.EXTRA_COUPON_BEAN_ID, couponID);
-
+        b.putInt(MobileConstant.PARAM.FEEFLOW_KEY, feeOrFlow);
+        b.putInt(MobileConstant.PARAM.CONTACT_TYPE_KEY, contactsType);
         intent.putExtras(b);
         context.startActivity(intent);
     }

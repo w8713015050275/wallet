@@ -16,6 +16,8 @@ import com.letv.lepaysdk.ELePayState;
 import com.letv.lepaysdk.LePayConfig;
 import com.letv.lepaysdk.activity.EUICashierAcitivity;
 import com.letv.shared.widget.LeBottomSheet;
+import com.letv.tracker.enums.EventType;
+import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.utils.LePayConstants;
@@ -95,6 +97,7 @@ public class LePayEntryActivity extends FragmentActivity {
                     mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
                 } else if (ELePayState.CANCEL.equals(eLePayState)) {
                     mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_CANCLE;
+                    Action.uploadCustom(EventType.Close, Action.PAY_PAGE_CLOSE);
                 } else if (ELePayState.NONETWORK.equals(eLePayState)) {
                 }
                 if (eLePayState != ELePayState.OK) {

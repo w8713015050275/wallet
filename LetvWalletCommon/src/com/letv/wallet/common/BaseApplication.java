@@ -33,7 +33,7 @@ public class BaseApplication extends Application {
         return "";
     }
 
-    protected String getAppVersion() {
+    public String getAppVersion() {
         PackageInfo packageInfo = null;
         String version = "";
         try {
