@@ -8,7 +8,6 @@ import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DigestUtils;
-import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 
 import java.util.ArrayList;
@@ -52,10 +51,20 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
         lepayEngine.bindService();
     }
 
-    public boolean hasCreatedAccount() {
+    public static boolean hasCreatedAccount() {
         SharedPreferences sharedPreferences = SharedPreferencesHelper.getUserIdPreferences(AccountConstant.LEPAY_PKG);
         if (sharedPreferences != null) {
-           return sharedPreferences.getBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid()), false);
+           return sharedPreferences.getBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid()+AccountConstant.SHAREDPREFERENCES_CREATE_ACCOUNT_SUFFIX), false);
+        }
+        return false;
+    }
+
+
+
+    public static boolean hasVerifyAccount(){
+        SharedPreferences sharedPreferences = SharedPreferencesHelper.getUserIdPreferences(AccountConstant.LEPAY_PKG);
+        if (sharedPreferences != null) {
+            return sharedPreferences.getBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid()+AccountConstant.SHAREDPREFERENCES_VERIFY_ACCOUNT_SUFFIX), false);
         }
         return false;
     }

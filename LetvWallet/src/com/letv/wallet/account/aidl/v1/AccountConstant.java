@@ -10,6 +10,9 @@ public class AccountConstant {
     // aidl服务的Action
     public static final String ACTION_SERVICE_LEPAY = LEPAY_PKG + ".ACTION_SERVICE_LEPAYACCOUNT";
 
+    public static final String SHAREDPREFERENCES_CREATE_ACCOUNT_SUFFIX = "_CA";
+    public static final String SHAREDPREFERENCES_VERIFY_ACCOUNT_SUFFIX = "_VA";
+
     /** 账户查询类型 **/
     public static final String QTYPE_ALL = "all";
     public static final String QTYPE_BASIC = "basic";
@@ -111,7 +114,7 @@ public class AccountConstant {
         public static final int ERRNO_MSG_CODE_FAILED = 10104; // 短信验证码错误
 
         /** 卡bin查询 错误号 **/
-        public static final int ERRNO_BANK_CARD_NOT_EXIST = 10107; // 银行卡不存在
+        public static final int ERRNO_BANK_CARD_ERRO = 10107; // 银行卡号错误
 
         /** 自定义错误妈 **/
         public static final int ERRNO_NO_NETWORK = -1; // 无网络

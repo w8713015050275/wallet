@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="120dp"
+    android:padding="@dimen/account_padding_default"
+    android:background="@drawable/card_bg_top_round_shape_white"
+    android:layout_marginTop="6dp">
+    <ImageView
+        android:id="@+id/imgBankIcon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        />
+    <TextView
+        android:id="@+id/tvBankName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:layout_toRightOf="@id/imgBankIcon"
+        android:layout_alignTop="@id/imgBankIcon"
+        android:layout_marginLeft="16dp"/>
+    <TextView
+        android:id="@+id/tvCardType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="#ccFFFFFF"
+        android:layout_below="@id/tvBankName"
+        android:layout_alignLeft="@id/tvBankName"
+        android:layout_marginTop="2dp"
+        />
+
+    <TextView
+        android:id="@+id/tvCardNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:maxLines="1"
+        android:textColor="#ccFFFFFF"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+</RelativeLayout>

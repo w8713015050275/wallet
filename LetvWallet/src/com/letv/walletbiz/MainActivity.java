@@ -18,10 +18,18 @@ import android.widget.RadioButton;
 import com.letv.shared.widget.LeBottomSheet;
 import com.letv.shared.widget.LeLicenceDialog;
 import com.letv.shared.widget.LeNeverPermissionRequestDialog;
+import com.letv.wallet.account.LePayAccountManager;
+import com.letv.wallet.account.LePayCommonCallback;
+import com.letv.wallet.account.LePayUtils;
+import com.letv.wallet.account.aidl.v1.AccountConstant;
+import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LocationHelper;
+import com.letv.wallet.common.util.LogHelper;
+import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
+import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.WalletConstant;
@@ -442,4 +450,57 @@ public class MainActivity extends BaseWalletFragmentActivity {
         }
         return true;
     }
+
+    private boolean ACCOUNT_FAIL_REASON_PHONE_NULL = false;
+    private boolean hasCreateAccount = false;
+    private boolean hasVerifyAccount = false;
+
+    public void loadAccountData() {
+        if (AccountHelper.getInstance().isLogin(this) && NetworkHelper.isNetworkAvailable()) {
+            String qType = null;
+            if (checkCreateAccount(false) && checkVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
+                qType = AccountConstant.QTYPE_CARD;
+            } else {
+                qType = AccountConstant.QTYPE_ALL; //查询用户状态
+            }
+            queryAccount(qType);
+        }
+    }
+
+    private boolean checkCreateAccount(boolean isForceCreate){
+        hasCreateAccount = LePayAccountManager.hasCreatedAccount();
+        if (!hasCreateAccount && isForceCreate) {
+            LePayAccountManager.getInstance().createAccount(null); //默认开一次户
+        }
+        return hasCreateAccount;
+    }
+
+    private boolean checkVerifyAccount(){
+        hasVerifyAccount = LePayAccountManager.hasVerifyAccount();
+        return hasVerifyAccount;
+    }
+
+    private void queryAccount(final String qType){
+        LePayAccountManager.getInstance().queryAccount(qType, new LePayCommonCallback<AccountInfo>() {
+            @Override
+            public void onSuccess(AccountInfo accountInfo) {
+                if (checkCreateAccount(true)) {
+                    // set card list = cardlist.size();
+
+                   /* // 跳转卡列表
+                    Intent intent = new Intent("com.letv.wallet.cardlist");
+                    intent.putExtra("LePayCardBinInfo", accountInfo.cardList);*/
+
+
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+
+            }
+        });
+    }
+
+
 }

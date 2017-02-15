@@ -86,6 +86,21 @@
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/SettingWebTheme" />
+
+        <activity android:name=".account.activity.CardListActivity"
+            android:label="@string/account_card_title"
+            android:theme="@style/AccountVerifyTheme">
+            <intent-filter>
+                <action android:name="com.letv.wallet.cardlist" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".account.activity.RedirectActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingWebTheme" />
     </application>
 
 </manifest>

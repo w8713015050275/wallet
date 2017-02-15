@@ -20,4 +20,14 @@
     <string name="account_verify_countdoun_s">S</string>
     <string name="account_verify_fail">实名认证失败</string>
     <string name="account_verify_please_check_agreement">请勾选协议</string>
+    <string name="account_card_type_debit">借记卡</string>
+    <string name="account_card_type_credit">信用卡</string>
+    <string name="account_card_type_passbook">存折</string>
+    <string name="account_card_type_other">其它</string>
+    <string name="account_card_add_bankcard">添加银行卡</string>
+    <string name="account_card_title">银行卡</string>
+    <string name="account_card_menu_title">帮助</string>
+    <string name="account_card_item_click_tip">暂时无法操作，请查看帮助</string>
+
+
 </resources>

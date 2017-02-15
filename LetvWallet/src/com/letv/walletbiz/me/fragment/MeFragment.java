@@ -1,14 +1,10 @@
 package com.letv.walletbiz.me.fragment;
 
-import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,10 +23,7 @@ import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.common.util.AccountHelper;
-import com.letv.wallet.common.util.DigestUtils;
-import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.main.fragment.MainFragment;

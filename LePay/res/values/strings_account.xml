@@ -9,16 +9,25 @@
     <string name="account_verify_input_sms_code">Enter code</string>
     <string name="account_verify_get_sms_code">Resend SMS code</string>
     <string name="account_verify_btn_comfire_update">Next</string>
-    <string name="account_agreement_tips">本人已阅读%1$s，且已理解上述内容，并承担相关风险。</string>
-    <string name="account_agreement">《支付通道服务协议》</string>
-    <string name="account_verify_name_invalid">姓名格式错误</string>
-    <string name="account_verify_id_num_invalid">身份证格式错误</string>
-    <string name="account_verify_card_num_invalid">卡号格式错误</string>
-    <string name="account_verify_card_bank_not_support">暂不支持该银行</string>
-    <string name="account_verify_phone_invalid">手机号格式错误</string>
-    <string name="account_verify_sms_invalid">验证码错误或已失效</string>
+    <string name="account_agreement_tips">I have read the% %1$s, and have understood the above, and bear the associated risks.</string>
+    <string name="account_agreement">Payment channel service agreement </string>
+    <string name="account_verify_name_invalid">Please enter a valid word</string>
+    <string name="account_verify_id_num_invalid">Please enter a valid ID number</string>
+    <string name="account_verify_card_num_invalid">Please enter a valid card number</string>
+    <string name="account_verify_card_bank_not_support">The bank is not supported temporarily</string>
+    <string name="account_verify_phone_invalid">Please enter a valid phone number</string>
+    <string name="account_verify_sms_invalid">Verification code error or expired</string>
     <string name="account_verify_countdoun_s">S</string>
-    <string name="account_verify_fail">实名认证失败</string>
-    <string name="account_verify_please_check_agreement">请勾选协议</string>
+    <string name="account_verify_fail">Failed to verify real name</string>
+    <string name="account_verify_please_check_agreement">Please tick the agreement</string>
+    <string name="account_card_type_debit">Debit card</string>
+    <string name="account_card_type_credit">Credit card</string>
+    <string name="account_card_type_passbook">Passbook</string>
+    <string name="account_card_type_other">Others</string>
+    <string name="account_card_add_bankcard">Add card</string>
+    <string name="account_card_title">Card</string>
+    <string name="account_card_menu_title">Help</string>
+    <string name="account_card_item_click_tip">Temporarily unable to operate, please check help</string>
+
 
 </resources>

@@ -10,6 +10,9 @@ public class AccountConstant {
     // aidl服务的Action
     public static final String ACTION_SERVICE_LEPAY = LEPAY_PKG + ".ACTION_SERVICE_LEPAYACCOUNT";
 
+    public static final String SHAREDPREFERENCES_CREATE_ACCOUNT_SUFFIX = "_CA";
+    public static final String SHAREDPREFERENCES_VERIFY_ACCOUNT_SUFFIX = "_VA";
+
     /** 账户查询类型 **/
     public static final String QTYPE_ALL = "all";
     public static final String QTYPE_BASIC = "basic";

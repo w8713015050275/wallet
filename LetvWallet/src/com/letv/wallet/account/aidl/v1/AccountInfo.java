@@ -12,8 +12,8 @@ import com.letv.wallet.common.http.beans.LetvBaseBean;
 public class AccountInfo implements Parcelable {
     public BasicAccount basic;
     public LeLeHuaAccount lelehua;
-    private String card;
-    private CardBin[] cardList;
+    public String card;
+    public CardBin[] cardList;
     public Vip[] vip;
     public Tips[] tips;
 
@@ -211,6 +211,14 @@ public class AccountInfo implements Parcelable {
          */
         public int status;
 
+        public  String bankIcon; //银行卡图标
+
+        public  String background; //银行卡背景色
+
+
+        public CardBin() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -229,9 +237,8 @@ public class AccountInfo implements Parcelable {
             dest.writeString(this.payAttribute);
             dest.writeString(this.realName);
             dest.writeInt(this.status);
-        }
-
-        public CardBin() {
+            dest.writeString(this.bankIcon);
+            dest.writeString(this.background);
         }
 
         protected CardBin(Parcel in) {
@@ -246,6 +253,8 @@ public class AccountInfo implements Parcelable {
             this.payAttribute = in.readString();
             this.realName = in.readString();
             this.status = in.readInt();
+            this.bankIcon = in.readString();
+            this.background = in.readString();
         }
 
         public static final Creator<CardBin> CREATOR = new Creator<CardBin>() {

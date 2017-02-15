@@ -2,12 +2,10 @@ package com.letv.wallet.account.base;
 
 import com.google.gson.reflect.TypeToken;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
-import com.letv.wallet.account.aidl.v1.BankAvailableInfo;
 import com.letv.wallet.account.aidl.v1.CardbinAvailableInfo;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.account.utils.RequestUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
-import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.utils.SslUtil;
 
 import org.xutils.xmain;
@@ -55,11 +53,6 @@ public class AccountGateway {
      * 银行相关
      */
     static final String BANK_BASE_PATH = "bank/";
-
-    /**
-     * 查询支持的银行列表
-     */
-    static final String BANK_AVAILABLE = BANK_BASE_PATH + "api/v1/available";
 
     /**
      * 卡bin查询
@@ -144,14 +137,6 @@ public class AccountGateway {
         AccountBaseReqParams params = buildBaseParams(ACCOUNT_REDIRECT);
         params.addBodyParameter(JTYPE, jumpType);
         return postSync(params, new TypeToken<BaseResponse<RedirectURL>>() {}.getType());
-    }
-
-    /**
-     * 查询支持的银行列表
-     */
-    public static BaseResponse<BankAvailableInfo> availableBank() {
-        return postSync(buildBaseParams(AccountGateway.BANK_AVAILABLE), new TypeToken<BaseResponse<BankAvailableInfo>>() {
-        }.getType());
     }
 
     /**
