@@ -19,4 +19,14 @@ public class StringUtils {
         }
         return priceStr;
     }
+
+    public static String getDiscountPriceUnit(Context context, Object price) {
+        String priceStr = "";
+        try {
+            priceStr = String.format(context.getString(R.string.price_unit_discount), String.valueOf(price));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return priceStr;
+    }
 }

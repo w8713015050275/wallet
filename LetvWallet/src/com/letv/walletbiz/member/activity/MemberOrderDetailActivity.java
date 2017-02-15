@@ -261,7 +261,7 @@ public class MemberOrderDetailActivity extends OrderDetailActivity {
         if (costBrief != null) {
             costBrief.setPriceBottomLineShow(MobileProductCostBrief.TAG_ALL, true);
             costBrief.setTotalPrice(String.valueOf(mOrderInfoBean.getPrice()));
-            costBrief.setCouponPrice(MemberOrderDetailActivity.this, Float.valueOf(mOrderInfoBean.getDiscount_price()));
+            costBrief.setCouponPrice(Float.valueOf(mOrderInfoBean.getDiscount_price()));
             costBrief.setPayPrice(String.valueOf(mOrderInfoBean.getReal_price()), MobileCostLabeledTextView.BLUECOLOR);
         }
 

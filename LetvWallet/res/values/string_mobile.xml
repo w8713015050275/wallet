@@ -3,6 +3,7 @@
     <string name="menu_record">Record</string>
     <string name="label_price_unit">RMB</string>
     <string name="price_unit" translatable="false">￥%s</string>
+    <string name="price_unit_discount" translatable="false">-￥%s</string>
     <string name="label_mobile_def_desc" translatable="false">(%s)</string>
     <string name="label_mobile_deposite">Top-up amount</string>
     <string name="label_mobile_flow_deposite">Top-up limit</string>
@@ -16,7 +17,6 @@
     <!-- mobile order -->
     <string name="mobile_order_list_label">Top-up history</string>
     <string name="mobile_order_desc_label_prodcut">Top-up:</string>
-    <string name="mobile_order_desc_coupon_price" translatable="false">-￥%.2f</string>
     <string name="mobile_order_desc_label_phonenumber">Top-up number</string>
     <string name="mobile_order_view_label">Order details</string>
     <string name="mobile_order_view_surelabel">Confirm order</string>

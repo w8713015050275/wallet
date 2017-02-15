@@ -95,6 +95,14 @@ public class MobileCostLabeledTextView extends RelativeLayout {
         tv_cost.setText(StringUtils.getPriceUnit(getContext(), s));
     }
 
+    public void setTextDiscountPrice(float s) {
+        if (s > 0.0F) {
+            tv_cost.setText(StringUtils.getDiscountPriceUnit(getContext(), s));
+        } else {
+            tv_cost.setText(StringUtils.getPriceUnit(getContext(), s));
+        }
+    }
+
     public TextView getLabelCostTv() {
         return tv_label_cost;
     }

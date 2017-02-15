@@ -220,7 +220,7 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
         if (costBrief != null) {
             costBrief.setPriceBottomLineShow(MobileProductCostBrief.TAG_ALL, true);
             costBrief.setTotalPrice(String.valueOf(mOrderDetailBean.getTotalPrice()));
-            costBrief.setCouponPrice(MobileOrderDetailActivity.this, mOrderDetailBean.getDiscountPrice());
+            costBrief.setCouponPrice(mOrderDetailBean.getDiscountPrice());
             costBrief.setPayPrice(String.valueOf(mOrderDetailBean.getRealPrice()), MobileCostLabeledTextView.BLUECOLOR);
         }
     }

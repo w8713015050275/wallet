@@ -197,25 +197,12 @@ public class MobileProductCostBrief extends RelativeLayout {
         v_total_price.setCostInfoColor(unitColor);
     }
 
-    public void setCouponContent(String content) {
-        setCouponContent(content, MobileCostLabeledTextView.BLACKCOLOR);
+    public void setCouponPrice(float price) {
+        setCouponPrice(price, MobileCostLabeledTextView.BLACKCOLOR);
     }
 
-    public void setCouponContent(String content, int unitColor) {
-        v_coupon_price.setTextContent(content);
-        v_coupon_price.setCostInfoColor(unitColor);
-    }
-
-    public void setCouponPrice(Context context, float price) {
-        setCouponPrice(context, price, MobileCostLabeledTextView.BLACKCOLOR);
-    }
-
-    public void setCouponPrice(Context context, float price, int unitColor) {
-        if (price > 0.0F) {
-            v_coupon_price.setTextPrice(String.format(context.getString(R.string.mobile_order_desc_coupon_price), price));
-        } else {
-            v_coupon_price.setTextPrice(String.valueOf(price));
-        }
+    public void setCouponPrice(float price, int unitColor) {
+        v_coupon_price.setTextDiscountPrice(price);
         v_coupon_price.setCostInfoColor(unitColor);
     }
 
