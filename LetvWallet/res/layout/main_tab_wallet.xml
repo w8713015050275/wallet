@@ -26,7 +26,7 @@
             android:layout_weight="1"
             android:gravity="center"
             MainTopButton:button_textColor="#ff447de9"
-            MainTopButton:button_textSize="7sp"
+            MainTopButton:button_textSize="5sp"
             MainTopButton:distance="1dp"
             MainTopButton:textColor="#262626"
             MainTopButton:textSize="4sp"
@@ -39,6 +39,8 @@
             android:layout_weight="1"
             android:background="@null"
             android:gravity="center"
+            MainTopButton:button_textColor="#ff447de9"
+            MainTopButton:button_textSize="5sp"
             MainTopButton:distance="1dp"
             MainTopButton:textColor="#262626"
             MainTopButton:textSize="4sp"
@@ -50,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            MainTopButton:button_textColor="#ffffffff"
+            MainTopButton:button_textColor="#ff447de9"
             MainTopButton:button_textSize="5sp"
             MainTopButton:distance="1dp"
             MainTopButton:textColor="#262626"
@@ -63,6 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="6dp"
+        android:visibility="gone"
         android:overScrollMode="never" />
 </LinearLayout>
 

@@ -308,7 +308,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mainPanelView.setLayoutManager(mainPanelLayoutManager);
             mainPanelView.setNestedScrollingEnabled(false);
             DividerGridItemDecoration itemDecoration = new DividerGridItemDecoration(context, context.getColor(R.color.colorDivider), (int) DensityUtils.dip2px(0.25f));
-            itemDecoration.setDrawRect(false, false, true, true);
+            //itemDecoration.setDrawRect(false, false, true, true);
             mainPanelView.addItemDecoration(itemDecoration);
             mainPanelAdapter = new MainPanelAdapter(context);
             mainPanelView.setAdapter(mainPanelAdapter);

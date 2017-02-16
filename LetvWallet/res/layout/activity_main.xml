@@ -3,56 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RadioGroup
-        android:id="@+id/main_bottom_layout"
+    <com.letv.wallet.common.widget.LeFragmentTabHost
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="6dp"
         android:layout_marginTop="6dp"
-        android:orientation="horizontal">
+        android:background="@color/movie_bottom_tab_bg_color">
 
-        <RadioButton
-            android:id="@+id/main_tab_recommend_radio"
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0" />
+
+        <com.letv.shared.widget.LeTabWidget
+            android:id="@android:id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/main_tab_recommend_bg"
-            android:gravity="center"
-            android:text="@string/main_tab_recommend"
-            android:textColor="@drawable/main_tab_txt_color"
-            android:textSize="14sp" />
+            android:orientation="horizontal" />
+    </com.letv.wallet.common.widget.LeFragmentTabHost>
 
-        <RadioButton
-            android:id="@+id/main_tab_wallet_radio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/main_tab_wallet_bg"
-            android:gravity="center"
-            android:checked="true"
-            android:text="@string/main_tab_wallet"
-            android:textColor="@drawable/main_tab_txt_color"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/main_tab_my_radio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/main_tab_my_bg"
-            android:gravity="center"
-            android:text="@string/main_tab_my"
-            android:textColor="@drawable/main_tab_txt_color"
-            android:textSize="14sp" />
-    </RadioGroup>
+    <View
+        android:id="@+id/main_line"
+        style="@style/Divider_HorizontalLine_Style"
+        android:layout_above="@android:id/tabhost" />
 
     <FrameLayout
         android:id="@+id/main_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/main_bottom_layout"></FrameLayout>
+        android:layout_above="@id/main_line"></FrameLayout>
 </RelativeLayout>

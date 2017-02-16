@@ -107,11 +107,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     public void onStart() {
         super.onStart();
 
-        if (!checkLogin() || !checkNetWork()) {
-            return;
-        }
 
-        hideBlankPage();
 
     }
 
@@ -166,6 +162,10 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void startLoadData() {
+        if (!checkLogin() || !checkNetWork()) {
+            return;
+        }
+        hideBlankPage();
         loadData();
     }
 

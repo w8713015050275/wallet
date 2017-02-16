@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.WalletConstant;
@@ -25,7 +26,7 @@ import org.xutils.xmain;
 /**
  * Created by changjiajie on 16-8-30.
  */
-public class MainTopButton extends LinearLayout implements View.OnClickListener{
+public class MainTopButton extends LinearLayout implements View.OnClickListener {
     private Button button;
     private TextView textView;
 
@@ -75,13 +76,15 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener{
     private float buttonTextSize;
 
 
-    private static final String TOP_KEY_LELEHUA="lelehua";
-    private static final String TOP_KEY_CARD="card";
-    private static final String TOP_KEY_BANK="bank";
+    private static final String TOP_KEY_LELEHUA = "lelehua";
+    private static final String TOP_KEY_CARD = "card";
+    private static final String TOP_KEY_BANK = "bank";
 
     private WalletTopListBean.WalletTopBean bean;
 
     private Context context;
+
+    private AccountInfo accountInfo;
 
     public MainTopButton(Context context) {
         this(context, null);
@@ -115,7 +118,7 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener{
     }
 
     private void init(Context context) {
-        this.context=context;
+        this.context = context;
         setOrientation(LinearLayout.VERTICAL);
         button = new Button(context);
         textView = new TextView(context);
@@ -151,25 +154,30 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener{
         return (int) (pxValue / fontScale + 0.5f);
     }
 
-    public void setData(int number) {
-        switch (type) {
-            case 1:
-                break;
-            case 2:
-                //显示数量，并且把button的背景置为空
-                button.setText("number==" + number);
-                button.setBackgroundResource(-1);
-                break;
-            case 3:
-                //显示数量，并且更改button的背景为next_drawable
-                button.setText("number==" + number);
-                button.setBackgroundResource(-1);
-                break;
+
+    public void setCardList(AccountInfo info) {
+        this.accountInfo = info;
+        if (accountInfo != null & accountInfo.cardList != null && accountInfo.cardList.length > 0) {
+            switch (type) {
+                case 1:
+                    break;
+                case 2:
+                    //显示数量，并且把button的背景置为空
+                    //button.setText(""+accountInfo.cardList.length);
+                    //button.setBackground(null);
+                    break;
+                case 3:
+                    //显示数量，并且更改button的背景为next_drawable
+                    button.setText("" + accountInfo.cardList.length);
+                    button.setBackground(null);
+                    break;
+            }
         }
+
     }
 
     public void setDefaultData(WalletTopListBean.WalletTopBean bean) {
-        this.bean=bean;
+        this.bean = bean;
         ImageOptions options = new ImageOptions.Builder().build();
         xmain.image().loadDrawable(bean.icon, options, new Callback.CommonCallback<Drawable>() {
             @Override
@@ -206,17 +214,24 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if(null==this.bean){
+        if (null == this.bean) {
             return;
-        }else{
-            if(this.bean.name.equals(TOP_KEY_LELEHUA)){
+        } else {
+            if (this.bean.name.equals(TOP_KEY_LELEHUA)) {
 
-            }else if(this.bean.name.equals(TOP_KEY_CARD)){
+            } else if (this.bean.name.equals(TOP_KEY_CARD)) {
                 Action.uploadExposeTab(Action.WALLET_HOME_COUPON);
                 Intent intent = new Intent(context, CouponListActivity.class);
                 intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
                 context.startActivity(intent);
-            }else if(this.bean.name.equals(TOP_KEY_BANK)){
+            } else if (this.bean.name.equals(TOP_KEY_BANK)) {
+                Intent intent = new Intent("com.letv.wallet.cardlist");
+
+                if (accountInfo != null) {
+                    //intent.putExtra("LePayCardBinInfo", accountInfo.cardList);
+                    //intent.putExtra("LePayCardBinInfo",accountInfo.card);
+                }
+                context.startActivity(intent);
 
             }
         }

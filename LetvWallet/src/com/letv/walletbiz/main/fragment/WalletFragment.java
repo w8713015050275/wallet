@@ -2,10 +2,9 @@ package com.letv.walletbiz.main.fragment;
 
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.letv.wallet.account.LePayAccountManager;
+import com.letv.wallet.account.LePayCommonCallback;
+import com.letv.wallet.account.aidl.v1.AccountConstant;
+import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
@@ -50,14 +53,12 @@ import com.letv.walletbiz.movie.beans.MovieOrder;
 
 import org.xutils.common.task.PriorityExecutor;
 
-import java.io.IOException;
-
 import timehop.stickyheader.RecyclerItemClickListener;
 
 /**
  * Created by zhuchuntao on 16-12-21.
  */
-public class WalletFragment extends MainFragment {
+public class WalletFragment extends MainFragment implements AccountHelper.OnAccountChangedListener {
     private PriorityExecutor mExecutor = new PriorityExecutor(3);
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -69,22 +70,41 @@ public class WalletFragment extends MainFragment {
     private MainTopButton threeButton;
     private LinearLayout topLayout;
 
+    private AccountInfo info;
+
+    private WalletTopListBean walletTopListBean;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        parseIntent(getActivity().getIntent());
+        AccountHelper.getInstance().registerOnAccountChangeListener(this);
+    }
+
+    private int parseIntent(Intent intent) {
+        Uri uri = intent.getData();
+        int serviceId = -1;
+        if (uri != null) {
+            String service_id = uri.getQueryParameter("service_id");
+            try {
+                serviceId = Integer.parseInt(service_id);
+            } catch (NumberFormatException e) {
+            }
+        } else {
+            serviceId = intent.getIntExtra("service_id", -1);
+        }
+        gotoType = serviceId;
+        return gotoType;
     }
 
     @Override
     public View onCreateCustomView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_tab_wallet, null);
-
         topLayout = (LinearLayout) view.findViewById(R.id.wallet_top_layout);
 
         oneButton = (MainTopButton) view.findViewById(R.id.wallet_top_one);
         twoButton = (MainTopButton) view.findViewById(R.id.wallet_top_two);
         threeButton = (MainTopButton) view.findViewById(R.id.wallet_top_three);
-
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
 
@@ -153,6 +173,7 @@ public class WalletFragment extends MainFragment {
         }
     }
 
+
     private CouponCommonCallback<CouponListResponseResult> mCouponListCallback = new CouponCommonCallback<CouponListResponseResult>() {
 
         @Override
@@ -191,6 +212,7 @@ public class WalletFragment extends MainFragment {
 
     @Override
     public void startLoadData() {
+        mRecyclerView.setVisibility(View.VISIBLE);
         if (!hasInitData) {
             initLoadData();
         } else {
@@ -201,36 +223,12 @@ public class WalletFragment extends MainFragment {
             } else if (!isCheckedNew) {
                 checkNewCoupon();
             }
+
         }
+        loadAccountData();
+
     }
-//    private void getLeleAccount(){
-//        AccountInfoHepler.getInstance().createAccount(new AccountCommonCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                AccountInfoHepler.getInstance().queryAccount(new AccountCommonCallback<AccountInfo>() {
-//                    @Override
-//                    public void onSuccess(AccountInfo result) {
-//                    }
-//
-//                    @Override
-//                    public void onError(int errorCode, String errorMsg) {
-//                    }
-//
-//                    @Override
-//                    public void onNoNet() {
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onError(int errorCode, String errorMsg) {
-//            }
-//
-//            @Override
-//            public void onNoNet() {
-//            }
-//        });
-//    }
+
 
     private void initLoadData() {
         hasInitData = true;
@@ -280,43 +278,9 @@ public class WalletFragment extends MainFragment {
         @Override
         public void onLoadFromNetworkFinished(WalletServiceListBean result, int errorCode, boolean needUpdate) {
             mServiceTask = null;
-            //System.out.println("WalletFragment mServiceCallback onLoadFromNetworkFinished gotoType==" + gotoType);
+            //可能会直接跳转到子服务，取决于activity的传递参数
+            gotoNext(gotoType);
 
-            if (gotoType != -1 && result != null && result.list != null && result.list.length > 0) {
-                for (final WalletServiceListBean.WalletServiceBean bean : result.list) {
-                    if (bean.service_id == gotoType) {
-                        Action.uploadExposeTab(Action.WALLET_HOME_LIST + bean.service_id);
-                        if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_APP) {
-                            Bundle bundle = null;
-                            if (getContext() != null
-                                    && !TextUtils.isEmpty(bean.package_name)
-                                    && getContext().getPackageName().startsWith(bean.package_name)) {
-                                bundle = new Bundle();
-                                bundle.putString(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
-                            }
-                            AppUtils.LaunchAppWithBundle(getContext(), bean.package_name, bean.jump_param, bundle);
-                        } else if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_WEB) {
-                            if (AccountHelper.getInstance().isLogin(getContext())) {
-                                jumpWeb(bean);
-                            } else {
-                                AccountHelper.getInstance().loginLetvAccountIfNot((Activity) getContext(), new AccountManagerCallback() {
-
-                                    @Override
-                                    public void run(AccountManagerFuture future) {
-                                        try {
-                                            if (getContext() != null && future.getResult() != null && AccountHelper.getInstance().isLogin(getContext())) {
-                                                jumpWeb(bean);
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    }
-                }
-            }
             if (!needUpdate) {
                 return;
             }
@@ -378,6 +342,7 @@ public class WalletFragment extends MainFragment {
         @Override
         public void onLoadFromLocalFinished(WalletTopListBean result, int errorCode) {
             if (result != null && null != result.list && errorCode == MainPanelHelper.NO_ERROR) {
+                walletTopListBean = result;
                 diaplayTopData(result.list);
             }
         }
@@ -386,6 +351,7 @@ public class WalletFragment extends MainFragment {
         public void onLoadFromNetworkFinished(WalletTopListBean result, int errorCode, boolean needUpdate) {
             mBannerTask = null;
             if (result != null && null != result.list && errorCode == MainPanelHelper.NO_ERROR) {
+                walletTopListBean = result;
                 diaplayTopData(result.list);
             }
         }
@@ -407,6 +373,9 @@ public class WalletFragment extends MainFragment {
                 oneButton.setDefaultData(list[0]);
                 twoButton.setDefaultData(list[1]);
                 threeButton.setDefaultData(list[2]);
+            }
+            if (info != null) {
+                setTopReadData(info);
             }
         }
 
@@ -547,11 +516,106 @@ public class WalletFragment extends MainFragment {
         return true;
     }
 
-
     private int gotoType = -1;
 
     @Override
-    public void gotoNext(int type) {
-        gotoType = type;
+    public void gotoNext(int gotoType) {
+
+        if (gotoType != -1 && mServiceListBean != null && mServiceListBean.list != null && mServiceListBean.list.length > 0) {
+            for (final WalletServiceListBean.WalletServiceBean bean : mServiceListBean.list) {
+                if (bean.service_id == gotoType) {
+                    Action.uploadExposeTab(Action.WALLET_HOME_LIST + bean.service_id);
+                    if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_APP) {
+                        Bundle bundle = null;
+                        if (getContext() != null
+                                && !TextUtils.isEmpty(bean.package_name)
+                                && getContext().getPackageName().startsWith(bean.package_name)) {
+                            bundle = new Bundle();
+                            bundle.putString(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
+                        }
+                        AppUtils.LaunchAppWithBundle(getContext(), bean.package_name, bean.jump_param, bundle);
+                    } else if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_WEB) {
+                        if (AccountHelper.getInstance().isLogin(getContext())) {
+                            jumpWeb(bean);
+                        } else {
+                            AccountHelper.getInstance().loginLetvAccountIfNot((Activity) getContext(), new AccountManagerCallback() {
+
+                                @Override
+                                public void run(AccountManagerFuture future) {
+                                    try {
+                                        if (getContext() != null && future.getResult() != null && AccountHelper.getInstance().isLogin(getContext())) {
+                                            jumpWeb(bean);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            gotoType = -1;
+        }
+    }
+
+    @Override
+    public void onAccountLogin() {
+    }
+
+    @Override
+    public void onAccountLogout() {
+        if (null != walletTopListBean && null != walletTopListBean.list){
+            info=null;
+            diaplayTopData(walletTopListBean.list);
+        }
+    }
+
+    public void loadAccountData() {
+        if (AccountHelper.getInstance().isLogin(getActivity()) && NetworkHelper.isNetworkAvailable()) {
+            String qType = null;
+            if (checkCreateAccount(false) && checkVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
+                qType = AccountConstant.QTYPE_CARD;
+            } else {
+                qType = AccountConstant.QTYPE_ALL; //查询用户状态
+            }
+            queryAccount(qType);
+        }
+    }
+
+    private boolean checkCreateAccount(boolean isForceCreate) {
+        boolean hasCreateAccount = LePayAccountManager.hasCreatedAccount();
+        if (!hasCreateAccount && isForceCreate) {
+            LePayAccountManager.getInstance().createAccount(null); //默认开一次户
+        }
+        return hasCreateAccount;
+    }
+
+    private boolean checkVerifyAccount() {
+        boolean hasVerifyAccount = LePayAccountManager.hasVerifyAccount();
+        return hasVerifyAccount;
+    }
+
+    private void queryAccount(final String qType) {
+        LePayAccountManager.getInstance().queryAccount(qType, new LePayCommonCallback<AccountInfo>() {
+
+            @Override
+            public void onSuccess(AccountInfo accountInfo) {
+                if (checkCreateAccount(true)) {
+                    info = accountInfo;
+                    setTopReadData(accountInfo);
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+            }
+        });
+    }
+
+    private void setTopReadData(AccountInfo accountInfo) {
+        oneButton.setCardList(accountInfo);
+        twoButton.setCardList(accountInfo);
+        threeButton.setCardList(accountInfo);
     }
 }
