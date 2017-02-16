@@ -4,10 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.view.View;
 
+import com.letv.tracker.enums.EventType;
+import com.letv.tracker.enums.Key;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.LogHelper;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.main.WalletMainWebActivity;
+
+import java.util.HashMap;
 
 /**
  * Created by liuliang on 17-2-13.
@@ -49,5 +55,17 @@ public class RecommendUtils {
             return false;
         }
         return true;
+    }
+
+    public static void uploadCardClick(View view) {
+        if (view == null) {
+            return;
+        }
+        Object type = view.getTag();
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        if (type != null) {
+            map.put(Key.Content.toString(), String.valueOf(type));
+        }
+        Action.uploadCustom(EventType.Click, Action.RECOMMEND_CARDS_CLICK, map);
     }
 }

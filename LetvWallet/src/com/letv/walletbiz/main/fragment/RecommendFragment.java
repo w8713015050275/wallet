@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.letv.tracker.enums.EventType;
 import com.letv.wallet.common.util.CommonCallback;
 import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.ExecutorHelper;
@@ -19,6 +20,7 @@ import com.letv.wallet.common.util.WalletExecutor;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.view.SpacesItemDecoration;
 import com.letv.walletbiz.R;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.main.recommend.RecommendTask;
 import com.letv.walletbiz.main.recommend.bean.RecommendCardBean;
 import com.letv.walletbiz.main.recommend.view.RecommendCardView;
@@ -78,7 +80,7 @@ public class RecommendFragment extends MainFragment {
                     mTask = null;
                     break;
                 case MSG_REFRESH_COMPLETED:
-                    if (mPtrFrameLayout !=  null && mPtrFrameLayout.isRefreshing()) {
+                    if (mPtrFrameLayout != null && mPtrFrameLayout.isRefreshing()) {
                         mPtrFrameLayout.refreshComplete();
                     }
                     break;
@@ -123,7 +125,7 @@ public class RecommendFragment extends MainFragment {
         mLocationHelper = LocationHelper.getInstance();
         mLocationHelper.addLocationCallback(mLocationCallback);
         mLocationHelper.getAddress(false);
-
+        Action.uploadCustom(EventType.Expose, Action.RECOMMEND_PAGE_EXPOSE);
     }
 
     @Override

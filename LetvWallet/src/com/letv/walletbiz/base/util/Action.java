@@ -101,6 +101,8 @@ public class Action extends BaseAction {
     public static final String WALLET_SERVICE_CONTENT_FEE = "fee";
     public static final String WALLET_SERVICE_CONTENT_MOVIE = "movie";
 
+    public static final String KEY_BUTTON = "button";
+
     public static void uploadSet(final String widget, final Object content) {
         mUploadExecutor.submit(new Runnable() {
             @Override

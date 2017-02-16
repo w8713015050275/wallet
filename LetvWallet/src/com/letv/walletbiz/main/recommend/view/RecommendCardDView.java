@@ -47,6 +47,7 @@ public class RecommendCardDView extends LinearLayout implements BaseCardView, Vi
         if (cardDBean == null) {
             return;
         }
+        RecommendUtils.uploadCardClick(this);
         RecommendUtils.launchUrl(getContext(), cardDBean.link);
     }
 

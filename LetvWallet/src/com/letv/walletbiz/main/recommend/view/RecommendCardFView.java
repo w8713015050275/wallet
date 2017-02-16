@@ -72,6 +72,7 @@ public class RecommendCardFView extends LinearLayout implements BaseCardView {
                 if (bean == null || TextUtils.isEmpty(bean.img_link)) {
                     return;
                 }
+                RecommendUtils.uploadCardClick(RecommendCardFView.this);
                 RecommendUtils.launchUrl(getContext(), bean.img_link);
             }
         }));

@@ -14,11 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.letv.tracker.enums.EventType;
+import com.letv.tracker.enums.Key;
 import com.letv.wallet.common.util.CommonCallback;
 import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.walletbiz.R;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.main.recommend.RecommendFooterTask;
 import com.letv.walletbiz.main.recommend.RecommendUtils;
 import com.letv.walletbiz.main.recommend.bean.BaseCardBean;
@@ -26,6 +29,7 @@ import com.letv.walletbiz.main.recommend.bean.RecommendCardBean;
 import com.letv.walletbiz.main.recommend.bean.RecommendCardBean.CardFooter;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +82,14 @@ public class RecommendCardView extends LinearLayout {
             if (mCardBean == null) {
                 return;
             }
+
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put(Key.Content.toString(), mCardBean.getAgnesCardType());
+            if (view instanceof TextView) {
+                map.put(Action.KEY_BUTTON, ((TextView) view).getText());
+            }
+            Action.uploadCustom(EventType.Click, Action.RECOMMEND_CARDS_BUTTON_CLICK, map);
+
             Map<String, String> param = null;
             if (mContentView != null) {
                 if (mContentView.checkContent()) {
@@ -117,6 +129,17 @@ public class RecommendCardView extends LinearLayout {
         init();
     }
 
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super.onWindowVisibilityChanged(visibility);
+        if (visibility == View.VISIBLE && mCardBean != null && !mCardBean.isUploadCardExpose()) {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put(Key.From.toString(), mCardBean.getAgnesCardType());
+            Action.uploadCustom(EventType.Expose, Action.RECOMMEND_CARDS_EXPOSE, map);
+            mCardBean.setUploadCardExpose(true);
+        }
+    }
+
     public void setCardBean(RecommendCardBean cardBean) {
         if (mCardBean == cardBean) {
             return;
@@ -142,7 +165,21 @@ public class RecommendCardView extends LinearLayout {
         mFooterContainer = null;
         boolean hasHeader = initHeaderView();
         initCardContentView(hasHeader);
-        initFooterView();
+        boolean hasFooter = initFooterView();
+        StringBuilder builder = new StringBuilder();
+        if (hasHeader) {
+            builder.append(RecommendCardFactory.CARD_TYPE_A);
+        }
+        if (!TextUtils.isEmpty(mCardBean.card_type)) {
+            builder.append(mCardBean.card_type);
+        }
+        if (hasFooter) {
+            builder.append(RecommendCardFactory.CARD_TYPE_B);
+        }
+        mCardBean.setAgnesCardType(builder.toString());
+        if (mContentView != null) {
+            ((View) mContentView).setTag(mCardBean.getAgnesCardType());
+        }
     }
 
     private boolean initHeaderView() {

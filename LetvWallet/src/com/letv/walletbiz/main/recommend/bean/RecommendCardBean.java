@@ -72,6 +72,10 @@ public class RecommendCardBean implements LetvBaseBean {
 
     private List<BaseCardBean> cardList;
 
+    private String agnesCardType;
+
+    private boolean isUploadCardExpose = false;
+
     public List<BaseCardBean> getCardContent() {
         if (cardList != null) {
             return cardList;
@@ -92,6 +96,22 @@ public class RecommendCardBean implements LetvBaseBean {
             Collections.sort(list);
         }
         return list;
+    }
+
+    public void setAgnesCardType(String type) {
+        agnesCardType = type;
+    }
+
+    public String getAgnesCardType() {
+        return agnesCardType;
+    }
+
+    public boolean isUploadCardExpose() {
+        return isUploadCardExpose;
+    }
+
+    public void setUploadCardExpose(boolean uploadCardExpose) {
+        isUploadCardExpose = uploadCardExpose;
     }
 
     public static class CardFooter implements LetvBaseBean, Comparable<CardFooter> {

@@ -18,6 +18,10 @@ import com.letv.walletbiz.main.recommend.bean.CardHBean;
 
 public class RecommendCardFactory {
 
+    public static final String CARD_TYPE_A = "A";
+
+    public static final String CARD_TYPE_B = "B";
+
     public static final String CARD_TYPE_C = "C";
 
     public static final String CARD_TYPE_D = "D";
