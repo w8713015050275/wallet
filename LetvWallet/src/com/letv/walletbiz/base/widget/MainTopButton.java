@@ -218,7 +218,7 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
             return;
         } else {
             if (this.bean.name.equals(TOP_KEY_LELEHUA)) {
-
+                Action.uploadClick(Action.QUICK_ENTRY_LELEHUA_CLICK);
             } else if (this.bean.name.equals(TOP_KEY_CARD)) {
                 Action.uploadExposeTab(Action.WALLET_HOME_COUPON);
                 Intent intent = new Intent(context, CouponListActivity.class);
@@ -228,8 +228,10 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
                 Intent intent = new Intent("com.letv.wallet.cardlist");
 
                 if (accountInfo != null) {
+                    Action.uploadClick(Action.QUICK_ENTRY_BANKCARD_CLICK);
                     //intent.putExtra("LePayCardBinInfo", accountInfo.cardList);
                     //intent.putExtra("LePayCardBinInfo",accountInfo.card);
+
                 }
                 context.startActivity(intent);
 
