@@ -40,7 +40,7 @@ public class AccountQueryTask extends AccountBaseTask {
     public BaseResponse onExecute() {
         BaseResponse<AccountInfo> response = AccountGateway.queryAccount(mType);
         if (response != null && response.errno == AccountConstant.RspCode.SUCCESS && response.data != null) {
-            if (mType == AccountConstant.QTYPE_ALL || mType == AccountConstant.QTYPE_CARD  || mType == AccountConstant.QTYPE_BASIC) {
+            if (AccountConstant.QTYPE_ALL.equalsIgnoreCase(mType) || AccountConstant.QTYPE_CARD.equalsIgnoreCase(mType)  || AccountConstant.QTYPE_BASIC.equalsIgnoreCase(mType)) {
                 decryptCard(response);
                 updataBasicPreferences(response);
 

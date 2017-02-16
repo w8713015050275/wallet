@@ -225,16 +225,12 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
                 intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
                 context.startActivity(intent);
             } else if (this.bean.name.equals(TOP_KEY_BANK)) {
+                Action.uploadClick(Action.QUICK_ENTRY_BANKCARD_CLICK);
                 Intent intent = new Intent("com.letv.wallet.cardlist");
-
-                if (accountInfo != null) {
-                    Action.uploadClick(Action.QUICK_ENTRY_BANKCARD_CLICK);
-                    //intent.putExtra("LePayCardBinInfo", accountInfo.cardList);
-                    //intent.putExtra("LePayCardBinInfo",accountInfo.card);
-
+                if (accountInfo != null && accountInfo.cardList != null) {
+                    intent.putExtra("LePayCardBinInfo", accountInfo.cardList);
                 }
                 context.startActivity(intent);
-
             }
         }
 

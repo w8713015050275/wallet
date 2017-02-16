@@ -2,6 +2,7 @@ package com.letv.wallet.account.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -64,9 +65,8 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         registerNetWorkReceiver();
         setContentView(R.layout.account_card_list_activity);
         initView();
-        AccountInfo.CardBin[] list ;
-        if(getIntent() != null && (list = (AccountInfo.CardBin[]) getIntent().getParcelableArrayExtra(EXTRA_CARDBIN)) != null){
-            upateCardList(list);
+        if (getIntent() != null) {
+            handleParcelableArray(getIntent().getParcelableArrayExtra(EXTRA_CARDBIN));
         }
     }
 
@@ -177,9 +177,11 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(this, AccountWebActivity.class);
-        intent.putExtra(CommonConstants.EXTRA_URL, AccountCommonConstant.URL_CARD_LIST_HELP);
-        startActivity(intent);
+        if (item.getItemId() == R.id.action_card_list) {
+            Intent intent = new Intent(this, AccountWebActivity.class);
+            intent.putExtra(CommonConstants.EXTRA_URL, AccountCommonConstant.URL_CARD_LIST_HELP);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -333,6 +335,22 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         }
         mAdapter.setData(cardList);
         isDataValidate = true;
+    }
+
+    private void handleParcelableArray(Parcelable[] parcelableArrayExtra) {
+        if (parcelableArrayExtra == null || parcelableArrayExtra.length == 0) {
+            return;
+        }
+        AccountInfo.CardBin[] cardBinList = new AccountInfo.CardBin[parcelableArrayExtra.length];
+        int i = 0;
+        try {
+            for (Parcelable card : parcelableArrayExtra) {
+                cardBinList[i++] = (AccountInfo.CardBin) card;
+            }
+        } catch (ClassCastException e) {
+           return;
+        }
+        upateCardList(cardBinList);
     }
 
     private void jumpWeb(String jType) {

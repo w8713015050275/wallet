@@ -235,7 +235,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     }
 
     private void updateAccountInfo(String qType, AccountInfo info) {
-        if (info == null) {
+        if (info == null || TextUtils.isEmpty(qType)) {
             return;
         }
         switch (qType) {

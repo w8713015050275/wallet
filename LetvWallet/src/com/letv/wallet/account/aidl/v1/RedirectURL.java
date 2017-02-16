@@ -2,6 +2,7 @@ package com.letv.wallet.account.aidl.v1;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 /**
  * Created by lijunying on 17-1-10.
@@ -21,6 +22,9 @@ public class RedirectURL implements Parcelable {
     public String sso_bind_mobile;
 
     public String getUrl(String jType) {
+        if (TextUtils.isEmpty(jType)) {
+            return null;
+        }
         switch (jType) {
             case AccountConstant.JTYPE_SET_PAY_PWD:
                 return set_pay_pwd;

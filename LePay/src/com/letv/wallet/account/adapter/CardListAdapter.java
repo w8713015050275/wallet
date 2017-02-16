@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.letv.shared.widget.BorderedCircleImageView;
 import com.letv.wallet.R;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo.CardBin;
@@ -65,18 +66,20 @@ public class CardListAdapter extends RecyclerView.Adapter {
 
     private String getCardType(String type) {
         int resId = R.string.account_card_type_other;
-        switch (type) {
-            case AccountConstant.CARD_BIN_TYPE_DEBIT:
-                resId = R.string.account_card_type_debit;
-                break;
+        if (!TextUtils.isEmpty(type)) {
+            switch (type) {
+                case AccountConstant.CARD_BIN_TYPE_DEBIT:
+                    resId = R.string.account_card_type_debit;
+                    break;
 
-            case AccountConstant.CARD_BIN_TYPE_CREDIT:
-                resId = R.string.account_card_type_credit;
-                break;
+                case AccountConstant.CARD_BIN_TYPE_CREDIT:
+                    resId = R.string.account_card_type_credit;
+                    break;
 
-            case AccountConstant.CARD_BIN_TYPE_PASSBOOK:
-                resId = R.string.account_card_type_passbook;
-                break;
+                case AccountConstant.CARD_BIN_TYPE_PASSBOOK:
+                    resId = R.string.account_card_type_passbook;
+                    break;
+            }
         }
         return mContext.getResources().getString(resId);
     }
@@ -84,14 +87,14 @@ public class CardListAdapter extends RecyclerView.Adapter {
 
     static class ItemHolder extends RecyclerView.ViewHolder {
 
-        ImageView mBankIcon;
+        BorderedCircleImageView mBankIcon;
         TextView mBankName;
         TextView mCardType;
         TextView mCardNum;
 
         public ItemHolder(View itemView) {
             super(itemView);
-            mBankIcon = (ImageView) itemView.findViewById(R.id.imgBankIcon);
+            mBankIcon = (BorderedCircleImageView) itemView.findViewById(R.id.imgBankIcon);
             mBankName = (TextView) itemView.findViewById(R.id.tvBankName);
             mCardType = (TextView) itemView.findViewById(R.id.tvCardType);
             mCardNum = (TextView) itemView.findViewById(R.id.tvCardNum);
