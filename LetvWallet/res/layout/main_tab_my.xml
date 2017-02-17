@@ -46,6 +46,7 @@
                 android:maxLines="1"
                 android:textColor="@color/white"
                 android:textSize="18sp"
+                android:ellipsize="end"
                 android:layout_centerVertical="true"/>
 
             <com.letv.walletbiz.me.ui.ToggleTextView
