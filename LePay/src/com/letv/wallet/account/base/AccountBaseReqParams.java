@@ -3,6 +3,7 @@ package com.letv.wallet.account.base;
 import android.text.TextUtils;
 
 import com.letv.wallet.PayApplication;
+import com.letv.wallet.account.AccountCommonConstant;
 import com.letv.wallet.base.http.client.BaseRequestParams;
 import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.util.AccountHelper;
@@ -52,10 +53,14 @@ public class AccountBaseReqParams extends BaseRequestParams {
         super(path);
         String imei = null;
         String failReason = null;
-        //// TODO: 17-1-18 判断root , 虚拟机
+        if (DeviceUtils.isDeviceRoot()) {
+            failReason = AccountCommonConstant.ROOTED_DEVICE;
+        } else if (DeviceUtils.isEmulator()) {
+            failReason = AccountCommonConstant.VIRTUAL_DEVICE;
+        }
         if (TextUtils.isEmpty(failReason)) {
             imei = DeviceUtils.getDeviceImei(BaseApplication.getApplication());
-            failReason = TextUtils.isEmpty(imei) ? DeviceUtils.GET_DEVICE_ID_FAIL : null;
+            failReason = TextUtils.isEmpty(imei) ? AccountCommonConstant.GET_DEVICE_ID_FAIL : null;
         }
         addBodyParameter(SSO_TK, AccountHelper.getInstance().getToken(PayApplication.getApplication()));
         addBodyParameter(TERMINAL_ID, imei);

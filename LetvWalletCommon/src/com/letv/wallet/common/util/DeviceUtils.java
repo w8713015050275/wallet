@@ -13,9 +13,6 @@ import java.lang.reflect.Method;
  */
 
 public class DeviceUtils {
-    public static final String ROOTED_DEVICE = "ROOTED_DEVICE";
-    public static final String VIRTUAL_DEVICE = "VIRTUAL_DEVICE";
-    public static final String GET_DEVICE_ID_FAIL = "GET_DEVICE_ID_FAIL";
 
     public static String getDeviceImei(Context context) {
         if (context == null) {
@@ -103,5 +100,13 @@ public class DeviceUtils {
         }
 
         return phoneNmber;
+    }
+
+    public static boolean isDeviceRoot() {
+        return RootCheckHelper.isRoot();
+    }
+
+    public static boolean isEmulator() {
+        return EmulatorCheckHelper.getEmulatorCheckHelper().isEmulator();
     }
 }
