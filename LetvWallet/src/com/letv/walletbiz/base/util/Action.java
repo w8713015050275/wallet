@@ -88,6 +88,9 @@ public class Action extends BaseAction {
     public static final String RECOMMEND_CARDS_CLICK = "12.2";
     public static final String RECOMMEND_CARDS_BUTTON_CLICK = "12.2.1";
 
+    //Me
+    public static final String ME_PAGE_EXPOSE  = "8";
+
     //EventType
     public static final String EVENTTYPE_VERIFY = "verify";
 

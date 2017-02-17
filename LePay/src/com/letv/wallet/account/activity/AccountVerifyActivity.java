@@ -29,7 +29,9 @@ import com.letv.wallet.account.ui.IdNoEditText;
 import com.letv.wallet.account.ui.PhoneEditText;
 import com.letv.wallet.account.ui.RealNameEditText;
 import com.letv.wallet.account.ui.SmsCodeEditText;
+import com.letv.wallet.account.utils.ActionUtils;
 import com.letv.wallet.account.utils.AgreementUrlSpan;
+import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
@@ -55,16 +57,22 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     private SendMsgTask sendMsgTask;
     private AccountVerifyTask verifyAccountTask;
 
+    private String from ;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AccountHelper.getInstance().registerOnAccountChangeListener(this);
-        setContentView(R.layout.account_verify_activity);
-        initView();
+
         if (!AccountHelper.getInstance().isLogin(this)) {
             finish(); //未登录返回
         }
+        AccountHelper.getInstance().registerOnAccountChangeListener(this);
+        setContentView(R.layout.account_verify_activity);
+        initView();
+
+        Action.uploadExpose(Action.ACCOUNT_VERIFY_PAGE_EXPOSE, (from = ActionUtils.getFromExtra(getIntent())));
+
     }
 
     private void initView() {
@@ -168,6 +176,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
             verifyAccountTask = new AccountVerifyTask(accountName, identityNum, bankNo, mobile, msgCode, new AccountCommonCallback() {
                 @Override
                 public void onSuccess(Object result) {
+                    Action.uploadCustom(Action.EVENT_TYPE_VERIFY, Action.ACCOUNT_VERIFY_PAGE_VERIFY);
                     verifyAccountTask = null;
                     hideVerifyDialog();
                     setResult(RESULT_OK);

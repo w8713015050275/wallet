@@ -2,7 +2,6 @@ package com.letv.walletbiz;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -230,9 +229,9 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     }
 
     private void goToTotalOrderList() {
-        Action.uploadExposeTab(Action.WALLET_HOME_TOTALORDER);
+        /*Action.uploadExposeTab(Action.WALLET_HOME_TOTALORDER);
         Intent intent = new Intent(this, TotalOrderListActivity.class);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     @Override

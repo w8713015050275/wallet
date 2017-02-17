@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.letv.tracker.enums.EventType;
 import com.letv.wallet.PayApplication;
 import com.letv.wallet.R;
 import com.letv.wallet.account.AccountCommonConstant;
@@ -24,6 +25,8 @@ import com.letv.wallet.account.task.AccountCreateTask;
 import com.letv.wallet.account.task.AccountQueryTask;
 import com.letv.wallet.account.task.RedirectTask;
 import com.letv.wallet.account.utils.AccountUtils;
+import com.letv.wallet.account.utils.ActionUtils;
+import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
@@ -58,6 +61,8 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
 
     private static final String EXTRA_CARDBIN = "LePayCardBinInfo";
 
+    private String from ;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         registerNetWorkReceiver();
         setContentView(R.layout.account_card_list_activity);
         initView();
+        Action.uploadExpose(Action.ACCOUNT_CARD_LIST_PAGE_EXPOSE, (from = ActionUtils.getFromExtra(getIntent())));
         if (getIntent() != null) {
             handleParcelableArray(getIntent().getParcelableArrayExtra(EXTRA_CARDBIN));
         }
@@ -82,6 +88,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
             @Override
             public void onItemClick(View view, int position) {
                 Toast.makeText(PayApplication.getApplication(), R.string.account_card_item_click_tip, Toast.LENGTH_SHORT).show();
+                Action.uploadClick(Action.ACCOUNT_CARD_LIST_ITEM_CLICK);
             }
         }));
     }
@@ -142,6 +149,8 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAddCard:
+                Action.uploadCustom(EventType.Add, Action.ACCOUNT_CARD_LIST_CARD_ADD);
+
                 if (ACCOUNT_FAIL_REASON_PHONE_NULL) {
                       //无手机号开户失败, 跳转到绑定手机号H5
                     jumpWeb(AccountConstant.JTYPE_SSO_BIND_MOBILE);
@@ -149,7 +158,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                     return;
                 }
                 if (!hasVerifyAccount) {
-                    startActivity(new Intent(this, AccountVerifyActivity.class));
+                    startActivity(ActionUtils.newIntent(this, AccountVerifyActivity.class, Action.EVENT_PROP_FROM_ACCOUNT_CARD_LIST));
                     return;
                 }
                 // 已开户 & 已实名
@@ -341,6 +350,10 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         if (parcelableArrayExtra == null || parcelableArrayExtra.length == 0) {
             return;
         }
+
+        checkCreateAccount(false) ;
+        checkVerifyAccount();
+
         AccountInfo.CardBin[] cardBinList = new AccountInfo.CardBin[parcelableArrayExtra.length];
         int i = 0;
         try {
@@ -365,6 +378,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         } else {
             intent = new Intent(this, AccountWebActivity.class);
             intent.putExtra(CommonConstants.EXTRA_URL, url);
+            intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
         }
         startActivity(intent);
     }

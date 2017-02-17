@@ -91,6 +91,7 @@ public class RedirectActivity extends BaseFragmentActivity{
                     if (result != null && !TextUtils.isEmpty(result.getUrl(jType))) {
                         Intent intent = new Intent(RedirectActivity.this, AccountWebActivity.class);
                         intent.putExtra(CommonConstants.EXTRA_URL, result.getUrl(jType));
+                        intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
                         startActivity(intent);
                         finish();
                     }

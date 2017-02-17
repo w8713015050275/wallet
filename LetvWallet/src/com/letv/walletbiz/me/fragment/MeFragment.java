@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.letv.shared.widget.BorderedCircleImageView;
+import com.letv.tracker.enums.EventType;
 import com.letv.wallet.account.LePayAccountManager;
 import com.letv.wallet.account.LePayCommonCallback;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
@@ -26,6 +27,7 @@ import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
+import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.main.fragment.MainFragment;
 import com.letv.walletbiz.me.ui.ToggleTextView;
 import com.letv.walletbiz.order.activity.TotalOrderListActivity;
@@ -106,9 +108,6 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     @Override
     public void onStart() {
         super.onStart();
-
-
-
     }
 
     @Override
@@ -162,6 +161,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void startLoadData() {
+        Action.uploadCustom(EventType.Expose, Action.ME_PAGE_EXPOSE);
         if (!checkLogin() || !checkNetWork()) {
             return;
         }
