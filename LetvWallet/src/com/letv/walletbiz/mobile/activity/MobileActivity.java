@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.letv.shared.widget.LeBottomSheet;
+import com.letv.tracker.enums.EventType;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
@@ -66,7 +67,9 @@ import org.xutils.common.task.PriorityExecutor;
 import org.xutils.xmain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.letv.walletbiz.mobile.MobileConstant.PRODUCT_TYPE.MOBILE_FEE;
 import static com.letv.walletbiz.mobile.MobileConstant.PRODUCT_TYPE.MOBILE_FLOW;
@@ -128,6 +131,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private boolean mHaveProductData = false;
     private boolean isChangedNumber = false;
     private boolean isRequestingPermissin = false;
+    private String mFrom;
 
     private RelativeLayout mRecordHistoryNumberRl;
     private HistoryRecordNumberV mRecordHistoryNumberV;
@@ -269,13 +273,12 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
 
     private String processExtraData() {
         String inNumber = null;
-        String from;
         Intent in = getIntent();
         Uri uri = in.getData();
         if (uri == null) {
             String action = in.getAction();
             inNumber = in.getStringExtra(MOBILE_PARAM.MOBILENUMBER);
-            from = in.getStringExtra(WalletConstant.EXTRA_FROM);
+            mFrom = in.getStringExtra(WalletConstant.EXTRA_FROM);
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
                 mCouponID = bundle.getLong(CouponConstant.EXTRA_COUPON_BEAN_ID);
@@ -289,16 +292,16 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                 mFeeOrFlow = MOBILE_FLOW;
             }
             inNumber = uri.getQueryParameter(MOBILE_PARAM.MOBILENUMBER);
-            from = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
+            mFrom = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
             try {
                 mCouponID = Integer.valueOf(uri.getQueryParameter(CouponConstant.EXTRA_COUPON_BEAN_ID));
             } catch (Exception e) {
             }
         }
         if (mFeeOrFlow == MOBILE_FEE) {
-            Action.uploadFeeExpose(from);
+            Action.uploadFeeExpose(mFrom);
         } else if (mFeeOrFlow == MOBILE_FLOW) {
-            Action.uploadFlowExpose(from);
+            Action.uploadFlowExpose(mFrom);
         }
         LogHelper.d("[%S] getStringExtra number = " + inNumber, TAG);
         return inNumber;
@@ -386,10 +389,12 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                 }
                 String phoneNumber = mPhoneEdittext.getMobileNumber();
                 if (phoneNumber.length() == MOBILE_LEN) {
+                    Map<String, Object> props = new HashMap<String, Object>();
+                    props.put(WalletConstant.EXTRA_FROM, mFrom);
                     if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FEE) {
-                        Action.uploadClick(Action.MOBILE_FEE_PRODUCT_CLICK);
+                        Action.uploadCustom(EventType.Click, Action.MOBILE_FEE_PRODUCT_CLICK, props);
                     } else {
-                        Action.uploadClick(Action.MOBILE_FLOW_PRODUCT_CLICK);
+                        Action.uploadCustom(EventType.Click, Action.MOBILE_FLOW_PRODUCT_CLICK, props);
                     }
                     int id = position;
                     ProductBean.product productBean = mProductPanel.getProductItem(id);
@@ -397,7 +402,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                         MobileProduct product = new MobileProduct(
                                 R.string.movie_order_view_label, productBean.getProductId(), productBean.getSkuSN(), productBean.getProductName(),
                                 mPhoneEdittext.getMobileNumber(), productBean.getProductPrice());
-                        product.showOrderSure(MobileActivity.this, mFeeOrFlow, mCouponID, mContactType);
+                        product.showOrderSure(MobileActivity.this, mFeeOrFlow, mFrom, mCouponID, mContactType);
                     }
                 }
             }

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
+import com.letv.tracker.enums.EventType;
+import com.letv.tracker.enums.Key;
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
@@ -27,6 +29,7 @@ import com.letv.walletbiz.base.http.client.BaseRequestParams;
 import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.StringUtils;
+import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.base.widget.CouponBrief;
 import com.letv.walletbiz.coupon.CouponConstant;
 import com.letv.walletbiz.mobile.MobileConstant;
@@ -102,6 +105,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     private boolean mIsShowDialog = false;
     private boolean mIsFirstLoadData = true;
     private boolean mSelectedCoupon = false;
+    private String mFrom;
 
     private Handler handler = new Handler() {
         @Override
@@ -236,6 +240,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         mUcouponId = bundle.getLong(CouponConstant.EXTRA_COUPON_BEAN_ID);
         mContactType = bundle.getInt(MobileConstant.PARAM.CONTACT_TYPE_KEY);
         mFeeOrFlow = bundle.getInt(MobileConstant.PARAM.FEEFLOW_KEY);
+        mFrom = bundle.getString(WalletConstant.EXTRA_FROM);
         mUseUcouponId = mUcouponId;
         mTvProductName = (TextView) findViewById(R.id.tv_product_name);
         mTvNumber = (TextView) findViewById(R.id.tv_number);
@@ -265,11 +270,16 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     return;
                 }
                 showDialog();
+                String widget;
                 if (mFeeOrFlow == MobileConstant.PRODUCT_TYPE.MOBILE_FEE) {
-                    Action.uploadClick(Action.MOBILE_FEE_PAY_CLICK, mContactType);
+                    widget = Action.MOBILE_FEE_PAY_CLICK;
                 } else {
-                    Action.uploadClick(Action.MOBILE_FLOW_PAY_CLICK, mContactType);
+                    widget = Action.MOBILE_FLOW_PAY_CLICK;
                 }
+                Map<String, Object> props = new HashMap<String, Object>();
+                props.put(WalletConstant.EXTRA_FROM, mFrom);
+                props.put(Key.Content.toString(), mContactType);
+                Action.uploadCustom(EventType.Click, widget, props);
                 getOrderSNAsyncTask(mMobileProduct.getNumber(), mMobileProduct.getProductId(), new long[]{mUseUcouponId});
             }
         });
@@ -429,6 +439,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
             Intent intent = new Intent(ActivityConstant.PAY_PARAM.PAY_ACTION);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.INFO_PARAM.LEPAY_INFO, payInfo);
+            bundle.putString(WalletConstant.EXTRA_FROM, mFrom);
             intent.putExtras(bundle);
             startActivityForResult(intent, PAY_REQUEST_CODE);
             mIsGoPay = true;

@@ -28,6 +28,7 @@ import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
+import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.main.fragment.MainFragment;
 import com.letv.walletbiz.me.ui.ToggleTextView;
 import com.letv.walletbiz.order.activity.TotalOrderListActivity;
@@ -35,6 +36,8 @@ import com.letv.walletbiz.order.activity.TotalOrderListActivity;
 import org.xutils.xmain;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lijunying on 17-1-9.
@@ -161,7 +164,14 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void startLoadData() {
-        Action.uploadCustom(EventType.Expose, Action.ME_PAGE_EXPOSE);
+        String from;
+        Map<String, Object> props = new HashMap<>();
+        if (getActivity() != null) {
+            Intent intent = getActivity().getIntent();
+            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+            props.put(WalletConstant.EXTRA_FROM, from);
+        }
+        Action.uploadCustom(EventType.Expose, Action.ME_PAGE_EXPOSE, props);
         if (!checkLogin() || !checkNetWork()) {
             return;
         }

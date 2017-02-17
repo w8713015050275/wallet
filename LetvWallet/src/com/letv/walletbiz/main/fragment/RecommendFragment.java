@@ -1,6 +1,7 @@
 package com.letv.walletbiz.main.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,11 +22,14 @@ import com.letv.wallet.common.view.BlankPage;
 import com.letv.wallet.common.view.SpacesItemDecoration;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
+import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.main.recommend.RecommendTask;
 import com.letv.walletbiz.main.recommend.bean.RecommendCardBean;
 import com.letv.walletbiz.main.recommend.view.RecommendCardView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -131,6 +135,14 @@ public class RecommendFragment extends MainFragment {
     @Override
     public void onStart() {
         super.onStart();
+        String from;
+        Map<String, Object> props = new HashMap<>();
+        if (getActivity() != null) {
+            Intent intent = getActivity().getIntent();
+            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+            props.put(WalletConstant.EXTRA_FROM, from);
+        }
+        Action.uploadCustom(EventType.Expose, Action.RECOMMEND_PAGE_EXPOSE, props);
     }
 
     @Override

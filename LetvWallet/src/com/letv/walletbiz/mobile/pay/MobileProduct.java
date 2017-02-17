@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.activity.PayResultActivity;
 import com.letv.walletbiz.base.pay.Product;
+import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.coupon.CouponConstant;
 import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.mobile.activity.MobileOrderConfirmationActivity;
@@ -65,10 +66,12 @@ public class MobileProduct extends Product {
         mResultAdapter = (PayResultActivity.PayResultAdapter) new MobilePayResultAdapter(this);
     }
 
-    public void showOrderSure(Context context, int feeOrFlow, Long couponID, int contactsType) {
+    public void showOrderSure(Context context, int feeOrFlow, String from, Long couponID, int contactsType) {
         Intent intent = new Intent(context, MobileOrderConfirmationActivity.class);
         Bundle b = new Bundle();
         b.putSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT, this);
+        // 表示流量话费页面的from
+        b.putString(WalletConstant.EXTRA_FROM, from);
         b.putLong(CouponConstant.EXTRA_COUPON_BEAN_ID, couponID);
         b.putInt(MobileConstant.PARAM.FEEFLOW_KEY, feeOrFlow);
         b.putInt(MobileConstant.PARAM.CONTACT_TYPE_KEY, contactsType);
