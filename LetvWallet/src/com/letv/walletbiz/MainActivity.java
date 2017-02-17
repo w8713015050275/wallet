@@ -33,7 +33,7 @@ import com.letv.walletbiz.me.fragment.MeFragment;
 import java.util.List;
 
 
-public class MainActivity extends BaseWalletFragmentActivity implements TabHost.OnTabChangeListener {
+public class MainActivity extends BaseWalletFragmentActivity implements TabHost.OnTabChangeListener, AccountHelper.OnAccountChangedListener {
     private static final String TAG = "MainActivity";
 
     public static final String WALLET_LICENCE_ACCEPT = "wallet_licence_accept";
@@ -59,6 +59,7 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerNetWorkReceiver();
+        AccountHelper.getInstance().registerOnAccountChangeListener(this);
         setContentView(R.layout.activity_main);
         if (!accountHelper.isLogin(this)) {
             showLoginPrompt(this);
@@ -169,10 +170,8 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     protected void onDestroy() {
         Action.uploadStopApp();
         ExecutorHelper.getExecutor().clearAllRunnable();
-
-        if (mLoginSheet != null && mLoginSheet.isShowing()) {
-            mLoginSheet.dismiss();
-        }
+        AccountHelper.getInstance().unregisterOnAccountChangeListener(this);
+        dismissLoginPrompt();
         super.onDestroy();
     }
 
@@ -334,4 +333,19 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
         }
     }
 
+    @Override
+    public void onAccountLogin() {
+        dismissLoginPrompt();
+    }
+
+    @Override
+    public void onAccountLogout() {
+        showLoginPrompt(this);
+    }
+
+    private void dismissLoginPrompt(){
+        if (null != mLoginSheet && mLoginSheet.isShowing()) {
+            mLoginSheet.dismiss();
+        }
+    }
 }

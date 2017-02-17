@@ -34,6 +34,7 @@ public abstract class BaseAction {
     public static final String EVENT_PROP_FROM_PUSH = "wallet_push";
     public static final String EVENT_PROP_FROM_APP = "app";
     public static final String EVENT_PROP_FROM_BANNER = "wallet_banner";
+    public static final String EVENT_PROP_FROM_CARD = "wallet_card";
 
     static class ActionThreadFactory implements ThreadFactory {
         private static final String NAME = "USER_ACTION";

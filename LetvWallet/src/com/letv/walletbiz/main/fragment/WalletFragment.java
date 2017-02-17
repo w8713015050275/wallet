@@ -618,4 +618,10 @@ public class WalletFragment extends MainFragment implements AccountHelper.OnAcco
         twoButton.setCardList(accountInfo);
         threeButton.setCardList(accountInfo);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        AccountHelper.getInstance().unregisterOnAccountChangeListener(this);
+    }
 }
