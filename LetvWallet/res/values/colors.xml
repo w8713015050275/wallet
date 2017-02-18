@@ -76,6 +76,8 @@
 
     <!-- main -->
     <color name="main_service_name_color">#54555C</color>
+    <color name="main_top_textview_color">#262626</color>
+    <color name="main_top_button_color">#447de9</color>
 
     <!-- movie -->
     <color name="movie_tab_tv_color">#CCFFFFFF</color>

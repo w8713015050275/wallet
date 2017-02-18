@@ -2,6 +2,7 @@
     <string name="main_tab_recommend">推荐</string>
     <string name="main_tab_wallet">钱包</string>
     <string name="main_tab_my">我的</string>
+    <string name="main_top_card">卡券包</string>
 
     <string name="main_recommend_input_error">格式错误</string>
     <string name="main_recommend_error_no_network">无网络，请检查你的网络!</string>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -77,14 +78,15 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
 
 
     private static final String TOP_KEY_LELEHUA = "lelehua";
-    private static final String TOP_KEY_CARD = "card";
-    private static final String TOP_KEY_BANK = "bank";
+    public static final String TOP_KEY_CARD = "card";
+    public static final String TOP_KEY_BANK = "bank";
 
     private WalletTopListBean.WalletTopBean bean;
 
-    private Context context;
-
     private AccountInfo accountInfo;
+
+
+    private Context context;
 
     public MainTopButton(Context context) {
         this(context, null);
@@ -128,78 +130,29 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
         addView(textView, params);
 
 
-        //button.setBackgroundResource(defaultDrawable);
-        button.setTextColor(buttonTextColor);
+        //button.setTextColor(buttonTextColor);
         button.setTextSize(buttonTextSize);
 
-        textView.setTextColor(textColor);
+        //textView.setTextColor(textColor);
         textView.setTextSize(textSize);
-        //textView.setText(text);
         this.setOnClickListener(this);
 
     }
 
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
-    }
-
-    public static int dip2px(Context context, float dipValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dipValue * scale + 0.5f);
-    }
-
-    public static int px2sp(Context context, float pxValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (pxValue / fontScale + 0.5f);
-    }
-
-
-    public void setCardList(AccountInfo info) {
-        this.accountInfo = info;
-        if (accountInfo != null & accountInfo.cardList != null && accountInfo.cardList.length > 0) {
-            switch (type) {
-                case 1:
-                    break;
-                case 2:
-                    //显示数量，并且把button的背景置为空
-                    //button.setText(""+accountInfo.cardList.length);
-                    //button.setBackground(null);
-                    break;
-                case 3:
-                    //显示数量，并且更改button的背景为next_drawable
-                    button.setText("" + accountInfo.cardList.length);
-                    button.setBackground(null);
-                    break;
-            }
-        }
-
-    }
-
-    public void setDefaultData(WalletTopListBean.WalletTopBean bean) {
-        this.bean = bean;
-        ImageOptions options = new ImageOptions.Builder().build();
-        xmain.image().loadDrawable(bean.icon, options, new Callback.CommonCallback<Drawable>() {
-            @Override
-            public void onSuccess(Drawable result) {
-                button.setBackground(result);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-            }
-
-            @Override
-            public void onFinished() {
-            }
-        });
-        textView.setText(bean.title);
-    }
-
+//    public static int px2dip(Context context, float pxValue) {
+//        final float scale = context.getResources().getDisplayMetrics().density;
+//        return (int) (pxValue / scale + 0.5f);
+//    }
+//
+//    public static int dip2px(Context context, float dipValue) {
+//        final float scale = context.getResources().getDisplayMetrics().density;
+//        return (int) (dipValue * scale + 0.5f);
+//    }
+//
+//    public static int px2sp(Context context, float pxValue) {
+//        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+//        return (int) (pxValue / fontScale + 0.5f);
+//    }
 
     /**
      * 拦截点击事件
@@ -234,5 +187,102 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
             }
         }
 
+    }
+
+    private Drawable dataDrawable;
+
+    public void setData(WalletTopListBean.WalletTopBean currentBean) {
+        bean = currentBean;
+        setButtonType(currentBean);
+        if (!TextUtils.isEmpty(currentBean.icon) && TextUtils.isDigitsOnly(currentBean.icon)) {
+            //如果是假数据，资源来自本地
+            dataDrawable = context.getDrawable(Integer.parseInt(currentBean.icon));
+            button.setBackground(dataDrawable);
+        } else {
+            ImageOptions options = new ImageOptions.Builder().build();
+            xmain.image().loadDrawable(currentBean.icon, options, new Callback.CommonCallback<Drawable>() {
+                @Override
+                public void onSuccess(Drawable result) {
+                    dataDrawable = result;
+                    button.setBackground(result);
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+                }
+
+                @Override
+                public void onFinished() {
+                }
+            });
+        }
+
+        textView.setText(currentBean.title);
+    }
+
+    private void setButtonType(WalletTopListBean.WalletTopBean currentBean) {
+        if (null == currentBean) {
+            return;
+        } else {
+            if (currentBean.name.equals(TOP_KEY_LELEHUA)) {
+                type = 0;
+            } else if (currentBean.name.equals(TOP_KEY_CARD)) {
+                type = 1;
+            } else if (currentBean.name.equals(TOP_KEY_BANK)) {
+                type = 2;
+            }
+        }
+    }
+
+    public void setNumber(Object info) {
+        switch (type) {
+            case 0:
+                //乐乐花暂时不做
+                break;
+            case 1:
+                //卡全包不做更改
+                break;
+            case 2:
+                //强制转化，不知道传递的会是什么值
+                accountInfo = (AccountInfo) info;
+                if (accountInfo != null & accountInfo.cardList != null && accountInfo.cardList.length > 0) {
+                    button.setText("" + accountInfo.cardList.length);
+                    button.setBackground(null);
+                }
+//                else {
+//
+//                    if (accountInfo.cardList == null) {
+//                        accountInfo.cardList = new AccountInfo.CardBin[1];
+//                        AccountInfo.CardBin bin = new AccountInfo.CardBin();
+//                        accountInfo.cardList[0] = bin;
+//                    }
+//
+//                }
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void resetDrawable() {
+        if (null != dataDrawable) {
+            button.setBackground(dataDrawable);
+        } else {
+            button.setBackground(null);
+        }
+        button.setText("");
+    }
+
+    public void setTextViewColor(int color) {
+        textView.setTextColor(color);
+    }
+
+    public void setButtonTextColor(int color) {
+        button.setTextColor(color);
     }
 }

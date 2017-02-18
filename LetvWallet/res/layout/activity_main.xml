@@ -8,8 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
         android:background="@color/movie_bottom_tab_bg_color">
 
         <FrameLayout
@@ -28,6 +26,7 @@
     <View
         android:id="@+id/main_line"
         style="@style/Divider_HorizontalLine_Style"
+        android:layout_marginTop="6dp"
         android:layout_above="@android:id/tabhost" />
 
     <FrameLayout

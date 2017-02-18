@@ -12,12 +12,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.letv.wallet.account.LePayAccountManager;
-import com.letv.wallet.account.LePayCommonCallback;
-import com.letv.wallet.account.aidl.v1.AccountConstant;
-import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
@@ -28,7 +23,7 @@ import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.WalletConstant;
-import com.letv.walletbiz.base.widget.MainTopButton;
+import com.letv.walletbiz.base.widget.MainTopLayout;
 import com.letv.walletbiz.coupon.CouponConstant;
 import com.letv.walletbiz.coupon.activity.CouponDetailActivity;
 import com.letv.walletbiz.coupon.beans.BaseCoupon;
@@ -46,7 +41,6 @@ import com.letv.walletbiz.main.MainTopTask;
 import com.letv.walletbiz.main.WalletMainWebActivity;
 import com.letv.walletbiz.main.bean.WalletBannerListBean;
 import com.letv.walletbiz.main.bean.WalletServiceListBean;
-import com.letv.walletbiz.main.bean.WalletTopListBean;
 import com.letv.walletbiz.movie.MovieTicketConstant;
 import com.letv.walletbiz.movie.activity.MovieOrderDetailActivity;
 import com.letv.walletbiz.movie.beans.MovieOrder;
@@ -58,27 +52,21 @@ import timehop.stickyheader.RecyclerItemClickListener;
 /**
  * Created by zhuchuntao on 16-12-21.
  */
-public class WalletFragment extends MainFragment implements AccountHelper.OnAccountChangedListener {
+public class WalletFragment extends MainFragment {
     private PriorityExecutor mExecutor = new PriorityExecutor(3);
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private MainAdapter mAdapter;
     private AccountHelper accountHelper = AccountHelper.getInstance();
 
-    private MainTopButton oneButton;
-    private MainTopButton twoButton;
-    private MainTopButton threeButton;
-    private LinearLayout topLayout;
+    private MainTopLayout topLayout;
 
-    private AccountInfo info;
 
-    private WalletTopListBean walletTopListBean;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parseIntent(getActivity().getIntent());
-        AccountHelper.getInstance().registerOnAccountChangeListener(this);
     }
 
     private int parseIntent(Intent intent) {
@@ -100,11 +88,9 @@ public class WalletFragment extends MainFragment implements AccountHelper.OnAcco
     @Override
     public View onCreateCustomView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_tab_wallet, null);
-        topLayout = (LinearLayout) view.findViewById(R.id.wallet_top_layout);
 
-        oneButton = (MainTopButton) view.findViewById(R.id.wallet_top_one);
-        twoButton = (MainTopButton) view.findViewById(R.id.wallet_top_two);
-        threeButton = (MainTopButton) view.findViewById(R.id.wallet_top_three);
+        topLayout = (MainTopLayout) view.findViewById(R.id.wallet_top_layout);
+
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
 
@@ -225,8 +211,7 @@ public class WalletFragment extends MainFragment implements AccountHelper.OnAcco
             }
 
         }
-        loadAccountData();
-
+        topLayout.loadButtonData();
     }
 
 
@@ -255,10 +240,7 @@ public class WalletFragment extends MainFragment implements AccountHelper.OnAcco
             mBannerTask = new BannerTask(getContext(), mBannerCallback, ActivityConstant.BUSINESS_ID.MAIN_ID);
             mExecutor.execute(mBannerTask);
         }
-        if (mTopTask == null) {
-            mTopTask = new MainTopTask(getContext(), mTopCallback);
-            mExecutor.execute(mTopTask);
-        }
+
     }
 
     private MainPanelHelper.Callback<WalletServiceListBean> mServiceCallback = new MainPanelHelper.Callback<WalletServiceListBean>() {
@@ -336,51 +318,6 @@ public class WalletFragment extends MainFragment implements AccountHelper.OnAcco
             }
         }
     };
-
-    private MainPanelHelper.Callback<WalletTopListBean> mTopCallback = new MainPanelHelper.Callback<WalletTopListBean>() {
-
-        @Override
-        public void onLoadFromLocalFinished(WalletTopListBean result, int errorCode) {
-            if (result != null && null != result.list && errorCode == MainPanelHelper.NO_ERROR) {
-                walletTopListBean = result;
-                diaplayTopData(result.list);
-            }
-        }
-
-        @Override
-        public void onLoadFromNetworkFinished(WalletTopListBean result, int errorCode, boolean needUpdate) {
-            mBannerTask = null;
-            if (result != null && null != result.list && errorCode == MainPanelHelper.NO_ERROR) {
-                walletTopListBean = result;
-                diaplayTopData(result.list);
-            }
-        }
-    };
-
-    private void diaplayTopData(WalletTopListBean.WalletTopBean[] list) {
-        if (null != list && list.length > 0) {
-            if (topLayout.getVisibility() == View.GONE) {
-                topLayout.setVisibility(View.VISIBLE);
-            }
-            if (list.length == 1) {
-                oneButton.setDefaultData(list[0]);
-            }
-            if (list.length == 2) {
-                oneButton.setDefaultData(list[0]);
-                twoButton.setDefaultData(list[1]);
-            }
-            if (list.length == 3) {
-                oneButton.setDefaultData(list[0]);
-                twoButton.setDefaultData(list[1]);
-                threeButton.setDefaultData(list[2]);
-            }
-            if (info != null) {
-                setTopReadData(info);
-            }
-        }
-
-    }
-
 
     private View.OnClickListener mRetryClickListener = new View.OnClickListener() {
 
@@ -560,68 +497,8 @@ public class WalletFragment extends MainFragment implements AccountHelper.OnAcco
     }
 
     @Override
-    public void onAccountLogin() {
-    }
-
-    @Override
-    public void onAccountLogout() {
-        if (null != walletTopListBean && null != walletTopListBean.list){
-            info=null;
-            diaplayTopData(walletTopListBean.list);
-        }
-    }
-
-    public void loadAccountData() {
-        if (AccountHelper.getInstance().isLogin(getActivity()) && NetworkHelper.isNetworkAvailable()) {
-            String qType = null;
-            if (checkCreateAccount(false) && checkVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
-                qType = AccountConstant.QTYPE_CARD;
-            } else {
-                qType = AccountConstant.QTYPE_ALL; //查询用户状态
-            }
-            queryAccount(qType);
-        }
-    }
-
-    private boolean checkCreateAccount(boolean isForceCreate) {
-        boolean hasCreateAccount = LePayAccountManager.hasCreatedAccount();
-        if (!hasCreateAccount && isForceCreate) {
-            LePayAccountManager.getInstance().createAccount(null); //默认开一次户
-        }
-        return hasCreateAccount;
-    }
-
-    private boolean checkVerifyAccount() {
-        boolean hasVerifyAccount = LePayAccountManager.hasVerifyAccount();
-        return hasVerifyAccount;
-    }
-
-    private void queryAccount(final String qType) {
-        LePayAccountManager.getInstance().queryAccount(qType, new LePayCommonCallback<AccountInfo>() {
-
-            @Override
-            public void onSuccess(AccountInfo accountInfo) {
-                if (checkCreateAccount(true)) {
-                    info = accountInfo;
-                    setTopReadData(accountInfo);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String errorMsg) {
-            }
-        });
-    }
-
-    private void setTopReadData(AccountInfo accountInfo) {
-        oneButton.setCardList(accountInfo);
-        twoButton.setCardList(accountInfo);
-        threeButton.setCardList(accountInfo);
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
-        AccountHelper.getInstance().unregisterOnAccountChangeListener(this);
+
     }
 }
