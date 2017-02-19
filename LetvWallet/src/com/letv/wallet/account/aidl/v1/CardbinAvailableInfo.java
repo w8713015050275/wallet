@@ -40,7 +40,7 @@ public class CardbinAvailableInfo implements Parcelable {
         this.cardType = in.readString();
     }
 
-    public static final Creator<CardbinAvailableInfo> CREATOR = new Creator<CardbinAvailableInfo>() {
+    public static final Parcelable.Creator<CardbinAvailableInfo> CREATOR = new Parcelable.Creator<CardbinAvailableInfo>() {
         @Override
         public CardbinAvailableInfo createFromParcel(Parcel source) {
             return new CardbinAvailableInfo(source);

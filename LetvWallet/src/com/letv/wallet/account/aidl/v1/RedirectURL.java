@@ -101,7 +101,7 @@ public class RedirectURL implements Parcelable {
         this.sso_bind_mobile = in.readString();
     }
 
-    public static final Creator<RedirectURL> CREATOR = new Creator<RedirectURL>() {
+    public static final Parcelable.Creator<RedirectURL> CREATOR = new Parcelable.Creator<RedirectURL>() {
         @Override
         public RedirectURL createFromParcel(Parcel source) {
             return new RedirectURL(source);
