@@ -52,7 +52,9 @@
 
         <activity android:name=".account.activity.AccountVerifyActivity"
             android:label="@string/account_verify_acitivtiy_title"
-            android:theme="@style/AccountVerifyTheme">
+            android:theme="@style/AccountVerifyTheme"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
             <intent-filter>
                <action android:name="com.letv.wallet.accountverify" />
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -89,6 +91,7 @@
 
         <activity android:name=".account.activity.CardListActivity"
             android:label="@string/account_card_title"
+            android:screenOrientation="portrait"
             android:theme="@style/AccountVerifyTheme">
             <intent-filter>
                 <action android:name="com.letv.wallet.cardlist" />

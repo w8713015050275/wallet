@@ -66,10 +66,10 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AccountHelper.getInstance().registerOnAccountChangeListener(this);
-        registerNetWorkReceiver();
         setContentView(R.layout.account_card_list_activity);
         initView();
+        AccountHelper.getInstance().registerOnAccountChangeListener(this);
+        registerNetWorkReceiver();
         Action.uploadExpose(Action.ACCOUNT_CARD_LIST_PAGE_EXPOSE, (from = ActionUtils.getFromExtra(getIntent())));
         if (getIntent() != null) {
             handleParcelableArray(getIntent().getParcelableArrayExtra(EXTRA_CARDBIN));
@@ -99,6 +99,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         if (!checkLogin() || !checkNetWork()) {
             return;
         }
+        hideBlankPage();
         loadData(false);
     }
 
@@ -151,6 +152,8 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
             case R.id.btnAddCard:
                 Action.uploadCustom(EventType.Add, Action.ACCOUNT_CARD_LIST_CARD_ADD);
 
+                isDataValidate = false ; //返回 更新数据
+
                 if (ACCOUNT_FAIL_REASON_PHONE_NULL) {
                       //无手机号开户失败, 跳转到绑定手机号H5
                     jumpWeb(AccountConstant.JTYPE_SSO_BIND_MOBILE);
@@ -163,7 +166,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                 }
                 // 已开户 & 已实名
                 jumpWeb(AccountConstant.JTYPE_ADD_CARD);
-                isDataValidate = false ; //添加卡列表返回 更新数据
+
                 break;
         }
     }
