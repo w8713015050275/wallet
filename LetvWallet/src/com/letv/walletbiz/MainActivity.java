@@ -176,6 +176,7 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
 
     @Override
     protected void onNetWorkChanged(boolean isNetworkAvailable) {
+        notifyNetworkChange(isNetworkAvailable);
     }
 
 
@@ -323,6 +324,14 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
         }
     }
 
+    private void notifyNetworkChange(boolean isNetworkAvailable){
+        MainFragment main = getCurrentFragment();
+        if (null != main) {
+            main.onNetWorkChanged(isNetworkAvailable);
+        }
+    }
+
+
     private void permissionResult(int requestCode,
                                   String permissions[], int[] grantResults) {
         MainFragment main = getCurrentFragment();
@@ -342,7 +351,7 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
         showLoginPrompt(this);
     }
 
-    private void dismissLoginPrompt(){
+    private void dismissLoginPrompt() {
         if (null != mLoginSheet && mLoginSheet.isShowing()) {
             mLoginSheet.dismiss();
         }
