@@ -1,6 +1,7 @@
 package com.letv.walletbiz.main.recommend.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -258,11 +259,7 @@ public class RecommendCardView extends LinearLayout {
         if (footerArray == null || footerArray.length <= 0) {
             return false;
         }
-        LayoutInflater inflater = LayoutInflater.from(getContext());
         if (mFooterContainer == null) {
-            if (mContentView == null || (mContentView != null && mContentView.needBottomDivider())) {
-                inflater.inflate(R.layout.divider_horizontal, this, true);
-            }
             mFooterContainer = new LinearLayout(getContext());
             mFooterContainer.setOrientation(LinearLayout.HORIZONTAL);
             int padding = (int) DensityUtils.dip2px(10);
@@ -272,24 +269,36 @@ public class RecommendCardView extends LinearLayout {
             mFooterContainer.removeAllViews();
         }
 
+        addWeightView(mFooterContainer, 1);
+
         CardFooter footer;
         TextView button;
         for (int i=0; i<footerArray.length; i++) {
             footer = footerArray[i];
             button = new TextView(getContext());
             button.setTextAppearance(R.style.Recommend_Card_Footer);
+            button.setBackgroundResource(R.drawable.main_recommend_footer_button_bg);
             button.setText(footer.key_title);
             button.setGravity(Gravity.CENTER);
             button.setOnClickListener(mFooterClickListener);
             button.setTag(footer);
-            LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            params.weight = 1;
-            mFooterContainer.addView(button, params);
-            if (footerArray.length > 1 && i != (footerArray.length - 1)) {
-                inflater.inflate(R.layout.divider_vertical, mFooterContainer, true);
+            if (i > 0) {
+                addWeightView(mFooterContainer, 1);
             }
+            Resources resources = getResources();
+            LayoutParams params = new LayoutParams(
+                    resources.getDimensionPixelOffset(R.dimen.recommend_footer_button_width),
+                    resources.getDimensionPixelOffset(R.dimen.recommend_footer_button_height));
+            mFooterContainer.addView(button, params);
         }
-        mFooterContainer.requestLayout();
+        addWeightView(mFooterContainer, 1);
         return true;
+    }
+
+    private void addWeightView(ViewGroup parent, int weight) {
+        View view = new View(getContext());
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        params.weight = weight;
+        parent.addView(view, params);
     }
 }

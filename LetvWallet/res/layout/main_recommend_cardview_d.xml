@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -11,10 +12,13 @@
         android:textAppearance="@style/Recommend_Card_SubTitle"
         android:layout_marginBottom="10dp"
         />
-    <ImageView
+    <com.letv.shared.widget.BorderedRoundedCornersImageView
         android:id="@+id/content_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
+        app:corner_radius="2dp"
+        app:border_width="0dp"
+        app:round_background="true"
         />
 </LinearLayout>

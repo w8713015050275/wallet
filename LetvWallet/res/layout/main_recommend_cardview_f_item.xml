@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:gravity="bottom"
     >
-    <ImageView
+    <com.letv.shared.widget.BorderedRoundedCornersImageView
         android:id="@+id/content_img"
         android:layout_width="72dp"
         android:layout_height="117dp"
         android:background="@color/colorPlaceHolderBg"
         android:alpha="@dimen/le_img_alpha"
+        app:corner_radius="2dp"
+        app:border_width="0dp"
+        app:round_background="true"
         />
     <TextView
         android:id="@+id/content_title"

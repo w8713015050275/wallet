@@ -177,5 +177,9 @@
     <dimen name="me_list_item_margin_horizontal">8dp</dimen>
     <dimen name="me_list_item_padding_horizontal">16dp</dimen>
 
+    <!-- recommend -->
+    <dimen name="recommend_footer_button_width">116dp</dimen>
+    <dimen name="recommend_footer_button_height">26dp</dimen>
+
 
 </resources>

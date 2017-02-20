@@ -209,7 +209,7 @@ public class RecommendFragment extends MainFragment {
     public void startLoadData() {
         if (!isNetworkAvailable()) {
             if (mRecommendCardList == null) {
-                showBlankPage(BlankPage.STATE_NO_NETWORK);
+                showBlankPage(BlankPage.STATE_NO_NETWORK, mRetryClickListener);
             }
             return;
         }
