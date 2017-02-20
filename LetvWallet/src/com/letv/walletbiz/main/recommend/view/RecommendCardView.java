@@ -2,6 +2,7 @@ package com.letv.walletbiz.main.recommend.view;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.location.Address;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -105,7 +106,8 @@ public class RecommendCardView extends LinearLayout {
                     return;
                 }
                 if (mFooterTask == null) {
-                    mFooterTask = new RecommendFooterTask(mFooterCallback, mCardBean.footer_req_url, param, mCardBean.footer_req_url_method);
+                    mFooterTask = new RecommendFooterTask(getContext(), mFooterCallback, mCardBean.footer_req_url,
+                            param, mCardBean.footer_req_url_method, (Address) getTag());
                     ExecutorHelper.getExecutor().runnableExecutor(mFooterTask);
                 }
                 return;

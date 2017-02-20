@@ -118,6 +118,9 @@ public class RecommendFragment extends MainFragment {
         public void onLocationUpdateFinished(Address address, int responseCode) {
             if (responseCode == LocationHelper.LOCATE_SUCCESS) {
                 mAddress = address;
+                if (mAdapter != null) {
+                    mAdapter.setAddress(mAddress);
+                }
             }
         }
     };
@@ -173,6 +176,9 @@ public class RecommendFragment extends MainFragment {
         mRecyclerView.addItemDecoration(itemDecoration);
 
         mAdapter = new RecommendAdapter(getContext());
+        if (mAddress != null) {
+            mAdapter.setAddress(mAddress);
+        }
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }
@@ -237,6 +243,7 @@ public class RecommendFragment extends MainFragment {
 
         private Context mContext;
         private List<RecommendCardBean> mCardList;
+        private Address mAddress;
 
         public RecommendAdapter(Context context) {
             mContext = context;
@@ -245,6 +252,10 @@ public class RecommendFragment extends MainFragment {
         public void setData(List<RecommendCardBean> cardList) {
             mCardList = cardList;
             notifyDataSetChanged();
+        }
+
+        public void setAddress(Address address) {
+            mAddress = address;
         }
 
         @Override
@@ -257,6 +268,7 @@ public class RecommendFragment extends MainFragment {
         public void onBindViewHolder(ItemHolder holder, int position) {
             RecommendCardBean cardBean = mCardList.get(position);
             ((RecommendCardView) holder.itemView).setCardBean(cardBean);
+            holder.itemView.setTag(mAddress);
         }
 
         @Override
