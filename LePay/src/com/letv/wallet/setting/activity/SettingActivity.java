@@ -21,7 +21,9 @@ import com.letv.wallet.account.task.AccountQueryTask;
 import com.letv.wallet.account.task.RedirectTask;
 import com.letv.wallet.base.util.Action;
 import com.letv.wallet.base.util.WalletConstant;
+import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.activity.BaseFragmentActivity;
+import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
@@ -31,10 +33,11 @@ import com.letv.wallet.common.view.BlankPage;
 /**
  * Created by changjiajie on 16-5-25.
  */
-public class SettingActivity extends BaseFragmentActivity implements View.OnClickListener {
+public class SettingActivity extends AccountBaseActivity implements View.OnClickListener, AccountHelper.OnAccountChangedListener {
 
     public static final String TAG = SettingActivity.class.getSimpleName();
 
+    private static String ISGOLOGIN = "isGoLogin";
     private RelativeLayout mAccountVerifyLl;
     private ImageView mAccountVerifyIv;
     private TextView mAccountVerifyTv;
@@ -100,19 +103,55 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerNetWorkReceiver();
+        AccountHelper.getInstance().registerOnAccountChangeListener(this);
         setContentView(R.layout.lepay_activity_setting);
         initV();
+        if (!isNetworkAvailable()) {
+            if (mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_SHOW_BLANKPAGE);
+                mHandler.sendMessage(msg);
+            }
+        }
+        if (savedInstanceState == null || !savedInstanceState.getBoolean(ISGOLOGIN)) {
+            AccountHelper.getInstance().loginLetvAccountIfNot(this, null);
+        }
     }
 
     @Override
-    public boolean hasBlankAndLoadingView() {
-        return true;
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (outState != null) {
+            outState.putBoolean(ISGOLOGIN, !AccountHelper.getInstance().isLogin(this));
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        if (!AccountHelper.getInstance().isLogin(getBaseContext())) {
+            showNoLoginBlankPage();
+            return;
+        }
+        if (!isNetworkAvailable()) {
+            if (mBasicAccount == null && mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_SHOW_BLANKPAGE);
+                mHandler.sendMessage(msg);
+            }
+            return;
+        }
         checkAccountInfo();
+    }
+
+    @Override
+    protected void onNetWorkChanged(boolean isNetworkAvailable) {
+        if (isNetworkAvailable && AccountHelper.getInstance().isLogin(getBaseContext())) {
+            if (mBasicAccount == null) {
+                checkAccountInfo();
+            } else {
+                hideBlankPage();
+            }
+        }
     }
 
     @Override
@@ -153,6 +192,21 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
         }
     }
 
+    @Override
+    public void onAccountLogin() {
+    }
+
+    @Override
+    public void onAccountLogout() {
+        mBasicAccount = null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        AccountHelper.getInstance().unregisterOnAccountChangeListener(this);
+        super.onDestroy();
+    }
+
     private class AccountQueryCallback implements AccountCommonCallback<AccountInfo> {
 
         @Override
@@ -175,11 +229,9 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
 
         @Override
         public void onNoNet() {
-            if (mBasicAccount == null) {
-                if (mHandler != null) {
-                    Message msg = mHandler.obtainMessage(NO_NETWORK_SHOW_BLANKPAGE);
-                    mHandler.sendMessage(msg);
-                }
+            if (mBasicAccount == null && mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_SHOW_BLANKPAGE);
+                mHandler.sendMessage(msg);
             }
         }
     }
@@ -270,7 +322,6 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
         findViewById();
         mAccountVerifyLl.setOnClickListener(this);
         mSettingPwdTv.setOnClickListener(this);
-        checkAccountInfo();
     }
 
     private void processExtraData() {
@@ -290,12 +341,23 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
     }
 
     private void checkAccountInfo() {
-        if (mAccountQueryTask == null) {
-            mAccountQueryTask = new AccountQueryTask(AccountConstant.QTYPE_BASIC,
-                    new AccountQueryCallback());
+        if (!isNetworkAvailable()) {
+            if (mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
+                mHandler.sendMessage(msg);
+            }
+            return;
         }
-        showLoadingView();
-        ExecutorHelper.getExecutor().runnableExecutor(mAccountQueryTask);
+        if (mBasicAccount == null) {
+            showLoadingView();
+            if (mAccountQueryTask == null) {
+                mAccountQueryTask = new AccountQueryTask(AccountConstant.QTYPE_BASIC,
+                        new AccountQueryCallback());
+            }
+            ExecutorHelper.getExecutor().runnableExecutor(mAccountQueryTask);
+        } else {
+            hideBlankPage();
+        }
     }
 
     private void findViewById() {
