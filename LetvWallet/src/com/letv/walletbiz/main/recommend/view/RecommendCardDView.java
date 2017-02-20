@@ -1,6 +1,7 @@
 package com.letv.walletbiz.main.recommend.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +81,12 @@ public class RecommendCardDView extends LinearLayout implements BaseCardView, Vi
             cardDBean = mCardList.get(i);
             View view = inflater.inflate(R.layout.main_recommend_cardview_d, this, false);
             titleView = (TextView) view.findViewById(R.id.content_title);
-            titleView.setText(cardDBean.title);
+            if (TextUtils.isEmpty(cardDBean.title)) {
+                titleView.setVisibility(View.GONE);
+            } else {
+                titleView.setText(cardDBean.title);
+                titleView.setVisibility(View.VISIBLE);
+            }
             imageView = (ImageView) view.findViewById(R.id.content_img);
             xmain.image().bind(imageView, cardDBean.img);
             view.setTag(cardDBean);
