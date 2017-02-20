@@ -2,10 +2,12 @@ package com.letv.walletbiz;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +42,7 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     public static final int WALLET_LICENCE_ACCEPT_ONCE = 1;
     public static final int WALLET_LICENCE_ACCEPT_FOREVER = 2;
 
-    private int mCurrentTabId = 1;
+    private int mCurrentTabId = -1;
     private LeFragmentTabHost mTabHost;
     private FrameLayout mRealTabCotent;
     public static final String TAG_RECOMMEND = "recommend";
@@ -57,6 +59,11 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null && savedInstanceState.getInt("last_frag_id") != -1) {
+            mCurrentTabId = savedInstanceState.getInt("last_frag_id");
+        }
+
         registerNetWorkReceiver();
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
         setContentView(R.layout.activity_main);
@@ -67,8 +74,92 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
         }
         fragmentManager = getSupportFragmentManager();
         Action.uploadStartApp();
-        findView();
         parseIntent(getIntent());
+
+        initView();
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        parseIntent(intent);
+        if (mCurrentTabId != -1 && mTabHost != null) {
+            mTabHost.setCurrentTab(mCurrentTabId);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("last_frag_id", mCurrentTabId);
+    }
+
+    private void parseIntent(Intent intent) {
+        Uri uri = intent.getData();
+        int tabId = -1;
+        int serviceId = -1;
+        if (uri != null) {
+            String main_tab = uri.getQueryParameter("main_tab");
+            String service_id = uri.getQueryParameter("service_id");
+            try {
+                tabId = Integer.parseInt(main_tab);
+            } catch (NumberFormatException e) {
+                tabId = -1;
+            }
+            try {
+                serviceId = Integer.parseInt(service_id);
+            } catch (NumberFormatException e) {
+                serviceId = -1;
+            }
+        }
+        if (tabId != -1) {
+            mCurrentTabId = tabId;
+        }
+        gotoService(serviceId);
+        getIntent().removeExtra("main_tab");
+        getIntent().removeExtra("service_id");
+
+    }
+
+    private void initView() {
+
+        mTabHost = (LeFragmentTabHost) findViewById(android.R.id.tabhost);
+        mRealTabCotent = (FrameLayout) findViewById(R.id.main_fragment_container);
+        mTabHost.setup(this, fragmentManager, R.id.main_fragment_container, mRealTabCotent);
+        LeTabWidget tabWidget = (LeTabWidget) mTabHost.getTabWidget();
+        tabWidget.setDividerDrawable(null);
+        View indicatorView;
+        LayoutInflater inflater = LayoutInflater.from(this);
+        indicatorView = LeTabWidgetUtils.createIndicatorView(inflater, tabWidget, R.drawable.main_tab_recommend_bg,
+                getString(R.string.main_tab_recommend));
+        mTabHost.addTab(mTabHost.newTabSpec(TAG_RECOMMEND).setIndicator(indicatorView), RecommendFragment.class, null);
+
+        indicatorView = LeTabWidgetUtils.createIndicatorView(inflater, tabWidget, R.drawable.main_tab_wallet_bg,
+                getString(R.string.main_tab_wallet));
+        mTabHost.addTab(mTabHost.newTabSpec(TAG_WALLET).setIndicator(indicatorView), WalletFragment.class, null);
+
+        indicatorView = LeTabWidgetUtils.createIndicatorView(inflater, tabWidget, R.drawable.main_tab_my_bg,
+                getString(R.string.main_tab_my));
+        mTabHost.addTab(mTabHost.newTabSpec(TAG_MY).setIndicator(indicatorView), MeFragment.class, null);
+
+        LeTabWidgetUtils.setTabWidgetLayout(this, tabWidget);
+        tabWidget.setTitleTextColor(getColor(R.color.movie_ticket_tab_tv_color), getColor(R.color.movie_ticket_tab_tv_select_color));
+
+
+        mTabHost.setOnTabChangedListener(this);
+        mTabHost.setFragmentHiddenEnabled(true);
+
+        if (mCurrentTabId == -1) {
+            mCurrentTabId = ID_WALLET;
+        }
+        mTabHost.setCurrentTab(mCurrentTabId);
+        setFragmentitle(mCurrentTabId);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     private void showLoginPrompt(Context context) {
@@ -119,44 +210,8 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
 
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        parseIntent(intent);
-    }
-
-
-    private void parseIntent(Intent intent) {
-        Uri uri = intent.getData();
-        int tabId = 1;
-        int serviceId = -1;
-        if (uri != null) {
-            String main_tab = uri.getQueryParameter("main_tab");
-            String service_id = uri.getQueryParameter("service_id");
-            try {
-                tabId = Integer.parseInt(main_tab);
-            } catch (NumberFormatException e) {
-                tabId = 1;
-            }
-            try {
-                serviceId = Integer.parseInt(service_id);
-            } catch (NumberFormatException e) {
-                serviceId = -1;
-            }
-        } else {
-            tabId = intent.getIntExtra("main_tab", 1);
-            serviceId = intent.getIntExtra("service_id", -1);
-        }
-        gotoTab(tabId);
-        gotoService(serviceId);
-        getIntent().removeExtra("main_tab");
-        getIntent().removeExtra("service_id");
-
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
-        changeActionbar();
     }
 
     @Override
@@ -179,41 +234,6 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
         notifyNetworkChange(isNetworkAvailable);
     }
 
-
-    private void findView() {
-
-        mTabHost = (LeFragmentTabHost) findViewById(android.R.id.tabhost);
-        mRealTabCotent = (FrameLayout) findViewById(R.id.main_fragment_container);
-        mTabHost.setup(this, fragmentManager, R.id.main_fragment_container, mRealTabCotent);
-        LeTabWidget tabWidget = (LeTabWidget) mTabHost.getTabWidget();
-        tabWidget.setDividerDrawable(null);
-        View indicatorView;
-        LayoutInflater inflater = LayoutInflater.from(this);
-        indicatorView = LeTabWidgetUtils.createIndicatorView(inflater, tabWidget, R.drawable.main_tab_recommend_bg,
-                getString(R.string.main_tab_recommend));
-        mTabHost.addTab(mTabHost.newTabSpec(TAG_RECOMMEND).setIndicator(indicatorView), RecommendFragment.class, null);
-
-        indicatorView = LeTabWidgetUtils.createIndicatorView(inflater, tabWidget, R.drawable.main_tab_wallet_bg,
-                getString(R.string.main_tab_wallet));
-        mTabHost.addTab(mTabHost.newTabSpec(TAG_WALLET).setIndicator(indicatorView), WalletFragment.class, null);
-
-        indicatorView = LeTabWidgetUtils.createIndicatorView(inflater, tabWidget, R.drawable.main_tab_my_bg,
-                getString(R.string.main_tab_my));
-        mTabHost.addTab(mTabHost.newTabSpec(TAG_MY).setIndicator(indicatorView), MeFragment.class, null);
-
-        LeTabWidgetUtils.setTabWidgetLayout(this, tabWidget);
-        tabWidget.setTitleTextColor(getColor(R.color.movie_ticket_tab_tv_color), getColor(R.color.movie_ticket_tab_tv_select_color));
-
-
-        mTabHost.setOnTabChangedListener(this);
-        mTabHost.setFragmentHiddenEnabled(true);
-    }
-
-    private void gotoTab(int tab) {
-        if (mTabHost != null) {
-            mTabHost.setCurrentTab(tab);
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -278,14 +298,22 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
 
     private void setFragmentitle(int tabId) {
         int resId = -1;
+        ActionBar ab = this.getSupportActionBar();
         switch (tabId) {
             case ID_RECOMMEND:
                 resId = R.string.main_tab_recommend;
+
+                if (ab != null && !ab.isShowing())
+                    ab.show();
                 break;
             case ID_WALLET:
+                if (ab != null && !ab.isShowing())
+                    ab.show();
                 resId = R.string.main_tab_wallet;
                 break;
             case ID_MY:
+                if (ab != null && ab.isShowing())
+                    ab.hide();
                 resId = R.string.main_tab_my;
                 break;
         }
@@ -310,13 +338,6 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
         }
     }
 
-    private void changeActionbar() {
-        MainFragment main = getCurrentFragment();
-        if (null != main) {
-            main.changeActionbar();
-        }
-    }
-
     private void gotoService(int type) {
         MainFragment main = getCurrentFragment();
         if (null != main) {
@@ -324,7 +345,7 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
         }
     }
 
-    private void notifyNetworkChange(boolean isNetworkAvailable){
+    private void notifyNetworkChange(boolean isNetworkAvailable) {
         MainFragment main = getCurrentFragment();
         if (null != main) {
             main.onNetWorkChanged(isNetworkAvailable);

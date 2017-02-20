@@ -201,10 +201,6 @@ public class RecommendFragment extends MainFragment {
         return true;
     }
 
-    @Override
-    public boolean displayActionbar() {
-        return true;
-    }
 
     @Override
     public void gotoNext(int type) {

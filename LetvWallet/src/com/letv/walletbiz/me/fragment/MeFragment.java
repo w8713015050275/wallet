@@ -188,10 +188,6 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         }
     }
 
-    @Override
-    public boolean displayActionbar() {
-        return false;
-    }
 
     @Override
     public void gotoNext(int type) {

@@ -448,11 +448,6 @@ public class WalletFragment extends MainFragment {
         }
     }
 
-    @Override
-    public boolean displayActionbar() {
-        return true;
-    }
-
     private int gotoType = -1;
 
     @Override

@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.ActionBar;
 import android.view.View;
 
 import com.letv.shared.widget.LeLicenceDialog;
@@ -15,7 +14,6 @@ import com.letv.wallet.common.util.LocationHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.walletbiz.MainActivity;
 import com.letv.walletbiz.R;
-import com.letv.walletbiz.base.activity.BaseWalletFragmentActivity;
 import com.letv.walletbiz.update.util.UpdateUtil;
 
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public abstract class MainFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //第一次加载时，控制actionbar的展示
-        changeActionbar();
+        //changeActionbar();
     }
 
     @Override
@@ -222,7 +220,7 @@ public abstract class MainFragment extends BaseFragment {
 
     public abstract void onNetWorkChanged(boolean isNetworkAvailable);
 
-    public abstract boolean displayActionbar();
+    //public abstract boolean displayActionbar();
 
     public abstract void gotoNext(int type);
 
@@ -232,22 +230,22 @@ public abstract class MainFragment extends BaseFragment {
 
         //一直在主页点击跳转时，控制顶部actionbar是否展示
         if (!hidden) {
-            changeActionbar();
+            //changeActionbar();
         }
     }
 
     //更改actionbar的显示状态
-    public void changeActionbar() {
-        BaseWalletFragmentActivity a = (BaseWalletFragmentActivity) getActivity();
-        if (a != null) {
-            ActionBar ab = a.getSupportActionBar();
-            if (displayActionbar()) {
-                if (ab != null && !ab.isShowing())
-                    ab.show();
-            } else {
-                if (ab != null && ab.isShowing())
-                    ab.hide();
-            }
-        }
-    }
+//    public void changeActionbar() {
+//        BaseWalletFragmentActivity a = (BaseWalletFragmentActivity) getActivity();
+//        if (a != null) {
+//            ActionBar ab = a.getSupportActionBar();
+//            if (displayActionbar()) {
+//                if (ab != null && !ab.isShowing())
+//                    ab.show();
+//            } else {
+//                if (ab != null && ab.isShowing())
+//                    ab.hide();
+//            }
+//        }
+//    }
 }
