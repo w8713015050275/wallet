@@ -246,7 +246,7 @@ public class RecommendCardView extends LinearLayout {
             if (hasHeader && inflater != null && ((BaseCardView) view).needTopDivider()) {
                 inflater.inflate(R.layout.divider_horizontal, this, true);
             }
-            addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             return true;
         }
         return false;
