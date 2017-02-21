@@ -76,6 +76,7 @@ public class MobileOrderListFragment extends BaseOrderListFragment implements Pa
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            if (!isAdded() || isDetached()) return;
             switch (msg.what) {
                 case PAY_INFO_RET:
                     switch (msg.arg1) {

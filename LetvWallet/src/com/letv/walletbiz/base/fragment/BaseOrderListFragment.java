@@ -321,6 +321,7 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
         // 在Handler中获取消息，重写handleMessage()方法
         @Override
         public void handleMessage(Message msg) {
+            if (!isAdded() || isDetached()) return;
             // 判断消息码是否为1
             switch (msg.what) {
                 case ORDER_LIST_RETURN:
@@ -506,11 +507,10 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
         }
     }
 
-    private void queryOrders(long lastId, int mod, final int limits/* 1 more; -1 refresh*/, final int updatePosition) {
+    private void queryOrders(OrderRequestBean requestBean, long lastId, int mod, final int limits/* 1 more; -1 refresh*/, final int updatePosition) {
         if (mCancelable != null) {
             mCancelable.cancel();
         }
-        OrderRequestBean requestBean = getRequestBean();
         if (requestBean == null || requestBean.reqParams == null || requestBean.reqParams.getQueryStringParams().size() <= 0)
             return;
         BaseRequestParams reqParams = requestBean.reqParams;
@@ -561,6 +561,7 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
         int localMod;
         int localLimits;
         int localposition;
+        OrderRequestBean localRequestBean;
 
         public OrderListTask() {
         }
@@ -570,12 +571,14 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
         }
 
         public void setData(long lastId, int mod, int limits) {
+            this.localRequestBean = getRequestBean();
             this.localLastId = lastId;
             this.localMod = mod;
             this.localLimits = limits;
         }
 
         public void setData(long lastId, int mod, int limits, int updatePosition) {
+            this.localRequestBean = getRequestBean();
             this.localLastId = lastId;
             this.localMod = mod;
             this.localLimits = limits;
@@ -594,7 +597,7 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
                 case ActivityConstant.ORDER.LIST_CONSTANT.MOD_PART_UPDATE:
                     break;
             }
-            queryOrders(this.localLastId, this.localMod, this.localLimits, this.localposition);
+            queryOrders(this.localRequestBean, this.localLastId, this.localMod, this.localLimits, this.localposition);
         }
     }
 
