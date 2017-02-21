@@ -83,7 +83,6 @@
         <activity
             android:name=".mobile.activity.MobileActivity"
             android:exported="true"
-            android:label="@string/label_entity_mobile"
             android:screenOrientation="portrait"
             android:theme="@style/MobileTheme"
             android:windowSoftInputMode="adjustPan">
