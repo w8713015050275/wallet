@@ -26,9 +26,10 @@ public class RecommendUtils {
         if (context == null || TextUtils.isEmpty(url)) {
             return false;
         }
-        String decodeUrl = Uri.decode(url);
+        String decodeUrl = url;
         Intent intent = null;
         if (decodeUrl.startsWith("http")) {
+            decodeUrl = Uri.decode(url);
             intent = new Intent(context, WalletMainWebActivity.class);
             intent.putExtra(CommonConstants.EXTRA_URL, decodeUrl);
         } else if (decodeUrl.startsWith("intent:")) {
@@ -47,7 +48,9 @@ public class RecommendUtils {
             }
         }
         if (intent == null) {
-            return false;
+            //以action方式启动
+            decodeUrl = Uri.decode(url);
+            intent = new Intent(decodeUrl);
         }
         try {
             intent.putExtra(WalletConstant.EXTRA_FROM,Action.EVENT_PROP_FROM_CARD);

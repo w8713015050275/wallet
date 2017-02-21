@@ -52,6 +52,7 @@
         <View style="@style/Divider_HorizontalLine_Style" />
 
         <LinearLayout
+            android:id="@+id/coupon_info_label"
             style="@style/SectionBase.Label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,6 +80,7 @@
         <View style="@style/Divider_HorizontalLine_Style" />
 
         <LinearLayout
+            android:id="@+id/coupon_usage_condition_label"
             style="@style/SectionBase.Label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,6 +96,7 @@
         <View style="@style/Divider_HorizontalLine_Style" />
 
         <RelativeLayout
+            android:id="@+id/coupon_usage_condition_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/content_item_bg_color"

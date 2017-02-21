@@ -44,9 +44,12 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
     private ImageView mViewCouponIcon;
     private TextView mViewCouponeName;
     private TextView mViewCouponType;
+    private View mCouponInfoLabelView;
     private LinearLayout mViewInfo;
     private LinearLayout mViewDetail;
     private LabeledTextView mViewUseDetail;
+    private View mCouponUsageConditionLabelView;
+    private View mCouponUsageConditionContainer;
     private TextView tv_usecondition;
 
     private View mUseCouponView;
@@ -156,8 +159,13 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
         mViewCouponeName = (TextView) findViewById(R.id.tv_coupon_name);
         mViewCouponType = (TextView) findViewById(R.id.tv_coupon_type);
 
-        mViewInfo = (LinearLayout) findViewById(R.id.v_info);
+        mCouponUsageConditionLabelView = findViewById(R.id.coupon_usage_condition_label);
+        mCouponUsageConditionContainer = findViewById(R.id.coupon_usage_condition_container);
         tv_usecondition = (TextView) findViewById(R.id.tv_usecondition);
+
+        mCouponInfoLabelView = findViewById(R.id.coupon_info_label);
+        mViewInfo = (LinearLayout) findViewById(R.id.v_info);
+
         mViewUseDetail = (LabeledTextView) findViewById(R.id.ltv_usedetail);
         mViewCouponIcon = (ImageView) findViewById(R.id.img_icon);
 
@@ -173,6 +181,13 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
         mViewCouponeName.setText(coupon.getTitle());
         mViewCouponType.setText(coupon.getService_name());
 
+        if (!TextUtils.isEmpty(coupon.getUse_condition())) {
+            mCouponUsageConditionLabelView.setVisibility(View.VISIBLE);
+            mCouponUsageConditionContainer.setVisibility(View.VISIBLE);
+        } else {
+            mCouponUsageConditionLabelView.setVisibility(View.GONE);
+            mCouponUsageConditionContainer.setVisibility(View.GONE);
+        }
         tv_usecondition.setText(coupon.getUse_condition());
 
         String link = mCoupon.getUse_detail_link();
@@ -185,7 +200,10 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
         }
 
         List<BaseCoupon.CouponItem> descItems = getDescList(coupon.showItems);
-        if (descItems != null) {
+        if (descItems != null && descItems.size() > 0) {
+            mCouponInfoLabelView.setVisibility(View.VISIBLE);
+            mViewInfo.setVisibility(View.VISIBLE);
+
             Collections.sort(descItems, new CouponComparator());
 
             int n = descItems.size();
@@ -202,6 +220,9 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
                     mViewInfo.addView(aView, 0);
                 }
             }
+        } else {
+            mCouponInfoLabelView.setVisibility(View.GONE);
+            mViewInfo.setVisibility(View.GONE);
         }
 
         if (coupon.state == BaseCoupon.STATE_UNUSE) {
