@@ -148,12 +148,14 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         // 在Handler中获取消息，重写handleMessage()方法
         @Override
         public void handleMessage(Message msg) {
+            if (isFinishing()) return;
             // 判断消息码是否为1
             switch (msg.what) {
                 case CHECK_STATUS:
                     checkAllStatus();
                     break;
                 case UPDATE_DOC_PROMPT:
+                    mDocPromptAsyncT = null;
                     if (msg.obj != null) {
                         mDocPromptBean = (DocPromptBean) msg.obj;
                         if (!TextUtils.isEmpty(mDocPromptBean.getDoc_content())) {
@@ -1131,56 +1133,42 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             if (mDocPromptAsyncT == null) {
                 mDocPromptAsyncT = new DocPromptTask();
             }
-            Object[] objParams = new Object[]{docKey};
-            mDocPromptAsyncT.execute(objParams);
+            mDocPromptAsyncT.setDocKey(docKey);
+            ExecutorHelper.getExecutor().runnableExecutor(mDocPromptAsyncT);
         } else {
             updateDocPrompt(mDocPromptBean);
         }
     }
 
-    private class DocPromptTask extends AsyncTask<Object, Integer, BaseResponse<DocPromptBean>> {
+    private class DocPromptTask implements Runnable {
 
-        public DocPromptTask() {
+        private String mDocKey;
+
+        public void setDocKey(String docKey) {
+            this.mDocKey = docKey;
         }
 
         @Override
-        protected void onPostExecute(BaseResponse<DocPromptBean> result) {
-            if (MobileActivity.this.isFinishing() || isCancelled()) return;
-            LogHelper.i("[%S] Response data", TAG);
-            DocPromptBean docPromptBean = null;
-            if (result != null) {
-                docPromptBean = result.data;
-            }
-            updateDocPrompt(docPromptBean);
-            mDocPromptAsyncT = null;
-        }
-
-        @Override
-        protected BaseResponse<DocPromptBean> doInBackground(Object... params) {
+        public void run() {
+            if (TextUtils.isEmpty(mDocKey)) return;
             BaseResponse<DocPromptBean> response = null;
             try {
                 String PATH = MobileConstant.PATH.DOC;
                 LogHelper.i("[%S] request DocPrompt data", TAG);
-                String docKey = params[0].toString();
                 BaseRequestParams reqParams = new BaseRequestParams(PATH);
-                reqParams.addQueryStringParameter(MobileConstant.PARAM.DOC_KEY, docKey);
+                reqParams.addQueryStringParameter(MobileConstant.PARAM.DOC_KEY, mDocKey);
                 TypeToken typeToken = new TypeToken<BaseResponse<DocPromptBean>>() {
                 };
                 response = xmain.http().getSync(reqParams, typeToken.getType());
             } catch (Exception e) {
             } catch (Throwable throwable) {
             }
-            return response;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            if (isCancelled()) return;
+            LogHelper.i("[%S] Response data", TAG);
+            DocPromptBean docPromptBean = null;
+            if (response != null) {
+                docPromptBean = response.data;
+            }
+            updateDocPrompt(docPromptBean);
         }
     }
 }
