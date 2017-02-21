@@ -439,6 +439,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         } else {
             mFlowEntrancell.setVisibility(View.GONE);
         }
+        getPhoneInfo();
         fillPhoneNumber(savedInstanceState, number);
     }
 
@@ -476,12 +477,8 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     }
 
     private void loadData() {
-        if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FLOW) {
-            queryFlowDocPrompt(MobileConstant.DOCKEY.DOC_FLOW_KEY);
-        }
         if (mPhoneEdittext != null && !mHaveProductData) {
-            String content = mPhoneEdittext.getMobileNumber();
-            queryMobileProducts(mFeeOrFlow, content);
+            mPhoneEdittext.onNumberChanged();
         }
         if (mBannerListData == null) {
             getBannerDataAsyncTask();
@@ -737,8 +734,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                                             if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FLOW) {
                                                 updateDocPrompt(null);
                                             }
-                                            mPhoneEdittext.setText(phoneNumber);
-                                            mPhoneEdittext.setSelection(phoneNumber.length());
+                                            setMobileNumberVData(phoneNumber, false);
                                         } else {
                                             showInputRightNumberToast();
                                         }
@@ -872,7 +868,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         HistoryRecordNumberBean.RecordInfoBean record_info = (HistoryRecordNumberBean.RecordInfoBean) view.getTag();
         String number = record_info.getPhoneNum();
         if (!TextUtils.isEmpty(number)) {
-            mPhoneEdittext.setText(number);
+            setMobileNumberVData(number, false);
         }
     }
 
