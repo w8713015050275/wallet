@@ -26,6 +26,8 @@ public class CardListAdapter extends RecyclerView.Adapter {
 
     private CardBin[] mData;
 
+    private static final String CARD_NUM_PREFIX_STAR = "**** **** **** ";
+
     public CardListAdapter(Context context) {
         mContext = context;
     }
@@ -49,8 +51,16 @@ public class CardListAdapter extends RecyclerView.Adapter {
             xmain.image().bind(itemHolder.mBankIcon, cardBin.bankIcon);
             itemHolder.mBankName.setText(cardBin.bankCardName);
             itemHolder.mCardType.setText(getCardType(cardBin.cardType));
-            itemHolder.mCardNum.setText(cardBin.bankCard);
+            itemHolder.mCardNum.setText(formatBankCard(cardBin.bankCard));
         }
+    }
+
+    private String formatBankCard(String originalCard) {
+        if (TextUtils.isEmpty(originalCard) || originalCard.length() < 4) {
+            return null;
+        }
+
+        return CARD_NUM_PREFIX_STAR + originalCard.substring(originalCard.length() - 4, originalCard.length());
     }
 
     @Override
