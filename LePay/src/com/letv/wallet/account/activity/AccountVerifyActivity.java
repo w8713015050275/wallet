@@ -150,12 +150,16 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                 @Override
                 public void onSuccess(Object result) {
                     sendMsgTask = null;
+                    tvGetSmsCode.startTick();
                 }
 
                 @Override
                 public void onError(int errorCode, String errorMsg) {
                     LogHelper.e("sendSmsCode onError : errorCode = " + errorCode + " errorMsg = " + errorMsg);
                     sendMsgTask = null;
+                    if (errorCode == AccountConstant.RspCode.ERRNO_SEND_MSG_FAILED) {
+                        Toast.makeText(PayApplication.getApplication(), R.string.account_verify_sms_send_fail, Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
@@ -166,7 +170,6 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                 }
             });
             editSmsCode.setError(null);
-            tvGetSmsCode.startTick();
             ExecutorHelper.getExecutor().runnableExecutor(sendMsgTask);
         }
     }

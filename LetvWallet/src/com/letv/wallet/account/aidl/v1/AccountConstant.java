@@ -116,6 +116,9 @@ public class AccountConstant {
         /** 卡bin查询 错误号 **/
         public static final int ERRNO_BANK_CARD_ERRO = 10107; // 银行卡号错误
 
+        /**  发送短信失败 错误码**/
+        public static final int ERRNO_SEND_MSG_FAILED = 10108;
+
         /** 自定义错误妈 **/
         public static final int ERRNO_NO_NETWORK = -1; // 无网络
         public static final int ERROR_NETWORK = -2; // 网络错误

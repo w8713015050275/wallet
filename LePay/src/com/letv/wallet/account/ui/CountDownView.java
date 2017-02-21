@@ -38,18 +38,11 @@ public class CountDownView extends TextView {
     public CountDownView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         strS = getResources().getString(R.string.account_verify_countdoun_s);
-        long lastTick = SharedPreferencesHelper.getLong(ACCOUNT_VERIFY_LAST_SMSCODE_TIME, 0);
-        if (lastTick != 0 && System.currentTimeMillis() - lastTick < DURATION) {
-            mTimer = new TimeCount(System.currentTimeMillis() - lastTick, INTERVAL);
-            mTimer.start();
-        }else{
-            setText(R.string.account_verify_get_sms_code);
-            setEnabled(true);
-        }
+        setText(R.string.account_verify_get_sms_code);
+        setEnabled(true);
     }
 
     public void startTick(){
-        SharedPreferencesHelper.putLong(ACCOUNT_VERIFY_LAST_SMSCODE_TIME, System.currentTimeMillis());
         mTimer = new TimeCount(DURATION, INTERVAL);
         mTimer.start();
     }
