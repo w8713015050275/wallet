@@ -29,5 +29,6 @@
     <string name="account_card_menu_title">Help</string>
     <string name="account_card_item_click_tip">Temporarily unable to operate, please check help</string>
     <string name="account_verify_sms_send_fail">The SMS code is getting too frequent, please try again later</string>
+    <string name="account_card_list_empty">No card</string>
 
 </resources>

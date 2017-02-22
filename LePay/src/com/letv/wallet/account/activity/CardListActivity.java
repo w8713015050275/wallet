@@ -110,7 +110,6 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
     }
 
     private void loadData(boolean isForce){
-        btnAddCard.setEnabled(true);
         if (!isForce && isDataValidate) { //非强制更新 & 数据未失效 返回
             return;
         }
@@ -150,23 +149,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAddCard:
-                Action.uploadCustom(EventType.Add, Action.ACCOUNT_CARD_LIST_CARD_ADD);
-
-                isDataValidate = false ; //返回 更新数据
-
-                if (ACCOUNT_FAIL_REASON_PHONE_NULL) {
-                      //无手机号开户失败, 跳转到绑定手机号H5
-                    jumpWeb(AccountConstant.JTYPE_SSO_BIND_MOBILE);
-                    ACCOUNT_FAIL_REASON_PHONE_NULL = false;
-                    return;
-                }
-                if (!hasVerifyAccount) {
-                    startActivity(ActionUtils.newIntent(this, AccountVerifyActivity.class, Action.EVENT_PROP_FROM_ACCOUNT_CARD_LIST));
-                    return;
-                }
-                // 已开户 & 已实名
-                jumpWeb(AccountConstant.JTYPE_ADD_CARD);
-
+                checkBindCard();
                 break;
         }
     }
@@ -222,12 +205,14 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                 public void onSuccess(Object result) {
                     hideLoadingView();
                     hasCreateAccount = true;
+                    checkEmptyPage(getString(R.string.account_card_add_bankcard)); //开户成功，显示添加卡片，点击去实名认证
                 }
                 @Override
                 public void onError(int errorCode, String errorMsg) {
                     hideLoadingView();
                     if (errorCode == AccountConstant.RspCode.ERRNO_MOBILE_EMPTY) {
                         ACCOUNT_FAIL_REASON_PHONE_NULL = true;
+                        checkEmptyPage(getString(R.string.account_card_add_bankcard)); //无手机号开户失败，显示添加卡片 点击去绑手机号
                     }else if(errorCode == AccountConstant.RspCode.ERROR_NETWORK){
                         showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL).getIconView().setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -236,10 +221,12 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                                 createAccount();
                             }
                         });
+                        return;
                     }else {
                         LogHelper.e("[%S] : createAccount errorCode = " + errorCode + " errorMsg = " + errorMsg, TAG);
-                        btnAddCard.setEnabled(false); //其他原因开户失败， 禁止添加卡片
+                        checkEmptyPage(null); //其他原因开户失败
                     }
+
                 }
 
                 @Override
@@ -265,6 +252,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                     if (checkCreateAccount(true)) {
                         hideLoadingView();
                         upateCardList(result == null ? null:result.cardList);
+                        checkEmptyPage(getString(R.string.account_card_add_bankcard));
                     }
                 }
 
@@ -289,7 +277,12 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                 public void onNoNet() {
                     hideLoadingView();
                     queryTask = null;
-                    Toast.makeText(PayApplication.getApplication(), R.string.empty_no_network, Toast.LENGTH_SHORT).show();
+                    if (mAdapter.getItemCount() > 0) {
+                        Toast.makeText(PayApplication.getApplication(), R.string.empty_no_network, Toast.LENGTH_SHORT).show();
+                    }else {
+                        showBlankPage(BlankPage.STATE_NO_NETWORK);
+                    }
+
                 }
             });
             ExecutorHelper.getExecutor().runnableExecutor(queryTask);
@@ -386,5 +379,37 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         startActivity(intent);
     }
 
+    private void checkBindCard(){
+        Action.uploadCustom(EventType.Add, Action.ACCOUNT_CARD_LIST_CARD_ADD);
 
+        isDataValidate = false ; //返回 更新数据
+
+        if (ACCOUNT_FAIL_REASON_PHONE_NULL) {
+            //无手机号开户失败, 跳转到绑定手机号H5
+            jumpWeb(AccountConstant.JTYPE_SSO_BIND_MOBILE);
+            ACCOUNT_FAIL_REASON_PHONE_NULL = false;
+            return;
+        }
+        if (!hasVerifyAccount) {
+            startActivity(ActionUtils.newIntent(this, AccountVerifyActivity.class, Action.EVENT_PROP_FROM_ACCOUNT_CARD_LIST));
+            return;
+        }
+        // 已开户 & 已实名
+        jumpWeb(AccountConstant.JTYPE_ADD_CARD);
+    }
+
+    private void checkEmptyPage(String primaryText){
+        if (mAdapter.getItemCount() <= 0) {
+            BlankPage blankPage = showBlankPage();
+            blankPage.setCustomPage(getString(R.string.account_card_list_empty), BlankPage.Icon.NO_CLOCK);
+            blankPage.getIconView().setBackground(getDrawable(R.drawable.card_empty_icon));
+            blankPage.setPrimaryText(primaryText);
+            blankPage.getPrimaryBtn().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBindCard();
+                }
+            });
+        }
+    }
 }
