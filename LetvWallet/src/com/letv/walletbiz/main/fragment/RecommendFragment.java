@@ -214,8 +214,11 @@ public class RecommendFragment extends MainFragment {
                 showBlankPage(BlankPage.STATE_NO_NETWORK, mRetryClickListener);
             }
             return;
+        } else {
+            if (mRecommendCardList == null) {
+                loadData(true);
+            }
         }
-        loadData(true);
     }
 
     private void loadData(boolean showLoading) {

@@ -76,6 +76,10 @@ public class RecommendCardBean implements LetvBaseBean {
 
     private boolean isUploadCardExpose = false;
 
+    private boolean hadRequestFooterUrl = false;
+
+    private CardFooter[] requestFooter;
+
     public List<BaseCardBean> getCardContent() {
         if (cardList != null) {
             return cardList;
@@ -112,6 +116,22 @@ public class RecommendCardBean implements LetvBaseBean {
 
     public void setUploadCardExpose(boolean uploadCardExpose) {
         isUploadCardExpose = uploadCardExpose;
+    }
+
+    public boolean isHadRequestFooterUrl() {
+        return hadRequestFooterUrl;
+    }
+
+    public void setHadRequestFooterUrl(boolean hadRequestFooterUrl) {
+        this.hadRequestFooterUrl = hadRequestFooterUrl;
+    }
+
+    public CardFooter[] getRequestFooter() {
+        return requestFooter;
+    }
+
+    public void setRequestFooter(CardFooter[] requestFooter) {
+        this.requestFooter = requestFooter;
     }
 
     public static class CardFooter implements LetvBaseBean, Comparable<CardFooter> {

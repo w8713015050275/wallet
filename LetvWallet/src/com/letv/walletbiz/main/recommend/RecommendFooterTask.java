@@ -13,6 +13,7 @@ import com.letv.wallet.common.util.CommonCallback;
 import com.letv.wallet.common.util.DeviceUtils;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.walletbiz.base.http.client.BaseRequestParams;
+import com.letv.walletbiz.base.http.client.BaseV2ParamBuilder;
 import com.letv.walletbiz.main.recommend.bean.RecommendCardBean.CardFooter;
 
 import org.xutils.http.HttpMethod;
@@ -47,7 +48,7 @@ public class RecommendFooterTask implements Runnable {
 
     @Override
     public void run() {
-        BaseRequestParams params = new BaseRequestParams(mUrl);
+        BaseRequestParams params = new BaseRequestParams(mUrl, new BaseV2ParamBuilder(), null, null);
         if (mParam != null) {
             for (String key : mParam.keySet()) {
                 params.addParameter(key, mParam.get(key));

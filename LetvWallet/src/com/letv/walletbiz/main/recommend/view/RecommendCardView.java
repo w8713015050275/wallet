@@ -57,7 +57,10 @@ public class RecommendCardView extends LinearLayout {
                         Toast.makeText(getContext(), R.string.main_recommend_error_network, Toast.LENGTH_SHORT).show();
                     } else {
                         List<CardFooter> list = (List<CardFooter>) msg.obj;
-                        mCardBean.footer = (list == null ? null : list.toArray(new CardFooter[0]));
+                        if (mCardBean != null) {
+                            mCardBean.setHadRequestFooterUrl(true);
+                        }
+                        mCardBean.setRequestFooter(list == null ? null : list.toArray(new CardFooter[0]));
                         initFooterView();
                     }
                     break;
@@ -73,6 +76,7 @@ public class RecommendCardView extends LinearLayout {
             Message msg = mHandler.obtainMessage(MSG_FOOTER_LOAD_FINISHED);
             msg.obj = result;
             msg.arg1 = errorCode;
+            mHandler.sendMessage(msg);
         }
     };
 
@@ -99,7 +103,8 @@ public class RecommendCardView extends LinearLayout {
                     return;
                 }
             }
-            if (!TextUtils.isEmpty(mCardBean.footer_req_url) && !TextUtils.isEmpty(mCardBean.footer_req_url_method)) {
+            if (!mCardBean.isHadRequestFooterUrl()
+                    && !TextUtils.isEmpty(mCardBean.footer_req_url) && !TextUtils.isEmpty(mCardBean.footer_req_url_method)) {
                 if (!NetworkHelper.isNetworkAvailable()) {
                     Toast.makeText(getContext(), R.string.main_recommend_error_no_network, Toast.LENGTH_SHORT).show();
                     return;
@@ -147,6 +152,9 @@ public class RecommendCardView extends LinearLayout {
             return;
         }
         mCardBean = cardBean;
+        if (mCardBean != null) {
+            mCardBean.setHadRequestFooterUrl(false);
+        }
         initView();
     }
 
@@ -259,11 +267,20 @@ public class RecommendCardView extends LinearLayout {
         if (mCardBean == null) {
             return false;
         }
-        Arrays.sort(mCardBean.footer);
-        CardFooter[] footerArray = mCardBean.footer;
+        CardFooter[] footerArray;
+        if (mCardBean.isHadRequestFooterUrl()) {
+            footerArray = mCardBean.getRequestFooter();
+        } else {
+            footerArray = mCardBean.footer;
+        }
         if (footerArray == null || footerArray.length <= 0) {
+            if (mFooterContainer != null) {
+                removeView(mFooterContainer);
+                mFooterContainer = null;
+            }
             return false;
         }
+        Arrays.sort(footerArray);
         if (mFooterContainer == null) {
             mFooterContainer = new LinearLayout(getContext());
             mFooterContainer.setOrientation(LinearLayout.HORIZONTAL);
