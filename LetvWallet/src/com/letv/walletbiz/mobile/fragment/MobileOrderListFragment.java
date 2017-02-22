@@ -397,7 +397,7 @@ public class MobileOrderListFragment extends BaseOrderListFragment implements Pa
             }
             if (mIdsDescV.isEnabled() && v.getId() == R.id.ibtn_order_action) {
                 //Todo multiple tap
-                mMobileProduct = new MobileProduct(R.string.label_mobile_deposite, mOrderBean);
+                mMobileProduct = new MobileProduct(mOrderBean);
                 getPrePayInfoTask();
             }
         }

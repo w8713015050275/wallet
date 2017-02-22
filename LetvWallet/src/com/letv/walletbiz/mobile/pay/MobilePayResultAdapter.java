@@ -23,7 +23,7 @@ public class MobilePayResultAdapter implements PayResultActivity.PayResultAdapte
 
     @Override
     public int getTitle() {
-        return R.string.movie_order_view_label;
+        return mProduct.getTitle();
     }
 
     @Override

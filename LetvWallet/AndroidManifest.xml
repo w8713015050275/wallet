@@ -120,6 +120,11 @@
             android:label="@string/mobile_order_view_surelabel"
             android:screenOrientation="portrait"
             android:theme="@style/MobileTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="letvwallet" android:host="MobileOrderConfirmation" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".mobile.activity.MobileOrderDetailActivity"

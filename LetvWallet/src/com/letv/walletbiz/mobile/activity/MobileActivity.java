@@ -403,9 +403,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                     ProductBean.product productBean = mProductPanel.getProductItem(id);
                     if (AccountHelper.getInstance().loginLetvAccountIfNot(MobileActivity.this, null) == true) {
                         MobileProduct product = new MobileProduct(
-                                R.string.movie_order_view_label, productBean.getProductId(), productBean.getSkuSN(), productBean.getProductName(),
+                                productBean.getProductId(), productBean.getSkuSN(), productBean.getProductName(),
                                 mPhoneEdittext.getMobileNumber(), productBean.getProductPrice());
-                        product.showOrderSure(MobileActivity.this, mFeeOrFlow, mFrom, mCouponID, mContactType);
+                        product.showOrderSure(MobileActivity.this, mFrom, mFeeOrFlow, mCouponID, mContactType);
                     }
                 }
             }

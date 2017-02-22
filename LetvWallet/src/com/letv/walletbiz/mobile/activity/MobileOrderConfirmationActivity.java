@@ -3,6 +3,7 @@ package com.letv.walletbiz.mobile.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -231,17 +232,11 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     }
 
     private void initV() {
-        Bundle bundle = getIntent().getExtras();
-        mMobileProduct = (MobileProduct) bundle.getSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT);
+        processExtraData();
         if (mMobileProduct == null) {
             finish();
             return;
         }
-        mUcouponId = bundle.getLong(CouponConstant.EXTRA_COUPON_BEAN_ID);
-        mContactType = bundle.getInt(MobileConstant.PARAM.CONTACT_TYPE_KEY);
-        mFeeOrFlow = bundle.getInt(MobileConstant.PARAM.FEEFLOW_KEY);
-        mFrom = bundle.getString(WalletConstant.EXTRA_FROM);
-        mUseUcouponId = mUcouponId;
         mTvProductName = (TextView) findViewById(R.id.tv_product_name);
         mTvNumber = (TextView) findViewById(R.id.tv_number);
         mCouponV = (CouponBrief) findViewById(R.id.v_coupon);
@@ -283,6 +278,43 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                 getOrderSNAsyncTask(mMobileProduct.getNumber(), mMobileProduct.getProductId(), new long[]{mUseUcouponId});
             }
         });
+    }
+
+    private void processExtraData() {
+        Intent in = getIntent();
+        if (in == null) return;
+        Uri uri = in.getData();
+        mFrom = in.getStringExtra(WalletConstant.EXTRA_FROM);
+        if (uri == null) {
+            Bundle bundle = getIntent().getExtras();
+            mMobileProduct = (MobileProduct) bundle.getSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT);
+            mUcouponId = bundle.getLong(CouponConstant.EXTRA_COUPON_BEAN_ID);
+            mContactType = bundle.getInt(MobileConstant.PARAM.CONTACT_TYPE_KEY);
+            mFeeOrFlow = bundle.getInt(MobileConstant.PARAM.FEEFLOW_KEY);
+            mUseUcouponId = mUcouponId;
+        } else {
+            String id = uri.getQueryParameter(MobileConstant.JPRODUCT.ID);
+            String skuSN = uri.getQueryParameter(MobileConstant.JPRODUCT.SKU_SN);
+            String phoneNumber = uri.getQueryParameter(MobileConstant.JPRODUCT.PHONE_NUMBER);
+            String name = uri.getQueryParameter(MobileConstant.JPRODUCT.NAME);
+            String price = uri.getQueryParameter(MobileConstant.JPRODUCT.PRICE);
+            if (TextUtils.isEmpty(id) || TextUtils.isEmpty(skuSN) || TextUtils.isEmpty(phoneNumber)
+                    || TextUtils.isEmpty(name) || TextUtils.isEmpty(price)) {
+                LogHelper.e("[%S] extra params is null", TAG);
+                return;
+            }
+            int product_id = -1;
+            try {
+                product_id = Integer.parseInt(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (product_id == -1) {
+                LogHelper.e("[%S] product_id == -1", TAG);
+                return;
+            }
+            mMobileProduct = new MobileProduct(product_id, skuSN, name, phoneNumber, price);
+        }
     }
 
     public void setData(CouponBean couponBean, int couponlistCount) {

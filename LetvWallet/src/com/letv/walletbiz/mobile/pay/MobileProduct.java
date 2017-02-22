@@ -2,8 +2,10 @@ package com.letv.walletbiz.mobile.pay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.activity.PayResultActivity;
 import com.letv.walletbiz.base.pay.Product;
@@ -24,33 +26,33 @@ public class MobileProduct extends Product {
     private String mSkuSN;
 
 
-    public MobileProduct(int title, String sn, String name, String number, String price) {
-        this(title, sn, name, number, price, System.currentTimeMillis(),
+    public MobileProduct(String sn, String name, String number, String price) {
+        this(sn, name, number, price, System.currentTimeMillis(),
                 MobileConstant.ORDER_STATUS.CREATED);
     }
 
-    public MobileProduct(int title, OrderBean order) {
-        this(title, order.order_sn, order.product_name, order.number,
+    public MobileProduct(OrderBean order) {
+        this(order.order_sn, order.product_name, order.number,
                 order.getPrice(), order.getOrderCTime(), order.getStatusValue());
     }
 
-    public MobileProduct(int title, OrderDetailBean orderDetailBean) {
-        this(title, orderDetailBean.order_sn, orderDetailBean.getSnapshot().getGoods_title(), orderDetailBean.number,
+    public MobileProduct(OrderDetailBean orderDetailBean) {
+        this(orderDetailBean.order_sn, orderDetailBean.getSnapshot().getGoods_title(), orderDetailBean.number,
                 orderDetailBean.getPrice(), orderDetailBean.getOrderCTime(), orderDetailBean.getStatusValue());
         mProductId = orderDetailBean.getSnapshot().getGoods_id();
     }
 
-    public MobileProduct(int title, int productId, String skuSN, String name, String number, String price) {
-        this(title, "", name, number, price, System.currentTimeMillis(),
+    public MobileProduct(int productId, String skuSN, String name, String number, String price) {
+        this("", name, number, price, System.currentTimeMillis(),
                 MobileConstant.ORDER_STATUS.CREATED);
         mProductId = productId;
         mSkuSN = skuSN;
     }
 
-    private MobileProduct(int title, String sn, String name, String number, String price, long time,
+    private MobileProduct(String sn, String name, String number, String price, long time,
                           int status) {
         super();
-        mTitle = title;
+        mTitle = R.string.mobile_order_view_label;
         mSN = sn;
         mName = name;
         mNumber = number;
@@ -66,7 +68,7 @@ public class MobileProduct extends Product {
         mResultAdapter = (PayResultActivity.PayResultAdapter) new MobilePayResultAdapter(this);
     }
 
-    public void showOrderSure(Context context, int feeOrFlow, String from, Long couponID, int contactsType) {
+    public void showOrderSure(Context context, String from, int feeOrFlow, Long couponID, int contactsType) {
         Intent intent = new Intent(context, MobileOrderConfirmationActivity.class);
         Bundle b = new Bundle();
         b.putSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT, this);

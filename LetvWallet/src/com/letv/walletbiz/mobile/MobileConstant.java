@@ -33,6 +33,8 @@ public class MobileConstant {
         public final static String RANK = "product_rank";
         public final static String NAME = "product_name";
         public final static String PRICE = "product_price";
+        public final static String PHONE_NUMBER = "phone_number";
+        public final static String SKU_SN = "sku_sn";
     }
 
     public static final class PARAM {

@@ -72,8 +72,6 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
 
     private Toast mToast;
     private OrderDetailBean mOrderDetailBean;
-    private int mTitleId = 0;
-
 
     private Handler handler = new Handler() {
         @Override
@@ -129,6 +127,7 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
     @Override
     public void setData(View v, OrderBaseBean bean) {
         mOrderDetailBean = (OrderDetailBean) bean;
+        int mTitleId;
         switch (mOrderDetailBean.getStatusValue()) {
             case MobileConstant.ORDER_STATUS.PAY_ONGOING:
             case MobileConstant.ORDER_STATUS.DEPOSITING:
@@ -173,7 +172,7 @@ public class MobileOrderDetailActivity extends OrderDetailActivity implements Pa
                             mToast.show();
                             return;
                         }
-                        mMobileProduct = new MobileProduct(mTitleId, mOrderDetailBean);
+                        mMobileProduct = new MobileProduct(mOrderDetailBean);
                         getPrePayInfoTask();
                     }
                 });
