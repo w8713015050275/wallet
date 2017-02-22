@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.letv.shared.widget.LeCheckBox;
 import com.letv.shared.widget.LeLoadingDialog;
+import com.letv.tracker.enums.Key;
 import com.letv.wallet.PayApplication;
 import com.letv.wallet.R;
 import com.letv.wallet.account.AccountCommonConstant;
@@ -39,6 +40,9 @@ import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by lijunying on 17-2-6.
  */
@@ -57,7 +61,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     private SendMsgTask sendMsgTask;
     private AccountVerifyTask verifyAccountTask;
 
-    private String from ;
+    private String from;
 
 
     @Override
@@ -133,7 +137,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
             case R.id.tvGetSmsCode:
                 if (editPhone.checkValidateWithError()) {
                     sendSmsCode(editPhone.getPhone());
-                }else{
+                } else {
                     editPhone.setFocusable(true);
                 }
                 break;
@@ -179,7 +183,9 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
             verifyAccountTask = new AccountVerifyTask(accountName, identityNum, bankNo, mobile, msgCode, new AccountCommonCallback() {
                 @Override
                 public void onSuccess(Object result) {
-                    Action.uploadCustom(Action.EVENT_TYPE_VERIFY, Action.ACCOUNT_VERIFY_PAGE_VERIFY);
+                    Map<String, Object> props = new HashMap<String, Object>();
+                    props.put(Key.From.getKeyId(), from);
+                    Action.uploadCustom(Action.EVENT_TYPE_VERIFY, Action.ACCOUNT_VERIFY_PAGE_VERIFY, props);
                     verifyAccountTask = null;
                     hideVerifyDialog();
                     setResult(RESULT_OK);
@@ -191,11 +197,11 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                 public void onError(int errorCode, String errorMsg) {
                     verifyAccountTask = null;
                     hideVerifyDialog();
-                    LogHelper.e("verifyAccount onError errorCode = " + errorCode +" errorMsg = " +errorMsg);
+                    LogHelper.e("verifyAccount onError errorCode = " + errorCode + " errorMsg = " + errorMsg);
                     if (errorCode == AccountConstant.RspCode.ERRNO_MSG_CODE_FAILED) {
                         editSmsCode.setError(getString(R.string.account_verify_sms_invalid));
                         return;
-                    } else if (errorCode != AccountConstant.RspCode.ERRNO_USER &&  errorCode != AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                    } else if (errorCode != AccountConstant.RspCode.ERRNO_USER && errorCode != AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
                         errorMsg = getString(R.string.account_verify_fail);
                     }
                     Toast.makeText(PayApplication.getApplication(), errorMsg, Toast.LENGTH_SHORT).show();
@@ -266,7 +272,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         if (checkAgreement.isChecked()) {
             showVefifyDialog();
             checkBankCardNet(editCardNum.getCardNum());
-        }else {
+        } else {
             Toast.makeText(PayApplication.getApplication(), R.string.account_verify_please_check_agreement, Toast.LENGTH_SHORT).show();
         }
 
