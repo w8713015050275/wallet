@@ -204,6 +204,9 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                     } else if (errorCode != AccountConstant.RspCode.ERRNO_USER && errorCode != AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
                         errorMsg = getString(R.string.account_verify_fail);
                     }
+                    editSmsCode.setText("");
+                    editSmsCode.setError(null);
+                    tvGetSmsCode.cancle();
                     Toast.makeText(PayApplication.getApplication(), errorMsg, Toast.LENGTH_SHORT).show();
                 }
 
@@ -230,31 +233,26 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         boolean isShowBtn = false;
         switch (editText.getId()) {
             case R.id.editRealName:
-                LogHelper.e("editRealName");
                 if (editIdNum.isIdValidate() && editCardNum.isCardValidate() && editPhone.isPhoneValidate() && editSmsCode.isSmsCodeValidate()) {
                     isShowBtn = true;
                 }
                 break;
             case R.id.editIdNo:
-                LogHelper.e("editIdNo");
                 if (editRealName.isNameValidate() && editCardNum.isCardValidate() && editPhone.isPhoneValidate() && editSmsCode.isSmsCodeValidate()) {
                     isShowBtn = true;
                 }
                 break;
             case R.id.editCardNum:
-                LogHelper.e("editCardNum");
                 if (editIdNum.isIdValidate() && editRealName.isNameValidate() && editPhone.isPhoneValidate() && editSmsCode.isSmsCodeValidate()) {
                     isShowBtn = true;
                 }
                 break;
             case R.id.editPhone:
-                LogHelper.e("editPhone");
                 if (editIdNum.isIdValidate() && editCardNum.isCardValidate() && editRealName.isNameValidate() && editSmsCode.isSmsCodeValidate()) {
                     isShowBtn = true;
                 }
                 break;
             case R.id.editSmsCode:
-                LogHelper.e("editSmsCode");
                 if (editIdNum.isIdValidate() && editCardNum.isCardValidate() && editPhone.isPhoneValidate() && editRealName.isNameValidate()) {
                     isShowBtn = true;
                 }

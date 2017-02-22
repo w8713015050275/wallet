@@ -19,11 +19,9 @@ import org.w3c.dom.Text;
 
 public class CountDownView extends TextView {
 
-    private TimeCount time;
     private String strS ;
     private static final long DURATION = 60000;
     private static final long INTERVAL = 1000;
-    private static final String ACCOUNT_VERIFY_LAST_SMSCODE_TIME = "accountVerifyLastSmscodeTime";
 
     private TimeCount mTimer ;
 
@@ -50,8 +48,9 @@ public class CountDownView extends TextView {
     public void cancle(){
         if (mTimer != null) {
             mTimer.cancel();
-            SharedPreferencesHelper.putLong(ACCOUNT_VERIFY_LAST_SMSCODE_TIME, 0); //未成功发送短信， 清除缓存
             mTimer = null;
+            setText(R.string.account_verify_get_sms_code);
+            setEnabled(true);
         }
     }
 
