@@ -100,6 +100,11 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             mViewLeLeHuaHome.setOnClickListener(this);
             mViewLeLeHuaBills.setOnClickListener(this);
 
+            //隐藏乐乐花
+            mViewLeLeHuaHome.setVisibility(View.GONE);
+            mViewLeLeHuaBills.setVisibility(View.GONE);
+            mViewLeLeHuaDivider.setVisibility(View.GONE);
+
         } else if (mRootView.getParent() != null) {
             ((ViewGroup) mRootView.getParent()).removeAllViews();
         }
