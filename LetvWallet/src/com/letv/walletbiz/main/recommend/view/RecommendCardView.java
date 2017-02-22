@@ -86,7 +86,7 @@ public class RecommendCardView extends LinearLayout {
             }
 
             HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put(Key.Content.toString(), mCardBean.getAgnesCardType());
+            map.put(Key.Content.getKeyId(), mCardBean.getAgnesCardType());
             if (view instanceof TextView) {
                 map.put(Action.KEY_BUTTON, ((TextView) view).getText());
             }
@@ -137,7 +137,7 @@ public class RecommendCardView extends LinearLayout {
         super.onWindowVisibilityChanged(visibility);
         if (visibility == View.VISIBLE && mCardBean != null && !mCardBean.isUploadCardExpose()) {
             HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put(Key.From.toString(), mCardBean.getAgnesCardType());
+            map.put(Key.From.getKeyId(), mCardBean.getAgnesCardType());
             Action.uploadCustom(EventType.Expose, Action.RECOMMEND_CARDS_EXPOSE, map);
             mCardBean.setUploadCardExpose(true);
         }

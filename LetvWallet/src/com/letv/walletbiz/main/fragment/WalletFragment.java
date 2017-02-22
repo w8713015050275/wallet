@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.letv.tracker.enums.EventType;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
@@ -46,6 +47,9 @@ import com.letv.walletbiz.movie.activity.MovieOrderDetailActivity;
 import com.letv.walletbiz.movie.beans.MovieOrder;
 
 import org.xutils.common.task.PriorityExecutor;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import timehop.stickyheader.RecyclerItemClickListener;
 
@@ -198,6 +202,14 @@ public class WalletFragment extends MainFragment {
 
     @Override
     public void startLoadData() {
+        String from;
+        Map<String, Object> props = new HashMap<>();
+        if (getActivity() != null) {
+            Intent intent = getActivity().getIntent();
+            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+            props.put(WalletConstant.EXTRA_FROM, from);
+        }
+        Action.uploadCustom(EventType.Expose, Action.WALLET_MAIN_EXPOSE, props);
         mRecyclerView.setVisibility(View.VISIBLE);
         if (!hasInitData) {
             initLoadData();

@@ -32,16 +32,22 @@ public class RecommendUtils {
             decodeUrl = Uri.decode(url);
             intent = new Intent(context, WalletMainWebActivity.class);
             intent.putExtra(CommonConstants.EXTRA_URL, decodeUrl);
+            intent.putExtra(WalletConstant.EXTRA_FROM,Action.EVENT_PROP_FROM_CARD);
         } else if (decodeUrl.startsWith("intent:")) {
             try {
                 intent = Intent.parseUri(decodeUrl, Intent.URI_INTENT_SCHEME);
+                intent.putExtra(WalletConstant.EXTRA_FROM,Action.EVENT_PROP_FROM_CARD);
             } catch (Exception e) {
                 LogHelper.d(e.toString());
                 intent = null;
             }
         } else {
             try {
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(decodeUrl));
+                Uri uri = Uri.parse(decodeUrl);
+                if (uri != null) {
+                    uri.buildUpon().appendQueryParameter(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_CARD);
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                }
             } catch (Exception e) {
                 LogHelper.d(e.toString());
                 intent = null;
@@ -53,7 +59,6 @@ public class RecommendUtils {
             intent = new Intent(decodeUrl);
         }
         try {
-            intent.putExtra(WalletConstant.EXTRA_FROM,Action.EVENT_PROP_FROM_CARD);
             context.startActivity(intent);
         } catch (Exception e) {
             LogHelper.e(e);
@@ -69,7 +74,7 @@ public class RecommendUtils {
         Object type = view.getTag();
         HashMap<String, Object> map = new HashMap<String, Object>();
         if (type != null) {
-            map.put(Key.Content.toString(), String.valueOf(type));
+            map.put(Key.Content.getKeyId(), String.valueOf(type));
         }
         Action.uploadCustom(EventType.Click, Action.RECOMMEND_CARDS_CLICK, map);
     }

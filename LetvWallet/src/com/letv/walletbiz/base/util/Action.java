@@ -89,7 +89,7 @@ public class Action extends BaseAction {
     public static final String RECOMMEND_CARDS_BUTTON_CLICK = "12.2.1";
 
     //Me
-    public static final String ME_PAGE_EXPOSE  = "8";
+    public static final String ME_PAGE_EXPOSE = "8";
 
     //EventType
     public static final String EVENTTYPE_VERIFY = "verify";
@@ -111,7 +111,7 @@ public class Action extends BaseAction {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                props.put(Key.Content.toString(), content);
+                props.put(Key.Content.getKeyId(), content);
                 uploadCustomImpl(EventType.Set, widget, props);
             }
         });
@@ -123,7 +123,7 @@ public class Action extends BaseAction {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                props.put(Key.Content.toString(), content);
+                props.put(Key.Content.getKeyId(), content);
                 if (!TextUtils.isEmpty(cinema)) {
                     props.put(PROP_CINEMA, cinema);
                 }
@@ -142,7 +142,7 @@ public class Action extends BaseAction {
             public void run() {
                 Map<String, Object> props = new HashMap<>();
                 if (content != null) {
-                    props.put(Key.Content.toString(), content);
+                    props.put(Key.Content.getKeyId(), content);
                 }
                 if (!TextUtils.isEmpty(cinema)) {
                     props.put(PROP_CINEMA, cinema);
@@ -165,7 +165,7 @@ public class Action extends BaseAction {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                props.put(Key.Content.toString(), content);
+                props.put(Key.Content.getKeyId(), content);
                 uploadCustomImpl(EVENTTYPE_SUBSCRIBE, widget, props);
             }
         });
@@ -176,8 +176,8 @@ public class Action extends BaseAction {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                props.put(Key.Content.toString(), id);
-                props.put(Key.Class.toString(), designerId);
+                props.put(Key.Content.getKeyId(), id);
+                props.put(Key.Class.getKeyId(), designerId);
                 uploadCustomImpl(EventType.Subscrible, widget, props);
             }
         });
@@ -208,17 +208,15 @@ public class Action extends BaseAction {
             public void run() {
                 Map<String, Object> props = new HashMap<>();
                 if (content != null) {
-                    props.put(Key.Content.toString(), content);
+                    props.put(Key.Content.getKeyId(), content);
                 }
                 if (!TextUtils.isEmpty(distance)) {
                     props.put(PROP_DISTANCE, distance);
                 }
                 if (!TextUtils.isEmpty(url)) {
-                    props.put(Key.Url.toString(), url);
+                    props.put(Key.Url.getKeyId(), url);
                 }
-                if (!TextUtils.isEmpty(from)) {
-                    props.put(WalletConstant.EXTRA_FROM, from);
-                }
+                props.put(Key.From.getKeyId(), from);
                 uploadCustomImpl(EventType.Click, widget, props);
             }
         });
@@ -289,8 +287,8 @@ public class Action extends BaseAction {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                props.put(Key.PackageName.toString(), packageName);
-                props.put(Key.Type.toString(), type);
+                props.put(Key.PackageName.getKeyId(), packageName);
+                props.put(Key.Type.getKeyId(), type);
                 uploadCustomImpl(EventType.Upgrade, UPGRADE_SUCCESS, props);
             }
         });
@@ -301,7 +299,7 @@ public class Action extends BaseAction {
             @Override
             public void run() {
                 Map<String, Object> props = new HashMap<>();
-                props.put(Key.PackageName.toString(), packageName);
+                props.put(Key.PackageName.getKeyId(), packageName);
                 uploadCustomImpl(EventType.Install, UPGRADE_AUTOMATIC_INSTALLATION, props);
             }
         });

@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.google.gson.reflect.TypeToken;
 import com.letv.shared.widget.LeBottomSheet;
 import com.letv.tracker.enums.EventType;
+import com.letv.tracker.enums.Key;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
@@ -392,7 +393,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
                 String phoneNumber = mPhoneEdittext.getMobileNumber();
                 if (phoneNumber.length() == MOBILE_LEN) {
                     Map<String, Object> props = new HashMap<String, Object>();
-                    props.put(WalletConstant.EXTRA_FROM, mFrom);
+                    props.put(Key.From.getKeyId(), mFrom);
                     if (mFeeOrFlow == PRODUCT_TYPE.MOBILE_FEE) {
                         Action.uploadCustom(EventType.Click, Action.MOBILE_FEE_PRODUCT_CLICK, props);
                     } else {

@@ -109,13 +109,11 @@ public abstract class BaseAction {
             public void run() {
                 Map<String, Object> props = new HashMap<>();
                 if (content != null) {
-                    props.put(Key.Content.toString(), content);
+                    props.put(Key.Content.getKeyId(), content);
                 }
-                if (!TextUtils.isEmpty(from)) {
-                    props.put(Key.From.toString(), from);
-                }
+                props.put(Key.From.getKeyId(), from);
                 if (!TextUtils.isEmpty(to)) {
-                    props.put(Key.To.toString(), to);
+                    props.put(Key.To.getKeyId(), to);
                 }
                 uploadCustomImpl(EventType.Expose, widget, props);
             }
@@ -183,13 +181,24 @@ public abstract class BaseAction {
         }
         if (prop != null) {
             for (Map.Entry<String, Object> entry : prop.entrySet()) {
-                if (!TextUtils.isEmpty(entry.getKey()) && entry.getValue() != null) {
-                    if (Key.isExsited(entry.getKey())) {
-                        event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
+                if (!TextUtils.isEmpty(entry.getKey())) {
+                    if (entry.getKey().equals(Key.From.getKeyId())) {
+                        String value = "";
+                        if (entry.getValue() != null) {
+                            value = entry.getValue().toString();
+                        }
+                        event.addProp(Key.valueOf(entry.getKey()), value);
+                        LogHelper.i("[%S] Agen " + entry.getKey() + " = " + value, TAG);
                     } else {
-                        event.addProp(entry.getKey(), entry.getValue().toString());
+                        if (entry.getValue() != null) {
+                            if (Key.isExsited(entry.getKey())) {
+                                event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
+                            } else {
+                                event.addProp(entry.getKey(), entry.getValue().toString());
+                            }
+                        }
+                        LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
                     }
-                    LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
                 }
             }
         }
@@ -206,13 +215,22 @@ public abstract class BaseAction {
         Event event = wdt.createEvent(eventType);
         if (prop != null) {
             for (Map.Entry<String, Object> entry : prop.entrySet()) {
-                if (!TextUtils.isEmpty(entry.getKey()) && entry.getValue() != null) {
-                    if (Key.isExsited(entry.getKey())) {
-                        event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
+                if (!TextUtils.isEmpty(entry.getKey())) {
+                    if (entry.getKey().equals(Key.From.getKeyId())) {
+                        String value = "";
+                        if (entry.getValue() != null) {
+                            value = entry.getValue().toString();
+                        }
+                        event.addProp(Key.valueOf(entry.getKey()), value);
+                        LogHelper.i("[%S] Agen " + entry.getKey() + " = " + value, TAG);
                     } else {
-                        event.addProp(entry.getKey(), entry.getValue().toString());
+                        if (Key.isExsited(entry.getKey())) {
+                            event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
+                        } else {
+                            event.addProp(entry.getKey(), entry.getValue().toString());
+                        }
+                        LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
                     }
-                    LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
                 }
             }
         }

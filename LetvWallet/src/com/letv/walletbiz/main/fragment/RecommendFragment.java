@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.letv.tracker.enums.EventType;
+import com.letv.tracker.enums.Key;
 import com.letv.wallet.common.util.CommonCallback;
 import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.ExecutorHelper;
@@ -132,7 +133,6 @@ public class RecommendFragment extends MainFragment {
         mLocationHelper = LocationHelper.getInstance();
         mLocationHelper.addLocationCallback(mLocationCallback);
         mLocationHelper.getAddress(false);
-        Action.uploadCustom(EventType.Expose, Action.RECOMMEND_PAGE_EXPOSE);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class RecommendFragment extends MainFragment {
         if (getActivity() != null) {
             Intent intent = getActivity().getIntent();
             from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
-            props.put(WalletConstant.EXTRA_FROM, from);
+            props.put(Key.From.getKeyId(), from);
         }
         Action.uploadCustom(EventType.Expose, Action.RECOMMEND_PAGE_EXPOSE, props);
     }
