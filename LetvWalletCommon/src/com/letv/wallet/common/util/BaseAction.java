@@ -36,7 +36,9 @@ public abstract class BaseAction {
     public static final String EVENT_PROP_FROM_BANNER = "wallet_banner";
     public static final String EVENT_PROP_FROM_CARD = "wallet_card";
 
-    /** 账户相关 **/
+    /**
+     * 账户相关
+     **/
     public static final String EVENT_PROP_FROM_ACCOUNT_CARD_LIST = "card";
 
     public static final String EVENT_TYPE_VERIFY = "verify";
@@ -166,46 +168,13 @@ public abstract class BaseAction {
         uploadCustomImpl(eventType, widget, null);
     }
 
-    protected static void uploadCustomImpl(String eventType, String widget, Map<String, Object> prop) {
-        if (TextUtils.isEmpty(widget)) {
-            LogHelper.i("[%S] Agen widget == null", TAG);
-            return;
+    protected static void uploadCustomImpl(EventType eventType, String widget, Map<String, Object> prop) {
+        if (eventType != null) {
+            uploadCustomImpl(eventType.getEventId(), widget, prop);
         }
-        App app = getApp();
-        Widget wdt = app.createWidget(widget);
-        Event event;
-        if (EventType.isExsited(eventType)) {
-            event = wdt.createEvent(EventType.valueOf(eventType));
-        } else {
-            event = wdt.createEvent(eventType);
-        }
-        if (prop != null) {
-            for (Map.Entry<String, Object> entry : prop.entrySet()) {
-                if (!TextUtils.isEmpty(entry.getKey())) {
-                    if (entry.getKey().equals(Key.From.getKeyId())) {
-                        String value = "";
-                        if (entry.getValue() != null) {
-                            value = entry.getValue().toString();
-                        }
-                        event.addProp(Key.valueOf(entry.getKey()), value);
-                        LogHelper.i("[%S] Agen " + entry.getKey() + " = " + value, TAG);
-                    } else {
-                        if (entry.getValue() != null) {
-                            if (Key.isExsited(entry.getKey())) {
-                                event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
-                            } else {
-                                event.addProp(entry.getKey(), entry.getValue().toString());
-                            }
-                        }
-                        LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
-                    }
-                }
-            }
-        }
-        Agnes.getInstance().report(event);
     }
 
-    protected static void uploadCustomImpl(EventType eventType, String widget, Map<String, Object> prop) {
+    protected static void uploadCustomImpl(String eventType, String widget, Map<String, Object> prop) {
         if (TextUtils.isEmpty(widget)) {
             LogHelper.i("[%S] Agen widget == null", TAG);
             return;
@@ -221,19 +190,18 @@ public abstract class BaseAction {
                         if (entry.getValue() != null) {
                             value = entry.getValue().toString();
                         }
-                        event.addProp(Key.valueOf(entry.getKey()), value);
+                        event.addProp(entry.getKey(), value);
                         LogHelper.i("[%S] Agen " + entry.getKey() + " = " + value, TAG);
                     } else {
-                        if (Key.isExsited(entry.getKey())) {
-                            event.addProp(Key.valueOf(entry.getKey()), entry.getValue().toString());
-                        } else {
+                        if (entry.getValue() != null) {
                             event.addProp(entry.getKey(), entry.getValue().toString());
+                            LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
                         }
-                        LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
                     }
                 }
             }
         }
         Agnes.getInstance().report(event);
     }
+
 }
