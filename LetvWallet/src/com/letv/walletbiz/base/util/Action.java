@@ -18,6 +18,9 @@ public class Action extends BaseAction {
     public static final String WALLET_HOME_COUPON = "1.2";
     public static final String COUPON_EXPOSE = "1.3";
 
+    //首页卡券的曝光
+    public static final String WALLET_HOME_COUPON_EXPOSE = "1.5";
+
     public static final String WALLET_HOME_BANNER = "2.1";
     public static final String WALLET_HOME_LIST = "s.";
 

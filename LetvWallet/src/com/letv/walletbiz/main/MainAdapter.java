@@ -32,8 +32,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_BANNER = 1;
     private static final int VIEW_TYPE_SERVICE = 2;
-    private static final int VIEW_TYPE_CARD_COUPON = 3;
-    private static final int VIEW_TYPE_COUPON = 4;
+    public static final int VIEW_TYPE_CARD_COUPON = 3;
+    public static final int VIEW_TYPE_COUPON = 4;
 
     public static final int POSITION_BANNER = 0;
     public static final int POSITION_SERVICE = 1;
@@ -211,6 +211,24 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             count += mCouponList.length;
         }
         return count;
+    }
+
+    public int getDataPosition(int position) {
+        if (position < HEADER_COUNT) {
+            return 0;
+        }
+        position -= HEADER_COUNT;
+        if (mMovieOrderList != null) {
+            if (position < mMovieOrderList.length) {
+                return position;
+            } else {
+                position -= mMovieOrderList.length;
+            }
+        }
+        if (mCouponList != null && position < mCouponList.length) {
+            return position;
+        }
+        return 0;
     }
 
     private void bindBannerView(BannerViewHolder holder, WalletBannerBean[] bannerList) {

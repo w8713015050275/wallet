@@ -135,6 +135,37 @@ public class WalletFragment extends MainFragment {
                         loadMoreCoupon();
                     }
                 }
+                //添加数据埋点
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && mAdapter != null) {
+                    //判断是否有卡券数据
+                    if (mAdapter.getItemCount() > mAdapter.HEADER_COUNT) {
+                        //获取此次滑动的初始位置和最终停止的位置
+                        int first = mLayoutManager.findFirstVisibleItemPosition();
+                        int last = mLayoutManager.findLastVisibleItemPosition();
+
+                        for (int i = first; i <= last; i++) {
+                            int type=mAdapter.getItemViewType(i);
+                            if(type==MainAdapter.VIEW_TYPE_CARD_COUPON){
+                                MovieOrder order= (MovieOrder)mAdapter.getItem(i);
+                                if(!order.upData){
+                                    //数据埋点，并且把数据是否已经添加数据埋点置为true，防止多次上传
+                                    Action.uploadExpose(Action.WALLET_HOME_COUPON_EXPOSE,mAdapter.getDataPosition(i)+1,"","");
+                                    order.upData=true;
+                                }
+                            }else if(type==MainAdapter.VIEW_TYPE_COUPON){
+                                //数据埋点，并且把数据是否已经添加数据埋点置为true，防止多次上传
+                                BaseCoupon coupon= (BaseCoupon)mAdapter.getItem(i);
+                                if(!coupon.upData){
+                                    //数据埋点
+                                    Action.uploadExpose(Action.WALLET_HOME_COUPON_EXPOSE,mAdapter.getDataPosition(i)+1,"","");
+                                    coupon.upData=true;
+                                }
+                            }else{
+                                continue;
+                            }
+                        }
+                    }
+                }
             }
 
             @Override

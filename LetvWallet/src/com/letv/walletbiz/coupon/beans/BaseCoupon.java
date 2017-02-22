@@ -32,6 +32,8 @@ public class BaseCoupon implements LetvBaseBean {
     public String valid_date_desc;
     public int state;
     public CouponItem[] showItems;
+    //是否已经上传数据埋点
+    public boolean upData = false;
 
     public static class CouponItem implements LetvBaseBean {
 

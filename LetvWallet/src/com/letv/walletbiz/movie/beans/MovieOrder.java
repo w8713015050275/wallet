@@ -164,6 +164,10 @@ public class MovieOrder implements OrderBaseBean, BaseMovieOrder {
     public String code;
 
 
+    //是否已经上传数据埋点
+    public boolean upData = false;
+
+
     public static class TicketInfo implements LetvBaseBean {
 
         /**
