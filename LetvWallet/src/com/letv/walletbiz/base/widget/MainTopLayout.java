@@ -164,6 +164,10 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
             mTopTask = new MainTopTask(context, mTopCallback);
             mExecutor.execute(mTopTask);
         }
+        //每次返回界面时，要重新刷新数量，防止用户的操作，此界面没有及时更新
+        if (null != getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK)) {
+            loadAccountData();
+        }
     }
 
     private WalletTopListBean lastResult;
