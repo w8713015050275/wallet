@@ -160,5 +160,7 @@
     <color name="me_primary_color">#447DE9</color>
     <color name="me_tab_default_color">#808080</color>
 
+    <color name="recommend_footer_text_color">#5272AE</color>
+
 
 </resources>

@@ -123,7 +123,11 @@ public class RecommendCardEView extends LinearLayout implements BaseCardView {
                 textView.setText(DateUtils.getDayStr(System.currentTimeMillis()));
                 textView.setTextAppearance(R.style.Recommend_Card_Title);
                 int pading = (int) DensityUtils.dip2px(10);
-                textView.setPadding(0, pading, 0, pading);
+                if (i == (mCardList.size() - 1)) {
+                    textView.setPadding(0, pading, 0, 0);
+                } else {
+                    textView.setPadding(0, pading, 0, pading);
+                }
                 textView.setGravity(Gravity.CENTER);
                 textView.setTag(bean);
                 final CardDateSetListener listener = new CardDateSetListener();

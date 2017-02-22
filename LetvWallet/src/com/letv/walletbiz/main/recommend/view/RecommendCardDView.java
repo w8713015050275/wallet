@@ -87,10 +87,26 @@ public class RecommendCardDView extends LinearLayout implements BaseCardView, Vi
                 titleView.setText(cardDBean.title);
                 titleView.setVisibility(View.VISIBLE);
             }
+
             imageView = (ImageView) view.findViewById(R.id.content_img);
-            xmain.image().bind(imageView, cardDBean.img);
+            if (TextUtils.isEmpty(cardDBean.img)) {
+                imageView.setVisibility(View.GONE);
+            } else {
+                imageView.setVisibility(View.VISIBLE);
+                xmain.image().bind(imageView, cardDBean.img);
+            }
+            if (!TextUtils.isEmpty(cardDBean.title) && !TextUtils.isEmpty(cardDBean.img)) {
+                titleView.setPadding(0, 0, 0, padding);
+            } else {
+                titleView.setPadding(0, 0, 0, 0);
+            }
+
             view.setTag(cardDBean);
-            view.setPadding(0, padding, 0, padding);
+            if (i == (mCardList.size() - 1)) {
+                view.setPadding(0, padding, 0, 0);
+            } else {
+                view.setPadding(0, padding, 0, padding);
+            }
             view.setOnClickListener(this);
             addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             if (mCardList.size() > 1 && i != (mCardList.size() - 1)) {

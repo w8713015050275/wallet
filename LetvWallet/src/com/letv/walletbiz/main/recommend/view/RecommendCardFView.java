@@ -51,7 +51,7 @@ public class RecommendCardFView extends LinearLayout implements BaseCardView {
         super(context, attrs, defStyleAttr);
         setOrientation(VERTICAL);
         int padding = (int) DensityUtils.dip2px(10);
-        setPadding(0, padding, 0, padding);
+        setPadding(0, padding, 0, 0);
         View.inflate(context, R.layout.main_recommend_cardview_f, this);
         mTitleView = (TextView) findViewById(R.id.content_title);
         mRecyclerView = (RecyclerView) findViewById(R.id.content_recyclerview);

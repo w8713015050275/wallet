@@ -1,7 +1,6 @@
 package com.letv.walletbiz.main.recommend.view;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.location.Address;
 import android.os.Handler;
 import android.os.Looper;
@@ -152,8 +151,6 @@ public class RecommendCardView extends LinearLayout {
     }
 
     private void init() {
-        int padding = (int) DensityUtils.dip2px(10);
-        setPadding(padding, padding, padding, padding);
         setOrientation(LinearLayout.VERTICAL);
         setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         setBackgroundResource(R.drawable.main_recommend_card_bg);
@@ -182,6 +179,12 @@ public class RecommendCardView extends LinearLayout {
         mCardBean.setAgnesCardType(builder.toString());
         if (mContentView != null) {
             ((View) mContentView).setTag(mCardBean.getAgnesCardType());
+        }
+        int padding = (int) DensityUtils.dip2px(10);
+        if (hasFooter) {
+            setPadding(padding, padding, padding, (int) DensityUtils.dip2px(16));
+        } else {
+            setPadding(padding, padding, padding, padding);
         }
     }
 
@@ -264,43 +267,33 @@ public class RecommendCardView extends LinearLayout {
         if (mFooterContainer == null) {
             mFooterContainer = new LinearLayout(getContext());
             mFooterContainer.setOrientation(LinearLayout.HORIZONTAL);
-            int padding = (int) DensityUtils.dip2px(10);
-            mFooterContainer.setPadding(0, padding, 0, padding);
+            int padding = (int) DensityUtils.dip2px(16);
+            mFooterContainer.setPadding(0, padding, 0, 0);
             addView(mFooterContainer, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         } else {
             mFooterContainer.removeAllViews();
         }
 
-        addWeightView(mFooterContainer, 1);
-
+        LayoutInflater inflater = LayoutInflater.from(getContext());
         CardFooter footer;
         TextView button;
         for (int i=0; i<footerArray.length; i++) {
             footer = footerArray[i];
             button = new TextView(getContext());
             button.setTextAppearance(R.style.Recommend_Card_Footer);
-            button.setBackgroundResource(R.drawable.main_recommend_footer_button_bg);
             button.setText(footer.key_title);
             button.setGravity(Gravity.CENTER);
             button.setOnClickListener(mFooterClickListener);
             button.setTag(footer);
-            if (i > 0) {
-                addWeightView(mFooterContainer, 1);
-            }
-            Resources resources = getResources();
-            LayoutParams params = new LayoutParams(
-                    resources.getDimensionPixelOffset(R.dimen.recommend_footer_button_width),
-                    resources.getDimensionPixelOffset(R.dimen.recommend_footer_button_height));
+            LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            params.weight = 1;
             mFooterContainer.addView(button, params);
+            if (footerArray.length > 1 && i != (footerArray.length - 1)) {
+                View view = inflater.inflate(R.layout.divider_vertical, mFooterContainer, false);
+                view.setBackgroundColor(getResources().getColor(R.color.recommend_footer_text_color, null));
+                mFooterContainer.addView(view);
+            }
         }
-        addWeightView(mFooterContainer, 1);
         return true;
-    }
-
-    private void addWeightView(ViewGroup parent, int weight) {
-        View view = new View(getContext());
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        params.weight = weight;
-        parent.addView(view, params);
     }
 }

@@ -292,8 +292,8 @@
     </style>
 
     <style name="Recommend_Card_Footer">
-        <item name="android:textColor">#808080</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/recommend_footer_text_color</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:lines">1</item>
     </style>
     <!-- Recommend Card end -->

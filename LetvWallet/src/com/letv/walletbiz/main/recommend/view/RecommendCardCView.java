@@ -89,7 +89,11 @@ public class RecommendCardCView extends LinearLayout implements BaseCardView, Vi
             iconView = (ImageView) view.findViewById(R.id.card_icon);
             xmain.image().bind(iconView, cardCBean.img);
             view.setTag(cardCBean);
-            view.setPadding(0, padding, 0, padding);
+            if (i == (mCardList.size() - 1)) {
+                view.setPadding(0, padding, 0, 0);
+            } else {
+                view.setPadding(0, padding, 0, padding);
+            }
             view.setGravity(Gravity.CENTER_VERTICAL);
             view.setOnClickListener(this);
             addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
