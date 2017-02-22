@@ -64,6 +64,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="letvwallet" android:host="main.view"></data>
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.letv.wallet.quickPayment"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".main.WalletMainWebActivity"
