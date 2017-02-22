@@ -1,10 +1,15 @@
 package com.letv.walletbiz.base.widget;
 
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -14,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.letv.wallet.account.aidl.v1.AccountInfo;
+import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.NetworkHelper;
+import com.letv.walletbiz.MainActivity;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.WalletConstant;
@@ -23,6 +31,8 @@ import com.letv.walletbiz.main.bean.WalletTopListBean;
 import org.xutils.common.Callback;
 import org.xutils.image.ImageOptions;
 import org.xutils.xmain;
+
+import java.io.IOException;
 
 /**
  * Created by changjiajie on 16-8-30.
@@ -178,12 +188,34 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
                 intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
                 context.startActivity(intent);
             } else if (this.bean.name.equals(TOP_KEY_BANK)) {
-                Action.uploadClick(Action.QUICK_ENTRY_BANKCARD_CLICK);
-                Intent intent = new Intent("com.letv.wallet.cardlist");
-                if (accountInfo != null && accountInfo.cardList != null) {
-                    intent.putExtra("LePayCardBinInfo", accountInfo.cardList);
+                if (AccountHelper.getInstance().isLogin(context)) {
+                    Action.uploadClick(Action.QUICK_ENTRY_BANKCARD_CLICK);
+                    Intent intent = new Intent("com.letv.wallet.cardlist");
+                    if (accountInfo != null && accountInfo.cardList != null) {
+                        intent.putExtra("LePayCardBinInfo", accountInfo.cardList);
+                    }
+                    context.startActivity(intent);
+                }else {
+                    final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("lepay://setting"));
+                    AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity)context, new AccountManagerCallback() {
+
+                        @Override
+                        public void run(AccountManagerFuture future) {
+                            try {
+                                if (context != null && future.getResult() != null && AccountHelper.getInstance().isLogin(context)) {
+                                    context.startActivity(intent);
+                                }
+                            } catch (OperationCanceledException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (AuthenticatorException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 }
-                context.startActivity(intent);
+
             }
         }
 
