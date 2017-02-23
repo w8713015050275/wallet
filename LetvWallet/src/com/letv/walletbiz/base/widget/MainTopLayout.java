@@ -99,11 +99,8 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
 
         //只所以传递dataSize，不能查找所有的button，防止服务器返回数据更改时，上一次有，这次没有
         setData(bean, buttonNumber);
-        if (null != getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK)) {
-            //这个时候去查询银行卡的数量
-            loadAccountData();
-        }
-
+        //这个时候去查询银行卡的数量
+        loadAccountData();
     }
 
     //当服务器返回的数据错误时，本地只显示一个卡券包
@@ -165,9 +162,7 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
             mExecutor.execute(mTopTask);
         }
         //每次返回界面时，要重新刷新数量，防止用户的操作，此界面没有及时更新
-        if (null != getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK)) {
-            loadAccountData();
-        }
+        loadAccountData();
     }
 
     private WalletTopListBean lastResult;
@@ -205,6 +200,8 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
      */
     public void loadAccountData() {
         if (!isloadAccountData) {
+            setBankButtonClick(false);
+
             isloadAccountData = true;
             if (AccountHelper.getInstance().isLogin(context) && NetworkHelper.isNetworkAvailable()) {
                 String qType = null;
@@ -221,7 +218,21 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
     private boolean checkCreateAccount(boolean isForceCreate) {
         boolean hasCreateAccount = LePayAccountManager.hasCreatedAccount();
         if (!hasCreateAccount && isForceCreate) {
-            LePayAccountManager.getInstance().createAccount(null); //默认开一次户
+            LePayAccountManager.getInstance().createAccount(new LePayCommonCallback(){
+
+                @Override
+                public void onSuccess(Object o) {
+                    setBankButtonClick(true);
+                    isloadAccountData = false;
+                }
+
+                @Override
+                public void onError(int errorCode, String errorMsg) {
+                    setBankButtonClick(true);
+                    isloadAccountData = false;
+                }
+            }
+            ); //默认开一次户
         }
         return hasCreateAccount;
     }
@@ -236,11 +247,15 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
 
             @Override
             public void onSuccess(AccountInfo accountInfo) {
-                isloadAccountData = false;
-                if (checkCreateAccount(true)) {
-                    MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK);
-                    if (null != button) {
+
+                MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK);
+                if (null != button) {
+                    if (checkCreateAccount(true)) {
+                        button.setClickable(true);
                         button.setNumber(accountInfo);
+                        isloadAccountData = false;
+                    }else{
+
                     }
                 }
             }
@@ -249,9 +264,16 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
             public void onError(int errorCode, String errorMsg) {
                 //发生错误时，不做任何改变
                 isloadAccountData = false;
-
+                setBankButtonClick(true);
             }
         });
+    }
+
+    private void setBankButtonClick(boolean click){
+        MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK);
+        if (null != button) {
+            button.setClickable(click);
+        }
     }
 
     @Override

@@ -203,8 +203,13 @@ public class RecommendFragment extends MainFragment {
 
 
     @Override
-    public void gotoNext(int type) {
+    public void gotoNext(int type,Bundle bundle) {
 
+    }
+
+    @Override
+    public void fragmentDisplay() {
+  
     }
 
     @Override

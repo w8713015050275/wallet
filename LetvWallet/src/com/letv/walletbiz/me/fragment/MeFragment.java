@@ -195,8 +195,13 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
 
     @Override
-    public void gotoNext(int type) {
+    public void gotoNext(int type,Bundle bundle) {
 
+    }
+
+    @Override
+    public void fragmentDisplay() {
+      
     }
 
     @Override

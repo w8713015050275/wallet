@@ -117,8 +117,8 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
             mCurrentTabId = tabId;
         }
         gotoService(serviceId);
-        getIntent().removeExtra("main_tab");
-        getIntent().removeExtra("service_id");
+        //getIntent().removeExtra("main_tab");
+        //getIntent().removeExtra("service_id");
 
     }
 
@@ -212,6 +212,7 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     @Override
     protected void onStart() {
         super.onStart();
+        setFragmentDisplay();
     }
 
     @Override
@@ -341,7 +342,20 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     private void gotoService(int type) {
         MainFragment main = getCurrentFragment();
         if (null != main) {
-            main.gotoNext(type);
+            Intent intent = getIntent();
+            if (null != intent) {
+                main.gotoChildScreen(type, intent.getExtras());
+            } else {
+                main.gotoChildScreen(type, null);
+            }
+
+        }
+    }
+
+    private void setFragmentDisplay() {
+        MainFragment main = getCurrentFragment();
+        if (null != main) {
+            main.fragmentDisplay();
         }
     }
 

@@ -86,6 +86,7 @@ public class WalletFragment extends MainFragment {
             serviceId = intent.getIntExtra("service_id", -1);
         }
         gotoType = serviceId;
+        bundle=intent.getExtras();
         return gotoType;
     }
 
@@ -304,7 +305,7 @@ public class WalletFragment extends MainFragment {
         public void onLoadFromNetworkFinished(WalletServiceListBean result, int errorCode, boolean needUpdate) {
             mServiceTask = null;
             //可能会直接跳转到子服务，取决于activity的传递参数
-            gotoNext(gotoType);
+            gotoNext(gotoType,bundle);
 
             if (!needUpdate) {
                 return;
@@ -494,19 +495,15 @@ public class WalletFragment extends MainFragment {
     private int gotoType = -1;
 
     @Override
-    public void gotoNext(int gotoType) {
-
+    public void gotoNext(int gotoType,Bundle bundle) {
         if (gotoType != -1 && mServiceListBean != null && mServiceListBean.list != null && mServiceListBean.list.length > 0) {
             for (final WalletServiceListBean.WalletServiceBean bean : mServiceListBean.list) {
                 if (bean.service_id == gotoType) {
                     Action.uploadExposeTab(Action.WALLET_HOME_LIST + bean.service_id);
                     if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_APP) {
-                        Bundle bundle = null;
                         if (getContext() != null
                                 && !TextUtils.isEmpty(bean.package_name)
                                 && getContext().getPackageName().startsWith(bean.package_name)) {
-                            bundle = new Bundle();
-                            bundle.putString(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
                         }
                         AppUtils.LaunchAppWithBundle(getContext(), bean.package_name, bean.jump_param, bundle);
                     } else if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_WEB) {
@@ -532,6 +529,12 @@ public class WalletFragment extends MainFragment {
             }
             gotoType = -1;
         }
+    }
+
+    @Override
+    public void fragmentDisplay() {
+       
+
     }
 
     @Override

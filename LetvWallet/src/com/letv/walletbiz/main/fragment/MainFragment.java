@@ -33,11 +33,14 @@ public abstract class MainFragment extends BaseFragment {
 
     private static final int PERMISSIONS_REQUEST_CODE = 1;
 
+    private boolean setDisplayVisible = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //第一次加载时，控制actionbar的展示
         //changeActionbar();
+        setDisplayVisible = true;
     }
 
     @Override
@@ -83,7 +86,7 @@ public abstract class MainFragment extends BaseFragment {
             } else if (SharedPreferencesHelper.getInt(MainActivity.WALLET_LICENCE_ACCEPT, MainActivity.WALLET_LICENCE_REJECT) == MainActivity.WALLET_LICENCE_ACCEPT_ONCE && displayLicence) {
                 //当用户选择当次不再提示,并且已经显示过提示框的时候，不在提示用户接受，直接进入接下来的逻辑
                 if (hasPermission()) {
-                    startLoadData();
+                    startOpenData();
                     LocationHelper.getInstance().getAddress(true);
                 } else if (!isRequestingPermissin) {
                     checkMainPermission(PERMISSIONS_REQUEST_CODE);
@@ -95,12 +98,13 @@ public abstract class MainFragment extends BaseFragment {
 
         } else {
             if (hasPermission()) {
-                startLoadData();
+                startOpenData();
                 LocationHelper.getInstance().getAddress(true);
             } else if (!isRequestingPermissin) {
                 checkMainPermission(PERMISSIONS_REQUEST_CODE);
             }
         }
+        setDisplayVisible = false;
 
     }
 
@@ -216,13 +220,29 @@ public abstract class MainFragment extends BaseFragment {
     }
 
 
+    public void startOpenData() {
+        if (setDisplayVisible) {
+            fragmentDisplay();
+        }
+        startLoadData();
+    }
+
     public abstract void startLoadData();
 
     public abstract void onNetWorkChanged(boolean isNetworkAvailable);
 
     //public abstract boolean displayActionbar();
 
-    public abstract void gotoNext(int type);
+    //保存从其它界面跳转时，不同的传递数据
+    public Bundle bundle;
+
+    public void gotoChildScreen(int type, Bundle bundle) {
+        this.bundle = bundle;
+        gotoNext(type, bundle);
+    }
+
+
+    public abstract void gotoNext(int type, Bundle bundle);
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -231,8 +251,11 @@ public abstract class MainFragment extends BaseFragment {
         //一直在主页点击跳转时，控制顶部actionbar是否展示
         if (!hidden) {
             //changeActionbar();
+            fragmentDisplay();
         }
     }
+
+    public abstract void fragmentDisplay();
 
     //更改actionbar的显示状态
 //    public void changeActionbar() {

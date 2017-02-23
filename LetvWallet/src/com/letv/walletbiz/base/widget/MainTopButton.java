@@ -196,7 +196,7 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
                     }
                     context.startActivity(intent);
                 }else {
-                    final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("lepay://setting"));
+                    final Intent intent = new Intent("com.letv.wallet.cardlist");
                     AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity)context, new AccountManagerCallback() {
 
                         @Override
