@@ -64,6 +64,10 @@ public class UpgradeService extends Service {
     private final int RETRY_TO_GET_UPGRADE_INFO = 6;
     private final int QUERY_NEW_VERSION_ASYNC = 7;
 
+    private final int HANDLE_BROADCAST_SCREEN_ON = 8;
+    private final int HANDLE_BROADCAST_SCREEN_OFF = 9;
+    private final int HANDLE_BROADCAST_USER_PRESENT = 10;
+
     private boolean mIsRestartAfterCrashed;
     private boolean mNeedTryToQueryVersion;
 
@@ -213,24 +217,17 @@ public class UpgradeService extends Service {
                     mScreenObserver.startObserver(new ScreenObserver.ScreenStateListener() {
                         @Override
                         public void onScreenOn() {
-                            mScreenIsOff = false;
+                            sendHandlerMessage(HANDLE_BROADCAST_SCREEN_ON,null);
                         }
 
                         @Override
                         public void onScreenOff() {
-                            mScreenIsOff = true;
-                            if (mPendingList2Install ==  null || mPendingList2Install.size() < mNeedToUpgradeApkCount) {
-                                return;
-                            }
-                            boolean inKeyguardMode = UpdateUtil.inKeyguardRestrictedInputMode(UpgradeService.this);
-                            if (inKeyguardMode) {
-                                installPackageIfPossible();
-                            }
+                            sendHandlerMessage(HANDLE_BROADCAST_SCREEN_OFF,null);
                         }
 
                         @Override
                         public void onUserPresent() {
-                            mScreenIsOff = false;
+                            sendHandlerMessage(HANDLE_BROADCAST_USER_PRESENT,null);
                         }
                     });
                     break;
@@ -304,6 +301,25 @@ public class UpgradeService extends Service {
                     break;
                 case QUERY_NEW_VERSION_ASYNC:
                     queryNewVersionSync(null);
+                    break;
+
+                case HANDLE_BROADCAST_SCREEN_ON:
+                    mScreenIsOff = false;
+                    break;
+
+                case HANDLE_BROADCAST_SCREEN_OFF:
+                    mScreenIsOff = true;
+                    if (mPendingList2Install ==  null || mPendingList2Install.size() < mNeedToUpgradeApkCount) {
+                        return;
+                    }
+                    boolean inKeyguardMode = UpdateUtil.inKeyguardRestrictedInputMode(UpgradeService.this);
+                    if (inKeyguardMode) {
+                        installPackageIfPossible();
+                    }
+                    break;
+
+                case HANDLE_BROADCAST_USER_PRESENT:
+                    mScreenIsOff = false;
                     break;
             }
         }
