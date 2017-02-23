@@ -50,7 +50,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     private View mRootView;
 
     private BorderedCircleImageView mUsrIcon;
-    private Button mSetting;
+    private ImageView mSetting;
     private TextView mUsrNickName;
     private ToggleTextView mVerifyFlag;
     private LinearLayout mViewTips, mViewLeLeHuaHome, mViewLeLeHuaBills;
@@ -79,7 +79,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             mRootView = inflater.inflate(R.layout.main_tab_my, container, false);
 
             mUsrIcon = (BorderedCircleImageView) mRootView.findViewById(R.id.img_usr_icon);
-            mSetting = (Button) mRootView.findViewById(R.id.btnSetting);
+            mSetting = (ImageView) mRootView.findViewById(R.id.btnSetting);
             mUsrNickName = (TextView) mRootView.findViewById(R.id.tvNickName);
             mVerifyFlag = (ToggleTextView) mRootView.findViewById(R.id.tvVerfify);
             mViewTips = (LinearLayout) mRootView.findViewById(R.id.viewTips);

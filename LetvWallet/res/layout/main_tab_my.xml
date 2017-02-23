@@ -12,12 +12,13 @@
         android:paddingLeft="@dimen/me_top_info_horizontal_padding"
         android:paddingRight="@dimen/me_top_info_horizontal_padding">
 
-        <Button
+        <ImageView
             android:id="@+id/btnSetting"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:padding="5dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_setting"
+            android:src="@drawable/btn_setting"
             android:layout_alignParentRight="true" />
 
         <com.letv.shared.widget.BorderedCircleImageView
