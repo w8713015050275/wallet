@@ -9,5 +9,6 @@
     <color name="setting_content_bg_color">#447DE9</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="divider_secondary_horizontal_color">#F2F2F2</color>
+    <color name="account_edit_error_color">#F7A623</color>
 
 </resources>

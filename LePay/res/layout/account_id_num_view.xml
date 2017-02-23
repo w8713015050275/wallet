@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.TextInputEditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:inputType="number"
+    android:maxLines="1"
+    android:digits="0123456789xX"
+    android:imeOptions="actionNext"
+    android:background="@null"
+    android:layout_gravity="center_vertical"
+    style="@style/AccountVerifyEditeTextStyle"
+    android:hint="@string/account_verify_input_id_no"/>

@@ -1,17 +1,12 @@
 package com.letv.wallet.account.ui;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 import com.letv.wallet.R;
-import com.letv.wallet.common.util.SharedPreferencesHelper;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by lijunying on 17-2-10.

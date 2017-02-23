@@ -6,8 +6,6 @@ import com.letv.wallet.account.aidl.v1.IAccountCallback;
 import com.letv.wallet.account.aidl.v1.IAccountServiceV1;
 import com.letv.wallet.account.task.AccountCreateTask;
 import com.letv.wallet.account.task.AccountQueryTask;
-import com.letv.wallet.account.task.AccountVerifyTask;
-import com.letv.wallet.account.task.CardbinTask;
 import com.letv.wallet.account.task.RedirectTask;
 import com.letv.wallet.common.util.ExecutorHelper;
 

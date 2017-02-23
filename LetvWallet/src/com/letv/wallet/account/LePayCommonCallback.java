@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.IAccountCallback;
-import com.letv.wallet.common.util.LogHelper;
 
 /**
  * Created by lijunying on 17-1-20.
@@ -51,7 +50,6 @@ public abstract class LePayCommonCallback<T> extends IAccountCallback.Stub {
                 t = (T) bundle.getParcelable(AccountConstant.KEY_LEPAY_RESPONSE);
             }catch (Exception e){
                e.printStackTrace();
-                LogHelper.e("Exception");
             }
         }
         mMainHandler.obtainMessage(SUCCESS).sendToTarget();

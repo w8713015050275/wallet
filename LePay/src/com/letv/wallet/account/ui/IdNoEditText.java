@@ -1,23 +1,15 @@
 package com.letv.wallet.account.ui;
 
 import android.content.Context;
-import android.graphics.Rect;
+import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.widget.Toast;
+import android.view.View;
 
-import com.letv.wallet.PayApplication;
 import com.letv.wallet.R;
-import com.letv.wallet.account.aidl.v1.AccountConstant;
-import com.letv.wallet.account.aidl.v1.CardbinAvailableInfo;
-import com.letv.wallet.account.task.AccountCommonCallback;
-import com.letv.wallet.account.task.CardbinTask;
-import com.letv.wallet.common.util.ExecutorHelper;
 
 import java.util.regex.Pattern;
 
@@ -25,7 +17,7 @@ import java.util.regex.Pattern;
  * Created by lijunying on 17-2-9.
  */
 
-public class IdNoEditText extends EditTextWithCustomError {
+public class IdNoEditText extends TextInputLayout implements View.OnFocusChangeListener {
 
     public static final String REGEX_ID_CARD = "(^\\d{15}$)|(^\\d{17}([0-9]|X)$)";
 
@@ -61,10 +53,10 @@ public class IdNoEditText extends EditTextWithCustomError {
         @Override
         public void afterTextChanged(Editable s) {
             setError(null);
-            removeTextChangedListener(mTextWatcher);
+            getEditText().removeTextChangedListener(mTextWatcher);
             String source = s.toString();
             String formateText = formatIdNum(source);
-            setText(formateText);
+            getEditText().setText(formateText);
             if (formateText.length() != oldtext.length()) {
                 selectedIndex += addOrDel;
             }
@@ -74,9 +66,9 @@ public class IdNoEditText extends EditTextWithCustomError {
                 } else if (selectedIndex % 5 == 0 && addOrDel == 0) {
                     selectedIndex -= 1;
                 }
-                setSelection(selectedIndex >= 0 ? selectedIndex : 0);
+                getEditText().setSelection(selectedIndex >= 0 ? selectedIndex : 0);
             }
-            addTextChangedListener(mTextWatcher);
+            getEditText().addTextChangedListener(mTextWatcher);
             if (checkId(getIdNum()) && mCallback != null) {
                 mCallback.onNumberChanged(IdNoEditText.this);
             }
@@ -93,21 +85,15 @@ public class IdNoEditText extends EditTextWithCustomError {
 
     public IdNoEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.setFilters(new InputFilter[]{new InputFilter.LengthFilter(MAXLENGTH + MAXLENGTH / SEPARATENUM)});
-        this.addTextChangedListener(mTextWatcher);
+        inflate(context, R.layout.account_id_num_view, this);
+        getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(MAXLENGTH + MAXLENGTH / SEPARATENUM)});
+        getEditText().addTextChangedListener(mTextWatcher);
         ID_INVALID_MSG = getResources().getString(R.string.account_verify_id_num_invalid);
-    }
-
-    @Override
-    protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
-        super.onFocusChanged(focused, direction, previouslyFocusedRect);
-        if (!focused && !checkId(getIdNum())) {
-            setError(ID_INVALID_MSG);
-        }
+        getEditText().setOnFocusChangeListener(this);
     }
 
     public String getIdNum() {
-        String cardNum = getText().toString();
+        String cardNum = getEditText().getText().toString();
         if (!TextUtils.isEmpty(cardNum)) {
             return cardNum.replace(" ", "");
         }
@@ -155,4 +141,10 @@ public class IdNoEditText extends EditTextWithCustomError {
     }
 
 
+    @Override
+    public void onFocusChange(View v, boolean focused) {
+        if (!focused && !checkId(getIdNum())) {
+            setError(ID_INVALID_MSG);
+        }
+    }
 }

@@ -1,150 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    <com.letv.wallet.account.ui.RealNameEditText
-        android:id="@+id/editRealName"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/account_list_item_height"
-        android:gravity="center_vertical"
-        style="@style/AccountVerifyEditeViewStyle"
-        android:textCursorDrawable="@drawable/color_cursor"
-        android:hint="@string/account_verify_input_real_name"
-        android:maxLines="1"
-        android:maxLength="20"
-        android:inputType="text"
-        android:imeOptions="actionNext"/>
-    <View
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        style="@style/AccountVerifyLine"
-        android:layout_below="@id/editRealName"/>
+    android:layout_height="match_parent" >
 
-    <com.letv.wallet.account.ui.IdNoEditText
-        android:id="@+id/editIdNo"
-        android:layout_below="@id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/account_list_item_height"
-        android:gravity="center_vertical"
-        android:inputType="number"
-        android:maxLines="1"
-        android:digits="0123456789xX"
-        android:imeOptions="actionNext"
-        style="@style/AccountVerifyEditeViewStyle"
-        android:hint="@string/account_verify_input_id_no"/>
-
-    <LinearLayout
-        android:id="@+id/viewBank"
-        android:layout_below="@id/editIdNo"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/account_list_item_height"
-        android:orientation="horizontal"
-        style="@style/AccountVerifyEditeViewStyle"
-        android:layout_marginTop="6dp">
-
-        <com.letv.wallet.account.ui.CardEditText
-            android:id="@+id/editCardNum"
-            android:layout_width="0dp"
-            android:layout_weight="1.0"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
+        <com.letv.wallet.account.ui.RealNameEditText
+            android:id="@+id/editRealName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@null"
-            app:ErrorTextColor="#FFFFFF"
-            style="@style/AccountVerifyEditeTextStyle"
-            android:hint="@string/account_verify_input_bank_no"/>
+            app:hintEnabled="false"
+            android:gravity="center_vertical"
+            app:errorEnabled="true"
+            style="@style/AccountVerifyEditeViewStyle"
+            app:errorTextAppearance="@style/ErrorTextStyle"/>
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            style="@style/AccountHorizontalLine"
+            android:layout_below="@id/editRealName"/>
+
+        <com.letv.wallet.account.ui.IdNoEditText
+            android:id="@+id/editIdNo"
+            android:layout_below="@id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:hintEnabled="false"
+            style="@style/AccountVerifyEditeViewStyle"
+            android:gravity="center_vertical"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorTextStyle">
+        </com.letv.wallet.account.ui.IdNoEditText>
+        <View
+            android:id="@+id/DividerLine1"
+            android:layout_below="@id/editIdNo"
+            android:layout_width="match_parent"
+            style="@style/AccountDividerLine"/>
+        <LinearLayout
+            android:id="@+id/viewBank"
+            android:layout_below="@id/DividerLine1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.letv.wallet.account.ui.CardEditText
+                style="@style/AccountVerifyEditeViewStyle"
+                android:id="@+id/editCardNum"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:hintEnabled="false"
+                android:gravity="center_vertical"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/ErrorTextStyle"/>
+            <View
+                android:layout_height="match_parent"
+                style="@style/AccountVerticalLine"/>
+
+            <TextView
+                android:id="@+id/tvAvailableBankList"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                style="@style/AccountVerifyTextStyle"
+                android:layout_marginLeft="@dimen/account_horizontal_margin"
+                android:layout_marginRight="@dimen/account_horizontal_margin"
+                android:text="@string/account_verify_available_bank_list"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/DividerLine2"
+            android:layout_below="@id/viewBank"
+            android:layout_width="match_parent"
+            style="@style/AccountDividerLine"/>
+
+        <com.letv.wallet.account.ui.PhoneEditText
+            android:id="@+id/editPhone"
+            android:layout_below="@id/DividerLine2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:hintEnabled="false"
+            android:gravity="center_vertical"
+            app:errorEnabled="true"
+            style="@style/AccountVerifyEditeViewStyle"
+            app:errorTextAppearance="@style/ErrorTextStyle" />
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            style="@style/AccountHorizontalLine"
+            android:layout_below="@id/editPhone"/>
+        <LinearLayout
+            android:id="@+id/viewSmsCode"
+            android:layout_below="@id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.letv.wallet.account.ui.SmsCodeEditText
+                android:id="@+id/editSmsCode"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:hintEnabled="false"
+                style="@style/AccountVerifyEditeViewStyle"
+                android:gravity="center_vertical"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/ErrorTextStyle" />
+            <View
+                android:layout_height="match_parent"
+                style="@style/AccountVerticalLine"/>
+
+            <com.letv.wallet.account.ui.CountDownView
+                android:id="@+id/tvGetSmsCode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                style="@style/AccountVerifyTextStyle"
+                android:layout_marginRight="@dimen/account_horizontal_margin"
+                android:layout_marginLeft="@dimen/account_horizontal_margin"
+                android:clickable="true"
+                android:text="@string/account_verify_get_sms_code"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/DividerLine3"
+            android:layout_below="@id/viewSmsCode"
+            android:layout_width="match_parent"
+            style="@style/AccountDividerLine"/>
 
         <TextView
-            android:id="@+id/tvAvailableBankList"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            style="@style/AccountVerifyTextStyle"
-            android:layout_marginLeft="16dp"
-            android:text="@string/account_verify_available_bank_list"/>
-
-    </LinearLayout>
-
-    <com.letv.wallet.account.ui.PhoneEditText
-        android:id="@+id/editPhone"
-        android:layout_below="@id/viewBank"
-        android:layout_marginTop="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/account_list_item_height"
-        android:gravity="center_vertical"
-        style="@style/AccountVerifyEditeViewStyle"
-        android:hint="@string/account_verify_input_mobile_no"/>
-    <View
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        style="@style/AccountVerifyLine"
-        android:layout_below="@id/editPhone"/>
-    <LinearLayout
-        android:id="@+id/viewSmsCode"
-        android:layout_below="@id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/account_list_item_height"
-        android:orientation="horizontal"
-        style="@style/AccountVerifyEditeViewStyle">
-
-        <com.letv.wallet.account.ui.SmsCodeEditText
-            android:id="@+id/editSmsCode"
-            android:layout_width="0dp"
-            android:layout_weight="1.0"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:background="@null"
-            android:inputType="number"
-            style="@style/AccountVerifyEditeTextStyle"
-            android:hint="@string/account_verify_input_sms_code"/>
-
-        <com.letv.wallet.account.ui.CountDownView
-            android:id="@+id/tvGetSmsCode"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            style="@style/AccountVerifyTextStyle"
-            android:layout_marginLeft="16dp"
-            android:clickable="true"
-            android:text="@string/account_verify_get_sms_code"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/btnOk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        style="@style/LargeButton.SectionBase"
-        android:text="@string/account_verify_btn_comfire_update"
-        android:enabled="false"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="66dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_above="@id/btnOk"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp">
-
-        <com.letv.shared.widget.LeCheckBox
-            android:id="@+id/checkAgreement"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnOk"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"/>
-        <TextView
-            android:id="@+id/tvAgreement"
-            android:layout_width="0dp"
+            android:layout_alignParentBottom="true"
+            style="@style/LargeButton.SectionBase"
+            android:text="@string/account_verify_btn_comfire_update"
+            android:enabled="false"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="50dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:lines="2"
-            android:lineSpacingExtra="2dp"
-            android:textSize="14sp"
-            android:textColor="@color/account_verify_text_hint_color" />
+            android:orientation="horizontal"
+            android:layout_above="@id/btnOk"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp">
 
-    </LinearLayout>
+            <com.letv.shared.widget.LeCheckBox
+                android:id="@+id/checkAgreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"/>
+            <TextView
+                android:id="@+id/tvAgreement"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:lineSpacingExtra="2dp"
+                android:textSize="14sp"
+                android:textColor="@color/account_verify_text_hint_color" />
 
-</RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+

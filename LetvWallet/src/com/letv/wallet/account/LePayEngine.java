@@ -38,7 +38,6 @@ public class LePayEngine {
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            LogHelper.e("onServiceConnected");
             mBinderV1 = IAccountServiceV1.Stub.asInterface(iBinder);
             if (mCallback != null) {
                 mCallback.onServiceReady(LePayEngine.this);
@@ -47,7 +46,6 @@ public class LePayEngine {
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            LogHelper.e("onServiceDisconnected");
             mBinderV1 = null;
             if (mCallback != null) {
                 mCallback.onServiceLost();
@@ -98,7 +96,6 @@ public class LePayEngine {
         }
 
         try {
-            LogHelper.e("createAccount start ... ");
             mBinderV1.createAccount(callback);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -113,11 +110,9 @@ public class LePayEngine {
         }
 
         try {
-            LogHelper.e("queryAccount start ... ");
             mBinderV1.queryAccount(qType, callback);
         } catch (RemoteException e) {
             e.printStackTrace();
-            LogHelper.e("exception = " + e.getMessage());
         }
 
     }
@@ -129,11 +124,9 @@ public class LePayEngine {
         }
 
         try {
-            LogHelper.e("redirect start ... ");
             mBinderV1.redirect(jTypes , callback);
         } catch (RemoteException e) {
             e.printStackTrace();
-            LogHelper.e("exception = " + e.getMessage());
         }
     }
 

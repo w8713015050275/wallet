@@ -10,6 +10,8 @@
         <item name="android:background">#FFFFFF</item>
         <item name="android:paddingLeft">@dimen/account_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/account_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/account_padding_default</item>
+        <item name="android:layout_marginBottom">6dp</item>
     </style>
 
     <style name="AccountVerifyTextStyle" >
@@ -17,11 +19,23 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="AccountVerifyLine" >
+    <style name="AccountDividerLine" >
+        <item name="android:background">#EEEEF0</item>
+        <item name="android:layout_height">6dp</item>
+    </style>
+
+    <style name="AccountHorizontalLine" >
         <item name="android:background">#D9D9D9</item>
         <item name="android:layout_marginLeft">@dimen/account_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/account_horizontal_margin</item>
         <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="AccountVerticalLine" >
+        <item name="android:background">#D9D9D9</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_width">1px</item>
     </style>
 
     <style name="SettingListItemTextStyle">
@@ -62,6 +76,11 @@
     <style name="PhoneEditText">
         <item name="android:layout_marginLeft">@dimen/padding_default</item>
         <item name="android:layout_marginRight">@dimen/padding_default</item>
+    </style>
+
+    <style name="ErrorTextStyle">
+        <item name="android:textColor">@color/account_edit_error_color</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
 </resources>

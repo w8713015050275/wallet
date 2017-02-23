@@ -51,9 +51,8 @@ public class LePayUtils {
         if (runnable == null) {
             return;
         }
-        LogHelper.d("service not bind ,put on blockingQueue");
         if (blockingQueue.size() >= BLOCKING_QUEUE_SIZE) {
-            LogHelper.e("put blockingQueue ERROR, Max size has been reached!");
+            LogHelper.w("put blockingQueue ERROR, Max size has been reached!");
             blockingQueue.remove(0);
         }
         blockingQueue.add(runnable);

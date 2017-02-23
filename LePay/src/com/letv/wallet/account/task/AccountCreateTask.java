@@ -10,11 +10,8 @@ import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DigestUtils;
-import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by lijunying on 16-12-26.

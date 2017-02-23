@@ -3,10 +3,10 @@ package com.letv.wallet.base.http.client;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.letv.wallet.common.util.DeviceUtils;
 import com.letv.wallet.PayApplication;
 import com.letv.wallet.base.http.LeSignature;
 import com.letv.wallet.base.http.UserAgent;
+import com.letv.wallet.common.util.DeviceUtils;
 
 import org.xutils.common.util.KeyValue;
 import org.xutils.http.RequestParams;

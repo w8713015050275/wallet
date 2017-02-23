@@ -2,13 +2,10 @@ package com.letv.wallet.account.task;
 
 import android.text.TextUtils;
 
-import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.IAccountCallback;
-import com.letv.wallet.account.base.AccountBaseReqParams;
 import com.letv.wallet.account.base.AccountGateway;
 import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
-import com.letv.wallet.common.util.NetworkHelper;
 
 /**
  * Created by lijunying on 17-1-10.

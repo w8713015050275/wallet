@@ -2,12 +2,12 @@ package com.letv.wallet.account.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +49,7 @@ import java.util.Map;
 
 public class AccountVerifyActivity extends BaseFragmentActivity implements View.OnClickListener, EditTextActionCallback, AccountHelper.OnAccountChangedListener {
     private RealNameEditText editRealName;
-    private IdNoEditText editIdNum;
+    private IdNoEditText editIdNo;
     private CardEditText editCardNum;
     private PhoneEditText editPhone;
     private SmsCodeEditText editSmsCode;
@@ -82,8 +82,8 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     private void initView() {
         editRealName = (RealNameEditText) findViewById(R.id.editRealName);
         editRealName.setCallback(this);
-        editIdNum = (IdNoEditText) findViewById(R.id.editIdNo);
-        editIdNum.setCallback(this);
+        editIdNo = (IdNoEditText) findViewById(R.id.editIdNo);
+        editIdNo.setCallback(this);
         editCardNum = (CardEditText) findViewById(R.id.editCardNum);
         editCardNum.setCallback(this);
         editPhone = (PhoneEditText) findViewById(R.id.editPhone);
@@ -97,7 +97,6 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         findViewById(R.id.tvAvailableBankList).setOnClickListener(this);
         tvGetSmsCode.setOnClickListener(this);
         btnOk.setOnClickListener(this);
-
     }
 
     @Override
@@ -137,9 +136,9 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
             case R.id.tvGetSmsCode:
                 if (editPhone.checkValidateWithError()) {
                     sendSmsCode(editPhone.getPhone());
-                } else {
-                    editPhone.setFocusable(true);
+                    return;
                 }
+                Toast.makeText(getApplication(), R.string.account_verify_phone_invalid, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -159,11 +158,11 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
 
                 @Override
                 public void onError(int errorCode, String errorMsg) {
-                    LogHelper.e("sendSmsCode onError : errorCode = " + errorCode + " errorMsg = " + errorMsg);
                     sendMsgTask = null;
-                    if (errorCode == AccountConstant.RspCode.ERRNO_SEND_MSG_FAILED) {
-                        Toast.makeText(PayApplication.getApplication(), R.string.account_verify_sms_send_fail, Toast.LENGTH_SHORT).show();
+                    if (errorCode != AccountConstant.RspCode.ERRNO_SEND_MSG_FAILED) {
+                        LogHelper.e("sendSmsCode onError : errorCode = " + errorCode + " errorMsg = " + errorMsg); //异常情况
                     }
+                    Toast.makeText(PayApplication.getApplication(), R.string.account_verify_sms_send_fail, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -190,21 +189,19 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                     hideVerifyDialog();
                     setResult(RESULT_OK);
                     finish();
-                    LogHelper.e("verifyAccount onSuccess");
                 }
 
                 @Override
                 public void onError(int errorCode, String errorMsg) {
                     verifyAccountTask = null;
                     hideVerifyDialog();
-                    LogHelper.e("verifyAccount onError errorCode = " + errorCode + " errorMsg = " + errorMsg);
                     if (errorCode == AccountConstant.RspCode.ERRNO_MSG_CODE_FAILED) {
                         editSmsCode.setError(getString(R.string.account_verify_sms_invalid));
                         return;
                     } else if (errorCode != AccountConstant.RspCode.ERRNO_USER && errorCode != AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
                         errorMsg = getString(R.string.account_verify_fail);
                     }
-                    editSmsCode.setText("");
+                    editSmsCode.getEditText().setText("");
                     editSmsCode.setError(null);
                     tvGetSmsCode.cancle();
                     Toast.makeText(PayApplication.getApplication(), errorMsg, Toast.LENGTH_SHORT).show();
@@ -226,14 +223,14 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     /**
      * focus 当前edittext， 过去其他输入框状态，都合法显示 button
      *
-     * @param editText
+     * @param inputLayout
      */
     @Override
-    public void onNumberChanged(EditText editText) {
+    public void onNumberChanged(TextInputLayout inputLayout) {
         boolean isShowBtn = false;
-        switch (editText.getId()) {
+        switch (inputLayout.getId()) {
             case R.id.editRealName:
-                if (editIdNum.isIdValidate() && editCardNum.isCardValidate() && editPhone.isPhoneValidate() && editSmsCode.isSmsCodeValidate()) {
+                if (editIdNo.isIdValidate() && editCardNum.isCardValidate() && editPhone.isPhoneValidate() && editSmsCode.isSmsCodeValidate()) {
                     isShowBtn = true;
                 }
                 break;
@@ -243,17 +240,18 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                 }
                 break;
             case R.id.editCardNum:
-                if (editIdNum.isIdValidate() && editRealName.isNameValidate() && editPhone.isPhoneValidate() && editSmsCode.isSmsCodeValidate()) {
+                if (editIdNo.isIdValidate() && editRealName.isNameValidate() && editPhone.isPhoneValidate() && editSmsCode.isSmsCodeValidate()) {
+
                     isShowBtn = true;
                 }
                 break;
             case R.id.editPhone:
-                if (editIdNum.isIdValidate() && editCardNum.isCardValidate() && editRealName.isNameValidate() && editSmsCode.isSmsCodeValidate()) {
+                if (editIdNo.isIdValidate() && editCardNum.isCardValidate() && editRealName.isNameValidate() && editSmsCode.isSmsCodeValidate()) {
                     isShowBtn = true;
                 }
                 break;
             case R.id.editSmsCode:
-                if (editIdNum.isIdValidate() && editCardNum.isCardValidate() && editPhone.isPhoneValidate() && editRealName.isNameValidate()) {
+                if (editIdNo.isIdValidate() && editCardNum.isCardValidate() && editPhone.isPhoneValidate() && editRealName.isNameValidate()) {
                     isShowBtn = true;
                 }
                 break;
@@ -263,7 +261,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
 
     private void checkAllInput() {
         //检测所有的edittext,并显示错误提示
-        if (!editRealName.checkValidateWithError() || !editIdNum.checkValidateWithError() || !editCardNum.checkValidateWithError() || !editPhone.checkValidateWithError()
+        if (!editRealName.checkValidateWithError() || !editIdNo.checkValidateWithError() || !editCardNum.checkValidateWithError() || !editPhone.checkValidateWithError()
                 || !editSmsCode.checkValidateWithError()) {
             return;
         }
@@ -310,7 +308,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         ExecutorHelper.getExecutor().runnableExecutor(new CardbinTask(cardNum, new AccountCommonCallback<CardbinAvailableInfo>() {
             @Override
             public void onSuccess(CardbinAvailableInfo result) {
-                verifyAccount(editRealName.getText().toString().trim(), editIdNum.getIdNum(), editCardNum.getCardNum(), editPhone.getPhone(), editSmsCode.getText().toString().trim());
+                verifyAccount(editRealName.getText().toString().trim(), editIdNo.getIdNum(), editCardNum.getCardNum(), editPhone.getPhone(), editSmsCode.getEditText().getText().toString().trim());
             }
 
             @Override

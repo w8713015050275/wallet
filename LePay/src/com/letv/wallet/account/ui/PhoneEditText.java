@@ -1,16 +1,14 @@
 package com.letv.wallet.account.ui;
 
 import android.content.Context;
-import android.graphics.Rect;
+import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.View;
 
 import com.letv.wallet.R;
 import com.letv.wallet.common.util.CommonConstants;
-import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.PhoneNumberUtils;
 import com.letv.wallet.common.widget.PhoneNumberFormatter;
 import com.letv.wallet.common.widget.PhoneNumberFormattingTextWatcherWithAction;
@@ -19,7 +17,7 @@ import com.letv.wallet.common.widget.PhoneNumberFormattingTextWatcherWithAction;
  * Created by lijunying on 17-2-9.
  */
 
-public class PhoneEditText extends EditTextWithCustomError implements PhoneNumberFormattingTextWatcherWithAction.ActionCallback {
+public class PhoneEditText extends TextInputLayout implements PhoneNumberFormattingTextWatcherWithAction.ActionCallback, View.OnFocusChangeListener {
     private static final int MOBILE_LEN = 11;
     private String mRegex = CommonConstants.PHONENUMBER_RIGOROUS_REGEX;
     private boolean mReformat = false;
@@ -39,32 +37,21 @@ public class PhoneEditText extends EditTextWithCustomError implements PhoneNumbe
     }
 
     public PhoneEditText(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public PhoneEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getContext(), this, this);
+        super(context, attrs, defStyleAttr);
+        inflate(context, R.layout.account_phone_view, this);
+        PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getContext(), getEditText(), this);
         PHONE_INVALID_MSG = getResources().getString(R.string.account_verify_phone_invalid);
-        this.setInputType(InputType.TYPE_CLASS_PHONE);
-        this.setSingleLine(true);
+        getEditText().setInputType(InputType.TYPE_CLASS_PHONE);
+        getEditText().setSingleLine(true);
+        getEditText().setOnFocusChangeListener(this);
     }
 
     public String getPhone() {
-        String text = getText().toString();
+        String text = getEditText().getText().toString();
         if (!TextUtils.isEmpty(text)) {
             return text.replaceAll(" ", "");
         }
         return null;
-    }
-
-    @Override
-    protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
-        LogHelper.e("onFocusChanged focused = " + focused + " isPhoneValidate = " + isPhoneValidate);
-        if (!focused && !isPhoneValidate) {
-            setError(PHONE_INVALID_MSG);
-        }
-        super.onFocusChanged(focused, direction, previouslyFocusedRect);
     }
 
     @Override
@@ -103,4 +90,10 @@ public class PhoneEditText extends EditTextWithCustomError implements PhoneNumbe
         mCallback = callback;
     }
 
+    @Override
+    public void onFocusChange(View v, boolean focused) {
+        if (!focused && !isPhoneValidate) {
+            setError(PHONE_INVALID_MSG);
+        }
+    }
 }

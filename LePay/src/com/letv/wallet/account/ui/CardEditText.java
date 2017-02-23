@@ -1,34 +1,22 @@
 package com.letv.wallet.account.ui;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
-import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.View;
 
-import com.letv.wallet.PayApplication;
 import com.letv.wallet.R;
-import com.letv.wallet.account.aidl.v1.AccountConstant;
-import com.letv.wallet.account.aidl.v1.CardbinAvailableInfo;
-import com.letv.wallet.account.task.AccountCommonCallback;
-import com.letv.wallet.account.task.CardbinTask;
-import com.letv.wallet.common.util.ExecutorHelper;
-import com.letv.wallet.common.util.LogHelper;
 
 /**
  * Created by lijunying on 17-2-9.
  */
 
-public class CardEditText extends EditTextWithCustomError {
+public class CardEditText extends TextInputLayout implements View.OnFocusChangeListener {
 
     public static final int MINLENGTH = 16;
     public static final int MAXLENGTH = 19;
@@ -62,9 +50,9 @@ public class CardEditText extends EditTextWithCustomError {
         @Override
         public void afterTextChanged(Editable s) {
             setError(null);
-            removeTextChangedListener(mTextWatcher);
+            getEditText().removeTextChangedListener(mTextWatcher);
             String formateText = formatCardNum(s.toString());
-            setText(formateText);
+            getEditText().setText(formateText);
             if (formateText.length() != oldtext.length()) {
                 selectedIndex += addOrDel;
             }
@@ -74,9 +62,9 @@ public class CardEditText extends EditTextWithCustomError {
                 } else if (selectedIndex % 5 == 0 && addOrDel == 0) {
                     selectedIndex -= 1;
                 }
-                setSelection(selectedIndex >= 0 ? selectedIndex : 0);
+                getEditText().setSelection(selectedIndex >= 0 ? selectedIndex : 0);
             }
-            addTextChangedListener(mTextWatcher);
+            getEditText().addTextChangedListener(mTextWatcher);
             if (checkBankCard(getCardNum()) && mCallback != null) {
                 mCallback.onNumberChanged(CardEditText.this);  //正则校验
             }
@@ -93,23 +81,17 @@ public class CardEditText extends EditTextWithCustomError {
 
     public CardEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        inflate(context, R.layout.account_card_num_view, this);
         CARD_INVALID_MSG = getResources().getString(R.string.account_verify_card_num_invalid);
-        this.setFilters(new InputFilter[]{new InputFilter.LengthFilter(MAXLENGTH + MAXLENGTH / SEPARATENUM)});
-        this.setInputType(InputType.TYPE_CLASS_PHONE);
-        this.setSingleLine(true);
-        this.addTextChangedListener(mTextWatcher);
-    }
-
-    @Override
-    protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
-        super.onFocusChanged(focused, direction, previouslyFocusedRect);
-        if (!focused && !isCardValidate) {
-            setError(CARD_INVALID_MSG);
-        }
+        getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(MAXLENGTH + MAXLENGTH / SEPARATENUM)});
+        getEditText().setInputType(InputType.TYPE_CLASS_PHONE);
+        getEditText().setSingleLine(true);
+        getEditText().addTextChangedListener(mTextWatcher);
+        getEditText().setOnFocusChangeListener(this);
     }
 
     public String getCardNum() {
-        String cardNum = getText().toString();
+        String cardNum = getEditText().getText().toString();
         if (!TextUtils.isEmpty(cardNum)) {
             return cardNum.replace(" ", "");
         }
@@ -151,7 +133,6 @@ public class CardEditText extends EditTextWithCustomError {
         } else {
             isCardValidate = true;
         }
-        LogHelper.e("checkBankCard = " + isCardValidate);
         return isCardValidate ;
     }
 
@@ -162,4 +143,10 @@ public class CardEditText extends EditTextWithCustomError {
     }
 
 
+    @Override
+    public void onFocusChange(View v, boolean focused) {
+        if (!focused && !isCardValidate) {
+            setError(CARD_INVALID_MSG);
+        }
+    }
 }

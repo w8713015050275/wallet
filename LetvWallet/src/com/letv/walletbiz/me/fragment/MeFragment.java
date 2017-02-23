@@ -23,7 +23,6 @@ import com.letv.wallet.account.LePayAccountManager;
 import com.letv.wallet.account.LePayCommonCallback;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
-import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
@@ -35,7 +34,6 @@ import com.letv.walletbiz.main.fragment.MainFragment;
 import com.letv.walletbiz.me.ui.ToggleTextView;
 import com.letv.walletbiz.order.activity.TotalOrderListActivity;
 
-import org.xutils.ex.HttpException;
 import org.xutils.xmain;
 
 import java.io.IOException;
