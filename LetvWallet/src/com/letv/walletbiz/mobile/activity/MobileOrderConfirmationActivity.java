@@ -272,7 +272,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     widget = Action.MOBILE_FLOW_PAY_CLICK;
                 }
                 Map<String, Object> props = new HashMap<String, Object>();
-                props.put(WalletConstant.EXTRA_FROM, mFrom);
+                props.put(Key.From.getKeyId(), mFrom);
                 props.put(Key.Content.getKeyId(), mContactType);
                 Action.uploadCustom(EventType.Click, widget, props);
                 getOrderSNAsyncTask(mMobileProduct.getNumber(), mMobileProduct.getProductId(), new long[]{mUseUcouponId});

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.letv.shared.widget.BorderedCircleImageView;
 import com.letv.tracker.enums.EventType;
+import com.letv.tracker.enums.Key;
 import com.letv.wallet.account.LePayAccountManager;
 import com.letv.wallet.account.LePayCommonCallback;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
@@ -171,14 +172,6 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void startLoadData() {
-        String from;
-        Map<String, Object> props = new HashMap<>();
-        if (getActivity() != null) {
-            Intent intent = getActivity().getIntent();
-            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
-            props.put(WalletConstant.EXTRA_FROM, from);
-        }
-        Action.uploadCustom(EventType.Expose, Action.ME_PAGE_EXPOSE, props);
         if (!checkLogin() || !checkNetWork()) {
             return;
         }
@@ -201,7 +194,14 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void fragmentDisplay() {
-      
+       String from;
+        Map<String, Object> props = new HashMap<>();
+        if (getActivity() != null) {
+            Intent intent = getActivity().getIntent();
+            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+            props.put(Key.From.getKeyId(), from);
+        }
+        Action.uploadCustom(EventType.Expose, Action.ME_PAGE_EXPOSE, props);
     }
 
     @Override

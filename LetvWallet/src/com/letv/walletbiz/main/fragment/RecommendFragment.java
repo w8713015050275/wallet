@@ -138,14 +138,6 @@ public class RecommendFragment extends MainFragment {
     @Override
     public void onStart() {
         super.onStart();
-        String from;
-        Map<String, Object> props = new HashMap<>();
-        if (getActivity() != null) {
-            Intent intent = getActivity().getIntent();
-            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
-            props.put(Key.From.getKeyId(), from);
-        }
-        Action.uploadCustom(EventType.Expose, Action.RECOMMEND_PAGE_EXPOSE, props);
     }
 
     @Override
@@ -209,7 +201,14 @@ public class RecommendFragment extends MainFragment {
 
     @Override
     public void fragmentDisplay() {
-  
+        String from;
+        Map<String, Object> props = new HashMap<>();
+        if (getActivity() != null) {
+            Intent intent = getActivity().getIntent();
+            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+            props.put(Key.From.getKeyId(), from);
+        }
+        Action.uploadCustom(EventType.Expose, Action.RECOMMEND_PAGE_EXPOSE, props);
     }
 
     @Override
