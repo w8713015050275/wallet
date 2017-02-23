@@ -494,10 +494,7 @@ public class WalletFragment extends MainFragment {
                 if (bean.service_id == gotoType) {
                     Action.uploadExposeTab(Action.WALLET_HOME_LIST + bean.service_id);
                     if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_APP) {
-                        if (getContext() != null
-                                && !TextUtils.isEmpty(bean.package_name)
-                                && getContext().getPackageName().startsWith(bean.package_name)) {
-                        }
+
                         AppUtils.LaunchAppWithBundle(getContext(), bean.package_name, bean.jump_param, bundle);
                     } else if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_WEB) {
                         if (AccountHelper.getInstance().isLogin(getContext())) {

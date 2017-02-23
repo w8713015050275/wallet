@@ -1,7 +1,7 @@
 <resources>
-    <string name="main_tab_recommend">recommended</string>
-    <string name="main_tab_wallet">wallet</string>
-    <string name="main_tab_my">mine</string>
+    <string name="main_tab_recommend">Recommended</string>
+    <string name="main_tab_wallet">Wallet</string>
+    <string name="main_tab_my">Mine</string>
     <string name="main_top_card">coupon</string>
     <string name="main_recommend_input_error">Please enter a valid word</string>
     <string name="main_recommend_error_no_network">No network connection. Please check your network settings.</string>
