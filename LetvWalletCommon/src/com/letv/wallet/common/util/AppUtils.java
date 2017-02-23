@@ -49,7 +49,7 @@ public class AppUtils {
                 intent.setData(Uri.parse(array[1]));
             }
             intent.putExtra("pkgName", packageName);
-            if (!context.getPackageName().equals(array[0])) {
+            if (!context.getPackageName().contains(packageName)) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             if (bundle != null) {
