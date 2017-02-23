@@ -313,7 +313,7 @@ public class CouponDetailActivity extends BaseWalletFragmentActivity implements 
         if (mCoupon != null) {
             copyToClipboard(code);
             if (mCoupon.jump_type == BaseCoupon.JUMP_TYPE_APP) {
-                AppUtils.LaunchAppWithBundle(this, mCoupon.package_name, mCoupon.jump_param, bundle);
+                AppUtils.LaunchAppWithBundle(this, mCoupon.package_name, mCoupon.jump_param, bundle, true);
             } else if (mCoupon.jump_type == BaseCoupon.JUMP_TYPE_WEB) {
                 AppUtils.LaunchUrlWithBundle(this, mCoupon.jump_link, mCoupon.service_name, WalletMainWebActivity.class, bundle);
             }

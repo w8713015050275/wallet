@@ -34,21 +34,38 @@ public class AppUtils {
     }
 
     public static void LaunchApp(Context context, String packageName, String actionWithData) {
-        LaunchAppWithBundle(context, packageName, actionWithData, null);
+        LaunchAppWithBundle(context, packageName, actionWithData, null, true);
     }
 
+    /**
+     * 调起activity工具方法
+     * 默认以action方式启动,当action方式无法启动时，以schema方式启动，再无法启动，会以packageName查找，
+     * 如果还找不到，再跳转到应用商店下载.
+     * @param context
+     * @param packageName 要启动的activity所在的应用包名
+     * @param actionWithData 格式为:
+     *                       1.action@uri 其中uri可为空
+     *                       2.类似letvwallet://main.view格式的schema (v1.1.2版本加入支持)
+     * @param bundle 跳转时会携带给启动的activity
+     * @param dowloadAppIfNotStart 如果没能启动activity是否跳转到应用商店下载 true:下载  false:不下载
+     */
     public static void LaunchAppWithBundle(Context context, String packageName,
-                                           String actionWithData, Bundle bundle) {
-        if (context == null) {
+                                           String actionWithData, Bundle bundle, boolean dowloadAppIfNotStart) {
+        if (context == null || TextUtils.isEmpty(actionWithData)) {
             return;
         }
+        boolean isStarted = false;
+
+        Intent intent;
+
+        //以action方式启动
         try {
             String[] array = getActionAndData(actionWithData);
-            Intent intent = new Intent(array[0]);
+            intent = new Intent(array[0]);
             if (!TextUtils.isEmpty(array[1])) {
                 intent.setData(Uri.parse(array[1]));
             }
-            intent.putExtra("pkgName", packageName);
+            intent.putExtra("pkgName", context.getPackageName());
             if (!context.getPackageName().contains(packageName)) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
@@ -56,10 +73,38 @@ public class AppUtils {
                 intent.putExtras(bundle);
             }
             context.startActivity(intent);
+            isStarted = true;
         } catch (Exception e) {
-            if (!startActivityByPackage(context, packageName)) {
-                downloadApp(context, packageName);
+            isStarted = false;
+        }
+
+        if (!isStarted) {
+            try {
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(actionWithData));
+                if (!context.getPackageName().contains(packageName)) {
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
+                intent.putExtra("pkgName", context.getPackageName());
+                if (bundle != null) {
+                    intent.putExtras(bundle);
+                }
+                context.startActivity(intent);
+                isStarted = true;
+            } catch (Exception e) {
+                isStarted = false;
             }
+        }
+
+        if (!isStarted) {
+            isStarted = startActivityByPackageWithBundle(context, packageName, bundle);
+        }
+
+        if (!isStarted) {
+            LogHelper.e("can not start activity " + actionWithData);
+        }
+
+        if (!isStarted && dowloadAppIfNotStart) {
+            downloadApp(context, packageName);
         }
     }
 
@@ -74,8 +119,8 @@ public class AppUtils {
         }
         try {
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
-            intent.putExtra("pkgName", packageName);
-            if (!context.getPackageName().equals(packageName)) {
+            intent.putExtra("pkgName", context.getPackageName());
+            if (!context.getPackageName().contains(packageName)) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             if (bundle != null) {

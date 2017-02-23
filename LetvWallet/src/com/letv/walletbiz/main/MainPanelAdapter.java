@@ -101,7 +101,7 @@ public class MainPanelAdapter extends RecyclerView.Adapter<MainPanelAdapter.View
                         bundle = new Bundle();
                         bundle.putString(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_ICON);
                     }
-                    AppUtils.LaunchAppWithBundle(mContext, bean.package_name, bean.jump_param, bundle);
+                    AppUtils.LaunchAppWithBundle(mContext, bean.package_name, bean.jump_param, bundle, true);
                 } else if (bean.jump_type == WalletServiceBean.JUMP_TYPE_WEB) {
                     if (AccountHelper.getInstance().isLogin(mContext)) {
                         jumpWeb(bean);

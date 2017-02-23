@@ -17,7 +17,6 @@ import com.letv.walletbiz.main.bean.WalletBannerListBean;
 import com.letv.walletbiz.main.bean.WalletServiceListBean;
 import com.letv.walletbiz.main.bean.WalletTopListBean;
 import com.letv.walletbiz.main.provider.WalletContract;
-import com.letv.walletbiz.mobile.MobileConstant;
 
 import org.xutils.xmain;
 
@@ -161,6 +160,8 @@ public class MainPanelHelper {
                 WalletContract.BannerTable.BANNER_POST,
                 WalletContract.BannerTable.BANNER_LINK,
                 WalletContract.BannerTable.NEED_TOKEN,
+                WalletContract.BannerTable.JUMP_PARAM,
+                WalletContract.BannerTable.PACKAGE_NAME,
                 WalletContract.BannerTable.UPDATE_TIME
         };
         Cursor cursor = null;
@@ -182,7 +183,9 @@ public class MainPanelHelper {
                     bannerBean.banner_post = cursor.getString(5);
                     bannerBean.banner_link = cursor.getString(6);
                     bannerBean.need_token = cursor.getInt(7);
-                    bannerBean.update_time = cursor.getLong(8);
+                    bannerBean.jump_param = cursor.getString(8);
+                    bannerBean.package_name = cursor.getString(9);
+                    bannerBean.update_time = cursor.getLong(10);
                     array[index++] = bannerBean;
                     version = Math.max(version, bannerBean.update_time);
                 } while (cursor.moveToNext());
@@ -230,6 +233,8 @@ public class MainPanelHelper {
                 values.put(WalletContract.BannerTable.BANNER_POST, bean.banner_post);
                 values.put(WalletContract.BannerTable.BANNER_LINK, bean.banner_link);
                 values.put(WalletContract.BannerTable.NEED_TOKEN, bean.need_token);
+                values.put(WalletContract.BannerTable.JUMP_PARAM, bean.jump_param);
+                values.put(WalletContract.BannerTable.PACKAGE_NAME, bean.package_name);
                 values.put(WalletContract.BannerTable.UPDATE_TIME, bean.update_time);
                 operationList.add(ContentProviderOperation
                         .newInsert(WalletContract.BannerTable.CONTENT_URI)

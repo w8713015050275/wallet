@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -494,8 +493,7 @@ public class WalletFragment extends MainFragment {
                 if (bean.service_id == gotoType) {
                     Action.uploadExposeTab(Action.WALLET_HOME_LIST + bean.service_id);
                     if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_APP) {
-
-                        AppUtils.LaunchAppWithBundle(getContext(), bean.package_name, bean.jump_param, bundle);
+                        AppUtils.LaunchAppWithBundle(getContext(), bean.package_name, bean.jump_param, bundle, true);
                     } else if (bean.jump_type == WalletServiceListBean.WalletServiceBean.JUMP_TYPE_WEB) {
                         if (AccountHelper.getInstance().isLogin(getContext())) {
                             jumpWeb(bean);

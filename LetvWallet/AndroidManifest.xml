@@ -234,6 +234,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="movieOrderDetail"></data>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="letvwallet" android:host="movieOrderDetail" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".movie.activity.MovieDetailActivity"

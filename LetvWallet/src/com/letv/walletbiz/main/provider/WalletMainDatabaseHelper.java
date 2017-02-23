@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.letv.walletbiz.main.provider.WalletContract.BannerTable;
-import static com.letv.walletbiz.main.provider.WalletContract.ServiceTable;
 import static com.letv.walletbiz.main.provider.WalletContract.MainTopTable;
+import static com.letv.walletbiz.main.provider.WalletContract.ServiceTable;
 
 /**
  * Created by liuliang on 16-4-11.
@@ -40,12 +40,22 @@ public class WalletMainDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < DATABASE_VERSION) {
+        if (oldVersion < 2) {
             updateToVersion2(db);
+            oldVersion = 2;
+        }
+        if (oldVersion < DATABASE_VERSION) {
+            updateToVersion3(db);
         }
     }
 
     private void createTables(SQLiteDatabase db) {
+        createTableService(db);
+        createTableBanner(db);
+        createTableMainTop(db);
+    }
+
+    private void createTableService(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + ServiceTable.TABLE_NAME +
                 "(" + ServiceTable.SERVICE_ID + " INTEGER PRIMARY KEY," +
                 ServiceTable.SERVICE_NAME + " TEXT," +
@@ -58,6 +68,9 @@ public class WalletMainDatabaseHelper extends SQLiteOpenHelper {
                 ServiceTable.STATE + " INTEGER," +
                 ServiceTable.RANK + " INTEGER," +
                 ServiceTable.UPDATE_TIME + " INTEGER);");
+    }
+
+    private void createTableBanner(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + BannerTable.TABLE_NAME +
                 "(" + BannerTable.BANNER_ID + " INTEGER PRIMARY KEY," +
                 BannerTable.BANNER_NAME + " TEXT," +
@@ -67,8 +80,12 @@ public class WalletMainDatabaseHelper extends SQLiteOpenHelper {
                 BannerTable.BANNER_POST + " TEXT," +
                 BannerTable.BANNER_LINK + " TEXT," +
                 BannerTable.NEED_TOKEN + " INTEGER," +
+                BannerTable.JUMP_PARAM + " TEXT," +
+                BannerTable.PACKAGE_NAME + " TEXT," +
                 BannerTable.UPDATE_TIME + " INTEGER);");
+    }
 
+    private void createTableMainTop(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + MainTopTable.TABLE_NAME +
                 "(" + MainTopTable.TOP_NAME + " TEXT," +
                 MainTopTable.TOP_HINT + " TEXT," +
@@ -82,5 +99,11 @@ public class WalletMainDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BannerTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + MainTopTable.TABLE_NAME);
         createTables(db);
+    }
+
+    private void updateToVersion3(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + BannerTable.TABLE_NAME);
+        createTableMainTop(db);
+        createTableBanner(db);
     }
 }

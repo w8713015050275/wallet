@@ -117,7 +117,7 @@ public class WalletBannerAdapter extends AutoSlidePagerAdapter implements View.O
         } else if (mData[position].banner_type == WalletBannerBean.BANNER_TYPE_APP) {
             Bundle bundle = new Bundle();
             bundle.putString(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_BANNER);
-            AppUtils.LaunchAppWithBundle(mContext, mData[position].package_name, mData[position].jump_param, bundle);
+            AppUtils.LaunchAppWithBundle(mContext, mData[position].package_name, mData[position].jump_param, bundle, true);
         }
     }
 }

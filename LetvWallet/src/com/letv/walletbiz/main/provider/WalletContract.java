@@ -120,7 +120,7 @@ public class WalletContract {
         public static final String RANK = "rank";
 
         /**
-         * Banner类型，1为图片,2为链接
+         * Banner类型，1为图片,2为链接,3为应用
          * <p>TYPE:INTEGER</p>
          */
         public static final String BANNER_TYPE = "banner_type";
@@ -142,6 +142,18 @@ public class WalletContract {
          * <p>TYPE:INTEGER</p>
          */
         public static final String NEED_TOKEN = "need_token";
+
+        /**
+         * 跳转参数，当banner_type=3有效，否则为空字符串
+         * <p>TYPE:TEXT</p>
+         */
+        public static final String JUMP_PARAM = "jump_param";
+
+        /**
+         * 包名，当jump_type=1有效，否则为空字符串
+         * <p>TYPE:TEXT</p>
+         */
+        public static final String PACKAGE_NAME = "package_name";
 
         /**
          * 更新时间
