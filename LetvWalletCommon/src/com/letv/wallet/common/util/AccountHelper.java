@@ -39,7 +39,6 @@ public class AccountHelper {
 
 
     public boolean isLogin(Context context) {
-
         AccountManager am = AccountManager.get(context);
         boolean isLogin = false;
         final Account[] accounts = am.getAccountsByType(ACCOUNT_TYPE);
@@ -47,41 +46,33 @@ public class AccountHelper {
             isLogin = true;
         }
         return isLogin;
-
     }
 
     public void getTokenASync(Context context) {
-
-    AccountThread aThread =new AccountThread(context);
+        AccountThread aThread =new AccountThread(context);
         ExecutorHelper.getExecutor().runnableExecutor(aThread);
     }
 
+    class AccountThread implements Runnable{
+        Context mContext;
+        public  AccountThread(Context context){
+            mContext = context;
+        }
 
-class AccountThread implements Runnable{
-    Context mContext;
-    public  AccountThread(Context context){
-        mContext = context;
+        @Override
+        public void run() {
+            getTokenSync(mContext);
+        }
     }
 
-    @Override
-    public void run() {
-        getTokenSync(mContext);
-    }
-};
 
-
-public String getTokenSync(Context context) {
+    public String getTokenSync(Context context) {
         LogHelper.w("[%s] getTokenSync " , TAG);
-
         AccountManager manager = AccountManager.get(context);
-        Account[] accounts = manager
-                .getAccountsByType(ACCOUNT_TYPE);
+        Account[] accounts = manager.getAccountsByType(ACCOUNT_TYPE);
         if (accounts != null && accounts.length > 0) {
             try {
-                uToken = manager.blockingGetAuthToken(accounts[0],
-                        AUTH_TOKEN_TYPE_LETV, true);
-
-                LogHelper.v(TAG + "getTokenSync, authToken: " + uToken);
+                uToken = manager.blockingGetAuthToken(accounts[0], AUTH_TOKEN_TYPE_LETV, true);
                 if (TextUtils.isEmpty(uToken)) {
                     LogHelper.e(TAG + "getTokenSync , authToken is null");
                 }
@@ -95,6 +86,8 @@ public String getTokenSync(Context context) {
             } catch (IOException e) {
                 LogHelper.v(TAG + "getTokenSync, e: " + e.getMessage());
                 e.printStackTrace();
+            } catch (SecurityException e) {
+                LogHelper.v(TAG + "getTokenSync, e: " + e.getMessage());
             }
         }
         return null;
@@ -109,7 +102,6 @@ public String getTokenSync(Context context) {
 
 
     private String getToken() {
-        LogHelper.w("[%s] getToken " + uToken, TAG);
         if (TextUtils.isEmpty(uToken)) {
             LogHelper.e(TAG + "getToken , uToken is null");
         }
@@ -118,7 +110,6 @@ public String getTokenSync(Context context) {
 
     public void  clearToken() {
         LogHelper.w("[%s] clearToken ", TAG);
-
         uToken = null;
     }
 
@@ -152,7 +143,6 @@ public String getTokenSync(Context context) {
         String userdata = "";
         if (accountList != null && accountList.length > 0) {
             userdata = manager.getUserData(accountList[0], dataKey);
-            LogHelper.d("[%s] account : " + accountList[0].toString(), TAG );
         }
         return userdata;
     }
