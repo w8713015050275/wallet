@@ -144,7 +144,6 @@ public class MovieListFragment extends BaseFragment implements MovieCommonCallba
                 Intent intent = new Intent(getContext(), MovieDetailActivity.class);
                 intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, movie.id);
                 intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_NAME, movie.name);
-                intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_APP);
                 startActivity(intent);
             }
         }

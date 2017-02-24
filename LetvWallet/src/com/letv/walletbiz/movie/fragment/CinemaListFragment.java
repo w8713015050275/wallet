@@ -348,7 +348,6 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
                 intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, mMovieId);
                 intent.putExtra(MovieTicketConstant.EXTRA_DATE, mDate);
                 intent.putExtra(MovieTicketConstant.MOVIE_PARAM_FAVORITES, cinema.is_favorite);
-                intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_APP);
                 startActivityForResult(intent, REQUEST_UPDATE_DATA);
                 Action.uploadClick(Action.MOVIE_DETAIL_CINEMA, String.valueOf(cinema.id), String.valueOf(cinema.distance));
             }

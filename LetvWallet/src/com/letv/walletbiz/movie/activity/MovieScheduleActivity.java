@@ -421,7 +421,6 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
         if (mCityId != -1) {
             intent.putExtra(MovieTicketConstant.EXTRA_CITY_ID, mCityId);
         }
-        intent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_APP);
         startActivity(intent);
     }
 
