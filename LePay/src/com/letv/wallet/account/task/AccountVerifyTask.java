@@ -6,6 +6,7 @@ import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.IAccountCallback;
 import com.letv.wallet.account.base.AccountBaseReqParams;
 import com.letv.wallet.account.base.AccountGateway;
+import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.NetworkHelper;
 
@@ -41,7 +42,11 @@ public class AccountVerifyTask extends AccountBaseTask{
 
     @Override
     public BaseResponse onExecute() {
-        return AccountGateway.verifyAccount(accountName, identityNum, bankNo, mobile, msgCode);
+        BaseResponse response = AccountGateway.verifyAccount(accountName, identityNum, bankNo, mobile, msgCode);
+        if (response != null && response.errno == AccountConstant.RspCode.SUCCESS) {
+            AccountUtils.updateVerifyAccountStatus();
+        }
+        return response;
     }
 
     @Override

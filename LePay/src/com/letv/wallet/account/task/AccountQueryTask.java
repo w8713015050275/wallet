@@ -58,26 +58,14 @@ public class AccountQueryTask extends AccountBaseTask {
     }
 
     private void updataBasicPreferences(BaseResponse<AccountInfo> response){
-        if (AccountUtils.hasCreatedAccount() && AccountUtils.hasVerifyAccount()) {
-            return; // 本地已缓存返回
-        }
         if (response.data.basic != null) {
-            String uid = AccountHelper.getInstance().getUid();
-            if (AccountConstant.BASIC_ACCOUNT_STATE_NON_ACTIVATED != response.data.basic.status) { // 更新缓存开户状态
-                updateCreatePreferences(uid);
+            if (AccountConstant.BASIC_ACCOUNT_STATE_NON_ACTIVATED != response.data.basic.status) {
+                AccountUtils.updateCreatedAccountStatus();
             }
-            if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equalsIgnoreCase(response.data.basic.verifyStatus)) { // 更新缓存认证状态
-                updateVerifyPreferences(uid);
+            if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equalsIgnoreCase(response.data.basic.verifyStatus)) {
+                AccountUtils.updateVerifyAccountStatus();
             }
         }
-    }
-
-    private void updateCreatePreferences(String uid){
-        SharedPreferencesHelper.putBoolean(DigestUtils.getMd5_30(uid+AccountConstant.SHAREDPREFERENCES_CREATE_ACCOUNT_SUFFIX), true);
-    }
-
-    private void updateVerifyPreferences(String uid){
-        SharedPreferencesHelper.putBoolean(DigestUtils.getMd5_30(uid+AccountConstant.SHAREDPREFERENCES_VERIFY_ACCOUNT_SUFFIX), true);
     }
 
     @Override

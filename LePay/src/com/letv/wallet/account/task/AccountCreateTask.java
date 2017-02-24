@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.IAccountCallback;
 import com.letv.wallet.account.base.AccountGateway;
+import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DigestUtils;
@@ -33,33 +34,20 @@ public class AccountCreateTask extends AccountBaseTask {
 
     @Override
     public void run() {
-        if (!NetworkHelper.isNetworkAvailable()) {
-            onNoNetWork();
-            return;
-        }
         if (TextUtils.isEmpty(AccountHelper.getInstance().getPhone())) {
             onError(AccountConstant.RspCode.ERRNO_MOBILE_EMPTY, null);
             return;
         }
-
-        BaseResponse response = onExecute();
-        if (response == null) {
-            onError(AccountConstant.RspCode.ERROR_NETWORK, null);
-            return;
-        }
-
-        if (response.errno == AccountConstant.RspCode.SUCCESS) {
-            SharedPreferencesHelper.putBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid()), true);
-            onSuccess(response.data);
-        } else {
-            onError(response.errno, response.errmsg);
-        }
-
+        super.run();
     }
 
     @Override
     public BaseResponse onExecute() {
-        return AccountGateway.createAcount();
+        BaseResponse response = AccountGateway.createAcount();
+        if (response != null && response.errno == AccountConstant.RspCode.SUCCESS) {
+            AccountUtils.updateCreatedAccountStatus();
+        }
+        return response;
     }
 
     @Override
