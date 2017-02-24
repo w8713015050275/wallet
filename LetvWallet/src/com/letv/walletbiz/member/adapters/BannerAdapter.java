@@ -28,9 +28,9 @@ public class BannerAdapter extends AutoSlidePagerAdapter implements View.OnClick
     private ArrayList<ImageView> mImageViewArray = new ArrayList<ImageView>();
     private BannerListBean.BannerBean[] mData;
 
-    public BannerAdapter(Context context, String from) {
+    public BannerAdapter(Context context, String rank) {
         mContext = context;
-        mFrom = from;
+        mFrom = rank;
     }
 
     public void setData(BannerListBean.BannerBean[] data) {
@@ -99,7 +99,7 @@ public class BannerAdapter extends AutoSlidePagerAdapter implements View.OnClick
         if (position < 0 || position >= mData.length) {
             return;
         }
-        Action.uploadClick(Action.MEMBER_BANNER_CLICK, String.valueOf(position), null, null, mFrom);
+        Action.uploadClick(Integer.valueOf(mFrom) == 0 ? Action.MEMBER_FIRST_BANNER_CLICK : Action.MEMBER_SECOND_BANNER_CLICK, String.valueOf(mData[position].banner_id), null, null, String.valueOf(position));
         if (mData[position].banner_type == MemberConstant.BANNER_TYPE_LINK) {
             Intent intent = new Intent(mContext, WalletMainWebActivity.class);
             intent.putExtra(CommonConstants.EXTRA_TITLE_NAME, mData[position].banner_name);

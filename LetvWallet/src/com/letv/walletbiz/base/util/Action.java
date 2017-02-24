@@ -69,7 +69,8 @@ public class Action extends BaseAction {
     public static final String MEMBER_SECOND_TAB_EXPOSE = "9.1";
     public static final String MEMBER_PRODUCT_ORDER_EXPOSE = "9.2.1"; //购买
     public static final String MEMBER_PAY_NOW_PURCHASE = "9.2.2"; //立刻支付
-    public static final String MEMBER_BANNER_CLICK = "9.3";
+    public static final String MEMBER_FIRST_BANNER_CLICK = "9.3.1";
+    public static final String MEMBER_SECOND_BANNER_CLICK = "9.3.2";
 
     //Quick entry
     public static final String QUICK_ENTRY_LELEHUA_CLICK = "11";
