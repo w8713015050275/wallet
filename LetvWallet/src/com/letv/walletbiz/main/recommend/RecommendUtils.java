@@ -45,7 +45,7 @@ public class RecommendUtils {
             try {
                 Uri uri = Uri.parse(decodeUrl);
                 if (uri != null) {
-                    uri.buildUpon().appendQueryParameter(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_CARD);
+                    uri = uri.buildUpon().appendQueryParameter(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_CARD).build();
                     intent = new Intent(Intent.ACTION_VIEW, uri);
                 }
             } catch (Exception e) {
