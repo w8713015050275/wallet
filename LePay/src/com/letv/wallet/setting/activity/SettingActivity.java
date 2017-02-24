@@ -288,6 +288,8 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
         }
         if (mRedirectURL == null) {
             getPwdUrl(0);
+        } else {
+            hideLoadingView();
         }
         if (isFirstShow) {
             isFirstShow = false;
@@ -360,19 +362,19 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
             }
             return;
         }
-        if (mBasicAccount == null) {
-            showLoadingView();
-            if (mAccountQueryTask == null) {
-                mAccountQueryTask = new AccountQueryTask(AccountConstant.QTYPE_BASIC,
-                        new AccountQueryCallback());
-            }
-            ExecutorHelper.getExecutor().runnableExecutor(mAccountQueryTask);
-        } else {
+        if (mBasicAccount != null) {
             if (mRedirectURL == null) {
                 getPwdUrl(0);
+            } else {
+                hideBlankPage();
             }
-            hideBlankPage();
         }
+        showLoadingView();
+        if (mAccountQueryTask == null) {
+            mAccountQueryTask = new AccountQueryTask(AccountConstant.QTYPE_BASIC,
+                    new AccountQueryCallback());
+        }
+        ExecutorHelper.getExecutor().runnableExecutor(mAccountQueryTask);
     }
 
     private void findViewById() {
