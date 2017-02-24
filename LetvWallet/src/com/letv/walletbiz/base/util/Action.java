@@ -18,9 +18,6 @@ public class Action extends BaseAction {
     public static final String WALLET_HOME_COUPON = "1.2";
     public static final String COUPON_EXPOSE = "1.3";
 
-    //首页卡券的曝光
-    public static final String WALLET_HOME_COUPON_EXPOSE = "1.5";
-
     public static final String WALLET_HOME_BANNER = "2.1";
     public static final String WALLET_HOME_LIST = "s.";
 
@@ -61,14 +58,11 @@ public class Action extends BaseAction {
 
     //Wallet
     public static final String WALLET_MAIN_EXPOSE = "1.4";
-    public static final String WALLET_MAIN_CARD_COUPONS_CARD_EXPOSE = "1.5";
+    //首页卡券的曝光
+    public static final String WALLET_HOME_COUPON_EXPOSE = "1.5";
 
     //Me
-    public static final String TAB_RECOMMEND_PAGE_EXPOSE = "8";
-    public static final String PUSH_COUPONS_COUNT_ACCEPT = "8.2";
-    public static final String TAB_SET_PAGE_EXPOSE = "8.3";
-    public static final String VERIFY_PAGE_EXPOSE = "8.3.1";
-    public static final String VERIFY_SUCCESS = "8.3.2";
+    public static final String ME_PAGE_EXPOSE = "8";
 
     //Member
     public static final String MEMBER_FIRST_TAB_EXPOSE = "9";
@@ -80,19 +74,12 @@ public class Action extends BaseAction {
     //Quick entry
     public static final String QUICK_ENTRY_LELEHUA_CLICK = "11";
     public static final String QUICK_ENTRY_BANKCARD_CLICK = "11.3";
-    public static final String QUICK_ENTRY_BANKCARD_LIST_EXPOSE = "11.3.4";
-    public static final String QUICK_ENTRY_BANKCARD_LIST_ITEM_CLICK = "11.3.5";
-    public static final String QUICK_ENTRY_ADD_BANKCARD = "11.3.6";
-    public static final String QUICK_ENTRY_BANKCARD_PAGE_EXPOSE = "11.3.7";
 
     //Recommend
     public static final String RECOMMEND_PAGE_EXPOSE = "12.1.1";
     public static final String RECOMMEND_CARDS_EXPOSE = "12.1";
     public static final String RECOMMEND_CARDS_CLICK = "12.2";
     public static final String RECOMMEND_CARDS_BUTTON_CLICK = "12.2.1";
-
-    //Me
-    public static final String ME_PAGE_EXPOSE = "8";
 
     //EventType
     public static final String EVENTTYPE_VERIFY = "verify";
@@ -258,11 +245,11 @@ public class Action extends BaseAction {
     }
 
     public static void uploadPushExpose(String content) {
-        uploadExpose(WALLET_PUSH, content, null, null);
+        uploadExpose(WALLET_PUSH, content, null);
     }
 
     public static void uploadPushExpose(String content, String to) {
-        uploadExpose(WALLET_PUSH, content, null, to);
+        uploadExpose(WALLET_PUSH, content, to);
     }
 
     public static void uploadExposeTab(String widget) {

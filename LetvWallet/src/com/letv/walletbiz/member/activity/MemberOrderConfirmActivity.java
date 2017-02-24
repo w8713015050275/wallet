@@ -215,7 +215,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
     private void initView() {
         Bundle bundle = getIntent().getExtras();
         mMemberProduct = (MemberProduct) bundle.getSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT);
-        Action.uploadExpose(Action.MEMBER_PRODUCT_ORDER_EXPOSE, String.valueOf(mMemberProduct.getProductId()), null, null);
+        Action.uploadExpose(Action.MEMBER_PRODUCT_ORDER_EXPOSE, String.valueOf(mMemberProduct.getProductId()), null);
 
         JSONObject jsonObject = new JSONObject();
         try {

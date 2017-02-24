@@ -150,7 +150,7 @@ public class WalletFragment extends MainFragment {
                                 MovieOrder order= (MovieOrder)mAdapter.getItem(i);
                                 if(!order.upData){
                                     //数据埋点，并且把数据是否已经添加数据埋点置为true，防止多次上传
-                                    Action.uploadExpose(Action.WALLET_HOME_COUPON_EXPOSE,mAdapter.getDataPosition(i)+1,"","");
+                                    Action.uploadExpose(Action.WALLET_HOME_COUPON_EXPOSE,mAdapter.getDataPosition(i)+1,"");
                                     order.upData=true;
                                 }
                             }else if(type==MainAdapter.VIEW_TYPE_COUPON){
@@ -158,7 +158,7 @@ public class WalletFragment extends MainFragment {
                                 BaseCoupon coupon= (BaseCoupon)mAdapter.getItem(i);
                                 if(!coupon.upData){
                                     //数据埋点
-                                    Action.uploadExpose(Action.WALLET_HOME_COUPON_EXPOSE,mAdapter.getDataPosition(i)+1,"","");
+                                    Action.uploadExpose(Action.WALLET_HOME_COUPON_EXPOSE,mAdapter.getDataPosition(i)+1,"");
                                     coupon.upData=true;
                                 }
                             }else{

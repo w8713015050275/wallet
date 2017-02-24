@@ -28,7 +28,7 @@ public class AccountWebActivity extends BaseWebViewActivity {
         if (intent != null) {
             String jType = getIntent().getStringExtra(EXTRA_KEY_JTYPE);
             if (AccountConstant.JTYPE_ADD_CARD.equalsIgnoreCase(jType)) {
-                Action.uploadExpose(Action.ACCOUNT_CARD_BIND_EXPOSE, ActionUtils.getFromExtra(intent));
+                Action.uploadExpose(Action.ACCOUNT_CARD_BIND_EXPOSE);
             }
         }
     }

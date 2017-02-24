@@ -105,6 +105,23 @@ public abstract class BaseAction {
     }
 
     //----------  Expose  ----------------
+
+    public static void uploadExpose(final String widget, final Object content, final String to) {
+        mUploadExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, Object> props = new HashMap<>();
+                if (content != null) {
+                    props.put(Key.Content.getKeyId(), content);
+                }
+                if (!TextUtils.isEmpty(to)) {
+                    props.put(Key.To.getKeyId(), to);
+                }
+                uploadCustomImpl(EventType.Expose, widget, props);
+            }
+        });
+    }
+
     public static void uploadExpose(final String widget, final Object content, final String from, final String to) {
         mUploadExecutor.submit(new Runnable() {
             @Override

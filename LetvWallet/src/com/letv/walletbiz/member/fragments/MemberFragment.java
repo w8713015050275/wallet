@@ -287,7 +287,7 @@ public class MemberFragment extends BaseFragment {
             if (Integer.valueOf(mMemberTypeBean.rank) == 0) {
                 Action.uploadExpose(Action.MEMBER_FIRST_TAB_EXPOSE, null, String.valueOf(mIsFromMainPanel ? 1: 2), null);
             } else if (Integer.valueOf(mMemberTypeBean.rank) == 1) {
-                Action.uploadExpose(Action.MEMBER_SECOND_TAB_EXPOSE, null, null, null);
+                Action.uploadExpose(Action.MEMBER_SECOND_TAB_EXPOSE, null, null);
             }
         }
     }
