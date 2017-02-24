@@ -164,7 +164,7 @@
         <activity
             android:name=".movie.activity.MovieTicketActivity"
             android:label="@string/label_entity_movie"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/MovieTheme">
             <intent-filter>
