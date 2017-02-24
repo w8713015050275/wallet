@@ -42,7 +42,7 @@ public class CouponListTask implements Runnable {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_LOAD_FINISHED:
-                    if (mCallback != null && !TextUtils.isEmpty(getSkus())) {
+                    if (mCallback != null) {
                         mCallback.onLoadFinished((CouponListBean<CouponBean>) msg.obj, mErrorCode);
                     }
                     break;
@@ -56,14 +56,6 @@ public class CouponListTask implements Runnable {
         mSkuSN = skuSN;
         mContext = context;
         mCallback = callback;
-    }
-
-    public void onCancelled() {
-        mSkuSN = null;
-    }
-
-    public String getSkus() {
-        return mSkuSN;
     }
 
     @Override

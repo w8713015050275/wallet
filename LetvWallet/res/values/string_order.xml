@@ -20,6 +20,7 @@
     <string name="total_order_list_hearder_this_month">Current month</string>
     <string name="order_desc_label_status">Status:</string>
     <string name="order_desc_label_sn">Number:</string>
+    <string name="order_parameter_error">error</string>
 
     <string name="label_order_cost_info">Checkout information</string>
     <string name="label_order_product_info">Item information</string>

@@ -17,6 +17,7 @@
     <string name="total_order_list_hearder_other_month">yyyy年MM月</string>
     <string name="order_desc_label_status">状态:</string>
     <string name="order_desc_label_sn">编号:</string>
+    <string name="order_parameter_error">参数错误</string>
 
     <string name="label_order_cost_info">结算信息</string>
     <string name="label_order_product_info">商品信息</string>

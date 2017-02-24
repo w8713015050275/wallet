@@ -52,9 +52,6 @@ public class MobileCouponListActivity extends AccountBaseActivity implements Cou
         }
         String uToken = AccountHelper.getInstance().getToken(MobileCouponListActivity.this);
         showLoadingView();
-        if (mCouponAsyncT != null) {
-            mCouponAsyncT.onCancelled();
-        }
         mCouponAsyncT = new CouponListTask(MobileCouponListActivity.this, this, uToken, skus);
         ExecutorHelper.getExecutor().runnableExecutor(mCouponAsyncT);
     }

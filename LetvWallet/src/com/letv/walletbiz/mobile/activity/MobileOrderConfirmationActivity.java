@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.reflect.TypeToken;
 import com.letv.tracker.enums.EventType;
 import com.letv.tracker.enums.Key;
+import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
@@ -234,6 +235,12 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     private void initV() {
         processExtraData();
         if (mMobileProduct == null) {
+            finish();
+            return;
+        }
+        if (TextUtils.isEmpty(mMobileProduct.getSkuSN()) && TextUtils.isEmpty(mMobileProduct.getNumber())
+                && TextUtils.isEmpty(mMobileProduct.getPrice())) {
+            Toast.makeText(BaseApplication.getApplication(), R.string.order_parameter_error, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -484,9 +491,6 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         setData(null, 0);
         showLoadingView();
         String uToken = AccountHelper.getInstance().getToken(MobileOrderConfirmationActivity.this);
-        if (mCouponAsyncT != null) {
-            mCouponAsyncT.onCancelled();
-        }
         mCouponAsyncT = new CouponListTask(MobileOrderConfirmationActivity.this, this, uToken, skuSN);
         ExecutorHelper.getExecutor().runnableExecutor(mCouponAsyncT);
     }
