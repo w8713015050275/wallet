@@ -54,6 +54,8 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
     private static final int NO_NETWORK_PROMPT = 3;
     private static final int NO_NETWORK_SHOW_BLANKPAGE = 4;
 
+    private static final int GOPWDPAGE = 1;
+
     protected Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -61,7 +63,6 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
             switch (msg.what) {
                 case ACCOUNT_QUERY_FINISH:
                     mAccountQueryTask = null;
-                    hideLoadingView();
                     if (msg.obj == null) {
                         LogHelper.e("[%S] account_query_finish | msg.obj == null", TAG);
                         showBlankPage(BlankPage.STATE_DATA_EXCEPTION, new View.OnClickListener() {
@@ -83,7 +84,9 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
                         return;
                     }
                     mRedirectURL = (RedirectURL) msg.obj;
-                    goPwdPage(mRedirectURL);
+                    if (msg.arg1 == 1) {
+                        goPwdPage(mRedirectURL);
+                    }
                     break;
                 case NO_NETWORK_PROMPT:
                     Toast.makeText(SettingActivity.this, R.string.pay_no_network, Toast.LENGTH_SHORT).show();
@@ -186,7 +189,7 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
                         goPwdPage(mRedirectURL);
                         return;
                     }
-                    getPwdUrl();
+                    getPwdUrl(GOPWDPAGE);
                 }
                 break;
         }
@@ -238,11 +241,18 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
 
     private class PwdUrlCallback implements AccountCommonCallback<RedirectURL> {
 
+        private int mType;
+
+        public PwdUrlCallback(int type) {
+            this.mType = type;
+        }
+
         @Override
         public void onSuccess(RedirectURL result) {
             if (mHandler != null) {
                 Message msg = mHandler.obtainMessage(PWD_URL_FINISH);
                 msg.obj = result;
+                msg.arg1 = mType;
                 mHandler.sendMessage(msg);
             }
         }
@@ -275,6 +285,9 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
                 }
             });
             return;
+        }
+        if (mRedirectURL == null) {
+            getPwdUrl(0);
         }
         if (isFirstShow) {
             isFirstShow = false;
@@ -331,12 +344,11 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
         }
     }
 
-    private void getPwdUrl() {
+    private void getPwdUrl(int type) {
         String[] jtype = new String[2];
         jtype[0] = AccountConstant.JTYPE_MOD_PAY_PWD;
         jtype[1] = AccountConstant.JTYPE_SET_PAY_PWD;
-        mRedirectTask = new RedirectTask(jtype, new PwdUrlCallback());
-        showLoadingView();
+        mRedirectTask = new RedirectTask(jtype, new PwdUrlCallback(type));
         ExecutorHelper.getExecutor().runnableExecutor(mRedirectTask);
     }
 
@@ -356,6 +368,9 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
             }
             ExecutorHelper.getExecutor().runnableExecutor(mAccountQueryTask);
         } else {
+            if (mRedirectURL == null) {
+                getPwdUrl(0);
+            }
             hideBlankPage();
         }
     }

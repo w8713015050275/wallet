@@ -211,7 +211,6 @@ public abstract class BaseAction {
                             value = entry.getValue().toString();
                         }
                         event.addProp(Key.From, value);
-                        LogHelper.i("[%S] Agen " + Key.From.getKeyId() + " = " + value, TAG);
                     } else {
                         if (entry.getValue() != null) {
                             if (Key.isExsited(entry.getKey())) {
@@ -220,7 +219,6 @@ public abstract class BaseAction {
                             } else {
                                 event.addProp(entry.getKey(), entry.getValue().toString());
                             }
-                            LogHelper.i("[%S] Agen " + entry.getKey() + " = " + entry.getValue(), TAG);
                         }
                     }
                 }
