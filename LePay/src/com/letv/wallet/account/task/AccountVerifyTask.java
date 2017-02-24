@@ -2,6 +2,7 @@ package com.letv.wallet.account.task;
 
 import android.text.TextUtils;
 
+import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.IAccountCallback;
 import com.letv.wallet.account.base.AccountGateway;
 import com.letv.wallet.account.utils.AccountUtils;
