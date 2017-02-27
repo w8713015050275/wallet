@@ -287,6 +287,9 @@ public class MovieScheduleActivity extends BaseWalletFragmentActivity implements
                 }
                 mDate = uri.getQueryParameter(MovieTicketConstant.EXTRA_DATE);
                 from = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
+                if (TextUtils.isEmpty(from)) {
+                    from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+                }
             } else {
                 mCinemaName = intent.getStringExtra(MovieTicketConstant.EXTRA_CINEMA_NAME);
                 mCinemaId = intent.getIntExtra(MovieTicketConstant.EXTRA_CINEMA_ID, -1);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -93,6 +94,9 @@ public class MovieTicketActivity extends BaseWalletFragmentActivity implements T
                 } catch (NumberFormatException e) {
                 }
                 from = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
+                if (TextUtils.isEmpty(from)) {
+                    from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+                }
             } else {
                 tabId = intent.getIntExtra(MovieTicketConstant.EXTRA_MOVIE_TICKET_TAB_ID, -1);
                 from = intent.getStringExtra(WalletConstant.EXTRA_FROM);

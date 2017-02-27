@@ -291,8 +291,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         Intent in = getIntent();
         if (in == null) return;
         Uri uri = in.getData();
-        mFrom = in.getStringExtra(WalletConstant.EXTRA_FROM);
         if (uri == null) {
+            mFrom = in.getStringExtra(WalletConstant.EXTRA_FROM);
             Bundle bundle = getIntent().getExtras();
             mMobileProduct = (MobileProduct) bundle.getSerializable(ActivityConstant.PAY_PARAM.PAY_PRODUCT);
             mUcouponId = bundle.getLong(CouponConstant.EXTRA_COUPON_BEAN_ID);
@@ -309,6 +309,10 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     || TextUtils.isEmpty(name) || TextUtils.isEmpty(price)) {
                 LogHelper.e("[%S] extra params is null", TAG);
                 return;
+            }
+            mFrom = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
+            if (TextUtils.isEmpty(mFrom)) {
+                mFrom = in.getStringExtra(WalletConstant.EXTRA_FROM);
             }
             int product_id = -1;
             try {

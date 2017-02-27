@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,6 +76,9 @@ public class CouponListActivity extends AccountBaseActivity implements View.OnCl
             Uri uri = intent.getData();
             if (uri != null) {
                 from = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
+                if(TextUtils.isEmpty(from)){
+                    from  = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+                }
             } else {
                 from  = intent.getStringExtra(WalletConstant.EXTRA_FROM);
             }

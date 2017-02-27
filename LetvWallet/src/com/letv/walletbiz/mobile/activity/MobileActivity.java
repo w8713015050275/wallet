@@ -296,6 +296,9 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             }
             inNumber = uri.getQueryParameter(MOBILE_PARAM.MOBILENUMBER);
             mFrom = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
+            if (TextUtils.isEmpty(mFrom)) {
+                mFrom = in.getStringExtra(WalletConstant.EXTRA_FROM);
+            }
             try {
                 mCouponID = Integer.valueOf(uri.getQueryParameter(CouponConstant.EXTRA_COUPON_BEAN_ID));
             } catch (Exception e) {

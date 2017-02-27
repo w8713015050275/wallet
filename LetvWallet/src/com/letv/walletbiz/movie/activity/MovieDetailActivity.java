@@ -161,7 +161,7 @@ public class MovieDetailActivity extends BaseWalletFragmentActivity implements M
         handleIntent(getIntent(), true);
     }
 
-    private void handleIntent(Intent intent, boolean needRefreshData){
+    private void handleIntent(Intent intent, boolean needRefreshData) {
         if (intent != null) {
             String from = null;
             Uri uri = intent.getData();
@@ -178,6 +178,9 @@ public class MovieDetailActivity extends BaseWalletFragmentActivity implements M
                 } catch (NumberFormatException e) {
                 }
                 from = uri.getQueryParameter(WalletConstant.EXTRA_FROM);
+                if (TextUtils.isEmpty(from)) {
+                    from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+                }
             } else {
                 mMovieId = intent.getLongExtra(MovieTicketConstant.EXTRA_MOVIE_ID, -1);
                 mMovieName = intent.getStringExtra(MovieTicketConstant.EXTRA_MOVIE_NAME);
@@ -192,8 +195,10 @@ public class MovieDetailActivity extends BaseWalletFragmentActivity implements M
         if (mCityId == -1) {
             mCityId = SharedPreferencesHelper.getInt(MovieTicketConstant.PREFERENCES_CURRENT_CITY_ID, -1);
         }
-        if(mToolBarTitle != null && !TextUtils.isEmpty(mMovieName)) {mToolBarTitle.setText(mMovieName);}
-        if(needRefreshData) {
+        if (mToolBarTitle != null && !TextUtils.isEmpty(mMovieName)) {
+            mToolBarTitle.setText(mMovieName);
+        }
+        if (needRefreshData) {
             mMovieDetailTask = null;
             loadData();
         }
@@ -314,10 +319,10 @@ public class MovieDetailActivity extends BaseWalletFragmentActivity implements M
         pageHeaderViewBehavior.setScrollListener(this);
     }
 
-    private void scalePosterBy16_9(){
-        if(mMoviePosterView != null){
+    private void scalePosterBy16_9() {
+        if (mMoviePosterView != null) {
             int width = DensityUtils.getScreenWidth();
-            int height = width * 9 / 16 ;
+            int height = width * 9 / 16;
             ViewGroup.LayoutParams params = mMoviePosterView.getLayoutParams();
             params.height = height;
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -337,7 +342,7 @@ public class MovieDetailActivity extends BaseWalletFragmentActivity implements M
             builder.setFailureDrawableId(R.drawable.place_holder_img).setLoadingDrawableId(R.drawable.place_holder_img);
             xmain.image().bind(mMoviePosterView, moviePhoto.backgroundImg, builder.build());
         }
-        if(mToolBarTitle != null && TextUtils.isEmpty(mMovieName)) {
+        if (mToolBarTitle != null && TextUtils.isEmpty(mMovieName)) {
             mMovieName = movieDetail.name;
             mToolBarTitle.setText(mMovieName);
         }

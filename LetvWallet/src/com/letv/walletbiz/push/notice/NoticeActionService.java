@@ -60,6 +60,7 @@ public class NoticeActionService  extends IntentService {
                 }
                 Action.uploadPushExpose(pushMessage.getMsgId());
                 mIntent = new Intent(this, PushWebActivity.class);
+                mIntent.putExtra(WalletConstant.EXTRA_FROM, Action.EVENT_PROP_FROM_PUSH);
                 mIntent.putExtra(CommonConstants.EXTRA_URL, uriStr);
                 break;
 
