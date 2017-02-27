@@ -367,7 +367,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
 
     private void setDiscountPrice(float price) {
         if (price > 0.0F) {
-            mTvDiscount.setText(String.format(getString(R.string.mobile_order_desc_coupon_price), price));
+            mTvDiscount.setText(StringUtils.getDiscountPriceUnit(price));
         } else {
             mTvDiscount.setText("-￥0");
         }
