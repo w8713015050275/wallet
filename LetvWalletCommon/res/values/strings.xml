@@ -3,10 +3,10 @@
 
     <!-- empty page -->
     <string name="empty_no_network">Disconnected. Please connect to a network.</string>
-    <string name="empty_network_error">Network access error, Please try later.</string>
+    <string name="empty_network_error">"Network access error, please try again later."</string>
     <string name="empty_no_login">Not logged in</string>
     <string name="empty_no_login_prompt">Log in now</string>
-    <string name="empty_no_record">No Record</string>
+    <string name="empty_no_record">"No records"</string>
     <string name="empty_no_network_retry">Reload</string>
     <string name="empty_no_network_setting">Configure network</string>
 

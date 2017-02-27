@@ -86,8 +86,8 @@
     <string name="movie_weipiao_tele">Wepiao customer service</string>
     <string name="movie_weipiao_tele_num">4001100100</string>
     <string name="movie_toast_order_overtime">Order timed out</string>
-    <string name="movie_permission_call_refused_toast">You need to grant the calling permission to the app</string>
-    <string name="movie_permission_location_refused_toast">You need to grant the positioning permission to the app</string>
+    <string name="movie_permission_call_refused_toast">"Call permission is required"</string>
+    <string name="movie_permission_location_refused_toast">"Location permission is required for the app"</string>
     <string name="movie_pay_overtime">Order payment timed out. Please select seats again.</string>
     <string name="movie_phone_number_empty_toast">Mobile number cannot be blank!</string>
     <string name="movie_dialog_query_pay_result">Checking payment result...</string>

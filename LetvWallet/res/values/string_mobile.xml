@@ -44,7 +44,7 @@
     <string name="mobile_prompt_user_select_load_title">Network error. Please reload.</string>
     <string name="mobile_prompt_user_select_reload">Reload</string>
     <string name="mobile_prompt_user_select_cancel">Cancel</string>
-    <string name="mobile_permission_contacts_refused_toast">You need to grant the contact reading permission to this app</string>
+    <string name="mobile_permission_contacts_refused_toast">"Access to contacts is required"</string>
     <!-- matter attention content -->
     <string name="label_matter_attention">Notes</string>
 </resources>
