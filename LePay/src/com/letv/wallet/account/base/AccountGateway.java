@@ -6,6 +6,11 @@ import com.letv.wallet.account.aidl.v1.CardbinAvailableInfo;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.account.utils.RequestUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
+import com.letv.wallet.online.LePayConstants;
+import com.letv.wallet.online.activity.LePayEntryActivity;
+import com.letv.wallet.online.bean.LePayCashierUrlBean;
+import com.letv.wallet.online.bean.LePayChannelListBean;
+import com.letv.wallet.online.bean.LePayOrderStatusBean;
 import com.letv.wallet.utils.SslUtil;
 
 import org.xutils.xmain;
@@ -112,7 +117,8 @@ public class AccountGateway {
     public static BaseResponse<AccountInfo> queryAccount(String type) {
         AccountBaseReqParams params = buildBaseParams(ACCOUNT_QUERY);
         params.addBodyParameter(QTYPE, type);
-        return postSync(params, new TypeToken<BaseResponse<AccountInfo>>(){}.getType());
+        return postSync(params, new TypeToken<BaseResponse<AccountInfo>>() {
+        }.getType());
     }
 
     /**
@@ -136,7 +142,8 @@ public class AccountGateway {
     public static BaseResponse<RedirectURL> redirect(String jumpType) {
         AccountBaseReqParams params = buildBaseParams(ACCOUNT_REDIRECT);
         params.addBodyParameter(JTYPE, jumpType);
-        return postSync(params, new TypeToken<BaseResponse<RedirectURL>>() {}.getType());
+        return postSync(params, new TypeToken<BaseResponse<RedirectURL>>() {
+        }.getType());
     }
 
     /**
@@ -145,7 +152,8 @@ public class AccountGateway {
     public static BaseResponse<CardbinAvailableInfo> availableCarbin(String bankNo) {
         AccountBaseReqParams params = buildBaseParams(AccountGateway.BANK_CARDBIN);
         params.addBodyParameter(KEY_BANK_NO, SslUtil.getInstance().encryptData(bankNo));
-        return postSync(params, new TypeToken<BaseResponse<CardbinAvailableInfo>>() {}.getType());
+        return postSync(params, new TypeToken<BaseResponse<CardbinAvailableInfo>>() {
+        }.getType());
     }
 
     /**
@@ -159,5 +167,36 @@ public class AccountGateway {
         }.getType());
     }
 
+
+    /**
+     * 请求支付列表
+     */
+    public static BaseResponse payChannel(String payInfo) {
+        AccountBaseReqParams reqParams = new AccountBaseReqParams(LePayConstants.PATH.PAY_CHANNEL);
+        reqParams.addBodyParameter(LePayConstants.PARAM.PAY_INFO, payInfo);
+        return postSync(reqParams, new TypeToken<BaseResponse<LePayChannelListBean>>() {
+        }.getType());
+    }
+
+    /**
+     * 请求支付地址
+     */
+    public static BaseResponse showCashier(String payInfo, String payMethod) {
+        AccountBaseReqParams reqParams = buildBaseParams(LePayConstants.PATH.GET_CASHIER_URL);
+        reqParams.addBodyParameter(LePayConstants.PARAM.PAY_INFO, payInfo);
+        reqParams.addBodyParameter(LePayConstants.PARAM.PAY_METHOD, payMethod);
+        return postSync(reqParams, new TypeToken<BaseResponse<LePayCashierUrlBean>>() {
+        }.getType());
+    }
+
+    /**
+     * 获取订单状态
+     */
+    public static BaseResponse orderStatus(String orderNo) {
+        AccountBaseReqParams reqParams = buildBaseParams(LePayConstants.PATH.ORDER_NO);
+        reqParams.addBodyParameter(LePayConstants.PARAM.ORDER_NO, orderNo);
+        return postSync(reqParams, new TypeToken<BaseResponse<LePayOrderStatusBean>>() {
+        }.getType());
+    }
 
 }

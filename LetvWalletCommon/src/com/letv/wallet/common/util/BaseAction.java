@@ -29,6 +29,7 @@ public abstract class BaseAction {
     public static final String EVENTTYPE_PURCHASE = "purchase";
     public static final String EVENTTYPE_PAY = "pay";
     public static final String EVENTTYPE_SET = "set";
+    public static final String EVENTTYPE_ACTIVE = "active";
 
     public static final String EVENT_PROP_FROM_ICON = "wallet_icon";
     public static final String EVENT_PROP_FROM_PUSH = "wallet_push";

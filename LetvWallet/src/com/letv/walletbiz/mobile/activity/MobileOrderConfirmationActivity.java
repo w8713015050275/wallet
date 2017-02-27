@@ -218,14 +218,6 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     if (mMobileProduct != null) {
                         mMobileProduct.showPayResult(MobileOrderConfirmationActivity.this, payResult);
                     }
-                    if (payResult != Constants.RESULT_STATUS.SUCCESS) {
-                        if (AccountHelper.getInstance().isLogin(this)) {
-                            loadData();
-                        } else {
-                            showNoLoginBlankPage();
-                        }
-                        return;
-                    }
                     finish();
                 }
                 break;

@@ -8,11 +8,13 @@ import android.os.Bundle;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.activity.PayResultActivity;
+import com.letv.walletbiz.base.pay.Constants;
 import com.letv.walletbiz.base.pay.Product;
 import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.coupon.CouponConstant;
 import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.mobile.activity.MobileOrderConfirmationActivity;
+import com.letv.walletbiz.mobile.activity.MobileOrderDetailActivity;
 import com.letv.walletbiz.mobile.beans.OrderBean;
 import com.letv.walletbiz.mobile.beans.OrderDetailBean;
 import com.letv.walletbiz.mobile.provider.MobileContact;
@@ -104,5 +106,17 @@ public class MobileProduct extends Product {
 
     public void showPayResult(Context context, int result) {
         super.showPayResult(context, result, null);
+        if (result != Constants.RESULT_STATUS.SUCCESS) {
+            showOrderDetail(context);
+        }
     }
+
+    private void showOrderDetail(Context context) {
+        Intent intent = new Intent(context, MobileOrderDetailActivity.class);
+        Bundle b = new Bundle();
+        b.putString(Constants.INFO_PARAM.ORDER_NO, mSN);
+        intent.putExtras(b);
+        context.startActivity(intent);
+    }
+
 }

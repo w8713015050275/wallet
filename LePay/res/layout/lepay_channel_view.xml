@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lepay_channel_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/pay_channel_v_height"
+    android:layout_marginBottom="@dimen/small_padding"
+    android:layout_marginLeft="@dimen/small_padding"
+    android:layout_marginRight="@dimen/small_padding"
+    android:background="@drawable/corners"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_default"
+    android:paddingRight="@dimen/padding_default">
+
+    <TextView
+        android:id="@+id/pay_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/channel_list_tv_primary_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/pay_price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/lepay_pay_price_tv_color"
+        android:textSize="14sp" />
+
+    <View style="@style/Divider_HorizontalLine_Style" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pay_channel_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fadingEdge="none"
+        android:scrollbars="none" />
+
+    <View
+        android:id="@+id/list_bottom_line"
+        style="@style/Divider_HorizontalLine_Style" />
+
+    <TextView
+        android:id="@+id/pay_cancel_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:paddingBottom="@dimen/padding_default"
+        android:paddingTop="@dimen/padding_default"
+        android:textColor="@color/lepay_pay_cancel_tv_color"
+        android:textSize="18sp" />
+
+</LinearLayout>

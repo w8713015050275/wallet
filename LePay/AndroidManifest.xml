@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.letv.wallet"
+    android:sharedUserId="com.letv.uid.walletpay"
     android:versionCode="10002"
-    android:versionName="1.0.2"
-    android:sharedUserId="com.letv.uid.walletpay">
+    android:versionName="1.0.2">
 
     <uses-sdk
         android:minSdkVersion="23"
@@ -15,15 +15,15 @@
         android:name=".PayApplication"
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.Translucent">
+
         <activity
-            android:name=".LePayEntryActivity"
+            android:name=".online.activity.LePayEntryActivity"
             android:configChanges="locale|layoutDirection|fontScale"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent">
+            android:theme="@style/LepayEntryTheme">
             <intent-filter>
                 <action android:name="android.intent.action.LE_PAYENTRYACTIVITY" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -45,24 +45,36 @@
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/SettingWebTheme" />
+
+        <activity
+            android:name=".online.activity.LePayWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
+
+        <activity
+            android:name=".online.activity.LePayWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
+
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent"/>
+            android:theme="@android:style/Theme.Translucent" />
 
-        <activity android:name=".account.activity.AccountVerifyActivity"
+        <activity
+            android:name=".account.activity.AccountVerifyActivity"
             android:label="@string/account_verify_acitivtiy_title"
+            android:screenOrientation="portrait"
             android:theme="@style/AccountVerifyTheme"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
-               <action android:name="com.letv.wallet.accountverify" />
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.letv.wallet.accountverify" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".account.service.AccountService">
+
+        <service android:name=".account.service.AccountService">
             <intent-filter>
                 <action android:name="com.letv.wallet.ACTION_SERVICE_LEPAYACCOUNT" />
             </intent-filter>
@@ -90,13 +102,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/SettingWebTheme" />
 
-        <activity android:name=".account.activity.CardListActivity"
+        <activity
+            android:name=".account.activity.CardListActivity"
             android:label="@string/account_card_title"
             android:screenOrientation="portrait"
             android:theme="@style/AccountVerifyTheme">
             <intent-filter>
                 <action android:name="com.letv.wallet.cardlist" />
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

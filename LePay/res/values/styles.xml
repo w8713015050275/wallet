@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AccountVerifyEditeTextStyle" >
         <item name="android:textColorHint">@color/account_verify_text_hint_color</item>
         <item name="android:textSize">16sp</item>
@@ -83,6 +84,25 @@
     <style name="ErrorTextStyle">
         <item name="android:textColor">@color/account_edit_error_color</item>
         <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextAppearance.LePay" parent="@android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/channel_list_tv_primary_color</item>
+    </style>
+
+    <style name="TextAppearance.LePay.ChannelListItemLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/channel_list_tv_primary_color</item>
+    </style>
+
+    <style name="TextAppearance.LePay.ChannelListItemContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/channel_list_tv_secondary_color</item>
     </style>
 
 </resources>

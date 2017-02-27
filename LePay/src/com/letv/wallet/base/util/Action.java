@@ -19,6 +19,9 @@ public class Action extends BaseAction {
     public static final String PAY_PAGE_EXPOSE = "10.1";
     public static final String PAY_PAGE_PAY_CLICK = "10.1.1";
     public static final String PAY_PAGE_CLOSE = "10.1.2";
+    public static final String PAY_PAGE_YOUΠ_ACTIVATED = "10.1.4";
+    public static final String PAY_RESULT_EXCEPTION = "10.2";
+    public static final String PAY_FAIL_EXPOSE = "10.1.5";
 
     /**
      * 账户相关

@@ -14,6 +14,7 @@ import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -34,6 +35,7 @@ import java.util.Map;
  */
 public class BaseWebViewActivity extends BaseFragmentActivity {
     private static final String TAG = "BaseWebView";
+    private static final String CLOSEURL = "letvwallet://closePage";
 
     private FrameLayout mContainer;
 
@@ -159,6 +161,24 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
 
     protected View.OnClickListener getRefreshClickListener() {
         return mRefreshClickListener;
+    }
+
+    /**
+     * 返回关闭页面时url地址
+     *
+     * @param url
+     * @return true 关闭页面，false 不会关闭页面
+     */
+    protected boolean closePageUrl(String url) {
+        return true;
+    }
+
+    /**
+     * @param url
+     * @return 是true的人为控制打开逻辑，为false时webview自己处理
+     */
+    protected boolean overrideUrlLoading(String url) {
+        return true;
     }
 
     @Override
@@ -319,20 +339,47 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
     public class BaseWebViewClient extends WebViewClient {
 
         @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            if (request != null) {
+                Uri uri = request.getUrl();
+                if (uri != null) {
+                    return checkUrl(view, uri.toString());
+                }
+            }
+            return super.shouldOverrideUrlLoading(view, request);
+        }
+
+        @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             //返回值是true的人为控制打开逻辑，为false时webview自己处理
-            LogHelper.d("[" + TAG + "]shouldOverrideUrlLoading url is: " + url);
-            if (!url.startsWith("http")) {
-                LogHelper.d("["+TAG+"]shouldOverrideUrlLoading go browser");
-                Intent intent = null;
-                if (url.startsWith("intent:")) {
-                    try {
-                        intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
-                    } catch (Exception e) {
-                        LogHelper.d(e.toString());
-                        intent = null;
-                    }
+            return checkUrl(view, url);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+        }
+    }
+
+    private boolean checkUrl(WebView view, String url) {
+        LogHelper.d("[" + TAG + "]shouldOverrideUrlLoading url is: " + url);
+        if (!url.startsWith("http")) {
+            LogHelper.d("[" + TAG + "]shouldOverrideUrlLoading go browser");
+            Intent intent = null;
+            if (url.startsWith(CLOSEURL)) {
+                if (closePageUrl(url)) {
+                    finish();
                 }
+                return true;
+            } else if (url.startsWith("intent:")) {
+                try {
+                    intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+                } catch (Exception e) {
+                    LogHelper.d(e.toString());
+                    intent = null;
+                }
+            }
+            if (overrideUrlLoading(url)) {
                 try {
                     if (intent == null) {
                         intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -351,16 +398,11 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
                 }
                 return true;
             }
-            return false;
         }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
-        }
+        return false;
     }
 
-    public void setFlagIfNeeded(Intent intent){
+    public void setFlagIfNeeded(Intent intent) {
 
     }
 

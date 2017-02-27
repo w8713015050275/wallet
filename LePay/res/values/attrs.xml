@@ -14,5 +14,9 @@
         <!-- Text Color of the error message -->
         <attr name="ErrorTextColor" format="reference|color" />
 
+	</declare-styleable>
+
+    <declare-styleable name="TabFlowLayout">
+        <attr name="singleLine" format="boolean" />
     </declare-styleable>
 </resources>
