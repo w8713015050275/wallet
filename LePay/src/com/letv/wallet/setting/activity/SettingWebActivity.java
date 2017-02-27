@@ -37,4 +37,9 @@ public class SettingWebActivity extends BaseWebViewActivity {
             }
         }
     }
+
+    @Override
+    public void setFlagIfNeeded(Intent intent) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
 }

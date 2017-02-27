@@ -2,10 +2,8 @@ package com.letv.wallet.account.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 
 import com.letv.wallet.account.aidl.v1.AccountConstant;
-import com.letv.wallet.account.utils.ActionUtils;
 import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.activity.BaseWebViewActivity;
 
@@ -31,5 +29,10 @@ public class AccountWebActivity extends BaseWebViewActivity {
                 Action.uploadExpose(Action.ACCOUNT_CARD_BIND_EXPOSE);
             }
         }
+    }
+
+    @Override
+    public void setFlagIfNeeded(Intent intent) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
 }

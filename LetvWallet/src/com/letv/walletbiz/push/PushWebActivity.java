@@ -26,6 +26,7 @@ public class PushWebActivity  extends BaseWebViewActivity {
                 startActivity(new Intent(PushWebActivity.this, MainActivity.class));
                 LogHelper.d("%S Main is not in stack, start MainActivity", TAG);
             }
+            finish();
         }
     };
 

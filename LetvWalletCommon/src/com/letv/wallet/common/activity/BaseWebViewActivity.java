@@ -270,6 +270,22 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        String url = getUrl(getIntent());
+        if (TextUtils.isEmpty(url) || url.equalsIgnoreCase(mUrl)) {
+            return;
+        }
+        mTitle = getWebViewTitle(intent);
+        if (!TextUtils.isEmpty(mTitle)) {
+            setTitle(mTitle);
+        }
+        showLoadingView();
+        mWebView.loadUrl(mUrl = url, getAdditionalHttpHeaders());
+    }
+
+    @Override
     protected void onDestroy() {
         if (mWebView != null) {
             mWebView.stopLoading();
@@ -319,6 +335,7 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
                     return false;
                 }
                 try {
+                    setFlagIfNeeded(intent);
                     startActivity(intent);
                 } catch (Exception e) {
                     LogHelper.d(e.toString());
@@ -334,6 +351,9 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
         }
     }
 
+    public void setFlagIfNeeded(Intent intent){
+
+    }
 }
 
 
