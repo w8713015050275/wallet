@@ -3,8 +3,8 @@
     <string name="main_tab_wallet">Wallet</string>
     <string name="main_tab_my">Mine</string>
     <string name="main_top_card">coupon</string>
-    <string name="main_recommend_input_error">Please enter a valid word</string>
-    <string name="main_recommend_error_no_network">No network connection. Please check your network settings.</string>
-    <string name="main_recommend_error_network">Server connection error. Please try again later.</string>
+    <string name="main_recommend_input_error">Invalid format</string>
+    <string name="main_recommend_error_no_network">No network connected. Please check your network settings.</string>
+    <string name="main_recommend_error_network">Server connection exception. Please try again later.</string>
     <string name="main_recommend_no_data">No content</string>
 </resources>

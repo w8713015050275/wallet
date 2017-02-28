@@ -6,10 +6,10 @@
     <string name="pay_no_network">Disconnected. Please connect to a network.</string>
 
     <string name="setting_label">Settings</string>
-    <string name="setting_account_verify_label">Real name verification</string>
-    <string name="prompt_str_account_verified">verification complete</string>
-    <string name="setting_account_verified">name verified</string>
-    <string name="setting_account_not_verify">name not verified</string>
+    <string name="setting_account_verify_label">Real-name authentication</string>
+    <string name="prompt_str_account_verified">Authentication complete</string>
+    <string name="setting_account_verified">Authenticated</string>
+    <string name="setting_account_not_verify">Not authenticated</string>
     <string name="setting_pay_pwd_label">Payment password</string>
     <string name="pay_pwd_mod_title">Modify password</string>
     <string name="pay_pwd_set_title">Set password</string>
