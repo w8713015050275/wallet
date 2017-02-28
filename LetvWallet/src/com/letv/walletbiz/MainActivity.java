@@ -83,10 +83,12 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        parseIntent(intent);
+        setIntent(intent);
+        parseIntent(getIntent());
         if (mCurrentTabId != -1 && mTabHost != null) {
             mTabHost.setCurrentTab(mCurrentTabId);
         }
+        setFragmentDisplay();
     }
 
     @Override
@@ -212,7 +214,6 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     @Override
     protected void onStart() {
         super.onStart();
-        setFragmentDisplay();
     }
 
     @Override

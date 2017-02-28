@@ -203,12 +203,19 @@ public class RecommendFragment extends MainFragment {
     public void fragmentDisplay() {
         String from;
         Map<String, Object> props = new HashMap<>();
+        Intent intent = null;
         if (getActivity() != null) {
-            Intent intent = getActivity().getIntent();
-            from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
-            props.put(Key.From.getKeyId(), from);
+            intent = getActivity().getIntent();
+            if (intent != null) {
+                from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+                props.put(Key.From.getKeyId(), from);
+            }
         }
         Action.uploadCustom(EventType.Expose, Action.RECOMMEND_PAGE_EXPOSE, props);
+        if (intent != null) {
+            String NULL = null;
+            intent.putExtra(WalletConstant.EXTRA_FROM, NULL);
+        }
     }
 
     @Override
