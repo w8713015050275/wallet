@@ -8,8 +8,8 @@
     >
     <com.letv.shared.widget.BorderedRoundedCornersImageView
         android:id="@+id/content_img"
-        android:layout_width="72dp"
-        android:layout_height="117dp"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPlaceHolderBg"
         android:alpha="@dimen/le_img_alpha"
         app:corner_radius="2dp"
@@ -23,7 +23,7 @@
         android:gravity="center"
         android:layout_marginTop="4dip"
         android:lines="1"
-        android:textAppearance="@style/Recommend_Card_Title"
+        android:textAppearance="@style/Recommend_Card_F_Item_Text"
         />
 
 </LinearLayout>

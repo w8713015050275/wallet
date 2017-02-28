@@ -62,15 +62,10 @@ public class RecommendCardHView extends LinearLayout implements BaseCardView {
             titleView.setText(cardBean.key + ":");
             summaryView = (TextView) view.findViewById(R.id.content_summary);
             summaryView.setText(cardBean.value);
-            if (i == (mCardList.size() - 1)) {
-                view.setPadding(0, padding, 0, 0);
-            } else {
-                view.setPadding(0, padding, 0, padding);
-            }
+            view.setPadding(padding, padding, padding, padding);
             addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             if (mCardList.size() > 1 && i != (mCardList.size() - 1)) {
-                view = inflater.inflate(R.layout.divider_horizontal, this, false);
-                addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                inflater.inflate(R.layout.recommend_divider_horizontal, this, true);
             }
         }
 

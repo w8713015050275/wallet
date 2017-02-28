@@ -46,6 +46,10 @@ public class RecommendCardEView extends LinearLayout implements BaseCardView {
         int paddingLeft = (int) DensityUtils.dip2px(16);
         setPadding(paddingLeft, padding, paddingLeft, padding);
         setBackgroundResource(R.drawable.main_recommend_edit_bg);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        params.leftMargin = padding;
+        params.rightMargin = padding;
+        setLayoutParams(params);
 
     }
 
@@ -121,7 +125,7 @@ public class RecommendCardEView extends LinearLayout implements BaseCardView {
             } else if (bean.i_type == CardEBean.I_TYPE_DATE) {
                 final TextView textView = new TextView(getContext());
                 textView.setText(DateUtils.getDayStr(System.currentTimeMillis()));
-                textView.setTextAppearance(R.style.Recommend_Card_Title);
+                textView.setTextAppearance(R.style.Recommend_Card_Content_Title);
                 int pading = (int) DensityUtils.dip2px(10);
                 if (i == (mCardList.size() - 1)) {
                     textView.setPadding(0, pading, 0, 0);
@@ -145,7 +149,7 @@ public class RecommendCardEView extends LinearLayout implements BaseCardView {
                 addView(textView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             }
             if (mCardList.size() > 1 && i != (mCardList.size() - 1)) {
-                inflater.inflate(R.layout.divider_horizontal, this, true);
+                inflater.inflate(R.layout.recommend_divider_horizontal, this, true);
             }
         }
     }

@@ -15,13 +15,14 @@
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Recommend_Card_Title"
+            android:textAppearance="@style/Recommend_Card_Content_Title"
             android:layout_marginBottom="2dp"
             />
         <TextView
             android:id="@+id/card_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.3"
             android:textAppearance="@style/Recommend_Card_SubTitle"
             />
     </LinearLayout>

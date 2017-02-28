@@ -280,14 +280,28 @@
     <style name="Recommend_Card_Title">
         <item name="android:textColor">#262626</item>
         <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">helve-neue-medium</item>
+    </style>
+
+    <style name="Recommend_Card_Content_Title">
+        <item name="android:textColor">#262626</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">helve-neue-regular</item>
     </style>
 
     <style name="Recommend_Card_SubTitle">
         <item name="android:textColor">#808080</item>
         <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">helve-neue-regular</item>
     </style>
 
-    <style name="Recommend_Card_EditText" parent="Recommend_Card_Title">
+    <style name="Recommend_Card_F_Item_Text">
+        <item name="android:textColor">#262626</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:fontFamily">helve-neue-regular</item>
+    </style>
+
+    <style name="Recommend_Card_EditText" parent="Recommend_Card_Content_Title">
         <item name="android:textColorHint">#B3B3B3</item>
     </style>
 
@@ -295,6 +309,17 @@
         <item name="android:textColor">@color/recommend_footer_text_color</item>
         <item name="android:textSize">14dp</item>
         <item name="android:lines">1</item>
+        <item name="android:fontFamily">helve-neue-regular</item>
+    </style>
+    
+    <style name="Recommend_Card_Divider_HorizontalLine" parent="Divider_HorizontalLine_Style">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="Recommend_Card_Divider_Vertical">
+        <item name="android:layout_width">2px</item>
+        <item name="android:layout_height">14dp</item>
     </style>
     <!-- Recommend Card end -->
 

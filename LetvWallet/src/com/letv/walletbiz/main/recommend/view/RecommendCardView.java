@@ -188,12 +188,12 @@ public class RecommendCardView extends LinearLayout {
         if (mContentView != null) {
             ((View) mContentView).setTag(mCardBean.getAgnesCardType());
         }
-        int padding = (int) DensityUtils.dip2px(10);
+        /*int padding = (int) DensityUtils.dip2px(10);
         if (hasFooter) {
             setPadding(padding, padding, padding, (int) DensityUtils.dip2px(16));
         } else {
             setPadding(padding, padding, padding, padding);
-        }
+        }*/
     }
 
     private boolean initHeaderView() {
@@ -205,7 +205,8 @@ public class RecommendCardView extends LinearLayout {
         }
         LinearLayout header = new LinearLayout(getContext());
         header.setOrientation(HORIZONTAL);
-        header.setPadding(0, 0, 0, (int) DensityUtils.dip2px(10));
+        int padding = (int) DensityUtils.dip2px(10);
+        header.setPadding(padding, padding, padding, padding);
         header.setGravity(Gravity.CENTER_VERTICAL);
 
         TextView leftTextView = getTextView(mCardBean.header_left_title, mCardBean.header_left_link, R.style.Recommend_Card_Title);
@@ -255,9 +256,9 @@ public class RecommendCardView extends LinearLayout {
         if (view != null) {
             ((BaseCardView) view).bindView(cardList);
             if (hasHeader && inflater != null && ((BaseCardView) view).needTopDivider()) {
-                inflater.inflate(R.layout.divider_horizontal, this, true);
+                inflater.inflate(R.layout.recommend_divider_horizontal, this, true);
             }
-            addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            addView(view);
             return true;
         }
         return false;
@@ -282,10 +283,15 @@ public class RecommendCardView extends LinearLayout {
         }
         Arrays.sort(footerArray);
         if (mFooterContainer == null) {
+            if (mContentView != null && mContentView.needBottomDivider()) {
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                inflater.inflate(R.layout.recommend_divider_horizontal, this, true);
+            }
             mFooterContainer = new LinearLayout(getContext());
             mFooterContainer.setOrientation(LinearLayout.HORIZONTAL);
-            int padding = (int) DensityUtils.dip2px(16);
-            mFooterContainer.setPadding(0, padding, 0, 0);
+            mFooterContainer.setGravity(Gravity.CENTER_VERTICAL);
+            int padding = (int) DensityUtils.dip2px(10);
+            mFooterContainer.setPadding(padding, 0, padding, 0);
             addView(mFooterContainer, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         } else {
             mFooterContainer.removeAllViews();
@@ -301,13 +307,16 @@ public class RecommendCardView extends LinearLayout {
             button.setText(footer.key_title);
             button.setGravity(Gravity.CENTER);
             button.setOnClickListener(mFooterClickListener);
+            button.setBackgroundResource(R.drawable.recommend_card_footer_button_bg);
+            int padding = (int) DensityUtils.dip2px(12);
+            button.setPadding(0, padding, 0, padding);
             button.setTag(footer);
             LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             params.weight = 1;
             mFooterContainer.addView(button, params);
             if (footerArray.length > 1 && i != (footerArray.length - 1)) {
-                View view = inflater.inflate(R.layout.divider_vertical, mFooterContainer, false);
-                view.setBackgroundColor(getResources().getColor(R.color.recommend_footer_text_color, null));
+                View view = inflater.inflate(R.layout.recommend_divider_vertical, mFooterContainer, false);
+                view.setBackgroundColor(getResources().getColor(R.color.recommend_divider_vertical_color, null));
                 mFooterContainer.addView(view);
             }
         }

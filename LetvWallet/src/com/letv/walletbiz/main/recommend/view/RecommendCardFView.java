@@ -51,7 +51,7 @@ public class RecommendCardFView extends LinearLayout implements BaseCardView {
         super(context, attrs, defStyleAttr);
         setOrientation(VERTICAL);
         int padding = (int) DensityUtils.dip2px(10);
-        setPadding(0, padding, 0, 0);
+        setPadding(0, padding, 0, padding);
         View.inflate(context, R.layout.main_recommend_cardview_f, this);
         mTitleView = (TextView) findViewById(R.id.content_title);
         mRecyclerView = (RecyclerView) findViewById(R.id.content_recyclerview);
@@ -97,7 +97,15 @@ public class RecommendCardFView extends LinearLayout implements BaseCardView {
             return;
         }
         mCardBean = (CardFBean) cardList.get(0);
+        int padding = (int) DensityUtils.dip2px(10);
         if (mCardBean != null) {
+            if (TextUtils.isEmpty(mCardBean.title)) {
+                mTitleView.setVisibility(View.GONE);
+                mTitleView.setPadding(0, 0, 0, 0);
+            } else {
+                mTitleView.setVisibility(View.VISIBLE);
+                mTitleView.setPadding(padding, 0, padding, padding);
+            }
             mTitleView.setText(mCardBean.title);
             mAdapter.setData(mCardBean.imgs);
         }
@@ -195,6 +203,11 @@ public class RecommendCardFView extends LinearLayout implements BaseCardView {
                 outRect.left = mSpace;
             } else {
                 outRect.left = (int) DensityUtils.dip2px(10);
+            }
+            if (pos == (adapter.getItemCount() - 1)) {
+                outRect.right = (int) DensityUtils.dip2px(10);
+            } else {
+                outRect.right = 0;
             }
         }
     }

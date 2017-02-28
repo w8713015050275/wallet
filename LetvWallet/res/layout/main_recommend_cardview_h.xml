@@ -6,12 +6,12 @@
         android:id="@+id/content_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Recommend_Card_Title"
+        android:textAppearance="@style/Recommend_Card_Content_Title"
         />
     <TextView
         android:id="@+id/content_summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Recommend_Card_Title"
+        android:textAppearance="@style/Recommend_Card_Content_Title"
         />
 </LinearLayout>

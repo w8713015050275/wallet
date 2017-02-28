@@ -160,7 +160,10 @@
     <color name="me_primary_color">#447DE9</color>
     <color name="me_tab_default_color">#808080</color>
 
+    <!-- recommend -->
     <color name="recommend_footer_text_color">#5272AE</color>
-
+    <color name="recommend_divider_vertical_color">#7F5272AE</color>
+    <drawable name="recommend_footer_button_default">#00FFFFFF</drawable>
+    <drawable name="recommend_footer_button_pressed">#E5E5E5</drawable>
 
 </resources>
