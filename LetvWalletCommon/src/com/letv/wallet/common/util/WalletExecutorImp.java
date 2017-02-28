@@ -36,6 +36,7 @@ public class WalletExecutorImp implements WalletExecutor {
                 mExecutors.allowCoreThreadTimeOut(true);
                 mExecutors.setKeepAliveTime(KEEPALIVETIME, TimeUnit.SECONDS);
                 mExecutors.setThreadFactory(new ActionThreadFactory());
+                mExecutors.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
             }
         }
     }
@@ -45,6 +46,9 @@ public class WalletExecutorImp implements WalletExecutor {
     }
 
     public static WalletExecutorImp getInstance() {
+        if (instance == null) {
+            instance = new WalletExecutorImp();
+        }
         return instance;
     }
 
@@ -73,6 +77,7 @@ public class WalletExecutorImp implements WalletExecutor {
             return;
         }
         mExecutors.shutdownNow();
+        mExecutors = null;
     }
 
 }

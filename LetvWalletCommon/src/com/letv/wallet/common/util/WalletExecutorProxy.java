@@ -39,5 +39,6 @@ public class WalletExecutorProxy implements WalletExecutor {
     @Override
     public void clearAllRunnable() {
         mExecutor.clearAllRunnable();
+        instance = null;
     }
 }
