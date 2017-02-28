@@ -207,7 +207,9 @@ public class Action extends BaseAction {
                 if (!TextUtils.isEmpty(url)) {
                     props.put(Key.Url.getKeyId(), url);
                 }
-                props.put(Key.From.getKeyId(), from);
+                if (!TextUtils.isEmpty(from)) {
+                    props.put(Key.From.getKeyId(), from);
+                }
                 uploadCustomImpl(EventType.Click, widget, props);
             }
         });
