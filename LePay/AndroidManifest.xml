@@ -42,6 +42,7 @@
         </activity>
         <activity
             android:name=".setting.activity.SettingWebActivity"
+            android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/SettingWebTheme" />
         <activity
