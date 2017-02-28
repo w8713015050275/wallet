@@ -360,9 +360,11 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     }
 
     private void notifyNetworkChange(boolean isNetworkAvailable) {
-        MainFragment main = getCurrentFragment();
-        if (null != main) {
-            main.onNetWorkChanged(isNetworkAvailable);
+        List<Fragment> list = fragmentManager.getFragments();
+        if (list != null && !list.isEmpty()) {
+            for (Fragment f : list) {
+                ((MainFragment) f).onNetWorkChanged(isNetworkAvailable);
+            }
         }
     }
 
