@@ -134,7 +134,8 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
         setOrientation(LinearLayout.VERTICAL);
         button = new Button(context);
         textView = new TextView(context);
-        addView(button, new LinearLayout.LayoutParams(133, 133));
+        button.setBackground(null);
+        addView(button, new LinearLayout.LayoutParams(133, 143));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.topMargin = distance;
         addView(textView, params);

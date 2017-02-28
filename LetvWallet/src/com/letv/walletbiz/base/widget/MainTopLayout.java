@@ -200,10 +200,9 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
      */
     public void loadAccountData() {
         if (!isloadAccountData) {
-            setBankButtonClick(false);
-
-            isloadAccountData = true;
             if (AccountHelper.getInstance().isLogin(context) && NetworkHelper.isNetworkAvailable()) {
+                isloadAccountData = true;
+                setBankButtonClick(false);
                 String qType = null;
                 if (checkCreateAccount(false) && checkVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
                     qType = AccountConstant.QTYPE_CARD;
