@@ -4,10 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/setting_account_verify_ll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/setting_item_height"
+        android:orientation="horizontal"
         android:paddingLeft="@dimen/padding_default"
         android:paddingRight="@dimen/padding_default">
 
@@ -16,8 +17,8 @@
             style="@style/SettingListItemTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
             android:clickable="false"
             android:text="@string/setting_account_verify_label" />
 
@@ -25,7 +26,7 @@
             android:id="@+id/setting_account_verify_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
             android:layout_marginRight="6dp"
             android:layout_toLeftOf="@+id/setting_account_verify_tv"
             android:src="@drawable/setting_account_verify_selected" />
@@ -35,12 +36,11 @@
             style="@style/SettingListItemFlagTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_gravity="right|center_vertical"
             android:clickable="false"
             android:text="@string/setting_account_not_verify" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <View style="@style/SettingListDividerLine" />
 

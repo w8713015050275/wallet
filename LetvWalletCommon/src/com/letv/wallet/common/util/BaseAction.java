@@ -201,7 +201,6 @@ public abstract class BaseAction {
         if (mMapevts.size() <= 0) {
             for (EventType et : EventType.values()) {
                 mMapevts.put(et.getEventId(), et.toString());
-                LogHelper.e(TAG, "", "et:" + et.toString() + ",id:" + et.getEventId());
             }
         }
         App app = getApp();

@@ -7,7 +7,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +38,7 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
     public static final String TAG = SettingActivity.class.getSimpleName();
 
     private static String ISGOLOGIN = "isGoLogin";
-    private RelativeLayout mAccountVerifyLl;
+    private LinearLayout mAccountVerifyLl;
     private ImageView mAccountVerifyIv;
     private TextView mAccountVerifyTv;
     private TextView mSettingPwdTv;
@@ -413,7 +413,7 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
     }
 
     private void findViewById() {
-        mAccountVerifyLl = (RelativeLayout) findViewById(R.id.setting_account_verify_ll);
+        mAccountVerifyLl = (LinearLayout) findViewById(R.id.setting_account_verify_ll);
         mAccountVerifyTv = (TextView) findViewById(R.id.setting_account_verify_tv);
         mAccountVerifyIv = (ImageView) findViewById(R.id.setting_account_verify_iv);
         mSettingPwdTv = (TextView) findViewById(R.id.setting_pwd_tv);

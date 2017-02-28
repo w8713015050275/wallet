@@ -519,8 +519,8 @@ public class HttpTask<ResultType> extends AbsTask<ResultType> implements Progres
                     long start = System.currentTimeMillis();
                     this.result = request.loadResult();
                     long end = System.currentTimeMillis();
-                    LogHelper.d("[http] uri=" + request.getRequestUri() +
-                            "; start time=" + start + ";  end time=" + end + "; spend time=" + (end - start) + "ms");
+//                    LogHelper.d("[http] uri=" + request.getRequestUri() +
+//                            "; start time=" + start + ";  end time=" + end + "; spend time=" + (end - start) + "ms");
                 } catch (Throwable ex) {
                     this.ex = ex;
                 }
