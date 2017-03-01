@@ -236,8 +236,12 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
             xmain.image().loadDrawable(currentBean.icon, options, new Callback.CommonCallback<Drawable>() {
                 @Override
                 public void onSuccess(Drawable result) {
-                    dataDrawable = result;
-                    button.setBackground(result);
+                    if (accountInfo != null && accountInfo.cardList != null && accountInfo.cardList.length > 0) {
+                        //此时可能已经获取到银行卡的数量，不需要加载默认图片
+                    }else{
+                        dataDrawable = result;
+                        button.setBackground(result);
+                    }
                 }
 
                 @Override
@@ -282,7 +286,7 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
             case 2:
                 //强制转化，不知道传递的会是什么值
                 accountInfo = (AccountInfo) info;
-                if (accountInfo != null & accountInfo.cardList != null && accountInfo.cardList.length > 0) {
+                if (accountInfo != null && accountInfo.cardList != null && accountInfo.cardList.length > 0) {
                     button.setText("" + accountInfo.cardList.length);
                     button.setBackground(null);
                 }
