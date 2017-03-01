@@ -55,6 +55,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     private SmsCodeEditText editSmsCode;
     private CountDownView tvGetSmsCode;
     private LeCheckBox checkAgreement;
+    private TextView tvAgreement;
 
     private TextView btnOk;
 
@@ -97,22 +98,37 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         findViewById(R.id.tvAvailableBankList).setOnClickListener(this);
         tvGetSmsCode.setOnClickListener(this);
         btnOk.setOnClickListener(this);
+        tvAgreement = (TextView) findViewById(R.id.tvAgreement);
+        SpannableString str = getClickableSpan();
+        if (str == null) {
+            tvAgreement.setVisibility(View.GONE);
+            return;
+        }
+        tvAgreement.setVisibility(View.VISIBLE);
+        tvAgreement.setText(str);
+        tvAgreement.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        TextView tv = (TextView) findViewById(R.id.tvAgreement);
-        tv.setText(getClickableSpan());
-        tv.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+    private static final String SYMBOL_AND = "&";
     private SpannableString getClickableSpan() {
         String agrementWrap = getString(R.string.account_agreement_tips);
         int start = agrementWrap.indexOf("%1$s");
-        String agrement = getString(R.string.account_agreement);
+        if (start < 0) {
+            return null;
+        }
+        String agrementLeFinancial = getString(R.string.account_agreement_le_financial);
+        String agrementLePayChannel = getString(R.string.account_agreement_le_paychannel);
+        String agrement = agrementLeFinancial + SYMBOL_AND + agrementLePayChannel;
         SpannableString spannableString = new SpannableString(String.format(agrementWrap, agrement));
-        spannableString.setSpan(new AgreementUrlSpan(AccountCommonConstant.URL_LEPAY_AGREEMENT), start, start + agrement.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new AgreementUrlSpan(AccountCommonConstant.URL_LE_FINANCIAL_AGREEMENT), start, start + agrementLeFinancial.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        spannableString.setSpan(new AgreementUrlSpan(AccountCommonConstant.URL_LE_PAY_CHANNEL_AGREEMENT), start + agrement.length()- agrementLePayChannel.length(), start + agrement.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         return spannableString;
     }
 
