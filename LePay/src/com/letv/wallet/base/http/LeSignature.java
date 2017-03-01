@@ -21,7 +21,7 @@ import java.util.TreeSet;
  * @author Lin Quan  <linquan@letv.com>
  */
 public class LeSignature {
-    private static final boolean Debug = true;
+    private static final boolean Debug = false;
     private static final String KEY_TIME = "_time";
     private static final String KEY_AK = "_ak";
     private static final String PARAMS_SEP = "&";
