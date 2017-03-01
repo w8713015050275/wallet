@@ -16,7 +16,7 @@ public class WalletExecutorImp implements WalletExecutor {
     private static WalletExecutorImp instance;
     private static int KEEPALIVETIME = 20;
 
-    private static ThreadPoolExecutor mExecutors;
+    private ThreadPoolExecutor mExecutors;
 
     static class ActionThreadFactory implements ThreadFactory {
         private static final String NAME = "WALLET_THEAD #";
@@ -30,13 +30,21 @@ public class WalletExecutorImp implements WalletExecutor {
     }
 
     private WalletExecutorImp() {
+        checkExecutors();
+    }
+
+    private void checkExecutors() {
         if (mExecutors == null) {
-            mExecutors = (ThreadPoolExecutor) Executors.newCachedThreadPool(new ActionThreadFactory());
-            if (mExecutors != null) {
-                mExecutors.allowCoreThreadTimeOut(true);
-                mExecutors.setKeepAliveTime(KEEPALIVETIME, TimeUnit.SECONDS);
-                mExecutors.setThreadFactory(new ActionThreadFactory());
-                mExecutors.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+            synchronized (WalletExecutorProxy.class) {
+                if (mExecutors == null) {
+                    mExecutors = (ThreadPoolExecutor) Executors.newCachedThreadPool(new ActionThreadFactory());
+                    if (mExecutors != null) {
+                        mExecutors.allowCoreThreadTimeOut(true);
+                        mExecutors.setKeepAliveTime(KEEPALIVETIME, TimeUnit.SECONDS);
+                        mExecutors.setThreadFactory(new ActionThreadFactory());
+                        mExecutors.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+                    }
+                }
             }
         }
     }
@@ -54,10 +62,7 @@ public class WalletExecutorImp implements WalletExecutor {
 
     @Override
     public void runnableExecutor(Runnable task) {
-        if (mExecutors == null) {
-            LogHelper.e("[%S] [executor(Runnable task) mExecutors == null]", TAG);
-            return;
-        }
+        checkExecutors();
         mExecutors.execute(task);
     }
 
@@ -72,12 +77,12 @@ public class WalletExecutorImp implements WalletExecutor {
 
     @Override
     public void clearAllRunnable() {
+        instance = null;
         if (mExecutors == null) {
             LogHelper.e("[%S] [clearAllRunnable() mExecutors == null]", TAG);
             return;
         }
         mExecutors.shutdownNow();
-        mExecutors = null;
     }
 
 }
