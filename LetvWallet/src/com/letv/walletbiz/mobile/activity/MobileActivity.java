@@ -879,7 +879,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         HistoryRecordNumberBean.RecordInfoBean record_info = (HistoryRecordNumberBean.RecordInfoBean) view.getTag();
         String number = record_info.getPhoneNum();
         if (!TextUtils.isEmpty(number)) {
-            setMobileNumberVData(number, false);
+            setMobileNumberVData(number, true);
         }
     }
 
