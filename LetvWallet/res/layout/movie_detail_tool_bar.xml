@@ -9,7 +9,7 @@
         android:id="@+id/toolbar_arrow"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_wallet_action_back"
+        android:src="@drawable/ic_wallet_action_back_movie_detail"
         android:alpha="@dimen/le_img_alpha"
         />
 
