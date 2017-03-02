@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="account_verify_acitivtiy_title">Real-name authentication</string>
-    <string name="account_verify_input_real_name">Enter full name</string>
-    <string name="account_verify_input_id_no">Enter ID card number</string>
-    <string name="account_verify_input_bank_no">Enter bank card number</string>
+    <string name="account_verify_input_real_name">Full name</string>
+    <string name="account_verify_input_id_no">ID card number</string>
+    <string name="account_verify_input_bank_no">Bank card number</string>
     <string name="account_verify_available_bank_list">View supported banks</string>
-    <string name="account_verify_input_mobile_no">Enter bound mobile number</string>
-    <string name="account_verify_input_sms_code">Enter code</string>
+    <string name="account_verify_input_mobile_no">Mobile number registered with the bank</string>
+    <string name="account_verify_input_sms_code">Code</string>
     <string name="account_verify_get_sms_code">Get verification code</string>
     <string name="account_verify_btn_comfire_update">Next</string>
     <string name="account_agreement_tips">I acknowledge that I have read, understand the terms of %1$s and agree to bear all possible risks relating to this agreement.</string>
-    <string name="account_agreement_le_financial">LeEco financial platform services agreement&#160;</string>
+    <string name="account_agreement_le_financial">LeEco Financial Platform Services Agreement&#160;</string>
     <string name="account_agreement_le_paychannel">&#160;Payment Services Agreement</string>
     <string name="account_verify_name_invalid">Invalid name format</string>
     <string name="account_verify_id_num_invalid">Invalid ID number format</string>
