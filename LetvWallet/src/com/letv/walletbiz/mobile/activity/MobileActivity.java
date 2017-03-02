@@ -131,6 +131,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
     private boolean mGotoOrderList;
     private boolean mHaveProductData = false;
     private boolean isChangedNumber = false;
+    private boolean isLoadRecordNumber = false;
     private boolean isRequestingPermissin = false;
     private String mFrom;
 
@@ -236,7 +237,12 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             mGotoOrderList = false;
         }
         getPhoneInfo();
-        if (!isChangedNumber) {
+        if (TextUtils.isEmpty(mDividerNumber)) {
+            if (mPhoneEdittext != null && !TextUtils.isEmpty(mPhoneEdittext.getMobileNumber())) {
+                getContactNameAsyncTask(mPhoneEdittext.getMobileNumber());
+            }
+        }
+        if (!isLoadRecordNumber && !isChangedNumber) {
             setMobileNumberVData(mDividerNumber);
         }
         checkPermisss();
@@ -472,6 +478,7 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         }
         if (TextUtils.isEmpty(number)) {
             if (mRecordHistoryNumberV != null) {
+                isLoadRecordNumber = true;
                 mRecordHistoryNumberV.loadRecordNumber();
             }
         } else {
@@ -906,9 +913,11 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
             HistoryRecordNumberBean.RecordInfoBean infoBean = numberBean.getRecordInfo().get(0);
             String recordNumber = infoBean.getPhoneNum();
             if (!TextUtils.isEmpty(recordNumber) && !recordNumber.equals(mDividerNumber)) {
+                setMobileName(infoBean.getName());
                 setMobileNumberVData(infoBean.getPhoneNum());
             }
         }
+        isLoadRecordNumber = false;
     }
 
     private void showHistoryNumberV() {
