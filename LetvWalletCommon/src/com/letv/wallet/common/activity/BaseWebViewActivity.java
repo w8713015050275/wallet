@@ -70,15 +70,11 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
             finish();
             return;
         }
+
         mUrl = getUrl(intent);
-        if (TextUtils.isEmpty(mUrl)) {
-            finish();
-            return;
-        }
+
         mTitle = getWebViewTitle(intent);
-        if (!TextUtils.isEmpty(mTitle)) {
-            setTitle(mTitle);
-        }
+
         registerNetWorkReceiver();
         mContainer = new FrameLayout(this);
         mContainer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -89,14 +85,28 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
         initView();
 
         initWebView();
+
+        if (TextUtils.isEmpty(mUrl)) {
+            if (!hasRedirect()) { finish(); }
+            return;
+        }
+
+        if (!TextUtils.isEmpty(mTitle)) {
+            setTitle(mTitle);
+        }
+
         if (!isNetworkAvailable()) {
             showBlankPage(BlankPage.STATE_NO_NETWORK);
             return;
         }
 
+        loadPage();
+
+    }
+
+    protected void loadPage(){
         showLoadingView();
         mWebView.loadUrl(mUrl, getAdditionalHttpHeaders());
-
     }
 
     protected String getUrl(Intent intent) {
@@ -281,8 +291,7 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
         if (!TextUtils.isEmpty(mTitle)) {
             setTitle(mTitle);
         }
-        showLoadingView();
-        mWebView.loadUrl(mUrl = url, getAdditionalHttpHeaders());
+        loadPage();
     }
 
     @Override
@@ -353,6 +362,10 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
 
     public void setFlagIfNeeded(Intent intent){
 
+    }
+
+    public boolean hasRedirect(){
+        return false;
     }
 }
 

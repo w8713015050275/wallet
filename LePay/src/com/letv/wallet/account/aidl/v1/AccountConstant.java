@@ -31,6 +31,7 @@ public class AccountConstant {
     public static final String JTYPE_LELEHUA_ACTIVE = "lelehua_active";
     public static final String JTYPE_LELEHUA_HOME = "lelehua_home";
     public static final String JTYPE_LELEHUA_BILL_LIST = "lelehua_bill_list";
+    public static final String JTYPE_LELEHUA_ACTIVING = "lelehua_activing";
     public static final String JTYPE_USER_GRADE = "user_grade";
     public static final String JTYPE_SSO_BIND_MOBILE = "sso_bind_mobile";
 
@@ -61,11 +62,13 @@ public class AccountConstant {
      已激活，冻结：1（点击跳转至乐乐花首页H5，jtype=lelehua_home）
      未激活，不可再申请：2（点击跳转至乐乐花不可用H5，jtype=lelehua_noactive）
      未激活，可申请：3（点击跳转至乐乐花激活页面，jtype=lelehua_active）
+     激活申请中: 4（点击跳转至静态H5提示页面：jtype=lelehua_activing）
      */
     public static final int LELEHUA_ACCOUNT_STATE_ACTIVATED= 0; //
     public static final int LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN = 1;
     public static final int LELEHUA_ACCOUNT_STATE_NOACTIVATED_FROZEN= 2;
     public static final int LELEHUA_ACCOUNT_STATE_NOACTIVATED = 3;
+    public static final int LELEHUA_ACCOUNT_STATE_ACTIVING = 4;
 
     /** 银行卡 卡类型 **/
     public static final String CARD_BIN_TYPE_DEBIT = "DEBIT";
@@ -124,6 +127,7 @@ public class AccountConstant {
         public static final int ERROR_NETWORK = -2; // 网络错误
         public static final int ERROR_REMOTE_SERVICE_KILLED = -3; // service被意外终止
         public static final int ERROR_REMOTE_SERVICE_DISCONNECTE = -4; // service未连接
+        public static final int ERROR_PAY_VERSION = -5; //lepay 不存在或者版本不对
 
     }
 }

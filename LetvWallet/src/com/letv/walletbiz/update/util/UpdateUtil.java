@@ -160,6 +160,18 @@ public class UpdateUtil {
         }
     }
 
+    public static String getVersionName(Context context, String packageName) {
+        try {
+            // ---get the package info---
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(packageName, 0);
+            return pi.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static String getVersionfromApkfile(Context context,String filePath) {
         PackageManager pm = context.getPackageManager();
         PackageInfo info = pm.getPackageArchiveInfo(filePath, PackageManager.GET_ACTIVITIES);

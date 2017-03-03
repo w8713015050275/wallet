@@ -66,7 +66,7 @@ public class AppUtils {
                 intent.setData(Uri.parse(array[1]));
             }
             intent.putExtra("pkgName", context.getPackageName());
-            if (!context.getPackageName().contains(packageName)) {
+            if (packageName != null && !context.getPackageName().contains(packageName)) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             if (bundle != null) {
@@ -81,7 +81,7 @@ public class AppUtils {
         if (!isStarted) {
             try {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(actionWithData));
-                if (!context.getPackageName().contains(packageName)) {
+                if ((packageName != null && !context.getPackageName().contains(packageName))) {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 intent.putExtra("pkgName", context.getPackageName());
@@ -120,7 +120,7 @@ public class AppUtils {
         try {
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             intent.putExtra("pkgName", context.getPackageName());
-            if (!context.getPackageName().contains(packageName)) {
+            if ((packageName != null && !context.getPackageName().contains(packageName))) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             if (bundle != null) {

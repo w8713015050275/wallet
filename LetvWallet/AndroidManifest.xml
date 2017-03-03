@@ -461,5 +461,9 @@
             android:name=".push.PushWebActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Arrow" />
+        <activity
+            android:name=".me.activity.MeWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
     </application>
 </manifest>

@@ -123,10 +123,10 @@ public class AccountInfo implements Parcelable {
     /* 乐乐花账户 */
     public static class LeLeHuaAccount implements LetvBaseBean, Parcelable {
         public int active_status;
-        public float credit_limit;
-        public float used_limit;
-        public float available_limit;
-        public float owe_amount;
+        public String credit_limit;
+        public String used_limit;
+        public String available_limit;
+        public String owe_amount;
 
         @Override
         public int describeContents() {
@@ -136,10 +136,10 @@ public class AccountInfo implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.active_status);
-            dest.writeFloat(this.credit_limit);
-            dest.writeFloat(this.used_limit);
-            dest.writeFloat(this.available_limit);
-            dest.writeFloat(this.owe_amount);
+            dest.writeString(this.credit_limit);
+            dest.writeString(this.used_limit);
+            dest.writeString(this.available_limit);
+            dest.writeString(this.owe_amount);
         }
 
         public LeLeHuaAccount() {
@@ -147,10 +147,10 @@ public class AccountInfo implements Parcelable {
 
         protected LeLeHuaAccount(Parcel in) {
             this.active_status = in.readInt();
-            this.credit_limit = in.readFloat();
-            this.used_limit = in.readFloat();
-            this.available_limit = in.readFloat();
-            this.owe_amount = in.readFloat();
+            this.credit_limit = in.readString();
+            this.used_limit = in.readString();
+            this.available_limit = in.readString();
+            this.owe_amount = in.readString();
         }
 
         public static final Creator<LeLeHuaAccount> CREATOR = new Creator<LeLeHuaAccount>() {
@@ -316,6 +316,7 @@ public class AccountInfo implements Parcelable {
         public String icon;
         public String jump_desc;
         public String jump_param;
+        public String package_name;
 
         @Override
         public int describeContents() {
@@ -330,6 +331,7 @@ public class AccountInfo implements Parcelable {
             dest.writeString(this.icon);
             dest.writeString(this.jump_desc);
             dest.writeString(this.jump_param);
+            dest.writeString(this.package_name);
         }
 
         public Tips() {
@@ -342,6 +344,7 @@ public class AccountInfo implements Parcelable {
             this.icon = in.readString();
             this.jump_desc = in.readString();
             this.jump_param = in.readString();
+            this.package_name = in.readString();
         }
 
         public static final Creator<Tips> CREATOR = new Creator<Tips>() {

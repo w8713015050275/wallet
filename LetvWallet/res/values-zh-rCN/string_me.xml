@@ -3,14 +3,17 @@
     <string name="home_tab_me">我的</string>
     <string name="me_real_name_authentication">实名认证</string>
     <string name="me_real_name_not_authentication">未实名认证</string>
-    <string name="me_tips_title">去认证</string>
-    <string name="me_tips_content">进行实名认证，理财更方便</string>
     <string name="me_vip_level">会员等级</string>
-    <string name="me_lelehua">乐乐花</string>
-    <string name="me_lelehua_payment_amount">还款金额</string>
+    <string name="me_lelehua">有π</string>
+    <string name="me_lelehua_quick_repayment">快捷还款</string>
     <string name="me_usr_feedback">用户反馈</string>
-    <string name="me_lelehua_not_open">未开通</string>
+    <string name="me_lelehua_not_open">未激活</string>
     <string name="me_create_account_failed">开户失败！</string>
     <string name="me_usr_nologin">未登录</string>
+    <string name="me_create_account_no_phone">该服务需要绑定手机号</string>
+    <string name="me_lelehua_opening">激活中</string>
+    <string name="me_lelehua_limit">可用额度￥%1$S</string>
+    <string name="me_lelehua_owe_amount">￥%1$S</string>
+    <string name="me_lelehua_unavailable">开户失败，请联系客服</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.letv.wallet.account;
 
 
 import android.content.SharedPreferences;
+import android.os.Looper;
 import android.text.TextUtils;
 
 import com.letv.wallet.account.aidl.v1.AccountConstant;
@@ -41,6 +42,16 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
         callbacks.remove(callbacks);
     }
 
+    private boolean checkRunBefore(LePayCommonCallback callback){
+        if (LePayUtils.isExistPayApp() && LePayUtils.isPayHasAidl() && Looper.myLooper() == Looper.getMainLooper()) {
+            return true;
+        }
+        if (callback != null) {
+            callback.onError(AccountConstant.RspCode.ERROR_PAY_VERSION , null);
+        }
+        return false;
+    }
+
     private void checkEngine(){
         if (lepayEngine == null) {
             lepayEngine = new LePayEngine(this);
@@ -59,8 +70,6 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
         return false;
     }
 
-
-
     public static boolean hasVerifyAccount(){
         SharedPreferences sharedPreferences = SharedPreferencesHelper.getUserIdPreferences(AccountConstant.LEPAY_PKG);
         if (sharedPreferences != null) {
@@ -70,7 +79,7 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
     }
 
     public void createAccount(final LePayCommonCallback callback) {
-        if (!LePayUtils.checkRunBefore()) {
+        if (!checkRunBefore(callback)) {
              return;
         }
 
@@ -91,7 +100,7 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
     }
 
     public void queryAccount(final String qType, final LePayCommonCallback callback) {
-        if (TextUtils.isEmpty(qType) || !LePayUtils.checkRunBefore())
+        if (TextUtils.isEmpty(qType) || !checkRunBefore(callback))
             return;
 
         checkEngine();
@@ -111,7 +120,7 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
     }
 
    public void redirect(final String[] jTypes , final LePayCommonCallback<RedirectURL> callback){
-       if (jTypes == null || !LePayUtils.checkRunBefore()) {
+       if (jTypes == null || !checkRunBefore(callback)) {
            return;
        }
 

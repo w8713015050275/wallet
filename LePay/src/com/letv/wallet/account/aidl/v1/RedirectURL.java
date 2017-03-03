@@ -20,6 +20,7 @@ public class RedirectURL implements Parcelable {
     public String lelehua_bill_list;
     public String user_grade;
     public String sso_bind_mobile;
+    public String lelehua_activing;
 
     public String getUrl(String jType) {
         if (TextUtils.isEmpty(jType)) {
@@ -59,6 +60,9 @@ public class RedirectURL implements Parcelable {
             case AccountConstant.JTYPE_SSO_BIND_MOBILE:
                 return sso_bind_mobile;
 
+            case AccountConstant.JTYPE_LELEHUA_ACTIVING:
+                return lelehua_activing;
+
             default:
                 return null;
         }
@@ -82,6 +86,7 @@ public class RedirectURL implements Parcelable {
         dest.writeString(this.lelehua_bill_list);
         dest.writeString(this.user_grade);
         dest.writeString(this.sso_bind_mobile);
+        dest.writeString(this.lelehua_activing);
     }
 
     public RedirectURL() {
@@ -99,6 +104,7 @@ public class RedirectURL implements Parcelable {
         this.lelehua_bill_list = in.readString();
         this.user_grade = in.readString();
         this.sso_bind_mobile = in.readString();
+        this.lelehua_activing = in.readString();
     }
 
     public static final Parcelable.Creator<RedirectURL> CREATOR = new Parcelable.Creator<RedirectURL>() {

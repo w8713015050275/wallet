@@ -4,20 +4,17 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.letv.shared.widget.BorderedCircleImageView;
 import com.letv.tracker.enums.EventType;
@@ -26,7 +23,10 @@ import com.letv.wallet.account.LePayAccountManager;
 import com.letv.wallet.account.LePayCommonCallback;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
+import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.AppUtils;
+import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.view.BlankPage;
@@ -34,8 +34,11 @@ import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.main.fragment.MainFragment;
+import com.letv.walletbiz.me.activity.MeWebActivity;
 import com.letv.walletbiz.me.ui.ToggleTextView;
+import com.letv.walletbiz.me.utils.AccountUtils;
 import com.letv.walletbiz.order.activity.TotalOrderListActivity;
+import com.letv.walletbiz.update.util.UpdateUtil;
 
 import org.xutils.xmain;
 
@@ -55,27 +58,27 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     private TextView mUsrNickName;
     private ToggleTextView mVerifyFlag;
     private LinearLayout mViewTips, mViewLeLeHuaHome, mViewLeLeHuaBills;
-    private ImageView mViewLeLeHuaDivider;
     private TextView mBills;
     private TextView mVipLevels;
     private TextView mLeLeHuaAavailableLimit, mLeLeHuaPaymentAmount;
-    private TextView mFeedback;
+    private TextView mUsrFeedback;
 
     private AccountInfo accountInfo;
 
-    private boolean isDataValidate = false;
     private static  final int ACCOUNT_BASIC_RETRY_COUNT = 1;
+
+    private boolean ACCOUNT_FAIL_REASON_PHONE_NULL = false;
+    private boolean hasCreateAccount = false;
 
     private  int retryCount = 0;
 
+    private RedirectURL redirectURL = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
     }
-
-
 
     @Override
     public View onCreateCustomView(LayoutInflater inflater, ViewGroup container, Bundle
@@ -92,26 +95,19 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             mVipLevels = (TextView) mRootView.findViewById(R.id.tvVipLevel);
             mViewLeLeHuaHome = (LinearLayout) mRootView.findViewById(R.id.viewLeLeHuaHome);
             mViewLeLeHuaBills = (LinearLayout) mRootView.findViewById(R.id.viewLeLeHuaBills);
-            mViewLeLeHuaDivider = (ImageView) mRootView.findViewById(R.id.viewLeLeHuaDivider);
             mLeLeHuaAavailableLimit = (TextView) mRootView.findViewById(R.id.tvLeLeHuaAavailableLimit);
             mLeLeHuaPaymentAmount = (TextView) mRootView.findViewById(R.id.tvPayAmount);
-            mFeedback = (TextView) mRootView.findViewById(R.id.tvUsrFeedback);
+            mUsrFeedback = (TextView) mRootView.findViewById(R.id.tvUsrFeedback);
 
             mSetting.setOnClickListener(this);
             mUsrIcon.setOnClickListener(this);
             mUsrNickName.setOnClickListener(this);
             mVerifyFlag.setOnClickListener(this);
-            mViewTips.setOnClickListener(this);
             mBills.setOnClickListener(this);
-            mVipLevels.setOnClickListener(this);
             mViewLeLeHuaHome.setOnClickListener(this);
             mViewLeLeHuaBills.setOnClickListener(this);
-            mFeedback.setOnClickListener(this);
-
-            //隐藏乐乐花
-            mViewLeLeHuaHome.setVisibility(View.GONE);
-            mViewLeLeHuaBills.setVisibility(View.GONE);
-            mViewLeLeHuaDivider.setVisibility(View.GONE);
+            mVipLevels.setOnClickListener(this);
+            mUsrFeedback.setOnClickListener(this);
 
         } else if (mRootView.getParent() != null) {
             ((ViewGroup) mRootView.getParent()).removeAllViews();
@@ -142,7 +138,6 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             case R.id.img_usr_icon:
             case R.id.tvNickName:
                 AccountHelper.getInstance().loginOrJumpLetvAccount(getActivity());
-                isDataValidate = false; //跳转乐视界面， 返回更新数据
                 break;
 
             case R.id.tvBills:
@@ -150,45 +145,46 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
                 jumpIntentOnLogin(intent);
                 break;
 
-            case R.id.tvUsrFeedback:
-                gotoFeedBack(getActivity());
-                break;
-
-           /* case R.id.tvVipLevel:
-                break;
-            case R.id.tvVerfify:
-                break;
             case R.id.viewLeLeHuaHome:
-                 intent  = new Intent(getActivity(), WalletMainWebActivity.class);
-                if (isCreateAccount) {
-                    if (isAccountVerifed()) {
-                        if (accountInfo == null || accountInfo.lelehua == null) {
-                            return;
-                        }
-                        jumpWeb(getLeLeHuaURL(LELEHUABILLS, accountInfo.lelehua.active_status));
-                    }else{
-                        jumpAccountVerify();
-                    }
-                };
-                break;
-            case R.id.viewLeLeHuaBills:
-                //jumpWeb(getLeLeHuaURL(LELEHUABILLS, accountInfo.lelehua.active_status));
+                if (AccountHelper.getInstance().loginLetvAccountIfNot(getActivity(), null) && checkLeLeHuaValidate()) {
+                    jumpLeLeHua(AccountUtils.LELEHUA_HOME);
+                }
                 break;
 
-            case R.id.viewTips:
+            case R.id.viewLeLeHuaBills:
+                if (AccountHelper.getInstance().loginLetvAccountIfNot(getActivity(), null) && checkLeLeHuaValidate()) {
+                    jumpLeLeHua(AccountUtils.LELEHUA_BILL);
+                }
                 break;
-                */
+
+            case R.id.tvUsrFeedback: //用户反馈
+                gotoFeedBack();
+                break;
+
+            default:
+                if (v.getTag() instanceof AccountInfo.Tips) {
+                    AccountInfo.Tips tips = (AccountInfo.Tips) v.getTag();
+                    if (TextUtils.isEmpty(tips.jump_param)) {
+                        return;
+                    }
+                    if (tips.jump_param.startsWith("http://") || tips.jump_param.startsWith("https://")) {
+                        jumpWeb(null, tips.jump_param);
+                    }else{
+                        AppUtils.LaunchApp(getActivity(), tips.package_name, tips.jump_param);
+                    }
+                }
+                break;
         }
     }
 
-    public boolean gotoFeedBack(Activity activity) {
+    public boolean gotoFeedBack() {
         try {
             Intent intent = new Intent();
             intent.setAction("com.letv.bugservices.reporter");
             intent.putExtra("fromApp", getActivity().getApplication().getPackageName());//fromApp传应用包名
-            intent.putExtra("versionId", getVersion());
+            intent.putExtra("versionId", UpdateUtil.getVersionName(getActivity(), getActivity().getPackageName()));
             intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-            activity.startActivity(intent);
+            startActivity(intent);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -196,19 +192,9 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         }
     }
 
-    public String getVersion() {
-        String versionName = "";
-        int versionCode;
-        try {
-            // ---get the package info---
-            PackageManager pm = getActivity().getApplication().getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(getActivity().getApplication().getPackageName(), 0);
-            versionName = pi.versionName;
-            versionCode = pi.versionCode;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return versionName;
+    private void jumpLeLeHua(int type) {
+        String jType = AccountUtils.getLeLeHuaJtype(type, accountInfo.lelehua.active_status);
+        jumpWeb(jType , redirectURL == null ? null : redirectURL.getUrl(jType));
     }
 
     @Override
@@ -216,6 +202,9 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         if (!checkLogin() || !checkNetWork()) {
             return;
         }
+        checkCreateAccount(false);
+        //checkVerifyAccount(); //更新状态
+
         hideBlankPage();
         loadData();
     }
@@ -260,8 +249,12 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     @Override
     public void onAccountLogout() {
         accountInfo = null;
-        isDataValidate = false;
+        redirectURL = null;
+        ACCOUNT_FAIL_REASON_PHONE_NULL = false;
         retryCount = 0 ;
+        if (mViewTips != null) {
+            mViewTips.removeAllViews();
+        }
     }
 
     @Override
@@ -285,8 +278,8 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         mUsrIcon.setImageResource(R.drawable.place_holder_star);
         mUsrIcon.setBackgroundResource(R.drawable.place_holder_star);
         mUsrNickName.setText(R.string.me_usr_nologin);
-        mLeLeHuaAavailableLimit.setVisibility(View.GONE);
-        mLeLeHuaPaymentAmount.setVisibility(View.GONE);
+        mLeLeHuaAavailableLimit.setText(R.string.me_lelehua_not_open);  //未激活
+        mLeLeHuaPaymentAmount.setText(R.string.me_lelehua_not_open);
         return false ;
     }
 
@@ -300,47 +293,19 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         return false;
     }
 
-    private void updateAccountInfo(String qType, AccountInfo info) {
-        if (info == null || TextUtils.isEmpty(qType)) {
-            return;
+    private void updateData(AccountInfo info) {
+        if (info != null) {
+            accountInfo = info;
+            updateAccountBasic();
+            updateTips();
+            updateAccountLeLeHua();
         }
-        switch (qType) {
-            case AccountConstant.QTYPE_BASIC:
-                updateAccountBasic(info.basic);
-                break;
-
-            /*  case AccountConstant.QTYPE_ALL:
-                accountInfo = info;;
-                if (accountInfo.basic != null) {
-                    updateAccountBasic();
-                }
-                if (accountInfo.lelehua != null) {
-                    mViewLeLeHuaHome.setVisibility(View.VISIBLE);
-                    mViewLeLeHuaBills.setVisibility(View.VISIBLE);
-                    mViewLeLeHuaDivider.setVisibility(View.VISIBLE);
-                    updateAccountLeLeHua();
-                }else{
-                    mViewLeLeHuaHome.setVisibility(View.GONE);
-                    mViewLeLeHuaBills.setVisibility(View.GONE);
-                    mViewLeLeHuaDivider.setVisibility(View.GONE);
-                }
-                break;
-
-            case AccountConstant.QTYPE_LELEHUA:
-                if (info.lelehua != null) {
-                    accountInfo.lelehua = info.lelehua;
-                    updateAccountLeLeHua();
-                }
-                break;
-
-            case AccountConstant.QTYPE_TIPS:
-
-                break;
-            */
+        if (isEmptyPage()) {
+            handErrorPage(AccountConstant.RspCode.ERROR_NETWORK, null); //更新数据后，仍为空， 显示网络异常界面
         }
     }
 
-    private boolean checkEmptyPage(){
+    private boolean isEmptyPage(){
         if (accountInfo == null || accountInfo.basic == null) {
             return true ;
         }
@@ -353,20 +318,17 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
                  showBlankPage(BlankPage.STATE_NO_NETWORK);
                 break;
 
-             default:
-                 showNetAbnormalPage();
+            default:   //其他显示网络错误页面
+                 showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL, new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         hideBlankPage();
+                         queryAccount();
+                     }
+                 });
+                LogHelper.w("errorCode = " + errorCode + " errorMsg = " + errorMsg);
                 break;
         }
-    }
-
-    private void showNetAbnormalPage(){
-        showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideBlankPage();
-                queryAccount(AccountConstant.QTYPE_BASIC);
-            }
-        });
     }
 
     public boolean permitsRetry(int errorCode,  int count) {
@@ -380,12 +342,10 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         return false;
     }
 
-    private void updateAccountBasic(AccountInfo.BasicAccount info) {
-        if (info == null) {
+    private void updateAccountBasic() {
+        if (accountInfo.basic == null) {
             return;
         }
-
-        accountInfo.basic = info;
 
         if (!TextUtils.isEmpty(accountInfo.basic.avatar)) {
             String[] url = accountInfo.basic.avatar.split("\\,");
@@ -395,16 +355,63 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             mUsrNickName.setText(accountInfo.basic.memberName);
         }
 
-        isDataValidate = true;
-        retryCount = 0 ;
-
-        /*if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(basic.verifyStatus)) {
+       /* if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(accountInfo.basic.verifyStatus)) {
             mVerifyFlag.setChecked(true);
-            mViewTips.setVisibility(View.GONE);
         } else {
             mVerifyFlag.setChecked(false);
-            mViewTips.setVisibility(View.VISIBLE);
         }*/
+    }
+
+    private void updateAccountLeLeHua() {
+        if (accountInfo.lelehua == null) {
+            return;
+        }
+        if (accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED ||
+                accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN) { //已激活
+            String limit = getFormateNumber(accountInfo.lelehua.available_limit);
+            mLeLeHuaAavailableLimit.setText(limit == null ? "" : String.format(getString(R.string.me_lelehua_limit), limit));
+            String oweAmmount = getFormateNumber(accountInfo.lelehua.owe_amount);
+            mLeLeHuaPaymentAmount.setText(oweAmmount == null ? "" : String.format(getString(R.string.me_lelehua_owe_amount), oweAmmount));
+
+        } else if (accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVING) { //激活中
+            mLeLeHuaAavailableLimit.setText(R.string.me_lelehua_opening);
+            mLeLeHuaPaymentAmount.setText(R.string.me_lelehua_opening);
+        } else {
+            mLeLeHuaAavailableLimit.setText(R.string.me_lelehua_not_open);  //未激活
+            mLeLeHuaPaymentAmount.setText(R.string.me_lelehua_not_open);
+        }
+    }
+
+    private String getFormateNumber(String amount) {
+        if (!TextUtils.isEmpty(amount) && !amount.equals("0")) {
+            java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
+            try {
+                return df.format(Double.parseDouble(amount));
+            } catch (NumberFormatException e) {
+                LogHelper.e(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    private void updateTips(){
+        if (accountInfo.tips == null) {
+            return;
+        }
+        mViewTips.removeAllViews();
+        LinearLayout child ;
+        TextView tvTipTitle , tvTipDesc ;
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        for (AccountInfo.Tips tip : accountInfo.tips) {
+            child = (LinearLayout) inflater.inflate(R.layout.me_tips_item, mViewTips, false);
+            tvTipTitle = (TextView) child.findViewById(R.id.tvTipTitle);
+            tvTipDesc = (TextView) child.findViewById(R.id.tvTipDesc);
+            tvTipTitle.setText(tip.title);
+            tvTipDesc.setText(tip.jump_desc);
+            child.setTag(tip);
+            child.setOnClickListener(this);
+            mViewTips.addView(child);
+        }
     }
 
     private void jumpIntentOnLogin(final Intent intent) {
@@ -432,43 +439,97 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         }
     }
 
-    private void loadData() {
-        if (isDataValidate) { //非强制更新 & 数据未失效 返回
+    private boolean checkAccountStatus(){
+        if (!hasCreateAccount && !ACCOUNT_FAIL_REASON_PHONE_NULL) {
+            Toast.makeText(getActivity(), R.string.me_lelehua_unavailable, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (ACCOUNT_FAIL_REASON_PHONE_NULL) { //未开户，手机号为空，绑手机号
+            Toast.makeText(getActivity(), R.string.me_create_account_no_phone, Toast.LENGTH_SHORT).show();
+            jumpWeb(AccountConstant.JTYPE_SSO_BIND_MOBILE, redirectURL == null ? null : redirectURL.getUrl(AccountConstant.JTYPE_SSO_BIND_MOBILE));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkLeLeHuaValidate(){
+        return (checkAccountStatus() && accountInfo != null && accountInfo.lelehua != null);
+    }
+
+    private void jumpWeb(String jType, String url) {
+        if (TextUtils.isEmpty(jType) && TextUtils.isEmpty(url)) {
             return;
         }
-        queryAccount(AccountConstant.QTYPE_BASIC);
+        Intent intent = new Intent(getActivity(), MeWebActivity.class);
+        if (!TextUtils.isEmpty(jType)) {
+            intent.putExtra(MeWebActivity.EXTRA_KEY_JTYPE, jType);
+        }
+        if (!TextUtils.isEmpty(url)) {
+            intent.putExtra(CommonConstants.EXTRA_URL, url);
+        }
+        startActivity(intent);
+    }
+
+    private void loadData() {
+        if (isRedirectExpired()) {
+            redirect(new String[]{AccountConstant.JTYPE_LELEHUA_ACTIVE, AccountConstant.JTYPE_LELEHUA_HOME, AccountConstant.JTYPE_LELEHUA_NOACTIVE,
+                    AccountConstant.JTYPE_LELEHUA_BILL_LIST, AccountConstant.JTYPE_LELEHUA_ACTIVING, AccountConstant.JTYPE_SSO_BIND_MOBILE});
+        }
+        queryAccount();
+    }
+
+    private boolean checkCreateAccount(boolean isForceCreate){
+        hasCreateAccount = LePayAccountManager.hasCreatedAccount();
+        if (!hasCreateAccount && isForceCreate) {
+            createAccount();
+        }
+        return hasCreateAccount;
     }
 
     private void createAccount() {
-        LePayAccountManager.getInstance().createAccount(null);
-    }
-
-    private void queryAccount(final String qType) {
-        if (accountInfo == null || accountInfo.basic == null) {
-            showLoadingView();
-        }
-
-        LePayAccountManager.getInstance().queryAccount(qType, new LePayCommonCallback<AccountInfo>() {
-
+        LePayAccountManager.getInstance().createAccount(new LePayCommonCallback() {
             @Override
-            public void onSuccess(AccountInfo info) {
-                if (!LePayAccountManager.hasCreatedAccount()) {
-                    createAccount(); //默认开一次户
-                }
-                if (accountInfo == null || accountInfo.basic == null) {
-                    hideLoadingView();
-                    accountInfo = info;
-                }
-                updateAccountInfo(qType, info); //update account info
-
-                if (checkEmptyPage()) { // 页面为空， 显示网络异常界面
-                    showNetAbnormalPage();
-                }
+            public void onSuccess(Object o) {
+                hasCreateAccount = true;
+                hideLoadingView();
+                updateData(accountInfo);
             }
 
             @Override
             public void onError(int errorCode, String errorMsg) {
-                if (checkEmptyPage()) { //page 为空
+                hideLoadingView();
+                updateData(accountInfo);
+                if (errorCode == AccountConstant.RspCode.ERRNO_MOBILE_EMPTY) {
+                    ACCOUNT_FAIL_REASON_PHONE_NULL = true;
+                }else {
+                    LogHelper.w("createAccount errorCode = " + errorCode);
+                }
+            }
+        });
+    }
+
+    private void queryAccount() {
+        if (isEmptyPage()) {
+            showLoadingView();
+        }
+
+        LePayAccountManager.getInstance().queryAccount(AccountConstant.QTYPE_ALL, new LePayCommonCallback<AccountInfo>() {
+
+            @Override
+            public void onSuccess(AccountInfo info) {
+                retryCount = 0;
+                if (checkCreateAccount(true)) {
+                    hideLoadingView();
+                    updateData(info);
+                } else {
+                    accountInfo = info;
+                }
+
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+                if (isEmptyPage()) {
                     if (permitsRetry(errorCode, retryCount++)) { //service 异常重试一次
                         return;
                     }
@@ -481,68 +542,28 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     }
 
-    //******************** 乐乐花 ！！！！！！！！！！！！！！！！！！！！！
-
-    /*private String getLeLeHuaJumpType(int leleHuaStatus) {
-        switch (leleHuaStatus) {
-            case AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED:
-            case AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN:
-                return AccountConstant.JTYPE_LELEHUA_HOME;
-
-            case AccountConstant.LELEHUA_ACCOUNT_STATE_NOACTIVATED:
-                return AccountConstant.JTYPE_LELEHUA_ACTIVE;
-
-            case AccountConstant.LELEHUA_ACCOUNT_STATE_NOACTIVATED_FROZEN:
-                return AccountConstant.JTYPE_LELEHUA_NOACTIVE;
-
-            default:
-                return null;
-        }
-    }
-
-    private boolean isLeLeHuaActivated() {
-        if (accountInfo != null && accountInfo.lelehua != null) {
-            return accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED ||
-                    accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN;
-
-        }
-        return false;
-    }
-
-
-    private String getLeLeHuaURL(int jumpType, int leleHuaStatus) {
-        if (redirectURL == null) {
-            return null;
-        }
-
-        switch (leleHuaStatus) {
-            case AccountConstant.LELEHUA_ACCOUNT_STATE_NOACTIVATED:
-                return redirectURL.lelehua_active; // 跳转到乐乐花激活页面
-
-            case AccountConstant.LELEHUA_ACCOUNT_STATE_NOACTIVATED_FROZEN:
-                return redirectURL.lelehua_noactive; // 跳转到乐乐花不可用页面
-
-            default:
-                if (LELEHUAHOME == jumpType) {
-                    return redirectURL.lelehua_home;
+    private void redirect(String[] jTypes){
+        LePayAccountManager.getInstance().redirect(jTypes, new LePayCommonCallback<RedirectURL>() {
+            @Override
+            public void onSuccess(RedirectURL result) {
+                lastRedirect = System.currentTimeMillis();
+                if (result != null) {
+                    redirectURL = result;
                 }
-                return redirectURL.lelehua_bill_list;
-        }
+            }
 
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+                LogHelper.e("redirect onError = " + errorCode);
+            }
+        });
     }
 
-    private void updateAccountLeLeHua() {
-        if (accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED ||
-                accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN) {
-            //mLeLeHuaAavailableLimit.setText("￥"+accountInfo.lelehua.available_limit);
-            //mLeLeHuaPaymentAmount.setText("￥"+accountInfo.lelehua.owe_amount);
-        } else {
-            mLeLeHuaAavailableLimit.setText(R.string.me_lelehua_not_open);
-            mLeLeHuaPaymentAmount.setText(R.string.me_lelehua_not_open);
-        }
-        mLeLeHuaAavailableLimit.setVisibility(View.VISIBLE);
-        mLeLeHuaPaymentAmount.setVisibility(View.VISIBLE);
+    private  long lastRedirect = 0;
+    public static final int REDIRECT_CACHE_EXPIRE =  1000 * 60 * 3; // 3min
+
+    private boolean isRedirectExpired() {
+        return (redirectURL == null) || (System.currentTimeMillis() - lastRedirect) >= REDIRECT_CACHE_EXPIRE;
     }
-*/
 }
 

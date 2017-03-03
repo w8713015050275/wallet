@@ -2,11 +2,12 @@ package com.letv.wallet.account;
 
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
-import android.os.Looper;
 
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.util.LogHelper;
+import com.letv.walletbiz.WalletApplication;
+import com.letv.walletbiz.update.util.UpdateUtil;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 public class LePayUtils {
 
     private static final int BLOCKING_QUEUE_SIZE = 5;
+
+    private static final int PAY_AIDL_VERSION_MINI = 10002;
 
     private static ArrayList<Runnable> blockingQueue = new ArrayList<Runnable>();
 
@@ -29,22 +32,25 @@ public class LePayUtils {
         return sComp;
     }
 
-    public static boolean isExistPayApp(String packageName) {
+    public static boolean isExistPayApp() {
         try {
             BaseApplication.getApplication().getPackageManager().getApplicationInfo(
-                    packageName, PackageManager.MATCH_UNINSTALLED_PACKAGES);
+                    AccountConstant.LEPAY_PKG, PackageManager.MATCH_UNINSTALLED_PACKAGES);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
-            LogHelper.e("not install " + packageName);
+            LogHelper.e(AccountConstant.LEPAY_PKG + " not install ");
             return false;
         }
     }
 
-    public static boolean checkRunBefore() {
-        if (LePayUtils.isExistPayApp(AccountConstant.LEPAY_PKG) && Looper.myLooper() == Looper.getMainLooper()) {
+    public static boolean isPayHasAidl(){
+        int version = Integer.parseInt(UpdateUtil.getVersion(WalletApplication.getApplication(), AccountConstant.LEPAY_PKG));
+        if (version >= PAY_AIDL_VERSION_MINI) {
             return true;
+        }else {
+            LogHelper.e(AccountConstant.LEPAY_PKG + " low version = " + version );
+            return false;
         }
-        return false;
     }
 
     public static void putBlockingOper(Runnable runnable) {
