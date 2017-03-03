@@ -481,6 +481,7 @@ public class WalletFragment extends MainFragment {
                 loadData();
             }
             handleCardCoupnLoad();
+            topLayout.loadButtonData();
         }
     }
 
