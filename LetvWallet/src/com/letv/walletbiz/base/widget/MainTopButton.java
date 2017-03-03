@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -135,14 +137,16 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
         button = new Button(context);
         textView = new TextView(context);
         button.setBackground(null);
-        addView(button, new LinearLayout.LayoutParams(133, 143));
+
+        addView(button, new LinearLayout.LayoutParams(133, 144));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.topMargin = distance;
         addView(textView, params);
 
 
         //button.setTextColor(buttonTextColor);
-        button.setTextSize(buttonTextSize);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_PX,60);
+        button.setTypeface(Typeface.DEFAULT_BOLD);
 
         //textView.setTextColor(textColor);
         textView.setTextSize(textSize);
