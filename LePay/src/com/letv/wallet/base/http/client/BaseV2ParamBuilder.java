@@ -3,10 +3,11 @@ package com.letv.wallet.base.http.client;
 import android.os.Build;
 import android.text.TextUtils;
 
+import com.letv.wallet.common.util.DeviceUtils;
 import com.letv.wallet.PayApplication;
 import com.letv.wallet.base.http.LeSignature;
 import com.letv.wallet.base.http.UserAgent;
-import com.letv.wallet.common.util.DeviceUtils;
+import com.letv.wallet.common.util.EnvUtil;
 
 import org.xutils.common.util.KeyValue;
 import org.xutils.http.RequestParams;
@@ -39,7 +40,12 @@ public class BaseV2ParamBuilder extends DefaultParamsBuilder
         params.setHeader("user-agent", UserAgent.ensureUserAgent(null));
 
         // build query string parameter as API requested fields
-        final String APPKEY = "hhBPZS1z9vizldPWHyct";
+        String APPKEY;
+        if (EnvUtil.getInstance().isTest()) {
+            APPKEY = "fertE2E4QcLjRAHGxcZy";
+        } else {
+            APPKEY = "hhBPZS1z9vizldPWHyct";
+        }
 
         long timestamp = System.currentTimeMillis();
         String date = LeSignature.formatDate(timestamp);

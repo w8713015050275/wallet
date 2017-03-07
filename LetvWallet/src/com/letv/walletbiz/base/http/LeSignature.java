@@ -2,6 +2,7 @@ package com.letv.walletbiz.base.http;
 
 import android.text.TextUtils;
 
+import com.letv.wallet.common.util.EnvUtil;
 import com.letv.wallet.common.util.LogHelper;
 
 import java.security.MessageDigest;
@@ -105,7 +106,7 @@ public class LeSignature {
 
             String stringToSign = method.toUpperCase() + "\n" + path + "\n" + bodyMD5 + "\n" + date + "\n" + paramString;
 //Jni
-            byte[] jnihmac = jni_hmacsha1(stringToSign);
+            byte[] jnihmac = jni_hmacsha1(stringToSign, EnvUtil.getInstance().isTest());
             if (Debug) {
                 LogHelper.d("[LeSignature] getSignature   %s ", toHexString(jnihmac));
             }
@@ -172,7 +173,7 @@ public class LeSignature {
         return (str == null || str.toString().trim().length() == 0);
     }
 
-    private static native byte[] jni_hmacsha1(String strToSign) ;
+    private static native byte[] jni_hmacsha1(String strToSign,boolean isTest) ;
 
 
 }

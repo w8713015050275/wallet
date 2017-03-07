@@ -4,6 +4,7 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import com.letv.wallet.common.util.DeviceUtils;
+import com.letv.wallet.common.util.EnvUtil;
 import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.base.http.LeSignature;
 import com.letv.walletbiz.base.http.UserAgent;
@@ -39,7 +40,13 @@ public class BaseV2ParamBuilder extends DefaultParamsBuilder
         params.setHeader("user-agent", UserAgent.ensureUserAgent(null));
 
         // build query string parameter as API requested fields
-        final String APPKEY = "hhBPZS1z9vizldPWHyct";
+        String APPKEY;
+        if (EnvUtil.getInstance().isTest()) {
+            APPKEY = "fertE2E4QcLjRAHGxcZy";
+        } else {
+            APPKEY = "hhBPZS1z9vizldPWHyct";
+        }
+
 
         long timestamp = System.currentTimeMillis();
         String date = LeSignature.formatDate(timestamp);

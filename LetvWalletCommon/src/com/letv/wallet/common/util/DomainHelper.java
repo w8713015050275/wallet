@@ -47,6 +47,11 @@ public class DomainHelper {
             LogHelper.d("[%s] host is null", TAG);
             host = null;
         }
-        return host;
+        if (EnvUtil.getInstance().isTest()) {
+            return "https://test-wallet.scloud.letv.com";
+        } else {
+            return host;
+        }
+
     }
 }

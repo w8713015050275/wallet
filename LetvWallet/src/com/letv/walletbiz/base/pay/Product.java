@@ -12,8 +12,8 @@ import com.letv.wallet.common.http.RspDataException;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.http.client.RspConstants;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.EnvUtil;
 import com.letv.wallet.common.util.LogHelper;
-import com.letv.walletbiz.BuildConfig;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.activity.PayResultActivity;
@@ -227,7 +227,7 @@ public abstract class Product implements Serializable {
         reqParams.addBodyParameter(Constants.INFO_PARAM.ORDER_SN, order_no);
         reqParams.addBodyParameter(Constants.INFO_PARAM.TOKEN, uToken);
         reqParams.addBodyParameter(Constants.INFO_PARAM.CLIENT, Constants.INFO_VALUE.CLIENT_ID);
-        if ("debug".equalsIgnoreCase(BuildConfig.BUILD_TYPE)) {
+        if(EnvUtil.getInstance().isTest()){
             reqParams.addParameter(Constants.INFO_PARAM.DBG, true);
         }
 
