@@ -47,11 +47,13 @@ public class DomainHelper {
             LogHelper.d("[%s] host is null", TAG);
             host = null;
         }
-        if (EnvUtil.getInstance().isTest()) {
+        String packageName = BaseApplication.getApplication().getPackageName();
+        if("com.letv.wallet".equals(packageName) && EnvUtil.getInstance().isLePayTest()){
             return "https://test-wallet.scloud.letv.com";
-        } else {
+        }else if("com.letv.walletbiz".equals(packageName) && EnvUtil.getInstance().isWalletTest()){
+            return "https://test-wallet.scloud.letv.com";
+        }else{
             return host;
         }
-
     }
 }

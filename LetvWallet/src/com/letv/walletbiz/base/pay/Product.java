@@ -227,7 +227,7 @@ public abstract class Product implements Serializable {
         reqParams.addBodyParameter(Constants.INFO_PARAM.ORDER_SN, order_no);
         reqParams.addBodyParameter(Constants.INFO_PARAM.TOKEN, uToken);
         reqParams.addBodyParameter(Constants.INFO_PARAM.CLIENT, Constants.INFO_VALUE.CLIENT_ID);
-        if(EnvUtil.getInstance().isTest()){
+        if(EnvUtil.getInstance().isWalletTest()){
             reqParams.addParameter(Constants.INFO_PARAM.DBG, true);
         }
 

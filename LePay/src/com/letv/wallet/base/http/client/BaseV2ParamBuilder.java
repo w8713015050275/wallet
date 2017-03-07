@@ -41,7 +41,7 @@ public class BaseV2ParamBuilder extends DefaultParamsBuilder
 
         // build query string parameter as API requested fields
         String APPKEY;
-        if (EnvUtil.getInstance().isTest()) {
+        if (EnvUtil.getInstance().isLePayTest()) {
             APPKEY = "fertE2E4QcLjRAHGxcZy";
         } else {
             APPKEY = "hhBPZS1z9vizldPWHyct";

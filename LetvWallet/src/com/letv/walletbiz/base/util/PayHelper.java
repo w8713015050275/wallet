@@ -77,7 +77,7 @@ public class PayHelper implements Serializable {
                 reqParams.addBodyParameter(key, reqMap.get(key));
             }
         }
-        if (EnvUtil.getInstance().isTest()) {
+        if (EnvUtil.getInstance().isWalletTest()) {
             reqParams.addParameter(Constants.INFO_PARAM.DBG, true);
         }
 

@@ -8,7 +8,9 @@ public class EnvUtil {
 
     private static EnvUtil instance;
 
-    private boolean isTest;
+    private boolean isWalletTest;
+    private boolean isLePayTest;
+
 
     /**
      * 线程安全的单例模式
@@ -26,13 +28,20 @@ public class EnvUtil {
         return instance;
     }
 
-    public boolean isTest() {
-        return false;
+    public boolean isWalletTest() {
+        return isWalletTest;
     }
 
-    public void setTest(boolean isTest) {
-        this.isTest = isTest;
+    public boolean isLePayTest() {
+        return isLePayTest;
     }
 
+    public void setWalletTest(boolean isWalletTest) {
+        this.isWalletTest = isWalletTest;
+    }
+
+    public void setLePayTest(boolean isLePayTest) {
+        this.isLePayTest = isLePayTest;
+    }
 
 }

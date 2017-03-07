@@ -106,7 +106,7 @@ public class LeSignature {
 
             String stringToSign = method.toUpperCase() + "\n" + path + "\n" + bodyMD5 + "\n" + date + "\n" + paramString;
 //Jni
-            byte[] jnihmac = jni_hmacsha1(stringToSign, EnvUtil.getInstance().isTest());
+            byte[] jnihmac = jni_hmacsha1(stringToSign, EnvUtil.getInstance().isWalletTest());
             if (Debug) {
                 LogHelper.d("[LeSignature] getSignature   %s ", toHexString(jnihmac));
             }

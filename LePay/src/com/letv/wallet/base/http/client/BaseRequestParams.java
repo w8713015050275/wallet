@@ -3,7 +3,6 @@ package com.letv.wallet.base.http.client;
 import android.text.TextUtils;
 
 import com.letv.wallet.common.util.DomainHelper;
-import com.letv.wallet.common.util.EnvUtil;
 
 import org.xutils.http.RequestParams;
 import org.xutils.http.app.ParamsBuilder;
@@ -39,11 +38,7 @@ public class BaseRequestParams extends RequestParams {
     protected String checkDomain(String uri) {
         String host;
         if (!TextUtils.isEmpty(uri) && uri.startsWith("null")) {
-            if (EnvUtil.getInstance().isTest()) {
-                host = "https://test-wallet.scloud.letv.com";
-            } else {
-                host = DomainHelper.getInstance().getHost();
-            }
+            host = DomainHelper.getInstance().getHost();
             if (!TextUtils.isEmpty(host)) {
                 uri = uri.replaceFirst("null", host);
             }
