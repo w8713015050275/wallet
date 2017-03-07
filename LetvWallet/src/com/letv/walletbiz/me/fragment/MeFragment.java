@@ -4,7 +4,10 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -56,6 +59,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     private TextView mBills;
     private TextView mVipLevels;
     private TextView mLeLeHuaAavailableLimit, mLeLeHuaPaymentAmount;
+    private TextView mFeedback;
 
     private AccountInfo accountInfo;
 
@@ -66,9 +70,12 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
     }
+
+
 
     @Override
     public View onCreateCustomView(LayoutInflater inflater, ViewGroup container, Bundle
@@ -88,6 +95,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             mViewLeLeHuaDivider = (ImageView) mRootView.findViewById(R.id.viewLeLeHuaDivider);
             mLeLeHuaAavailableLimit = (TextView) mRootView.findViewById(R.id.tvLeLeHuaAavailableLimit);
             mLeLeHuaPaymentAmount = (TextView) mRootView.findViewById(R.id.tvPayAmount);
+            mFeedback = (TextView) mRootView.findViewById(R.id.tvUsrFeedback);
 
             mSetting.setOnClickListener(this);
             mUsrIcon.setOnClickListener(this);
@@ -98,6 +106,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             mVipLevels.setOnClickListener(this);
             mViewLeLeHuaHome.setOnClickListener(this);
             mViewLeLeHuaBills.setOnClickListener(this);
+            mFeedback.setOnClickListener(this);
 
             //隐藏乐乐花
             mViewLeLeHuaHome.setVisibility(View.GONE);
@@ -141,6 +150,10 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
                 jumpIntentOnLogin(intent);
                 break;
 
+            case R.id.tvUsrFeedback:
+                gotoFeedBack(getActivity());
+                break;
+
            /* case R.id.tvVipLevel:
                 break;
             case R.id.tvVerfify:
@@ -166,6 +179,36 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
                 break;
                 */
         }
+    }
+
+    public boolean gotoFeedBack(Activity activity) {
+        try {
+            Intent intent = new Intent();
+            intent.setAction("com.letv.bugservices.reporter");
+            intent.putExtra("fromApp", getActivity().getApplication().getPackageName());//fromApp传应用包名
+            intent.putExtra("versionId", getVersion());
+            intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            activity.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getVersion() {
+        String versionName = "";
+        int versionCode;
+        try {
+            // ---get the package info---
+            PackageManager pm = getActivity().getApplication().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(getActivity().getApplication().getPackageName(), 0);
+            versionName = pi.versionName;
+            versionCode = pi.versionCode;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return versionName;
     }
 
     @Override

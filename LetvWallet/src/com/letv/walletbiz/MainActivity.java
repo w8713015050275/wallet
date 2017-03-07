@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TabHost;
 
@@ -59,7 +60,6 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (savedInstanceState != null && savedInstanceState.getInt("last_frag_id") != -1) {
             mCurrentTabId = savedInstanceState.getInt("last_frag_id");
         }
@@ -283,7 +283,16 @@ public class MainActivity extends BaseWalletFragmentActivity implements TabHost.
     @Override
     public void onTabChanged(String tabId) {
         mCurrentTabId = getTabIdByTag(tabId);
+        changeSofeInputMode(mCurrentTabId);
         setFragmentitle(mCurrentTabId);
+    }
+
+    private void changeSofeInputMode(int currentTabId) {
+        if (currentTabId == ID_MY) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        } else if (currentTabId == ID_RECOMMEND) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        }
     }
 
     private int getTabIdByTag(String s) {
