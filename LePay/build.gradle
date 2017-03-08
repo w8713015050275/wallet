@@ -6,6 +6,8 @@ android {
         applicationId "com.letv.wallet"
         minSdkVersion 23
         targetSdkVersion 24
+        versionCode 10002
+        versionName getVersionName(versionCode)
         multiDexEnabled false
     }
     sourceSets {
@@ -58,4 +60,12 @@ dependencies {
 
     compile(name: 'lepaysdk', ext: 'aar')
 
+}
+
+def getVersionName(versionCode) {
+    def prefix = (versionCode.intdiv(10000)) + "." + (versionCode.intdiv(100) % 100) + "." + (versionCode % 100)
+    def walletCmd = 'git rev-list HEAD --first-parent --count LePay'
+    def commonCmd = 'git rev-list HEAD --first-parent --count LetvWalletCommon'
+    def result = walletCmd.execute().text.trim().toInteger().plus(commonCmd.execute().text.trim().toInteger())
+    return prefix + " build" + result
 }

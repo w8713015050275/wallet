@@ -6,6 +6,8 @@ android {
         applicationId "com.letv.walletbiz"
         minSdkVersion 23
         targetSdkVersion 24
+        versionCode 10102
+        versionName getVersionName(versionCode)
         multiDexEnabled false
     }
     sourceSets {
@@ -55,4 +57,12 @@ dependencies {
     compile project(':LetvWalletCommon')
     compile project(':LetvWallet/library/LeuiRecommend')
     compile project(':LetvWallet/library/letvwalletsigncheck')
+}
+
+def getVersionName(versionCode) {
+    def prefix = (versionCode.intdiv(10000)) + "." + (versionCode.intdiv(100) % 100) + "." + (versionCode % 100)
+    def walletCmd = 'git rev-list HEAD --first-parent --count LetvWallet'
+    def commonCmd = 'git rev-list HEAD --first-parent --count LetvWalletCommon'
+    def result = walletCmd.execute().text.trim().toInteger().plus(commonCmd.execute().text.trim().toInteger())
+    return prefix + " build" + result
 }
