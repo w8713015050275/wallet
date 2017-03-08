@@ -41,7 +41,7 @@
         <item name="android:fontFamily">helve-neue</item>
     </style>
 
-    <style name="Wallet.Actionbar" parent="@style/Widget.Material.ActionBar.Leui">
+    <style name="Wallet.Actionbar" parent="@style/ThemeOverlay.Eui.ActionBar">
         <item name="titleTextColor">@color/wallet_actionBar_titleTv_color</item>
         <item name="titleTextAppearance">@style/Wallet.Toolbar.Title</item>
     </style>

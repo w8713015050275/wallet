@@ -31,10 +31,10 @@
         <item name="android:textAppearanceSmallPopupMenu">@style/Wallet.TextAppearance.Widget.PopupMenu.Small</item>
 
         <!-- Dialog attributes -->
-        <item name="dialogTheme">@style/Theme.Leui.Dialog</item>
+        <item name="dialogTheme">@style/Theme.DeviceDefault.Dialog.Leui</item>
 
         <!-- AlertDialog attributes -->
-        <item name="alertDialogTheme">@style/Theme.Leui.Dialog.Alert</item>
+        <item name="alertDialogTheme">@style/Theme.DeviceDefault.Dialog.Alert.Leui</item>
         <item name="alertDialogStyle">@style/AlertDialog.Leui</item>
     </style>
 
