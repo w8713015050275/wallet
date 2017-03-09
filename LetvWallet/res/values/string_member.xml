@@ -29,7 +29,7 @@
 
     <string name="member_order_desc_label_sn">"Order number:"</string>
     <string name="member_order_list_label">Order history</string>
-    <string name="member_prompt_not_agree_agreement">Please agree the agreement</string>
+    <string name="member_prompt_not_agree_agreement">"Please accept the agreement before continuing"</string>
 
     <string name="member_order_status_to_pay">To Pay</string>
     <string name="member_order_status_paid">Paid</string>

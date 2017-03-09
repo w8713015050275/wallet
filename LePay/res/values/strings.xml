@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="pay_network_error">Wallet App can‘t connect network</string>
+    <string name="pay_network_error">"Wallet can't connect network"</string>
     <string name="pay_network_error_sure">OK</string>
-    <string name="pay_no_network">Disconnected. Please connect to a network.</string>
+    <string name="pay_no_network">"No network available. Please connect to a network and try again."</string>
 
     <string name="setting_label">Settings</string>
     <string name="setting_account_verify_label">Real-name authentication</string>
