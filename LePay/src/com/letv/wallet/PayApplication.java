@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
 import com.letv.tracker2.agnes.Agnes;
+import com.letv.tracker2.enums.Area;
+import com.letv.tracker2.enums.HwType;
 import com.letv.wallet.base.util.WalletConstant;
 import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.util.AccountHelper;
@@ -25,7 +27,7 @@ public class PayApplication extends BaseApplication {
         getUToken();
         xmain.Ext.init(this);
         xmain.Ext.setDebug(true);
-        Agnes.getInstance().setContext(this);
+        Agnes.getInstance(HwType.PHONE_LETV, Area.CN).setContext(this);
     }
 
     @Override
