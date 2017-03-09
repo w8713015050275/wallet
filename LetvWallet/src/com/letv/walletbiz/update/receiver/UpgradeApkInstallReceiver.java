@@ -29,6 +29,9 @@ public class UpgradeApkInstallReceiver extends BroadcastReceiver {
         context.sendBroadcast(i);
 
         if (intent.getAction().equalsIgnoreCase("android.intent.action.PACKAGE_REPLACED")) {
+            //升级或卸载成功：升级-版本相同；卸载-版本不同
+            long latestVersionCode = SharedPreferencesHelper.getLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE, 0);
+            long currentVersionCode = Long.valueOf(UpdateUtil.getVersion(context, UpdateUtil.getLocalAppList().get(0)));
             String packageStr = intent.getDataString();
             String[] strs = packageStr.split(":");
             String packageName = intent.getStringExtra("PackageName");
@@ -36,22 +39,24 @@ public class UpgradeApkInstallReceiver extends BroadcastReceiver {
                 packageName = strs[strs.length-1];
             }
 
-            String contextPackageName = context.getPackageName();
+            if (latestVersionCode != 0 && currentVersionCode == latestVersionCode) {
+                String contextPackageName = context.getPackageName();
 
-            ArrayList<String> packagesList = (ArrayList<String>) UpdateUtil.getLocalAppList();
-            if (packagesList.contains(packageName)) {
-                if (SharedPreferencesHelper.getBoolean(UpdateConstant.PREFERENCES_NOTIFY_LATER, false)) {
-                    Action.uploadInstallSuccess(packageName);
-                } else {
-                    Action.uploadUpgradeSuccess(String.valueOf(SharedPreferencesHelper.getBoolean(UpdateConstant.PREFERENCES_FORCE_UPGRADE, false)? 2 : 1), packageName);
+                ArrayList<String> packagesList = (ArrayList<String>) UpdateUtil.getLocalAppList();
+                if (packagesList.contains(packageName)) {
+                    if (SharedPreferencesHelper.getBoolean(UpdateConstant.PREFERENCES_NOTIFY_LATER, false)) {
+                        Action.uploadInstallSuccess(packageName);
+                    } else {
+                        Action.uploadUpgradeSuccess(String.valueOf(SharedPreferencesHelper.getBoolean(UpdateConstant.PREFERENCES_FORCE_UPGRADE, false) ? 2 : 1), packageName);
+                    }
                 }
-            }
 
-            if (packageName != null && contextPackageName != null) {
-                if (packageName.trim().equalsIgnoreCase(contextPackageName.trim())) {
-                    UpdateUtil.removeDownloadedFile(packageName);
-                    Toast.makeText(context, context.getString(R.string.upgrade_success_note),Toast.LENGTH_SHORT).show();
-                    restartWallet(context);
+                if (packageName != null && contextPackageName != null) {
+                    if (packageName.trim().equalsIgnoreCase(contextPackageName.trim())) {
+                        UpdateUtil.removeDownloadedFile(packageName);
+                        Toast.makeText(context, context.getString(R.string.upgrade_success_note), Toast.LENGTH_SHORT).show();
+                        restartWallet(context);
+                    }
                 }
             }
 

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.letv.wallet.common.util.NetworkHelper;
+import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.walletbiz.update.UpdateConstant;
 import com.letv.walletbiz.update.beans.LocalAppInfo;
 import com.letv.walletbiz.update.task.DownLoadManager;
@@ -397,6 +398,7 @@ public class UpgradeService extends Service {
                 if(remoteAppInfoList ==  null || remoteAppInfoList.length == 0) {
                     Log.d(TAG, "===wallet remote app list is null");
                     mServiceHandler.sendEmptyMessage(RETRY_TO_GET_UPGRADE_INFO);
+                    SharedPreferencesHelper.putLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE, 0);
                     return;
                 }
                 //to update
@@ -414,6 +416,9 @@ public class UpgradeService extends Service {
                                 try {
                                     local_version = Integer.valueOf(localAppInfo.mApkVersion);
                                     remote_version = Integer.valueOf(remoteAppInfo.getApkVersion());
+                                    if (localAppInfo.mPackageName.equals(UpdateUtil.getLocalAppList().get(0))) {
+                                        SharedPreferencesHelper.putLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE, remote_version);
+                                    }
                                 } catch (NumberFormatException e) {
                                     e.printStackTrace();
                                 }
