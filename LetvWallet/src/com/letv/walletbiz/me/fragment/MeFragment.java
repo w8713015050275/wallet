@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.letv.shared.widget.BorderedCircleImageView;
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.account.LePayAccountManager;
 import com.letv.wallet.account.LePayCommonCallback;
 import com.letv.wallet.account.aidl.v1.AccountConstant;

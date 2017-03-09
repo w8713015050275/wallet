@@ -3,14 +3,14 @@ package com.letv.wallet.common.util;
 
 import android.text.TextUtils;
 
-import com.letv.tracker.agnes.Agnes;
-import com.letv.tracker.agnes.App;
-import com.letv.tracker.agnes.Event;
-import com.letv.tracker.agnes.Widget;
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
-import com.letv.tracker.enums.LeUIApp;
-import com.letv.tracker.msg.bean.Version;
+import com.letv.tracker2.agnes.Agnes;
+import com.letv.tracker2.agnes.App;
+import com.letv.tracker2.agnes.Event;
+import com.letv.tracker2.agnes.Widget;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
+import com.letv.tracker2.enums.LeUIApp;
+import com.letv.tracker2.msg.bean.Version;
 import com.letv.wallet.common.BaseApplication;
 
 import java.util.HashMap;

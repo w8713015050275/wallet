@@ -1,7 +1,7 @@
 package com.letv.leui.common.recommend.report;
 
-import com.letv.tracker.agnes.App;
-import com.letv.tracker.enums.LeUIApp;
+import com.letv.tracker2.agnes.App;
+import com.letv.tracker2.enums.LeUIApp;
 
 /**
  * Created by dupengtao on 15-3-12.

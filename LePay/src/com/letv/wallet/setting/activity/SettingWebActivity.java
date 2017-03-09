@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.letv.tracker.enums.EventType;
+import com.letv.tracker2.enums.EventType;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.activity.BaseWebViewActivity;

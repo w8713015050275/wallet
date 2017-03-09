@@ -1,7 +1,7 @@
 package com.letv.wallet.base.util;
 
 
-import com.letv.tracker.enums.EventType;
+import com.letv.tracker2.enums.EventType;
 import com.letv.wallet.common.util.BaseAction;
 
 import java.util.Map;

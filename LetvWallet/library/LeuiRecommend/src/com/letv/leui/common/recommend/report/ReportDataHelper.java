@@ -3,14 +3,14 @@ package com.letv.leui.common.recommend.report;
 import android.content.Context;
 import com.letv.leui.common.recommend.widget.LeRecommendViewGroup;
 import com.letv.leui.common.recommend.widget.adapter.dto.RecommendTaginfoDTO;
-import com.letv.tracker.agnes.Agnes;
-import com.letv.tracker.agnes.App;
-import com.letv.tracker.agnes.Event;
-import com.letv.tracker.agnes.Widget;
-import com.letv.tracker.enums.AppType;
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
-import com.letv.tracker.enums.LeUIApp;
+import com.letv.tracker2.agnes.Agnes;
+import com.letv.tracker2.agnes.App;
+import com.letv.tracker2.agnes.Event;
+import com.letv.tracker2.agnes.Widget;
+import com.letv.tracker2.enums.AppType;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
+import com.letv.tracker2.enums.LeUIApp;
 
 /**
  * Created by dupengtao on 15-3-12.

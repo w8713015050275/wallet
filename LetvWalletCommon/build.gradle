@@ -36,7 +36,8 @@ repositories {
     }
 }
 dependencies {
-    compile files('libs/common_agnes_thin_client.jar')
+    compile files('libs/agnes_tracker-0.9.8.jar')
+    compile files('libs/protobuf-java-2.5.0.jar')
     compile files('libs/letv-gson-common.jar')
     compile files('libs/letv-domain-util.jar')
     compile files('libs/libphonenumber.jar')

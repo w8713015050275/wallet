@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
-import com.letv.tracker.agnes.Agnes;
+import com.letv.tracker2.agnes.Agnes;
 import com.letv.wallet.base.util.WalletConstant;
 import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.util.AccountHelper;

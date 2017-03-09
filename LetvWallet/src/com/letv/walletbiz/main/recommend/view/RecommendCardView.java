@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.common.util.CommonCallback;
 import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.ExecutorHelper;

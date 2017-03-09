@@ -19,25 +19,26 @@ extern "C" {
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 
 //本地测试用公钥,服务器用来加密,
+/**
 char publicKey[] = "-----BEGIN PUBLIC KEY-----\n"\
     "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1St/YDeJKlf9+EaEwao1uC6IZ\n"\
     "zD5sub+4ASEQQlhefVTVbI825gLFS00YBRqrY0vJAlbtrqOrUMIpI5aBZkAity4m\n"\
     "x68Lx5quoDRjU2yUOm4fcM3HGBmUvfvHot4R7KFGq+GfaOviJkuwbKZ0ApbMl/Np\n"\
     "kC/qf9fBhSKTM7tytwIDAQAB\n"\
     "-----END PUBLIC KEY-----\n";
-
+ **/
 
 //服务器端公钥,作用是:客户端发送给服务器的数据加密
-/**
+
 char publicKey[] = "-----BEGIN PUBLIC KEY-----\n"\
     "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDNrMS1/XHrMeMdw2bL8oV4Wj88\n"\
     "IuAlMjSx/X9Mamz0UJu3P06JbXUQlb/eAUNd+yevC4cxww3U7kIyBvs3Wcjk4bd4\n"\
     "O3Ox1IcEaj8k6sA3kV6ziJX+A+i2WSM1e1kuw89TzagrSJ4tYNGTk1Z30Bq8QEyr\n"\
     "VAJy3h5MtWRCi0zRcwIDAQAB\n"\
     "-----END PUBLIC KEY-----\n";
-    **/
 
 //客户端私钥,本地用私钥来解密服务器发送过来的数据
+
 char privateKey[] = "-----BEGIN RSA PRIVATE KEY-----\n"\
     "MIICXQIBAAKBgQC1St/YDeJKlf9+EaEwao1uC6IZzD5sub+4ASEQQlhefVTVbI82\n"\
     "5gLFS00YBRqrY0vJAlbtrqOrUMIpI5aBZkAity4mx68Lx5quoDRjU2yUOm4fcM3H\n"\
@@ -53,6 +54,7 @@ char privateKey[] = "-----BEGIN RSA PRIVATE KEY-----\n"\
     "zQZMkaFaHh+6vTAtlScCQQDXOF/foObLtZk7oNU87MCtJkUIx9JIglI3EgAufX6t\n"\
     "a8J4NR4w3QcMZbLfFRFA3JBVbcopwQPBjMmf0CJ/Oc+5\n"\
     "-----END RSA PRIVATE KEY-----\n";
+
 
 RSA *createRSA(unsigned char *key, int type) {
     RSA *rsa = NULL;

@@ -16,7 +16,7 @@ import com.letv.lepaysdk.ELePayState;
 import com.letv.lepaysdk.LePayConfig;
 import com.letv.lepaysdk.activity.EUICashierAcitivity;
 import com.letv.shared.widget.LeBottomSheet;
-import com.letv.tracker.enums.EventType;
+import com.letv.tracker2.enums.EventType;
 import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;

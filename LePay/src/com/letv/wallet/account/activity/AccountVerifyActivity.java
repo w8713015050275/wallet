@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.letv.shared.widget.LeCheckBox;
 import com.letv.shared.widget.LeLoadingDialog;
-import com.letv.tracker.enums.Key;
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.PayApplication;
 import com.letv.wallet.R;
 import com.letv.wallet.account.AccountCommonConstant;

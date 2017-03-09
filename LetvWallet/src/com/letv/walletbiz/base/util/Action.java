@@ -3,8 +3,8 @@ package com.letv.walletbiz.base.util;
 
 import android.text.TextUtils;
 
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.common.util.BaseAction;
 
 import java.util.HashMap;

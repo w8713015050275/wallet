@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
-import com.letv.tracker.agnes.Agnes;
+import com.letv.tracker2.agnes.Agnes;
+import com.letv.tracker2.enums.Area;
+import com.letv.tracker2.enums.HwType;
 import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.EnvUtil;
@@ -18,6 +20,8 @@ import com.letv.walletbiz.update.UpdateConstant;
 import com.letv.walletbiz.update.util.CrashHandler;
 import com.letv.walletbiz.update.util.UpdateUtil;
 
+import java.util.Locale;
+
 /**
  * Created by linquan on 15-12-25.
  */
@@ -30,7 +34,9 @@ public class WalletApplication extends BaseApplication {
         getUToken();
         xmain.Ext.init(this);
         xmain.Ext.setDebug(true);
-        Agnes.getInstance().setContext(this);
+        Agnes.getInstance(HwType.PHONE_LETV, Area.CN).setContext(this);
+        //TODO,上传国别信息待定
+        //Agnes.getInstance().setRegion(Locale.getDefault().getCountry());
         initPushService();
 
         UpdateUtil.mIsStartedNewly = true;

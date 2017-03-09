@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.activity.AccountBaseActivity;
 import com.letv.wallet.common.http.beans.BaseResponse;

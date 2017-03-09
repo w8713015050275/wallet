@@ -27,8 +27,8 @@ import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.letv.shared.widget.LeBottomSheet;
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;

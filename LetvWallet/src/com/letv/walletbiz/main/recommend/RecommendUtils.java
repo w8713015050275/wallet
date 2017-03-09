@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.letv.tracker.enums.EventType;
-import com.letv.tracker.enums.Key;
+import com.letv.tracker2.enums.EventType;
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.walletbiz.base.util.Action;

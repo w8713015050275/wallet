@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.letv.tracker.enums.EventType;
+import com.letv.tracker2.enums.EventType;
 import com.letv.wallet.PayApplication;
 import com.letv.wallet.R;
 import com.letv.wallet.account.AccountCommonConstant;
