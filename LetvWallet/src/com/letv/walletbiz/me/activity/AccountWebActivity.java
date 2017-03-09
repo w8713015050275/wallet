@@ -20,7 +20,7 @@ import com.letv.wallet.common.view.BlankPage;
  * Created by lijunying on 17-3-3.
  */
 
-public class MeWebActivity extends BaseWebViewActivity {
+public class AccountWebActivity extends BaseWebViewActivity implements AccountHelper.OnAccountChangedListener {
     public static final String EXTRA_KEY_JTYPE = "redirectJtype";
 
     private String jType = null;
@@ -30,9 +30,10 @@ public class MeWebActivity extends BaseWebViewActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AccountHelper.getInstance().registerOnAccountChangeListener(this);
         Intent intent = getIntent();
-        if (intent != null) {
-            if (TextUtils.isEmpty(mUrl) && TextUtils.isEmpty(jType = intent.getStringExtra(EXTRA_KEY_JTYPE))) {
+        if (intent != null) { //url为空， （未登录或者type为空） finish
+            if (TextUtils.isEmpty(mUrl) && (TextUtils.isEmpty(jType = intent.getStringExtra(EXTRA_KEY_JTYPE)) || !AccountHelper.getInstance().isLogin(this))) {
                finish();
             }
         }
@@ -41,7 +42,7 @@ public class MeWebActivity extends BaseWebViewActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (TextUtils.isEmpty(mUrl) && checkLogin() && checkNetWork()) {
+        if (TextUtils.isEmpty(mUrl) && checkNetWork()) {
             redirect(jType);
         }
     }
@@ -56,12 +57,23 @@ public class MeWebActivity extends BaseWebViewActivity {
         return true;
     }
 
-    private boolean checkLogin() {
-        if(AccountHelper.getInstance().isLogin(this)){
-            return true;
+    @Override
+    protected void onNetWorkChanged(boolean isNetworkAvailable) {
+        if (isNetworkAvailable && TextUtils.isEmpty(mUrl)) {
+            redirect(jType);
         }
-        showBlankPage(BlankPage.STATE_NO_LOGIN);
-        return false ;
+    }
+
+    @Override
+    public void onAccountLogin() {
+
+    }
+
+    @Override
+    public void onAccountLogout() {
+        if (TextUtils.isEmpty(mUrl)) {
+            finish(); //换账户后，导致type和当前账户状态不统一 ；
+        }
     }
 
     private boolean checkNetWork(){
@@ -70,6 +82,16 @@ public class MeWebActivity extends BaseWebViewActivity {
         }
         showBlankPage(BlankPage.STATE_NO_NETWORK);
         return false;
+    }
+
+    private void showNetErrorBlankPage(){
+        showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideBlankPage();
+                redirect(jType);
+            }
+        });
     }
 
     private void redirect(final String jType){
@@ -82,11 +104,10 @@ public class MeWebActivity extends BaseWebViewActivity {
             @Override
             public void onSuccess(RedirectURL result) {
                 isLoading = false;
-                hideLoadingView();
-                if (result != null && !TextUtils.isEmpty(mUrl =result.getUrl(jType))) {
+                if (result != null && !TextUtils.isEmpty(mUrl = result.getUrl(jType))) {
                     loadPage();
                 } else {
-                    showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL);
+                    showNetErrorBlankPage();
                 }
             }
 
@@ -97,23 +118,11 @@ public class MeWebActivity extends BaseWebViewActivity {
                 if (errorCode == AccountConstant.RspCode.ERRNO_NO_NETWORK) {
                     showBlankPage(BlankPage.STATE_NO_NETWORK);
                 }else {
-                    showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            hideBlankPage();
-                            redirect(jType);
-                        }
-                    });
+                    showNetErrorBlankPage();
                     LogHelper.e("redirect jType = "+ jType + " onError = " + errorCode);
                 }
             }
         });
     }
 
-    @Override
-    protected void onNetWorkChanged(boolean isNetworkAvailable) {
-        if (isNetworkAvailable && TextUtils.isEmpty(mUrl)) {
-            redirect(jType);
-        }
-    }
 }

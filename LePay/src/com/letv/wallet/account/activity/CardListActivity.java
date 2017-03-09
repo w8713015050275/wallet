@@ -366,15 +366,13 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         if (TextUtils.isEmpty(jType)) {
             return;
         }
-        Intent intent = null;
-        String url = null;
-        if (redirectURL == null || TextUtils.isEmpty((url = redirectURL.getUrl(jType)))) {
-            intent = new Intent(this, RedirectActivity.class);
-            intent.putExtra(RedirectActivity.EXTRA_KEY_JTYPE, jType);
-        } else {
-            intent = new Intent(this, AccountWebActivity.class);
-            intent.putExtra(CommonConstants.EXTRA_URL, url);
+        String url = redirectURL == null ? null : redirectURL.getUrl(jType);
+        Intent intent = new Intent(this, AccountWebActivity.class);
+        if (!TextUtils.isEmpty(jType)) {
             intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
+        }
+        if (!TextUtils.isEmpty(url)) {
+            intent.putExtra(CommonConstants.EXTRA_URL, url);
         }
         startActivity(intent);
     }

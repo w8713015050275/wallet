@@ -462,7 +462,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Arrow" />
         <activity
-            android:name=".me.activity.MeWebActivity"
+            android:name=".me.activity.AccountWebActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Arrow" />
     </application>

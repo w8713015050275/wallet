@@ -100,11 +100,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".account.activity.RedirectActivity"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:theme="@style/SettingWebTheme" />
     </application>
 
 </manifest>
