@@ -38,6 +38,11 @@
 -dontwarn com.tencent.mm.**
 -keep class com.tencent.mm.** { *;}
 
+#不混淆protobuf
+-dontwarn com.google.protobuf.**
+-keep class com.google.protobuf.** { *;}
+
+
 
 #保持Parcelable不被混淆
 -keep class * implements android.os.Parcelable {
@@ -110,3 +115,22 @@
 -keep class com.letv.wallet.account.aidl.v1.IAccountCallback
 -keep class com.letv.wallet.account.aidl.v1.IAccountServiceV1
 -keep class com.letv.wallet.account.LePayCommonCallback
+
+
+-keep class com.letv.wallet.common.widget.LeFragmentTabHost$SavedState
+-keep class pl.droidsonroids.gif.GifViewSavedState
+-dontnote com.letv.wallet.common.widget.LeFragmentTabHost$SavedState
+-dontnote pl.droidsonroids.gif.GifViewSavedState
+
+-dontnote android.net.http.HttpResponseCache
+-dontnote android.net.http.SslError
+-dontnote android.net.http.SslCertificate
+-dontnote android.net.http.SslCertificate$DName
+-dontnote org.apache.http.conn.scheme.HostNameResolver
+-dontnote org.apache.http.conn.scheme.LayeredSocketFactory
+-dontnote org.apache.http.conn.scheme.SocketFactory
+-dontnote org.apache.http.conn.ConnectTimeoutException
+-dontnote org.apache.http.params.HttpConnectionParams
+-dontnote org.apache.http.params.CoreConnectionPNames
+-dontnote org.apache.http.params.HttpParams
+-dontwarn java.beans.ConstructorProperties
