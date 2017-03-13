@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
+import com.google.android.gms.analytics.ExceptionParser;
+import com.google.android.gms.analytics.ExceptionReporter;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.letv.tracker2.agnes.Agnes;
 import com.letv.tracker2.enums.Area;
 import com.letv.tracker2.enums.HwType;
@@ -20,9 +24,12 @@ import org.xutils.xmain;
  */
 public class PayApplication extends BaseApplication {
 
+    private Tracker mTracker;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        initExceptionHandler();
         initEnv();
         getUToken();
         xmain.Ext.init(this);
@@ -43,6 +50,23 @@ public class PayApplication extends BaseApplication {
         }
     }
 
+    private void initExceptionHandler() {
+        AnalyticsExceptionReporter customReportHandler = new AnalyticsExceptionReporter(
+                getDefaultTracker(),
+                Thread.getDefaultUncaughtExceptionHandler(),
+                this);
+        Thread.setDefaultUncaughtExceptionHandler(customReportHandler);
+    }
+
+    synchronized public Tracker getDefaultTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+            mTracker = analytics.newTracker(R.xml.app_tracker);
+        }
+        return mTracker;
+    }
+
     private void initEnv(){
         Context targetAPPContext = null;
         try {
@@ -57,6 +81,38 @@ public class PayApplication extends BaseApplication {
                 LogHelper.d("PayApplication Env is "+ result);
                 EnvUtil.getInstance().setLePayTest(result);
             }
+        }
+    }
+
+    private class AnalyticsExceptionParser implements ExceptionParser {
+        @Override
+        public String getDescription(String arg0, Throwable t) {
+            if (t == null) {
+                return "";
+            }
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(t.toString());
+            sb.append("\n");
+
+            for (StackTraceElement element : t.getStackTrace()) {
+                sb.append(element.toString());
+                sb.append("\n");
+            }
+            return sb.toString();
+        }
+    }
+
+    private class AnalyticsExceptionReporter extends ExceptionReporter {
+
+        public AnalyticsExceptionReporter(Tracker tracker, Thread.UncaughtExceptionHandler originalHandler, Context context) {
+            super(tracker, originalHandler, context);
+            setExceptionParser(new AnalyticsExceptionParser());
+        }
+
+        @Override
+        public void uncaughtException(Thread t, Throwable e) {
+            super.uncaughtException(t, e);
         }
     }
 }

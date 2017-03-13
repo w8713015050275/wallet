@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "257521407888",
+    "project_id": "firebase-lepay"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257521407888:android:83fe6eadceeeaeb9",
+        "android_client_info": {
+          "package_name": "com.letv.wallet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAQDZmIzTlpIJCZRcsSM4fCKgx4Da2Y2s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-93227773-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
