@@ -16,12 +16,13 @@
 
     <color name="colorPrimary">#77CEE1</color>
     <color name="colorSecondary">#747474</color>
-    <color name="colorDividerLineBg">#DFDFDF</color>
     <color name="transparent">#00000000</color>
+    <color name="half_transparent">#7FFFFFFF</color>
     <color name="channel_list_tv_primary_color">#404040</color>
     <color name="channel_list_tv_secondary_color">#808080</color>
     <color name="lepay_pay_price_tv_color">#3386F7</color>
     <color name="lepay_pay_cancel_tv_color">#262626</color>
+    <color name="lepay_pay_item_click_color">#E5E5E5</color>
     <color name="colorBtnBlue">#2BA2FF</color>
 
 </resources>

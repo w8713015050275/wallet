@@ -35,6 +35,7 @@ import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.view.DividerGridItemDecoration;
+import com.letv.wallet.common.view.DividerItemDecoration;
 import com.letv.wallet.online.LePayConstants;
 import com.letv.wallet.online.bean.LePayCashierUrlBean;
 import com.letv.wallet.online.bean.LePayChannelBean;
@@ -87,7 +88,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private boolean isFirst = true, isFirstShow = true;
     private String mFrom = LePayConstants.PAY_FROM.OTHER;
 
-    // TODO 解决后边那条线的问题
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -948,9 +948,12 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         mLinearLayoutManager = new LinearLayoutManager(getBaseContext());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mChannelRecyclerV.setLayoutManager(mLinearLayoutManager);
-        DividerGridItemDecoration ItemDecoration = new DividerGridItemDecoration(this, getColor(R.color.colorDividerLineBg), (int) DensityUtils.dip2px(0.25F));
-        ItemDecoration.setDrawRect(false, false, false, false);
-        mChannelRecyclerV.addItemDecoration(ItemDecoration);
+        DividerItemDecoration itemDecoration =
+                new DividerItemDecoration(BaseApplication.getApplication(), getColor(R.color.divider_horizontal_color),
+                        DividerItemDecoration.VERTICAL_LIST, getResources().getDimensionPixelSize(R.dimen.divider_width));
+        int extraMargin = getResources().getDimensionPixelSize(R.dimen.margin_default);
+        itemDecoration.setExtraMargin(extraMargin, extraMargin, 0, 0);
+        mChannelRecyclerV.addItemDecoration(itemDecoration);
         mChannelRecyclerV.setAdapter(mChannelListAdapter);
     }
 

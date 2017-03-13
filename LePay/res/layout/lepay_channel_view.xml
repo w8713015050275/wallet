@@ -3,19 +3,16 @@
     android:id="@+id/lepay_channel_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/pay_channel_v_height"
-    android:layout_marginBottom="@dimen/small_padding"
-    android:layout_marginLeft="@dimen/small_padding"
-    android:layout_marginRight="@dimen/small_padding"
     android:background="@drawable/corners"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/padding_default"
-    android:paddingRight="@dimen/padding_default">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/pay_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default"
         android:layout_marginTop="18dp"
         android:textColor="@color/channel_list_tv_primary_color"
         android:textSize="16sp" />
@@ -26,13 +23,18 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default"
         android:layout_marginTop="2dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/lepay_pay_price_tv_color"
         android:textSize="14sp" />
 
-    <View style="@style/Divider_HorizontalLine_Style" />
+    <View
+        style="@style/Divider_HorizontalLine_Style"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/pay_channel_list"
@@ -44,15 +46,20 @@
 
     <View
         android:id="@+id/list_bottom_line"
-        style="@style/Divider_HorizontalLine_Style" />
+        style="@style/Divider_HorizontalLine_Style"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default" />
 
     <TextView
         android:id="@+id/pay_cancel_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/lepay_channel_item_selected"
         android:gravity="center"
         android:paddingBottom="@dimen/padding_default"
+        android:paddingLeft="@dimen/padding_default"
+        android:paddingRight="@dimen/padding_default"
         android:paddingTop="@dimen/padding_default"
         android:textColor="@color/lepay_pay_cancel_tv_color"
         android:textSize="18sp" />

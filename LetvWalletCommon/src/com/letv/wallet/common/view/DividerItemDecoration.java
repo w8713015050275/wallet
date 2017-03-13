@@ -23,6 +23,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private boolean mHeadLine = false;
     private int mHeadSize;
     private Context mContext;
+    private int mExtraMarginLeft;
+    private int mExtraMarginRight;
+    private int mExtraMarginTop;
+    private int mExtraMarginBottom;
 
     public DividerItemDecoration(Context context, int color) {
         this(context, color, VERTICAL_LIST);
@@ -47,6 +51,13 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             throw new IllegalArgumentException("invalid orientation");
         }
         mOrientation = orientation;
+    }
+
+    public void setExtraMargin(int left, int right, int top, int bottom) {
+        this.mExtraMarginLeft = left;
+        this.mExtraMarginRight = right;
+        this.mExtraMarginTop = top;
+        this.mExtraMarginBottom = bottom;
     }
 
     public void setTopAndBottomLine(boolean headLine, int headLineSize) {
@@ -78,35 +89,35 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     protected void drawHorizontal(Canvas c, RecyclerView parent) {
-        final int top = parent.getPaddingTop();
-        final int bottom = parent.getHeight() - parent.getPaddingBottom();
+        final int top = parent.getPaddingTop() + this.mExtraMarginTop;
+        final int bottom = parent.getHeight() - parent.getPaddingBottom() + this.mExtraMarginBottom;
 
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-            final int right = child.getRight() + params.rightMargin - mSize;
+            final int right = child.getRight() + params.rightMargin + this.mExtraMarginRight - mSize;
             c.drawLine(right, top, right, bottom, mPaint);
             if (i == 0 && mHeadLine) {
-                final int left = child.getLeft() + params.topMargin + mHeadSize;
+                final int left = child.getLeft() + params.topMargin + this.mExtraMarginLeft + mHeadSize;
                 c.drawLine(left, top, right, top, mPaint);
             }
         }
     }
 
     public void drawVertical(Canvas c, RecyclerView parent) {
-        final int left = parent.getPaddingLeft();
-        final int right = parent.getWidth() - parent.getPaddingRight();
+        final int left = parent.getPaddingLeft() + this.mExtraMarginLeft;
+        final int right = parent.getWidth() - parent.getPaddingRight() - this.mExtraMarginRight;
 
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-            final int bottom = child.getBottom() + params.bottomMargin - mSize;
+            final int bottom = child.getBottom() + params.bottomMargin + this.mExtraMarginBottom - mSize;
 
             c.drawLine(left, bottom, right, bottom, mPaint);
             if (i == 0 && mHeadLine) {
-                final int top = child.getTop() + params.topMargin + mHeadSize;
+                final int top = child.getTop() + params.topMargin + this.mExtraMarginTop + mHeadSize;
                 c.drawLine(left, top, right, top, mPaint);
             }
         }

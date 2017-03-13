@@ -61,6 +61,7 @@ public class LePayChannelListAdapter extends RecyclerView.Adapter<LePayChannelLi
         protected TextView mTitle;
         protected TextView mSubTitle;
         protected TextView mInfo;
+        protected View mCoverView;
         protected LePayTagFlowLayout mTagsContainer;
 
         public ViewHolder(View v) {
@@ -74,6 +75,7 @@ public class LePayChannelListAdapter extends RecyclerView.Adapter<LePayChannelLi
             mSubTitle = (TextView) itemView.findViewById(R.id.lepay_channel_sub_title_tv);
             mInfo = (TextView) itemView.findViewById(R.id.lepay_channel_info_tv);
             mTagsContainer = (LePayTagFlowLayout) itemView.findViewById(R.id.lepay_channel_tag_container);
+            mCoverView = itemView.findViewById(R.id.cover_view);
         }
 
         public void setData(LePayChannelBean channelBean) {
@@ -105,13 +107,13 @@ public class LePayChannelListAdapter extends RecyclerView.Adapter<LePayChannelLi
                         mTagsContainer.addView(child);
                     }
                 }
+                channelBean.setActive(LePayConstants.PAY_ACTIVE.UNAVAILABLE);
                 if (channelBean.getChannelId() == LePayConstants.PAY_CHANNEL.CHANNEL_Π) {
                     // 判断ypa状态
                     if (LePayConstants.YOUΠ_ACTIVE.NOTACTIVATION_CAN_APPLY == channelBean.getChannelStatus()
                             || LePayConstants.YOUΠ_ACTIVE.NOTACTIVATION_CANNOT_APPLY == channelBean.getChannelStatus()) {
                         // 未激活状态，显示未激活
                         mInfo.setText(R.string.lepay_ypa_notactivation);
-                        // TODO 未激活状态需要显示成灰色背景
                     } else {
                         if (!TextUtils.isEmpty(channelBean.getAvailableLimit())) {
                             String info = String.format(itemView.getContext().getString(R.string.lepay_payment_available_limit_str), channelBean.getAvailableLimit());
@@ -122,8 +124,11 @@ public class LePayChannelListAdapter extends RecyclerView.Adapter<LePayChannelLi
                 } else {
                     mInfo.setVisibility(View.GONE);
                 }
-                if (channelBean.getActive() == LePayConstants.PAY_ACTIVE.UNAVAILABLE) {
-                    // TODO 置灰条目背景
+                if (channelBean.getActive() == LePayConstants.PAY_ACTIVE.AVAILABLE) {
+                    mCoverView.setVisibility(View.GONE);
+                } else {
+                    // 条目置灰
+                    mCoverView.setVisibility(View.VISIBLE);
                 }
             }
         }

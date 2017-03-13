@@ -4,18 +4,18 @@
     <string name="pay_network_error">"Wallet can't connect network"</string>
     <string name="pay_network_error_sure">OK</string>
     <string name="pay_no_network">"No network available. Please connect to a network and try again."</string>
-    <string name="pay_no_network_str">网络连接失败</string>
+    <string name="pay_no_network_str">The network connection failed</string>
 
     <string name="lepay_channel_cancel">Cancel</string>
     <string name="lepay_payment_center">Payment center</string>
-    <string name="lepay_payment_price_str">支付金额：￥%s</string>
-    <string name="lepay_payment_available_limit_str">可用额度￥%s</string>
-    <string name="lepay_channel_list_data_error">加载失败，请重试</string>
-    <string name="lepay_payment_money_insufficient">可用额度不足</string>
-    <string name="lepay_payment_unavailable">不可用</string>
-    <string name="lepay_repayment">重新支付</string>
-    <string name="lepay_fail">支付失败</string>
-    <string name="lepay_ypa_notactivation">未激活</string>
+    <string name="lepay_payment_price_str">Payment amount：￥%s</string>
+    <string name="lepay_payment_available_limit_str">Available amount￥%s</string>
+    <string name="lepay_channel_list_data_error">Loading failed, please try again</string>
+    <string name="lepay_payment_money_insufficient">Insufficient amount available</string>
+    <string name="lepay_payment_unavailable">Unavailable, please contact customer service.</string>
+    <string name="lepay_repayment">Pay again</string>
+    <string name="lepay_fail">Payment failed</string>
+    <string name="lepay_ypa_notactivation">Inactivated</string>
     <string name="lepay_user_select_pay_result_title">Has the order been paid for?</string>
     <string name="lepay_user_select_pay_result_success">Paid</string>
     <string name="lepay_user_select_pay_result_failed">Not paid</string>

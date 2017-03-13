@@ -12,7 +12,7 @@
     <string name="lepay_payment_available_limit_str">可用额度￥%s</string>
     <string name="lepay_data_error">加载失败，请重试</string>
     <string name="lepay_payment_money_insufficient">可用额度不足</string>
-    <string name="lepay_payment_unavailable">不可用</string>
+    <string name="lepay_payment_unavailable">不可用，请联系客服</string>
     <string name="lepay_repayment">重新支付</string>
     <string name="lepay_fail">支付失败</string>
     <string name="lepay_ypa_notactivation">未激活</string>
