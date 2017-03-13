@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="钱包运行环境配置"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="钱包(com.letv.walletbiz)"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_walletbiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="性别">
+
+        <RadioButton
+            android:id="@+id/develop_walletbiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试环境"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/product_walletbiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生产环境"></RadioButton>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="LePay(com.letv.wallet)"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="性别">
+
+        <RadioButton
+            android:id="@+id/develop_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试环境"></RadioButton>
+
+        <RadioButton
+            android:id="@+id/product_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生产环境"></RadioButton>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Click Me"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/msg_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:visibility="gone" />
+</LinearLayout>

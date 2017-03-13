@@ -1,1 +1,1 @@
-include ':LetvWalletCommon', ':LetvWallet', ':LetvWallet/library/LeuiRecommend', ':LetvWallet/library/letvwalletsigncheck', ':LePay', ':LePay/library/letvpaysigncheck', ':LePay/library/secure'
+include ':LetvWalletCommon', ':LetvWallet', ':LetvWallet/library/LeuiRecommend', ':LetvWallet/library/letvwalletsigncheck', ':LePay', ':LePay/library/letvpaysigncheck', ':LePay/library/secure', ':tools/EnvSetting'

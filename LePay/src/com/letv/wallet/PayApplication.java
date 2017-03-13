@@ -53,7 +53,7 @@ public class PayApplication extends BaseApplication {
         if(targetAPPContext!=null){
             SharedPreferences mPreferences = targetAPPContext.getSharedPreferences("wallet_pay", Context.MODE_PRIVATE);
             if(mPreferences!=null){
-                boolean result = mPreferences.getBoolean("wallet", true);
+                boolean result = mPreferences.getBoolean("wallet", false);
                 LogHelper.d("PayApplication Env is "+ result);
                 EnvUtil.getInstance().setLePayTest(result);
             }
