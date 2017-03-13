@@ -377,23 +377,33 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         startActivity(intent);
     }
 
+    private boolean checkAccountStatus(){
+        if (!hasCreateAccount && !ACCOUNT_FAIL_REASON_PHONE_NULL) { //未开户，手机号不为空
+            Toast.makeText(this, R.string.account_card_unavailable, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (ACCOUNT_FAIL_REASON_PHONE_NULL) { //未开户，手机号为空，绑手机号
+            Toast.makeText(this, R.string.account_card_no_phone, Toast.LENGTH_SHORT).show();
+            jumpWeb(AccountConstant.JTYPE_SSO_BIND_MOBILE);
+            ACCOUNT_FAIL_REASON_PHONE_NULL = false;
+            return false;
+        }
+        if (!hasVerifyAccount) {//未实名
+            startActivity(ActionUtils.newIntent(this, AccountVerifyActivity.class, Action.EVENT_PROP_FROM_ACCOUNT_CARD_LIST));
+            return false;
+        }
+        return true;
+    }
+
     private void checkBindCard(){
         Action.uploadCustom(EventType.Add, Action.ACCOUNT_CARD_LIST_CARD_ADD);
 
         isDataValidate = false ; //返回 更新数据
 
-        if (ACCOUNT_FAIL_REASON_PHONE_NULL) {
-            //无手机号开户失败, 跳转到绑定手机号H5
-            jumpWeb(AccountConstant.JTYPE_SSO_BIND_MOBILE);
-            ACCOUNT_FAIL_REASON_PHONE_NULL = false;
-            return;
+        if (checkAccountStatus()) {
+            // 已开户 & 已实名
+            jumpWeb(AccountConstant.JTYPE_ADD_CARD);
         }
-        if (!hasVerifyAccount) {
-            startActivity(ActionUtils.newIntent(this, AccountVerifyActivity.class, Action.EVENT_PROP_FROM_ACCOUNT_CARD_LIST));
-            return;
-        }
-        // 已开户 & 已实名
-        jumpWeb(AccountConstant.JTYPE_ADD_CARD);
     }
 
     private void checkEmptyPage(String primaryText){

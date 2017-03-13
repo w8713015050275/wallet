@@ -31,5 +31,6 @@
     <string name="account_card_item_click_tip">The operation failed. Please refer to Help.</string>
     <string name="account_verify_sms_send_fail">The SMS code is getting too frequent, please try again later</string>
     <string name="account_card_list_empty">No card</string>
-
+    <string name="account_card_no_phone">The service needs to bind the phone number</string>
+    <string name="account_card_unavailable">Failed to open account, please contact customer service.</string>
 </resources>

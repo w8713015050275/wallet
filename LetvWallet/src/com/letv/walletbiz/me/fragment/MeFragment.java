@@ -441,6 +441,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         if (ACCOUNT_FAIL_REASON_PHONE_NULL) { //未开户，手机号为空，绑手机号
             Toast.makeText(getActivity(), R.string.me_create_account_no_phone, Toast.LENGTH_SHORT).show();
             AccountUtils.goToBindMobile(getActivity());
+            ACCOUNT_FAIL_REASON_PHONE_NULL = false;
             return false;
         }
         return true;
