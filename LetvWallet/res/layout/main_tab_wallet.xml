@@ -9,7 +9,7 @@
         android:id="@+id/wallet_top_layout"
         android:layout_marginTop="6dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="74dip"
         android:background="@drawable/rounded_rectangle_white"
         android:paddingBottom="12dp"
         android:paddingTop="10dp"

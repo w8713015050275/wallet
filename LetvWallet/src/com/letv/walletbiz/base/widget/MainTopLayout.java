@@ -3,13 +3,10 @@ package com.letv.walletbiz.base.widget;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.letv.wallet.account.LePayAccountManager;
-import com.letv.wallet.account.LePayCommonCallback;
-import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.NetworkHelper;
@@ -59,10 +56,6 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
     private MainTopButton addButton() {
         MainTopButton button = new MainTopButton(context);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1);
-        //button居中展示
-        button.setGravity(Gravity.CENTER);
-        button.setButtonTextColor(context.getColor(R.color.main_top_button_color));
-        button.setTextViewColor(context.getColor(R.color.main_top_textview_color));
         addView(button, params);
         return button;
     }
@@ -199,76 +192,79 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
      * 从lepay获取关于银行卡的数据
      */
     public void loadAccountData() {
+        loadLelehuaAccountData();
         if (!isloadAccountData) {
             if (AccountHelper.getInstance().isLogin(context) && NetworkHelper.isNetworkAvailable()) {
                 isloadAccountData = true;
                 setBankButtonClick(false);
-                String qType = null;
-                if (checkCreateAccount(false) && checkVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
-                    qType = AccountConstant.QTYPE_CARD;
-                } else {
-                    qType = AccountConstant.QTYPE_ALL; //查询用户状态
-                }
-                queryAccount(qType);
-            }
-        }
-    }
+                LePayAccountManager.getInstance().bankQueryAccountInfo(new LePayAccountManager.QueryAccountResult<AccountInfo>() {
 
-    private boolean checkCreateAccount(boolean isForceCreate) {
-        boolean hasCreateAccount = LePayAccountManager.hasCreatedAccount();
-        if (!hasCreateAccount && isForceCreate) {
-            LePayAccountManager.getInstance().createAccount(new LePayCommonCallback(){
+                    @Override
+                    public void queryAccountSuccess(AccountInfo result) {
+                        MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK);
+                        if (null != button) {
+                            button.setClickable(true);
+                            button.setNumber(result);
+                            isloadAccountData = false;
+                        } else {
 
-                @Override
-                public void onSuccess(Object o) {
-                    setBankButtonClick(true);
-                    isloadAccountData = false;
-                }
-
-                @Override
-                public void onError(int errorCode, String errorMsg) {
-                    setBankButtonClick(true);
-                    isloadAccountData = false;
-                }
-            }
-            ); //默认开一次户
-        }
-        return hasCreateAccount;
-    }
-
-    private boolean checkVerifyAccount() {
-        boolean hasVerifyAccount = LePayAccountManager.hasVerifyAccount();
-        return hasVerifyAccount;
-    }
-
-    private void queryAccount(final String qType) {
-        LePayAccountManager.getInstance().queryAccount(qType, new LePayCommonCallback<AccountInfo>() {
-
-            @Override
-            public void onSuccess(AccountInfo accountInfo) {
-
-                MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK);
-                if (null != button) {
-                    if (checkCreateAccount(true)) {
-                        button.setClickable(true);
-                        button.setNumber(accountInfo);
-                        isloadAccountData = false;
-                    }else{
-
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onError(int errorCode, String errorMsg) {
-                //发生错误时，不做任何改变
-                isloadAccountData = false;
-                setBankButtonClick(true);
+                    @Override
+                    public void queryAccountError() {
+                        isloadAccountData = false;
+                        setBankButtonClick(true);
+                    }
+                });
             }
-        });
+        }
     }
 
-    private void setBankButtonClick(boolean click){
+    /**
+     * 从lepay获取关于乐乐花的数据
+     */
+    //因为本地和服务器的返回都会执行，不能查询两次
+    private boolean isloadLelehuaAccountData = false;
+
+    public void loadLelehuaAccountData() {
+        if (!isloadLelehuaAccountData) {
+            if (AccountHelper.getInstance().isLogin(context) && NetworkHelper.isNetworkAvailable()) {
+                isloadLelehuaAccountData = true;
+                setLelehuaButtonClick(false);
+                LePayAccountManager.getInstance().lelehuaQueryAccountInfo(new LePayAccountManager.QueryAccountResult<AccountInfo>() {
+
+                    @Override
+                    public void queryAccountSuccess(AccountInfo result) {
+                        MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_LELEHUA);
+                        if (null != button) {
+                            button.setClickable(true);
+                            button.setNumber(result);
+                            isloadLelehuaAccountData = false;
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void queryAccountError() {
+                        isloadLelehuaAccountData = false;
+                        setLelehuaButtonClick(true);
+                    }
+                });
+            }
+        }
+    }
+
+
+    private void setLelehuaButtonClick(boolean click) {
+        MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_LELEHUA);
+        if (null != button) {
+            button.setClickable(click);
+        }
+    }
+
+    private void setBankButtonClick(boolean click) {
         MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK);
         if (null != button) {
             button.setClickable(click);

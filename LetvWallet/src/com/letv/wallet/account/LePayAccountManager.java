@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 
 import com.letv.wallet.account.aidl.v1.AccountConstant;
+import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DigestUtils;
@@ -150,5 +151,131 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
         for (LePayCommonCallback callback : callbacks) {
             callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_KILLED, null);
         }
+    }
+
+    private boolean checkCreateAccount(boolean isForceCreate, final CreateAccountResult createAccountResult) {
+        boolean hasCreateAccount = hasCreatedAccount();
+        if (!hasCreatedAccount() && isForceCreate) {
+            createAccount(new LePayCommonCallback() {
+
+                              @Override
+                              public void onSuccess(Object o) {
+                                  if (null != createAccountResult) {
+                                      createAccountResult.createAccountSuccess();
+                                  }
+                              }
+
+                              @Override
+                              public void onError(int errorCode, String errorMsg) {
+                                  if (null != createAccountResult) {
+                                      createAccountResult.createAccountError();
+                                  }
+                              }
+                          }
+            ); //默认开一次户
+        }
+        return hasCreateAccount;
+    }
+
+    public void bankQueryAccountInfo(final QueryAccountResult queryAccountResult) {
+        String qType = null;
+        if (checkCreateAccount(false, null) && hasVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
+            qType = AccountConstant.QTYPE_CARD;
+        } else {
+            qType = AccountConstant.QTYPE_ALL; //查询用户状态
+        }
+        queryAccount(qType, new LePayCommonCallback<AccountInfo>() {
+
+            @Override
+            public void onSuccess(AccountInfo accountInfo) {
+                if (checkCreateAccount(true, new CreateAccountResult() {
+
+                    @Override
+                    public void createAccountSuccess() {
+                        if (null != queryAccountResult) {
+                            queryAccountResult.queryAccountSuccess(null);
+                        }
+                    }
+
+                    @Override
+                    public void createAccountError() {
+                        if (null != queryAccountResult) {
+                            queryAccountResult.queryAccountError();
+                        }
+                    }
+                })) {
+                    if (null != queryAccountResult) {
+                        queryAccountResult.queryAccountSuccess(accountInfo);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+                //发生错误时，不做任何改变
+                if (null != queryAccountResult) {
+                    queryAccountResult.queryAccountError();
+                }
+            }
+        });
+    }
+
+    public interface QueryAccountResult<T> {
+        void queryAccountSuccess(T result);
+
+        void queryAccountError();
+    }
+
+    public interface CreateAccountResult {
+        void createAccountSuccess();
+
+        void createAccountError();
+    }
+
+    public void lelehuaQueryAccountInfo(final QueryAccountResult queryAccountResult) {
+        String qType = null;
+        if (checkCreateAccount(false, null)) { //用户已开户并已实名， 直接查询卡列表
+            qType = AccountConstant.QTYPE_LELEHUA;
+        } else {
+            qType = AccountConstant.QTYPE_ALL; //查询用户状态
+        }
+        queryAccount(qType, new LePayCommonCallback<AccountInfo>() {
+
+            @Override
+            public void onSuccess(AccountInfo accountInfo) {
+                if (checkCreateAccount(true, new CreateAccountResult() {
+
+                    @Override
+                    public void createAccountSuccess() {
+                        if (null != queryAccountResult) {
+                            queryAccountResult.queryAccountSuccess(null);
+                        }
+                    }
+
+                    @Override
+                    public void createAccountError() {
+                        if (null != queryAccountResult) {
+                            queryAccountResult.queryAccountError();
+                        }
+                    }
+                })) {
+                    //信息已经获取完成，再次获取跳转地址
+
+                    if (null != queryAccountResult) {
+                        queryAccountResult.queryAccountSuccess(accountInfo);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+                //发生错误时，不做任何改变
+                if (null != queryAccountResult) {
+                    queryAccountResult.queryAccountError();
+                }
+            }
+        });
     }
 }

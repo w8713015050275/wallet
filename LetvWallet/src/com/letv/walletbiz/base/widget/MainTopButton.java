@@ -10,25 +10,26 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.common.util.AccountHelper;
-import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.walletbiz.MainActivity;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
 import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.coupon.activity.CouponListActivity;
 import com.letv.walletbiz.main.bean.WalletTopListBean;
+import com.letv.walletbiz.me.activity.AccountWebActivity;
+import com.letv.walletbiz.me.utils.AccountUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.image.ImageOptions;
@@ -39,9 +40,22 @@ import java.io.IOException;
 /**
  * Created by changjiajie on 16-8-30.
  */
-public class MainTopButton extends LinearLayout implements View.OnClickListener {
-    private Button button;
+public class MainTopButton extends RelativeLayout implements View.OnClickListener {
+
+    /**
+     * 底部textview
+     */
     private TextView textView;
+
+    /**
+     * 上边按钮位
+     */
+    private ImageView imageView;
+
+    /**
+     * 数字栏位
+     */
+    private TextView numberView;
 
     /**
      * 定义控件的样式
@@ -89,7 +103,7 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
     private float buttonTextSize;
 
 
-    private static final String TOP_KEY_LELEHUA = "lelehua";
+    public static final String TOP_KEY_LELEHUA = "lelehua";
     public static final String TOP_KEY_CARD = "card";
     public static final String TOP_KEY_BANK = "bank";
 
@@ -133,41 +147,42 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
 
     private void init(Context context) {
         this.context = context;
-        setOrientation(LinearLayout.VERTICAL);
-        button = new Button(context);
         textView = new TextView(context);
-        button.setBackground(null);
+        textView.setId(generateViewId());
+        RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        bottomParams.topMargin = distance;
+        bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        bottomParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        textView.setTextColor(context.getColor(R.color.main_top_textview_color));
+        addView(textView, bottomParams);
 
-        addView(button, new LinearLayout.LayoutParams(133, 144));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        params.topMargin = distance;
-        addView(textView, params);
+
+        imageView = new ImageView(context);
+        imageView.setBackground(null);
+        RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(133, 133);
+        imageParams.addRule(RelativeLayout.ABOVE, textView.getId());
+        imageParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        addView(imageView, imageParams);
 
 
-        //button.setTextColor(buttonTextColor);
-        button.setTextSize(TypedValue.COMPLEX_UNIT_PX,60);
-        button.setTypeface(Typeface.DEFAULT_BOLD);
+        numberView = new TextView(context);
+        RelativeLayout.LayoutParams numberParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        numberParams.addRule(RelativeLayout.ABOVE, textView.getId());
+        numberParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        //初始化的时候隐藏此控件
+        numberView.setVisibility(View.GONE);
+        numberView.setGravity(Gravity.CENTER);
+        numberView.setTextColor(context.getColor(R.color.main_top_button_color));
+        addView(numberView, numberParams);
 
-        //textView.setTextColor(textColor);
-        textView.setTextSize(textSize);
+        numberView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        numberView.setTypeface(Typeface.DEFAULT_BOLD);
+
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setTypeface(Typeface.create("Roboto-Bold", Typeface.NORMAL));
         this.setOnClickListener(this);
 
     }
-
-//    public static int px2dip(Context context, float pxValue) {
-//        final float scale = context.getResources().getDisplayMetrics().density;
-//        return (int) (pxValue / scale + 0.5f);
-//    }
-//
-//    public static int dip2px(Context context, float dipValue) {
-//        final float scale = context.getResources().getDisplayMetrics().density;
-//        return (int) (dipValue * scale + 0.5f);
-//    }
-//
-//    public static int px2sp(Context context, float pxValue) {
-//        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-//        return (int) (pxValue / fontScale + 0.5f);
-//    }
 
     /**
      * 拦截点击事件
@@ -186,6 +201,16 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
             return;
         } else {
             if (this.bean.name.equals(TOP_KEY_LELEHUA)) {
+                if (null != accountInfo && null != accountInfo.lelehua) {
+                    if (AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity) context, null)) {
+                        String jType = AccountUtils.getLeLeHuaJtype(AccountUtils.LELEHUA_HOME, accountInfo.lelehua.active_status);
+                        Intent intent = new Intent(context, AccountWebActivity.class);
+                        if (!TextUtils.isEmpty(jType)) {
+                            intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
+                        }
+                        context.startActivity(intent);
+                    }
+                }
                 Action.uploadClick(Action.QUICK_ENTRY_LELEHUA_CLICK);
             } else if (this.bean.name.equals(TOP_KEY_CARD)) {
                 Action.uploadExposeTab(Action.WALLET_HOME_COUPON);
@@ -200,9 +225,9 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
                         intent.putExtra("LePayCardBinInfo", accountInfo.cardList);
                     }
                     context.startActivity(intent);
-                }else {
+                } else {
                     final Intent intent = new Intent("com.letv.wallet.cardlist");
-                    AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity)context, new AccountManagerCallback() {
+                    AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity) context, new AccountManagerCallback() {
 
                         @Override
                         public void run(AccountManagerFuture future) {
@@ -226,15 +251,12 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
 
     }
 
-    private Drawable dataDrawable;
-
     public void setData(WalletTopListBean.WalletTopBean currentBean) {
         bean = currentBean;
         setButtonType(currentBean);
         if (!TextUtils.isEmpty(currentBean.icon) && TextUtils.isDigitsOnly(currentBean.icon)) {
             //如果是假数据，资源来自本地
-            dataDrawable = context.getDrawable(Integer.parseInt(currentBean.icon));
-            button.setBackground(dataDrawable);
+            imageView.setBackground(context.getDrawable(Integer.parseInt(currentBean.icon)));
         } else {
             ImageOptions options = new ImageOptions.Builder().build();
             xmain.image().loadDrawable(currentBean.icon, options, new Callback.CommonCallback<Drawable>() {
@@ -242,9 +264,8 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
                 public void onSuccess(Drawable result) {
                     if (accountInfo != null && accountInfo.cardList != null && accountInfo.cardList.length > 0) {
                         //此时可能已经获取到银行卡的数量，不需要加载默认图片
-                    }else{
-                        dataDrawable = result;
-                        button.setBackground(result);
+                    } else {
+                        imageView.setBackground(result);
                     }
                 }
 
@@ -282,7 +303,16 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
     public void setNumber(Object info) {
         switch (type) {
             case 0:
-                //乐乐花暂时不做
+                accountInfo = (AccountInfo) info;
+                if (accountInfo != null && accountInfo.lelehua != null) {
+                    if (TextUtils.isEmpty(accountInfo.lelehua.available_limit)) {
+                        numberView.setText(String.format(context.getString(R.string.main_top_lelehua_amount), "0"));
+                    } else {
+                        numberView.setText(String.format(context.getString(R.string.main_top_lelehua_amount), accountInfo.lelehua.available_limit));
+                    }
+                    numberView.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(View.GONE);
+                }
                 break;
             case 1:
                 //卡全包不做更改
@@ -291,18 +321,10 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
                 //强制转化，不知道传递的会是什么值
                 accountInfo = (AccountInfo) info;
                 if (accountInfo != null && accountInfo.cardList != null && accountInfo.cardList.length > 0) {
-                    button.setText("" + accountInfo.cardList.length);
-                    button.setBackground(null);
+                    numberView.setText("" + accountInfo.cardList.length);
+                    numberView.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(View.GONE);
                 }
-//                else {
-//
-//                    if (accountInfo.cardList == null) {
-//                        accountInfo.cardList = new AccountInfo.CardBin[1];
-//                        AccountInfo.CardBin bin = new AccountInfo.CardBin();
-//                        accountInfo.cardList[0] = bin;
-//                    }
-//
-//                }
                 break;
             default:
                 break;
@@ -311,19 +333,9 @@ public class MainTopButton extends LinearLayout implements View.OnClickListener 
     }
 
     public void resetDrawable() {
-        if (null != dataDrawable) {
-            button.setBackground(dataDrawable);
-        } else {
-            button.setBackground(null);
-        }
-        button.setText("");
+        imageView.setVisibility(View.VISIBLE);
+        numberView.setVisibility(View.GONE);
+        numberView.setText("");
     }
 
-    public void setTextViewColor(int color) {
-        textView.setTextColor(color);
-    }
-
-    public void setButtonTextColor(int color) {
-        button.setTextColor(color);
-    }
 }

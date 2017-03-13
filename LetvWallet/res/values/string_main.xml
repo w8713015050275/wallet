@@ -7,4 +7,5 @@
     <string name="main_recommend_error_no_network">No network connected. Please check your network settings.</string>
     <string name="main_recommend_error_network">Server connection exception. Please try again later.</string>
     <string name="main_recommend_no_data">No content</string>
+    <string name="main_top_lelehua_amount">￥%1$S</string>
 </resources>
