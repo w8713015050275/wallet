@@ -186,7 +186,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     if (couponBean != null) {
                         mSelectedCoupon = true;
                     }
-                    setData(couponBean, couponListCount);
+                    // 需要记录优惠券id
+                    setData(couponBean, couponListCount, true);
                 }
                 break;
             case PAY_REQUEST_CODE:
@@ -320,19 +321,21 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         }
     }
 
-    public void setData(CouponBean couponBean, int couponlistCount) {
+    public void setData(CouponBean couponBean, int couponlistCount, boolean recordCouponId) {
         if (couponBean == null) {
-            mUseUcouponId = 0;
+            if (recordCouponId) {
+                mUseUcouponId = 0;
+            }
             mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), mMobileProduct.getPrice()));
             setDiscountPrice(zero_f);
-            setCouponListCount(0);
             mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), mMobileProduct.getPrice()));
             mMobileProduct.setRealPrice(mMobileProduct.getPrice());
         } else {
-            mUseUcouponId = couponBean.ucoupon_id;
+            if (recordCouponId) {
+                mUseUcouponId = couponBean.ucoupon_id;
+            }
             mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.getTotalPrice()));
             setDiscountPrice(couponBean.getDiscountPrice());
-            setCouponListCount(couponlistCount);
             mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.getRealPrice()));
             try {
                 mMobileProduct.setRealPrice(String.valueOf(couponBean.getRealPrice())); // 更新 price 为实付金额
@@ -340,6 +343,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                 e.printStackTrace();
             }
         }
+        setCouponListCount(couponlistCount);
         mCouponV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -380,10 +384,6 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
         int couponlistCount = 0;
         mUseUcouponId = 0;
         if (mCouponListBean != null && mCouponListBean.list != null && mCouponListBean.list.length > 0) {
-            couponBean = mCouponListBean.list[0];
-            if (couponBean != null) {
-                mUseUcouponId = couponBean.ucoupon_id;
-            }
             couponlistCount = mCouponListBean.list.length;
             if (mUcouponId != 0) {
                 for (int i = 0; i < mCouponListBean.list.length; i++) {
@@ -394,7 +394,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                 }
             }
         }
-        setData(couponBean, couponlistCount);
+        // 不记录优惠券ID
+        setData(couponBean, couponlistCount, false);
     }
 
     @Override
@@ -414,8 +415,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     }
 
     private void loadData() {
-        if (mSelectedCoupon || mMobileProduct == null) return;
         if (isNetworkAvailable()) {
+            if (mSelectedCoupon || mMobileProduct == null) return;
             mIsFirstLoadData = false;
             queryCouponInfo(mMobileProduct.getSkuSN());
         } else {
@@ -484,7 +485,8 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
     }
 
     private void queryCouponInfo(String skuSN) {
-        setData(null, 0);
+        // 不记录优惠券ID
+        setData(null, 0, false);
         showLoadingView();
         String uToken = AccountHelper.getInstance().getToken(MobileOrderConfirmationActivity.this);
         mCouponAsyncT = new CouponListTask(MobileOrderConfirmationActivity.this, this, uToken, skuSN);

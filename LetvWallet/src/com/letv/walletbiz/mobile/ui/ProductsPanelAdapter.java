@@ -166,13 +166,13 @@ public class ProductsPanelAdapter extends RecyclerView.Adapter<ProductsPanelAdap
         }
 
         public void setData(ProductBean.product pItem) {
-            String nameStr = pItem.getProductNameValue();
+            float content = pItem.getContent();
+            String nameStr = String.valueOf(content);
             int uStrId = mFeeOrFlow == MobileConstant.PRODUCT_TYPE.MOBILE_FLOW ?
                     R.string.label_mobile_product_unit_flow : R.string.label_mobile_product_unit_fee;
             if (mFeeOrFlow == MobileConstant.PRODUCT_TYPE.MOBILE_FLOW) {
-                float nameValue = Integer.valueOf(nameStr);
-                if (nameValue >= MobileConstant.NUMBER.MTG) {
-                    nameStr = String.valueOf(new DecimalFormat("#.##").format(nameValue / MobileConstant.NUMBER.MTG));
+                if (content >= MobileConstant.NUMBER.MTG) {
+                    nameStr = String.valueOf(new DecimalFormat("#.##").format(content / MobileConstant.NUMBER.MTG));
                     uStrId = R.string.label_mobile_product_unit_g_flow;
                 }
             }

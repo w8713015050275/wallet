@@ -35,6 +35,7 @@ public class ProductBean implements LetvBaseBean {
         public int product_id;
         public float orig_price;
         public float price;
+        public float content;
         public String product_name;
         public String sku_sn;
 
@@ -50,27 +51,13 @@ public class ProductBean implements LetvBaseBean {
             return String.format(MobileConstant.DPRODUCT.FORMAT_PRICE, price);
         }
 
-        public String getProductNameValue() {
-            return getIntegerInString(product_name);
-        }
-
         public String getProductName() {
             return product_name;
         }
 
-        private String getIntegerInString(String str) {
-            String out = "";
-
-            if (str != null && !"".equals(str)) {
-                for (int i = 0; i < str.length(); i++) {
-                    if (str.charAt(i) >= 48 && str.charAt(i) <= 57) {
-                        out += str.charAt(i);
-                    }
-                }
-            }
-            return out;
+        public float getContent(){
+            return content;
         }
-
     }
 
 }
