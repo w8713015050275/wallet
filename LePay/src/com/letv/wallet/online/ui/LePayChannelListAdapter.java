@@ -107,7 +107,6 @@ public class LePayChannelListAdapter extends RecyclerView.Adapter<LePayChannelLi
                         mTagsContainer.addView(child);
                     }
                 }
-                channelBean.setActive(LePayConstants.PAY_ACTIVE.UNAVAILABLE);
                 if (channelBean.getChannelId() == LePayConstants.PAY_CHANNEL.CHANNEL_Π) {
                     // 判断ypa状态
                     if (LePayConstants.YOUΠ_ACTIVE.NOTACTIVATION_CAN_APPLY == channelBean.getChannelStatus()
