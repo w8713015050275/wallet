@@ -414,7 +414,10 @@
             android:name=".member.activity.MemberAgreementActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MemberTheme" />
-
+        <activity
+            android:name="com.letv.wallet.common.activity.BaseWebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Arrow" />
         <!--letv Push -->
         <service android:name=".push.LetvPushIntentService" />
 

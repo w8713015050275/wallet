@@ -363,6 +363,7 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
 
     private boolean checkUrl(WebView view, String url) {
         LogHelper.d("[" + TAG + "]shouldOverrideUrlLoading url is: " + url);
+        //url = "intent://wallet?newPage=true&url=" + url;
         if (!url.startsWith("http")) {
             LogHelper.d("[" + TAG + "]shouldOverrideUrlLoading go browser");
             Intent intent = null;
@@ -377,6 +378,22 @@ public class BaseWebViewActivity extends BaseFragmentActivity {
                 } catch (Exception e) {
                     LogHelper.d(e.toString());
                     intent = null;
+                }
+                //如果希望在新的界面打开一个网页走下边的逻辑
+                if (intent != null) {
+                    Uri uri = intent.getData();
+                    if (uri != null) {
+                        String newPage = uri.getQueryParameter("newPage");
+                        String realUrl = uri.getQueryParameter("url");
+                        if (uri.getHost().equals("wallet") && !TextUtils.isEmpty(newPage) && !TextUtils.isEmpty(realUrl) && Boolean.valueOf(newPage)) {
+                            Intent pageIntent = new Intent();
+                            pageIntent.setClass(this, BaseWebViewActivity.class);
+                            pageIntent.putExtra(CommonConstants.EXTRA_URL, realUrl);
+                            pageIntent.putExtra(CommonConstants.EXTRA_TITLE_NAME, mTitle);
+                            startActivity(pageIntent);
+                            return true;
+                        }
+                    }
                 }
             }
             if (overrideUrlLoading(url)) {
