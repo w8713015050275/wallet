@@ -1,13 +1,18 @@
 package com.letv.wallet.account.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +42,7 @@ import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
+import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
@@ -65,6 +71,12 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
 
     private String from;
 
+    public static final String EXTRA_ACTION_BAR_HAS_NAVIGATION= "hasNavigationIcon";
+    public static final String EXTRA_ACTION_BAR_TITLE_COLOR = "titleTextColor";
+    public static final String EXTRA_ACTION_BAR_BACKGROUND_COLOR = "colorActionBar";
+    public static final String EXTRA_STATUS_BAR_BACKGROUND_COLOR = "colorStatusBar";
+    public static final String EXTRA_STATUS_BAR_ICON_COLOR = "colorStatusBarIcon";
+    public static final String EXTRA_MENU_HAS_SKIP = "allowSkip";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +84,10 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
 
         if (!AccountHelper.getInstance().isLogin(this)) {
             finish(); //未登录返回
+        }
+        int colorStatusBarIcon = getIntent().getIntExtra(EXTRA_STATUS_BAR_ICON_COLOR, 0);
+        if (colorStatusBarIcon == 1) {
+            setTheme(R.style.AppTheme_WebView);
         }
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
         setContentView(R.layout.account_verify_activity);
@@ -82,6 +98,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     }
 
     private void initView() {
+        initActionBar();
         editRealName = (RealNameEditText) findViewById(R.id.editRealName);
         editRealName.setCallback(this);
         editIdNo = (IdNoEditText) findViewById(R.id.editIdNo);
@@ -108,6 +125,56 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         tvAgreement.setVisibility(View.VISIBLE);
         tvAgreement.setText(str);
         tvAgreement.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    private void initActionBar(){
+        Toolbar toolbar = getToolbar();
+        Drawable iconNavigation = null;
+        if (getIntent().getBooleanExtra(EXTRA_ACTION_BAR_HAS_NAVIGATION, true)) {
+            iconNavigation = getDrawable(R.drawable.ic_wallet_action_back);
+        }
+        toolbar.setNavigationIcon(iconNavigation);
+        int titleColor = parseColor(getIntent().getStringExtra(EXTRA_ACTION_BAR_TITLE_COLOR));
+        toolbar.setTitleTextColor( titleColor == -1 ? getColor(R.color.wallet_actionBar_titleTv_color) : titleColor);
+        int colorActionBar = parseColor(getIntent().getStringExtra(EXTRA_ACTION_BAR_BACKGROUND_COLOR));
+        toolbar.setBackgroundColor(colorActionBar == -1 ? getColor(R.color.wallet_statusbar_color) : colorActionBar);
+        int colorStatusBar = parseColor(getIntent().getStringExtra(EXTRA_STATUS_BAR_BACKGROUND_COLOR));
+        getWindow().setStatusBarColor(colorStatusBar == -1 ? getColor(R.color.wallet_statusbar_color) : colorStatusBar);
+        if (getIntent().getBooleanExtra(EXTRA_MENU_HAS_SKIP, false)) {
+            showMenu().setTextColor(titleColor == -1 ? getColor(R.color.wallet_actionBar_titleTv_color) : titleColor);
+        }
+    }
+
+    private TextView showMenu(){
+        TextView menu = new TextView(this, null, android.support.v7.appcompat.R.attr.actionOverflowMenuStyle);
+        menu.setSingleLine();
+        menu.setEllipsize(TextUtils.TruncateAt.END);
+        menu.setTextAppearance(R.style.TextAppearance_Eui_Widget_ActionBar_Menu);
+        Toolbar.LayoutParams layoutParams = new Toolbar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        menu.setLayoutParams(layoutParams);
+        layoutParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+        layoutParams.rightMargin = (int) DensityUtils.dip2px(10);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        menu.setText(R.string.account_verify_menu_skip);
+        getToolbar().addView(menu, layoutParams);
+        return menu;
+    }
+
+    private int parseColor(String strColor){
+        int color = -1;
+        if (!TextUtils.isEmpty(strColor)) {
+            try {
+                color = Color.parseColor(strColor);
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        return color;
     }
 
     @Override
@@ -195,6 +262,15 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         }
     }
 
+    private void checkSetPwd(){
+        if (!TextUtils.isEmpty(from) && from.startsWith("com.letv") && !from.contains(getPackageName())) { //from 从其他app跳转过来，不进入设置密码
+             return;
+        }
+        AccountUtils.goToAccountWeb(AccountVerifyActivity.this, AccountConstant.JTYPE_SET_PAY_PWD);
+
+    }
+
+
     private void verifyAccount(String accountName, String identityNum, String bankNo, String mobile, String msgCode) {
         if (verifyAccountTask == null) {
             verifyAccountTask = new AccountVerifyTask(accountName, identityNum, bankNo, mobile, msgCode, new AccountCommonCallback() {
@@ -206,7 +282,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                     verifyAccountTask = null;
                     hideVerifyDialog();
                     setResult(RESULT_OK);
-                    AccountUtils.goToAccountWeb(AccountVerifyActivity.this, AccountConstant.JTYPE_SET_PAY_PWD);
+                    checkSetPwd();
                     finish();
                 }
 

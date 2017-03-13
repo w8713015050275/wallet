@@ -33,5 +33,6 @@
     <string name="account_card_list_empty">暂无银行卡</string>
     <string name="account_card_no_phone">该服务需要绑定手机号</string>
     <string name="account_card_unavailable">开户失败，请联系客服</string>
+    <string name="account_verify_menu_skip">跳过</string>
 
 </resources>

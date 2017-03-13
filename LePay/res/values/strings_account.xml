@@ -33,4 +33,5 @@
     <string name="account_card_list_empty">No card</string>
     <string name="account_card_no_phone">The service needs to bind the phone number</string>
     <string name="account_card_unavailable">Failed to open account, please contact customer service.</string>
+    <string name="account_verify_menu_skip">Skip</string>
 </resources>
