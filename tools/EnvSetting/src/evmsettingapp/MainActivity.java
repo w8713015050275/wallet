@@ -1,10 +1,15 @@
 package com.letv.wallet.evmsettingapp;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -12,7 +17,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final int PERMISSIONS_REQUEST_CODE = 1;
 
     public static final String WALLET_PACKAGE = "com.letv.walletbiz";
     public static final String LEPAY_PACKAGE = "com.letv.wallet";
@@ -41,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findView();
         bindView();
-        initData();
+        if(checkMainPermission(PERMISSIONS_REQUEST_CODE)){
+            initData();
+        }
     }
 
     private void findView() {
@@ -113,13 +124,53 @@ public class MainActivity extends AppCompatActivity {
         sp.edit().putBoolean(key, value).commit();
     }
 
-    private void killWallet(String packageName) {
-        try {
-            ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-            activityManager.killBackgroundProcesses(packageName);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, getString(R.string.kill_error_msg) + e.getMessage(), Toast.LENGTH_LONG).show();
+    private void killWallet(String packageName){
+       try {
+           ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+           activityManager.killBackgroundProcesses(packageName);
+       }catch (Exception e){
+           e.printStackTrace();
+           Toast.makeText(this, getString(R.string.kill_error_msg)+e.getMessage(), Toast.LENGTH_LONG).show();
+       }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_CODE: {
+                if (grantResults.length > 0) {
+                    PackageManager packageManager = this.getPackageManager();
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                            try {
+                                PermissionInfo info = packageManager.getPermissionInfo(permissions[i], 0);
+                                if(info!=null && Manifest.permission.KILL_BACKGROUND_PROCESSES.equals(info.toString())){
+                                    finish();
+                                }
+                            } catch (PackageManager.NameNotFoundException e) {
+                            }
+                        }
+                    }
+                }
+                break;
+            }
         }
+    }
+
+    public boolean checkMainPermission(int requestCode) {
+        boolean result = true;
+        String[] permissionList = new String[]{Manifest.permission.KILL_BACKGROUND_PROCESSES};
+        ArrayList<String> deniedPermissionList = new ArrayList<String>();
+        for (String permission : permissionList) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                result = false;
+                deniedPermissionList.add(permission);
+            }
+        }
+        Log.e("MainActivity", "deniedPermissionList size "+deniedPermissionList.size());
+        if (deniedPermissionList.size() > 0) {
+            ActivityCompat.requestPermissions(this, deniedPermissionList.toArray(new String[0]), requestCode);
+        }
+        return result;
     }
 }

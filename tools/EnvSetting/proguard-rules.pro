@@ -23,3 +23,15 @@
 -keep class * extends android.app.Service
 -keep class * extends android.content.BroadcastReceiver
 -keep class * extends android.content.ContentProvider
+
+
+#不混淆android　support包v4
+-dontwarn android.support.v4.**
+-keep class android.support.v4.** { *;}
+
+
+#不混淆android　support包v7
+-dontwarn android.support.v7.**
+-keep class android.support.v7.** { *; }
+
+-dontnote android.support.v7.**
