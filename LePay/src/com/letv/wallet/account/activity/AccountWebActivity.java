@@ -61,8 +61,12 @@ public class AccountWebActivity extends BaseWebViewActivity implements AccountHe
 
     @Override
     protected void onNetWorkChanged(boolean isNetworkAvailable) {
-        if (isNetworkAvailable && TextUtils.isEmpty(mUrl)) {
-            redirect(jType);
+        if (isNetworkAvailable) {
+            if (TextUtils.isEmpty(mUrl)) {
+                redirect(jType);
+            } else {
+                super.onNetWorkChanged(isNetworkAvailable);
+            }
         }
     }
 
