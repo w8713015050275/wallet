@@ -1,5 +1,6 @@
 package com.letv.wallet.evmsettingapp;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String WALLET_PACKAGE = "com.letv.walletbiz";
+    public static final String LEPAY_PACKAGE = "com.letv.wallet";
 
     public static final String WALLET_PAY = "wallet_pay";
     public static final String WALLET_KEY = "wallet";
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         rgWallet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                killWallet(LEPAY_PACKAGE);
                 switch (checkedId) {
                     case R.id.product_wallet:
                         saveDate(WALLET_KEY, PRODUCT);
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         rgWalletbiz.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                killWallet(WALLET_PACKAGE);
                 switch (checkedId) {
                     case R.id.product_walletbiz:
                         saveDate(WALLETBIZ_KEY, PRODUCT);
@@ -106,5 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveDate(String key, boolean value) {
         sp.edit().putBoolean(key, value).commit();
+    }
+
+    private void killWallet(String packageName){
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        activityManager.killBackgroundProcesses(packageName);
     }
 }
