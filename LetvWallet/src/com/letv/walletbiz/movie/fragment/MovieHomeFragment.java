@@ -159,7 +159,14 @@ public class MovieHomeFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mLocationHelper = LocationHelper.getInstance();
         mLocationHelper.addLocationCallback(mLocationCallback);
-        updateCurrentCity();
+        MovieTicketActivity activity = (MovieTicketActivity) getActivity();
+        if (activity != null) {
+            mCurrentCityID = activity.getCityId();
+            mCurrentCityName = activity.getCityName();
+        }
+        if (mCurrentCityID == -1 || mCurrentCityName == null) {
+            updateCurrentCity();
+        }
         if (mCurrentCityID == -1) {
             Intent intent = new Intent(getActivity(), CityListActivity.class);
             intent.putExtra("first", true);

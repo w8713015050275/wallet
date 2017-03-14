@@ -41,7 +41,6 @@ import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.wallet.common.view.BlankPage;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
-import com.letv.walletbiz.base.util.WalletConstant;
 import com.letv.walletbiz.movie.MovieTicketConstant;
 import com.letv.walletbiz.movie.activity.MovieScheduleActivity;
 import com.letv.walletbiz.movie.activity.MovieTicketActivity;
@@ -240,6 +239,14 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
             mMovieId = bundle.getLong(EXTRA_MOVIE_ID, -1);
             mDate = bundle.getString(EXTRA_DATE, null);
             mCurrentCityId = bundle.getInt(MovieTicketConstant.EXTRA_CITY_ID, -1);
+        }
+        MovieTicketActivity activity = (MovieTicketActivity) getActivity();
+        if (mCurrentCityId == -1 && activity != null) {
+            mCurrentCityId = activity.getCityId();
+            mCurrentCityName = activity.getCityName();
+            if (TextUtils.isEmpty(mCurrentCityName)) {
+                mCurrentCityId = -1;
+            }
         }
         if (mCurrentCityId == -1) {
             updateCurrentCity();

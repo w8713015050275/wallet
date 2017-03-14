@@ -46,6 +46,9 @@ public class MovieTicketActivity extends BaseWalletFragmentActivity implements T
     private RelativeLayout customView;
     private TextView mToolBarTitle;
 
+    private int mCityId = -1;
+    private String mCityName = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +56,10 @@ public class MovieTicketActivity extends BaseWalletFragmentActivity implements T
 
         parseIntent(getIntent());
 
-        int cityId = SharedPreferencesHelper.getInt(MovieTicketConstant.PREFERENCES_CURRENT_CITY_ID, -1);
-        if (cityId == -1) {
+        if (mCityId == -1) {
+            mCityId = SharedPreferencesHelper.getInt(MovieTicketConstant.PREFERENCES_CURRENT_CITY_ID, -1);
+        }
+        if (mCityId == -1) {
             Intent intent = new Intent(this, CityListActivity.class);
             intent.putExtra("first", true);
             if (mCurrentTabId != -1) {
@@ -66,6 +71,14 @@ public class MovieTicketActivity extends BaseWalletFragmentActivity implements T
         }
 
         initView();
+    }
+
+    public int getCityId() {
+        return mCityId;
+    }
+
+    public String getCityName() {
+        return mCityName;
     }
 
     @Override
@@ -97,9 +110,18 @@ public class MovieTicketActivity extends BaseWalletFragmentActivity implements T
                 if (TextUtils.isEmpty(from)) {
                     from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
                 }
+                String cityId = uri.getQueryParameter(MovieTicketConstant.EXTRA_CITY_ID);
+                try {
+                    mCityId = Integer.parseInt(cityId);
+                } catch (Exception e) {
+                    mCityId = -1;
+                }
+                mCityName = uri.getQueryParameter(MovieTicketConstant.EXTRA_CITY_NAME);
             } else {
                 tabId = intent.getIntExtra(MovieTicketConstant.EXTRA_MOVIE_TICKET_TAB_ID, -1);
                 from = intent.getStringExtra(WalletConstant.EXTRA_FROM);
+                mCityId = intent.getIntExtra(MovieTicketConstant.EXTRA_CITY_ID, -1);
+                mCityName = intent.getStringExtra(MovieTicketConstant.EXTRA_CITY_NAME);
             }
             Action.uploadMovieExpose(from);
             if (tabId != -1) {

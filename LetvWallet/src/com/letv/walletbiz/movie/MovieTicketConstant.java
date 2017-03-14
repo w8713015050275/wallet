@@ -312,6 +312,11 @@ public class MovieTicketConstant {
     public static final String EXTRA_CITY_ID = "city_id";
 
     /**
+     * String
+     */
+    public static final String EXTRA_CITY_NAME = "city_name";
+
+    /**
      * long
      */
     public static final String EXTRA_MOVIE_ID = "movie_id";
@@ -339,12 +344,12 @@ public class MovieTicketConstant {
     public static final int MOVIE_PARAM_UNFAVORITED = 0;
 
     /**
-     * {@link com.letv.wallet.movie.beans.CinemaSchedule.Schedule}
+     * {@link com.letv.walletbiz.movie.beans.CinemaSchedule.Schedule}
      */
     public static final String EXTRA_MOVIE_SCHEDULE = "movie_schedule";
 
     /**
-     *{@link com.letv.wallet.movie.beans.CinemaSchedule.DiscountInfo}
+     *{@link com.letv.walletbiz.movie.beans.CinemaSchedule.DiscountInfo}
      */
     public static final String EXTRA_MOVIE_DISCOUNT_INFO = "movie_discount_info";
 
@@ -359,7 +364,7 @@ public class MovieTicketConstant {
     public static final String EXTRA_SCHE_DATE = "schedule_date";
 
     /**
-     * {@link com.letv.wallet.movie.beans.MovieDetail.MovieAllSizePhoto}
+     * {@link com.letv.walletbiz.movie.beans.MovieDetail.MovieAllSizePhoto}
      */
     public static final String EXTRA_MOVIE_PHOTO_ARRAY = "photo_array";
 
