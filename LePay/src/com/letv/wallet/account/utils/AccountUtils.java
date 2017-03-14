@@ -23,14 +23,17 @@ public class AccountUtils {
         if (hasCreatedAccount()) {
             return; // 开户已缓存返回
         }
-        SharedPreferencesHelper.putBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid() + AccountConstant.SHAREDPREFERENCES_CREATE_ACCOUNT_SUFFIX), true);
+        SharedPreferencesHelper.getSharePreferences().edit().putBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid() +
+                AccountConstant.SHAREDPREFERENCES_CREATE_ACCOUNT_SUFFIX), true).commit();
+
     }
 
     public static void updateVerifyAccountStatus() {
         if (hasVerifyAccount()) {
             return; // 认证已缓存返回
         }
-        SharedPreferencesHelper.putBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid() + AccountConstant.SHAREDPREFERENCES_VERIFY_ACCOUNT_SUFFIX), true);
+        SharedPreferencesHelper.getSharePreferences().edit().putBoolean(DigestUtils.getMd5_30(AccountHelper.getInstance().getUid() +
+                AccountConstant.SHAREDPREFERENCES_VERIFY_ACCOUNT_SUFFIX), true).commit();
     }
 
 }

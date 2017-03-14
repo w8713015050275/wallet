@@ -513,16 +513,16 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             @Override
             public void onSuccess(AccountInfo info) {
                 retryCount = 0;
-                if (checkCreateAccount(true)) {
+                if (AccountConstant.QTYPE_TIPS.equals(qType)) {
                     hideLoadingView();
-                    if (AccountConstant.QTYPE_TIPS.equals(qType)) {
-                        updateTips(info == null ? null : info.tips);
-                        return;
+                    updateTips(info == null ? null : info.tips);
+                }else if(AccountConstant.QTYPE_ALL.equals(qType)){
+                    if (checkCreateAccount(true)) {
+                        hideLoadingView();
+                        updateData(info);
+                    } else {
+                        accountInfo = info;
                     }
-                    updateData(info);
-
-                } else {
-                    accountInfo = info;
                 }
             }
 

@@ -9,10 +9,7 @@ import com.letv.wallet.account.aidl.v1.IAccountCallback;
 import com.letv.wallet.account.base.AccountGateway;
 import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
-import com.letv.wallet.common.util.AccountHelper;
-import com.letv.wallet.common.util.DigestUtils;
 import com.letv.wallet.common.util.ParseHelper;
-import com.letv.wallet.common.util.SharedPreferencesHelper;
 import com.letv.wallet.utils.SslUtil;
 
 /**
