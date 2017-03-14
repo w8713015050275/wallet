@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EvmSettingApp</string>
+    <string name="kill_error_msg">请手动KILL钱包(LePay)进程\n</string>
 </resources>

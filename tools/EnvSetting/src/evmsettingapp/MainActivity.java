@@ -3,15 +3,14 @@ package com.letv.wallet.evmsettingapp;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -114,8 +113,13 @@ public class MainActivity extends AppCompatActivity {
         sp.edit().putBoolean(key, value).commit();
     }
 
-    private void killWallet(String packageName){
-        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        activityManager.killBackgroundProcesses(packageName);
+    private void killWallet(String packageName) {
+        try {
+            ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+            activityManager.killBackgroundProcesses(packageName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, getString(R.string.kill_error_msg) + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }
