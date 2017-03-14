@@ -74,9 +74,6 @@ public class MemberCouponListActivity extends AccountBaseActivity implements Cou
         if (couponBeans != null && couponBeans.length > 0) {
             mCouponList = couponBeans;
             findViewById();
-            if (mUcouponId == 0L) {
-                mUcouponId = mCouponList[0].ucoupon_id;
-            }
             mAdapter = new CouponListAdapter(getBaseContext(), mCouponList, mUcouponId);
             mAdapter.setOnItemClickListener(MemberCouponListActivity.this);
             mLayoutManager =

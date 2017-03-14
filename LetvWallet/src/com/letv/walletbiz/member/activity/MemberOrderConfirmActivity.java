@@ -176,7 +176,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
                     if (couponBean != null) {
                         mSelectedCoupon = true;
                     }
-                    updateCouponAndPriceUi(couponBean, couponListCount);
+                    updateCouponAndPriceUi(couponBean, couponListCount, true);
                 }
                 break;
             case PAY_REQUEST_CODE:
@@ -330,8 +330,8 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
     }
 
     private void loadData() {
-        if (mSelectedCoupon || mMemberProduct == null) return;
         if (isNetworkAvailable()) {
+            if (mSelectedCoupon || mMemberProduct == null) return;
             mIsFirstLoadData = false;
             queryCouponInfo();
         } else {
@@ -415,7 +415,6 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
         int couponlistCount = 0;
         if (mCouponBeans != null && mCouponBeans.length > 0) {
             couponlistCount = mCouponBeans.length;
-            couponBean = mCouponBeans[0];
             if (mUcouponId != 0) {
                 couponlistCount = mCouponBeans.length;
                 for (int i = 0; i < mCouponBeans.length; i++) {
@@ -425,7 +424,7 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
                 }
             }
         }
-        updateCouponAndPriceUi(couponBean, couponlistCount);
+        updateCouponAndPriceUi(couponBean, couponlistCount, false);
     }
 
     private void setDiscountPrice(float price) {
@@ -441,21 +440,24 @@ public class MemberOrderConfirmActivity extends AccountBaseActivity {
         mCouponV.setContent(String.format(getString(R.string.coupon_request_data), count));
     }
 
-    public void updateCouponAndPriceUi(CouponBean couponBean, int couponlistCount) {
+    public void updateCouponAndPriceUi(CouponBean couponBean, int couponlistCount, Boolean recordCouponId) {
         if (couponBean == null) {
-            mUcouponId = 0;
+            if (recordCouponId) {
+                mUcouponId = 0;
+            }
             mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), mMemberProduct.getPrice()));
             setDiscountPrice(zero_f);
-            setCouponListCount(0);
             mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), mMemberProduct.getPrice()));
         } else {
-            mUcouponId = couponBean.ucoupon_id;
+            if (recordCouponId) {
+                mUcouponId = couponBean.ucoupon_id;
+            }
             mTvPrice.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.total_price));
             setDiscountPrice(couponBean.discount_price);
-            setCouponListCount(couponlistCount);
             mTvCost.setText(StringUtils.getPriceUnit(getBaseContext(), couponBean.real_price));
             mMemberProduct.setPrice(String.valueOf(couponBean.real_price));
         }
+        setCouponListCount(couponlistCount);
         mCouponV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
