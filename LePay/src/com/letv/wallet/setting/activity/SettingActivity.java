@@ -1,5 +1,9 @@
 package com.letv.wallet.setting.activity;
 
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,27 +21,28 @@ import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.account.task.AccountCommonCallback;
+import com.letv.wallet.account.task.AccountCreateTask;
 import com.letv.wallet.account.task.AccountQueryTask;
 import com.letv.wallet.account.task.RedirectTask;
 import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.base.util.Action;
 import com.letv.wallet.base.util.WalletConstant;
-import com.letv.wallet.common.activity.AccountBaseActivity;
+import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.view.BlankPage;
+
+import java.io.IOException;
 
 /**
  * Created by changjiajie on 16-5-25.
  */
-public class SettingActivity extends AccountBaseActivity implements View.OnClickListener, AccountHelper.OnAccountChangedListener {
+public class SettingActivity extends BaseFragmentActivity implements View.OnClickListener, AccountHelper.OnAccountChangedListener {
 
     public static final String TAG = SettingActivity.class.getSimpleName();
 
-    private static String ISGOLOGIN = "isGoLogin";
     private LinearLayout mAccountVerifyLl;
     private ImageView mAccountVerifyIv;
     private TextView mAccountVerifyTv;
@@ -45,14 +50,13 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
     private AccountQueryTask mAccountQueryTask;
     private RedirectTask mRedirectTask;
     private RedirectURL mRedirectURL;
+    private AccountCreateTask mCreateTask;
     private AccountInfo.BasicAccount mBasicAccount;
     private boolean isFirstShow = true;
+    private boolean hasCreateAccount = false;
     private String mFrom;
 
-    private static final int ACCOUNT_QUERY_FINISH = 1;
-    private static final int PWD_URL_FINISH = 2;
-    private static final int NO_NETWORK_PROMPT = 3;
-    private static final int NO_NETWORK_SHOW_BLANKPAGE = 4;
+    private static final int NO_NETWORK_PROMPT = 1;
 
     private static final int GOPWDPAGE = 1;
 
@@ -61,57 +65,8 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case ACCOUNT_QUERY_FINISH:
-                    mAccountQueryTask = null;
-                    switch (msg.arg1) {
-                        case AccountConstant.RspCode.ERROR_NETWORK:
-                            showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL, new LoadDataListener());
-                            break;
-                        case AccountConstant.RspCode.SUCCESS:
-                            updateInfo((AccountInfo) msg.obj);
-                            break;
-                        case AccountConstant.RspCode.ERRNO_USER:
-                            if (msg.obj != null) {
-                                Toast.makeText(SettingActivity.this, String.valueOf(msg.obj), Toast.LENGTH_SHORT).show();
-                            }
-                        default: {
-                            LogHelper.e("[%S] account_query_finish | msg.obj == null", TAG);
-                            BlankPage blankPage = showBlankPage(BlankPage.STATE_DATA_EXCEPTION, new LoadDataListener());
-                            blankPage.getPrimaryBtn().setOnClickListener(new LoadDataListener());
-                        }
-                        break;
-                    }
-                    break;
-                case PWD_URL_FINISH:
-                    mRedirectTask = null;
-                    hideLoadingView();
-                    switch (msg.arg1) {
-                        case AccountConstant.RspCode.ERROR_NETWORK:
-                            sendEmptyMessage(NO_NETWORK_PROMPT);
-                            break;
-                        case AccountConstant.RspCode.SUCCESS:
-                            if (msg.obj == null) {
-                                LogHelper.e("[%S] pwd_url_finish | msg.obj == null", TAG);
-                                sendEmptyMessage(NO_NETWORK_PROMPT);
-                                return;
-                            }
-                            mRedirectURL = (RedirectURL) msg.obj;
-                            if (msg.arg2 == GOPWDPAGE) {
-                                goPwdPage(mRedirectURL);
-                            }
-                            break;
-                        case AccountConstant.RspCode.ERRNO_USER:
-                            if (msg.obj != null) {
-                                Toast.makeText(SettingActivity.this, String.valueOf(msg.obj), Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-                    }
-                    break;
                 case NO_NETWORK_PROMPT:
                     Toast.makeText(SettingActivity.this, R.string.pay_no_network, Toast.LENGTH_SHORT).show();
-                    break;
-                case NO_NETWORK_SHOW_BLANKPAGE:
-                    showBlankPage(BlankPage.STATE_NO_NETWORK);
                     break;
             }
         }
@@ -124,50 +79,98 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
         setContentView(R.layout.lepay_activity_setting);
         initV();
-        if (!isNetworkAvailable()) {
-            if (mHandler != null) {
-                Message msg = mHandler.obtainMessage(NO_NETWORK_SHOW_BLANKPAGE);
-                mHandler.sendMessage(msg);
-            }
-        }
-        if (savedInstanceState == null || !savedInstanceState.getBoolean(ISGOLOGIN)) {
-            AccountHelper.getInstance().loginLetvAccountIfNot(this, null);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (outState != null) {
-            outState.putBoolean(ISGOLOGIN, !AccountHelper.getInstance().isLogin(this));
-        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (!AccountHelper.getInstance().isLogin(getBaseContext())) {
-            showNoLoginBlankPage();
-            return;
+        if (isNetworkAvailable()) {
+            checkAccountStatus();
         }
-        if (!isNetworkAvailable()) {
-            if (mBasicAccount == null && mHandler != null) {
-                Message msg = mHandler.obtainMessage(NO_NETWORK_SHOW_BLANKPAGE);
-                mHandler.sendMessage(msg);
-            }
-            return;
-        }
-        checkAccountInfo();
     }
 
     @Override
     protected void onNetWorkChanged(boolean isNetworkAvailable) {
         if (isNetworkAvailable && AccountHelper.getInstance().isLogin(getBaseContext())) {
-            if (mBasicAccount == null) {
-                checkAccountInfo();
+            checkAccountStatus();
+        }
+    }
+
+
+    private void clickVerifyLl() {
+        // 判断是否开户
+        if (checkCreateAccount(false, true)) {
+            if (mBasicAccount != null) {
+                if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(mBasicAccount.verifyStatus)) {
+                    Toast.makeText(getBaseContext(), R.string.prompt_str_account_verified, Toast.LENGTH_SHORT).show();
+                } else {
+                    goAccountVerifyPage(SettingConstant.VERIFYPAGE_REALNAME_FROM);
+                }
             } else {
-                hideBlankPage();
+                checkAccountInfo(true);
             }
+        }
+    }
+
+    private void clickSettingPwdLl() {
+        // 判断是否开户
+        if (checkCreateAccount(false, true)) {
+            if (mBasicAccount != null) {
+                if (!AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(mBasicAccount.verifyStatus)) {
+                    goAccountVerifyPage(SettingConstant.VERIFYPAGE_PWD_FROM);
+                    return;
+                }
+                if (mRedirectURL != null) {
+                    goPwdPage(mRedirectURL);
+                    return;
+                }
+                getPwdUrl(GOPWDPAGE, true);
+            } else {
+                checkAccountInfo(true);
+            }
+        }
+    }
+
+    private void checkStatusClick(final int vId) {
+        if (!NetworkHelper.isNetworkAvailable()) {
+            if (mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
+                mHandler.sendMessage(msg);
+            }
+            return;
+        }
+        if (AccountHelper.getInstance().isLogin(getBaseContext())) {
+            switch (vId) {
+                case R.id.setting_account_verify_ll:
+                    clickVerifyLl();
+                    break;
+                case R.id.setting_pwd_tv:
+                    clickSettingPwdLl();
+                    break;
+            }
+        } else {
+            AccountHelper.getInstance().loginLetvAccountIfNot(SettingActivity.this, new AccountManagerCallback() {
+
+                @Override
+                public void run(AccountManagerFuture future) {
+                    try {
+                        if (getBaseContext() != null && future.getResult() != null && AccountHelper.getInstance().isLogin(getBaseContext())) {
+                            switch (vId) {
+                                case R.id.setting_account_verify_ll:
+                                case R.id.setting_pwd_tv:
+                                    checkAccountInfo(true);
+                                    break;
+                            }
+                        }
+                    } catch (OperationCanceledException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (AuthenticatorException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 
@@ -175,36 +178,8 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setting_account_verify_ll:
-                if (!NetworkHelper.isNetworkAvailable()) {
-                    Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
-                    mHandler.sendMessage(msg);
-                    return;
-                }
-                if (mBasicAccount != null) {
-                    if (AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(mBasicAccount.verifyStatus)) {
-                        Toast.makeText(getBaseContext(), R.string.prompt_str_account_verified, Toast.LENGTH_SHORT).show();
-                    } else {
-                        goAccountVerifyPage(SettingConstant.VERIFYPAGE_REALNAME_FROM);
-                    }
-                }
-                break;
             case R.id.setting_pwd_tv:
-                if (!NetworkHelper.isNetworkAvailable()) {
-                    Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
-                    mHandler.sendMessage(msg);
-                    return;
-                }
-                if (mBasicAccount != null) {
-                    if (!AccountConstant.BASIC_ACCOUNT_VERIFY_STATE_AUTHENTICATED.equals(mBasicAccount.verifyStatus)) {
-                        goAccountVerifyPage(SettingConstant.VERIFYPAGE_PWD_FROM);
-                        return;
-                    }
-                    if (mRedirectURL != null) {
-                        goPwdPage(mRedirectURL);
-                        return;
-                    }
-                    getPwdUrl(GOPWDPAGE);
-                }
+                checkStatusClick(v.getId());
                 break;
         }
     }
@@ -215,6 +190,9 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
 
     @Override
     public void onAccountLogout() {
+        hasCreateAccount = false;
+        mCreateTask = null;
+        mAccountQueryTask = null;
         mBasicAccount = null;
         mRedirectURL = null;
     }
@@ -225,40 +203,108 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
         super.onDestroy();
     }
 
-    private class LoadDataListener implements View.OnClickListener {
+    @Override
+    public boolean hasBlankAndLoadingView() {
+        return true;
+    }
 
-        @Override
-        public void onClick(View v) {
-            checkAccountInfo();
+    private boolean checkCreateAccount(boolean isForceCreate, boolean isPrompt) {
+        hasCreateAccount = AccountUtils.hasCreatedAccount();
+        if (!hasCreateAccount) {
+            if (isPrompt) {
+                Toast.makeText(this, R.string.account_card_unavailable, Toast.LENGTH_SHORT).show();
+            }
+            if (isForceCreate) {
+                showLoadingView();
+                createAccount();
+            }
+        }
+        return hasCreateAccount;
+    }
+
+    private void createAccount() {
+        if (mCreateTask == null) {
+            mCreateTask = new AccountCreateTask(new AccountCommonCallback() {
+                @Override
+                public void onSuccess(Object result) {
+                    mCreateTask = null;
+                    hasCreateAccount = true;
+                    hideLoadingView();
+                    //开户成功，请求账户信息
+                    checkAccountInfo(true);
+                }
+
+                @Override
+                public void onError(int errorCode, String errorMsg) {
+                    mCreateTask = null;
+                    accountInfoError();
+                    hideLoadingView();
+                    LogHelper.e("[%S] createAccount | errorCode == %s | errorMsg == %s", TAG, errorCode + "", errorMsg);
+                    switch (errorCode) {
+                        case AccountConstant.RspCode.ERRNO_USER:
+                            if (!TextUtils.isEmpty(errorMsg)) {
+                                Toast.makeText(SettingActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                    }
+                }
+
+                @Override
+                public void onNoNet() {
+                    mCreateTask = null;
+                    accountInfoError();
+                    hideLoadingView();
+                    if (mHandler != null) {
+                        Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
+                        mHandler.sendMessage(msg);
+                    }
+                }
+            });
+            ExecutorHelper.getExecutor().runnableExecutor(mCreateTask);
         }
     }
 
     private class AccountQueryCallback implements AccountCommonCallback<AccountInfo> {
 
+        private boolean mIsPrompt;
+
+        public AccountQueryCallback(boolean isPrompt) {
+            this.mIsPrompt = isPrompt;
+        }
+
         @Override
         public void onSuccess(AccountInfo result) {
-            if (mHandler != null) {
-                Message msg = mHandler.obtainMessage(ACCOUNT_QUERY_FINISH);
-                msg.arg1 = AccountConstant.RspCode.SUCCESS;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-            }
+            hideLoadingView();
+            mAccountQueryTask = null;
+            updateInfo(result, this.mIsPrompt);
         }
 
         @Override
         public void onError(int errorCode, String errorMsg) {
-            if (mHandler != null) {
-                Message msg = mHandler.obtainMessage(ACCOUNT_QUERY_FINISH);
-                msg.obj = errorMsg;
-                msg.arg1 = errorCode;
-                mHandler.sendMessage(msg);
+            mAccountQueryTask = null;
+            if (mBasicAccount == null) {
+                accountInfoError();
+            }
+            hideLoadingView();
+            LogHelper.e("[%S] account_query | errorCode == %s | errorMsg == %s", TAG, errorCode + "", errorMsg);
+            switch (errorCode) {
+                case AccountConstant.RspCode.ERRNO_USER:
+                    if (this.mIsPrompt && !TextUtils.isEmpty(errorMsg)) {
+                        Toast.makeText(SettingActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
         }
 
         @Override
         public void onNoNet() {
-            if (mBasicAccount == null && mHandler != null) {
-                Message msg = mHandler.obtainMessage(NO_NETWORK_SHOW_BLANKPAGE);
+            mAccountQueryTask = null;
+            if (mBasicAccount == null) {
+                accountInfoError();
+            }
+            hideLoadingView();
+            if (this.mIsPrompt && mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
                 mHandler.sendMessage(msg);
             }
         }
@@ -267,56 +313,88 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
     private class PwdUrlCallback implements AccountCommonCallback<RedirectURL> {
 
         private int mType;
+        private boolean mIsPrompt;
 
-        public PwdUrlCallback(int type) {
+        public PwdUrlCallback(int type, boolean isPrompt) {
             this.mType = type;
+            this.mIsPrompt = isPrompt;
         }
 
         @Override
         public void onSuccess(RedirectURL result) {
-            if (mHandler != null) {
-                Message msg = mHandler.obtainMessage(PWD_URL_FINISH);
-                msg.obj = result;
-                msg.arg1 = AccountConstant.RspCode.SUCCESS;
-                msg.arg2 = mType;
-                mHandler.sendMessage(msg);
+            mRedirectTask = null;
+            hideLoadingView();
+            if (result == null) {
+                LogHelper.e("[%S] pwd_url_finish | result == null", TAG);
+                if (this.mIsPrompt && mHandler != null) {
+                    Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
+                    mHandler.sendMessage(msg);
+                }
+                return;
+            }
+            mRedirectURL = result;
+            if (mType == GOPWDPAGE) {
+                goPwdPage(mRedirectURL);
             }
         }
 
         @Override
         public void onError(int errorCode, String errorMsg) {
-            if (mHandler != null) {
-                Message msg = mHandler.obtainMessage(PWD_URL_FINISH);
-                msg.arg1 = errorCode;
-                msg.obj = errorMsg;
-                mHandler.sendMessage(msg);
+            mRedirectTask = null;
+            hideLoadingView();
+            LogHelper.e("[%S] pwd_url_finish | errorCode == %s | errorMsg == %s", TAG, errorCode + "", errorMsg);
+            switch (errorCode) {
+                case AccountConstant.RspCode.ERROR_NETWORK:
+                    if (this.mIsPrompt && mHandler != null) {
+                        Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
+                        mHandler.sendMessage(msg);
+                    }
+                    break;
+                case AccountConstant.RspCode.ERRNO_USER:
+                    if (this.mIsPrompt && !TextUtils.isEmpty(errorMsg)) {
+                        Toast.makeText(SettingActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
         }
 
         @Override
         public void onNoNet() {
-            if (mHandler != null) {
+            mRedirectTask = null;
+            hideLoadingView();
+            if (this.mIsPrompt && mHandler != null) {
                 Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
                 mHandler.sendMessage(msg);
             }
         }
+
     }
 
-    private void updateInfo(AccountInfo accountInfo) {
+    private void accountInfoError() {
+        mBasicAccount = null;
+        mAccountVerifyTv.setText(R.string.setting_account_not_verify);
+        mAccountVerifyIv.setSelected(false);
+    }
+
+    private void updateInfo(AccountInfo accountInfo, boolean isPrompt) {
+        if (accountInfo == null) {
+            LogHelper.e("[%S] account_query_finish | accountInfo == null", TAG);
+            if (isPrompt && mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
+                mHandler.sendMessage(msg);
+            }
+            return;
+        }
         if (accountInfo.basic == null) {
             LogHelper.e("[%S] account_query_finish | AccountInfo.basic == null", TAG);
-            showBlankPage(BlankPage.STATE_DATA_EXCEPTION, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkAccountInfo();
-                }
-            });
+            if (isPrompt && mHandler != null) {
+                Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
+                mHandler.sendMessage(msg);
+            }
             return;
         }
         if (mRedirectURL == null) {
-            getPwdUrl(0);
-        } else {
-            hideLoadingView();
+            getPwdUrl(0, false);
         }
         if (isFirstShow) {
             isFirstShow = false;
@@ -372,15 +450,22 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
         }
     }
 
-    private void getPwdUrl(int type) {
+    private void getPwdUrl(int type, boolean isPrompt) {
         String[] jtype = new String[2];
         jtype[0] = AccountConstant.JTYPE_MOD_PAY_PWD;
         jtype[1] = AccountConstant.JTYPE_SET_PAY_PWD;
-        mRedirectTask = new RedirectTask(jtype, new PwdUrlCallback(type));
+        showLoadingView();
+        mRedirectTask = new RedirectTask(jtype, new PwdUrlCallback(type, isPrompt));
         ExecutorHelper.getExecutor().runnableExecutor(mRedirectTask);
     }
 
-    private void checkAccountInfo() {
+    private void checkAccountStatus() {
+        if (checkCreateAccount(true, false)) {
+            checkAccountInfo(false);
+        }
+    }
+
+    private void checkAccountInfo(boolean isPrompt) {
         if (!isNetworkAvailable()) {
             if (mHandler != null) {
                 Message msg = mHandler.obtainMessage(NO_NETWORK_PROMPT);
@@ -390,7 +475,7 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
         }
         if (mBasicAccount != null) {
             if (mRedirectURL == null) {
-                getPwdUrl(0);
+                getPwdUrl(0, false);
             } else {
                 hideBlankPage();
             }
@@ -398,7 +483,7 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
                 showLoadingView();
                 if (mAccountQueryTask == null) {
                     mAccountQueryTask = new AccountQueryTask(AccountConstant.QTYPE_BASIC,
-                            new AccountQueryCallback());
+                            new AccountQueryCallback(isPrompt));
                 }
                 ExecutorHelper.getExecutor().runnableExecutor(mAccountQueryTask);
             }
@@ -406,7 +491,7 @@ public class SettingActivity extends AccountBaseActivity implements View.OnClick
             showLoadingView();
             if (mAccountQueryTask == null) {
                 mAccountQueryTask = new AccountQueryTask(AccountConstant.QTYPE_BASIC,
-                        new AccountQueryCallback());
+                        new AccountQueryCallback(isPrompt));
             }
             ExecutorHelper.getExecutor().runnableExecutor(mAccountQueryTask);
         }

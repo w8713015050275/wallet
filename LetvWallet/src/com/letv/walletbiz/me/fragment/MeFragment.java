@@ -129,7 +129,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         switch (v.getId()) {
             case R.id.btnSetting:
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("lepay://setting"));
-                jumpIntentOnLogin(intent);
+                startActivity(intent);
                 break;
 
             case R.id.img_usr_icon:
