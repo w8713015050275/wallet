@@ -39,6 +39,7 @@ public class LePayWebActivity extends BaseWebViewActivity {
     private String mJumpType;
     private String mExternLePayInfo = null;
     private LePayChannelBean mChannelBean;
+    private boolean isResult = false;
 
     @Override
     protected boolean needUpdateTitle() {
@@ -55,28 +56,27 @@ public class LePayWebActivity extends BaseWebViewActivity {
         }
         mExternLePayInfo = getIntent().getStringExtra(LePayConstants.ApiIntentExtraKEY.LEPAY_INFO);
         mChannelBean = (LePayChannelBean) getIntent().getSerializableExtra(LePayConstants.ApiIntentExtraKEY.CHANNEL_DATA_KEY);
-        overrideUrlLoading("lepay://");
     }
 
-    private View.OnClickListener mClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (isFinishing()) return;
-            if (!TextUtils.isEmpty(mJumpType)) {
-                if (mJumpType.equals(LePayConstants.JUMP_TYPE.PAY)) {
-                    // 回调支付结果
-                    setResultPayFail();
-                } else if (mJumpType.equals(LePayConstants.JUMP_TYPE.ACTIVE)) {
-                    // 回调激活结果
-                    setResultActive(mActivateStatus, mPayStatus);
-                }
+    @Override
+    public void finish() {
+        if (!isResult && !TextUtils.isEmpty(mJumpType)) {
+            if (mJumpType.equals(LePayConstants.JUMP_TYPE.PAY)) {
+                // 回调支付结果
+                Intent intent = new Intent();
+                intent.putExtra(LePayConstants.ApiIntentExtraKEY.JUMP_TYPE, LePayConstants.JUMP_TYPE.PAY);
+                intent.putExtra(LePayConstants.ApiIntentExtraKEY.PAY_STATUS, LePayConstants.PAY_STATUS.FAIL);
+                setResult(RESULT_OK, intent);
+            } else if (mJumpType.equals(LePayConstants.JUMP_TYPE.ACTIVE)) {
+                // 回调激活结果
+                Intent intent = new Intent();
+                intent.putExtra(LePayConstants.ApiIntentExtraKEY.JUMP_TYPE, LePayConstants.JUMP_TYPE.ACTIVE);
+                intent.putExtra(LePayConstants.ApiIntentExtraKEY.ACTIVE_STATUS, mActivateStatus);
+                intent.putExtra(LePayConstants.ApiIntentExtraKEY.PAYSTATUS, mPayStatus);
+                setResult(RESULT_OK, intent);
             }
         }
-    };
-
-    @Override
-    protected View.OnClickListener getCloseButtonClickListener() {
-        return mClickListener;
+        super.finish();
     }
 
     @Override
@@ -193,6 +193,7 @@ public class LePayWebActivity extends BaseWebViewActivity {
 
     private void setResult(Intent data) {
         setResult(RESULT_OK, data);
+        isResult = true;
         finish();
     }
 
