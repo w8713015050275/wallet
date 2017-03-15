@@ -466,5 +466,19 @@
             android:name=".me.activity.AccountWebActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Arrow" />
+
+        <!-- GA -->
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 </manifest>
