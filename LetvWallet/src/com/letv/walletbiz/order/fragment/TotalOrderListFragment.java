@@ -28,6 +28,7 @@ import com.letv.walletbiz.base.http.beans.order.OrderRequestBean;
 import com.letv.walletbiz.base.view.OrderListViewAdapter;
 import com.letv.walletbiz.mobile.MobileConstant;
 import com.letv.walletbiz.order.TotalOrderConstant;
+import com.letv.walletbiz.order.activity.OrderDetailWebActivity;
 import com.letv.walletbiz.order.bean.TotalOrderBean;
 
 import org.xutils.xmain;
@@ -132,7 +133,7 @@ public class TotalOrderListFragment extends BaseOrderListFragment {
     }
 
     private void goToWebView(TotalOrderBean orderBean) {
-        Intent intent = new Intent(TotalOrderListFragment.this.getContext(), PayWebViewActivity.class);
+        Intent intent = new Intent(TotalOrderListFragment.this.getContext(), OrderDetailWebActivity.class);
         intent.putExtra(CommonConstants.EXTRA_URL, orderBean.jump_param);
         startActivity(intent);
     }

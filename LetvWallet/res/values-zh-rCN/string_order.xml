@@ -11,6 +11,7 @@
     <string name="total_order_status_completed">已完成</string>
     <string name="total_order_status_canceled">已取消</string>
     <string name="total_order_detail_fail_prom">暂无订单详情</string>
+    <string name="total_order_order_detail">订单详情</string>
     <string name="total_order_empty_no_record">暂无订单</string>
     <string name="total_order_no_sn">编号: %1$s</string>
     <string name="total_order_list_hearder_this_month">本月</string>

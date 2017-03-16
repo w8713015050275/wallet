@@ -11,6 +11,7 @@
     <string name="total_order_status_completed">Completed</string>
     <string name="total_order_status_canceled">Canceled</string>
     <string name="total_order_detail_fail_prom">No order details</string>
+    <string name="total_order_order_detail">Order details</string>
     <string name="total_order_empty_no_record">No orders</string>
     <string name="total_order_no_sn">Number: %1$s</string>
     <string name="total_order_list_time_week" translatable="false">E</string>

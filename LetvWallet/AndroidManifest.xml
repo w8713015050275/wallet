@@ -307,6 +307,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".order.activity.OrderDetailWebActivity"
+            android:label="@string/total_order_order_detail"
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <!-- Pay -->
         <activity
             android:name=".base.activity.PayActivity"
