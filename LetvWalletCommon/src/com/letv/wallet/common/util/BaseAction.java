@@ -66,7 +66,7 @@ public abstract class BaseAction {
             app = Agnes.getInstance().getApp(APP_NAME);
         }
         Version appVersion = app.getVersion();
-        appVersion.setVersion(BaseApplication.getApplication().getAppVersion());
+        appVersion.setVersion(AppUtils.getAppVersionName(BaseApplication.getApplication()));
         return app;
     }
 

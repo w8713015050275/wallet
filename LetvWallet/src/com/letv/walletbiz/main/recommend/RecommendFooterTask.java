@@ -1,14 +1,14 @@
 package com.letv.walletbiz.main.recommend;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.os.Build;
+import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonCallback;
 import com.letv.wallet.common.util.DeviceUtils;
 import com.letv.wallet.common.util.LogHelper;
@@ -56,13 +56,10 @@ public class RecommendFooterTask implements Runnable {
         }
         params.addParameter(RecommendConstant.PARAM_SSO_TK, AccountHelper.getInstance().getToken(mContext));
         params.addParameter(RecommendConstant.PARAM_IMEI, DeviceUtils.getDeviceImei(mContext));
-        try {
-            PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
-            if (packageInfo != null) {
-                params.addParameter(RecommendConstant.PARAM_V, packageInfo.versionName);
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            LogHelper.e(e);
+
+        String versionName = AppUtils.getAppFullVersionName(mContext);
+        if (!TextUtils.isEmpty(versionName)) {
+            params.addParameter(RecommendConstant.PARAM_V, versionName);
         }
 
         params.addParameter(RecommendConstant.PARAM_SYS_V, Build.ID);

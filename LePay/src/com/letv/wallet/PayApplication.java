@@ -14,6 +14,7 @@ import com.letv.tracker2.enums.HwType;
 import com.letv.wallet.base.util.WalletConstant;
 import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.EnvUtil;
 import com.letv.wallet.common.util.LogHelper;
 
@@ -63,6 +64,9 @@ public class PayApplication extends BaseApplication {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
             mTracker = analytics.newTracker(R.xml.app_tracker);
+            mTracker.setAppVersion(AppUtils.getAppVersionName(this));
+            //增加自定义维度"App版本号"
+            mTracker.set("&cd1", AppUtils.getAppFullVersionName(this));
         }
         return mTracker;
     }

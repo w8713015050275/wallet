@@ -205,4 +205,43 @@ public class AppUtils {
         }
         return new String[]{action, dataStr};
     }
+
+    public static String getAppVersionName(Context context) {
+        String version = getAppFullVersionName(context);
+        if (!TextUtils.isEmpty(version)) {
+            String[] split = version.split(" ");
+            version = split[0];
+        }
+        return version;
+    }
+
+    public static String getAppFullVersionName(Context context) {
+        String version = "";
+        if (context == null) {
+            return version;
+        }
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            version = packageInfo.versionName;
+        } catch (Exception e) {
+            LogHelper.e(e);
+        }
+        return version;
+    }
+
+    public static int getAppVersionCode(Context context) {
+        int versionCode = -1;
+        if (context == null) {
+            return versionCode;
+        }
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            versionCode = packageInfo.versionCode;
+        } catch (Exception e) {
+            LogHelper.e(e);
+        }
+        return versionCode;
+    }
 }
