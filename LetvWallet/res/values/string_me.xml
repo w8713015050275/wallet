@@ -5,14 +5,14 @@
     <string name="me_real_name_not_authentication">You real name is not authenticated</string>
     <string name="me_vip_level">Membership level</string>
     <string name="me_lelehua">有π</string>
-    <string name="me_lelehua_quick_repayment">quick payment</string>
+    <string name="me_lelehua_quick_repayment">Quick payment</string>
     <string name="me_usr_feedback">Feedback</string>
     <string name="me_lelehua_not_open">Account not active</string>
     <string name="me_create_account_failed">Failed to open account</string>
     <string name="me_usr_nologin">Not logged in</string>
-    <string name="me_create_account_no_phone">The service needs to bind the phone number</string>
+    <string name="me_create_account_no_phone">You need to bind a mobile number to use this service</string>
     <string name="me_lelehua_opening">Activating account</string>
     <string name="me_lelehua_limit">Available amount ￥%1$S</string>
     <string name="me_lelehua_owe_amount">￥%1$S</string>
-    <string name="me_lelehua_unavailable">Failed to open account, please contact customer service.</string>
+    <string name="me_lelehua_unavailable">Failed to create account. Please contact Customer Service for support.</string>
 </resources>
