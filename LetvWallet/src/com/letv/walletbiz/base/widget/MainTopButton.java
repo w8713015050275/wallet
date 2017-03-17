@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.common.util.AccountHelper;
+import com.letv.wallet.common.util.DensityUtils;
 import com.letv.walletbiz.MainActivity;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.util.Action;
@@ -160,23 +161,26 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
 
         imageView = new ImageView(context);
         imageView.setBackground(null);
-        RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(133, 133);
+        RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams((int)DensityUtils.dip2px(38), (int)DensityUtils.dip2px(38));
         imageParams.addRule(RelativeLayout.ABOVE, textView.getId());
-        imageParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        imageParams.addRule(RelativeLayout.CENTER_HORIZONTAL,RelativeLayout.TRUE);
         addView(imageView, imageParams);
 
 
         numberView = new TextView(context);
         RelativeLayout.LayoutParams numberParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         numberParams.addRule(RelativeLayout.ABOVE, textView.getId());
-        numberParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        //numberParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        //numberParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+        numberParams.addRule(RelativeLayout.CENTER_IN_PARENT,RelativeLayout.TRUE);
+        numberParams.bottomMargin=(int)DensityUtils.dip2px(6);
         //初始化的时候隐藏此控件
         numberView.setVisibility(View.GONE);
         numberView.setGravity(Gravity.CENTER);
         numberView.setTextColor(context.getColor(R.color.main_top_button_color));
         addView(numberView, numberParams);
 
-        numberView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        numberView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         numberView.setTypeface(Typeface.DEFAULT_BOLD);
 
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
