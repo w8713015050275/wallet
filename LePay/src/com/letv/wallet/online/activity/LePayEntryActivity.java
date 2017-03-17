@@ -731,14 +731,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     }
 
     private void updatePayPage() {
-        if (mPayPageView == null) {
-            LogHelper.e("[%S] mPayPageView == null", TAG);
-            return;
-        }
         findViewById(mPayPageDialog);
-        if (mPayPageDialog != null) {
-            mPayPageDialog.setStyle(mPayPageView);
-        }
     }
 
     private void showPayPage() {

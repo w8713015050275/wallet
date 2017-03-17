@@ -10,7 +10,7 @@
     <string name="lepay_payment_center">Payment center</string>
     <string name="lepay_payment_price_str">Payment amount：￥%s</string>
     <string name="lepay_payment_available_limit_str">Available amount￥%s</string>
-    <string name="lepay_channel_list_data_error">Loading failed, please try again</string>
+    <string name="lepay_data_error">Loading failed, please try again</string>
     <string name="lepay_payment_money_insufficient">Insufficient amount available</string>
     <string name="lepay_payment_unavailable">Unavailable, please contact customer service.</string>
     <string name="lepay_repayment">Pay again</string>
