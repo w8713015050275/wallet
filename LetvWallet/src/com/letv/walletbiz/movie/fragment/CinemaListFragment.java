@@ -1,5 +1,6 @@
 package com.letv.walletbiz.movie.fragment;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -240,10 +241,10 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
             mDate = bundle.getString(EXTRA_DATE, null);
             mCurrentCityId = bundle.getInt(MovieTicketConstant.EXTRA_CITY_ID, -1);
         }
-        MovieTicketActivity activity = (MovieTicketActivity) getActivity();
-        if (mCurrentCityId == -1 && activity != null) {
-            mCurrentCityId = activity.getCityId();
-            mCurrentCityName = activity.getCityName();
+        Activity activity = getActivity();
+        if ((activity instanceof MovieTicketActivity) && mCurrentCityId == -1 && activity != null) {
+            mCurrentCityId = ((MovieTicketActivity) activity).getCityId();
+            mCurrentCityName = ((MovieTicketActivity) activity).getCityName();
             if (TextUtils.isEmpty(mCurrentCityName)) {
                 mCurrentCityId = -1;
             }
