@@ -4,3 +4,7 @@
 build/
 local.properties
 .externalNativeBuild/
+captures/
+LePay/lint.xml
+LetvWallet/lint.xml
+LetvWalletCommon/lint.xml

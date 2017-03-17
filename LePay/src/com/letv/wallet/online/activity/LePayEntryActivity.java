@@ -1138,6 +1138,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         mChannelRecyclerV.setAdapter(mChannelListAdapter);
     }
 
+    @SuppressWarnings("WrongConstant")
     private int getUid() {
         int uid = -1;
         try {

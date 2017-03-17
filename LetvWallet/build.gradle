@@ -23,7 +23,8 @@ android {
         }
     }
     lintOptions {
-        abortOnError false
+        abortOnError true
+        lintConfig file('lint.xml')
     }
     signingConfigs {
         platform {
@@ -45,6 +46,14 @@ android {
             signingConfig signingConfigs.platform
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (output.outputFile != null && output.outputFile.name.endsWith("apk")) {
+                output.outputFile = new File(output.outputFile.parent,
+                        output.outputFile.name.replace('.apk', '-' + variant.versionName + '.apk').replace(' ', '_'))
+            }
+        }
+    }
 }
 repositories {
     jcenter()
@@ -55,8 +64,8 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':LetvWalletCommon')
-    compile project(':LetvWallet/library/LeuiRecommend')
-    compile project(':LetvWallet/library/letvwalletsigncheck')
+    compile project(':LetvWallet/library:LeuiRecommend')
+    compile project(':LetvWallet/library:letvwalletsigncheck')
 }
 
 def getVersionName(versionCode) {

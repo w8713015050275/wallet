@@ -23,7 +23,8 @@ android {
         }
     }
     lintOptions {
-        abortOnError false
+        abortOnError true
+        lintConfig file('lint.xml')
     }
     signingConfigs {
         platform {
@@ -45,6 +46,14 @@ android {
             signingConfig signingConfigs.platform
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (output.outputFile != null && output.outputFile.name.endsWith("apk")) {
+                output.outputFile = new File(output.outputFile.parent,
+                        output.outputFile.name.replace('.apk', '-' + variant.versionName + '.apk').replace(' ', '_'))
+            }
+        }
+    }
 }
 repositories {
     jcenter()
@@ -54,9 +63,9 @@ repositories {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':LePay/library/secure')
+    compile project(':LePay/library:secure')
     compile project(':LetvWalletCommon')
-    compile project(':LePay/library/letvpaysigncheck')
+    compile project(':LePay/library:letvpaysigncheck')
 
     compile(name: 'lepaysdk', ext: 'aar')
 

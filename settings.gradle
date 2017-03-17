@@ -1,1 +1,35 @@
-include ':LetvWalletCommon', ':LetvWallet', ':LetvWallet/library/LeuiRecommend', ':LetvWallet/library/letvwalletsigncheck', ':LePay', ':LePay/library/letvpaysigncheck', ':LePay/library/secure', ':tools/EnvSetting'
+copyLint()
+include ':LetvWalletCommon', ':LetvWallet', ':LetvWallet/library:LeuiRecommend', ':LetvWallet/library:letvwalletsigncheck', ':LePay', ':LePay/library:letvpaysigncheck', ':LePay/library:secure', './tools:EnvSetting'
+def copyLint() {
+    def version = getVersion("lint.xml")
+    checkProjectLint("LetvWallet/lint.xml", version, "lint.xml")
+    checkProjectLint("LePay/lint.xml", version, "lint.xml")
+    checkProjectLint("LetvWalletCommon/lint.xml", version, "lint.xml")
+}
+def getVersion(dir) {
+    File file = new File(dir)
+    if (!file.exists()) {
+        return null
+    }
+    def reader = file.newReader("UTF-8")
+    reader.readLine()
+    def result = reader.readLine()
+    reader.close()
+    return result
+}
+def checkProjectLint(dir, version, lintFile) {
+    def temp = getVersion(dir)
+    if (temp != version) {
+        println("copy $lintFile to $dir")
+        cpLintToProject(lintFile, dir)
+    }
+}
+def cpLintToProject(from, to) {
+    File fromFile = new File(from)
+    File toFile = new File(to)
+    toFile.withOutputStream {
+        os -> fromFile.withInputStream {
+            ins -> os << ins
+        }
+    }
+}

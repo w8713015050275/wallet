@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- version=1 -->
+<!-- 此文件的原始文件为项目根目录的lint.xml，如果更改此文件请更新上面的version -->
+<lint>
+    <issue id="ProtectedPermissions" severity="warning" />
+    <issue id="MissingTranslation" severity="ignore" />
+    <issue id="ExtraTranslation" severity="warning" />
+    <issue id="AppCompatResource" severity="ignore" />
+    <issue id="MissingQuantity" severity="ignore" />
+    <issue id="ImpliedQuantity" severity="ignore" />
+    <issue id="GradleCompatible" severity="ignore" />
+</lint>
