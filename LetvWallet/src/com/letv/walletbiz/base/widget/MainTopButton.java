@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.walletbiz.MainActivity;
@@ -305,13 +306,15 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
             case 0:
                 accountInfo = (AccountInfo) info;
                 if (accountInfo != null && accountInfo.lelehua != null) {
-                    if (TextUtils.isEmpty(accountInfo.lelehua.available_limit)) {
-                        numberView.setText(String.format(context.getString(R.string.main_top_lelehua_amount), "0"));
-                    } else {
-                        numberView.setText(String.format(context.getString(R.string.main_top_lelehua_amount), accountInfo.lelehua.available_limit));
+                    if (accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED || accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN) {
+                        if (TextUtils.isEmpty(accountInfo.lelehua.available_limit)) {
+                            numberView.setText(String.format(context.getString(R.string.main_top_lelehua_amount), "0"));
+                        } else {
+                            numberView.setText(String.format(context.getString(R.string.main_top_lelehua_amount), accountInfo.lelehua.available_limit));
+                        }
+                        numberView.setVisibility(View.VISIBLE);
+                        imageView.setVisibility(View.GONE);
                     }
-                    numberView.setVisibility(View.VISIBLE);
-                    imageView.setVisibility(View.GONE);
                 }
                 break;
             case 1:
