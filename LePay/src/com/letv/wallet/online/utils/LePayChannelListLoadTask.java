@@ -25,9 +25,12 @@ public class LePayChannelListLoadTask implements Runnable {
     private String mPayInfo;
     private int ERROR_CODE;
 
-    public LePayChannelListLoadTask(LePayOnlineCallback callback, String payInfo) {
-        this.mCallback = callback;
+    public LePayChannelListLoadTask(String payInfo) {
         this.mPayInfo = payInfo;
+    }
+
+    public void setCallback(LePayOnlineCallback callback) {
+        this.mCallback = callback;
     }
 
     private static final int MSG_LOAD_FINISHED = 100;

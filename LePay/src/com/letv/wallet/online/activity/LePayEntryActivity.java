@@ -7,8 +7,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -30,11 +28,9 @@ import com.letv.wallet.common.activity.BaseFragmentActivity;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.CommonConstants;
-import com.letv.wallet.common.util.DensityUtils;
 import com.letv.wallet.common.util.ExecutorHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
-import com.letv.wallet.common.view.DividerGridItemDecoration;
 import com.letv.wallet.common.view.DividerItemDecoration;
 import com.letv.wallet.online.LePayConstants;
 import com.letv.wallet.online.bean.LePayCashierUrlBean;
@@ -48,13 +44,6 @@ import com.letv.wallet.online.utils.LePayOnlineCallback;
 import com.letv.wallet.online.utils.LePayOrderStatusTask;
 import com.letv.wallet.utils.SslUtil;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +73,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private LinearLayoutManager mLinearLayoutManager;
     private LePayChannelListAdapter mChannelListAdapter;
 
-    private boolean isActivityResult, isShowPayFail, isClickReGoPay;
+    private boolean isGoActivition, isActivityResult, isShowPayFail, isClickReGoPay;
     private boolean isFirst = true, isFirstShow = true;
     private String mFrom = LePayConstants.PAY_FROM.OTHER;
 
@@ -200,7 +189,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         if (!TextUtils.isEmpty(activeStatus)) {
             if (LePayConstants.ACTIVE_STATUS.YES.equals(activeStatus)) {
                 // 激活成功后 更新支付列表数据，调起支付
-                loadPayChannel();
+                updatePayChannelData();
                 String decryptUsingStatus = SslUtil.getInstance().decryptData(payStatus);
                 if (!TextUtils.isEmpty(decryptUsingStatus)
                         && LePayConstants.PAY_STATUS.AVAILABLE.equals(decryptUsingStatus)) {
@@ -212,7 +201,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             } else if (LePayConstants.ACTIVE_STATUS.NO.equals(activeStatus)) {
                 // 此时状态有可能为激活状态，因此刷新列表数据
                 showLoadingView();
-                loadPayChannel();
+                updatePayChannelData();
             }
         }
     }
@@ -243,13 +232,25 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                         props.put(Key.Content.getKeyId(), "paymentStatus");
                         Action.uploadCustom(EventType.Exception.getEventId(), Action.PAY_RESULT_EXCEPTION, props);
                     }
+                    //如果是去激活，回来刷新数据
+                    if (isGoActivition) {
+                        isGoActivition = false;
+                        showLoadingView();
+                        updatePayChannelData();
+                    }
                     showPayFailDialog();
                 }
             }
         } else {
             String status = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.PAY_STATUS);
+            //如果是去激活，回来刷新数据
+            if (isGoActivition) {
+                isGoActivition = false;
+                showLoadingView();
+                updatePayChannelData();
+            }
             if (!TextUtils.isEmpty(status)) {
-                if (!TextUtils.isEmpty(status) && LePayConstants.PAY_STATUS.FAIL.equals(status)) {
+                if (LePayConstants.PAY_STATUS.FAIL.equals(status)) {
                     showPayFailDialog();
                 }
             }
@@ -333,6 +334,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             intent.putExtra(CommonConstants.EXTRA_URL, url);
             intent.putExtra(LePayConstants.ApiIntentExtraKEY.CHANNEL_DATA_KEY, channelBean);
             startActivityForResult(intent, WEB_FORRESULT);
+            isGoActivition = true;
             LogHelper.d("[%S] start goActivation", TAG);
         } catch (Exception e) {
             e.printStackTrace();
@@ -413,14 +415,30 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     }
 
     // ------ request data ---------------
+    private void updatePayChannelData() {
+        if (mPayChannelTask == null) {
+            mPayChannelTask = new LePayChannelListLoadTask(this.mExternLePayInfo);
+        }
+        mPayChannelTask.setCallback(new ChannelListCallback(false));
+        ExecutorHelper.getExecutor().runnableExecutor(mPayChannelTask);
+    }
+
     private void loadPayChannel() {
         if (mPayChannelTask == null) {
-            mPayChannelTask = new LePayChannelListLoadTask(new ChannelListCallback(), this.mExternLePayInfo);
+            mPayChannelTask = new LePayChannelListLoadTask(this.mExternLePayInfo);
         }
+        mPayChannelTask.setCallback(new ChannelListCallback(true));
         ExecutorHelper.getExecutor().runnableExecutor(mPayChannelTask);
     }
 
     protected class ChannelListCallback implements LePayOnlineCallback {
+
+        private boolean mReturn = false;
+
+        public ChannelListCallback(boolean isReturn) {
+            this.mReturn = isReturn;
+        }
+
         @Override
         public void onSuccess(Object result) {
             if (isFinishing()) return;
@@ -429,7 +447,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             if (result != null) {
                 response = (BaseResponse<LePayChannelListBean>) result;
             }
-            updateData(response);
+            updateData(response, mReturn);
         }
 
         @Override
@@ -444,7 +462,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                 case LePayOnlineCallback.ERROR_NETWORK:
                 case LePayOnlineCallback.ERROR_DATA:
                     Toast.makeText(getBaseContext(), R.string.lepay_data_error, Toast.LENGTH_SHORT).show();
-                    if (mLePayChannelListBean == null) {
+                    if (this.mReturn && mLePayChannelListBean == null) {
                         setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
                     }
                     break;
@@ -452,7 +470,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                     if (response == null) {
                         Toast.makeText(getBaseContext(), R.string.lepay_data_error, Toast.LENGTH_SHORT).show();
                         //未知错误
-                        if (mLePayChannelListBean == null) {
+                        if (this.mReturn && mLePayChannelListBean == null) {
                             setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
                         }
                         return;
@@ -465,7 +483,9 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                             Toast.makeText(getBaseContext(), response.errmsg, Toast.LENGTH_SHORT).show();
                             break;
                     }
-                    setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
+                    if (this.mReturn) {
+                        setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
+                    }
                     break;
             }
         }
@@ -600,8 +620,10 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                 return;
             }
             if (LePayConstants.PAY_STATUS.SUCCESS.equals(response.data.getStatus())) {
+                hideSelectStatusDialog();
                 setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_SUCCESSED);
             } else if (LePayConstants.PAY_STATUS.FAIL.equals(response.data.getStatus())) {
+                hideSelectStatusDialog();
                 showPayFailDialog();
             } else {
                 showSelectStatusDialog();
@@ -628,6 +650,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                         Toast.makeText(getBaseContext(), R.string.lepay_data_error, Toast.LENGTH_SHORT).show();
                         //未知错误
                         if (mLePayChannelListBean == null) {
+                            hideSelectStatusDialog();
                             setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
                         }
                         return;
@@ -647,7 +670,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
 
     // ------ UI ----------
 
-    private void updateData(BaseResponse<LePayChannelListBean> response) {
+    private void updateData(BaseResponse<LePayChannelListBean> response, boolean isReturn) {
         boolean dataError = false;
         if (response == null) {
             LogHelper.e("[%S] ChannelListCallback response == null", TAG);
@@ -661,7 +684,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
         if (dataError) {
             Toast.makeText(getBaseContext(), R.string.lepay_data_error, Toast.LENGTH_SHORT).show();
-            if (mLePayChannelListBean == null) {
+            if (isReturn && mLePayChannelListBean == null) {
                 setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
             }
             return;
@@ -725,6 +748,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         if (mPayPageDialog == null) {
             mPayPageDialog = new LeBottomSheet(this);
             mPayPageDialog.setStyle(mPayPageView);
+            mPayPageDialog.setCancelable(false);
             mPayPageDialog.setCanceledOnTouchOutside(false);
             findViewById(mPayPageDialog);
         }
@@ -759,6 +783,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         if (mSelectStatusDialog == null) {
             String title = getString(R.string.lepay_user_select_pay_result_title);
             mSelectStatusDialog = new LeBottomSheet(this);
+            mSelectStatusDialog.setCancelable(false);
             mSelectStatusDialog.setCanceledOnTouchOutside(false);
             mSelectStatusDialog.setStyle(LeBottomSheet.BUTTON_DEFAULT_STYLE,
                     new SelectStatusButtonOnClickListener(),
@@ -769,7 +794,9 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                     }, title,
                     null, null, getColor(R.color.colorBtnBlue), false);
         }
-        mSelectStatusDialog.show();
+        if (!mSelectStatusDialog.isShowing()) {
+            mSelectStatusDialog.show();
+        }
         isShowPayFail = true;
     }
 
@@ -787,12 +814,17 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
     }
 
+    private void hideSelectStatusDialog() {
+        if (mSelectStatusDialog != null && mSelectStatusDialog.isShowing()) {
+            mSelectStatusDialog.dismiss();
+        }
+    }
+
     private class SelectStatusButtonOnClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             // 查询订单状态
-            mSelectStatusDialog.dismiss();
             loadOrderStatus(mOrderNo);
         }
     }

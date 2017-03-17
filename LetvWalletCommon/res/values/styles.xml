@@ -50,7 +50,7 @@
         <item name="navigationIcon">@drawable/ic_wallet_action_back</item>
     </style>
 
-    <style name="Wallet.Toolbar.Title" parent="@*android:style/TextAppearance">
+    <style name="Wallet.Toolbar.Title" parent="@android:style/TextAppearance">
         <item name="android:background">@color/wallet_toolbar_titleBg_color</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/wallet_toolbar_titleTv_color</item>
