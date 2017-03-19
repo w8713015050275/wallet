@@ -386,13 +386,14 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     }
 
     private void updateTips(AccountInfo.Tips[] tips){
+        mViewTips.removeAllViews();
+
         if (tips == null || tips.length == 0 || accountInfo == null) {
             return;
         }
 
         accountInfo.tips = tips;
 
-        mViewTips.removeAllViews();
         LinearLayout child ;
         TextView tvTipTitle , tvTipDesc ;
         LayoutInflater inflater = LayoutInflater.from(getActivity());
