@@ -82,9 +82,7 @@ public class AccountWebActivity extends BaseWebViewActivity implements AccountHe
 
     @Override
     public void onAccountLogout() {
-        if (TextUtils.isEmpty(mUrl)) {
-            finish(); //换账户后，导致type和当前账户状态不统一 ；
-        }
+        finish(); //换账户后；
     }
 
     private boolean checkNetWork(){

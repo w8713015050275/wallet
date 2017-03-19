@@ -11,7 +11,6 @@ import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.common.activity.BaseWebViewActivity;
 import com.letv.wallet.common.util.AccountHelper;
-import com.letv.wallet.common.util.CommonConstants;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.view.BlankPage;
@@ -76,9 +75,7 @@ public class AccountWebActivity extends BaseWebViewActivity implements AccountHe
 
     @Override
     public void onAccountLogout() {
-        if (TextUtils.isEmpty(mUrl)) {
-            finish(); //换账户后，导致type和当前账户状态不统一 ；
-        }
+        finish(); //换账户后，返回上一页；
     }
 
     private boolean checkNetWork(){
