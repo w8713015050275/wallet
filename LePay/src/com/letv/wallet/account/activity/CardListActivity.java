@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -114,9 +113,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
             return;
         }
 
-        if (isRedirectExpired()) {
-            redirect(new String[]{AccountConstant.JTYPE_ADD_CARD, AccountConstant.JTYPE_SSO_BIND_MOBILE});
-        }
+        AccountUtils.checkRedirectExpired();
 
         String qType = null;
         if (checkCreateAccount(false) && checkVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
@@ -289,38 +286,6 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         }
     }
 
-    private void redirect(final String[] jTypes){
-        if (redirectTask == null) {
-            redirectTask = new RedirectTask(jTypes, new AccountCommonCallback<RedirectURL>() {
-                @Override
-                public void onSuccess(RedirectURL result) {
-                    redirectTask = null;
-                    redirectURL = result;
-                    lastRedirect = System.currentTimeMillis();
-                }
-
-                @Override
-                public void onError(int errorCode, String errorMsg) {
-                    redirectTask = null;
-                }
-
-                @Override
-                public void onNoNet() {
-                    redirectTask = null;
-                }
-            });
-            ExecutorHelper.getExecutor().runnableExecutor(redirectTask);
-        }
-
-    }
-
-    private  long lastRedirect = 0;
-    public static final int REDIRECT_CACHE_EXPIRE =  1000 * 60 * 10;
-
-    private boolean isRedirectExpired() {
-        return (redirectURL == null) || (System.currentTimeMillis() - lastRedirect) >= REDIRECT_CACHE_EXPIRE;
-    }
-
     private boolean checkCreateAccount(boolean isForceCreate){
         hasCreateAccount = AccountUtils.hasCreatedAccount();
         if (!hasCreateAccount && isForceCreate) {
@@ -363,18 +328,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
     }
 
     private void jumpWeb(String jType) {
-        if (TextUtils.isEmpty(jType)) {
-            return;
-        }
-        String url = redirectURL == null ? null : redirectURL.getUrl(jType);
-        Intent intent = new Intent(this, AccountWebActivity.class);
-        if (!TextUtils.isEmpty(jType)) {
-            intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
-        }
-        if (!TextUtils.isEmpty(url)) {
-            intent.putExtra(CommonConstants.EXTRA_URL, url);
-        }
-        startActivity(intent);
+        AccountUtils.goToAccountWeb(this, jType);
     }
 
     private boolean checkAccountStatus(){

@@ -96,9 +96,9 @@ public class AccountUtils {
         LePayAccountManager.getInstance().redirect(jTypes, new LePayCommonCallback<RedirectURL>() {
             @Override
             public void onSuccess(RedirectURL result) {
-                lastRedirect = System.currentTimeMillis();
                 if (result != null) {
                     redirectURL = result;
+                    lastRedirect = System.currentTimeMillis();
                 }
             }
 

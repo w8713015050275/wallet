@@ -30,6 +30,7 @@ import com.letv.wallet.account.ui.IdNoEditText;
 import com.letv.wallet.account.ui.PhoneEditText;
 import com.letv.wallet.account.ui.RealNameEditText;
 import com.letv.wallet.account.ui.SmsCodeEditText;
+import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.account.utils.ActionUtils;
 import com.letv.wallet.account.utils.AgreementUrlSpan;
 import com.letv.wallet.base.util.Action;
@@ -110,8 +111,9 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
+        AccountUtils.checkRedirectExpired();
     }
 
     private static final String SYMBOL_AND = "&";
@@ -204,6 +206,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                     verifyAccountTask = null;
                     hideVerifyDialog();
                     setResult(RESULT_OK);
+                    AccountUtils.goToAccountWeb(AccountVerifyActivity.this, AccountConstant.JTYPE_SET_PAY_PWD);
                     finish();
                 }
 
@@ -355,6 +358,9 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
             }
         }));
     }
+
+
+
 
     @Override
     public void onAccountLogin() {
