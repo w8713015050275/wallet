@@ -3,11 +3,11 @@ package com.letv.walletbiz;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.google.android.gms.analytics.ExceptionParser;
 import com.google.android.gms.analytics.ExceptionReporter;
 import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.letv.tracker2.agnes.Agnes;
 import com.letv.tracker2.enums.Area;
@@ -82,6 +82,8 @@ public class WalletApplication extends BaseApplication {
             mTracker.setAppVersion(AppUtils.getAppVersionName(this));
             //增加自定义维度"App版本号"
             mTracker.set("&cd1", AppUtils.getAppFullVersionName(this));
+            //自定义维度"系统版本号"
+            mTracker.set("&cd2", Build.ID);
         }
         return mTracker;
     }

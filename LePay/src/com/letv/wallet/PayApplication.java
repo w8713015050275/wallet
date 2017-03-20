@@ -3,6 +3,7 @@ package com.letv.wallet;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.google.android.gms.analytics.ExceptionParser;
 import com.google.android.gms.analytics.ExceptionReporter;
@@ -67,6 +68,8 @@ public class PayApplication extends BaseApplication {
             mTracker.setAppVersion(AppUtils.getAppVersionName(this));
             //增加自定义维度"App版本号"
             mTracker.set("&cd1", AppUtils.getAppFullVersionName(this));
+            //自定义维度"系统版本号"
+            mTracker.set("&cd2", Build.ID);
         }
         return mTracker;
     }
