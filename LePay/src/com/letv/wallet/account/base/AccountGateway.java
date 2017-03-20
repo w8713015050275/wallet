@@ -7,7 +7,6 @@ import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.account.utils.RequestUtils;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.online.LePayConstants;
-import com.letv.wallet.online.activity.LePayEntryActivity;
 import com.letv.wallet.online.bean.LePayCashierUrlBean;
 import com.letv.wallet.online.bean.LePayChannelListBean;
 import com.letv.wallet.online.bean.LePayOrderStatusBean;
@@ -124,6 +123,7 @@ public class AccountGateway {
     /**
      * 实名认证
      */
+    private static final int VERIFY_CONNECT_TIME_OUT = 1000 * 10; // 连接超时时间10s
     public static BaseResponse verifyAccount(String accountName, String identityNum, String bankNo, String mobile, String msgCode) {
         AccountBaseReqParams params = buildBaseParams(ACCOUNT_VERIFY);
         SslUtil sslUtil = SslUtil.getInstance();
@@ -132,6 +132,7 @@ public class AccountGateway {
         params.addBodyParameter(KEY_BANK_NO, sslUtil.encryptData(bankNo));
         params.addBodyParameter(KEY_MOBILE, sslUtil.encryptData(mobile));
         params.addBodyParameter(KEY_MSG_CODE, msgCode);
+        params.setConnectTimeout(VERIFY_CONNECT_TIME_OUT);
         return postSync(params, new TypeToken<BaseResponse<String>>() {
         }.getType());
     }
