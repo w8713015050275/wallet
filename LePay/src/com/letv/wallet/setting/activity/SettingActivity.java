@@ -479,7 +479,7 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
             } else {
                 hideBlankPage();
             }
-            if (!AccountUtils.hasVerifyAccount()) {
+            if (!AccountUtils.hasVerifyAccount() || AccountConstant.BASIC_ACCOUNT_PWD_STATE_UNSETTLED.equals(mBasicAccount.pwdStatus)) {
                 showLoadingView();
                 if (mAccountQueryTask == null) {
                     mAccountQueryTask = new AccountQueryTask(AccountConstant.QTYPE_BASIC,
