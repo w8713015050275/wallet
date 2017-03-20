@@ -281,6 +281,10 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
         if (button != null) {
             button.resetDrawable();
         }
+        MainTopButton leButton = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_LELEHUA);
+        if (leButton != null) {
+            leButton.resetDrawable();
+        }
         //设置为空是为了，登出之后进入，要重新查询数据
         lastResult = null;
     }
