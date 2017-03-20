@@ -161,9 +161,9 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
 
         imageView = new ImageView(context);
         imageView.setBackground(null);
-        RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams((int)DensityUtils.dip2px(38), (int)DensityUtils.dip2px(38));
+        RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams((int) DensityUtils.dip2px(38), (int) DensityUtils.dip2px(38));
         imageParams.addRule(RelativeLayout.ABOVE, textView.getId());
-        imageParams.addRule(RelativeLayout.CENTER_HORIZONTAL,RelativeLayout.TRUE);
+        imageParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         addView(imageView, imageParams);
 
 
@@ -172,8 +172,8 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
         numberParams.addRule(RelativeLayout.ABOVE, textView.getId());
         //numberParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         //numberParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        numberParams.addRule(RelativeLayout.CENTER_IN_PARENT,RelativeLayout.TRUE);
-        numberParams.bottomMargin=(int)DensityUtils.dip2px(6);
+        numberParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        numberParams.bottomMargin = (int) DensityUtils.dip2px(6);
         //初始化的时候隐藏此控件
         numberView.setVisibility(View.GONE);
         numberView.setGravity(Gravity.CENTER);
@@ -206,15 +206,16 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
             return;
         } else {
             if (this.bean.name.equals(TOP_KEY_LELEHUA)) {
-                if (null != accountInfo && null != accountInfo.lelehua) {
-                    if (AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity) context, null)) {
+
+                if (AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity) context, null)) {
+                    Intent intent = new Intent(context, AccountWebActivity.class);
+                    if (null != accountInfo && null != accountInfo.lelehua) {
                         String jType = AccountUtils.getLeLeHuaJtype(AccountUtils.LELEHUA_HOME, accountInfo.lelehua.active_status);
-                        Intent intent = new Intent(context, AccountWebActivity.class);
                         if (!TextUtils.isEmpty(jType)) {
                             intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
                         }
-                        context.startActivity(intent);
                     }
+                    context.startActivity(intent);
                 }
                 Action.uploadClick(Action.QUICK_ENTRY_LELEHUA_CLICK);
             } else if (this.bean.name.equals(TOP_KEY_CARD)) {
