@@ -80,7 +80,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogHelper.d("[%S] %s", TAG, "onCreate");
         registerNetWorkReceiver();
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
         mPayPageView = View.inflate(getApplicationContext(), R.layout.lepay_channel_view, null);
@@ -734,7 +733,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             return;
         }
         if (mPriceTv != null) {
-            String price = String.format(getString(R.string.lepay_payment_price_str), mLePayChannelListBean.getPrice());
+            String price = String.format(getString(R.string.price_unit), mLePayChannelListBean.getPrice());
             mPriceTv.setText(price);
         }
         List<LePayChannelBean> lepayChannelBeen = mLePayChannelListBean.getChannels();

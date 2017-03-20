@@ -8,7 +8,7 @@
 
     <string name="lepay_channel_cancel">取消</string>
     <string name="lepay_payment_center">支付中心</string>
-    <string name="lepay_payment_price_str">支付金额：￥%s</string>
+    <string name="lepay_payment_price_label">应付金额</string>
     <string name="lepay_payment_available_limit_str">可用额度￥%s</string>
     <string name="lepay_data_error">加载失败，请重试</string>
     <string name="lepay_payment_money_insufficient">可用额度不足</string>

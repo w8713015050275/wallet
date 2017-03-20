@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/lepay_channel_icon_iv"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="left|center_vertical"
             android:background="@drawable/lepay_channel_item_default_icon" />
 

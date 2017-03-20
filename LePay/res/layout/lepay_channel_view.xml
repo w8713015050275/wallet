@@ -11,25 +11,48 @@
         android:id="@+id/pay_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
         android:layout_marginLeft="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
         android:layout_marginTop="18dp"
         android:textColor="@color/channel_list_tv_primary_color"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/pay_price_tv"
-        android:layout_width="wrap_content"
+    <View
+        style="@style/Divider_HorizontalLine_Style"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"
         android:layout_marginLeft="@dimen/margin_default"
         android:layout_marginRight="@dimen/margin_default"
-        android:layout_marginTop="2dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/lepay_pay_price_tv_color"
-        android:textSize="14sp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/pay_price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/lepay_payment_price_label"
+            android:textColor="@color/lepay_pay_price_tv_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/pay_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:maxLines="1"
+            android:textColor="@color/lepay_pay_price_tv_color"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <View
         style="@style/Divider_HorizontalLine_Style"

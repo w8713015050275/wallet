@@ -6,9 +6,10 @@
     <string name="pay_no_network">"No network available. Please connect to a network and try again."</string>
     <string name="pay_no_network_str">Network connection failed</string>
 
+    <string name="price_unit" translatable="false">￥%s</string>
     <string name="lepay_channel_cancel">Cancel</string>
     <string name="lepay_payment_center">Payment center</string>
-    <string name="lepay_payment_price_str">Payment amount：￥%s</string>
+    <string name="lepay_payment_price_label">Amount payable</string>
     <string name="lepay_payment_available_limit_str">Available credit￥%s</string>
     <string name="lepay_data_error">Failed to load page. Please try again.</string>
     <string name="lepay_payment_money_insufficient">Available credit is not enough.</string>
