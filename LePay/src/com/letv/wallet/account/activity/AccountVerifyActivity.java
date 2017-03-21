@@ -70,6 +70,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     private AccountVerifyTask verifyAccountTask;
 
     private String from;
+    private boolean hasNavigation = false;
 
     public static final String EXTRA_ACTION_BAR_HAS_NAVIGATION= "hasNavigationIcon";
     public static final String EXTRA_ACTION_BAR_TITLE_COLOR = "titleTextColor";
@@ -132,6 +133,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         Drawable iconNavigation = null;
         if (getIntent().getBooleanExtra(EXTRA_ACTION_BAR_HAS_NAVIGATION, true)) {
             iconNavigation = getDrawable(R.drawable.ic_wallet_action_back);
+            hasNavigation = true;
         }
         toolbar.setNavigationIcon(iconNavigation);
         int titleColor = parseColor(getIntent().getStringExtra(EXTRA_ACTION_BAR_TITLE_COLOR));
@@ -455,8 +457,12 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         }));
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        if (hasNavigation) {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public void onAccountLogin() {
