@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.AccountInfo;
@@ -214,8 +215,10 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
                         if (!TextUtils.isEmpty(jType)) {
                             intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
                         }
+                        context.startActivity(intent);
+                    }else{
+                        Toast.makeText(context,R.string.empty_network_error,Toast.LENGTH_SHORT).show();
                     }
-                    context.startActivity(intent);
                 }
                 Action.uploadClick(Action.QUICK_ENTRY_LELEHUA_CLICK);
             } else if (this.bean.name.equals(TOP_KEY_CARD)) {

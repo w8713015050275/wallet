@@ -45,6 +45,7 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
     private void init(Context context) {
         this.context = context;
 
+
         setOrientation(LinearLayout.HORIZONTAL);
         //初始化的时候，不显示
         setVisibility(View.GONE);
@@ -193,6 +194,7 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
      */
     public void loadAccountData() {
         loadLelehuaAccountData();
+
         if (!isloadAccountData) {
             if (AccountHelper.getInstance().isLogin(context) && NetworkHelper.isNetworkAvailable()) {
                 isloadAccountData = true;
@@ -215,6 +217,10 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
                     public void queryAccountError() {
                         isloadAccountData = false;
                         setBankButtonClick(true);
+                        MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_BANK);
+                        if (null != button) {
+                            button.resetDrawable();
+                        }
                     }
                 });
             }
@@ -250,6 +256,10 @@ public class MainTopLayout extends LinearLayout implements AccountHelper.OnAccou
                     public void queryAccountError() {
                         isloadLelehuaAccountData = false;
                         setLelehuaButtonClick(true);
+                        MainTopButton button = getMainTopButton(actualButtonNumber, MainTopButton.TOP_KEY_LELEHUA);
+                        if (null != button) {
+                            button.resetDrawable();
+                        }
                     }
                 });
             }
