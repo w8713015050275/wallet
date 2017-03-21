@@ -1,5 +1,11 @@
 package com.letv.wallet.common.util;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+
+import static android.content.Context.CONTEXT_IGNORE_SECURITY;
+
 /**
  * Created by zhuchuntao on 17-2-22.
  */
@@ -44,4 +50,19 @@ public class EnvUtil {
         this.isLePayTest = isLePayTest;
     }
 
+    public String getDevelopUrl(Context context){
+        Context targetAPPContext = null;
+        try {
+            targetAPPContext = context.createPackageContext("com.letv.wallet.evmsettingapp", CONTEXT_IGNORE_SECURITY);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (targetAPPContext != null) {
+            SharedPreferences mPreferences = targetAPPContext.getSharedPreferences("wallet_pay", Context.MODE_PRIVATE);
+            if (mPreferences != null) {
+                return mPreferences.getString("develop_url", null);
+            }
+        }
+        return null;
+    }
 }

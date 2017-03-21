@@ -9,6 +9,7 @@ import android.content.pm.PermissionInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +23,15 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_CODE = 1;
+    private static final String DEVELOP_URL = "https://test-wallet.scloud.letv.com";
 
     public static final String WALLET_PACKAGE = "com.letv.walletbiz";
     public static final String LEPAY_PACKAGE = "com.letv.wallet";
 
     public static final String WALLET_PAY = "wallet_pay";
+
+    public static final String DEVELOP_URL_KEY = "develop_url";
+
     public static final String WALLET_KEY = "wallet";
     public static final String WALLETBIZ_KEY = "walletbiz";
     public static final boolean PRODUCT = false;
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.develop_wallet:
                         saveDate(WALLET_KEY, DEVELOP);
+                        saveDevelopUrl(DEVELOP_URL_KEY,DEVELOP_URL);
                         break;
                 }
             }
@@ -91,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.develop_walletbiz:
                         saveDate(WALLETBIZ_KEY, DEVELOP);
+                        saveDevelopUrl(DEVELOP_URL_KEY,DEVELOP_URL);
                         break;
                 }
             }
@@ -121,17 +128,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveDate(String key, boolean value) {
-        sp.edit().putBoolean(key, value).commit();
+        if(sp != null){
+            sp.edit().putBoolean(key, value).commit();
+        }
+    }
+
+    private void saveDevelopUrl(String key, String url){
+        if(sp != null){
+            if(TextUtils.isEmpty(sp.getString(DEVELOP_URL_KEY,null))){
+                sp.edit().putString(key,url).commit();
+            }
+        }
     }
 
     private void killWallet(String packageName){
-       try {
-           ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-           activityManager.killBackgroundProcesses(packageName);
-       }catch (Exception e){
-           e.printStackTrace();
-           Toast.makeText(this, getString(R.string.kill_error_msg)+e.getMessage(), Toast.LENGTH_LONG).show();
-       }
+        try {
+            ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+            activityManager.killBackgroundProcesses(packageName);
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(this, getString(R.string.kill_error_msg)+e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

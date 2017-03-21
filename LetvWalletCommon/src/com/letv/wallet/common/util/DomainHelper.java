@@ -1,5 +1,6 @@
 package com.letv.wallet.common.util;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.letv.domain.utils.LeDomainManager;
@@ -47,11 +48,12 @@ public class DomainHelper {
             LogHelper.d("[%s] host is null", TAG);
             host = null;
         }
-        String packageName = BaseApplication.getApplication().getPackageName();
+        Context context = BaseApplication.getApplication();
+        String packageName = context.getPackageName();
         if("com.letv.wallet".equals(packageName) && EnvUtil.getInstance().isLePayTest()){
-            return "https://test-wallet.scloud.letv.com";
+            return EnvUtil.getInstance().getDevelopUrl(context);
         }else if("com.letv.walletbiz".equals(packageName) && EnvUtil.getInstance().isWalletTest()){
-            return "https://test-wallet.scloud.letv.com";
+            return EnvUtil.getInstance().getDevelopUrl(context);
         }else{
             return host;
         }
