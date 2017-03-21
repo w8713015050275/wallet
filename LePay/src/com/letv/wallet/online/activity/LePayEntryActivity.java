@@ -309,7 +309,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             Action.uploadClick(Action.PAY_PAGE_PAY_CLICK, props);
             switch (channelBean.getSourcing()) {
                 case LePayConstants.PAY_CHANNEL.BOSS_PAY:
-                    startBossPay(channelBean.getChannelId(), mExternLePayInfo);
+                    startBossPay(channelBean, mExternLePayInfo);
                     break;
                 case LePayConstants.PAY_CHANNEL.FINANCE_PAY:
                     loadCashierUrlChannel(channelBean);
@@ -356,39 +356,44 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
     }
 
-    private void startBossPay(int channelId, String payInfo) {
-        String channelStr = Constants.ILepayChannel.alipay_channelId;
-        switch (channelId) {
-            case LePayConstants.PAY_CHANNEL.CHANNEL_ALIPAY:
-                channelStr = Constants.ILepayChannel.alipay_channelId;
-                break;
-            case LePayConstants.PAY_CHANNEL.CHANNEL_WXPAY:
-                channelStr = Constants.ILepayChannel.wx_channelId;
+    private void startBossPay(LePayChannelBean channelBean, String payInfo) {
+        switch (channelBean.getActive()) {
+            case LePayConstants.PAY_ACTIVE.AVAILABLE:
+                int channelId = channelBean.getChannelId();
+                String channelStr = Constants.ILepayChannel.alipay_channelId;
+                switch (channelId) {
+                    case LePayConstants.PAY_CHANNEL.CHANNEL_ALIPAY:
+                        channelStr = Constants.ILepayChannel.alipay_channelId;
+                        break;
+                    case LePayConstants.PAY_CHANNEL.CHANNEL_WXPAY:
+                        channelStr = Constants.ILepayChannel.wx_channelId;
+                        break;
+                }
+                LogHelper.d("[%S] start boss pay", TAG);
+                LePayApi.createGetdirectpay(this, channelStr, payInfo, new LePay.ILePayCallback() {
+
+                    @Override
+                    public void payResult(ELePayState eLePayState, String s) {
+                        mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
+                        if (eLePayState != null) {
+                            if (ELePayState.OK.equals(eLePayState)) {
+                                mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_SUCCESSED;
+                                setReturnResult(mPayReturnResult);
+                            } else if (ELePayState.FAILT.equals(eLePayState)) {
+                                mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
+                            } else if (ELePayState.CANCEL.equals(eLePayState)) {
+                                mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_CANCLE;
+                            } else if (ELePayState.NONETWORK.equals(eLePayState)) {
+                            }
+                            if (eLePayState != ELePayState.OK) {
+                                showPayFailDialog();
+                                LogHelper.e("[%S] %s", TAG, "ELePayState == " + mPayReturnResult);
+                            }
+                        }
+                    }
+                });
                 break;
         }
-        LogHelper.d("[%S] start boss pay", TAG);
-        LePayApi.createGetdirectpay(this, channelStr, payInfo, new LePay.ILePayCallback() {
-
-            @Override
-            public void payResult(ELePayState eLePayState, String s) {
-                mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
-                if (eLePayState != null) {
-                    if (ELePayState.OK.equals(eLePayState)) {
-                        mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_SUCCESSED;
-                        setReturnResult(mPayReturnResult);
-                    } else if (ELePayState.FAILT.equals(eLePayState)) {
-                        mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
-                    } else if (ELePayState.CANCEL.equals(eLePayState)) {
-                        mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_CANCLE;
-                    } else if (ELePayState.NONETWORK.equals(eLePayState)) {
-                    }
-                    if (eLePayState != ELePayState.OK) {
-                        showPayFailDialog();
-                        LogHelper.e("[%S] %s", TAG, "ELePayState == " + mPayReturnResult);
-                    }
-                }
-            }
-        });
     }
 
     public void setReturnResult(int result) {
