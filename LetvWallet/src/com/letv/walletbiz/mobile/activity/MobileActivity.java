@@ -239,7 +239,11 @@ public class MobileActivity extends BaseWalletFragmentActivity implements
         getPhoneInfo();
         if (TextUtils.isEmpty(mDividerNumber)) {
             if (mPhoneEdittext != null && !TextUtils.isEmpty(mPhoneEdittext.getMobileNumber())) {
-                getContactNameAsyncTask(mPhoneEdittext.getMobileNumber());
+                // 检测编辑的号码为手机号获取联系人姓名
+                String number = PhoneNumberUtils.checkPhoneNumber(mPhoneEdittext.getMobileNumber(), false);
+                if (!TextUtils.isEmpty(number)) {
+                    getContactNameAsyncTask(mPhoneEdittext.getMobileNumber());
+                }
             }
         }
         if (!isLoadRecordNumber && !isChangedNumber) {
