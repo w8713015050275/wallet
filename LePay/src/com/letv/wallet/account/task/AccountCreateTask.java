@@ -8,12 +8,17 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import com.letv.tracker2.enums.Key;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.base.AccountGateway;
 import com.letv.wallet.account.utils.AccountUtils;
+import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.NetworkHelper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lijunying on 16-12-26.
@@ -27,6 +32,9 @@ public class AccountCreateTask implements Runnable  {
     public static final int SUCCESS = 1;
     public static final int ERROR = 2;
     public static final int NONET = 3;
+
+    public static final String FAIL_NO_PHONE = "no_phone";
+    public static final String FAIL_OTHER = "other";
 
     private int errorCode ;
 
@@ -75,6 +83,7 @@ public class AccountCreateTask implements Runnable  {
     public void run() {
         if (TextUtils.isEmpty(AccountHelper.getInstance().getPhone())) {
             onError(AccountConstant.RspCode.ERRNO_MOBILE_EMPTY, null);
+            uploadData(FAIL_NO_PHONE);
             return;
         }
 
@@ -97,6 +106,7 @@ public class AccountCreateTask implements Runnable  {
             onSuccess(response.data);
         } else {
             onError(response.errno, response.errmsg);
+            uploadData(FAIL_OTHER);
         }
     }
 
@@ -140,6 +150,13 @@ public class AccountCreateTask implements Runnable  {
         void onSuccess(Bundle bundle);
         void onFailure(int errorCode, String errorMsg);
     }
+
+    private void uploadData(String reason){
+        Map<String, Object> props = new HashMap<String, Object>();
+        props.put(Key.Content.getKeyId(), reason);
+        Action.uploadCustom(Action.EVENT_TYPE_FAIL, Action.ACCOUNT_CREATE_FAIL, props);
+    }
+
 
 
 

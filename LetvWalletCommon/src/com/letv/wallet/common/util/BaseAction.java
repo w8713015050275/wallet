@@ -43,6 +43,8 @@ public abstract class BaseAction {
 
     public static final String EVENT_TYPE_VERIFY = "verify";
 
+    public static final String EVENT_TYPE_FAIL = "fail";
+
 
     static class ActionThreadFactory implements ThreadFactory {
         private static final String NAME = "USER_ACTION";

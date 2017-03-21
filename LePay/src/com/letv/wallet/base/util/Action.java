@@ -29,6 +29,8 @@ public class Action extends BaseAction {
     //实名认证
     public static final String ACCOUNT_VERIFY_PAGE_EXPOSE = "8.3.1";
     public static final String ACCOUNT_VERIFY_PAGE_VERIFY = "8.3.2"; // 实名认证成功（自定义事件）
+    public static final String ACCOUNT_VERIFY_PAGE_FAIL = "8.3.2.1"; // 实名认证失败时
+    public static final String ACCOUNT_CREATE_FAIL= "8.3.7"; // 金融开户失败时
     //卡列表
     public static final String ACCOUNT_CARD_LIST_PAGE_EXPOSE = "11.3.4";
     public static final String ACCOUNT_CARD_LIST_ITEM_CLICK = "11.3.5";

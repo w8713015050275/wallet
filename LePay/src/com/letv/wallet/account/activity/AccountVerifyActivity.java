@@ -293,6 +293,10 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
 
                 @Override
                 public void onError(int errorCode, String errorMsg) {
+                    Map<String, Object> props = new HashMap<String, Object>();
+                    props.put(Key.From.getKeyId(), from);
+                    Action.uploadCustom(Action.EVENT_TYPE_FAIL, Action.ACCOUNT_VERIFY_PAGE_FAIL, props);
+
                     verifyAccountTask = null;
                     hideVerifyDialog();
                     if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
