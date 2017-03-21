@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import com.letv.wallet.account.LePayAccountManager;
 import com.letv.wallet.account.LePayCommonCallback;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
+import com.letv.wallet.common.BaseApplication;
 import com.letv.wallet.common.activity.BaseWebViewActivity;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.view.BlankPage;
+import com.letv.walletbiz.R;
 
 /**
  * Created by lijunying on 17-3-3.
@@ -119,6 +122,9 @@ public class AccountWebActivity extends BaseWebViewActivity implements AccountHe
                 hideLoadingView();
                 if (errorCode == AccountConstant.RspCode.ERRNO_NO_NETWORK) {
                     showBlankPage(BlankPage.STATE_NO_NETWORK);
+                }else if(errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED){
+                    Toast.makeText(BaseApplication.getApplication(), R.string.account_login_expired, Toast.LENGTH_SHORT).show();
+                    finish(); //token 过期，finish返回上界面
                 }else {
                     showNetErrorBlankPage();
                     LogHelper.e("redirect jType = "+ jType + " onError = " + errorCode);

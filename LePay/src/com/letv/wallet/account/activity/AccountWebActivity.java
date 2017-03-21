@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
+import com.letv.wallet.PayApplication;
+import com.letv.wallet.R;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.RedirectURL;
 import com.letv.wallet.account.task.AccountCommonCallback;
@@ -110,7 +113,13 @@ public class AccountWebActivity extends BaseWebViewActivity implements AccountHe
                 public void onError(int errorCode, String errorMsg) {
                     hideLoadingView();
                     task = null;
-                    showNetErrorBlankPage();
+                    if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                        Toast.makeText(PayApplication.getApplication(), R.string.account_login_expired, Toast.LENGTH_SHORT).show();
+                        finish(); //token 过期，finish返回上界面
+                    } else {
+                        showNetErrorBlankPage();
+                    }
+
                 }
 
                 @Override

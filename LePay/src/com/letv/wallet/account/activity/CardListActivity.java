@@ -128,8 +128,24 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
         if(AccountHelper.getInstance().isLogin(this)){
             return true;
         }
-        showBlankPage(BlankPage.STATE_NO_LOGIN);
+        showNoLoginBlankPage();
         return false ;
+    }
+
+    public BlankPage showNoLoginBlankPage() {
+        BlankPage blankPage = showBlankPage();
+        blankPage.setPageState(BlankPage.STATE_NO_LOGIN, null);
+        blankPage.getPrimaryBtn().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isNetworkAvailable()) {
+                    promptNoNetWork();
+                    return;
+                }
+                AccountHelper.getInstance().loginOrJumpLetvAccount(CardListActivity.this);
+            }
+        });
+        return blankPage;
     }
 
     private boolean checkNetWork(){
@@ -207,6 +223,10 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                 @Override
                 public void onError(int errorCode, String errorMsg) {
                     hideLoadingView();
+                    if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                        showNoLoginBlankPage(); //token过期，显示未登录；
+                        return;
+                    }
                     if (errorCode == AccountConstant.RspCode.ERRNO_MOBILE_EMPTY) {
                         ACCOUNT_FAIL_REASON_PHONE_NULL = true;
                         checkEmptyPage(getString(R.string.account_card_add_bankcard)); //无手机号开户失败，显示添加卡片 点击去绑手机号
@@ -258,6 +278,11 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                     hideLoadingView();
                     queryTask = null;
                     LogHelper.e("[%S] : queryAccount qType = " + qType + " errorCode = " + errorCode + " errorMsg = " + errorMsg, TAG);
+                    if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                        showNoLoginBlankPage();
+                        return;
+
+                    }
                     if (mAdapter.getItemCount() <= 0) {
                         showBlankPage(BlankPage.STATE_NETWORK_ABNORMAL).getIconView().setOnClickListener(new View.OnClickListener() {
                             @Override

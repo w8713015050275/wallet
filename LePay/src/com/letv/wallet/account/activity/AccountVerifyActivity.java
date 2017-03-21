@@ -244,6 +244,11 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                 @Override
                 public void onError(int errorCode, String errorMsg) {
                     sendMsgTask = null;
+                    if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                        Toast.makeText(PayApplication.getApplication(), R.string.account_login_expired, Toast.LENGTH_SHORT).show();
+                        finish(); //token过期，返回上一级；
+                        return;
+                    }
                     if (errorCode != AccountConstant.RspCode.ERRNO_SEND_MSG_FAILED) {
                         LogHelper.e("sendSmsCode onError : errorCode = " + errorCode + " errorMsg = " + errorMsg); //异常情况
                     }
@@ -290,10 +295,15 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                 public void onError(int errorCode, String errorMsg) {
                     verifyAccountTask = null;
                     hideVerifyDialog();
+                    if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                        Toast.makeText(PayApplication.getApplication(), R.string.account_login_expired, Toast.LENGTH_SHORT).show();
+                        finish(); //token过期，返回上一级；
+                        return;
+                    }
                     if (errorCode == AccountConstant.RspCode.ERRNO_MSG_CODE_FAILED) {
                         editSmsCode.setError(getString(R.string.account_verify_sms_invalid));
                         return;
-                    } else if (errorCode != AccountConstant.RspCode.ERRNO_USER && errorCode != AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                    } else if (errorCode != AccountConstant.RspCode.ERRNO_USER) {
                         errorMsg = getString(R.string.account_verify_fail);
                     }
                     editSmsCode.getEditText().setText("");
@@ -410,6 +420,12 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
             public void onError(int errorCode, String errorMsg) {
                 hideVerifyDialog();
                 String msg = null;
+
+                if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                    Toast.makeText(PayApplication.getApplication(), R.string.account_login_expired, Toast.LENGTH_SHORT).show();
+                    finish(); //token过期，返回上一级；
+                    return;
+                }
 
                 switch (errorCode) {
                     case AccountConstant.RspCode.ERRNO_BANK_CARD_ERRO:

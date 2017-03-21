@@ -15,5 +15,5 @@
     <string name="me_lelehua_limit">可用额度￥%1$S</string>
     <string name="me_lelehua_owe_amount">￥%1$S</string>
     <string name="me_lelehua_unavailable">开户失败，请联系客服</string>
-
+    <string name="account_login_expired">当前登录状态已失效，请重新登录</string>
 </resources>

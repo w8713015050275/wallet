@@ -15,4 +15,5 @@
     <string name="me_lelehua_limit">Available amount ￥%1$S</string>
     <string name="me_lelehua_owe_amount">￥%1$S</string>
     <string name="me_lelehua_unavailable">Failed to create account. Please contact Customer Service for support.</string>
+    <string name="account_login_expired">The current logon state is invalid. please log in again</string>
 </resources>

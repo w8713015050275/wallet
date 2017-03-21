@@ -71,6 +71,8 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     private  int retryCount = 0;
 
+    private boolean isTokenExpired = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,13 +145,21 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
                 break;
 
             case R.id.viewLeLeHuaHome:
-                if (AccountHelper.getInstance().loginLetvAccountIfNot(getActivity(), null) && checkLeLeHuaValidate()) {
+                if (!AccountHelper.getInstance().isLogin(getActivity()) || isTokenExpired) { //未登录跳转登录界面  ； token失效时，跳转我的乐视界面
+                    AccountHelper.getInstance().loginOrJumpLetvAccount(getActivity());
+                    return;
+                }
+                if (checkLeLeHuaValidate()) {
                     AccountUtils.goToLeLeHuaHome(getActivity(), accountInfo.lelehua.active_status);
                 }
                 break;
 
             case R.id.viewLeLeHuaBills:
-                if (AccountHelper.getInstance().loginLetvAccountIfNot(getActivity(), null) && checkLeLeHuaValidate()) {
+                if (!AccountHelper.getInstance().isLogin(getActivity()) || isTokenExpired) { //未登录跳转登录界面  ； token失效时，跳转我的乐视界面
+                    AccountHelper.getInstance().loginOrJumpLetvAccount(getActivity());
+                    return;
+                }
+                if (checkLeLeHuaValidate()) {
                     AccountUtils.goToLeLeHuaBill(getActivity(), accountInfo.lelehua.active_status);
                 }
                 break;
@@ -234,7 +244,7 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
     @Override
     public void onAccountLogin() {
-
+        isTokenExpired = false;
     }
 
     @Override
@@ -265,12 +275,16 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         if(AccountHelper.getInstance().isLogin(getActivity())){
             return true;
         }
+        showNoLoginPage();
+        return false ;
+    }
+
+    private void showNoLoginPage(){
         mUsrIcon.setImageResource(R.drawable.place_holder_star);
         mUsrIcon.setBackgroundResource(R.drawable.place_holder_star);
         mUsrNickName.setText(R.string.me_usr_nologin);
         mLeLeHuaAavailableLimit.setText(R.string.me_lelehua_not_open);  //未激活
         mLeLeHuaPaymentAmount.setText(R.string.me_lelehua_not_open);
-        return false ;
     }
 
     private boolean checkNetWork(){
@@ -306,6 +320,12 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
         switch (errorCode) {
             case AccountConstant.RspCode.ERRNO_NO_NETWORK:
                  showBlankPage(BlankPage.STATE_NO_NETWORK);
+               break;
+
+            case AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED:
+                isTokenExpired = true;
+                hideLoadingView();
+                showNoLoginPage();
                 break;
 
             default:   //其他显示网络错误页面
@@ -528,6 +548,12 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
 
             @Override
             public void onError(int errorCode, String errorMsg) {
+                if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
+                    hideLoadingView();
+                    showNoLoginPage();
+                    isTokenExpired = true;
+                    return;
+                }
                 if (isEmptyPage()) {
                     if (permitsRetry(errorCode, retryCount++)) { //service 异常重试一次
                         return;
