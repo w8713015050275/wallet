@@ -180,7 +180,6 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
             intent.setAction("com.letv.bugservices.reporter");
             intent.putExtra("fromApp", getActivity().getApplication().getPackageName());//fromApp传应用包名
             intent.putExtra("versionId", UpdateUtil.getVersionName(getActivity(), getActivity().getPackageName()));
-            intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             startActivity(intent);
             return true;
         } catch (Exception e) {
