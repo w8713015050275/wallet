@@ -106,17 +106,5 @@ public class MobileProduct extends Product {
 
     public void showPayResult(Context context, int result) {
         super.showPayResult(context, result, null);
-        if (result != Constants.RESULT_STATUS.SUCCESS) {
-            showOrderDetail(context);
-        }
     }
-
-    private void showOrderDetail(Context context) {
-        Intent intent = new Intent(context, MobileOrderDetailActivity.class);
-        Bundle b = new Bundle();
-        b.putString(Constants.INFO_PARAM.ORDER_NO, mSN);
-        intent.putExtras(b);
-        context.startActivity(intent);
-    }
-
 }

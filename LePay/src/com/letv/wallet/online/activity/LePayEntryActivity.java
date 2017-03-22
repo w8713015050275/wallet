@@ -19,6 +19,7 @@ import com.letv.lepaysdk.ELePayState;
 import com.letv.lepaysdk.LePay;
 import com.letv.lepaysdk.LePayApi;
 import com.letv.shared.widget.LeBottomSheet;
+import com.letv.shared.widget.LeLoadingView;
 import com.letv.tracker2.enums.EventType;
 import com.letv.tracker2.enums.Key;
 import com.letv.wallet.R;
@@ -59,6 +60,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private LeBottomSheet mNetworkDialog;
     private LeBottomSheet mPayFailDialog;
     private LeBottomSheet mSelectStatusDialog;
+    private LeLoadingView mLoadingV;
     private int mDialogTitleId = -1;
 
     private TextView mPriceTv;
@@ -98,9 +100,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
         if (isShowPayFail) {
             return false;
-        }
-        if (mLePayChannelListBean != null) {
-            showPayPage();
         }
         return true;
     }
@@ -175,7 +174,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                             } else if (jumpType.equals(LePayConstants.JUMP_TYPE.ACTIVE)) {
                                 activeResult(data);
                             }
-                            break;
                         }
                         break;
                 }
@@ -199,7 +197,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                 }
             } else if (LePayConstants.ACTIVE_STATUS.NO.equals(activeStatus)) {
                 // 此时状态有可能为激活状态，因此刷新列表数据
-                showLoadingView();
+                showBottomLoadingView();
                 updatePayChannelData();
             }
         }
@@ -234,7 +232,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                     //如果是去激活，回来刷新数据
                     if (isGoActivition) {
                         isGoActivition = false;
-                        showLoadingView();
+                        showBottomLoadingView();
                         updatePayChannelData();
                     }
                     showPayFailDialog();
@@ -245,7 +243,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             //如果是去激活，回来刷新数据
             if (isGoActivition) {
                 isGoActivition = false;
-                showLoadingView();
+                showBottomLoadingView();
                 updatePayChannelData();
             }
             if (!TextUtils.isEmpty(status)) {
@@ -254,6 +252,12 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                 }
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideBottomLoadingView();
     }
 
     @Override
@@ -267,7 +271,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
 
     @Override
     public boolean hasBlankAndLoadingView() {
-        return true;
+        return false;
     }
 
     @Override
@@ -370,6 +374,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                         break;
                 }
                 LogHelper.d("[%S] start boss pay", TAG);
+                showBottomLoadingView();
                 LePayApi.createGetdirectpay(this, channelStr, payInfo, new LePay.ILePayCallback() {
 
                     @Override
@@ -446,7 +451,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onSuccess(Object result) {
             if (isFinishing()) return;
-            hideLoadingView();
+            hideBottomLoadingView();
             BaseResponse<LePayChannelListBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayChannelListBean>) result;
@@ -457,7 +462,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onError(Object result, int errorCode) {
             if (isFinishing()) return;
-            hideLoadingView();
+            hideBottomLoadingView();
             BaseResponse<LePayChannelListBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayChannelListBean>) result;
@@ -531,7 +536,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             if (mCashierUrlTask == null) {
                 mCashierUrlTask = new LePayCashierUrlLoadTask(new CashierUrlCallback(), this.mExternLePayInfo, name);
             }
-            showLoadingView();
+            showBottomLoadingView();
             ExecutorHelper.getExecutor().runnableExecutor(mCashierUrlTask);
         }
     }
@@ -541,7 +546,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onSuccess(Object result) {
             if (isFinishing()) return;
-            hideLoadingView();
+            hideBottomLoadingView();
             BaseResponse<LePayCashierUrlBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayCashierUrlBean>) result;
@@ -559,7 +564,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onError(Object result, int errorCode) {
             if (isFinishing()) return;
-            hideLoadingView();
+            hideBottomLoadingView();
             BaseResponse<LePayCashierUrlBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayCashierUrlBean>) result;
@@ -600,7 +605,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             if (mOrderStatusTask == null) {
                 mOrderStatusTask = new LePayOrderStatusTask(new OrderStatusCallback(), this.mOrderNo);
             }
-            showLoadingView();
+            showBottomLoadingView();
             ExecutorHelper.getExecutor().runnableExecutor(mOrderStatusTask);
         }
     }
@@ -609,7 +614,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onSuccess(Object result) {
             if (isFinishing()) return;
-            hideLoadingView();
+            hideBottomLoadingView();
             isActivityResult = false;
             BaseResponse<LePayOrderStatusBean> response = null;
             if (result == null) {
@@ -637,7 +642,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onError(Object result, int errorCode) {
             if (isFinishing()) return;
-            hideLoadingView();
+            hideBottomLoadingView();
             isActivityResult = false;
             showSelectStatusDialog();
             BaseResponse<LePayChannelListBean> response = null;
@@ -954,6 +959,29 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
     }
 
+    private void showBottomLoadingView() {
+        if (mLoadingV != null && !isShowBottomLoadingView()) {
+            mLoadingV.setVisibility(View.VISIBLE);
+            mLoadingV.appearAnim();
+        }
+    }
+
+    private void hideBottomLoadingView() {
+        if (mLoadingV != null && isShowBottomLoadingView()) {
+            mLoadingV.disappearAnim(null);
+            mLoadingV.setVisibility(View.GONE);
+        }
+    }
+
+    private boolean isShowBottomLoadingView() {
+        if (mLoadingV != null) {
+            if (mLoadingV.getVisibility() == View.VISIBLE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // --- init View -----
 
     private void init() {
@@ -973,6 +1001,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         mPayTitleTv.setText(R.string.lepay_payment_center);
         mPriceTv = (TextView) view.findViewById(R.id.pay_price_tv);
         mChannelRecyclerV = (RecyclerView) view.findViewById(R.id.pay_channel_list);
+        mLoadingV = (LeLoadingView) view.findViewById(R.id.loading);
         mChannelListAdapter = new LePayChannelListAdapter(new ChannelItemOnclickListener());
         mLinearLayoutManager = new LinearLayoutManager(getBaseContext());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

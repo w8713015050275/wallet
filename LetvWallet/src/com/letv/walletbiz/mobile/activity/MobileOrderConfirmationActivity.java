@@ -2,6 +2,7 @@ package com.letv.walletbiz.mobile.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -218,11 +219,22 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
                     }
                     if (mMobileProduct != null) {
                         mMobileProduct.showPayResult(MobileOrderConfirmationActivity.this, payResult);
+                        if (payResult != SUCCESSED) {
+                            showOrderDetail(mMobileProduct.getSN());
+                        }
                     }
                     finish();
                 }
                 break;
         }
+    }
+
+    private void showOrderDetail(String orderSN) {
+        Intent intent = new Intent(MobileOrderConfirmationActivity.this, MobileOrderDetailActivity.class);
+        Bundle b = new Bundle();
+        b.putString(Constants.INFO_PARAM.ORDER_NO, orderSN);
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
     private void initV() {
