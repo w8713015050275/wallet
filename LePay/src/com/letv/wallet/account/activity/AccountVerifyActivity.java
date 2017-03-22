@@ -283,6 +283,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
             verifyAccountTask = new AccountVerifyTask(accountName, identityNum, bankNo, mobile, msgCode, new AccountCommonCallback() {
                 @Override
                 public void onSuccess(Object result) {
+                    Toast.makeText(PayApplication.getApplication(), R.string.account_verify_success, Toast.LENGTH_SHORT).show();
                     Map<String, Object> props = new HashMap<String, Object>();
                     props.put(Key.From.getKeyId(), from);
                     Action.uploadCustom(Action.EVENT_TYPE_VERIFY, Action.ACCOUNT_VERIFY_PAGE_VERIFY, props);
