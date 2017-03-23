@@ -60,7 +60,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private LeBottomSheet mNetworkDialog;
     private LeBottomSheet mPayFailDialog;
     private LeBottomSheet mSelectStatusDialog;
-    private LeLoadingView mLoadingV;
     private int mDialogTitleId = -1;
 
     private TextView mPriceTv;
@@ -75,7 +74,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private LinearLayoutManager mLinearLayoutManager;
     private LePayChannelListAdapter mChannelListAdapter;
 
-    private boolean isGoActivition, isActivityResult, isShowPayFail, isClickReGoPay;
+    private boolean isGoActivition, isCheckOrderStatus, isResultPayFail, isShowPayFail, isClickReGoPay;
     private boolean isFirst = true, isFirstShow = true;
     private String mFrom = LePayConstants.PAY_FROM.OTHER;
 
@@ -84,6 +83,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         super.onCreate(savedInstanceState);
         registerNetWorkReceiver();
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
+        setContentView(R.layout.lepay_entry_activity_v);
         mPayPageView = View.inflate(getApplicationContext(), R.layout.lepay_channel_view, null);
     }
 
@@ -91,11 +91,22 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         if (!checkAppNetWork(showDialog)) {
             return false;
         }
-        mDialogTitleId = -1;
-        if (mNetworkDialog != null) {
-            mNetworkDialog.dismiss();
+        if (isGoActivition) {
+            isGoActivition = false;
+            showLoadingView();
+            // 去激活回调为支付失败时网络错误或者禁网导致数据无法更新,此时更新数据并显示支付失败弹框
+            if (isResultPayFail) {
+                isResultPayFail = false;
+                updatePayChannelData(false, false);
+                showPayFailDialog();
+                return false;
+            }
+            // 去激活回调时网络错误或者禁网导致数据无法更新，此时更新数据并显示支付弹框
+            updatePayChannelData(false, true);
+            return false;
         }
-        if (isActivityResult) {
+        // 是否在查询订单状态
+        if (isCheckOrderStatus) {
             return false;
         }
         if (isShowPayFail) {
@@ -104,6 +115,12 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         return true;
     }
 
+    /**
+     * 检测网络状态，传入true并且返回false时会有相应网络弹框
+     *
+     * @param showDialog
+     * @return
+     */
     private boolean checkAppNetWork(boolean showDialog) {
         int uid = getUid();
         if (!NetworkHelper.isNetworkAvailable()) {
@@ -129,6 +146,10 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                 showUserSelectDialog(R.string.pay_network_error);
             }
             return false;
+        }
+        mDialogTitleId = -1;
+        if (mNetworkDialog != null && mNetworkDialog.isShowing()) {
+            mNetworkDialog.dismiss();
         }
         return true;
     }
@@ -166,55 +187,81 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             case RESULT_OK:
                 switch (requestCode) {
                     case WEB_FORRESULT:
-                        isActivityResult = true;
                         if (data != null) {
                             String jumpType = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.JUMP_TYPE);
                             if (jumpType.equals(LePayConstants.JUMP_TYPE.PAY)) {
                                 payResult(data);
+                                return;
                             } else if (jumpType.equals(LePayConstants.JUMP_TYPE.ACTIVE)) {
                                 activeResult(data);
+                                return;
                             }
                         }
                         break;
                 }
         }
+        // 回调异常，显示支付页,防止出现空白页面
+        showPayPage();
     }
 
     private void activeResult(Intent data) {
-        String activeStatus = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.ACTIVE_STATUS);
-        String payStatus = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.PAYSTATUS);
-        if (!TextUtils.isEmpty(activeStatus)) {
-            if (LePayConstants.ACTIVE_STATUS.YES.equals(activeStatus)) {
-                // 激活成功后 更新支付列表数据，调起支付
-                updatePayChannelData();
-                String decryptUsingStatus = SslUtil.getInstance().decryptData(payStatus);
-                if (!TextUtils.isEmpty(decryptUsingStatus)
-                        && LePayConstants.PAY_STATUS.AVAILABLE.equals(decryptUsingStatus)) {
-                    // 如果支付为可用状态获取支付地址并调起对应的支付
-                    if (mCurrentChannelBean != null) {
-                        getCashierUrl(mCurrentChannelBean.getName());
+        //检测网络状态：
+        //      1>网络异常弹出相应网络异常的弹框，在onStart中会更新支付列表数据并显示支付弹框
+        //      2>网络状态正常,判断支付是否可用:
+        //              (1)可用，更新支付列表数据防止支付失败后重新支付时数据出错
+        //              (2)不可用或其他异常情况，更新支付列表数据，显示支付弹框
+        if (checkAppNetWork(true)) {
+            // 如果为true,onStart中需要更新列表数据
+            isGoActivition = false;
+            String activeStatus = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.ACTIVE_STATUS);
+            String payStatus = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.PAYSTATUS);
+            if (!TextUtils.isEmpty(activeStatus)) {
+                if (LePayConstants.ACTIVE_STATUS.YES.equals(activeStatus)) {
+                    String decryptUsingStatus = SslUtil.getInstance().decryptData(payStatus);
+                    if (!TextUtils.isEmpty(decryptUsingStatus)
+                            && LePayConstants.PAY_STATUS.AVAILABLE.equals(decryptUsingStatus)) {
+                        // 如果支付为可用状态获取支付地址并调起对应的支付
+                        if (mCurrentChannelBean != null) {
+                            // 更新支付列表数据
+                            showLoadingView();
+                            updatePayChannelData(false, false);
+                            getCashierUrl(mCurrentChannelBean.getName());
+                            return;
+                        }
                     }
                 }
-            } else if (LePayConstants.ACTIVE_STATUS.NO.equals(activeStatus)) {
-                // 此时状态有可能为激活状态，因此刷新列表数据
-                showBottomLoadingView();
-                updatePayChannelData();
             }
+            // 回传数据异常 或激活失败，显示支付列表
+            showLoadingView();
+            updatePayChannelData(false, true);
         }
     }
 
     private void payResult(Intent data) {
+        //1.数据正常
+        //      1>支付成功，把isGoActivition置为false,查询订单状态后会显示是否已支付弹框
+        //      2>支付失败或者状态异常检测网络状态：
+        //              (1)网络异常弹出相应网络异常的弹框，并记录isResultPayFail为true,
+        //                  onStart判断(isGoActivition==true&&isResultPayFail==true)更新支付列表数据并显示支付失败弹框
+        //              (2)网络状态正常,把isGoActivition置为false,更新支付列表数据，弹出支付失败弹框
+        //2.数据异常 检测网络状态：
+        //      1>网络异常弹出相应网络异常的弹框，在onStart中会更新支付列表数据并显示支付弹框
+        //      2>网络状态正常,更新支付列表数据显示支付列表
         String info = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.INFO);
         if (!TextUtils.isEmpty(info)) {
             String decryptInfo = SslUtil.getInstance().decryptData(info);
             if (!TextUtils.isEmpty(decryptInfo)) {
                 String[] strs = decryptInfo.split("\\^");
                 if (strs != null && strs.length == 2) {
-                    String order_no = strs[0];
-                    String pay_status = strs[1];
+                    String order_no = strs[0].trim();
+                    String pay_status = strs[1].trim();
                     if (LePayConstants.PAY_STATUS.SUCCESS.equals(pay_status)) {
                         if (!TextUtils.isEmpty(order_no)) {
                             // 查询订单状态
+                            isCheckOrderStatus = true;
+                            if (isGoActivition) {
+                                isGoActivition = false;
+                            }
                             loadOrderStatus(order_no);
                             return;
                         } else {
@@ -229,35 +276,57 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                         props.put(Key.Content.getKeyId(), "paymentStatus");
                         Action.uploadCustom(EventType.Exception.getEventId(), Action.PAY_RESULT_EXCEPTION, props);
                     }
-                    //如果是去激活，回来刷新数据
-                    if (isGoActivition) {
-                        isGoActivition = false;
-                        showBottomLoadingView();
-                        updatePayChannelData();
+                    if (checkAppNetWork(true)) {
+                        //如果是去激活，回来刷新数据
+                        if (isGoActivition) {
+                            isGoActivition = false;
+                            showLoadingView();
+                            updatePayChannelData(false, false);
+                        }
+                        showPayFailDialog();
+                    } else {
+                        // 网络异常或禁网导致的无法更新，记录变量
+                        isResultPayFail = true;
                     }
-                    showPayFailDialog();
+                    return;
                 }
             }
         } else {
             String status = data.getStringExtra(LePayConstants.ApiIntentExtraKEY.PAY_STATUS);
-            //如果是去激活，回来刷新数据
-            if (isGoActivition) {
-                isGoActivition = false;
-                showBottomLoadingView();
-                updatePayChannelData();
-            }
             if (!TextUtils.isEmpty(status)) {
                 if (LePayConstants.PAY_STATUS.FAIL.equals(status)) {
-                    showPayFailDialog();
+                    if (checkAppNetWork(true)) {
+                        //如果是去激活，回来刷新数据
+                        if (isGoActivition) {
+                            isGoActivition = false;
+                            showLoadingView();
+                            // 更新数据不弹出支付弹框
+                            updatePayChannelData(false, false);
+                        }
+                        showPayFailDialog();
+                    } else {
+                        // 网络异常或禁网导致的无法更新，记录变量
+                        isResultPayFail = true;
+                    }
+                    return;
                 }
             }
+        }
+        // 回调数据异常
+        if (checkAppNetWork(true)) {
+            if (isGoActivition) {
+                isGoActivition = false;
+            }
+            // 更新列表数据显示支付列表
+            showLoadingView();
+            updatePayChannelData(false, true);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        hideBottomLoadingView();
+        hideLoadingView();
     }
 
     @Override
@@ -271,7 +340,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
 
     @Override
     public boolean hasBlankAndLoadingView() {
-        return false;
+        return true;
     }
 
     @Override
@@ -292,7 +361,8 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             if (checkData(false)) {
                 if (mLePayChannelListBean == null) {
                     loadPayChannel();
-                    return;
+                } else {
+                    showPayPage();
                 }
             }
         }
@@ -374,7 +444,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                         break;
                 }
                 LogHelper.d("[%S] start boss pay", TAG);
-                showBottomLoadingView();
+                showLoadingView();
                 LePayApi.createGetdirectpay(this, channelStr, payInfo, new LePay.ILePayCallback() {
 
                     @Override
@@ -424,11 +494,11 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     }
 
     // ------ request data ---------------
-    private void updatePayChannelData() {
+    private void updatePayChannelData(boolean isResult, boolean showPayPage) {
         if (mPayChannelTask == null) {
             mPayChannelTask = new LePayChannelListLoadTask(this.mExternLePayInfo);
         }
-        mPayChannelTask.setCallback(new ChannelListCallback(false));
+        mPayChannelTask.setCallback(new ChannelListCallback(isResult, showPayPage));
         ExecutorHelper.getExecutor().runnableExecutor(mPayChannelTask);
     }
 
@@ -436,33 +506,36 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         if (mPayChannelTask == null) {
             mPayChannelTask = new LePayChannelListLoadTask(this.mExternLePayInfo);
         }
-        mPayChannelTask.setCallback(new ChannelListCallback(true));
+        mPayChannelTask.setCallback(new ChannelListCallback(true, true));
         ExecutorHelper.getExecutor().runnableExecutor(mPayChannelTask);
     }
 
     protected class ChannelListCallback implements LePayOnlineCallback {
 
         private boolean mReturn = false;
+        private boolean mShowPayPage = false;
 
-        public ChannelListCallback(boolean isReturn) {
+        public ChannelListCallback(boolean isReturn, boolean showPayPage) {
             this.mReturn = isReturn;
+            this.mShowPayPage = showPayPage;
         }
 
         @Override
         public void onSuccess(Object result) {
             if (isFinishing()) return;
-            hideBottomLoadingView();
+            hideLoadingView();
             BaseResponse<LePayChannelListBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayChannelListBean>) result;
             }
             updateData(response, mReturn);
+            updateChannelUI(mShowPayPage);
         }
 
         @Override
         public void onError(Object result, int errorCode) {
             if (isFinishing()) return;
-            hideBottomLoadingView();
+            hideLoadingView();
             BaseResponse<LePayChannelListBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayChannelListBean>) result;
@@ -536,7 +609,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             if (mCashierUrlTask == null) {
                 mCashierUrlTask = new LePayCashierUrlLoadTask(new CashierUrlCallback(), this.mExternLePayInfo, name);
             }
-            showBottomLoadingView();
+            showLoadingView();
             ExecutorHelper.getExecutor().runnableExecutor(mCashierUrlTask);
         }
     }
@@ -546,7 +619,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onSuccess(Object result) {
             if (isFinishing()) return;
-            hideBottomLoadingView();
+            hideLoadingView();
             BaseResponse<LePayCashierUrlBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayCashierUrlBean>) result;
@@ -564,7 +637,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onError(Object result, int errorCode) {
             if (isFinishing()) return;
-            hideBottomLoadingView();
+            hideLoadingView();
             BaseResponse<LePayCashierUrlBean> response = null;
             if (result != null) {
                 response = (BaseResponse<LePayCashierUrlBean>) result;
@@ -605,7 +678,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             if (mOrderStatusTask == null) {
                 mOrderStatusTask = new LePayOrderStatusTask(new OrderStatusCallback(), this.mOrderNo);
             }
-            showBottomLoadingView();
+            showLoadingView();
             ExecutorHelper.getExecutor().runnableExecutor(mOrderStatusTask);
         }
     }
@@ -614,8 +687,8 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onSuccess(Object result) {
             if (isFinishing()) return;
-            hideBottomLoadingView();
-            isActivityResult = false;
+            hideLoadingView();
+            isCheckOrderStatus = false;
             BaseResponse<LePayOrderStatusBean> response = null;
             if (result == null) {
                 showSelectStatusDialog();
@@ -642,8 +715,8 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         @Override
         public void onError(Object result, int errorCode) {
             if (isFinishing()) return;
-            hideBottomLoadingView();
-            isActivityResult = false;
+            hideLoadingView();
+            isCheckOrderStatus = false;
             showSelectStatusDialog();
             BaseResponse<LePayChannelListBean> response = null;
             if (result != null) {
@@ -722,7 +795,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                 }
             });
         }
-        updateChannelUI();
     }
 
     private void updateUI() {
@@ -734,10 +806,10 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
         updateSelectStatusDialog();
         updatePayPage();
-        updateChannelUI();
+        updateChannelUI(true);
     }
 
-    private void updateChannelUI() {
+    private void updateChannelUI(boolean showPayPage) {
         if (mLePayChannelListBean == null) {
             LogHelper.d("[%S]  updateChannelUI mLePayChannelListBean == null", TAG);
             return;
@@ -750,7 +822,9 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         if (mChannelListAdapter != null && lepayChannelBeen != null && lepayChannelBeen.size() > 0) {
             mChannelListAdapter.setData(lepayChannelBeen);
         }
-        showPayPage();
+        if (showPayPage) {
+            showPayPage();
+        }
     }
 
     private void initPayPageV() {
@@ -849,6 +923,8 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
 
 
     private void showPayFailDialog() {
+        // 置为false,在执行onStart时不再显示支付失败弹框
+        isResultPayFail = false;
         hidePayPage();
         if (mPayFailDialog == null) {
             String title = getString(R.string.lepay_fail);
@@ -930,7 +1006,9 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             mNetworkDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-                    finish();
+                    if (mDialogTitleId != -1) {
+                        setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
+                    }
                 }
             });
         }
@@ -959,29 +1037,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
     }
 
-    private void showBottomLoadingView() {
-        if (mLoadingV != null && !isShowBottomLoadingView()) {
-            mLoadingV.setVisibility(View.VISIBLE);
-            mLoadingV.appearAnim();
-        }
-    }
-
-    private void hideBottomLoadingView() {
-        if (mLoadingV != null && isShowBottomLoadingView()) {
-            mLoadingV.disappearAnim(null);
-            mLoadingV.setVisibility(View.GONE);
-        }
-    }
-
-    private boolean isShowBottomLoadingView() {
-        if (mLoadingV != null) {
-            if (mLoadingV.getVisibility() == View.VISIBLE) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     // --- init View -----
 
     private void init() {
@@ -1001,7 +1056,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         mPayTitleTv.setText(R.string.lepay_payment_center);
         mPriceTv = (TextView) view.findViewById(R.id.pay_price_tv);
         mChannelRecyclerV = (RecyclerView) view.findViewById(R.id.pay_channel_list);
-        mLoadingV = (LeLoadingView) view.findViewById(R.id.loading);
         mChannelListAdapter = new LePayChannelListAdapter(new ChannelItemOnclickListener());
         mLinearLayoutManager = new LinearLayoutManager(getBaseContext());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
