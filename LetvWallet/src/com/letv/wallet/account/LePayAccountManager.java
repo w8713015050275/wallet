@@ -12,8 +12,6 @@ import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DigestUtils;
 import com.letv.wallet.common.util.SharedPreferencesHelper;
 
-import java.util.ArrayList;
-
 /**
  * Created by lijunying on 17-1-17.
  */
@@ -21,9 +19,6 @@ import java.util.ArrayList;
 public final class LePayAccountManager implements LePayEngine.CallBack {
     private static LePayAccountManager sInstance;
     public LePayEngine lepayEngine;
-
-
-    private static ArrayList<LePayCommonCallback> callbacks = new ArrayList<LePayCommonCallback>();
 
     private LePayAccountManager() {
     }
@@ -33,14 +28,6 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
             sInstance = new LePayAccountManager();
         }
         return sInstance;
-    }
-
-    private void registerCallback(LePayCommonCallback callback){
-        callbacks.add(callback);
-    }
-
-    public static void unRegisterCallback(LePayCommonCallback callback){
-        callbacks.remove(callbacks);
     }
 
     private boolean checkRunBefore(LePayCommonCallback callback){
@@ -86,8 +73,6 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
 
         checkEngine();
 
-        registerCallback(callback);
-
         if (lepayEngine.isConnected()) {
             lepayEngine.createAccount(callback);
         } else {
@@ -96,7 +81,7 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
                 public void run() {
                     lepayEngine.createAccount(callback);
                 }
-            });
+            }, callback);
         }
     }
 
@@ -106,8 +91,6 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
 
         checkEngine();
 
-        registerCallback(callback);
-
         if (lepayEngine.isConnected()) {
             lepayEngine.queryAccount(qType, callback);
         } else {
@@ -116,7 +99,7 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
                 public void run() {
                     lepayEngine.queryAccount(qType, callback);
                 }
-            });
+            }, callback);
         }
     }
 
@@ -127,8 +110,6 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
 
        checkEngine();
 
-       registerCallback(callback);
-
        if (lepayEngine.isConnected()) {
            lepayEngine.redirect(jTypes, callback);
        } else {
@@ -137,21 +118,35 @@ public final class LePayAccountManager implements LePayEngine.CallBack {
                public void run() {
                    lepayEngine.redirect(jTypes, callback);
                }
-           });
+           }, callback);
        }
     }
 
     @Override
     public void onServiceReady(LePayEngine service) {
-        LePayUtils.clearBlockingOper();
+        LePayUtils.excuteBlockingOper();
     }
 
     @Override
     public void onServiceLost() {
-        for (LePayCommonCallback callback : callbacks) {
+        //service异常终止，清空操作；
+        for (LePayCommonCallback callback : LePayUtils.callbacks) {
             callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_KILLED, null);
         }
+        for (Runnable r : LePayUtils.blockingQueue) {
+            LePayCommonCallback callback =  LePayUtils.blockingHashtable.get(r.hashCode());
+            if (callback != null) {
+                callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_KILLED, null);
+            }
+        }
+        LePayUtils.callbacks.clear();
+        LePayUtils.blockingQueue.clear();
+        LePayUtils.blockingHashtable.clear();
     }
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private boolean checkCreateAccount(boolean isForceCreate, final CreateAccountResult createAccountResult) {
         boolean hasCreateAccount = hasCreatedAccount();

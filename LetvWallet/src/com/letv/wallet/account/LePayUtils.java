@@ -10,6 +10,7 @@ import com.letv.walletbiz.WalletApplication;
 import com.letv.walletbiz.update.util.UpdateUtil;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * Created by lijunying on 17-1-17.
@@ -17,11 +18,16 @@ import java.util.ArrayList;
 
 public class LePayUtils {
 
-    private static final int BLOCKING_QUEUE_SIZE = 5;
+    private static final int BLOCKING_QUEUE_SIZE = 8;
 
     private static final int PAY_AIDL_VERSION_MINI = 10002;
 
-    private static ArrayList<Runnable> blockingQueue = new ArrayList<Runnable>();
+    // service未连接时，待请求列表 ； 当列表size > maxSize 时，notifyServiceDisconnected
+    public static ArrayList<Runnable> blockingQueue = new ArrayList<Runnable>();
+    public static Hashtable<Integer, LePayCommonCallback> blockingHashtable = new Hashtable<Integer, LePayCommonCallback>();
+
+    //正在执行的请求列表 callback ； 请求未返回remoteService被异常终止时，notifyRemoteException
+    public static ArrayList<LePayCommonCallback> callbacks = new ArrayList<LePayCommonCallback>();
 
     private static ComponentName sComp;
 
@@ -53,22 +59,57 @@ public class LePayUtils {
         }
     }
 
-    public static void putBlockingOper(Runnable runnable) {
-        if (runnable == null) {
-            return;
+    public static void registerCallback(LePayCommonCallback callback){
+        if (callback != null && !callbacks.contains(callback)) {
+            callbacks.add(callback);
         }
-        if (blockingQueue.size() >= BLOCKING_QUEUE_SIZE) {
-            LogHelper.w("put blockingQueue ERROR, Max size has been reached!");
-            blockingQueue.remove(0);
-        }
-        blockingQueue.add(runnable);
     }
 
-    public static void clearBlockingOper() {
+    public static void unRegisterCallback(LePayCommonCallback callback){
+        if (callback != null && !callbacks.isEmpty()) {
+            callbacks.remove(callback);
+        }
+
+    }
+
+    public static void putBlockingOper(Runnable r, LePayCommonCallback callback) {
+        if (r == null) {
+            return;
+        }
+        checkQueueSize();
+        addRunnable(r, callback);
+    }
+
+    private static void addRunnable(Runnable r, LePayCommonCallback callback) {
+        if (r == null || blockingQueue.contains(r)) {
+            return;
+        }
+        blockingQueue.add(r);
+        if (callback != null) {
+            blockingHashtable.put(r.hashCode(), callback);
+        }
+    }
+
+    private static void checkQueueSize(){
+        if (blockingQueue.size() >= BLOCKING_QUEUE_SIZE) {
+            LogHelper.w("put blockingQueue ERROR, Max size has been reached!");
+            Runnable r = blockingQueue.remove(0); // 移除最早的oper
+            if (r != null) {
+                LePayCommonCallback callback =  blockingHashtable.remove(r.hashCode());
+                if (callback != null) {
+                    callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_DISCONNECTE, null); // service长时间未连接上, 通知callback；
+                }
+            }
+
+        }
+    }
+
+    public static void excuteBlockingOper() {
         for (Runnable r : blockingQueue) {
             r.run();
         }
         blockingQueue.clear();
+        blockingHashtable.clear();
     }
 
 }

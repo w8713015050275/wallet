@@ -37,7 +37,7 @@ public abstract class LePayCommonCallback<T> extends IAccountCallback.Stub {
                     onError(errorCode, errorMsg);
                     break;
             }
-            LePayAccountManager.unRegisterCallback(LePayCommonCallback.this); //反注册 服务被杀死监听
+            LePayUtils.unRegisterCallback(LePayCommonCallback.this); //反注册 服务被杀死监听
         }
     };
 

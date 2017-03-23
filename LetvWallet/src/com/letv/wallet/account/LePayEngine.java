@@ -10,7 +10,6 @@ import android.os.RemoteException;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
 import com.letv.wallet.account.aidl.v1.IAccountServiceV1;
 import com.letv.wallet.common.BaseApplication;
-import com.letv.wallet.common.util.LogHelper;
 
 /**
  * Created by lijunying on 17-1-17.
@@ -91,44 +90,58 @@ public class LePayEngine {
 
     public void createAccount(final LePayCommonCallback callback) {
         if (mBinderV1 == null) {
-            callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_DISCONNECTE, null);
+            notifyServiceDisconnected(callback);
             return;
         }
-
         try {
             mBinderV1.createAccount(callback);
+            LePayUtils.registerCallback(callback);  //添加removeService异常终止监听；
         } catch (RemoteException e) {
             e.printStackTrace();
+            notifyRemoteException(callback);
         }
-
     }
 
     public void queryAccount(String qType, final LePayCommonCallback callback) {
         if (mBinderV1 == null) {
-            callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_DISCONNECTE, null);
+            notifyServiceDisconnected(callback);
             return;
         }
-
         try {
             mBinderV1.queryAccount(qType, callback);
+            LePayUtils.registerCallback(callback);
         } catch (RemoteException e) {
             e.printStackTrace();
+            notifyRemoteException(callback);
         }
 
     }
 
     public void redirect(final String[] jTypes, final LePayCommonCallback callback) {
         if (mBinderV1 == null) {
-            callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_DISCONNECTE, null);
+            notifyServiceDisconnected(callback);
             return;
         }
 
         try {
             mBinderV1.redirect(jTypes , callback);
+            LePayUtils.registerCallback(callback);
         } catch (RemoteException e) {
             e.printStackTrace();
+            notifyRemoteException(callback);
         }
     }
 
+    public  void notifyServiceDisconnected(LePayCommonCallback callback){
+        if (callback != null) {
+            callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_DISCONNECTE, null);
+        }
+    }
+
+    public  void notifyRemoteException(LePayCommonCallback callback) {
+        if (callback != null) {
+            callback.onError(AccountConstant.RspCode.ERROR_REMOTE_SERVICE_KILLED, null);
+        }
+    }
 
 }
