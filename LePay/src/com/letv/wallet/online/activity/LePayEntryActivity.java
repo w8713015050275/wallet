@@ -1093,5 +1093,8 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
         mExternLePayInfo = value;
         mFrom = from;
+        if (mFrom == null) {
+            mFrom = LePayConstants.PAY_FROM.OTHER;
+        }
     }
 }
