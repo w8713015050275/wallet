@@ -75,6 +75,8 @@ public class Action extends BaseAction {
     //Quick entry
     public static final String QUICK_ENTRY_LELEHUA_CLICK = "11";
     public static final String QUICK_ENTRY_BANKCARD_CLICK = "11.3";
+    //乐乐花未激活转激活
+    public static final String QUICK_ENTRY_LELEHUA_ACTIVE_CLICK = "11.1";
 
     //Recommend
     public static final String RECOMMEND_PAGE_EXPOSE = "12.1.1";

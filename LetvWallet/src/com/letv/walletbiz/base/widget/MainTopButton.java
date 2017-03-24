@@ -114,6 +114,7 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
 
     private AccountInfo accountInfo;
 
+    private int lastActiveStatus = -1;
 
     private Context context;
 
@@ -211,13 +212,19 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
                 if (AccountHelper.getInstance().loginLetvAccountIfNot((MainActivity) context, null)) {
                     Intent intent = new Intent(context, AccountWebActivity.class);
                     if (null != accountInfo && null != accountInfo.lelehua) {
+                        //如果点击的时候是未激活状态，则记录lastActiveStatus，目的在于数据埋点
+                        if (accountInfo.lelehua.active_status != AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED
+                                && accountInfo.lelehua.active_status != AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN
+                                && accountInfo.lelehua.active_status != AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVING) {
+                            lastActiveStatus = accountInfo.lelehua.active_status;
+                        }
                         String jType = AccountUtils.getLeLeHuaJtype(AccountUtils.LELEHUA_HOME, accountInfo.lelehua.active_status);
                         if (!TextUtils.isEmpty(jType)) {
                             intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
                         }
                         context.startActivity(intent);
-                    }else{
-                        Toast.makeText(context,R.string.empty_network_error,Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, R.string.empty_network_error, Toast.LENGTH_SHORT).show();
                     }
                 }
                 Action.uploadClick(Action.QUICK_ENTRY_LELEHUA_CLICK);
@@ -314,7 +321,21 @@ public class MainTopButton extends RelativeLayout implements View.OnClickListene
             case 0:
                 accountInfo = (AccountInfo) info;
                 if (accountInfo != null && accountInfo.lelehua != null) {
-                    if (accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED || accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN) {
+                    //如果点击的时候是未激活
+                    if (lastActiveStatus != -1
+                            && lastActiveStatus != AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED
+                            && lastActiveStatus != AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN
+                            && lastActiveStatus != AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVING) {
+                        //如果当前状态是激活，则增加数据埋点
+                        if (accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED
+                                || accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN
+                                || accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVING) {
+                            Action.uploadClick(Action.QUICK_ENTRY_LELEHUA_ACTIVE_CLICK);
+                        }
+                    }
+
+                    if (accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED
+                            || accountInfo.lelehua.active_status == AccountConstant.LELEHUA_ACCOUNT_STATE_ACTIVATED_FROZEN) {
                         if (TextUtils.isEmpty(accountInfo.lelehua.available_limit)) {
                             numberView.setText(String.format(context.getString(R.string.main_top_lelehua_amount), "0"));
                         } else {
