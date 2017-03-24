@@ -487,7 +487,7 @@ public class MobileOrderConfirmationActivity extends AccountBaseActivity impleme
             Intent intent = new Intent(ActivityConstant.PAY_PARAM.PAY_ACTION);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.INFO_PARAM.LEPAY_INFO, payInfo);
-            bundle.putString(WalletConstant.EXTRA_FROM, mFrom);
+            bundle.putString(WalletConstant.EXTRA_FROM, mFeeOrFlow+"");
             intent.putExtras(bundle);
             startActivityForResult(intent, PAY_REQUEST_CODE);
             mIsGoPay = true;
