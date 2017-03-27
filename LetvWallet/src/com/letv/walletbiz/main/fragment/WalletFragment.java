@@ -34,6 +34,7 @@ import com.letv.walletbiz.coupon.utils.CardCouponListTask;
 import com.letv.walletbiz.coupon.utils.CouponCheckNewTask;
 import com.letv.walletbiz.coupon.utils.CouponCommonCallback;
 import com.letv.walletbiz.coupon.utils.CouponListLoadTask;
+import com.letv.walletbiz.main.AutoSlideViewpager;
 import com.letv.walletbiz.main.BannerTask;
 import com.letv.walletbiz.main.MainAdapter;
 import com.letv.walletbiz.main.MainPanelHelper;
@@ -541,5 +542,19 @@ public class WalletFragment extends MainFragment {
     public void onDestroy() {
         super.onDestroy();
 
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            Intent intent = new Intent();
+            intent.setAction(AutoSlideViewpager.SLIDE_PAUSE_LISTENER);
+            getContext().sendBroadcast(intent);
+        }else {
+            Intent intent = new Intent();
+            intent.setAction(AutoSlideViewpager.SLIDE_START_LISTENER);
+            getContext().sendBroadcast(intent);
+        }
     }
 }

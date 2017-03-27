@@ -1,6 +1,9 @@
 package com.letv.walletbiz.main;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.view.ViewPager;
@@ -45,6 +48,10 @@ public class AutoSlideViewpager extends ViewPager {
     public AutoSlideViewpager(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
+        IntentFilter filter_dynamic = new IntentFilter();
+        filter_dynamic.addAction(SLIDE_PAUSE_LISTENER);
+        filter_dynamic.addAction(SLIDE_START_LISTENER);
+        context.registerReceiver(dynamicReceiver,filter_dynamic);
     }
 
     public void enableAutoSlide() {
@@ -134,5 +141,21 @@ public class AutoSlideViewpager extends ViewPager {
                 }
             }
         });
+
     }
+
+    //解决有时出现空白页面的问题
+    public static final String SLIDE_PAUSE_LISTENER="slide_pause_listener";
+    public static final String SLIDE_START_LISTENER="slide_start_listener";
+    private BroadcastReceiver dynamicReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(SLIDE_PAUSE_LISTENER)){
+                disableAutoSlide();
+            }else if(intent.getAction().equals(SLIDE_START_LISTENER)){
+                enableAutoSlide();
+            }
+        }
+    };
 }
