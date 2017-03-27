@@ -17,23 +17,18 @@ import java.util.List;
 public class ParseHelper {
     private final static String TAG = "ParseHelper";
 
-    private static Gson mGson = null;
-
+    private static Gson mGson = new Gson();
 
     public static <T> T parseByGson(String respond, Class<T> cls) {
         T bean = null;
         try {
             if (!TextUtils.isEmpty(respond)) {
-                mGson = new Gson();
                 bean = mGson.fromJson(respond, cls);
             }
         } catch (Exception e) {
             LogHelper.w("[%s] analysisRespond catch exception getMessage=" +
                     e.getMessage() + " toString()=" + e.toString(), TAG);
             bean = null;
-        }
-        if (mGson != null) {
-            mGson = null;
         }
         return bean;
     }
@@ -42,7 +37,6 @@ public class ParseHelper {
         T bean = null;
         try {
             if (!TextUtils.isEmpty(respond)) {
-                mGson = new Gson();
                 bean = mGson.fromJson(respond, typeOfT);
             }
         } catch (Exception e) {
@@ -50,18 +44,12 @@ public class ParseHelper {
                     e.getMessage() + " toString()=" + e.toString(), TAG);
             bean = null;
         }
-        if (mGson != null) {
-            mGson = null;
-        }
         return bean;
     }
 
     public static <T> List<T> parseArrayByGson(String respond, Type typeOfT) {
         List<T> list = new ArrayList<T>();
-
-        T bean = null;
         try {
-            mGson = new Gson();
             JsonParser parser = new JsonParser();
             JsonArray jsonArray  = parser.parse(respond).getAsJsonArray();
 
@@ -74,13 +62,7 @@ public class ParseHelper {
         } catch (Exception e) {
             LogHelper.w("[%s] analysisRespond catch exception getMessage=" +
                     e.getMessage() + " toString()=" + e.toString(), TAG);
-            bean = null;
-        }
-
-        if (mGson != null)
-
-        {
-            mGson = null;
+            list = null;
         }
 
         return list;
