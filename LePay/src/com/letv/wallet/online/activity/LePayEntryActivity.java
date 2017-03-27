@@ -19,7 +19,6 @@ import com.letv.lepaysdk.ELePayState;
 import com.letv.lepaysdk.LePay;
 import com.letv.lepaysdk.LePayApi;
 import com.letv.shared.widget.LeBottomSheet;
-import com.letv.shared.widget.LeLoadingView;
 import com.letv.tracker2.enums.EventType;
 import com.letv.tracker2.enums.Key;
 import com.letv.wallet.R;
@@ -77,6 +76,8 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private boolean isGoActivition, isCheckOrderStatus, isResultPayFail, isShowPayFail, isClickReGoPay;
     private boolean isFirst = true, isFirstShow = true;
     private String mFrom = LePayConstants.PAY_FROM.OTHER;
+
+    private int lastActiveStatus = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -776,25 +777,42 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             // 统计支付页面曝光
             isFirstShow = false;
             Action.uploadExpose(Action.PAY_PAGE_EXPOSE, mFrom);
-            ExecutorHelper.getExecutor().runnableExecutor(new Runnable() {
-                @Override
-                public void run() {
-                    if (mLePayChannelListBean != null && mLePayChannelListBean.getChannels() != null
-                            && mLePayChannelListBean.getChannels().size() > 0) {
-                        for (LePayChannelBean channelBean : mLePayChannelListBean.getChannels()) {
-                            if (!TextUtils.isEmpty(channelBean.getName())
-                                    && LePayConstants.PAY_CHANNEL.CHANNEL_Π_NAME.equals(channelBean.getName())) {
+        }
+        //乐乐花支付状态的数据埋点
+        ExecutorHelper.getExecutor().runnableExecutor(new Runnable() {
+            @Override
+            public void run() {
+                if (mLePayChannelListBean != null && mLePayChannelListBean.getChannels() != null
+                        && mLePayChannelListBean.getChannels().size() > 0) {
+                    for (LePayChannelBean channelBean : mLePayChannelListBean.getChannels()) {
+                        if (!TextUtils.isEmpty(channelBean.getName())
+                                && LePayConstants.PAY_CHANNEL.CHANNEL_Π_NAME.equals(channelBean.getName())) {
+                            if (lastActiveStatus == -1) {
+                                //第一次记录当前的状态
+                                lastActiveStatus = channelBean.getChannelStatus();
+                            } else if (lastActiveStatus != LePayConstants.YOUΠ_ACTIVE.NORMAL
+                                    && lastActiveStatus != LePayConstants.YOUΠ_ACTIVE.ACTIVATION_IN
+                                    && lastActiveStatus != LePayConstants.YOUΠ_ACTIVE.ACTIVATED_FROZEN) {
+                                //如果上次是非激活的状态
                                 if (channelBean.getChannelStatus() == LePayConstants.YOUΠ_ACTIVE.NORMAL
                                         || channelBean.getChannelStatus() == LePayConstants.YOUΠ_ACTIVE.ACTIVATION_IN
                                         || channelBean.getChannelStatus() == LePayConstants.YOUΠ_ACTIVE.ACTIVATED_FROZEN) {
+                                    //如果是当前状态是激活的状态，则增加数据埋点
                                     Action.uploadCustom(Action.EVENTTYPE_ACTIVE, Action.PAY_PAGE_YOUΠ_ACTIVATED);
+                                } else {
+                                    //如果是当前状态是非激活的状态，则记录当前状态
+                                    lastActiveStatus = channelBean.getChannelStatus();
                                 }
+                            } else {
+                                //如果上次是激活的状态
+                                lastActiveStatus = channelBean.getChannelStatus();
                             }
+
                         }
                     }
                 }
-            });
-        }
+            }
+        });
     }
 
     private void updateUI() {
@@ -1093,7 +1111,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         }
         mExternLePayInfo = value;
         mFrom = from;
-        if (mFrom == null) {
+        if (TextUtils.isEmpty(mFrom)) {
             mFrom = LePayConstants.PAY_FROM.OTHER;
         }
     }
