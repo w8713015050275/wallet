@@ -183,7 +183,10 @@ public class RecommendFragment extends MainFragment {
 
     @Override
     public void onNetWorkChanged(boolean isNetworkAvailable) {
-        if (isNetworkAvailable && mRecommendCardList == null) {
+        if (isNetworkAvailable) {
+            if (mAddress == null) {
+                mLocationHelper.getAddress(true);
+            }
             startLoadData();
         }
     }
@@ -224,7 +227,6 @@ public class RecommendFragment extends MainFragment {
             if (mRecommendCardList == null) {
                 showBlankPage(BlankPage.STATE_NO_NETWORK, mRetryClickListener);
             }
-            return;
         } else {
             if (mRecommendCardList == null) {
                 loadData(true);
@@ -233,12 +235,15 @@ public class RecommendFragment extends MainFragment {
     }
 
     private void loadData(boolean showLoading) {
+        if (mAddress == null) {
+            mLocationHelper.getAddress(true);
+        }
         if (mTask == null) {
-            mTask = new RecommendTask(getContext(), mCallback, mAddress);
-            mExecutor.runnableExecutor(mTask);
             if (showLoading) {
                 showLoadingView();
             }
+            mTask = new RecommendTask(getContext(), mCallback, mAddress);
+            mExecutor.runnableExecutor(mTask);
         }
     }
 
