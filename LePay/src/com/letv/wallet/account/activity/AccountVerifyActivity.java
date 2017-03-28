@@ -88,7 +88,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         }
         int colorStatusBarIcon = getIntent().getIntExtra(EXTRA_STATUS_BAR_ICON_COLOR, 0);
         if (colorStatusBarIcon == 1) {
-            setTheme(R.style.AppTheme_WebView);
+            setTheme(R.style.LeEcoTheme);
         }
         AccountHelper.getInstance().registerOnAccountChangeListener(this);
         setContentView(R.layout.account_verify_activity);

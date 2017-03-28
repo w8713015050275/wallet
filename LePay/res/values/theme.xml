@@ -18,4 +18,9 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
+    <!-- 我的乐视主题 -->
+    <style name="LeEcoTheme" parent="AppTheme.WebView">
+        <item name="android:textAppearance">@style/TextAppearance.LeEcoActionBarTextAppearance</item>
+    </style>
 </resources>

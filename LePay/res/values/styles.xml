@@ -105,4 +105,8 @@
         <item name="android:textColor">@color/channel_list_tv_secondary_color</item>
     </style>
 
+    <style name="TextAppearance.LeEcoActionBarTextAppearance" parent="Wallet.TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
 </resources>

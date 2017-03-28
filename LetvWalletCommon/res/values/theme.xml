@@ -47,7 +47,7 @@
     <style name="AppTheme.Arrow">
         <item name="actionBarStyle">@style/Wallet.Actionbar.Arrow</item>
     </style>
-    <style name="AppTheme.WebView">
+    <style name="AppTheme.WebView" parent="AppTheme.NoArrow">
         <item name="walletPrimaryColor">@color/wallet_common_primary_color</item>
         <item name="android:statusBarColor">@color/wallet_statusbar_white_color</item>
         <item name="android:windowLightStatusBar">true</item>
