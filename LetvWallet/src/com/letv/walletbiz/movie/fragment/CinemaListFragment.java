@@ -544,13 +544,13 @@ public class CinemaListFragment extends BaseFragment implements MovieCommonCallb
         }
         if (mAddress != null && mLocationDesc != null) {
             StringBuilder builder = new StringBuilder();
-            int count = mAddress.getMaxAddressLineIndex();
-            if (count <= 0) {
+            int index = mAddress.getMaxAddressLineIndex();
+            if (index < 0) {
                 mLocationDesc.setText(R.string.movie_city_location_failure);
                 return;
             }
             builder.append(mAddress.getAddressLine(0));
-            if (count > 1) {
+            if (index >= 1) {
                 builder.append(mAddress.getAddressLine(1));
             }
             mLocationDesc.setText(builder);
