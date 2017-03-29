@@ -212,10 +212,12 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
     }
 
     private void createAccount() {
+        ACCOUNT_FAIL_REASON_PHONE_NULL = false;
         if (createTask == null) {
             createTask = new AccountCreateTask(new AccountCommonCallback() {
                 @Override
                 public void onSuccess(Object result) {
+                    createTask = null;
                     hideLoadingView();
                     hasCreateAccount = true;
                     checkEmptyPage(getString(R.string.account_card_add_bankcard)); //开户成功，显示添加卡片，点击去实名认证
@@ -223,6 +225,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                 @Override
                 public void onError(int errorCode, String errorMsg) {
                     hideLoadingView();
+                    createTask = null;
                     if (errorCode == AccountConstant.RspCode.ERRNO_USER_AUTH_FAILED) {
                         showNoLoginBlankPage(); //token过期，显示未登录；
                         return;
@@ -241,7 +244,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                         return;
                     }else {
                         LogHelper.e("[%S] : createAccount errorCode = " + errorCode + " errorMsg = " + errorMsg, TAG);
-                        checkEmptyPage(null); //其他原因开户失败
+                        checkEmptyPage(null); //其他原因开户失败,隐藏添加银行卡按钮；
                     }
 
                 }
@@ -249,6 +252,7 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
                 @Override
                 public void onNoNet() {
                     hideLoadingView();
+                    createTask = null;
                     showBlankPage(BlankPage.STATE_NO_NETWORK);
                 }
             });

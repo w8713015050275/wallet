@@ -109,4 +109,10 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
+    <style name="TextAppearance.LeEcoMenuTextAppearance" parent="Wallet.TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

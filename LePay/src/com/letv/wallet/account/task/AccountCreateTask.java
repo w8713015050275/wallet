@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Parcelable;
-import android.text.TextUtils;
 
 import com.letv.tracker2.enums.Key;
 import com.letv.wallet.account.aidl.v1.AccountConstant;
@@ -14,7 +13,6 @@ import com.letv.wallet.account.base.AccountGateway;
 import com.letv.wallet.account.utils.AccountUtils;
 import com.letv.wallet.base.util.Action;
 import com.letv.wallet.common.http.beans.BaseResponse;
-import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 
 import java.util.HashMap;
@@ -81,11 +79,6 @@ public class AccountCreateTask implements Runnable  {
 
     @Override
     public void run() {
-        if (TextUtils.isEmpty(AccountHelper.getInstance().getPhone())) {
-            onError(AccountConstant.RspCode.ERRNO_MOBILE_EMPTY, null);
-            uploadData(FAIL_NO_PHONE);
-            return;
-        }
 
         if (!NetworkHelper.isNetworkAvailable()) {
             onNoNetWork();
@@ -104,10 +97,15 @@ public class AccountCreateTask implements Runnable  {
         if (response.errno == AccountConstant.RspCode.SUCCESS) {
             AccountUtils.updateCreatedAccountStatus();
             onSuccess(response.data);
-        } else {
-            onError(response.errno, response.errmsg);
+            return;
+        }
+
+        if (response.errno == AccountConstant.RspCode.ERRNO_MOBILE_EMPTY) {
+            uploadData(FAIL_NO_PHONE);
+        }else {
             uploadData(FAIL_OTHER);
         }
+        onError(response.errno, response.errmsg);
     }
 
     protected void onNoNetWork() {
@@ -156,8 +154,4 @@ public class AccountCreateTask implements Runnable  {
         props.put(Key.Content.getKeyId(), reason);
         Action.uploadCustom(Action.EVENT_TYPE_FAIL, Action.ACCOUNT_CREATE_FAIL, props);
     }
-
-
-
-
 }

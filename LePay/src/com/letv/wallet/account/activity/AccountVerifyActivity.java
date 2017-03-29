@@ -74,6 +74,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
 
     public static final String EXTRA_ACTION_BAR_HAS_NAVIGATION= "hasNavigationIcon";
     public static final String EXTRA_ACTION_BAR_TITLE_COLOR = "titleTextColor";
+    public static final String EXTRA_MENU_TEXT_COLOR = "menuTextColor";
     public static final String EXTRA_ACTION_BAR_BACKGROUND_COLOR = "colorActionBar";
     public static final String EXTRA_STATUS_BAR_BACKGROUND_COLOR = "colorStatusBar";
     public static final String EXTRA_STATUS_BAR_ICON_COLOR = "colorStatusBarIcon";
@@ -143,7 +144,8 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         int colorStatusBar = parseColor(getIntent().getStringExtra(EXTRA_STATUS_BAR_BACKGROUND_COLOR));
         getWindow().setStatusBarColor(colorStatusBar == -1 ? getColor(R.color.wallet_statusbar_color) : colorStatusBar);
         if (getIntent().getBooleanExtra(EXTRA_MENU_HAS_SKIP, false)) {
-            showMenu().setTextColor(titleColor == -1 ? getColor(R.color.wallet_actionBar_titleTv_color) : titleColor);
+            int menuTextColor = parseColor(getIntent().getStringExtra(EXTRA_MENU_TEXT_COLOR));
+            showMenu().setTextColor(titleColor == -1 ? getColor(R.color.wallet_actionBar_titleTv_color) : menuTextColor);
         }
     }
 
@@ -151,7 +153,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         TextView menu = new TextView(this, null, android.support.v7.appcompat.R.attr.actionOverflowMenuStyle);
         menu.setSingleLine();
         menu.setEllipsize(TextUtils.TruncateAt.END);
-        menu.setTextAppearance(R.style.TextAppearance_Eui_Widget_ActionBar_Menu);
+        menu.setTextAppearance(R.style.TextAppearance_LeEcoMenuTextAppearance);
         Toolbar.LayoutParams layoutParams = new Toolbar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         menu.setLayoutParams(layoutParams);
         layoutParams.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
