@@ -452,6 +452,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
 
                 @Override
                 public void payResult(ELePayState eLePayState, String s) {
+                    if (isFinishing()) return;
                     mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
                     if (eLePayState != null) {
                         if (ELePayState.OK.equals(eLePayState)) {
