@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,6 @@ import com.letv.lepaysdk.Constants;
 import com.letv.lepaysdk.ELePayState;
 import com.letv.lepaysdk.LePay;
 import com.letv.lepaysdk.LePayApi;
-import com.letv.lepaysdk.wxpay.WXPay;
 import com.letv.shared.widget.LeBottomSheet;
 import com.letv.shared.widget.LeLoadingView;
 import com.letv.tracker2.enums.EventType;
@@ -72,6 +72,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private LePayChannelBean mCurrentChannelBean;
 
     private RecyclerView mChannelRecyclerV;
+    private RelativeLayout mLoadingRl;
     private LeLoadingView mLoadingV;
     private LinearLayoutManager mLinearLayoutManager;
     private LePayChannelListAdapter mChannelListAdapter;
@@ -439,21 +440,18 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             String channelStr = Constants.ILepayChannel.alipay_channelId;
             if (channelId == LePayConstants.PAY_CHANNEL.CHANNEL_ALIPAY) {
                 channelStr = Constants.ILepayChannel.alipay_channelId;
-                showBottomLoadingView();
             } else if (channelId == LePayConstants.PAY_CHANNEL.CHANNEL_WXPAY) {
                 channelStr = Constants.ILepayChannel.wx_channelId;
-                if (WXPay.getInstance(this).isWXAppInstalled()
-                        && WXPay.getInstance(this).isSupportWXPay()) {
-                    showBottomLoadingView();
-                }
             }
+//            showBottomLoadingView();
             LogHelper.d("[%S] start boss pay", TAG);
             LePayApi.createGetdirectpay(this, channelStr, payInfo, new LePay.ILePayCallback() {
 
                 @Override
                 public void payResult(ELePayState eLePayState, String s) {
                     if (isFinishing()) return;
-                    mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
+                    hideBottomLoadingView();
+                    mPayReturnResult = 0;
                     if (eLePayState != null) {
                         if (ELePayState.OK.equals(eLePayState)) {
                             mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_SUCCESSED;
@@ -463,12 +461,17 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                         } else if (ELePayState.CANCEL.equals(eLePayState)) {
                             mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_CANCLE;
                         } else if (ELePayState.NONETWORK.equals(eLePayState)) {
+                            mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
+                        } else if (ELePayState.NONE.equals(eLePayState)) {
+                            // 未安装微信
+                        } else if (ELePayState.ORDERSTATE.equals(eLePayState)) {
+                            // 重复提交订单时状态
                         }
-                        if (eLePayState != ELePayState.OK) {
-                            hideBottomLoadingView();
+                        if (mPayReturnResult == LePayConstants.PAY_RETURN_RESULT.PAY_FAILED
+                                || mPayReturnResult == LePayConstants.PAY_RETURN_RESULT.PAY_CANCLE) {
                             showPayFailDialog();
-                            LogHelper.e("[%S] %s", TAG, "ELePayState == " + mPayReturnResult);
                         }
+                        LogHelper.e("[%S] %s", TAG, "ELePayState == " + mPayReturnResult + "errmsg{" + s + "}");
                     }
                 }
             });
@@ -1048,22 +1051,24 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     }
 
     private void showBottomLoadingView() {
-        if (mLoadingV != null && !isShowBottomLoadingView()) {
+        if (mLoadingRl != null && mLoadingV != null && !isShowBottomLoadingView()) {
+            mLoadingRl.setVisibility(View.VISIBLE);
             mLoadingV.setVisibility(View.VISIBLE);
             mLoadingV.appearAnim();
         }
     }
 
     private void hideBottomLoadingView() {
-        if (mLoadingV != null && isShowBottomLoadingView()) {
+        if (mLoadingRl != null && mLoadingV != null && isShowBottomLoadingView()) {
             mLoadingV.disappearAnim(null);
             mLoadingV.setVisibility(View.GONE);
+            mLoadingRl.setVisibility(View.GONE);
         }
     }
 
     private synchronized boolean isShowBottomLoadingView() {
-        if (mLoadingV != null) {
-            if (mLoadingV.getVisibility() == View.VISIBLE) {
+        if (mLoadingRl != null) {
+            if (mLoadingRl.getVisibility() == View.VISIBLE) {
                 return true;
             }
         }
@@ -1090,6 +1095,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
         mPriceTv = (TextView) view.findViewById(R.id.pay_price_tv);
         mChannelRecyclerV = (RecyclerView) view.findViewById(R.id.pay_channel_list);
         mChannelListAdapter = new LePayChannelListAdapter(new ChannelItemOnclickListener());
+        mLoadingRl = (RelativeLayout) view.findViewById(R.id.loading_rl);
         mLoadingV = (LeLoadingView) view.findViewById(R.id.loading);
         mLinearLayoutManager = new LinearLayoutManager(getBaseContext());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
