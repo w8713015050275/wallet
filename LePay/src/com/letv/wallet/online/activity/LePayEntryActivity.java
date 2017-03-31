@@ -443,7 +443,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             } else if (channelId == LePayConstants.PAY_CHANNEL.CHANNEL_WXPAY) {
                 channelStr = Constants.ILepayChannel.wx_channelId;
             }
-//            showBottomLoadingView();
+            showBottomLoadingView();
             LogHelper.d("[%S] start boss pay", TAG);
             LePayApi.createGetdirectpay(this, channelStr, payInfo, new LePay.ILePayCallback() {
 
