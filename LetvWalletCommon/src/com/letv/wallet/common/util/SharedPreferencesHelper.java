@@ -26,7 +26,7 @@ public class SharedPreferencesHelper {
             try {
                 Context context = BaseApplication.getApplication().createPackageContext(packName, Context.CONTEXT_IGNORE_SECURITY);
                 if (context != null) {
-                     return  context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_WORLD_READABLE|Context.MODE_MULTI_PROCESS);
+                     return  context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_MULTI_PROCESS);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
