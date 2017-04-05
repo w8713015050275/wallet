@@ -2,6 +2,7 @@ package com.letv.walletbiz.main.recommend.view;
 
 import android.content.Context;
 import android.location.Address;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -54,6 +55,7 @@ public class RecommendCardView extends LinearLayout {
                 case MSG_FOOTER_LOAD_FINISHED:
                     mFooterTask = null;
                     if (msg.arg1 != CommonCallback.NO_ERROR) {
+                        mContentMap = null;
                         Toast.makeText(getContext(), R.string.main_recommend_error_network, Toast.LENGTH_SHORT).show();
                     } else {
                         List<CardFooter> list = (List<CardFooter>) msg.obj;
@@ -80,7 +82,9 @@ public class RecommendCardView extends LinearLayout {
         }
     };
 
+    private HashMap mContentMap = null;
     private OnClickListener mFooterClickListener = new OnClickListener() {
+
 
         @Override
         public void onClick(View view) {
@@ -95,31 +99,49 @@ public class RecommendCardView extends LinearLayout {
             }
             Action.uploadCustom(EventType.Click, Action.RECOMMEND_CARDS_BUTTON_CLICK, map);
 
-            Map<String, String> param = null;
-            if (mContentView != null) {
-                if (mContentView.checkContent()) {
-                    param = mContentView.getContentParam();
-                } else {
-                    return;
-                }
-            }
-            if (!mCardBean.isHadRequestFooterUrl()
-                    && !TextUtils.isEmpty(mCardBean.footer_req_url) && !TextUtils.isEmpty(mCardBean.footer_req_url_method)) {
-                if (!NetworkHelper.isNetworkAvailable()) {
-                    Toast.makeText(getContext(), R.string.main_recommend_error_no_network, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (mFooterTask == null) {
-                    mFooterTask = new RecommendFooterTask(getContext(), mFooterCallback, mCardBean.footer_req_url,
-                            param, mCardBean.footer_req_url_method, (Address) getTag());
-                    ExecutorHelper.getExecutor().runnableExecutor(mFooterTask);
-                }
+            CardFooter footer = (CardFooter) view.getTag();
+            if (footer == null) {
                 return;
             }
-            CardFooter footer = (CardFooter) view.getTag();
-            if (footer != null) {
-                RecommendUtils.launchUrl(getContext(), footer.key_link);
+
+            String link = footer.key_link;
+            HashMap<String, String> param = null;
+            if (mContentView != null) {
+                if (!mContentView.checkContent()) {
+                    return;
+                }
+                param = mContentView.getContentParam();
+
+                boolean isContentChanged = false;
+                if(!checkMapEquals(param, mContentMap)) {
+                    mContentMap = param;
+                    isContentChanged = true;
+                }
+                if (!TextUtils.isEmpty(mCardBean.footer_req_url) && !TextUtils.isEmpty(mCardBean.footer_req_url_method)) {
+                    if (!mCardBean.isHadRequestFooterUrl() || isContentChanged) {
+                        if (!NetworkHelper.isNetworkAvailable()) {
+                            Toast.makeText(getContext(), R.string.main_recommend_error_no_network, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (mFooterTask == null) {
+                            mFooterTask = new RecommendFooterTask(getContext(), mFooterCallback, mCardBean.footer_req_url,
+                                    param, mCardBean.footer_req_url_method, (Address) getTag());
+                            ExecutorHelper.getExecutor().runnableExecutor(mFooterTask);
+                        }
+                        return;
+                    }
+                } else {
+                    if (!TextUtils.isEmpty(link) && param != null) {
+                        Uri uri = Uri.parse(link);
+                        Uri.Builder builder = uri.buildUpon();
+                        for (String key : param.keySet()) {
+                            builder.appendQueryParameter(key, param.get(key));
+                        }
+                        link = builder.build().toString();
+                    }
+                }
             }
+            RecommendUtils.launchUrl(getContext(), link);
         }
     };
 
@@ -318,6 +340,41 @@ public class RecommendCardView extends LinearLayout {
                 View view = inflater.inflate(R.layout.recommend_divider_vertical, mFooterContainer, false);
                 view.setBackgroundColor(getResources().getColor(R.color.recommend_divider_vertical_color, null));
                 mFooterContainer.addView(view);
+            }
+        }
+        return true;
+    }
+
+    private boolean checkMapEquals(HashMap<String, String> map1, HashMap<String, String> map2) {
+
+        if (map1 == null || map1.size() <= 0) {
+            if (map2 == null || map2.size() <= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (map2 == null || map2.size() <= 0) {
+            return false;
+        } else {
+            if (map1.size() != map2.size()) {
+                return false;
+            }
+            String value1;
+            String value2;
+            for (String key : map1.keySet()) {
+                value1 = map1.get(key);
+                value2 = map2.get(key);
+                if (TextUtils.isEmpty(value1)) {
+                    if (!TextUtils.isEmpty(value2)) {
+                        return false;
+                    }
+                } else if (TextUtils.isEmpty(value2)) {
+                    return false;
+                } else {
+                    if (!value1.equals(value2)) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
