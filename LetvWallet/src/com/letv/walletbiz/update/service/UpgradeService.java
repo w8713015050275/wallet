@@ -398,7 +398,6 @@ public class UpgradeService extends Service {
                 if(remoteAppInfoList ==  null || remoteAppInfoList.length == 0) {
                     Log.d(TAG, "===wallet remote app list is null");
                     mServiceHandler.sendEmptyMessage(RETRY_TO_GET_UPGRADE_INFO);
-                    SharedPreferencesHelper.putLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE, 0);
                     return;
                 }
                 //to update
@@ -418,6 +417,8 @@ public class UpgradeService extends Service {
                                     remote_version = Integer.valueOf(remoteAppInfo.getApkVersion());
                                     if (localAppInfo.mPackageName.equals(UpdateUtil.getLocalAppList().get(0))) {
                                         SharedPreferencesHelper.putLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE, remote_version);
+                                    } else if (localAppInfo.mPackageName.equals(UpdateUtil.getLocalAppList().get(1))) {
+                                        SharedPreferencesHelper.putLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_PAY_VERSION_CODE, remote_version);
                                     }
                                 } catch (NumberFormatException e) {
                                     e.printStackTrace();

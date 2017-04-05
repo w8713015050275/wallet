@@ -29,19 +29,24 @@ public class UpgradeApkInstallReceiver extends BroadcastReceiver {
         context.sendBroadcast(i);
 
         if (intent.getAction().equalsIgnoreCase("android.intent.action.PACKAGE_REPLACED")) {
-            //升级或卸载成功：升级-版本相同；卸载-版本不同
-            long latestVersionCode = SharedPreferencesHelper.getLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE, 0);
-            long currentVersionCode = Long.valueOf(UpdateUtil.getVersion(context, UpdateUtil.getLocalAppList().get(0)));
+//            //获得远程版本和Replaced后的本地版本；升级-版本相同；卸载-版本不同
+//            //1.1.2版本及以前版本没有设置，所以为0
+//            long latestBizVersionCode = SharedPreferencesHelper.getLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE, 0);
+//            long latestPayVersionCode = SharedPreferencesHelper.getLong(UpdateConstant.PREFERENCES_SAVE_REMOTE_PAY_VERSION_CODE, 0);
+//            //必不为0的整数
+//            long currentBizVersionCode = Long.valueOf(UpdateUtil.getVersion(context, UpdateUtil.getLocalAppList().get(0)));
+//            long currentPayVersionCode = Long.valueOf(UpdateUtil.getVersion(context, UpdateUtil.getLocalAppList().get(1)));
             String packageStr = intent.getDataString();
             String[] strs = packageStr.split(":");
             String packageName = intent.getStringExtra("PackageName");
             if (strs != null && strs.length > 0) {
                 packageName = strs[strs.length-1];
             }
+            String contextPackageName = context.getPackageName();
 
-            if (latestVersionCode != 0 && currentVersionCode == latestVersionCode) {
-                String contextPackageName = context.getPackageName();
-
+//            //只要有一个升级成功，就进行数据上报：针对1.1.3以上版本，1.1.3升级到更高版本
+//            if ((currentBizVersionCode == latestBizVersionCode) ||
+//                    (currentPayVersionCode == latestPayVersionCode)) {
                 ArrayList<String> packagesList = (ArrayList<String>) UpdateUtil.getLocalAppList();
                 if (packagesList.contains(packageName)) {
                     if (SharedPreferencesHelper.getBoolean(UpdateConstant.PREFERENCES_NOTIFY_LATER, false)) {
@@ -58,7 +63,14 @@ public class UpgradeApkInstallReceiver extends BroadcastReceiver {
                         restartWallet(context);
                     }
                 }
-            }
+//            } else {
+//                //卸载成功：重启wallet，不提示升级成功+数据上报
+//                if (packageName != null && contextPackageName != null) {
+//                    if (packageName.trim().equalsIgnoreCase(contextPackageName.trim())) {
+//                        restartWallet(context);
+//                    }
+//                }
+//            }
 
         }  else if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED_FAILED")) {
             String failPackageName = intent.getStringExtra("PackageName");

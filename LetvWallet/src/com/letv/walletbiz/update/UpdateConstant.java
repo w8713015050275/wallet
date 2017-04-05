@@ -52,5 +52,6 @@ public class UpdateConstant {
     public static final String PREFERENCES_LAST_CHECK_UPDATE = "last_check_update";
     public static final String PREFERENCES_NOTIFY_LATER = "notify_later";
     public static final String PREFERENCES_FORCE_UPGRADE = "force_upgrade";
-    public static final String PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE = "remote_version_code";
+    public static final String PREFERENCES_SAVE_REMOTE_BIZ_VERSION_CODE = "remote_biz_version_code";
+    public static final String PREFERENCES_SAVE_REMOTE_PAY_VERSION_CODE = "remote_pay_version_code";
 }
