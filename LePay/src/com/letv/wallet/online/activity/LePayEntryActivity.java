@@ -56,6 +56,9 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     private String mExternLePayInfo = null;
     private String mOrderNo = null;
     private static final int WEB_FORRESULT = 1;
+    private static final int SHOW_PAYFAIL = 2;
+    private static final int SHOW_SELECTSTATUS = 3;
+    private static final int SHOW_USERSELECT = 4;
     private int mPayReturnResult = LePayConstants.PAY_RETURN_RESULT.PAY_FAILED;
     private LeBottomSheet mPayPageDialog;
     private LeBottomSheet mNetworkDialog;
@@ -79,6 +82,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
 
     private boolean isGoActivition, isCheckOrderStatus, isResultPayFail, isShowPayFail, isClickReGoPay;
     private boolean isFirst = true, isFirstShow = true;
+    private int mShowType = -1;
     private String mFrom = LePayConstants.PAY_FROM.OTHER;
 
     private int lastActiveStatus = -1;
@@ -846,6 +850,29 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
             mPayPageDialog.setStyle(mPayPageView);
             mPayPageDialog.setCancelable(false);
             mPayPageDialog.setCanceledOnTouchOutside(false);
+            mPayPageDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    switch (mShowType) {
+                        case SHOW_PAYFAIL:
+                            if (mPayFailDialog != null && !mPayFailDialog.isShowing()) {
+                                mPayFailDialog.show();
+                            }
+                            break;
+                        case SHOW_SELECTSTATUS:
+                            if (mSelectStatusDialog != null && !mSelectStatusDialog.isShowing()) {
+                                mSelectStatusDialog.show();
+                            }
+                            break;
+                        case SHOW_USERSELECT:
+                            if (mNetworkDialog != null && !mNetworkDialog.isShowing()) {
+                                mNetworkDialog.show();
+                            }
+                            break;
+                    }
+                    mShowType = -1;
+                }
+            });
             findViewById(mPayPageDialog);
         }
     }
@@ -875,6 +902,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     }
 
     private void showSelectStatusDialog() {
+        mShowType = SHOW_SELECTSTATUS;
         hidePayPage();
         if (mSelectStatusDialog == null) {
             String title = getString(R.string.lepay_user_select_pay_result_title);
@@ -890,10 +918,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                     }, title,
                     null, null, getColor(R.color.colorBtnBlue), false);
         }
-        if (!mSelectStatusDialog.isShowing()) {
-            mSelectStatusDialog.show();
-        }
-        isShowPayFail = true;
     }
 
     private void updateSelectStatusDialog() {
@@ -937,6 +961,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
 
     private void showPayFailDialog() {
         // 置为false,在执行onStart时不再显示支付失败弹框
+        mShowType = SHOW_PAYFAIL;
         isResultPayFail = false;
         hidePayPage();
         if (mPayFailDialog == null) {
@@ -962,11 +987,15 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                     setReturnResult(LePayConstants.PAY_RETURN_RESULT.PAY_FAILED);
                 }
             });
+            mPayFailDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    Action.uploadExpose(Action.PAY_FAIL_EXPOSE);
+                    isShowPayFail = true;
+                }
+            });
             mPayFailDialog.getTitle().setTextColor(getColor(R.color.red));
         }
-        Action.uploadExpose(Action.PAY_FAIL_EXPOSE);
-        mPayFailDialog.show();
-        isShowPayFail = true;
     }
 
     private void updatePayFailDialog() {
@@ -1003,6 +1032,7 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
     }
 
     private void showUserSelectDialog(int titleId) {
+        mShowType = SHOW_USERSELECT;
         hidePayPage();
         String title = getString(titleId);
         mDialogTitleId = titleId;
@@ -1025,7 +1055,6 @@ public class LePayEntryActivity extends BaseFragmentActivity implements View.OnC
                 }
             });
         }
-        mNetworkDialog.show();
     }
 
 
