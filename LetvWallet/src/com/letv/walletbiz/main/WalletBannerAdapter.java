@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import com.letv.shared.widget.BorderedRoundedCornersImageView;
 import com.letv.wallet.common.util.AppUtils;
 import com.letv.wallet.common.util.CommonConstants;
 import com.letv.walletbiz.R;
@@ -27,7 +27,7 @@ public class WalletBannerAdapter extends AutoSlidePagerAdapter implements View.O
 
     private Context mContext;
 
-    private ArrayList<ImageView> mImageViewArray = new ArrayList<ImageView>();
+    private ArrayList<BorderedRoundedCornersImageView> mImageViewArray = new ArrayList<BorderedRoundedCornersImageView>();
     private WalletBannerBean[] mData;
 
 
@@ -60,13 +60,15 @@ public class WalletBannerAdapter extends AutoSlidePagerAdapter implements View.O
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         position %= mData.length;
-        ImageView imageView = null;
+        BorderedRoundedCornersImageView imageView = null;
         if (mImageViewArray.size() > 0) {
             imageView = mImageViewArray.remove(0);
         }
         if (imageView == null) {
-            imageView = new ImageView(mContext);
+            imageView = new BorderedRoundedCornersImageView(mContext);
             imageView.setOnClickListener(this);
+            imageView.setCornerRadius(14);
+            imageView.setRoundBackground(true);
         }
         TypedValue outValue = new TypedValue();
         mContext.getResources().getValue(R.dimen.le_img_alpha, outValue, true);
@@ -79,7 +81,7 @@ public class WalletBannerAdapter extends AutoSlidePagerAdapter implements View.O
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ImageView view = (ImageView) object;
+        BorderedRoundedCornersImageView view = (BorderedRoundedCornersImageView) object;
         container.removeView(view);
         mImageViewArray.add(view);
     }
