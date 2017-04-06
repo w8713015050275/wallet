@@ -31,7 +31,7 @@ public class AutoSlideViewpager extends ViewPager {
             }
             if (getAdapter() != null) {
                 int count = getAdapter().getCount();
-                mCurrentPosition ++;
+                mCurrentPosition++;
                 if (mCurrentPosition >= count) {
                     mCurrentPosition = 0;
                 }
@@ -41,6 +41,8 @@ public class AutoSlideViewpager extends ViewPager {
     };
     private Boolean mEnableAutoSlide = true;
 
+    private Context context;
+
     public AutoSlideViewpager(Context context) {
         this(context, null);
     }
@@ -48,10 +50,7 @@ public class AutoSlideViewpager extends ViewPager {
     public AutoSlideViewpager(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
-        IntentFilter filter_dynamic = new IntentFilter();
-        filter_dynamic.addAction(SLIDE_PAUSE_LISTENER);
-        filter_dynamic.addAction(SLIDE_START_LISTENER);
-        context.registerReceiver(dynamicReceiver,filter_dynamic);
+        this.context = context;
     }
 
     public void enableAutoSlide() {
@@ -133,7 +132,7 @@ public class AutoSlideViewpager extends ViewPager {
                         newPos = mCurrentPosition + adapter.getRealCount();
                         setCurrentItem(newPos, false);
                         mCurrentPosition = newPos;
-                    } else if(mCurrentPosition >= adapter.getRealCount() * 2){
+                    } else if (mCurrentPosition >= adapter.getRealCount() * 2) {
                         newPos = adapter.getItemIndexForPosition(mCurrentPosition);
                         setCurrentItem(newPos, false);
                         mCurrentPosition = newPos;
@@ -145,17 +144,41 @@ public class AutoSlideViewpager extends ViewPager {
     }
 
     //解决有时出现空白页面的问题
-    public static final String SLIDE_PAUSE_LISTENER="slide_pause_listener";
-    public static final String SLIDE_START_LISTENER="slide_start_listener";
+    public static final String SLIDE_PAUSE_LISTENER = "slide_pause_listener";
+    public static final String SLIDE_START_LISTENER = "slide_start_listener";
     private BroadcastReceiver dynamicReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals(SLIDE_PAUSE_LISTENER)){
+            if (intent.getAction().equals(SLIDE_PAUSE_LISTENER)) {
                 disableAutoSlide();
-            }else if(intent.getAction().equals(SLIDE_START_LISTENER)){
+            } else if (intent.getAction().equals(SLIDE_START_LISTENER)) {
                 enableAutoSlide();
             }
         }
     };
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        IntentFilter filter_dynamic = new IntentFilter();
+        filter_dynamic.addAction(SLIDE_PAUSE_LISTENER);
+        filter_dynamic.addAction(SLIDE_START_LISTENER);
+        try {
+            context.registerReceiver(dynamicReceiver, filter_dynamic);
+        } catch (Exception e) {
+            //注册失败不做处理，不能崩溃，可以出现1s空白页面
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        try {
+            context.unregisterReceiver(dynamicReceiver);
+        } catch (Exception e) {
+            //反注册失败不做处理，不能崩溃，可以出现1s空白页面
+        }
+    }
+
 }
