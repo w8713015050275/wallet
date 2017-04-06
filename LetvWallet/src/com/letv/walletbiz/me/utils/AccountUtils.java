@@ -20,8 +20,6 @@ public class AccountUtils {
 
     public static final int LELEHUA_HOME = 0, LELEHUA_BILL = 1;
 
-    static RedirectURL redirectURL;
-
     public static  String getLeLeHuaJtype(int type, int leleHuaStatus) {
         switch (leleHuaStatus) {
             case AccountConstant.LELEHUA_ACCOUNT_STATE_NOACTIVATED_FROZEN:
@@ -53,7 +51,6 @@ public class AccountUtils {
         }
         Intent intent = new Intent(context, AccountWebActivity.class);
         intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
-        intent.putExtra(CommonConstants.EXTRA_URL, getRedirectUrl(jType));
         context.startActivity(intent);
     }
 
@@ -71,44 +68,4 @@ public class AccountUtils {
     public static void goToBindMobile(Context context){
         goToAccountWeb(context, AccountConstant.JTYPE_SSO_BIND_MOBILE);
     }
-
-
-    private static long lastRedirect = 0;
-    public static final int REDIRECT_CACHE_EXPIRE =  1000 * 60 * 5; // 5min
-
-    public static boolean checkRedirectExpired() {
-        if ((redirectURL != null) && (System.currentTimeMillis() - lastRedirect) <= REDIRECT_CACHE_EXPIRE) {
-            return false;
-        }
-        redirect(new String[]{AccountConstant.JTYPE_LELEHUA_ACTIVE, AccountConstant.JTYPE_LELEHUA_HOME, AccountConstant.JTYPE_LELEHUA_NOACTIVE,
-                AccountConstant.JTYPE_LELEHUA_BILL_LIST, AccountConstant.JTYPE_LELEHUA_ACTIVING, AccountConstant.JTYPE_SSO_BIND_MOBILE});
-        return true;
-    }
-
-    public static String getRedirectUrl(String jType){
-        if (checkRedirectExpired()) {
-            return null;
-        }
-        return redirectURL.getUrl(jType);
-    }
-
-    private static void redirect(String[] jTypes){
-        LePayAccountManager.getInstance().redirect(jTypes, new LePayCommonCallback<RedirectURL>() {
-            @Override
-            public void onSuccess(RedirectURL result) {
-                if (result != null) {
-                    redirectURL = result;
-                    lastRedirect = System.currentTimeMillis();
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String errorMsg) {
-
-            }
-        });
-    }
-
-
-
 }

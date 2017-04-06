@@ -488,7 +488,6 @@ public class MeFragment extends MainFragment implements View.OnClickListener, Ac
     }
 
     private void loadData() {
-        AccountUtils.checkRedirectExpired();
         queryAccount(AccountConstant.QTYPE_ALL);
     }
 

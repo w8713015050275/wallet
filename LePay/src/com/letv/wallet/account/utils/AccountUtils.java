@@ -46,72 +46,12 @@ public class AccountUtils {
                 AccountConstant.SHAREDPREFERENCES_VERIFY_ACCOUNT_SUFFIX), true).commit();
     }
 
-    //金融统一跳转H5接口
-    static RedirectURL redirectURL;
-
     public static void goToAccountWeb(Context context, String jType) {
         if (context == null || TextUtils.isEmpty(jType)) {
             return;
         }
         Intent intent = new Intent(context, AccountWebActivity.class);
         intent.putExtra(AccountWebActivity.EXTRA_KEY_JTYPE, jType);
-        intent.putExtra(CommonConstants.EXTRA_URL, getRedirectUrl(jType));
         context.startActivity(intent);
     }
-
-    private static long lastRedirect = 0;
-    public  static final int REDIRECT_CACHE_EXPIRE =  1000 * 60 * 5; // 5min
-    private static  RedirectTask redirectTask = null;
-    private static final Object taskHashLock = new Object();
-
-    public static boolean checkRedirectExpired() {
-        if ((redirectURL != null) && (System.currentTimeMillis() - lastRedirect) <= REDIRECT_CACHE_EXPIRE) {
-            return false;
-        }
-        redirect(new String[]{AccountConstant.JTYPE_SSO_BIND_MOBILE, AccountConstant.JTYPE_ADD_CARD, AccountConstant.JTYPE_SET_PAY_PWD});
-        return true;
-    }
-
-    public static String getRedirectUrl(String jType){
-        if (checkRedirectExpired()) {
-            return null;
-        }
-        return redirectURL.getUrl(jType);
-    }
-
-    private static void redirect(String[] jTypes){
-        if (redirectTask == null) {
-            synchronized (taskHashLock) {
-                if (redirectTask == null) {
-                    ExecutorHelper.getExecutor().runnableExecutor(redirectTask = new RedirectTask(jTypes, new AccountCommonCallback<RedirectURL>() {
-                        @Override
-                        public void onSuccess(RedirectURL result) {
-                            synchronized (taskHashLock) {
-                                redirectTask = null;
-                            }
-                            if (result != null) {
-                                redirectURL = result;
-                                lastRedirect = System.currentTimeMillis();
-                            }
-                        }
-
-                        @Override
-                        public void onError(int errorCode, String errorMsg) {
-                            synchronized (taskHashLock) {
-                                redirectTask = null;
-                            }
-                        }
-
-                        @Override
-                        public void onNoNet() {
-                            synchronized (taskHashLock) {
-                                redirectTask = null;
-                            }
-                        }
-                    }));
-                }
-            }
-        }
-    }
-
 }

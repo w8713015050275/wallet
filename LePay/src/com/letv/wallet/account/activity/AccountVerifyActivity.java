@@ -184,7 +184,6 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     @Override
     protected void onStart() {
         super.onStart();
-        AccountUtils.checkRedirectExpired();
     }
 
     private static final String SYMBOL_AND = "&";

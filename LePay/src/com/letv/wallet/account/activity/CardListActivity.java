@@ -113,8 +113,6 @@ public class CardListActivity extends AccountBaseActivity implements View.OnClic
             return;
         }
 
-        AccountUtils.checkRedirectExpired();
-
         String qType = null;
         if (checkCreateAccount(false) && checkVerifyAccount()) { //用户已开户并已实名， 直接查询卡列表
             qType = AccountConstant.QTYPE_CARD;
