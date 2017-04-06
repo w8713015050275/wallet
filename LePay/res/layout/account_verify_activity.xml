@@ -167,6 +167,7 @@
                 android:layout_weight="1.0"
                 android:lineSpacingExtra="2dp"
                 android:textSize="14sp"
+                android:longClickable="false"
                 android:textColor="@color/account_verify_text_hint_color" />
 
         </LinearLayout>

@@ -138,19 +138,19 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         }
         toolbar.setNavigationIcon(iconNavigation);
         int titleColor = parseColor(getIntent().getStringExtra(EXTRA_ACTION_BAR_TITLE_COLOR));
-        toolbar.setTitleTextColor( titleColor == -1 ? getColor(R.color.wallet_actionBar_titleTv_color) : titleColor);
+        toolbar.setTitleTextColor( titleColor == Color.TRANSPARENT ? getColor(R.color.wallet_actionBar_titleTv_color) : titleColor);
         int colorActionBar = parseColor(getIntent().getStringExtra(EXTRA_ACTION_BAR_BACKGROUND_COLOR));
-        toolbar.setBackgroundColor(colorActionBar == -1 ? getColor(R.color.wallet_statusbar_color) : colorActionBar);
+        toolbar.setBackgroundColor(colorActionBar == Color.TRANSPARENT ? getColor(R.color.wallet_statusbar_color) : colorActionBar);
         int colorStatusBar = parseColor(getIntent().getStringExtra(EXTRA_STATUS_BAR_BACKGROUND_COLOR));
-        getWindow().setStatusBarColor(colorStatusBar == -1 ? getColor(R.color.wallet_statusbar_color) : colorStatusBar);
+        getWindow().setStatusBarColor(colorStatusBar == Color.TRANSPARENT ? getColor(R.color.wallet_statusbar_color) : colorStatusBar);
         if (getIntent().getBooleanExtra(EXTRA_MENU_HAS_SKIP, false)) {
             int menuTextColor = parseColor(getIntent().getStringExtra(EXTRA_MENU_TEXT_COLOR));
-            showMenu().setTextColor(titleColor == -1 ? getColor(R.color.wallet_actionBar_titleTv_color) : menuTextColor);
+            showMenu().setTextColor(menuTextColor == Color.TRANSPARENT ? getColor(R.color.wallet_actionBar_titleTv_color) : menuTextColor);
         }
     }
 
     private TextView showMenu(){
-        TextView menu = new TextView(this, null, android.support.v7.appcompat.R.attr.actionOverflowMenuStyle);
+        TextView menu = new TextView(this, null, android.support.v7.appcompat.R.attr.actionButtonStyle);
         menu.setSingleLine();
         menu.setEllipsize(TextUtils.TruncateAt.END);
         menu.setTextAppearance(R.style.TextAppearance_LeEcoMenuTextAppearance);
@@ -171,7 +171,7 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
     }
 
     private int parseColor(String strColor){
-        int color = -1;
+        int color = Color.TRANSPARENT;
         if (!TextUtils.isEmpty(strColor)) {
             try {
                 color = Color.parseColor(strColor);
@@ -198,7 +198,6 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
         String agrement = agrementLeFinancial + SYMBOL_AND + agrementLePayChannel;
         SpannableString spannableString = new SpannableString(String.format(agrementWrap, agrement));
         spannableString.setSpan(new AgreementUrlSpan(AccountCommonConstant.URL_LE_FINANCIAL_AGREEMENT), start, start + agrementLeFinancial.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         spannableString.setSpan(new AgreementUrlSpan(AccountCommonConstant.URL_LE_PAY_CHANNEL_AGREEMENT), start + agrement.length()- agrementLePayChannel.length(), start + agrement.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         return spannableString;

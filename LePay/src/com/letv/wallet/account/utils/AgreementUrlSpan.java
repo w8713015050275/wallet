@@ -28,9 +28,14 @@ public class AgreementUrlSpan extends ClickableSpan {
         widget.getContext().startActivity(intent);
     }
 
+
+
     @Override
     public void updateDrawState(TextPaint ds) {
-        ds.setColor(PayApplication.getApplication().getResources().getColor(R.color.account_primary_color));
+        super.updateDrawState(ds);
+        ds.setColor(PayApplication.getApplication().getColor(R.color.account_primary_color));
         ds.setUnderlineText(false);
     }
+
+
 }
