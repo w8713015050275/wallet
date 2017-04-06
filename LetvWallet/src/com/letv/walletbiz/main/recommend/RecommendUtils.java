@@ -22,6 +22,12 @@ import java.util.HashMap;
 
 public class RecommendUtils {
 
+    /**
+     * need_token=1时自动登录,默认为0或者没有
+     */
+    public static final String PARAM_NEED_TOKEN = "need_token";
+    public static final String VALUES_NEED_TOKEN = "1";
+
     public static boolean launchUrl(Context context, String url) {
         if (context == null || TextUtils.isEmpty(url)) {
             return false;
@@ -29,10 +35,16 @@ public class RecommendUtils {
         String decodeUrl = url;
         Intent intent = null;
         if (decodeUrl.startsWith("http")) {
-            decodeUrl = Uri.decode(url);
             intent = new Intent(context, WalletMainWebActivity.class);
             intent.putExtra(CommonConstants.EXTRA_URL, decodeUrl);
             intent.putExtra(WalletConstant.EXTRA_FROM,Action.EVENT_PROP_FROM_CARD);
+            Uri temp = Uri.parse(decodeUrl);
+            if (temp != null) {
+                String value = temp.getQueryParameter(PARAM_NEED_TOKEN);
+                if (!TextUtils.isEmpty(value) && value.trim().equals(VALUES_NEED_TOKEN)) {
+                    intent.putExtra(WalletConstant.EXTRA_WEB_WITH_ACCOUNT, true);
+                }
+            }
         } else if (decodeUrl.startsWith("intent:")) {
             try {
                 intent = Intent.parseUri(decodeUrl, Intent.URI_INTENT_SCHEME);
