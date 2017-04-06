@@ -58,6 +58,12 @@ public class AccountWebActivity extends BaseWebViewActivity implements AccountHe
     }
 
     @Override
+    protected void onDestroy() {
+        AccountHelper.getInstance().unregisterOnAccountChangeListener(this);
+        super.onDestroy();
+    }
+
+    @Override
     public void setFlagIfNeeded(Intent intent) {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }

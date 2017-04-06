@@ -50,6 +50,12 @@ public class AccountWebActivity extends BaseWebViewActivity implements AccountHe
     }
 
     @Override
+    protected void onDestroy() {
+        AccountHelper.getInstance().unregisterOnAccountChangeListener(this);
+        super.onDestroy();
+    }
+
+    @Override
     protected boolean needUpdateTitle() {
         return true;
     }

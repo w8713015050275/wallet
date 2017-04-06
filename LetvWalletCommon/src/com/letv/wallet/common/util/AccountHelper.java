@@ -27,7 +27,7 @@ public class AccountHelper {
     public final static String ACCOUNT_TYPE = "com.letv";
     public final static String AUTH_TOKEN_TYPE_LETV = "tokenTypeLetv";
     private static AccountHelper instance;
-    private static String uToken ;
+    private static String uToken;
 
     static {
         instance = new AccountHelper();
@@ -49,26 +49,21 @@ public class AccountHelper {
     }
 
     public void getTokenASync(Context context) {
-        AccountThread aThread =new AccountThread(context);
+        AccountThread aThread = new AccountThread();
         ExecutorHelper.getExecutor().runnableExecutor(aThread);
     }
 
-    class AccountThread implements Runnable{
-        Context mContext;
-        public  AccountThread(Context context){
-            mContext = context;
-        }
-
+    class AccountThread implements Runnable {
         @Override
         public void run() {
-            getTokenSync(mContext);
+            getTokenSync();
         }
     }
 
 
-    public String getTokenSync(Context context) {
-        LogHelper.w("[%s] getTokenSync " , TAG);
-        AccountManager manager = AccountManager.get(context);
+    public String getTokenSync() {
+        LogHelper.w("[%s] getTokenSync ", TAG);
+        AccountManager manager = AccountManager.get(BaseApplication.getApplication());
         Account[] accounts = manager.getAccountsByType(ACCOUNT_TYPE);
         if (accounts != null && accounts.length > 0) {
             try {
@@ -94,7 +89,7 @@ public class AccountHelper {
     }
 
     public String getToken(Context context) {
-        if(isLogin(context)) {
+        if (isLogin(context)) {
             return getToken();
         }
         return null;
@@ -108,7 +103,7 @@ public class AccountHelper {
         return uToken;
     }
 
-    public void  clearToken() {
+    public void clearToken() {
         LogHelper.w("[%s] clearToken ", TAG);
         uToken = null;
     }
@@ -148,16 +143,16 @@ public class AccountHelper {
     }
 
     public boolean loginLetvAccountIfNot(Activity activity,
-                AccountManagerCallback<Bundle> callback) {
+                                         AccountManagerCallback<Bundle> callback) {
         if (isLogin(activity)) {
             return true;
         }
-        addAccount(activity,callback);
+        addAccount(activity, callback);
         return false;
     }
 
     public void loginOrJumpLetvAccount(Activity activity) {
-        if (loginLetvAccountIfNot(activity , null)) { //已登录进入首页
+        if (loginLetvAccountIfNot(activity, null)) { //已登录进入首页
             AccountManager am = AccountManager.get(activity);
             am.addAccount(ACCOUNT_TYPE, AUTH_TOKEN_TYPE_LETV, null, null, activity, null, null);
         }
@@ -171,7 +166,7 @@ public class AccountHelper {
         return mobile;
     }
 
-    private  Handler mMainHandler = new Handler(Looper.getMainLooper()){
+    private Handler mMainHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -197,6 +192,7 @@ public class AccountHelper {
 
     /**
      * 注册乐视账号变更监听
+     *
      * @param listener
      */
     public void registerOnAccountChangeListener(final OnAccountChangedListener listener) {
@@ -212,6 +208,7 @@ public class AccountHelper {
 
     /**
      * 注销监听
+     *
      * @param listener
      */
     public void unregisterOnAccountChangeListener(OnAccountChangedListener listener) {
@@ -226,7 +223,7 @@ public class AccountHelper {
     }
 
     public void onAccountChange(String action) {
-        if(mAccountChangeListeners.isEmpty() || mMainHandler == null ) return;
+        if (mAccountChangeListeners.isEmpty() || mMainHandler == null) return;
 
         Message msg = mMainHandler.obtainMessage(MSG_ACCOUNT_CHANGE);
         msg.obj = action;
