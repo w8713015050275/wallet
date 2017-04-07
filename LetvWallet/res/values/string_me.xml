@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="home_tab_me">My</string>
-    <string name="me_real_name_authentication">Real name verification</string>
+    <string name="me_real_name_authentication">Real-name authentication</string>
     <string name="me_real_name_not_authentication">You real name is not authenticated</string>
     <string name="me_vip_level">Membership level</string>
     <string name="me_lelehua">有π</string>

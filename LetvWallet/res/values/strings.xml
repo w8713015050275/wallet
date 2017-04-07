@@ -3,7 +3,7 @@
     <string name="app_name">Wallet</string>
     <string name="menu_bills">Order history</string>
     <string name="label_more">More</string>
-    <string name="label_entity_flow">Data plan top-up</string>
+    <string name="label_entity_flow">Data top-up</string>
     <string name="label_entity_mobile">Mobile top-up</string>
     <string name="label_entity_movie">Movie ticket</string>
     <string name="label_entity_show">Performance ticket</string>
