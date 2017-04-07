@@ -19,6 +19,7 @@
         android:background="@color/colorPlaceHolderBg"
         android:alpha="@dimen/le_img_alpha"
         android:scaleType="fitStart"
+        android:adjustViewBounds="true"
         app:corner_radius="2dp"
         app:border_width="0dp"
         app:round_background="true"
