@@ -55,24 +55,24 @@ public class UiUtils {
                 "  'provice' : 'beijing'," +
                 "  'isp' : 'cmcc'," +
                 "  'product_list' : [ " +
-                "{'product_id':0,'orig_price':20, 'product_name':'20', 'price':0}," +
-                "{'product_id':0,'orig_price':30, 'product_name':'30', 'price':0}," +
-                "{'product_id':0,'orig_price':50, 'product_name':'50', 'price':0}," +
-                "{'product_id':0,'orig_price':100, 'product_name':'100', 'price':0}," +
-                "{'product_id':0,'orig_price':200,'product_name':'200','price':0}," +
-                "{'product_id':0,'orig_price':500,'product_name':'500','price':0}" +
+                "{'product_id':0,'content':20,'orig_price':20, 'product_name':'20', 'price':0}," +
+                "{'product_id':0,'content':30,'orig_price':30, 'product_name':'30', 'price':0}," +
+                "{'product_id':0,'content':50,'orig_price':50, 'product_name':'50', 'price':0}," +
+                "{'product_id':0,'content':100,'orig_price':100, 'product_name':'100', 'price':0}," +
+                "{'product_id':0,'content':200,'orig_price':200,'product_name':'200','price':0}," +
+                "{'product_id':0,'content':500,'orig_price':500,'product_name':'500','price':0}" +
                 "]" +
                 " }";
         final String flow = "{" +
                 "  'provice' : 'beijing'," +
                 "  'isp' : 'cmcc'," +
                 "  'product_list' : [ " +
-                "{'product_id':0,'orig_price':10, 'product_name':'10', 'price':0}," +
-                "{'product_id':0,'orig_price':20, 'product_name':'20', 'price':0}," +
-                "{'product_id':0,'orig_price':30, 'product_name':'30', 'price':0}," +
-                "{'product_id':0,'orig_price':50, 'product_name':'50', 'price':0}," +
-                "{'product_id':0,'orig_price':100,'product_name':'100','price':0}," +
-                "{'product_id':0,'orig_price':200,'product_name':'200','price':0}" +
+                "{'product_id':0,'content':10,'orig_price':10, 'product_name':'10', 'price':0}," +
+                "{'product_id':0,'content':20,'orig_price':20, 'product_name':'20', 'price':0}," +
+                "{'product_id':0,'content':30,'orig_price':30, 'product_name':'30', 'price':0}," +
+                "{'product_id':0,'content':50,'orig_price':50, 'product_name':'50', 'price':0}," +
+                "{'product_id':0,'content':100,'orig_price':100,'product_name':'100','price':0}," +
+                "{'product_id':0,'content':200,'orig_price':200,'product_name':'200','price':0}" +
                 "]" +
                 " }";
         final String stub = (type == MobileConstant.PRODUCT_TYPE.MOBILE_FEE ? mobile : flow);
