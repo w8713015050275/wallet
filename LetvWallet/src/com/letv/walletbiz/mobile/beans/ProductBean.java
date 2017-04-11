@@ -35,7 +35,7 @@ public class ProductBean implements LetvBaseBean {
         public int product_id;
         public float orig_price;
         public float price;
-        public float content;
+        public int content;
         public String product_name;
         public String sku_sn;
 
@@ -55,7 +55,7 @@ public class ProductBean implements LetvBaseBean {
             return product_name;
         }
 
-        public float getContent(){
+        public int getContent(){
             return content;
         }
     }

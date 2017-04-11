@@ -166,7 +166,7 @@ public class ProductsPanelAdapter extends RecyclerView.Adapter<ProductsPanelAdap
         }
 
         public void setData(ProductBean.product pItem) {
-            float content = pItem.getContent();
+            int content = pItem.getContent();
             String nameStr = String.valueOf(content);
             int uStrId = mFeeOrFlow == MobileConstant.PRODUCT_TYPE.MOBILE_FLOW ?
                     R.string.label_mobile_product_unit_flow : R.string.label_mobile_product_unit_fee;
