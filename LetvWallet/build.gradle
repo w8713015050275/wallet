@@ -6,7 +6,7 @@ android {
         applicationId "com.letv.walletbiz"
         minSdkVersion 23
         targetSdkVersion 24
-        versionCode 10103
+        versionCode 10104
         versionName getVersionName(versionCode)
         multiDexEnabled false
     }
