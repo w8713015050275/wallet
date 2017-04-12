@@ -557,4 +557,20 @@ public class WalletFragment extends MainFragment {
             getContext().sendBroadcast(intent);
         }
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Intent intent = new Intent();
+        intent.setAction(AutoSlideViewpager.SLIDE_PAUSE_LISTENER);
+        getContext().sendBroadcast(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent intent = new Intent();
+        intent.setAction(AutoSlideViewpager.SLIDE_START_LISTENER);
+        getContext().sendBroadcast(intent);
+    }
 }
