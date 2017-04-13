@@ -120,7 +120,7 @@ public class BlurImageHelper {
         if (drawable != null && drawable instanceof BitmapDrawable) {
             Bitmap in = ((BitmapDrawable) drawable).getBitmap();
             blurIcon = new BitmapDrawable(mIBlur.blur(BLUR_RADIUS, in, BLUR_INSAMPLE_SIZE));
-            in.recycle();
+            //in.recycle();
         }
         LogHelper.d("[%S] blur - complete : " + mIBlur.getTimeMs()+ " Ms", TAG);
         return blurIcon;
