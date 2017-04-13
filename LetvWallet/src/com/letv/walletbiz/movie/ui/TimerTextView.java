@@ -38,6 +38,9 @@ public class TimerTextView extends TextView {
     //unit:s
     private long mInterval = 1;
 
+    //unit:ms
+    private long mStartTime = -1;
+
     private Handler mHandler = new Handler() {
 
         @Override
@@ -47,6 +50,7 @@ public class TimerTextView extends TextView {
                     setText(mText);
                     break;
                 case MSG_TIMER_FINISHED:
+                    mStartTime = -1;
                     setText(mText);
                     if (mListener != null) {
                         mListener.onTimerFinished(TimerTextView.this);
@@ -73,11 +77,18 @@ public class TimerTextView extends TextView {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
-            mHandler.removeMessages(MSG_UPDATE_TEXTVIEW);
-            mHandler.removeMessages(MSG_TIMER_FINISHED);
+        stopTimer();
+    }
+
+    @Override
+    public void onScreenStateChanged(int screenState) {
+        super.onScreenStateChanged(screenState);
+        if (screenState == View.SCREEN_STATE_OFF) {
+            stopTimer();
+        } else if (screenState == View.SCREEN_STATE_ON) {
+            if (mStartTime != -1) {
+                setRemainTime(mDuration - (System.currentTimeMillis() - mStartTime) / 1000);
+            }
         }
     }
 
@@ -86,6 +97,7 @@ public class TimerTextView extends TextView {
      */
     public void setRemainTime(long duration) {
         mDuration = duration;
+        mStartTime = System.currentTimeMillis();
         setText(getTimeStr(duration));
         startTimerTask();
     }
@@ -107,10 +119,10 @@ public class TimerTextView extends TextView {
 
             @Override
             public void run() {
-                mDuration -= mInterval;
-                mText = getTimeStr(mDuration);
+                long currentDuration = mDuration - (System.currentTimeMillis() - mStartTime) / 1000;
+                mText = getTimeStr(currentDuration);
                 mHandler.removeMessages(MSG_UPDATE_TEXTVIEW);
-                if (mDuration <= 0) {
+                if (currentDuration <= 0) {
                     mHandler.obtainMessage(MSG_TIMER_FINISHED).sendToTarget();
                     mTimer.cancel();
                     mTimer = null;
@@ -119,6 +131,15 @@ public class TimerTextView extends TextView {
                 }
             }
         }, 0, mInterval * 1000);
+    }
+
+    private void stopTimer() {
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+            mHandler.removeMessages(MSG_UPDATE_TEXTVIEW);
+            mHandler.removeMessages(MSG_TIMER_FINISHED);
+        }
     }
 
     /**
