@@ -141,6 +141,13 @@ public class DownloadTask implements Runnable {
 
             @Override
             public void onSuccess(File result) {
+                //针对没有认证的Wifi，xutils返回200，并产生一个568 Bytes大小的文件
+                if (result.exists() && result.length() < 1024) {
+                    if (mDownloadCallback != null) {
+                        mDownloadCallback.onFinished(mAppInfo, false);
+                        return;
+                    }
+                }
                 if (mDownloadCallback != null) {
                     mDownloadCallback.onSuccess(mAppInfo);
                 }
@@ -178,7 +185,7 @@ public class DownloadTask implements Runnable {
                 }
 
                 if (mDownloadCallback != null) {
-                    mDownloadCallback.onFinished(mAppInfo);
+                    mDownloadCallback.onFinished(mAppInfo, true);
                 }
             }
 

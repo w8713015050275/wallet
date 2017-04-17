@@ -40,7 +40,7 @@ public class UpgradeService extends Service {
         void onSuccess(RemoteAppInfo appInfo);
         void onError(boolean needRerequest);
         void onCancelled();
-        void onFinished(RemoteAppInfo appInfo);
+        void onFinished(RemoteAppInfo appInfo, boolean certifiedWifi);
     }
 
     private volatile Looper mServiceLooper;
@@ -155,7 +155,7 @@ public class UpgradeService extends Service {
         }
 
         @Override
-        public void onFinished(RemoteAppInfo appInfo) {
+        public void onFinished(RemoteAppInfo appInfo, boolean certifiedWifi) {
             if (needRerequest && isError) {
                 needRerequest = false;
                 if (mUpgradeTypeByUser == UpdateConstant.UPGRADE_NOW) {
@@ -173,10 +173,13 @@ public class UpgradeService extends Service {
                 }
             }
 
-            if (isError || isCancelled) {
+            if (isError || isCancelled || !certifiedWifi) {
                 if (mUpgradeTypeByUser == UpdateConstant.UPGRADE_NOW) {
                     if (!NetworkHelper.isWifiAvailable() && !UpdateUtil.mDownloadInCeller) {
                         Toast.makeText(getApplicationContext(), getString(R.string.wifi_fail_continue_next),Toast.LENGTH_SHORT).show();
+                    } else if (!certifiedWifi) {
+                        UpdateUtil.removeDownloadedFile(appInfo.getPackageName());
+                        Toast.makeText(getApplicationContext(), getString(R.string.mobile_prompt_net_connection_fail),Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), getString(R.string.download_fail),Toast.LENGTH_SHORT).show();
                     }
