@@ -160,7 +160,7 @@ public abstract class BaseOrderListFragment extends AccountBaseFragment implemen
         switch (failState) {
             case ActivityConstant.RETURN_STATUS.FAIL_STATE_N0_RECORD:
                 hidePtrFrameLayout();
-                showBlankPage().setCustomPage(promptNoRecordStr, BlankPage.Icon.NO_HISTORY);
+                showBlankPage().setCustomPage(promptNoRecordStr, BlankPage.Icon.NO_HISTORY_ORDER);
                 break;
             case ActivityConstant.RETURN_STATUS.FAIL_STATE_TOAST_PROMPT:
                 if (mPtrFrameLayout != null && mPtrFrameLayout.isRefreshing()) {
