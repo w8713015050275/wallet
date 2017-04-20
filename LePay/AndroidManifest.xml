@@ -14,7 +14,8 @@
     <application
         android:name=".PayApplication"
         android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Translucent">
+        android:theme="@android:style/Theme.Translucent"
+        android:label="@string/app_name">
 
         <activity
             android:name=".online.activity.LePayEntryActivity"
