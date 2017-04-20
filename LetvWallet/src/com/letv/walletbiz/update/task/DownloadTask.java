@@ -44,6 +44,7 @@ public class DownloadTask implements Runnable {
     private boolean mIsNotificationCanceled;
     private boolean mNeedRerequest;
     private Object mObjLock = new Object();
+    private long BYTETOMB = 1024 * 1024;
 
     public DownloadTask(Context context,RemoteAppInfo appInfo, DownloadCallback downloadCallback,int upgradeTypeByUser) {
         mContext = context;
@@ -200,13 +201,17 @@ public class DownloadTask implements Runnable {
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
                 int percent = (int) ((current * 100) / total);
-                String progress = "" + current + "/" + total;
+                String progress = "" + byteToMB(current) + "M/ " + byteToMB(total) + "M";
                 Message msg = Message.obtain();
                 msg.what = percent;
                 msg.obj = progress;
                 mHandle.sendMessage(msg);
             }
         });
+    }
+
+    private String byteToMB(long bytes) {
+        return bytes / BYTETOMB + "." + (bytes % BYTETOMB) / 10000;
     }
 
     public void cancelNotification() {
