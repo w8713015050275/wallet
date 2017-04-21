@@ -225,7 +225,6 @@ public class AccountVerifyActivity extends BaseFragmentActivity implements View.
                     sendSmsCode(editPhone.getPhone());
                     return;
                 }
-                Toast.makeText(getApplication(), R.string.account_verify_phone_invalid, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
