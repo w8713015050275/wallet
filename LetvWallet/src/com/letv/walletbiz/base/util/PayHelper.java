@@ -2,6 +2,7 @@ package com.letv.walletbiz.base.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -10,7 +11,6 @@ import com.letv.wallet.common.http.RspDataException;
 import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.http.client.RspConstants;
 import com.letv.wallet.common.util.AccountHelper;
-import com.letv.walletbiz.BuildConfig;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.activity.PayActivity;
@@ -76,7 +76,7 @@ public class PayHelper implements Serializable {
                 reqParams.addBodyParameter(key, reqMap.get(key));
             }
         }
-        if ("debug".equalsIgnoreCase(BuildConfig.BUILD_TYPE)) {
+        if ("userdebug".equalsIgnoreCase(Build.TYPE)) {
             reqParams.addParameter(Constants.INFO_PARAM.DBG, true);
         }
 

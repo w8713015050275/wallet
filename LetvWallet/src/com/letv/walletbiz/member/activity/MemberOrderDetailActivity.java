@@ -3,6 +3,7 @@ package com.letv.walletbiz.member.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,10 +18,8 @@ import com.letv.wallet.common.http.beans.BaseResponse;
 import com.letv.wallet.common.util.AccountHelper;
 import com.letv.wallet.common.util.DateUtils;
 import com.letv.wallet.common.util.ExecutorHelper;
-import com.letv.wallet.common.util.LogHelper;
 import com.letv.wallet.common.util.NetworkHelper;
 import com.letv.wallet.common.widget.LabeledTextView;
-import com.letv.walletbiz.BuildConfig;
 import com.letv.walletbiz.R;
 import com.letv.walletbiz.base.activity.ActivityConstant;
 import com.letv.walletbiz.base.activity.OrderDetailActivity;
@@ -275,7 +274,7 @@ public class MemberOrderDetailActivity extends OrderDetailActivity {
         if (mPrePayTask == null) {
             String uToken = AccountHelper.getInstance().getToken(MemberOrderDetailActivity.this);
             boolean dbg = false;
-            if ("debug".equalsIgnoreCase(BuildConfig.BUILD_TYPE)) {
+            if ("userdebug".equalsIgnoreCase(Build.TYPE)) {
                 dbg = true;
             }
             mPrePayTask = new OrderPrePayTask(uToken, MemberConstant.PARAM.CLIENT_TYPE, mMemberProduct.getSN(), MemberConstant.PARAM.PLATFORM, dbg, new MemberCommonCallback<OrderPayBean>() {
