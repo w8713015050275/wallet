@@ -36,8 +36,11 @@ public class MovieListAdapter extends RecyclerView.Adapter implements View.OnCli
 
     private List<Movie> mData;
 
-    public MovieListAdapter(Context context) {
+    private int mCurrentCityID;
+
+    public MovieListAdapter(Context context, int mCurrentCityID) {
         mContext = context;
+        this.mCurrentCityID = mCurrentCityID;
     }
 
     @Override
@@ -124,6 +127,7 @@ public class MovieListAdapter extends RecyclerView.Adapter implements View.OnCli
         intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_NAME, movie.name);
         intent.putExtra(MovieTicketConstant.EXTRA_SCHE_DATE, movie.sche_date);
         intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, movie.id);
+        intent.putExtra(MovieTicketConstant.EXTRA_CITY_ID, mCurrentCityID);
         mContext.startActivity(intent);
     }
 

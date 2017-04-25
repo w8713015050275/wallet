@@ -60,10 +60,13 @@ public class MovieSoonListAdapter extends RecyclerView.Adapter implements Sticky
 
     private String currentMonthOfyear;
 
-    public MovieSoonListAdapter(Context context, RadioGroup rgFilter) {
+    private int mCurrentCityID;
+
+    public MovieSoonListAdapter(Context context, RadioGroup rgFilter, int mCurrentCityID) {
         mContext = context;
         this.rgTimeFilter = rgFilter;
         this.rgTimeFilter.setOnCheckedChangeListener(this);
+        this.mCurrentCityID = mCurrentCityID;
         currentMonthOfyear = mContext.getResources().getString(R.string.movie_soon_filter_time_all);
         setHasStableIds(true);
     }
@@ -176,6 +179,7 @@ public class MovieSoonListAdapter extends RecyclerView.Adapter implements Sticky
         intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_NAME, movie.name);
         intent.putExtra(MovieTicketConstant.EXTRA_SCHE_DATE, movie.sche_date);
         intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, movie.id);
+        intent.putExtra(MovieTicketConstant.EXTRA_CITY_ID, mCurrentCityID);
         mContext.startActivity(intent);
     }
 

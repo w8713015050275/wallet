@@ -144,6 +144,7 @@ public class MovieListFragment extends BaseFragment implements MovieCommonCallba
                 Intent intent = new Intent(getContext(), MovieDetailActivity.class);
                 intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_ID, movie.id);
                 intent.putExtra(MovieTicketConstant.EXTRA_MOVIE_NAME, movie.name);
+                intent.putExtra(MovieTicketConstant.EXTRA_CITY_ID, mCurrentCityID);
                 startActivity(intent);
             }
         }
@@ -227,7 +228,7 @@ public class MovieListFragment extends BaseFragment implements MovieCommonCallba
 
     private RecyclerView.Adapter getSoonAdapter(){
         if (mSoonAdapter == null) {
-            mSoonAdapter = new MovieSoonListAdapter(getContext(), radioGroupTimer);
+            mSoonAdapter = new MovieSoonListAdapter(getContext(), radioGroupTimer, mCurrentCityID);
             decoration = new StickyRecyclerHeadersDecoration(mSoonAdapter);
             mRecyclerView.addItemDecoration(decoration);
             // Add touch listeners
@@ -253,7 +254,7 @@ public class MovieListFragment extends BaseFragment implements MovieCommonCallba
 
     private RecyclerView.Adapter getShownAdapter(){
         if(mShownAdapter == null){
-            mShownAdapter = new MovieListAdapter(getContext());
+            mShownAdapter = new MovieListAdapter(getContext(), mCurrentCityID);
             mRecyclerView.addOnItemTouchListener(itemClickListener);
         }
         return mShownAdapter ;
